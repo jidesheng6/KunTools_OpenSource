@@ -112,6 +112,13 @@
             this.ReplaceExcelContentButton = new System.Windows.Forms.Button();
             this.SelectRelaceExcelButton = new System.Windows.Forms.Button();
             this.ReplaceExcelFileView = new System.Windows.Forms.ListView();
+            this.TabPage_12 = new System.Windows.Forms.TabPage();
+            this.DecodeDataMatixStatusText = new System.Windows.Forms.Label();
+            this.DecodeDataMarix = new System.Windows.Forms.Button();
+            this.SelectDataMatrixWord = new System.Windows.Forms.Button();
+            this.groupBox14 = new System.Windows.Forms.GroupBox();
+            this.DecodeDataMatrixView = new System.Windows.Forms.TreeView();
+            this.DecodeMatrixWordListView = new System.Windows.Forms.ListView();
             this.TabPage_05 = new System.Windows.Forms.TabPage();
             this.NameStorkeChcek = new System.Windows.Forms.CheckBox();
             this.MutilLineMode = new System.Windows.Forms.CheckBox();
@@ -138,6 +145,7 @@
             this.PreviewPictureName = new System.Windows.Forms.Label();
             this.PreviewPictureBox = new System.Windows.Forms.PictureBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.UseInterfaceUi = new System.Windows.Forms.CheckBox();
             this.TwainPaperSizeBox = new System.Windows.Forms.ComboBox();
             this.label17 = new System.Windows.Forms.Label();
             this.SkipBlankPage = new System.Windows.Forms.CheckBox();
@@ -154,6 +162,15 @@
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.SetTwainDevice = new System.Windows.Forms.LinkLabel();
             this.SelectTwainDevice = new System.Windows.Forms.LinkLabel();
+            this.TabPage_13 = new System.Windows.Forms.TabPage();
+            this.label20 = new System.Windows.Forms.Label();
+            this.groupBox16 = new System.Windows.Forms.GroupBox();
+            this.ReleaseRegistry = new System.Windows.Forms.Button();
+            this.groupBox15 = new System.Windows.Forms.GroupBox();
+            this.LanzouNetfx = new System.Windows.Forms.LinkLabel();
+            this.ProcessLabel = new System.Windows.Forms.Label();
+            this.Downloadfx35Progress = new System.Windows.Forms.ProgressBar();
+            this.DownloadNetfx35 = new System.Windows.Forms.Button();
             this.TabPage_08 = new System.Windows.Forms.TabPage();
             this.label12 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -166,13 +183,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.TabPage_12 = new System.Windows.Forms.TabPage();
-            this.DecodeDataMatixStatusText = new System.Windows.Forms.Label();
-            this.DecodeDataMarix = new System.Windows.Forms.Button();
-            this.SelectDataMatrixWord = new System.Windows.Forms.Button();
-            this.groupBox14 = new System.Windows.Forms.GroupBox();
-            this.DecodeDataMatrixView = new System.Windows.Forms.TreeView();
-            this.DecodeMatrixWordListView = new System.Windows.Forms.ListView();
             this.SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.ListViewRightMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.删除本项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -196,6 +206,8 @@
             this.groupBox13.SuspendLayout();
             this.groupBox12.SuspendLayout();
             this.groupBox11.SuspendLayout();
+            this.TabPage_12.SuspendLayout();
+            this.groupBox14.SuspendLayout();
             this.TabPage_05.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -206,11 +218,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.PreviewPictureBox)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            this.TabPage_13.SuspendLayout();
+            this.groupBox16.SuspendLayout();
+            this.groupBox15.SuspendLayout();
             this.TabPage_08.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.TabPage_12.SuspendLayout();
-            this.groupBox14.SuspendLayout();
             this.ListViewRightMenu.SuspendLayout();
             this.TreeViewContentMenu.SuspendLayout();
             this.SuspendLayout();
@@ -228,6 +241,7 @@
             this.MainTabPage.Controls.Add(this.TabPage_12);
             this.MainTabPage.Controls.Add(this.TabPage_05);
             this.MainTabPage.Controls.Add(this.TabPage_09);
+            this.MainTabPage.Controls.Add(this.TabPage_13);
             this.MainTabPage.Controls.Add(this.TabPage_08);
             this.MainTabPage.Location = new System.Drawing.Point(3, 12);
             this.MainTabPage.Name = "MainTabPage";
@@ -1088,6 +1102,79 @@
             this.ReplaceExcelFileView.UseCompatibleStateImageBehavior = false;
             this.ReplaceExcelFileView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ReplaceExcelFileView_MouseClick);
             // 
+            // TabPage_12
+            // 
+            this.TabPage_12.Controls.Add(this.DecodeDataMatixStatusText);
+            this.TabPage_12.Controls.Add(this.DecodeDataMarix);
+            this.TabPage_12.Controls.Add(this.SelectDataMatrixWord);
+            this.TabPage_12.Controls.Add(this.groupBox14);
+            this.TabPage_12.Controls.Add(this.DecodeMatrixWordListView);
+            this.TabPage_12.Location = new System.Drawing.Point(4, 28);
+            this.TabPage_12.Name = "TabPage_12";
+            this.TabPage_12.Size = new System.Drawing.Size(777, 475);
+            this.TabPage_12.TabIndex = 11;
+            this.TabPage_12.Text = "测评/选举/推荐二维码校验";
+            this.TabPage_12.UseVisualStyleBackColor = true;
+            this.TabPage_12.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TabPage_12_MouseDown);
+            // 
+            // DecodeDataMatixStatusText
+            // 
+            this.DecodeDataMatixStatusText.AutoSize = true;
+            this.DecodeDataMatixStatusText.ForeColor = System.Drawing.Color.ForestGreen;
+            this.DecodeDataMatixStatusText.Location = new System.Drawing.Point(319, 431);
+            this.DecodeDataMatixStatusText.Name = "DecodeDataMatixStatusText";
+            this.DecodeDataMatixStatusText.Size = new System.Drawing.Size(98, 18);
+            this.DecodeDataMatixStatusText.TabIndex = 4;
+            this.DecodeDataMatixStatusText.Text = "等待处理中";
+            // 
+            // DecodeDataMarix
+            // 
+            this.DecodeDataMarix.Location = new System.Drawing.Point(547, 413);
+            this.DecodeDataMarix.Name = "DecodeDataMarix";
+            this.DecodeDataMarix.Size = new System.Drawing.Size(221, 55);
+            this.DecodeDataMarix.TabIndex = 3;
+            this.DecodeDataMarix.Text = "开始处理";
+            this.DecodeDataMarix.UseVisualStyleBackColor = true;
+            this.DecodeDataMarix.Click += new System.EventHandler(this.DecodeDataMarix_Click);
+            // 
+            // SelectDataMatrixWord
+            // 
+            this.SelectDataMatrixWord.Location = new System.Drawing.Point(16, 413);
+            this.SelectDataMatrixWord.Name = "SelectDataMatrixWord";
+            this.SelectDataMatrixWord.Size = new System.Drawing.Size(221, 55);
+            this.SelectDataMatrixWord.TabIndex = 2;
+            this.SelectDataMatrixWord.Text = "选择文件";
+            this.SelectDataMatrixWord.UseVisualStyleBackColor = true;
+            this.SelectDataMatrixWord.Click += new System.EventHandler(this.SelectDataMatrixWord_Click);
+            // 
+            // groupBox14
+            // 
+            this.groupBox14.Controls.Add(this.DecodeDataMatrixView);
+            this.groupBox14.Location = new System.Drawing.Point(10, 182);
+            this.groupBox14.Name = "groupBox14";
+            this.groupBox14.Size = new System.Drawing.Size(764, 225);
+            this.groupBox14.TabIndex = 1;
+            this.groupBox14.TabStop = false;
+            this.groupBox14.Text = "解析信息";
+            // 
+            // DecodeDataMatrixView
+            // 
+            this.DecodeDataMatrixView.Location = new System.Drawing.Point(6, 27);
+            this.DecodeDataMatrixView.Name = "DecodeDataMatrixView";
+            this.DecodeDataMatrixView.Size = new System.Drawing.Size(752, 192);
+            this.DecodeDataMatrixView.TabIndex = 0;
+            this.DecodeDataMatrixView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DecodeDataMatrixView_MouseClick);
+            // 
+            // DecodeMatrixWordListView
+            // 
+            this.DecodeMatrixWordListView.HideSelection = false;
+            this.DecodeMatrixWordListView.Location = new System.Drawing.Point(9, 6);
+            this.DecodeMatrixWordListView.Name = "DecodeMatrixWordListView";
+            this.DecodeMatrixWordListView.Size = new System.Drawing.Size(764, 173);
+            this.DecodeMatrixWordListView.TabIndex = 0;
+            this.DecodeMatrixWordListView.UseCompatibleStateImageBehavior = false;
+            this.DecodeMatrixWordListView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DecodeMatrixWordListView_MouseClick);
+            // 
             // TabPage_05
             // 
             this.TabPage_05.Controls.Add(this.NameStorkeChcek);
@@ -1348,6 +1435,7 @@
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.UseInterfaceUi);
             this.groupBox6.Controls.Add(this.TwainPaperSizeBox);
             this.groupBox6.Controls.Add(this.label17);
             this.groupBox6.Controls.Add(this.SkipBlankPage);
@@ -1367,6 +1455,16 @@
             this.groupBox6.TabIndex = 1;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "扫描配置";
+            // 
+            // UseInterfaceUi
+            // 
+            this.UseInterfaceUi.AutoSize = true;
+            this.UseInterfaceUi.Location = new System.Drawing.Point(521, 109);
+            this.UseInterfaceUi.Name = "UseInterfaceUi";
+            this.UseInterfaceUi.Size = new System.Drawing.Size(124, 22);
+            this.UseInterfaceUi.TabIndex = 13;
+            this.UseInterfaceUi.Text = "调用UI扫描";
+            this.UseInterfaceUi.UseVisualStyleBackColor = true;
             // 
             // TwainPaperSizeBox
             // 
@@ -1517,6 +1615,98 @@
             this.SelectTwainDevice.Text = "选择扫描仪";
             this.SelectTwainDevice.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.SelectTwainDevice_LinkClicked);
             // 
+            // TabPage_13
+            // 
+            this.TabPage_13.Controls.Add(this.label20);
+            this.TabPage_13.Controls.Add(this.groupBox16);
+            this.TabPage_13.Controls.Add(this.groupBox15);
+            this.TabPage_13.Location = new System.Drawing.Point(4, 28);
+            this.TabPage_13.Name = "TabPage_13";
+            this.TabPage_13.Size = new System.Drawing.Size(777, 475);
+            this.TabPage_13.TabIndex = 12;
+            this.TabPage_13.Text = "VFSOFT辅助功能";
+            this.TabPage_13.UseVisualStyleBackColor = true;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.ForeColor = System.Drawing.Color.Tomato;
+            this.label20.Location = new System.Drawing.Point(8, 438);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(440, 18);
+            this.label20.TabIndex = 2;
+            this.label20.Text = "提示：所有释放和下载文件都会存放在软件所在目录下";
+            // 
+            // groupBox16
+            // 
+            this.groupBox16.Controls.Add(this.ReleaseRegistry);
+            this.groupBox16.Location = new System.Drawing.Point(558, 13);
+            this.groupBox16.Name = "groupBox16";
+            this.groupBox16.Size = new System.Drawing.Size(200, 106);
+            this.groupBox16.TabIndex = 1;
+            this.groupBox16.TabStop = false;
+            this.groupBox16.Text = "释放注册文件";
+            // 
+            // ReleaseRegistry
+            // 
+            this.ReleaseRegistry.Location = new System.Drawing.Point(36, 47);
+            this.ReleaseRegistry.Name = "ReleaseRegistry";
+            this.ReleaseRegistry.Size = new System.Drawing.Size(130, 41);
+            this.ReleaseRegistry.TabIndex = 0;
+            this.ReleaseRegistry.Text = "点击释放";
+            this.ReleaseRegistry.UseVisualStyleBackColor = true;
+            this.ReleaseRegistry.Click += new System.EventHandler(this.ReleaseRegistry_Click);
+            // 
+            // groupBox15
+            // 
+            this.groupBox15.Controls.Add(this.LanzouNetfx);
+            this.groupBox15.Controls.Add(this.ProcessLabel);
+            this.groupBox15.Controls.Add(this.Downloadfx35Progress);
+            this.groupBox15.Controls.Add(this.DownloadNetfx35);
+            this.groupBox15.Location = new System.Drawing.Point(5, 3);
+            this.groupBox15.Name = "groupBox15";
+            this.groupBox15.Size = new System.Drawing.Size(546, 116);
+            this.groupBox15.TabIndex = 0;
+            this.groupBox15.TabStop = false;
+            this.groupBox15.Text = "下载.Net3.5离线包";
+            // 
+            // LanzouNetfx
+            // 
+            this.LanzouNetfx.AutoSize = true;
+            this.LanzouNetfx.Location = new System.Drawing.Point(377, 80);
+            this.LanzouNetfx.Name = "LanzouNetfx";
+            this.LanzouNetfx.Size = new System.Drawing.Size(152, 18);
+            this.LanzouNetfx.TabIndex = 3;
+            this.LanzouNetfx.TabStop = true;
+            this.LanzouNetfx.Text = "前往蓝奏网盘下载";
+            this.LanzouNetfx.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LanzouNetfx_LinkClicked);
+            // 
+            // ProcessLabel
+            // 
+            this.ProcessLabel.AutoSize = true;
+            this.ProcessLabel.Location = new System.Drawing.Point(235, 37);
+            this.ProcessLabel.Name = "ProcessLabel";
+            this.ProcessLabel.Size = new System.Drawing.Size(116, 18);
+            this.ProcessLabel.TabIndex = 2;
+            this.ProcessLabel.Text = "下载进度：0%";
+            // 
+            // Downloadfx35Progress
+            // 
+            this.Downloadfx35Progress.Location = new System.Drawing.Point(6, 71);
+            this.Downloadfx35Progress.Name = "Downloadfx35Progress";
+            this.Downloadfx35Progress.Size = new System.Drawing.Size(355, 38);
+            this.Downloadfx35Progress.TabIndex = 1;
+            // 
+            // DownloadNetfx35
+            // 
+            this.DownloadNetfx35.Location = new System.Drawing.Point(6, 27);
+            this.DownloadNetfx35.Name = "DownloadNetfx35";
+            this.DownloadNetfx35.Size = new System.Drawing.Size(223, 38);
+            this.DownloadNetfx35.TabIndex = 0;
+            this.DownloadNetfx35.Text = "开始下载（从私有网盘）";
+            this.DownloadNetfx35.UseVisualStyleBackColor = true;
+            this.DownloadNetfx35.Click += new System.EventHandler(this.DownloadNetfx35_Click);
+            // 
             // TabPage_08
             // 
             this.TabPage_08.Controls.Add(this.label12);
@@ -1583,11 +1773,13 @@
             // label9
             // 
             this.label9.AutoSize = true;
+            this.label9.ForeColor = System.Drawing.Color.Tomato;
             this.label9.Location = new System.Drawing.Point(0, 35);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(764, 18);
             this.label9.TabIndex = 0;
             this.label9.Text = "· 支持的操作系统：Windows 7 、Windows10、Windows11或更高（附带.NetFrameWork 4.7.1）";
+            this.label9.DoubleClick += new System.EventHandler(this.label9_DoubleClick);
             // 
             // groupBox3
             // 
@@ -1640,79 +1832,6 @@
             this.label6.Size = new System.Drawing.Size(116, 18);
             this.label6.TabIndex = 0;
             this.label6.Text = "开发语言：C#";
-            // 
-            // TabPage_12
-            // 
-            this.TabPage_12.Controls.Add(this.DecodeDataMatixStatusText);
-            this.TabPage_12.Controls.Add(this.DecodeDataMarix);
-            this.TabPage_12.Controls.Add(this.SelectDataMatrixWord);
-            this.TabPage_12.Controls.Add(this.groupBox14);
-            this.TabPage_12.Controls.Add(this.DecodeMatrixWordListView);
-            this.TabPage_12.Location = new System.Drawing.Point(4, 28);
-            this.TabPage_12.Name = "TabPage_12";
-            this.TabPage_12.Size = new System.Drawing.Size(777, 475);
-            this.TabPage_12.TabIndex = 11;
-            this.TabPage_12.Text = "测评/选举/推荐二维码校验";
-            this.TabPage_12.UseVisualStyleBackColor = true;
-            this.TabPage_12.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TabPage_12_MouseDown);
-            // 
-            // DecodeDataMatixStatusText
-            // 
-            this.DecodeDataMatixStatusText.AutoSize = true;
-            this.DecodeDataMatixStatusText.ForeColor = System.Drawing.Color.ForestGreen;
-            this.DecodeDataMatixStatusText.Location = new System.Drawing.Point(319, 431);
-            this.DecodeDataMatixStatusText.Name = "DecodeDataMatixStatusText";
-            this.DecodeDataMatixStatusText.Size = new System.Drawing.Size(98, 18);
-            this.DecodeDataMatixStatusText.TabIndex = 4;
-            this.DecodeDataMatixStatusText.Text = "等待处理中";
-            // 
-            // DecodeDataMarix
-            // 
-            this.DecodeDataMarix.Location = new System.Drawing.Point(547, 413);
-            this.DecodeDataMarix.Name = "DecodeDataMarix";
-            this.DecodeDataMarix.Size = new System.Drawing.Size(221, 55);
-            this.DecodeDataMarix.TabIndex = 3;
-            this.DecodeDataMarix.Text = "开始处理";
-            this.DecodeDataMarix.UseVisualStyleBackColor = true;
-            this.DecodeDataMarix.Click += new System.EventHandler(this.DecodeDataMarix_Click);
-            // 
-            // SelectDataMatrixWord
-            // 
-            this.SelectDataMatrixWord.Location = new System.Drawing.Point(16, 413);
-            this.SelectDataMatrixWord.Name = "SelectDataMatrixWord";
-            this.SelectDataMatrixWord.Size = new System.Drawing.Size(221, 55);
-            this.SelectDataMatrixWord.TabIndex = 2;
-            this.SelectDataMatrixWord.Text = "选择文件";
-            this.SelectDataMatrixWord.UseVisualStyleBackColor = true;
-            this.SelectDataMatrixWord.Click += new System.EventHandler(this.SelectDataMatrixWord_Click);
-            // 
-            // groupBox14
-            // 
-            this.groupBox14.Controls.Add(this.DecodeDataMatrixView);
-            this.groupBox14.Location = new System.Drawing.Point(10, 182);
-            this.groupBox14.Name = "groupBox14";
-            this.groupBox14.Size = new System.Drawing.Size(764, 225);
-            this.groupBox14.TabIndex = 1;
-            this.groupBox14.TabStop = false;
-            this.groupBox14.Text = "解析信息";
-            // 
-            // DecodeDataMatrixView
-            // 
-            this.DecodeDataMatrixView.Location = new System.Drawing.Point(6, 27);
-            this.DecodeDataMatrixView.Name = "DecodeDataMatrixView";
-            this.DecodeDataMatrixView.Size = new System.Drawing.Size(752, 192);
-            this.DecodeDataMatrixView.TabIndex = 0;
-            this.DecodeDataMatrixView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DecodeDataMatrixView_MouseClick);
-            // 
-            // DecodeMatrixWordListView
-            // 
-            this.DecodeMatrixWordListView.HideSelection = false;
-            this.DecodeMatrixWordListView.Location = new System.Drawing.Point(9, 6);
-            this.DecodeMatrixWordListView.Name = "DecodeMatrixWordListView";
-            this.DecodeMatrixWordListView.Size = new System.Drawing.Size(764, 173);
-            this.DecodeMatrixWordListView.TabIndex = 0;
-            this.DecodeMatrixWordListView.UseCompatibleStateImageBehavior = false;
-            this.DecodeMatrixWordListView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DecodeMatrixWordListView_MouseClick);
             // 
             // ListViewRightMenu
             // 
@@ -1815,6 +1934,9 @@
             this.groupBox12.PerformLayout();
             this.groupBox11.ResumeLayout(false);
             this.groupBox11.PerformLayout();
+            this.TabPage_12.ResumeLayout(false);
+            this.TabPage_12.PerformLayout();
+            this.groupBox14.ResumeLayout(false);
             this.TabPage_05.ResumeLayout(false);
             this.TabPage_05.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -1832,15 +1954,17 @@
             this.groupBox6.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            this.TabPage_13.ResumeLayout(false);
+            this.TabPage_13.PerformLayout();
+            this.groupBox16.ResumeLayout(false);
+            this.groupBox15.ResumeLayout(false);
+            this.groupBox15.PerformLayout();
             this.TabPage_08.ResumeLayout(false);
             this.TabPage_08.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.TabPage_12.ResumeLayout(false);
-            this.TabPage_12.PerformLayout();
-            this.groupBox14.ResumeLayout(false);
             this.ListViewRightMenu.ResumeLayout(false);
             this.TreeViewContentMenu.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -2001,6 +2125,16 @@
         private System.Windows.Forms.ToolStripMenuItem 展开折叠全部节点ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 打开文件ToolStripMenuItem;
         private System.Windows.Forms.TreeView DecodeDataMatrixView;
+        private System.Windows.Forms.TabPage TabPage_13;
+        private System.Windows.Forms.GroupBox groupBox15;
+        private System.Windows.Forms.Button DownloadNetfx35;
+        private System.Windows.Forms.ProgressBar Downloadfx35Progress;
+        private System.Windows.Forms.Label ProcessLabel;
+        private System.Windows.Forms.LinkLabel LanzouNetfx;
+        private System.Windows.Forms.GroupBox groupBox16;
+        private System.Windows.Forms.Button ReleaseRegistry;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.CheckBox UseInterfaceUi;
     }
 }
 

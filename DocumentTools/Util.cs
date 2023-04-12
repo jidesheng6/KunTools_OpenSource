@@ -1,21 +1,21 @@
 ﻿using Aspose.BarCode.BarCodeRecognition;
 using Aspose.Cells;
 using Aspose.Cells.Rendering;
+using Aspose.Imaging.ImageOptions;
 using Microsoft.VisualBasic.Devices;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using NAudio.Wave;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Net;
 using System.Reflection;
 using System.Resources;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
-using System.Windows.Media;
 
 namespace DocumentTools
 {
@@ -92,7 +92,7 @@ namespace DocumentTools
         /// </summary>
         /// <param name="ResourceName">资源名称，不需要带后缀</param>
         /// <returns></returns>
-        private static object GetEmbedResourceObj(string ResourceName)
+        public static object GetEmbedResourceObj(string ResourceName)
         {
             Assembly SelfAssmbly = Assembly.GetExecutingAssembly();
             ResourceManager TempManager = new ResourceManager("DocumentTools.Properties.Resources", SelfAssmbly);
@@ -275,7 +275,7 @@ namespace DocumentTools
             //如果是pdf格式则进行pdf合并，如果不是pdf则进行document插入图片合并转换为pdf
             pdfFileNames.ForEach(FileName =>
             {
-                string FileExtension = Path.GetExtension(FileName);
+                string FileExtension = System.IO.Path.GetExtension(FileName);
                 if (FileExtension != ".pdf")
                 {
                     TempPicturePdfBuilder.InsertImage(FileName);
@@ -383,7 +383,7 @@ namespace DocumentTools
         {
             Aspose.Hook.Manager.StartHook();
 
-            string FileType = Path.GetExtension(DocumentsFileName);
+            string FileType = System.IO.Path.GetExtension(DocumentsFileName);
 
             //初始化一个临时参数，到时候重新初始化
             Aspose.Words.Saving.ImageSaveOptions TempWordImageSaveOption = new Aspose.Words.Saving.ImageSaveOptions(Aspose.Words.SaveFormat.Jpeg);
@@ -592,22 +592,22 @@ namespace DocumentTools
         /// </summary>
         /// <param name="DocumentFileName">文档名称</param>
         /// <param name="TempTreeView">控件</param>
-        public static void ReadDocumentDataMatrix(string DocumentFileName,TreeView TempTreeView)
+        public static void ReadDocumentDataMatrix(string DocumentFileName, TreeView TempTreeView)
         {
             Aspose.Hook.Manager.StartHook();
             TreeNode TempTreeNode = new TreeNode();
-            TreeNode TempDocumentNameRootNode =  TempTreeNode.Nodes.Add(DocumentFileName);//添加文件节点信息
+            TreeNode TempDocumentNameRootNode = TempTreeNode.Nodes.Add(DocumentFileName);//添加文件节点信息
             Aspose.Words.Document TempDocuemnt = new Aspose.Words.Document(DocumentFileName);
-            for (int PageIndex=0;PageIndex<TempDocuemnt.PageCount;PageIndex++)
+            for (int PageIndex = 0; PageIndex < TempDocuemnt.PageCount; PageIndex++)
             {
-                TreeNode PageIndexNode = TempDocumentNameRootNode.Nodes.Add($"第{PageIndex+1}页");//在文件节点信息基础上添加页面信息
+                TreeNode PageIndexNode = TempDocumentNameRootNode.Nodes.Add($"第{PageIndex + 1}页");//在文件节点信息基础上添加页面信息
                 PageIndexNode.ForeColor = System.Drawing.Color.ForestGreen;
                 Aspose.Words.Saving.ImageSaveOptions TempImageSaveOption = new Aspose.Words.Saving.ImageSaveOptions(Aspose.Words.SaveFormat.Png);
                 TempImageSaveOption.PageSet = new Aspose.Words.Saving.PageSet(PageIndex);
                 TempImageSaveOption.Resolution = 300;
                 using (MemoryStream TempMemoryStream = new MemoryStream())
                 {
-                    TempDocuemnt.Save(TempMemoryStream,TempImageSaveOption);
+                    TempDocuemnt.Save(TempMemoryStream, TempImageSaveOption);
                     TempMemoryStream.Position = 0;
 
                     using (BarCodeReader TempCodeReader = new BarCodeReader(TempMemoryStream, DecodeType.DataMatrix))
@@ -743,11 +743,6 @@ namespace DocumentTools
                         TempInputTextNoSpace = RemoveSpeciCharacter(new string[] { "[0-9]" }, TempInputTextNoSpace);//移除数字
                     }
 
-                    if (DoubleTextAligin)
-                    {
-                        TempInputTextNoSpace = DoubleTextAlign(TempInputTextNoSpace);//双字对齐
-                    }
-
                     if (RemoveSquare)
                     {
                         //删除括号
@@ -770,15 +765,11 @@ namespace DocumentTools
 
                     if (TempText != string.Empty)
                     {
-                        string AddListText = TempText;
+                        string AddListText = RemoveSpeciCharacter(new string[] { "\\s"},TempText);
+
                         if (RemoveNumber)
                         {
                             AddListText = RemoveSpeciCharacter(new string[] { "[0-9]" }, AddListText);//移除数字
-                        }
-
-                        if (DoubleTextAligin)
-                        {
-                            AddListText = DoubleTextAlign(AddListText);//双字对齐
                         }
 
                         if (RemoveSquare)
@@ -835,6 +826,58 @@ namespace DocumentTools
 
             return byteNumber / Math.Pow(1024.0, 3);
         }
+
+        /// <summary>
+        /// 通过HTTPCLIENT来下载文件，并展示下载进度
+        /// </summary>
+        /// <param name="FileUrl">下载链接</param>
+        /// <param name="SavedFileName">保存的文件名称</param>
+        /// <param name="DownloadProgressBar">使用的进度条</param>
+        /// <param name="DownloadStatusLabel">使用的提示文本标签</param>
+        public static void DwonloadFile(string FileUrl, string SavedFileName, ProgressBar DownloadProgressBar,Label DownloadStatusLabel)
+        {
+
+            DownloadProgressBar.Maximum = 100;
+            WebClient TempDownloadClient = new WebClient();
+            Uri TempDownloadUrl = new Uri(FileUrl);
+            TempDownloadClient.DownloadFileAsync(TempDownloadUrl, SavedFileName);
+            TempDownloadClient.DownloadProgressChanged += (download_sender, download_event) =>
+            {
+                int CurrentPercent = download_event.ProgressPercentage;
+                DownloadProgressBar.Value = CurrentPercent;
+                DownloadStatusLabel.Text = $"下载进度：{CurrentPercent}%";
+            };
+            TempDownloadClient.DownloadFileCompleted += (download_sender, download_event) =>
+            {
+                DownloadStatusLabel.Text = $"下载完毕，文件名称为：{SavedFileName}";
+            };
+
+
+        }
+
+        //public static void ConvertImage(string PictureName,string SavedfileName,string ConvertExtension,int ConvertDpiValue)
+        //{
+        //    Aspose.Hook.Manager.StartHook();
+        //    using (Aspose.Imaging.Image RawImage = Aspose.Imaging.Image.Load(PictureName))
+        //    {
+        //        PdfOptions SimPdfOption;
+        //        switch (ConvertExtension)
+        //        {
+        //            //模拟扫描件输出
+        //            case ".pdf":
+        //                SimPdfOption = new PdfOptions()
+        //                {
+        //                    ResolutionSettings = new Aspose.Imaging.ResolutionSetting(ConvertDpiValue, ConvertDpiValue),
+        //                    PdfDocumentInfo = new Aspose.Imaging.FileFormats.Pdf.PdfDocumentInfo(),
+        //                };
+        //                break;
+        //            case ".jpg":
+
+        //                break;
+        //            default:break;
+        //        }
+        //    }
+        //}
     }
     internal class SavingPdfCallBack : Aspose.Words.Saving.IPageSavingCallback
     {
