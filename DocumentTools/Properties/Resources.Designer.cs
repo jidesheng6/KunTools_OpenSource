@@ -69,5 +69,26 @@ namespace DocumentTools.Properties {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   查找类似 Windows Registry Editor Version 5.00
+        ///
+        ///[HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Pegasus Imaging]
+        ///
+        ///[HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Pegasus Imaging\FormDirector v2.00 Control]
+        ///
+        ///[HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Pegasus Imaging\FormDirector v2.00 Control\Company]
+        ///@=&quot;&quot;
+        ///
+        ///[HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Pegasus Imaging\FormDirector v2.00 Control\Copyright]
+        ///@=&quot; (c) 1998-2010 Pegasus Imaging Corp.  All Rights Reserved.&quot;
+        ///
+        ///[HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Pegasus Imaging\Fo [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string 注册 {
+            get {
+                return ResourceManager.GetString("注册", resourceCulture);
+            }
+        }
     }
 }

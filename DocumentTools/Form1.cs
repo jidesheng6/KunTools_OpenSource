@@ -50,8 +50,13 @@ namespace DocumentTools
             this.DecodeDataMatrixView.ShowRootLines = true;
             this.DecodeDataMatrixView.FullRowSelect = true;
 
+            MainTabPage.TabPages.RemoveAt(11);
+
 
             //Util.PlayMp3WithStream();
+
+
+
 
         }
 
@@ -702,7 +707,7 @@ namespace DocumentTools
         private void SelectTwainDevice_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             dataSource = twainSession.ShowSourceSelector();
-            if(dataSource != null)
+            if (dataSource != null)
             {
                 if (dataSource.Open() == ReturnCode.Success)
                 {
@@ -783,30 +788,30 @@ namespace DocumentTools
 
                 if (dataSource.Capabilities.ICapPixelType.CanSet)
                 {
-                    if (TwainColorMode.Items.Count>0)
+                    if (TwainColorMode.Items.Count > 0)
                     {
                         dataSource.Capabilities.ICapPixelType.SetValue((NTwain.Data.PixelType)TwainColorMode.SelectedItem);
                     }
                 }
                 if (dataSource.Capabilities.ICapXResolution.CanSet && dataSource.Capabilities.ICapYResolution.CanSet)
                 {
-                    if(TwainDpi.Items.Count>0)
+                    if (TwainDpi.Items.Count > 0)
                     {
                         dataSource.Capabilities.ICapXResolution.SetValue((TWFix32)TwainDpi.SelectedItem);
                         dataSource.Capabilities.ICapYResolution.SetValue((TWFix32)TwainDpi.SelectedItem);
                     }
                 }
-                if(DoubleScanBox.Checked && dataSource.Capabilities.CapDuplex.IsSupported)
+                if (DoubleScanBox.Checked && dataSource.Capabilities.CapDuplex.IsSupported)
                 {
                     dataSource.Capabilities.CapDuplexEnabled.SetValue(BoolType.True);
                 }
-                if(SkipBlankPage.Checked && dataSource.Capabilities.ICapAutoDiscardBlankPages.IsSupported)
+                if (SkipBlankPage.Checked && dataSource.Capabilities.ICapAutoDiscardBlankPages.IsSupported)
                 {
                     dataSource.Capabilities.ICapAutoDiscardBlankPages.SetValue(BlankPage.Auto);
                 }
-                if(dataSource.Capabilities.ICapSupportedSizes.CanSet)
+                if (dataSource.Capabilities.ICapSupportedSizes.CanSet)
                 {
-                    if(TwainPaperSizeBox.Items.Count>0)
+                    if (TwainPaperSizeBox.Items.Count > 0)
                     {
                         dataSource.Capabilities.ICapSupportedSizes.SetValue((SupportedSize)TwainPaperSizeBox.SelectedItem);
                     }
@@ -877,7 +882,7 @@ namespace DocumentTools
                 string[] Files = Directory.GetFiles(ScanPictureSavePathBox.Text);
                 if (Files.Length > 0)
                 {
-                    if(PictureBoxPreviewImage !=null)
+                    if (PictureBoxPreviewImage != null)
                     {
                         PictureBoxPreviewImage = null;
                         this.PreviewPictureBox.Image = null;
@@ -971,12 +976,13 @@ namespace DocumentTools
         {
             int DecodeCount = 0;
             DecodeDataMatrixView.Nodes.Clear();
-            Task.Run(() => {
+            Task.Run(() =>
+            {
                 UI.GetListViewFirstItemContent(this.DecodeMatrixWordListView).Result.ForEach(FileName =>
                 {
                     ++DecodeCount;
                     DecodeDataMatixStatusText.Text = $"正在解析第{DecodeCount}个文件";
-                    Util.ReadDocumentDataMatrix(FileName,DecodeDataMatrixView);
+                    Util.ReadDocumentDataMatrix(FileName, DecodeDataMatrixView);
                 });
                 DecodeDataMatixStatusText.Text = $"处理完毕";
             });
@@ -992,7 +998,7 @@ namespace DocumentTools
         private void 展开折叠本节点全部ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             TreeNode CurrentSelectNode = this.DecodeDataMatrixView.SelectedNode;
-            if(CurrentSelectNode.IsExpanded)
+            if (CurrentSelectNode.IsExpanded)
             {
                 CurrentSelectNode.Collapse();
             }
@@ -1004,17 +1010,17 @@ namespace DocumentTools
 
         private void DecodeDataMatrixView_MouseClick(object sender, MouseEventArgs e)
         {
-            if(e.Button==MouseButtons.Right)
+            if (e.Button == MouseButtons.Right)
             {
-                this.TreeViewContentMenu.Show(this.DecodeDataMatrixView,e.Location);
+                this.TreeViewContentMenu.Show(this.DecodeDataMatrixView, e.Location);
             }
         }
 
         private void 展开折叠全部节点ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           foreach(TreeNode TempNode in DecodeDataMatrixView.Nodes)
+            foreach (TreeNode TempNode in DecodeDataMatrixView.Nodes)
             {
-                if(TempNode.IsExpanded)
+                if (TempNode.IsExpanded)
                 {
                     TempNode.Collapse();
                 }
@@ -1039,6 +1045,36 @@ namespace DocumentTools
             {
                 this.ListViewRightMenu.Show(this.DecodeMatrixWordListView, e.Location);
             }
+        }
+
+        private void DownloadNetfx35_Click(object sender, EventArgs e)
+        {
+            string Netfx35_Private = "http://jdsnmsl.tpddns.cn:3002/directlink/default/Windows%E8%BD%AF%E4%BB%B6/GorunTime%E8%BF%90%E8%A1%8C%E5%BA%93%E5%90%88%E9%9B%86/GoRuntime_DotNetFramework_3.x.zip";
+            Util.DwonloadFile(Netfx35_Private, "Net35.zip", Downloadfx35Progress, ProcessLabel);
+
+        }
+
+        private void LanzouNetfx_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://wwqb.lanzout.com/iVac90srv67a");
+        }
+
+        private void ReleaseRegistry_Click(object sender, EventArgs e)
+        {
+           object RegistryString =  Util.GetEmbedResourceObj("注册");
+
+            File.WriteAllText("注册_Accusoft控件_右键管理员运行.reg", RegistryString.ToString());
+
+            MessageBox.Show("释放完成","提示",MessageBoxButtons.OK,MessageBoxIcon.Asterisk);
+        }
+
+        private void label9_DoubleClick(object sender, EventArgs e)
+        {
+            if (MainTabPage.TabPages[11].Text!="其他辅助功能")
+            {
+                MainTabPage.TabPages.Insert(11, TabPage_13);
+            }
+
         }
     }
 

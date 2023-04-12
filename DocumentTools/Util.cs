@@ -7,15 +7,14 @@ using NAudio.Wave;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Net;
 using System.Reflection;
 using System.Resources;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
-using System.Windows.Media;
 
 namespace DocumentTools
 {
@@ -92,7 +91,7 @@ namespace DocumentTools
         /// </summary>
         /// <param name="ResourceName">资源名称，不需要带后缀</param>
         /// <returns></returns>
-        private static object GetEmbedResourceObj(string ResourceName)
+        public static object GetEmbedResourceObj(string ResourceName)
         {
             Assembly SelfAssmbly = Assembly.GetExecutingAssembly();
             ResourceManager TempManager = new ResourceManager("DocumentTools.Properties.Resources", SelfAssmbly);
@@ -275,7 +274,7 @@ namespace DocumentTools
             //如果是pdf格式则进行pdf合并，如果不是pdf则进行document插入图片合并转换为pdf
             pdfFileNames.ForEach(FileName =>
             {
-                string FileExtension = Path.GetExtension(FileName);
+                string FileExtension = System.IO.Path.GetExtension(FileName);
                 if (FileExtension != ".pdf")
                 {
                     TempPicturePdfBuilder.InsertImage(FileName);
@@ -383,7 +382,7 @@ namespace DocumentTools
         {
             Aspose.Hook.Manager.StartHook();
 
-            string FileType = Path.GetExtension(DocumentsFileName);
+            string FileType = System.IO.Path.GetExtension(DocumentsFileName);
 
             //初始化一个临时参数，到时候重新初始化
             Aspose.Words.Saving.ImageSaveOptions TempWordImageSaveOption = new Aspose.Words.Saving.ImageSaveOptions(Aspose.Words.SaveFormat.Jpeg);
@@ -592,22 +591,22 @@ namespace DocumentTools
         /// </summary>
         /// <param name="DocumentFileName">文档名称</param>
         /// <param name="TempTreeView">控件</param>
-        public static void ReadDocumentDataMatrix(string DocumentFileName,TreeView TempTreeView)
+        public static void ReadDocumentDataMatrix(string DocumentFileName, TreeView TempTreeView)
         {
             Aspose.Hook.Manager.StartHook();
             TreeNode TempTreeNode = new TreeNode();
-            TreeNode TempDocumentNameRootNode =  TempTreeNode.Nodes.Add(DocumentFileName);//添加文件节点信息
+            TreeNode TempDocumentNameRootNode = TempTreeNode.Nodes.Add(DocumentFileName);//添加文件节点信息
             Aspose.Words.Document TempDocuemnt = new Aspose.Words.Document(DocumentFileName);
-            for (int PageIndex=0;PageIndex<TempDocuemnt.PageCount;PageIndex++)
+            for (int PageIndex = 0; PageIndex < TempDocuemnt.PageCount; PageIndex++)
             {
-                TreeNode PageIndexNode = TempDocumentNameRootNode.Nodes.Add($"第{PageIndex+1}页");//在文件节点信息基础上添加页面信息
+                TreeNode PageIndexNode = TempDocumentNameRootNode.Nodes.Add($"第{PageIndex + 1}页");//在文件节点信息基础上添加页面信息
                 PageIndexNode.ForeColor = System.Drawing.Color.ForestGreen;
                 Aspose.Words.Saving.ImageSaveOptions TempImageSaveOption = new Aspose.Words.Saving.ImageSaveOptions(Aspose.Words.SaveFormat.Png);
                 TempImageSaveOption.PageSet = new Aspose.Words.Saving.PageSet(PageIndex);
                 TempImageSaveOption.Resolution = 300;
                 using (MemoryStream TempMemoryStream = new MemoryStream())
                 {
-                    TempDocuemnt.Save(TempMemoryStream,TempImageSaveOption);
+                    TempDocuemnt.Save(TempMemoryStream, TempImageSaveOption);
                     TempMemoryStream.Position = 0;
 
                     using (BarCodeReader TempCodeReader = new BarCodeReader(TempMemoryStream, DecodeType.DataMatrix))
@@ -834,6 +833,27 @@ namespace DocumentTools
         {
 
             return byteNumber / Math.Pow(1024.0, 3);
+        }
+
+        public static void DwonloadFile(string FileUrl, string SavedFileName, ProgressBar DownloadProgressBar,Label DownloadStatusLabel)
+        {
+
+            DownloadProgressBar.Maximum = 100;
+            WebClient TempDownloadClient = new WebClient();
+            Uri TempDownloadUrl = new Uri(FileUrl);
+            TempDownloadClient.DownloadFileAsync(TempDownloadUrl, SavedFileName);
+            TempDownloadClient.DownloadProgressChanged += (download_sender, download_event) =>
+            {
+                int CurrentPercent = download_event.ProgressPercentage;
+                DownloadProgressBar.Value = CurrentPercent;
+                DownloadStatusLabel.Text = $"下载进度：{CurrentPercent}%";
+            };
+            TempDownloadClient.DownloadFileCompleted += (download_sender, download_event) =>
+            {
+                DownloadStatusLabel.Text = $"下载完毕，文件名称为：{SavedFileName}";
+            };
+
+
         }
     }
     internal class SavingPdfCallBack : Aspose.Words.Saving.IPageSavingCallback
