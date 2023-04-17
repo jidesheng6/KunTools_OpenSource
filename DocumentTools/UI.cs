@@ -17,8 +17,10 @@ namespace DocumentTools
         Word2Image,
         Pdf2Excel,
         WordReplace,
-        ExcelReplace
+        ExcelReplace,
+        Image2Ico
     }
+
     internal class UI
     {
 
@@ -206,6 +208,11 @@ namespace DocumentTools
             AddFilesToListView("WORD文档", "*.doc;*.docx", BodyForm.MainForm.DecodeMatrixWordListView);
         }
 
+        public static void AddIcoConvertFiles()
+        {
+            AddFilesToListView("图片文件", "*.jpg;*.png;*.bmp", BodyForm.MainForm.IcoFileView);
+        }
+
 
 
         /// <summary>
@@ -269,6 +276,10 @@ namespace DocumentTools
                             //批量替换Excel内容
                             case ConvertFileType.ExcelReplace:
                                 Util.RelaceDocumentContent(ListViewFirstColumnText, ConvertedFileName, "EXCEL", BodyForm.MainForm.ExcelFindTextBox.Text, BodyForm.MainForm.ExcelReplaceBox.Text, false, BodyForm.MainForm.ExcelNoIgnoreCase.Checked, BodyForm.MainForm.RemoveRows.Checked, Convert.ToInt32(BodyForm.MainForm.ExcelStartRow.Text), Convert.ToInt32(BodyForm.MainForm.ExcelEndRow.Text), BodyForm.MainForm.UseRegex.Checked);
+                                break;
+                            // 批量图片转为ICO
+                            case ConvertFileType.Image2Ico:
+                                Util.ConvertImage2Ico(ListViewFirstColumnText,ConvertedFileName, Convert.ToInt32(BodyForm.MainForm.IcoSizeDrop.SelectedValue));
                                 break;
                             default: break;
                         }

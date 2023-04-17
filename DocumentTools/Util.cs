@@ -1,13 +1,13 @@
 ﻿using Aspose.BarCode.BarCodeRecognition;
 using Aspose.Cells;
 using Aspose.Cells.Rendering;
-using Aspose.Imaging.ImageOptions;
 using Microsoft.VisualBasic.Devices;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using NAudio.Wave;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Net;
@@ -16,6 +16,9 @@ using System.Resources;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
+using ImageMagick;
+
+using Aspose.Pdf;
 
 namespace DocumentTools
 {
@@ -855,29 +858,12 @@ namespace DocumentTools
 
         }
 
-        //public static void ConvertImage(string PictureName,string SavedfileName,string ConvertExtension,int ConvertDpiValue)
-        //{
-        //    Aspose.Hook.Manager.StartHook();
-        //    using (Aspose.Imaging.Image RawImage = Aspose.Imaging.Image.Load(PictureName))
-        //    {
-        //        PdfOptions SimPdfOption;
-        //        switch (ConvertExtension)
-        //        {
-        //            //模拟扫描件输出
-        //            case ".pdf":
-        //                SimPdfOption = new PdfOptions()
-        //                {
-        //                    ResolutionSettings = new Aspose.Imaging.ResolutionSetting(ConvertDpiValue, ConvertDpiValue),
-        //                    PdfDocumentInfo = new Aspose.Imaging.FileFormats.Pdf.PdfDocumentInfo(),
-        //                };
-        //                break;
-        //            case ".jpg":
-
-        //                break;
-        //            default:break;
-        //        }
-        //    }
-        //}
+        public static void ConvertImage2Ico(string ImageFileName,string SaveFileName, int icoSize)
+        {
+            MagickImage TempLoadImage = new MagickImage(ImageFileName);
+            TempLoadImage.Resize(new MagickGeometry(icoSize,icoSize));
+            TempLoadImage.Write(SaveFileName);
+        }
     }
     internal class SavingPdfCallBack : Aspose.Words.Saving.IPageSavingCallback
     {

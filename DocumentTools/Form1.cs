@@ -49,11 +49,10 @@ namespace DocumentTools
             this.DecodeDataMatrixView.ShowLines = true;
             this.DecodeDataMatrixView.ShowRootLines = true;
             this.DecodeDataMatrixView.FullRowSelect = true;
+            ReleaseRegistry.Enabled = false;
 
-            MainTabPage.TabPages.RemoveAt(11);
 
-
-            Util.PlayMp3WithStream();
+            //Util.PlayMp3WithStream();
 
 
 
@@ -171,6 +170,18 @@ namespace DocumentTools
 
             this.DecodeMatrixWordListView.DragEnter += ListViewDragEnter;
             this.DecodeMatrixWordListView.DragDrop += ListviewDragDrop;
+
+            //IcoFileView
+            this.IcoFileView.View = View.Details;
+            this.IcoFileView.FullRowSelect = true;
+            this.IcoFileView.AllowDrop = true;
+            this.IcoFileView.Columns.Add("文件名称", 300);
+            this.IcoFileView.Columns.Add("添加时间", 300);
+            this.IcoFileView.Columns.Add("转换后文件名称", 300);
+            this.IcoFileView.Name = "IcoFileView";
+
+            this.IcoFileView.DragEnter += ListViewDragEnter;
+            this.IcoFileView.DragDrop += ListviewDragDrop;
         }
 
         private void InitComboxValue()
@@ -225,11 +236,29 @@ namespace DocumentTools
             this.MeregeFilePage.DisplayMember = "PdfFormatDisplayValue";
             this.MeregeFilePage.ValueMember = "PdfFormatValue";
 
-            this.MeregeFilePage.DropDownStyle = ComboBoxStyle.DropDownList;
+            DataTable IcoSizeTable = new DataTable();
+            IcoSizeTable.Columns.Add("IcoSizeDisplay");
+            IcoSizeTable.Columns.Add("IcoSizeValue");
+            IcoSizeTable.Rows.Add("16X16", 16);
+            IcoSizeTable.Rows.Add("32X32", 32);
+            IcoSizeTable.Rows.Add("64X64", 64);
+            IcoSizeTable.Rows.Add("128X128", 128);
+            IcoSizeTable.Rows.Add("256X256", 256);
 
+            this.IcoSizeDrop.DataSource = IcoSizeTable;
+            this.IcoSizeDrop.DisplayMember = "IcoSizeDisplay";
+            this.IcoSizeDrop.ValueMember = "IcoSizeValue";
+
+
+
+            this.MeregeFilePage.DropDownStyle = ComboBoxStyle.DropDownList;
             this.TwainColorMode.DropDownStyle = ComboBoxStyle.DropDownList;
             this.TwainDpi.DropDownStyle = ComboBoxStyle.DropDownList;
             this.TwainPaperSizeBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.IcoSizeDrop.DropDownStyle = ComboBoxStyle.DropDownList;
+
+
+
         }
 
         private void ChooseDocButton_Click(object sender, EventArgs e)
@@ -501,6 +530,9 @@ namespace DocumentTools
                     case "DecodeMatrixWordListView":
                         UI.RemoveListViewItem(false, DecodeMatrixWordListView, DecodeMatrixWordListView.FocusedItem.Index);
                         break;
+                    case "IcoFileView":
+                        UI.RemoveListViewItem(false, IcoFileView, IcoFileView.FocusedItem.Index);
+                        break;
                     default: break;
                 }
             }
@@ -555,6 +587,9 @@ namespace DocumentTools
                         break;
                     case "DecodeMatrixWordListView":
                         UI.RemoveListViewItem(true, DecodeMatrixWordListView);
+                        break;
+                    case "IcoFileView":
+                        UI.RemoveListViewItem(true, IcoFileView);
                         break;
                     default: break;
                 }
@@ -682,6 +717,9 @@ namespace DocumentTools
                     break;
                 case "DecodeMatrixWordListView":
                     UI.AddFilesToListviewWithNotDialog(DropFiles, this.DecodeMatrixWordListView, new string[] { ".doc", ".docx" });
+                    break;
+                case "IcoFileView":
+                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.IcoFileView, new string[] { ".jpg", ".png",".bmp" });
                     break;
                 default: break;
             }
@@ -1085,15 +1123,36 @@ namespace DocumentTools
 
         private void label9_DoubleClick(object sender, EventArgs e)
         {
-            if (MainTabPage.TabPages[11].Text!="其他辅助功能")
+            if(ReleaseRegistry.Enabled)
             {
-                MainTabPage.TabPages.Insert(11, TabPage_13);
+                ReleaseRegistry.Enabled = false;
             }
             else
             {
-                MainTabPage.TabPages.RemoveAt(11);
+                ReleaseRegistry.Enabled = true;
             }
 
+        }
+
+        private void SelectFilesIco_Click(object sender, EventArgs e)
+        {
+            UI.AddIcoConvertFiles();
+        }
+
+        private void ConvertImage2Ico_Click(object sender, EventArgs e)
+        {
+            Task.Run(() =>
+            {
+                try
+                {
+                    UI.ConvertStart(this.IcoFileView, this.Image2IcoStatusText, ConvertFileType.Image2Ico, ".ico");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            });
         }
     }
 
