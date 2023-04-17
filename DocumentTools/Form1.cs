@@ -51,6 +51,8 @@ namespace DocumentTools
             this.DecodeDataMatrixView.FullRowSelect = true;
             ReleaseRegistry.Enabled = false;
 
+            MainTabPage.TabPages.RemoveAt(11);
+
 
             //Util.PlayMp3WithStream();
 
