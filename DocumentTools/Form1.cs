@@ -51,7 +51,6 @@ namespace DocumentTools
             this.DecodeDataMatrixView.FullRowSelect = true;
             ReleaseRegistry.Enabled = false;
 
-            MainTabPage.TabPages.RemoveAt(11);
 
 
             //Util.PlayMp3WithStream();
@@ -1155,6 +1154,15 @@ namespace DocumentTools
                 }
 
             });
+        }
+
+        private void IcoFileView_MouseClick(object sender, MouseEventArgs e)
+        {
+            //右键项目才显示菜单
+            if (e.Button == MouseButtons.Right)
+            {
+                this.ListViewRightMenu.Show(this.IcoFileView, e.Location);
+            }
         }
     }
 

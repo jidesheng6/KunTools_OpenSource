@@ -163,6 +163,13 @@
             this.SetTwainDevice = new System.Windows.Forms.LinkLabel();
             this.SelectTwainDevice = new System.Windows.Forms.LinkLabel();
             this.TabPage_13 = new System.Windows.Forms.TabPage();
+            this.groupBox17 = new System.Windows.Forms.GroupBox();
+            this.IcoSizeDrop = new System.Windows.Forms.ComboBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.Image2IcoStatusText = new System.Windows.Forms.Label();
+            this.ConvertImage2Ico = new System.Windows.Forms.Button();
+            this.SelectFilesIco = new System.Windows.Forms.Button();
+            this.IcoFileView = new System.Windows.Forms.ListView();
             this.label20 = new System.Windows.Forms.Label();
             this.groupBox16 = new System.Windows.Forms.GroupBox();
             this.ReleaseRegistry = new System.Windows.Forms.Button();
@@ -192,13 +199,6 @@
             this.展开折叠本节点全部ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.展开折叠全部节点ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.打开文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.groupBox17 = new System.Windows.Forms.GroupBox();
-            this.IcoFileView = new System.Windows.Forms.ListView();
-            this.SelectFilesIco = new System.Windows.Forms.Button();
-            this.ConvertImage2Ico = new System.Windows.Forms.Button();
-            this.Image2IcoStatusText = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.IcoSizeDrop = new System.Windows.Forms.ComboBox();
             this.MainTabPage.SuspendLayout();
             this.TabPage_01.SuspendLayout();
             this.TabPage_02.SuspendLayout();
@@ -226,6 +226,7 @@
             this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.TabPage_13.SuspendLayout();
+            this.groupBox17.SuspendLayout();
             this.groupBox16.SuspendLayout();
             this.groupBox15.SuspendLayout();
             this.TabPage_08.SuspendLayout();
@@ -233,7 +234,6 @@
             this.groupBox3.SuspendLayout();
             this.ListViewRightMenu.SuspendLayout();
             this.TreeViewContentMenu.SuspendLayout();
-            this.groupBox17.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainTabPage
@@ -1636,6 +1636,78 @@
             this.TabPage_13.Text = "其他辅助功能";
             this.TabPage_13.UseVisualStyleBackColor = true;
             // 
+            // groupBox17
+            // 
+            this.groupBox17.Controls.Add(this.IcoSizeDrop);
+            this.groupBox17.Controls.Add(this.label22);
+            this.groupBox17.Controls.Add(this.Image2IcoStatusText);
+            this.groupBox17.Controls.Add(this.ConvertImage2Ico);
+            this.groupBox17.Controls.Add(this.SelectFilesIco);
+            this.groupBox17.Controls.Add(this.IcoFileView);
+            this.groupBox17.Location = new System.Drawing.Point(11, 126);
+            this.groupBox17.Name = "groupBox17";
+            this.groupBox17.Size = new System.Drawing.Size(747, 309);
+            this.groupBox17.TabIndex = 3;
+            this.groupBox17.TabStop = false;
+            this.groupBox17.Text = "ICO图标转换";
+            // 
+            // IcoSizeDrop
+            // 
+            this.IcoSizeDrop.FormattingEnabled = true;
+            this.IcoSizeDrop.Location = new System.Drawing.Point(605, 219);
+            this.IcoSizeDrop.Name = "IcoSizeDrop";
+            this.IcoSizeDrop.Size = new System.Drawing.Size(136, 26);
+            this.IcoSizeDrop.TabIndex = 5;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(456, 222);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(143, 18);
+            this.label22.TabIndex = 4;
+            this.label22.Text = "设置ICO图标大小";
+            // 
+            // Image2IcoStatusText
+            // 
+            this.Image2IcoStatusText.AutoSize = true;
+            this.Image2IcoStatusText.ForeColor = System.Drawing.Color.ForestGreen;
+            this.Image2IcoStatusText.Location = new System.Drawing.Point(302, 261);
+            this.Image2IcoStatusText.Name = "Image2IcoStatusText";
+            this.Image2IcoStatusText.Size = new System.Drawing.Size(125, 18);
+            this.Image2IcoStatusText.TabIndex = 3;
+            this.Image2IcoStatusText.Text = "等待处理中...";
+            // 
+            // ConvertImage2Ico
+            // 
+            this.ConvertImage2Ico.Location = new System.Drawing.Point(605, 251);
+            this.ConvertImage2Ico.Name = "ConvertImage2Ico";
+            this.ConvertImage2Ico.Size = new System.Drawing.Size(136, 43);
+            this.ConvertImage2Ico.TabIndex = 2;
+            this.ConvertImage2Ico.Text = "开始处理";
+            this.ConvertImage2Ico.UseVisualStyleBackColor = true;
+            this.ConvertImage2Ico.Click += new System.EventHandler(this.ConvertImage2Ico_Click);
+            // 
+            // SelectFilesIco
+            // 
+            this.SelectFilesIco.Location = new System.Drawing.Point(6, 249);
+            this.SelectFilesIco.Name = "SelectFilesIco";
+            this.SelectFilesIco.Size = new System.Drawing.Size(136, 43);
+            this.SelectFilesIco.TabIndex = 1;
+            this.SelectFilesIco.Text = "选择文件";
+            this.SelectFilesIco.UseVisualStyleBackColor = true;
+            this.SelectFilesIco.Click += new System.EventHandler(this.SelectFilesIco_Click);
+            // 
+            // IcoFileView
+            // 
+            this.IcoFileView.HideSelection = false;
+            this.IcoFileView.Location = new System.Drawing.Point(6, 27);
+            this.IcoFileView.Name = "IcoFileView";
+            this.IcoFileView.Size = new System.Drawing.Size(735, 185);
+            this.IcoFileView.TabIndex = 0;
+            this.IcoFileView.UseCompatibleStateImageBehavior = false;
+            this.IcoFileView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.IcoFileView_MouseClick);
+            // 
             // label20
             // 
             this.label20.AutoSize = true;
@@ -1903,77 +1975,6 @@
             this.打开文件ToolStripMenuItem.Text = "打开文件";
             this.打开文件ToolStripMenuItem.Click += new System.EventHandler(this.打开文件ToolStripMenuItem_Click);
             // 
-            // groupBox17
-            // 
-            this.groupBox17.Controls.Add(this.IcoSizeDrop);
-            this.groupBox17.Controls.Add(this.label22);
-            this.groupBox17.Controls.Add(this.Image2IcoStatusText);
-            this.groupBox17.Controls.Add(this.ConvertImage2Ico);
-            this.groupBox17.Controls.Add(this.SelectFilesIco);
-            this.groupBox17.Controls.Add(this.IcoFileView);
-            this.groupBox17.Location = new System.Drawing.Point(11, 126);
-            this.groupBox17.Name = "groupBox17";
-            this.groupBox17.Size = new System.Drawing.Size(747, 309);
-            this.groupBox17.TabIndex = 3;
-            this.groupBox17.TabStop = false;
-            this.groupBox17.Text = "ICO图标转换";
-            // 
-            // IcoFileView
-            // 
-            this.IcoFileView.HideSelection = false;
-            this.IcoFileView.Location = new System.Drawing.Point(6, 27);
-            this.IcoFileView.Name = "IcoFileView";
-            this.IcoFileView.Size = new System.Drawing.Size(735, 185);
-            this.IcoFileView.TabIndex = 0;
-            this.IcoFileView.UseCompatibleStateImageBehavior = false;
-            // 
-            // SelectFilesIco
-            // 
-            this.SelectFilesIco.Location = new System.Drawing.Point(6, 249);
-            this.SelectFilesIco.Name = "SelectFilesIco";
-            this.SelectFilesIco.Size = new System.Drawing.Size(136, 43);
-            this.SelectFilesIco.TabIndex = 1;
-            this.SelectFilesIco.Text = "选择文件";
-            this.SelectFilesIco.UseVisualStyleBackColor = true;
-            this.SelectFilesIco.Click += new System.EventHandler(this.SelectFilesIco_Click);
-            // 
-            // ConvertImage2Ico
-            // 
-            this.ConvertImage2Ico.Location = new System.Drawing.Point(605, 251);
-            this.ConvertImage2Ico.Name = "ConvertImage2Ico";
-            this.ConvertImage2Ico.Size = new System.Drawing.Size(136, 43);
-            this.ConvertImage2Ico.TabIndex = 2;
-            this.ConvertImage2Ico.Text = "开始处理";
-            this.ConvertImage2Ico.UseVisualStyleBackColor = true;
-            this.ConvertImage2Ico.Click += new System.EventHandler(this.ConvertImage2Ico_Click);
-            // 
-            // Image2IcoStatusText
-            // 
-            this.Image2IcoStatusText.AutoSize = true;
-            this.Image2IcoStatusText.ForeColor = System.Drawing.Color.ForestGreen;
-            this.Image2IcoStatusText.Location = new System.Drawing.Point(302, 261);
-            this.Image2IcoStatusText.Name = "Image2IcoStatusText";
-            this.Image2IcoStatusText.Size = new System.Drawing.Size(125, 18);
-            this.Image2IcoStatusText.TabIndex = 3;
-            this.Image2IcoStatusText.Text = "等待处理中...";
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(456, 222);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(143, 18);
-            this.label22.TabIndex = 4;
-            this.label22.Text = "设置ICO图标大小";
-            // 
-            // IcoSizeDrop
-            // 
-            this.IcoSizeDrop.FormattingEnabled = true;
-            this.IcoSizeDrop.Location = new System.Drawing.Point(605, 219);
-            this.IcoSizeDrop.Name = "IcoSizeDrop";
-            this.IcoSizeDrop.Size = new System.Drawing.Size(136, 26);
-            this.IcoSizeDrop.TabIndex = 5;
-            // 
             // BodyForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
@@ -2036,6 +2037,8 @@
             this.groupBox5.PerformLayout();
             this.TabPage_13.ResumeLayout(false);
             this.TabPage_13.PerformLayout();
+            this.groupBox17.ResumeLayout(false);
+            this.groupBox17.PerformLayout();
             this.groupBox16.ResumeLayout(false);
             this.groupBox15.ResumeLayout(false);
             this.groupBox15.PerformLayout();
@@ -2047,8 +2050,6 @@
             this.groupBox3.PerformLayout();
             this.ListViewRightMenu.ResumeLayout(false);
             this.TreeViewContentMenu.ResumeLayout(false);
-            this.groupBox17.ResumeLayout(false);
-            this.groupBox17.PerformLayout();
             this.ResumeLayout(false);
 
         }
