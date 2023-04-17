@@ -15,9 +15,8 @@ using System.Resources;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
-using ImageMagick;
-
 using Aspose.Pdf;
+using System.Drawing;
 
 namespace DocumentTools
 {
@@ -859,9 +858,19 @@ namespace DocumentTools
 
         public static void ConvertImage2Ico(string ImageFileName,string SaveFileName, int icoSize)
         {
-            MagickImage TempLoadImage = new MagickImage(ImageFileName);
-            TempLoadImage.Resize(new MagickGeometry(icoSize,icoSize));
-            TempLoadImage.Write(SaveFileName);
+            using (Bitmap TempBitMapLoad = new Bitmap(ImageFileName))
+            {
+                using (Bitmap TempResizeBitMap = new Bitmap(TempBitMapLoad, new Size(icoSize, icoSize)))
+                {
+                    using (Icon TempIcon = Icon.FromHandle(TempResizeBitMap.GetHicon()))
+                    {
+                        using (FileStream TempIconStream = new FileStream(SaveFileName, FileMode.OpenOrCreate))
+                        {
+                            TempIcon.Save(TempIconStream);
+                        }
+                    }
+                }
+            }
         }
     }
     internal class SavingPdfCallBack : Aspose.Words.Saving.IPageSavingCallback

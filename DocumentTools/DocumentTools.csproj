@@ -123,12 +123,6 @@
       <HintPath>..\packages\Costura.Fody.5.7.0\lib\netstandard1.0\Costura.dll</HintPath>
     </Reference>
     <Reference Include="CustomMarshalers" />
-    <Reference Include="Magick.NET-Q16-AnyCPU, Version=13.0.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=MSIL">
-      <HintPath>..\packages\Magick.NET-Q16-AnyCPU.13.0.1\lib\netstandard20\Magick.NET-Q16-AnyCPU.dll</HintPath>
-    </Reference>
-    <Reference Include="Magick.NET.Core, Version=13.0.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=MSIL">
-      <HintPath>..\packages\Magick.NET.Core.13.0.1\lib\netstandard20\Magick.NET.Core.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.ML.OnnxRuntime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=f27f157f0a5b7bb6, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ML.OnnxRuntime.Managed.1.7.0\lib\netstandard1.1\Microsoft.ML.OnnxRuntime.dll</HintPath>
     </Reference>
@@ -180,14 +174,8 @@
     <Reference Include="NAudio.WinMM, Version=2.1.0.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
       <HintPath>..\packages\NAudio.WinMM.2.1.0\lib\netstandard2.0\NAudio.WinMM.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="NTwain, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NTwain.3.7.2\lib\net462\NTwain.dll</HintPath>
-    </Reference>
-    <Reference Include="OpenCvSharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6adad1e807fea099, processorArchitecture=MSIL">
-      <HintPath>..\packages\OpenCvSharp4.4.7.0.20230115\lib\netstandard2.0\OpenCvSharp.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -428,7 +416,6 @@
     <Error Condition="!Exists('..\packages\Microsoft.ML.OnnxRuntime.Managed.1.7.0\build\netstandard1.1\Microsoft.ML.OnnxRuntime.Managed.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ML.OnnxRuntime.Managed.1.7.0\build\netstandard1.1\Microsoft.ML.OnnxRuntime.Managed.targets'))" />
     <Error Condition="!Exists('..\packages\Microsoft.ML.OnnxRuntime.1.7.0\build\netstandard1.1\Microsoft.ML.OnnxRuntime.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ML.OnnxRuntime.1.7.0\build\netstandard1.1\Microsoft.ML.OnnxRuntime.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.ML.OnnxRuntime.1.7.0\build\netstandard1.1\Microsoft.ML.OnnxRuntime.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ML.OnnxRuntime.1.7.0\build\netstandard1.1\Microsoft.ML.OnnxRuntime.targets'))" />
-    <Error Condition="!Exists('..\packages\Magick.NET-Q16-AnyCPU.13.0.1\build\netstandard20\Magick.NET-Q16-AnyCPU.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Magick.NET-Q16-AnyCPU.13.0.1\build\netstandard20\Magick.NET-Q16-AnyCPU.targets'))" />
   </Target>
   <Import Project="..\packages\Costura.Fody.5.7.0\build\Costura.Fody.targets" Condition="Exists('..\packages\Costura.Fody.5.7.0\build\Costura.Fody.targets')" />
   <Import Project="..\packages\Microsoft.ML.OnnxRuntime.Managed.1.7.0\build\netstandard1.1\Microsoft.ML.OnnxRuntime.Managed.targets" Condition="Exists('..\packages\Microsoft.ML.OnnxRuntime.Managed.1.7.0\build\netstandard1.1\Microsoft.ML.OnnxRuntime.Managed.targets')" />
@@ -441,5 +428,4 @@
     <PreBuildEvent>
     </PreBuildEvent>
   </PropertyGroup>
-  <Import Project="..\packages\Magick.NET-Q16-AnyCPU.13.0.1\build\netstandard20\Magick.NET-Q16-AnyCPU.targets" Condition="Exists('..\packages\Magick.NET-Q16-AnyCPU.13.0.1\build\netstandard20\Magick.NET-Q16-AnyCPU.targets')" />
 </Project>

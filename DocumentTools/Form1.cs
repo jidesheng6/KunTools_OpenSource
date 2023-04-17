@@ -24,6 +24,7 @@ namespace DocumentTools
         private int TotalTempImageCount = 0;
         private double ScanSeconds = 0;
         private Bitmap PictureBoxPreviewImage;
+        private bool TwainStopScan = false;
 
 
         public BodyForm()
@@ -51,7 +52,6 @@ namespace DocumentTools
             this.DecodeDataMatrixView.FullRowSelect = true;
             ReleaseRegistry.Enabled = false;
 
-            MainTabPage.TabPages.RemoveAt(11);
 
 
             //Util.PlayMp3WithStream();
@@ -758,6 +758,13 @@ namespace DocumentTools
                     this.ScanSpendTime.Text = $"本次扫描时间：{ScanSeconds}秒";
                 }
                 dataSource.Close();
+                TwainStopScan = false;
+            };
+
+            twainSession.TransferReady += (twainSender, twainArgs) =>
+            {
+                Debug.WriteLine($"TransferReady Event：Stop_Scan_State={TwainStopScan}");
+                twainArgs.CancelAll = TwainStopScan;
             };
         }
 
@@ -786,7 +793,18 @@ namespace DocumentTools
 
                     }
                     //输出扫描仪支持的设置参数
-                    dataSource.Capabilities.CapSupportedCaps.GetValues().ToList().ForEach(x => Debug.WriteLine(x));
+                    string DebugName = $"{dataSource.Name}_Support_Capabilities.txt";
+                    if (File.Exists(DebugName))
+                    {
+                        File.Delete(DebugName);
+                    }
+                    dataSource.Capabilities.CapSupportedCaps.GetValues().ToList().ForEach(x => {
+                        StreamWriter sr = File.AppendText(DebugName);
+                        sr.WriteLine(x);
+                        sr.Close();
+                        }
+                    );
+
 
                     if (dataSource.Capabilities.CapSerialNumber.CanGet)
                     {
@@ -908,6 +926,14 @@ namespace DocumentTools
                     sw.Stop();
                     ScanSeconds += sw.Elapsed.TotalSeconds;//一个扫描过程中花费的时间值，值将会在开始扫描按钮中重置为0
                     PictureBoxPreviewImage.Dispose();
+
+                    if(TwainScanNumberSet.Text!=string.Empty && Int32.TryParse(TwainScanNumberSet.Text,out int TwainScanNumberSetInt))
+                    {
+                        if(TwainScanNumberSetInt>0 && TwainScanNumberSetInt== TempImageCount)
+                        {
+                            TwainStopScan = true;
+                        }
+                    }
 
                 }
             }
@@ -1155,6 +1181,15 @@ namespace DocumentTools
                 }
 
             });
+        }
+
+        private void IcoFileView_MouseClick(object sender, MouseEventArgs e)
+        {
+            //右键项目才显示菜单
+            if (e.Button == MouseButtons.Right)
+            {
+                this.ListViewRightMenu.Show(this.IcoFileView, e.Location);
+            }
         }
     }
 
