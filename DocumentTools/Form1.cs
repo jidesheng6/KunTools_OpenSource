@@ -1,4 +1,5 @@
-﻿using NTwain;
+﻿using Aspose.Pdf.Drawing;
+using NTwain;
 using NTwain.Data;
 using System;
 using System.Collections.Generic;
@@ -56,8 +57,7 @@ namespace DocumentTools
 
             //Util.PlayMp3WithStream();
 
-
-
+           
 
         }
 
@@ -913,9 +913,9 @@ namespace DocumentTools
                     sw.Start();
                     ++TempImageCount;//每次扫描的时候进入纸张数量，扫描完毕后需要在开始扫描按钮重置该值为0
                     ++TotalTempImageCount;//程序运行期间，扫描纸张的总数量，和上面的不同之处在于，点击开始扫描以后不进行重置值
-                    string SaveImageName = Path.Combine(ScanPictureSavePathBox.Text, $"ScanImage_{++ImageIndex}.jpg");//Imageindex为全局属性，值为目录内的文件数量，防止下次扫描原图片被覆盖
+                    string SaveImageName = System.IO.Path.Combine(ScanPictureSavePathBox.Text, $"ScanImage_{++ImageIndex}.jpg");//Imageindex为全局属性，值为目录内的文件数量，防止下次扫描原图片被覆盖
                     TempScannedImage.Save(SaveImageName, System.Drawing.Imaging.ImageFormat.Jpeg);
-                    this.PreviewPictureName.Text = "图片名称：" + Path.GetFileName(SaveImageName);
+                    this.PreviewPictureName.Text = "图片名称：" + System.IO.Path.GetFileName(SaveImageName);
 
                     PictureBoxPreviewImage = new Bitmap(SaveImageName);
                     this.PreviewPictureBox.Image = PictureBoxPreviewImage;

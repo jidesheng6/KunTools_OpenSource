@@ -168,18 +168,6 @@ namespace DocumentTools
 
             SaveDocxName = System.IO.Path.Combine(tempSaveDocxPath, DocumentName + ".docx");
 
-
-            TempPdfaveOption.PageSavingCallback = new SavingPdfCallBack();
-            //TempDocument.CompatibilityOptions.AutoSpaceLikeWord95 = true;
-            //TempDocument.CompatibilityOptions.WrapTrailSpaces = true;
-            //TempDocument.CompatibilityOptions.NoSpaceRaiseLower = true;
-            //TempDocument.CompatibilityOptions.SuppressSpBfAfterPgBrk = true;
-            //TempDocument.CompatibilityOptions.NoLeading = true;
-            //TempDocument.CompatibilityOptions.NoExtraLineSpacing = true;
-            //TempDocument.CompatibilityOptions.DoNotUseEastAsianBreakRules = true;
-            //TempDocument.CompatibilityOptions.BalanceSingleByteDoubleByteWidth = true;
-
-
             TempDocument.UpdateFields();
 
             TempDocument.Save(SaveDocxName, TempDocxSaveOption);
@@ -871,20 +859,6 @@ namespace DocumentTools
                     }
                 }
             }
-        }
-    }
-    internal class SavingPdfCallBack : Aspose.Words.Saving.IPageSavingCallback
-    {
-        public SavingPdfCallBack()
-        {
-
-        }
-
-
-        public void PageSaving(Aspose.Words.Saving.PageSavingArgs args)
-        {
-
-            BodyForm.MainForm.ProcessPage_W2P.Text = $"已保存{args.PageIndex + 1}页";
         }
     }
 

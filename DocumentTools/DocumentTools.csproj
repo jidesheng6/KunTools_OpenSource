@@ -421,8 +421,9 @@
   <Import Project="..\packages\Microsoft.ML.OnnxRuntime.Managed.1.7.0\build\netstandard1.1\Microsoft.ML.OnnxRuntime.Managed.targets" Condition="Exists('..\packages\Microsoft.ML.OnnxRuntime.Managed.1.7.0\build\netstandard1.1\Microsoft.ML.OnnxRuntime.Managed.targets')" />
   <Import Project="..\packages\Microsoft.ML.OnnxRuntime.1.7.0\build\netstandard1.1\Microsoft.ML.OnnxRuntime.targets" Condition="Exists('..\packages\Microsoft.ML.OnnxRuntime.1.7.0\build\netstandard1.1\Microsoft.ML.OnnxRuntime.targets')" />
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>if $(PlatformName) == x86 copy /y "$(TargetPath)" "$(TargetDir)\DocumentTools_x86$(TargetExt)"
+if $(PlatformName) == x64 copy /y "$(TargetPath)" "$(TargetDir)\DocumentTools_x64$(TargetExt)"
+</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>

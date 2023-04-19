@@ -32,7 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BodyForm));
             this.MainTabPage = new System.Windows.Forms.TabControl();
             this.TabPage_01 = new System.Windows.Forms.TabPage();
-            this.ProcessPage_W2P = new System.Windows.Forms.Label();
             this.MergePdfButton = new System.Windows.Forms.Button();
             this.RemoveTempDocx = new System.Windows.Forms.CheckBox();
             this.OpenPdfOptions = new System.Windows.Forms.CheckBox();
@@ -145,12 +144,14 @@
             this.PreviewPictureName = new System.Windows.Forms.Label();
             this.PreviewPictureBox = new System.Windows.Forms.PictureBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.TwainScanNumberSet = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
             this.UseInterfaceUi = new System.Windows.Forms.CheckBox();
             this.TwainPaperSizeBox = new System.Windows.Forms.ComboBox();
             this.label17 = new System.Windows.Forms.Label();
             this.SkipBlankPage = new System.Windows.Forms.CheckBox();
-            this.DoubleScanBox = new System.Windows.Forms.CheckBox();
             this.ScanSerialNumber = new System.Windows.Forms.Label();
+            this.DoubleScanBox = new System.Windows.Forms.CheckBox();
             this.TwainDpi = new System.Windows.Forms.ComboBox();
             this.label16 = new System.Windows.Forms.Label();
             this.TwainColorMode = new System.Windows.Forms.ComboBox();
@@ -199,8 +200,6 @@
             this.展开折叠本节点全部ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.展开折叠全部节点ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.打开文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label21 = new System.Windows.Forms.Label();
-            this.TwainScanNumberSet = new System.Windows.Forms.TextBox();
             this.MainTabPage.SuspendLayout();
             this.TabPage_01.SuspendLayout();
             this.TabPage_02.SuspendLayout();
@@ -261,7 +260,6 @@
             // 
             // TabPage_01
             // 
-            this.TabPage_01.Controls.Add(this.ProcessPage_W2P);
             this.TabPage_01.Controls.Add(this.MergePdfButton);
             this.TabPage_01.Controls.Add(this.RemoveTempDocx);
             this.TabPage_01.Controls.Add(this.OpenPdfOptions);
@@ -276,16 +274,6 @@
             this.TabPage_01.TabIndex = 0;
             this.TabPage_01.Text = "WORD转PDF";
             this.TabPage_01.UseVisualStyleBackColor = true;
-            // 
-            // ProcessPage_W2P
-            // 
-            this.ProcessPage_W2P.AutoSize = true;
-            this.ProcessPage_W2P.ForeColor = System.Drawing.Color.ForestGreen;
-            this.ProcessPage_W2P.Location = new System.Drawing.Point(386, 424);
-            this.ProcessPage_W2P.Name = "ProcessPage_W2P";
-            this.ProcessPage_W2P.Size = new System.Drawing.Size(89, 18);
-            this.ProcessPage_W2P.TabIndex = 7;
-            this.ProcessPage_W2P.Text = "已保存X页";
             // 
             // MergePdfButton
             // 
@@ -1468,6 +1456,22 @@
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "扫描配置";
             // 
+            // TwainScanNumberSet
+            // 
+            this.TwainScanNumberSet.Location = new System.Drawing.Point(520, 143);
+            this.TwainScanNumberSet.Name = "TwainScanNumberSet";
+            this.TwainScanNumberSet.Size = new System.Drawing.Size(119, 28);
+            this.TwainScanNumberSet.TabIndex = 14;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(398, 150);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(116, 18);
+            this.label21.TabIndex = 0;
+            this.label21.Text = "设置扫描张数";
+            // 
             // UseInterfaceUi
             // 
             this.UseInterfaceUi.AutoSize = true;
@@ -1505,6 +1509,15 @@
             this.SkipBlankPage.Text = "跳过空白页";
             this.SkipBlankPage.UseVisualStyleBackColor = true;
             // 
+            // ScanSerialNumber
+            // 
+            this.ScanSerialNumber.AutoSize = true;
+            this.ScanSerialNumber.Location = new System.Drawing.Point(8, 150);
+            this.ScanSerialNumber.Name = "ScanSerialNumber";
+            this.ScanSerialNumber.Size = new System.Drawing.Size(134, 18);
+            this.ScanSerialNumber.TabIndex = 8;
+            this.ScanSerialNumber.Text = "扫描仪序列号：";
+            // 
             // DoubleScanBox
             // 
             this.DoubleScanBox.AutoSize = true;
@@ -1514,15 +1527,6 @@
             this.DoubleScanBox.TabIndex = 9;
             this.DoubleScanBox.Text = "双面扫描";
             this.DoubleScanBox.UseVisualStyleBackColor = true;
-            // 
-            // ScanSerialNumber
-            // 
-            this.ScanSerialNumber.AutoSize = true;
-            this.ScanSerialNumber.Location = new System.Drawing.Point(8, 150);
-            this.ScanSerialNumber.Name = "ScanSerialNumber";
-            this.ScanSerialNumber.Size = new System.Drawing.Size(134, 18);
-            this.ScanSerialNumber.TabIndex = 8;
-            this.ScanSerialNumber.Text = "扫描仪序列号：";
             // 
             // TwainDpi
             // 
@@ -1979,22 +1983,6 @@
             this.打开文件ToolStripMenuItem.Text = "打开文件";
             this.打开文件ToolStripMenuItem.Click += new System.EventHandler(this.打开文件ToolStripMenuItem_Click);
             // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(398, 150);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(116, 18);
-            this.label21.TabIndex = 0;
-            this.label21.Text = "设置扫描张数";
-            // 
-            // TwainScanNumberSet
-            // 
-            this.TwainScanNumberSet.Location = new System.Drawing.Point(520, 143);
-            this.TwainScanNumberSet.Name = "TwainScanNumberSet";
-            this.TwainScanNumberSet.Size = new System.Drawing.Size(119, 28);
-            this.TwainScanNumberSet.TabIndex = 14;
-            // 
             // BodyForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
@@ -2210,7 +2198,6 @@
         internal System.Windows.Forms.TextBox ExcelStartRow;
         internal System.Windows.Forms.TextBox ExcelEndRow;
         internal System.Windows.Forms.CheckBox UseRegex;
-        internal System.Windows.Forms.Label ProcessPage_W2P;
         internal System.Windows.Forms.Label ProcessPage_P2W;
         private System.Windows.Forms.LinkLabel ExcelRegexReadMe;
         private System.Windows.Forms.LinkLabel linkLabel1;
