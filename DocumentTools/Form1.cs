@@ -25,7 +25,6 @@ namespace DocumentTools
         private int TotalTempImageCount = 0;
         private double ScanSeconds = 0;
         private Bitmap PictureBoxPreviewImage;
-        private bool TwainStopScan = false;
 
 
         public BodyForm()
@@ -38,7 +37,6 @@ namespace DocumentTools
         {
             InitListView();
             InitComboxValue();
-            InitTwain();
             this.AllowDrop = true;
             this.PageExportCheck.Checked = true;
             this.PageExportCheck.Enabled = false;
@@ -57,7 +55,15 @@ namespace DocumentTools
 
             //Util.PlayMp3WithStream();
 
-           
+
+            try
+            {
+                InitTwain();
+            }
+            catch {
+                MessageBox.Show("没有在系统中找到TwainDsm数据源管理器，请自行下载TwainDsm.dll文件放在程序目录下调用，否则无法使用twain调试功能","提示",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
+
 
         }
 
@@ -758,13 +764,11 @@ namespace DocumentTools
                     this.ScanSpendTime.Text = $"本次扫描时间：{ScanSeconds}秒";
                 }
                 dataSource.Close();
-                TwainStopScan = false;
             };
 
             twainSession.TransferReady += (twainSender, twainArgs) =>
             {
-                Debug.WriteLine($"TransferReady Event：Stop_Scan_State={TwainStopScan}");
-                twainArgs.CancelAll = TwainStopScan;
+                //dont do anything
             };
         }
 
@@ -792,6 +796,11 @@ namespace DocumentTools
                         TwainPaperSizeBox.SelectedItem = dataSource.Capabilities.ICapSupportedSizes.GetCurrent();
 
                     }
+                    if (dataSource.Capabilities.CapSerialNumber.CanGet)
+                    {
+                        ScanSerialNumber.Text = $"扫描仪序列号：{dataSource.Capabilities.CapSerialNumber.GetValues().FirstOrDefault()}";
+                    }
+
                     //输出扫描仪支持的设置参数
                     string DebugName = $"{dataSource.Name}_Support_Capabilities.txt";
                     if (File.Exists(DebugName))
@@ -802,14 +811,8 @@ namespace DocumentTools
                         StreamWriter sr = File.AppendText(DebugName);
                         sr.WriteLine(x);
                         sr.Close();
-                        }
-                    );
-
-
-                    if (dataSource.Capabilities.CapSerialNumber.CanGet)
-                    {
-                        ScanSerialNumber.Text = $"扫描仪序列号：{dataSource.Capabilities.CapSerialNumber.GetValues().FirstOrDefault()}";
                     }
+                    );
                     dataSource.Close();
                 }
 
@@ -877,7 +880,23 @@ namespace DocumentTools
                         dataSource.Capabilities.ICapSupportedSizes.SetValue((SupportedSize)TwainPaperSizeBox.SelectedItem);
                     }
                 }
-                if(UseInterfaceUi.Checked)
+                //设置本次会话中需要获取的文件数量
+                if (TwainScanNumberSet.Text != string.Empty && Int32.TryParse(TwainScanNumberSet.Text, out int TwainScanNumberSetInt))
+                {
+                    if(dataSource.Capabilities.CapXferCount.CanSet)
+                    {
+                        if(TwainScanNumberSetInt > 0)
+                        {
+                            dataSource.Capabilities.CapXferCount.SetValue(TwainScanNumberSetInt);
+                        }
+                        else
+                        {
+                            dataSource.Capabilities.CapXferCount.SetValue(-1);
+                        }
+                    }
+                }
+
+                if (UseInterfaceUi.Checked)
                 {
                     dataSource.Enable(SourceEnableMode.ShowUI, false, this.Handle);
                 }
@@ -926,14 +945,6 @@ namespace DocumentTools
                     sw.Stop();
                     ScanSeconds += sw.Elapsed.TotalSeconds;//一个扫描过程中花费的时间值，值将会在开始扫描按钮中重置为0
                     PictureBoxPreviewImage.Dispose();
-
-                    if(TwainScanNumberSet.Text!=string.Empty && Int32.TryParse(TwainScanNumberSet.Text,out int TwainScanNumberSetInt))
-                    {
-                        if(TwainScanNumberSetInt>0 && TwainScanNumberSetInt== TempImageCount)
-                        {
-                            TwainStopScan = true;
-                        }
-                    }
 
                 }
             }
