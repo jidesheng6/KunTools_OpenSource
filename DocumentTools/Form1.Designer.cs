@@ -1995,6 +1995,7 @@
             this.Name = "BodyForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "文档工具";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BodyForm_FormClosing);
             this.Load += new System.EventHandler(this.BodyForm_Load);
             this.MainTabPage.ResumeLayout(false);
             this.TabPage_01.ResumeLayout(false);

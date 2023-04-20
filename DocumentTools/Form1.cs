@@ -25,6 +25,7 @@ namespace DocumentTools
         private int TotalTempImageCount = 0;
         private double ScanSeconds = 0;
         private Bitmap PictureBoxPreviewImage;
+        List<Bitmap> TempScannedImageBmpList = new List<Bitmap>();
 
 
         public BodyForm()
@@ -936,16 +937,14 @@ namespace DocumentTools
                     TempScannedImage.Save(SaveImageName, System.Drawing.Imaging.ImageFormat.Jpeg);
                     this.PreviewPictureName.Text = "图片名称：" + System.IO.Path.GetFileName(SaveImageName);
 
-                    PictureBoxPreviewImage = new Bitmap(SaveImageName);
-                    this.PreviewPictureBox.Image = PictureBoxPreviewImage;
-
                     this.NowScanNumber.Text = "本次扫描数量：" + TempImageCount.ToString();
                     this.ScannTotalNumber.Text = "扫描总数量：" + TotalTempImageCount.ToString();
                     this.SavedPathFileCount.Text = $"扫描路径内文件数量：{Directory.GetFiles(this.ScanPictureSavePathBox.Text).Length}";
                     sw.Stop();
                     ScanSeconds += sw.Elapsed.TotalSeconds;//一个扫描过程中花费的时间值，值将会在开始扫描按钮中重置为0
-                    PictureBoxPreviewImage.Dispose();
-
+                    PictureBoxPreviewImage = new Bitmap(SaveImageName);
+                    this.PreviewPictureBox.Image = PictureBoxPreviewImage;
+                    TempScannedImageBmpList.Add(PictureBoxPreviewImage);//添加bitmap对象到列表中
                 }
             }
 
@@ -974,10 +973,15 @@ namespace DocumentTools
                 string[] Files = Directory.GetFiles(ScanPictureSavePathBox.Text);
                 if (Files.Length > 0)
                 {
-                    if (PictureBoxPreviewImage != null)
+                    //删除文件之前清除全部的bitmap对象
+                    if (TempScannedImageBmpList.Count>0)
                     {
-                        PictureBoxPreviewImage = null;
+                        TempScannedImageBmpList.ForEach(ScannBmp => { 
+                        ScannBmp.Dispose();
+                        });
+                        this.PreviewPictureBox.Image.Dispose();
                         this.PreviewPictureBox.Image = null;
+                        TempScannedImageBmpList.Clear();
                     }
                     foreach (string file in Files)
                     {
@@ -1201,6 +1205,11 @@ namespace DocumentTools
             {
                 this.ListViewRightMenu.Show(this.IcoFileView, e.Location);
             }
+        }
+
+        private void BodyForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Environment.Exit(0);
         }
     }
 
