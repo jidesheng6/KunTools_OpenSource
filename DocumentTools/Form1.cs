@@ -9,6 +9,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 namespace DocumentTools
@@ -24,6 +25,7 @@ namespace DocumentTools
         private int TempImageCount = 0;
         private int TotalTempImageCount = 0;
         private double ScanSeconds = 0;
+        private int ScanCount = 0;
         private Bitmap PictureBoxPreviewImage;
         List<Bitmap> TempScannedImageBmpList = new List<Bitmap>();
 
@@ -36,6 +38,16 @@ namespace DocumentTools
         }
         private void BodyForm_Load(object sender, EventArgs e)
         {
+
+            if (RuntimeInformation.ProcessArchitecture == Architecture.X86)
+            {
+                this.Text = "文档工具[X86版本|Twain支持设备多|程序内存限制2GB]";
+            }
+            else if (RuntimeInformation.ProcessArchitecture == Architecture.X64)
+            {
+                this.Text = "文档工具[X64版本|Twain支持设备少|程序无内存限制]";
+            }
+
             InitListView();
             InitComboxValue();
             this.AllowDrop = true;
@@ -53,9 +65,7 @@ namespace DocumentTools
             ReleaseRegistry.Enabled = false;
 
 
-
             //Util.PlayMp3WithStream();
-
 
             try
             {
@@ -286,6 +296,7 @@ namespace DocumentTools
                 }
                 catch (Exception ex)
                 {
+                    Debug.WriteLine(ex);
                     MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
@@ -799,21 +810,24 @@ namespace DocumentTools
                     }
                     if (dataSource.Capabilities.CapSerialNumber.CanGet)
                     {
-                        ScanSerialNumber.Text = $"扫描仪序列号：{dataSource.Capabilities.CapSerialNumber.GetValues().FirstOrDefault()}";
+                        ScanSerialNumber.Text = $"序列号：{dataSource.Capabilities.CapSerialNumber.GetValues().FirstOrDefault()}";
                     }
 
-                    //输出扫描仪支持的设置参数
-                    string DebugName = $"{dataSource.Name}_Support_Capabilities.txt";
-                    if (File.Exists(DebugName))
+                    if(this.ExportCaps.Checked)
                     {
-                        File.Delete(DebugName);
+                        //输出扫描仪支持的设置参数
+                        string DebugName = $"{dataSource.Name}_Support_Capabilities.txt";
+                        if (File.Exists(DebugName))
+                        {
+                            File.Delete(DebugName);
+                        }
+                        dataSource.Capabilities.CapSupportedCaps.GetValues().ToList().ForEach(x => {
+                            StreamWriter sr = File.AppendText(DebugName);
+                            sr.WriteLine(x);
+                            sr.Close();
+                        }
+                        );
                     }
-                    dataSource.Capabilities.CapSupportedCaps.GetValues().ToList().ForEach(x => {
-                        StreamWriter sr = File.AppendText(DebugName);
-                        sr.WriteLine(x);
-                        sr.Close();
-                    }
-                    );
                     dataSource.Close();
                 }
 
@@ -888,6 +902,11 @@ namespace DocumentTools
                     {
                         if(TwainScanNumberSetInt > 0)
                         {
+                            //对于支持双面扫描的扫描仪，先把扫描模式设置为单面扫描
+                            if (dataSource.Capabilities.CapDuplex.IsSupported && !(DoubleScanBox.Checked))
+                            {
+                                dataSource.Capabilities.CapDuplexEnabled.SetValue(BoolType.False);
+                            }
                             dataSource.Capabilities.CapXferCount.SetValue(TwainScanNumberSetInt);
                         }
                         else
@@ -896,6 +915,8 @@ namespace DocumentTools
                         }
                     }
                 }
+
+
 
                 if (UseInterfaceUi.Checked)
                 {
@@ -1210,6 +1231,23 @@ namespace DocumentTools
         private void BodyForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Environment.Exit(0);
+        }
+
+        private void MainTabPage_DoubleClick(object sender, EventArgs e)
+        {
+            if (this.MainTabPage.Multiline)
+            {
+                this.Height -= 46;
+                this.MainTabPage.Height -= 48;
+                this.MainTabPage.Multiline = false;
+
+            }
+            else
+            {
+                this.Height += 46;
+                this.MainTabPage.Height += 48;
+                this.MainTabPage.Multiline = true;
+            }
         }
     }
 

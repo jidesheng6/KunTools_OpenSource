@@ -144,6 +144,7 @@
             this.PreviewPictureName = new System.Windows.Forms.Label();
             this.PreviewPictureBox = new System.Windows.Forms.PictureBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.ExportCaps = new System.Windows.Forms.CheckBox();
             this.TwainScanNumberSet = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.UseInterfaceUi = new System.Windows.Forms.CheckBox();
@@ -252,11 +253,15 @@
             this.MainTabPage.Controls.Add(this.TabPage_09);
             this.MainTabPage.Controls.Add(this.TabPage_13);
             this.MainTabPage.Controls.Add(this.TabPage_08);
-            this.MainTabPage.Location = new System.Drawing.Point(3, 12);
+            this.MainTabPage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MainTabPage.Location = new System.Drawing.Point(0, 0);
+            this.MainTabPage.Multiline = true;
             this.MainTabPage.Name = "MainTabPage";
             this.MainTabPage.SelectedIndex = 0;
-            this.MainTabPage.Size = new System.Drawing.Size(785, 507);
+            this.MainTabPage.Size = new System.Drawing.Size(788, 564);
+            this.MainTabPage.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.MainTabPage.TabIndex = 0;
+            this.MainTabPage.DoubleClick += new System.EventHandler(this.MainTabPage_DoubleClick);
             // 
             // TabPage_01
             // 
@@ -267,10 +272,10 @@
             this.TabPage_01.Controls.Add(this.ConvertButton);
             this.TabPage_01.Controls.Add(this.ChooseDocButton);
             this.TabPage_01.Controls.Add(this.WordFileListView);
-            this.TabPage_01.Location = new System.Drawing.Point(4, 28);
+            this.TabPage_01.Location = new System.Drawing.Point(4, 76);
             this.TabPage_01.Name = "TabPage_01";
             this.TabPage_01.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage_01.Size = new System.Drawing.Size(777, 475);
+            this.TabPage_01.Size = new System.Drawing.Size(780, 484);
             this.TabPage_01.TabIndex = 0;
             this.TabPage_01.Text = "WORD转PDF";
             this.TabPage_01.UseVisualStyleBackColor = true;
@@ -327,6 +332,7 @@
             // 
             // ChooseDocButton
             // 
+            this.ChooseDocButton.AutoSize = true;
             this.ChooseDocButton.Location = new System.Drawing.Point(6, 406);
             this.ChooseDocButton.Name = "ChooseDocButton";
             this.ChooseDocButton.Size = new System.Drawing.Size(221, 55);
@@ -354,10 +360,10 @@
             this.TabPage_02.Controls.Add(this.Convert2DocButton);
             this.TabPage_02.Controls.Add(this.SelectPdfButton);
             this.TabPage_02.Controls.Add(this.PdfFileListView);
-            this.TabPage_02.Location = new System.Drawing.Point(4, 28);
+            this.TabPage_02.Location = new System.Drawing.Point(4, 76);
             this.TabPage_02.Name = "TabPage_02";
             this.TabPage_02.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage_02.Size = new System.Drawing.Size(777, 475);
+            this.TabPage_02.Size = new System.Drawing.Size(780, 484);
             this.TabPage_02.TabIndex = 1;
             this.TabPage_02.Text = "PDF转WORD";
             this.TabPage_02.UseVisualStyleBackColor = true;
@@ -429,9 +435,9 @@
             this.TabPage_03.Controls.Add(this.ConvertExcel2PdfButton);
             this.TabPage_03.Controls.Add(this.SelectExcelFileButton);
             this.TabPage_03.Controls.Add(this.ExcelFileListView);
-            this.TabPage_03.Location = new System.Drawing.Point(4, 28);
+            this.TabPage_03.Location = new System.Drawing.Point(4, 76);
             this.TabPage_03.Name = "TabPage_03";
-            this.TabPage_03.Size = new System.Drawing.Size(777, 475);
+            this.TabPage_03.Size = new System.Drawing.Size(780, 484);
             this.TabPage_03.TabIndex = 2;
             this.TabPage_03.Text = "EXCEL转PDF";
             this.TabPage_03.UseVisualStyleBackColor = true;
@@ -493,9 +499,9 @@
             this.TabPage_07.Controls.Add(this.ConvertPDF2Excel);
             this.TabPage_07.Controls.Add(this.SelectPDF2ExcelButton);
             this.TabPage_07.Controls.Add(this.PDF2ExcelFileView);
-            this.TabPage_07.Location = new System.Drawing.Point(4, 28);
+            this.TabPage_07.Location = new System.Drawing.Point(4, 76);
             this.TabPage_07.Name = "TabPage_07";
-            this.TabPage_07.Size = new System.Drawing.Size(777, 475);
+            this.TabPage_07.Size = new System.Drawing.Size(780, 484);
             this.TabPage_07.TabIndex = 6;
             this.TabPage_07.Text = "PDF转EXCEL";
             this.TabPage_07.UseVisualStyleBackColor = true;
@@ -560,9 +566,9 @@
             this.TabPage_06.Controls.Add(this.MeregePdfFileButtonConvert);
             this.TabPage_06.Controls.Add(this.MergePdfFileSelectButton);
             this.TabPage_06.Controls.Add(this.MergePdfFileView);
-            this.TabPage_06.Location = new System.Drawing.Point(4, 28);
+            this.TabPage_06.Location = new System.Drawing.Point(4, 76);
             this.TabPage_06.Name = "TabPage_06";
-            this.TabPage_06.Size = new System.Drawing.Size(777, 475);
+            this.TabPage_06.Size = new System.Drawing.Size(780, 484);
             this.TabPage_06.TabIndex = 5;
             this.TabPage_06.Text = "合并PDF";
             this.TabPage_06.UseVisualStyleBackColor = true;
@@ -657,9 +663,9 @@
             this.TabPage_04.Controls.Add(this.ConvertWord2ImageButton);
             this.TabPage_04.Controls.Add(this.ConvertImageList);
             this.TabPage_04.Controls.Add(this.DocumentsListView);
-            this.TabPage_04.Location = new System.Drawing.Point(4, 28);
+            this.TabPage_04.Location = new System.Drawing.Point(4, 76);
             this.TabPage_04.Name = "TabPage_04";
-            this.TabPage_04.Size = new System.Drawing.Size(777, 475);
+            this.TabPage_04.Size = new System.Drawing.Size(780, 484);
             this.TabPage_04.TabIndex = 3;
             this.TabPage_04.Text = "文档转图片";
             this.TabPage_04.UseVisualStyleBackColor = true;
@@ -782,9 +788,9 @@
             this.TabPage_10.Controls.Add(this.ReplaceWordContentButton);
             this.TabPage_10.Controls.Add(this.SelectReplaceWordFilesButton);
             this.TabPage_10.Controls.Add(this.ReplaceWordFileList);
-            this.TabPage_10.Location = new System.Drawing.Point(4, 28);
+            this.TabPage_10.Location = new System.Drawing.Point(4, 76);
             this.TabPage_10.Name = "TabPage_10";
-            this.TabPage_10.Size = new System.Drawing.Size(777, 475);
+            this.TabPage_10.Size = new System.Drawing.Size(780, 484);
             this.TabPage_10.TabIndex = 9;
             this.TabPage_10.Text = "WORD内容批量替换";
             this.TabPage_10.UseVisualStyleBackColor = true;
@@ -919,9 +925,9 @@
             this.TabPage_11.Controls.Add(this.ReplaceExcelContentButton);
             this.TabPage_11.Controls.Add(this.SelectRelaceExcelButton);
             this.TabPage_11.Controls.Add(this.ReplaceExcelFileView);
-            this.TabPage_11.Location = new System.Drawing.Point(4, 28);
+            this.TabPage_11.Location = new System.Drawing.Point(4, 76);
             this.TabPage_11.Name = "TabPage_11";
-            this.TabPage_11.Size = new System.Drawing.Size(777, 475);
+            this.TabPage_11.Size = new System.Drawing.Size(780, 484);
             this.TabPage_11.TabIndex = 10;
             this.TabPage_11.Text = "EXCEL内容批量替换";
             this.TabPage_11.UseVisualStyleBackColor = true;
@@ -1107,9 +1113,9 @@
             this.TabPage_12.Controls.Add(this.SelectDataMatrixWord);
             this.TabPage_12.Controls.Add(this.groupBox14);
             this.TabPage_12.Controls.Add(this.DecodeMatrixWordListView);
-            this.TabPage_12.Location = new System.Drawing.Point(4, 28);
+            this.TabPage_12.Location = new System.Drawing.Point(4, 76);
             this.TabPage_12.Name = "TabPage_12";
-            this.TabPage_12.Size = new System.Drawing.Size(777, 475);
+            this.TabPage_12.Size = new System.Drawing.Size(780, 484);
             this.TabPage_12.TabIndex = 11;
             this.TabPage_12.Text = "测评/选举/推荐二维码校验";
             this.TabPage_12.UseVisualStyleBackColor = true;
@@ -1184,9 +1190,9 @@
             this.TabPage_05.Controls.Add(this.ConvertTextButton);
             this.TabPage_05.Controls.Add(this.groupBox2);
             this.TabPage_05.Controls.Add(this.groupBox1);
-            this.TabPage_05.Location = new System.Drawing.Point(4, 28);
+            this.TabPage_05.Location = new System.Drawing.Point(4, 76);
             this.TabPage_05.Name = "TabPage_05";
-            this.TabPage_05.Size = new System.Drawing.Size(777, 475);
+            this.TabPage_05.Size = new System.Drawing.Size(780, 484);
             this.TabPage_05.TabIndex = 4;
             this.TabPage_05.Text = "姓名横转竖列";
             this.TabPage_05.UseVisualStyleBackColor = true;
@@ -1307,9 +1313,9 @@
             this.TabPage_09.Controls.Add(this.groupBox7);
             this.TabPage_09.Controls.Add(this.groupBox6);
             this.TabPage_09.Controls.Add(this.groupBox5);
-            this.TabPage_09.Location = new System.Drawing.Point(4, 28);
+            this.TabPage_09.Location = new System.Drawing.Point(4, 76);
             this.TabPage_09.Name = "TabPage_09";
-            this.TabPage_09.Size = new System.Drawing.Size(777, 475);
+            this.TabPage_09.Size = new System.Drawing.Size(780, 484);
             this.TabPage_09.TabIndex = 8;
             this.TabPage_09.Text = "Twain调试";
             this.TabPage_09.UseVisualStyleBackColor = true;
@@ -1319,9 +1325,9 @@
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MemoryStatusLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 444);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 453);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(777, 31);
+            this.statusStrip1.Size = new System.Drawing.Size(780, 31);
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -1433,6 +1439,7 @@
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.ExportCaps);
             this.groupBox6.Controls.Add(this.TwainScanNumberSet);
             this.groupBox6.Controls.Add(this.label21);
             this.groupBox6.Controls.Add(this.UseInterfaceUi);
@@ -1456,21 +1463,31 @@
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "扫描配置";
             // 
+            // ExportCaps
+            // 
+            this.ExportCaps.AutoSize = true;
+            this.ExportCaps.Location = new System.Drawing.Point(520, 145);
+            this.ExportCaps.Name = "ExportCaps";
+            this.ExportCaps.Size = new System.Drawing.Size(115, 22);
+            this.ExportCaps.TabIndex = 15;
+            this.ExportCaps.Text = "导出Cap项";
+            this.ExportCaps.UseVisualStyleBackColor = true;
+            // 
             // TwainScanNumberSet
             // 
-            this.TwainScanNumberSet.Location = new System.Drawing.Point(520, 143);
+            this.TwainScanNumberSet.Location = new System.Drawing.Point(358, 143);
             this.TwainScanNumberSet.Name = "TwainScanNumberSet";
-            this.TwainScanNumberSet.Size = new System.Drawing.Size(119, 28);
+            this.TwainScanNumberSet.Size = new System.Drawing.Size(156, 28);
             this.TwainScanNumberSet.TabIndex = 14;
             // 
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(398, 150);
+            this.label21.Location = new System.Drawing.Point(268, 150);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(116, 18);
+            this.label21.Size = new System.Drawing.Size(80, 18);
             this.label21.TabIndex = 0;
-            this.label21.Text = "设置扫描张数";
+            this.label21.Text = "扫描张数";
             // 
             // UseInterfaceUi
             // 
@@ -1514,9 +1531,9 @@
             this.ScanSerialNumber.AutoSize = true;
             this.ScanSerialNumber.Location = new System.Drawing.Point(8, 150);
             this.ScanSerialNumber.Name = "ScanSerialNumber";
-            this.ScanSerialNumber.Size = new System.Drawing.Size(134, 18);
+            this.ScanSerialNumber.Size = new System.Drawing.Size(80, 18);
             this.ScanSerialNumber.TabIndex = 8;
-            this.ScanSerialNumber.Text = "扫描仪序列号：";
+            this.ScanSerialNumber.Text = "序列号：";
             // 
             // DoubleScanBox
             // 
@@ -1637,9 +1654,9 @@
             this.TabPage_13.Controls.Add(this.label20);
             this.TabPage_13.Controls.Add(this.groupBox16);
             this.TabPage_13.Controls.Add(this.groupBox15);
-            this.TabPage_13.Location = new System.Drawing.Point(4, 28);
+            this.TabPage_13.Location = new System.Drawing.Point(4, 76);
             this.TabPage_13.Name = "TabPage_13";
-            this.TabPage_13.Size = new System.Drawing.Size(777, 475);
+            this.TabPage_13.Size = new System.Drawing.Size(780, 484);
             this.TabPage_13.TabIndex = 12;
             this.TabPage_13.Text = "其他辅助功能";
             this.TabPage_13.UseVisualStyleBackColor = true;
@@ -1801,9 +1818,9 @@
             this.TabPage_08.Controls.Add(this.label12);
             this.TabPage_08.Controls.Add(this.groupBox4);
             this.TabPage_08.Controls.Add(this.groupBox3);
-            this.TabPage_08.Location = new System.Drawing.Point(4, 28);
+            this.TabPage_08.Location = new System.Drawing.Point(4, 76);
             this.TabPage_08.Name = "TabPage_08";
-            this.TabPage_08.Size = new System.Drawing.Size(777, 475);
+            this.TabPage_08.Size = new System.Drawing.Size(780, 484);
             this.TabPage_08.TabIndex = 7;
             this.TabPage_08.Text = "关于软件";
             this.TabPage_08.UseVisualStyleBackColor = true;
@@ -1987,8 +2004,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(788, 520);
+            this.AutoScroll = true;
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(788, 564);
             this.Controls.Add(this.MainTabPage);
+            this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -2235,6 +2255,7 @@
         internal System.Windows.Forms.ComboBox IcoSizeDrop;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.TextBox TwainScanNumberSet;
+        private System.Windows.Forms.CheckBox ExportCaps;
     }
 }
 
