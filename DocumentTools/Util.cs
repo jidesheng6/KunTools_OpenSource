@@ -678,19 +678,6 @@ namespace DocumentTools
         }
 
         /// <summary>
-        /// 双字对齐，文本为2个字的文本则自动在中间插入空格
-        /// </summary>
-        /// <param name="InputText">待处理文本</param>
-        /// <returns></returns>
-        private static string DoubleTextAlign(string InputText)
-        {
-            if (InputText.Length == 2 && InputText != string.Empty)
-            {
-                InputText = InputText.Insert(1, "  ");
-            }
-            return InputText;
-        }
-        /// <summary>
         /// 正则匹配结果，如果匹配到了就返回true
         /// </summary>
         /// <param name="MachMode">表达式</param>
@@ -802,7 +789,7 @@ namespace DocumentTools
             double MachineFreeMemory = Byte2GB((long)computerInfo.AvailablePhysicalMemory);
             double ProcessUsedMemory = Process.GetCurrentProcess().PrivateMemorySize64 / 1024.0 / 1024.0;
 
-            return $"程序占用内存：{ProcessUsedMemory.ToString("f2")}MB|本机可用内存：{MachineFreeMemory.ToString("f2")}GB|本机总内存：{MachineTotalMemory.ToString("f2")}GB";
+            return $"程序占用内存：{ProcessUsedMemory:f2}MB|本机可用内存：{MachineFreeMemory:f2}GB|本机总内存：{MachineTotalMemory:f2}GB";
         }
 
         /// <summary>
