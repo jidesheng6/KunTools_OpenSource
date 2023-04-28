@@ -25,7 +25,6 @@ namespace DocumentTools
         private int TempImageCount = 0;
         private int TotalTempImageCount = 0;
         private double ScanSeconds = 0;
-        private int ScanCount = 0;
         private Bitmap PictureBoxPreviewImage;
         List<Bitmap> TempScannedImageBmpList = new List<Bitmap>();
 
@@ -399,11 +398,11 @@ namespace DocumentTools
         private void ConvertTextButton_Click(object sender, EventArgs e)
         {
             List<string> TempLines = new List<string>();
-            TargetTextBox.Lines = Util.AddText2List(SourceTextBox.Text, DoubleTextAlignCheck.Checked, RemoveNumberCheck.Checked, RemoveSquareCheck.Checked, NameStorkeChcek.Checked);
+            TargetTextBox.Lines = Util.AddText2List(SourceTextBox.Text, RemoveNumberCheck.Checked, RemoveSquareCheck.Checked, NameStorkeChcek.Checked);
             //双字对齐功能，放在全部的文本处理完毕以后再进行重新处理，不然只能针对源文本字符长度进行判断，不太合适
             if(DoubleTextAlignCheck.Checked && this.TargetTextBox.Text !=string.Empty)
             {
-               string DoubleText = string.Empty;
+                string DoubleText;
                foreach(string TargetTextTemp in this.TargetTextBox.Lines)
                 {
                     DoubleText = TargetTextTemp;

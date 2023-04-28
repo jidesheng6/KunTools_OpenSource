@@ -34,10 +34,11 @@ namespace DocumentTools
         {
             IEnumerable<string> ReturnFileNameString = new List<string>();
 
-            CommonOpenFileDialog FileSelectDialog = new CommonOpenFileDialog();
-
-            FileSelectDialog.Multiselect = MulitSelect;
-            FileSelectDialog.IsFolderPicker = isPickFolder;
+            CommonOpenFileDialog FileSelectDialog = new CommonOpenFileDialog
+            {
+                Multiselect = MulitSelect,
+                IsFolderPicker = isPickFolder
+            };
 
             if (!isPickFolder)
             {
@@ -189,15 +190,14 @@ namespace DocumentTools
         {
             Aspose.Hook.Manager.StartHook();
 
-            Aspose.Pdf.DocSaveOptions TempDocxSaveOption = new Aspose.Pdf.DocSaveOptions()
+            Aspose.Pdf.DocSaveOptions TempDocxSaveOption = new Aspose.Pdf.DocSaveOptions
             {
                 ExtractOcrSublayerOnly = true,
                 Format = Aspose.Pdf.DocSaveOptions.DocFormat.DocX,
                 Mode = Aspose.Pdf.DocSaveOptions.RecognitionMode.Textbox,
                 RecognizeBullets = true,
+                CustomProgressHandler = new Aspose.Pdf.UnifiedSaveOptions.ConversionProgressEventHandler(WritePdf2WordDebugInfo)
             };
-
-            TempDocxSaveOption.CustomProgressHandler = new Aspose.Pdf.UnifiedSaveOptions.ConversionProgressEventHandler(WritePdf2WordDebugInfo);
 
             using (Aspose.Pdf.Document TempPdfFileDocument = new Aspose.Pdf.Document(pdfFileName))
             {
@@ -409,8 +409,10 @@ namespace DocumentTools
             switch (ConvertImageType)
             {
                 case ".jpg":
-                    TempWordImageSaveOption = new Aspose.Words.Saving.ImageSaveOptions(Aspose.Words.SaveFormat.Jpeg);
-                    TempWordImageSaveOption.JpegQuality = 100;
+                    TempWordImageSaveOption = new Aspose.Words.Saving.ImageSaveOptions(Aspose.Words.SaveFormat.Jpeg)
+                    {
+                        JpegQuality = 100
+                    };
                     TempPdfImageDevice = new Aspose.Pdf.Devices.JpegDevice(TempPdfImageResolution, 100);
                     TempExcelImageOPtion.ImageType = Aspose.Cells.Drawing.ImageType.Jpeg;
                     TempExcelImageOPtion.Quality = 100;
@@ -591,9 +593,11 @@ namespace DocumentTools
             {
                 TreeNode PageIndexNode = TempDocumentNameRootNode.Nodes.Add($"第{PageIndex + 1}页");//在文件节点信息基础上添加页面信息
                 PageIndexNode.ForeColor = System.Drawing.Color.ForestGreen;
-                Aspose.Words.Saving.ImageSaveOptions TempImageSaveOption = new Aspose.Words.Saving.ImageSaveOptions(Aspose.Words.SaveFormat.Png);
-                TempImageSaveOption.PageSet = new Aspose.Words.Saving.PageSet(PageIndex);
-                TempImageSaveOption.Resolution = 300;
+                Aspose.Words.Saving.ImageSaveOptions TempImageSaveOption = new Aspose.Words.Saving.ImageSaveOptions(Aspose.Words.SaveFormat.Png)
+                {
+                    PageSet = new Aspose.Words.Saving.PageSet(PageIndex),
+                    Resolution = 300
+                };
                 using (MemoryStream TempMemoryStream = new MemoryStream())
                 {
                     TempDocuemnt.Save(TempMemoryStream, TempImageSaveOption);
@@ -696,7 +700,7 @@ namespace DocumentTools
         /// <param name="RemoveNumber">是否移除数字</param>
         /// <param name="RemoveSquare">是否移除括号</param>
         /// <returns></returns>
-        public static string[] AddText2List(string InputText, bool DoubleTextAligin, bool RemoveNumber, bool RemoveSquare, bool NameStorke)
+        public static string[] AddText2List(string InputText, bool RemoveNumber, bool RemoveSquare, bool NameStorke)
         {
             List<string> TextList = new List<string>();
 
