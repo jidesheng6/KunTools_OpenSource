@@ -123,7 +123,7 @@ namespace DocumentTools
         /// <param name="tempSaveDocxPath">临时存放转换的docx目录</param>
         public static void ConvertWord2Pdf(string documentFileName, string SavePdfName, string tempSaveDocxPath)
         {
-            Aspose.Hook.Manager.StartHook();
+            Aspose.Hook.HookManager.StartHook();
             string DocumentName, SaveDocxName;
 
             //设置加载word文档的时候参数
@@ -165,6 +165,8 @@ namespace DocumentTools
 
             Aspose.Words.Document TempDocument = new Aspose.Words.Document(documentFileName, TempDocuemntLoadOption);
 
+            //TempDocument.JustificationMode = Aspose.Words.Settings.JustificationMode.CompressKana;
+
             DocumentName = System.IO.Path.GetFileNameWithoutExtension(documentFileName);
 
             SaveDocxName = System.IO.Path.Combine(tempSaveDocxPath, DocumentName + ".docx");
@@ -174,6 +176,8 @@ namespace DocumentTools
             TempDocument.Save(SaveDocxName, TempDocxSaveOption);
 
             Aspose.Words.Document TempDocxDocument = new Aspose.Words.Document(SaveDocxName, TempDocuemntLoadOption);
+
+            //TempDocxDocument.JustificationMode = Aspose.Words.Settings.JustificationMode.CompressKana;
 
             TempDocxDocument.UpdateFields();
 
@@ -188,7 +192,7 @@ namespace DocumentTools
         /// <param name="SavePdfName">导出docx</param>
         public static void ConvertPdf2Word(string pdfFileName, string SavePdfName)
         {
-            Aspose.Hook.Manager.StartHook();
+            Aspose.Hook.HookManager.StartHook();
 
             Aspose.Pdf.DocSaveOptions TempDocxSaveOption = new Aspose.Pdf.DocSaveOptions
             {
@@ -236,7 +240,7 @@ namespace DocumentTools
         /// <param name="mergrePdfFileName">合并后保存的PDF文件名称</param>
         public static void MergrePdfFIle(List<string> pdfFileNames, string mergrePdfFileName, bool IsMergePicture, string PageMode)
         {
-            Aspose.Hook.Manager.StartHook();
+            Aspose.Hook.HookManager.StartHook();
             List<string> TempFileList = new List<string>();
             Aspose.Words.Document TempPicturePdf = new Aspose.Words.Document();
             Aspose.Words.DocumentBuilder TempPicturePdfBuilder = new Aspose.Words.DocumentBuilder(TempPicturePdf);
@@ -294,7 +298,7 @@ namespace DocumentTools
         /// <param name="SavePdfFileName">导出pdf的路径</param>
         public static void ConvertExcel2Pdf(string ExcelFileName, string SavePdfFileName, bool ExportEachSheet)
         {
-            Aspose.Hook.Manager.StartHook();
+            Aspose.Hook.HookManager.StartHook();
 
             using (Aspose.Cells.Workbook TempExcelDocument = new Aspose.Cells.Workbook(ExcelFileName))
             {
@@ -335,7 +339,7 @@ namespace DocumentTools
         /// <param name="SaveExcelFileName">导出excel的路径</param>
         public static void ConvertPdf2Excel(string PdfFileName, string SaveExcelFileName, bool MergeAllPages)
         {
-            Aspose.Hook.Manager.StartHook();
+            Aspose.Hook.HookManager.StartHook();
 
             using (Aspose.Pdf.Document TempPdfDocuemnt = new Aspose.Pdf.Document(PdfFileName))
             {
@@ -370,7 +374,7 @@ namespace DocumentTools
         /// <param name="DpiValue">导出的图像DPI分辨率</param>
         public static void ConvertWord2Image(string DocumentsFileName, string SavedImageFileName, string ConvertImageType, bool SetGrayMode, bool PageExport, int DpiValue = 150)
         {
-            Aspose.Hook.Manager.StartHook();
+            Aspose.Hook.HookManager.StartHook();
 
             string FileType = System.IO.Path.GetExtension(DocumentsFileName);
 
@@ -521,7 +525,7 @@ namespace DocumentTools
         /// <param name="IgnoreCase">是否忽略大小写</param>
         public static void RelaceDocumentContent(string DocumentsFileName, string SavedDoucmentFileName, string RelaceDocumentType, string InputRegexRule, string ReplaceContent, bool IgnoreFootText, bool NoIgnoreCase, bool RemoveRowMode = false, int ExcelStartRow = -1, int ExcelEndRow = -1, bool UseRegex = false)
         {
-            Aspose.Hook.Manager.StartHook();
+            Aspose.Hook.HookManager.StartHook();
 
             Regex DocuemntRegex = new Regex(InputRegexRule);
             if (RelaceDocumentType == "WORD")
@@ -585,7 +589,7 @@ namespace DocumentTools
         /// <param name="TempTreeView">控件</param>
         public static void ReadDocumentDataMatrix(string DocumentFileName, TreeView TempTreeView)
         {
-            Aspose.Hook.Manager.StartHook();
+            Aspose.Hook.HookManager.StartHook();
             TreeNode TempTreeNode = new TreeNode();
             TreeNode TempDocumentNameRootNode = TempTreeNode.Nodes.Add(DocumentFileName);//添加文件节点信息
             Aspose.Words.Document TempDocuemnt = new Aspose.Words.Document(DocumentFileName);
