@@ -37,16 +37,7 @@ namespace DocumentTools
         }
         private void BodyForm_Load(object sender, EventArgs e)
         {
-
-            if (RuntimeInformation.ProcessArchitecture == Architecture.X86)
-            {
-                this.Text = "文档工具[X86版本|Twain支持设备多|程序内存限制2GB]";
-            }
-            else if (RuntimeInformation.ProcessArchitecture == Architecture.X64)
-            {
-                this.Text = "文档工具[X64版本|Twain支持设备少|程序无内存限制]";
-            }
-
+            this.Text = $"文档工具【软件完全离线|更新请看关于软件|编译日期：{DateTime.Now.ToString("yy.M.d")}】";
             InitListView();
             InitComboxValue();
             this.AllowDrop = true;
@@ -200,6 +191,19 @@ namespace DocumentTools
 
             this.IcoFileView.DragEnter += ListViewDragEnter;
             this.IcoFileView.DragDrop += ListviewDragDrop;
+
+
+            // MergeWordFileList
+            this.MergeWordFileList.View = View.Details;
+            this.MergeWordFileList.FullRowSelect = true;
+            this.MergeWordFileList.AllowDrop = true;
+            this.MergeWordFileList.Columns.Add("文件名称", 300);
+            this.MergeWordFileList.Columns.Add("添加时间", 300);
+            this.MergeWordFileList.Columns.Add("转换后文件名称", 300);
+            this.MergeWordFileList.Name = "MergeWordFileList";
+
+            this.MergeWordFileList.DragEnter += ListViewDragEnter;
+            this.MergeWordFileList.DragDrop += ListviewDragDrop;
         }
 
         private void InitComboxValue()
@@ -552,6 +556,9 @@ namespace DocumentTools
                     case "IcoFileView":
                         UI.RemoveListViewItem(false, IcoFileView, IcoFileView.FocusedItem.Index);
                         break;
+                    case "MergeWordFileList":
+                        UI.RemoveListViewItem(false, MergeWordFileList, MergeWordFileList.FocusedItem.Index);
+                        break;
                     default: break;
                 }
             }
@@ -609,6 +616,9 @@ namespace DocumentTools
                         break;
                     case "IcoFileView":
                         UI.RemoveListViewItem(true, IcoFileView);
+                        break;
+                    case "MergeWordFileList":
+                        UI.RemoveListViewItem(true, MergeWordFileList);
                         break;
                     default: break;
                 }
@@ -739,6 +749,9 @@ namespace DocumentTools
                     break;
                 case "IcoFileView":
                     UI.AddFilesToListviewWithNotDialog(DropFiles, this.IcoFileView, new string[] { ".jpg", ".png",".bmp" });
+                    break;
+                case "MergeWordFileList":
+                    UI.AddFilesToListviewWithNotDialog(DropFiles,this.MergeWordFileList,new string[] { ".doc",".docx"});
                     break;
                 default: break;
             }
@@ -1246,6 +1259,62 @@ namespace DocumentTools
                 this.Height += 46;
                 this.MainTabPage.Height += 48;
                 this.MainTabPage.Multiline = true;
+            }
+        }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://www.52pojie.cn/thread-1769111-1-1.html");
+        }
+
+        private void MergeWordFileList_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                this.ListViewRightMenu.Show(this.MergeWordFileList, e.Location);
+            }
+        }
+
+        private void SelectMergeWordFiles_Click(object sender, EventArgs e)
+        {
+            UI.AddMergeWordFiles();
+        }
+
+        private void MergeWordFile_Click(object sender, EventArgs e)
+        {
+            Task<List<string>> MergeWordFiles = UI.GetListViewFirstItemContent(this.MergeWordFileList);
+            if (MergeWordFiles.Result.Count > 0)
+            {
+                string MergeWordFileName = Util.ShowSaveFileDialog("WORD文档|.docx", "设置文件名称");
+                if (MergeWordFileName != string.Empty)
+                {
+                    Task.Run(() =>
+                    {
+                        try
+                        {
+                            string MeregeDirectory = System.IO.Path.GetDirectoryName(MergeWordFileName);
+                            this.MeregeWordStatusText.Text = "正在合并中...";
+                            Util.MergeWordFile(MergeWordFiles.Result, MergeWordFileName);
+                            this.MeregeWordStatusText.Text = "合并完毕，右键名称可移除文件";
+                            this.BeginInvoke(new Action(() =>
+                            {
+                                DialogResult OpenResult = MessageBox.Show("合并完毕，是否需要打开合并文件所在目录？", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
+                                if (OpenResult == DialogResult.Yes)
+                                {
+                                    Process.Start(MeregeDirectory);
+                                }
+                            }));
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        }
+
+                    });
+
+
+                }
             }
         }
     }

@@ -58,6 +58,7 @@
             this.ConvertPDF2Excel = new System.Windows.Forms.Button();
             this.SelectPDF2ExcelButton = new System.Windows.Forms.Button();
             this.PDF2ExcelFileView = new System.Windows.Forms.ListView();
+            this.TabPage_14 = new System.Windows.Forms.TabPage();
             this.TabPage_06 = new System.Windows.Forms.TabPage();
             this.label5 = new System.Windows.Forms.Label();
             this.MeregeFilePage = new System.Windows.Forms.ComboBox();
@@ -183,6 +184,7 @@
             this.TabPage_08 = new System.Windows.Forms.TabPage();
             this.label12 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.label13 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -201,11 +203,17 @@
             this.展开折叠本节点全部ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.展开折叠全部节点ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.打开文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MergeWordFileList = new System.Windows.Forms.ListView();
+            this.SelectMergeWordFiles = new System.Windows.Forms.Button();
+            this.MergeWordFile = new System.Windows.Forms.Button();
+            this.label23 = new System.Windows.Forms.Label();
+            this.MeregeWordStatusText = new System.Windows.Forms.Label();
             this.MainTabPage.SuspendLayout();
             this.TabPage_01.SuspendLayout();
             this.TabPage_02.SuspendLayout();
             this.TabPage_03.SuspendLayout();
             this.TabPage_07.SuspendLayout();
+            this.TabPage_14.SuspendLayout();
             this.TabPage_06.SuspendLayout();
             this.TabPage_04.SuspendLayout();
             this.TabPage_10.SuspendLayout();
@@ -244,6 +252,7 @@
             this.MainTabPage.Controls.Add(this.TabPage_02);
             this.MainTabPage.Controls.Add(this.TabPage_03);
             this.MainTabPage.Controls.Add(this.TabPage_07);
+            this.MainTabPage.Controls.Add(this.TabPage_14);
             this.MainTabPage.Controls.Add(this.TabPage_06);
             this.MainTabPage.Controls.Add(this.TabPage_04);
             this.MainTabPage.Controls.Add(this.TabPage_10);
@@ -556,6 +565,21 @@
             this.PDF2ExcelFileView.UseCompatibleStateImageBehavior = false;
             this.PDF2ExcelFileView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PDF2ExcelFileView_MouseClick);
             // 
+            // TabPage_14
+            // 
+            this.TabPage_14.Controls.Add(this.MeregeWordStatusText);
+            this.TabPage_14.Controls.Add(this.label23);
+            this.TabPage_14.Controls.Add(this.MergeWordFile);
+            this.TabPage_14.Controls.Add(this.SelectMergeWordFiles);
+            this.TabPage_14.Controls.Add(this.MergeWordFileList);
+            this.TabPage_14.Location = new System.Drawing.Point(4, 76);
+            this.TabPage_14.Name = "TabPage_14";
+            this.TabPage_14.Padding = new System.Windows.Forms.Padding(3);
+            this.TabPage_14.Size = new System.Drawing.Size(780, 484);
+            this.TabPage_14.TabIndex = 13;
+            this.TabPage_14.Text = "合并WORD";
+            this.TabPage_14.UseVisualStyleBackColor = true;
+            // 
             // TabPage_06
             // 
             this.TabPage_06.Controls.Add(this.label5);
@@ -595,9 +619,9 @@
             this.PictureMergeMode.AutoSize = true;
             this.PictureMergeMode.Location = new System.Drawing.Point(262, 347);
             this.PictureMergeMode.Name = "PictureMergeMode";
-            this.PictureMergeMode.Size = new System.Drawing.Size(142, 22);
+            this.PictureMergeMode.Size = new System.Drawing.Size(151, 22);
             this.PictureMergeMode.TabIndex = 5;
-            this.PictureMergeMode.Text = "图片合并模式";
+            this.PictureMergeMode.Text = "图片合并为PDF";
             this.PictureMergeMode.UseVisualStyleBackColor = true;
             // 
             // OpenMeregePdfFile
@@ -1746,9 +1770,9 @@
             // groupBox16
             // 
             this.groupBox16.Controls.Add(this.ReleaseRegistry);
-            this.groupBox16.Location = new System.Drawing.Point(558, 13);
+            this.groupBox16.Location = new System.Drawing.Point(558, 3);
             this.groupBox16.Name = "groupBox16";
-            this.groupBox16.Size = new System.Drawing.Size(200, 106);
+            this.groupBox16.Size = new System.Drawing.Size(200, 116);
             this.groupBox16.TabIndex = 1;
             this.groupBox16.TabStop = false;
             this.groupBox16.Text = "释放注册文件";
@@ -1838,6 +1862,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.linkLabel2);
             this.groupBox4.Controls.Add(this.label13);
             this.groupBox4.Controls.Add(this.label11);
             this.groupBox4.Controls.Add(this.label10);
@@ -1848,6 +1873,17 @@
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "软件说明";
+            // 
+            // linkLabel2
+            // 
+            this.linkLabel2.AutoSize = true;
+            this.linkLabel2.Location = new System.Drawing.Point(267, 200);
+            this.linkLabel2.Name = "linkLabel2";
+            this.linkLabel2.Size = new System.Drawing.Size(278, 18);
+            this.linkLabel2.TabIndex = 5;
+            this.linkLabel2.TabStop = true;
+            this.linkLabel2.Text = "点击跳转更新地址[吾爱破解原帖]";
+            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
             // 
             // label13
             // 
@@ -2000,6 +2036,56 @@
             this.打开文件ToolStripMenuItem.Text = "打开文件";
             this.打开文件ToolStripMenuItem.Click += new System.EventHandler(this.打开文件ToolStripMenuItem_Click);
             // 
+            // MergeWordFileList
+            // 
+            this.MergeWordFileList.HideSelection = false;
+            this.MergeWordFileList.Location = new System.Drawing.Point(6, 6);
+            this.MergeWordFileList.Name = "MergeWordFileList";
+            this.MergeWordFileList.Size = new System.Drawing.Size(765, 326);
+            this.MergeWordFileList.TabIndex = 0;
+            this.MergeWordFileList.UseCompatibleStateImageBehavior = false;
+            this.MergeWordFileList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MergeWordFileList_MouseClick);
+            // 
+            // SelectMergeWordFiles
+            // 
+            this.SelectMergeWordFiles.Location = new System.Drawing.Point(6, 406);
+            this.SelectMergeWordFiles.Name = "SelectMergeWordFiles";
+            this.SelectMergeWordFiles.Size = new System.Drawing.Size(221, 55);
+            this.SelectMergeWordFiles.TabIndex = 1;
+            this.SelectMergeWordFiles.Text = "选择文件";
+            this.SelectMergeWordFiles.UseVisualStyleBackColor = true;
+            this.SelectMergeWordFiles.Click += new System.EventHandler(this.SelectMergeWordFiles_Click);
+            // 
+            // MergeWordFile
+            // 
+            this.MergeWordFile.Location = new System.Drawing.Point(550, 406);
+            this.MergeWordFile.Name = "MergeWordFile";
+            this.MergeWordFile.Size = new System.Drawing.Size(221, 55);
+            this.MergeWordFile.TabIndex = 2;
+            this.MergeWordFile.Text = "开始处理";
+            this.MergeWordFile.UseVisualStyleBackColor = true;
+            this.MergeWordFile.Click += new System.EventHandler(this.MergeWordFile_Click);
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.ForeColor = System.Drawing.Color.Tomato;
+            this.label23.Location = new System.Drawing.Point(6, 355);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(656, 18);
+            this.label23.TabIndex = 3;
+            this.label23.Text = "提示：合并WORD不能保证格式完全一致，合并完毕后请自行检查文档是否需要调整";
+            // 
+            // MeregeWordStatusText
+            // 
+            this.MeregeWordStatusText.AutoSize = true;
+            this.MeregeWordStatusText.ForeColor = System.Drawing.Color.ForestGreen;
+            this.MeregeWordStatusText.Location = new System.Drawing.Point(246, 424);
+            this.MeregeWordStatusText.Name = "MeregeWordStatusText";
+            this.MeregeWordStatusText.Size = new System.Drawing.Size(143, 18);
+            this.MeregeWordStatusText.TabIndex = 4;
+            this.MeregeWordStatusText.Text = "正在处理X个文件";
+            // 
             // BodyForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
@@ -2026,6 +2112,8 @@
             this.TabPage_03.PerformLayout();
             this.TabPage_07.ResumeLayout(false);
             this.TabPage_07.PerformLayout();
+            this.TabPage_14.ResumeLayout(false);
+            this.TabPage_14.PerformLayout();
             this.TabPage_06.ResumeLayout(false);
             this.TabPage_06.PerformLayout();
             this.TabPage_04.ResumeLayout(false);
@@ -2256,6 +2344,13 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.TextBox TwainScanNumberSet;
         private System.Windows.Forms.CheckBox ExportCaps;
+        private System.Windows.Forms.LinkLabel linkLabel2;
+        private System.Windows.Forms.TabPage TabPage_14;
+        private System.Windows.Forms.Button MergeWordFile;
+        private System.Windows.Forms.Button SelectMergeWordFiles;
+        internal System.Windows.Forms.ListView MergeWordFileList;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label MeregeWordStatusText;
     }
 }
 

@@ -213,6 +213,11 @@ namespace DocumentTools
             AddFilesToListView("图片文件", "*.jpg;*.png;*.bmp", BodyForm.MainForm.IcoFileView);
         }
 
+        public static void AddMergeWordFiles()
+        {
+            AddFilesToListView("WORD文档","*.doc;*.docx",BodyForm.MainForm.MergeWordFileList);
+        }
+
 
 
         /// <summary>

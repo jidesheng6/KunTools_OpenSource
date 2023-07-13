@@ -582,6 +582,23 @@ namespace DocumentTools
         }
 
 
+
+        public static void MergeWordFile(List<string> DocumentsFileNames,string SavedDocumentFileName)
+        {
+            Aspose.Hook.HookManager.StartHook();
+
+            Aspose.Words.Document MergeDocument = new Aspose.Words.Document();
+
+            DocumentsFileNames.ForEach(DocumentName =>
+            {
+                Aspose.Words.Document LoadTempDocument = new Aspose.Words.Document(DocumentName);
+                MergeDocument.AppendDocument(LoadTempDocument,Aspose.Words.ImportFormatMode.KeepSourceFormatting);
+            });
+
+            MergeDocument.FirstSection.Remove();
+            MergeDocument.Save(SavedDocumentFileName);
+        }
+
         /// <summary>
         /// 读取文件中的DataMatrix，交给treeview处理，功能写的差不多了，随便写写了
         /// </summary>
