@@ -215,7 +215,7 @@ namespace DocumentTools
 
         public static void AddMergeWordFiles()
         {
-            AddFilesToListView("WORD文档","*.doc;*.docx",BodyForm.MainForm.MergeWordFileList);
+            AddFilesToListView("WORD文档", "*.doc;*.docx", BodyForm.MainForm.MergeWordFileList);
         }
 
 
@@ -284,7 +284,7 @@ namespace DocumentTools
                                 break;
                             // 批量图片转为ICO
                             case ConvertFileType.Image2Ico:
-                                Util.ConvertImage2Ico(ListViewFirstColumnText,ConvertedFileName, Convert.ToInt32(BodyForm.MainForm.IcoSizeDrop.SelectedValue));
+                                Util.ConvertImage2Ico(ListViewFirstColumnText, ConvertedFileName, Convert.ToInt32(BodyForm.MainForm.IcoSizeDrop.SelectedValue));
                                 break;
                             default: break;
                         }

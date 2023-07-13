@@ -1,5 +1,4 @@
-﻿using Aspose.Pdf.Drawing;
-using NTwain;
+﻿using NTwain;
 using NTwain.Data;
 using System;
 using System.Collections.Generic;
@@ -9,7 +8,6 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 namespace DocumentTools
@@ -37,7 +35,7 @@ namespace DocumentTools
         }
         private void BodyForm_Load(object sender, EventArgs e)
         {
-            this.Text = $"文档工具【软件完全离线|更新请看关于软件|编译日期：{DateTime.Now.ToString("yy.M.d")}】";
+            this.Text = $"Pwnint32_DocuemtToos【软件完全离线|更新请看关于软件|编译日期：{DateTime.Now.ToString("yy.M.d")}】";
             InitListView();
             InitComboxValue();
             this.AllowDrop = true;
@@ -61,8 +59,9 @@ namespace DocumentTools
             {
                 InitTwain();
             }
-            catch {
-                MessageBox.Show("没有在系统中找到TwainDsm数据源管理器，请自行下载TwainDsm.dll文件放在程序目录下调用，否则无法使用twain调试功能","提示",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            catch
+            {
+                MessageBox.Show("没有在系统中找到TwainDsm数据源管理器，请自行下载TwainDsm.dll文件放在程序目录下调用，否则无法使用twain调试功能", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
 
@@ -404,17 +403,17 @@ namespace DocumentTools
             List<string> TempLines = new List<string>();
             TargetTextBox.Lines = Util.AddText2List(SourceTextBox.Text, RemoveNumberCheck.Checked, RemoveSquareCheck.Checked, NameStorkeChcek.Checked);
             //双字对齐功能，放在全部的文本处理完毕以后再进行重新处理，不然只能针对源文本字符长度进行判断，不太合适
-            if(DoubleTextAlignCheck.Checked && this.TargetTextBox.Text !=string.Empty)
+            if (DoubleTextAlignCheck.Checked && this.TargetTextBox.Text != string.Empty)
             {
                 string DoubleText;
-               foreach(string TargetTextTemp in this.TargetTextBox.Lines)
+                foreach (string TargetTextTemp in this.TargetTextBox.Lines)
                 {
                     DoubleText = TargetTextTemp;
-                   if (DoubleText.Length==2)
+                    if (DoubleText.Length == 2)
                     {
-                        DoubleText = DoubleText.Insert(1,"  ");
+                        DoubleText = DoubleText.Insert(1, "  ");
                     }
-                   TempLines.Add(DoubleText);//把不需要对齐的也一起加回来
+                    TempLines.Add(DoubleText);//把不需要对齐的也一起加回来
                 }
                 TargetTextBox.Lines = TempLines.ToArray();
             }
@@ -748,10 +747,10 @@ namespace DocumentTools
                     UI.AddFilesToListviewWithNotDialog(DropFiles, this.DecodeMatrixWordListView, new string[] { ".doc", ".docx" });
                     break;
                 case "IcoFileView":
-                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.IcoFileView, new string[] { ".jpg", ".png",".bmp" });
+                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.IcoFileView, new string[] { ".jpg", ".png", ".bmp" });
                     break;
                 case "MergeWordFileList":
-                    UI.AddFilesToListviewWithNotDialog(DropFiles,this.MergeWordFileList,new string[] { ".doc",".docx"});
+                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.MergeWordFileList, new string[] { ".doc", ".docx" });
                     break;
                 default: break;
             }
@@ -825,7 +824,7 @@ namespace DocumentTools
                         ScanSerialNumber.Text = $"序列号：{dataSource.Capabilities.CapSerialNumber.GetValues().FirstOrDefault()}";
                     }
 
-                    if(this.ExportCaps.Checked)
+                    if (this.ExportCaps.Checked)
                     {
                         //输出扫描仪支持的设置参数
                         string DebugName = $"{dataSource.Name}_Support_Capabilities.txt";
@@ -833,7 +832,8 @@ namespace DocumentTools
                         {
                             File.Delete(DebugName);
                         }
-                        dataSource.Capabilities.CapSupportedCaps.GetValues().ToList().ForEach(x => {
+                        dataSource.Capabilities.CapSupportedCaps.GetValues().ToList().ForEach(x =>
+                        {
                             StreamWriter sr = File.AppendText(DebugName);
                             sr.WriteLine(x);
                             sr.Close();
@@ -910,9 +910,9 @@ namespace DocumentTools
                 //设置本次会话中需要获取的文件数量
                 if (TwainScanNumberSet.Text != string.Empty && Int32.TryParse(TwainScanNumberSet.Text, out int TwainScanNumberSetInt))
                 {
-                    if(dataSource.Capabilities.CapXferCount.CanSet)
+                    if (dataSource.Capabilities.CapXferCount.CanSet)
                     {
-                        if(TwainScanNumberSetInt > 0)
+                        if (TwainScanNumberSetInt > 0)
                         {
                             //对于支持双面扫描的扫描仪，先把扫描模式设置为单面扫描
                             if (dataSource.Capabilities.CapDuplex.IsSupported && !(DoubleScanBox.Checked))
@@ -1007,10 +1007,11 @@ namespace DocumentTools
                 if (Files.Length > 0)
                 {
                     //删除文件之前清除全部的bitmap对象
-                    if (TempScannedImageBmpList.Count>0)
+                    if (TempScannedImageBmpList.Count > 0)
                     {
-                        TempScannedImageBmpList.ForEach(ScannBmp => { 
-                        ScannBmp.Dispose();
+                        TempScannedImageBmpList.ForEach(ScannBmp =>
+                        {
+                            ScannBmp.Dispose();
                         });
                         this.PreviewPictureBox.Image.Dispose();
                         this.PreviewPictureBox.Image = null;
@@ -1190,16 +1191,16 @@ namespace DocumentTools
 
         private void ReleaseRegistry_Click(object sender, EventArgs e)
         {
-           object RegistryString =  Util.GetEmbedResourceObj("注册");
+            object RegistryString = Util.GetEmbedResourceObj("注册");
 
             File.WriteAllText("注册_Accusoft控件_右键管理员运行.reg", RegistryString.ToString());
 
-            MessageBox.Show("释放完成","提示",MessageBoxButtons.OK,MessageBoxIcon.Asterisk);
+            MessageBox.Show("释放完成", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
 
         private void label9_DoubleClick(object sender, EventArgs e)
         {
-            if(ReleaseRegistry.Enabled)
+            if (ReleaseRegistry.Enabled)
             {
                 ReleaseRegistry.Enabled = false;
             }

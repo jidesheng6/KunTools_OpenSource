@@ -7,6 +7,7 @@ using NAudio.Wave;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Net;
@@ -15,8 +16,6 @@ using System.Resources;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
-using Aspose.Pdf;
-using System.Drawing;
 
 namespace DocumentTools
 {
@@ -583,7 +582,7 @@ namespace DocumentTools
 
 
 
-        public static void MergeWordFile(List<string> DocumentsFileNames,string SavedDocumentFileName)
+        public static void MergeWordFile(List<string> DocumentsFileNames, string SavedDocumentFileName)
         {
             Aspose.Hook.HookManager.StartHook();
 
@@ -592,7 +591,7 @@ namespace DocumentTools
             DocumentsFileNames.ForEach(DocumentName =>
             {
                 Aspose.Words.Document LoadTempDocument = new Aspose.Words.Document(DocumentName);
-                MergeDocument.AppendDocument(LoadTempDocument,Aspose.Words.ImportFormatMode.KeepSourceFormatting);
+                MergeDocument.AppendDocument(LoadTempDocument, Aspose.Words.ImportFormatMode.KeepSourceFormatting);
             });
 
             MergeDocument.FirstSection.Remove();
@@ -766,7 +765,7 @@ namespace DocumentTools
 
                     if (TempText != string.Empty)
                     {
-                        string AddListText = RemoveSpeciCharacter(new string[] { "\\s"},TempText);
+                        string AddListText = RemoveSpeciCharacter(new string[] { "\\s" }, TempText);
 
                         if (RemoveNumber)
                         {
@@ -835,7 +834,7 @@ namespace DocumentTools
         /// <param name="SavedFileName">保存的文件名称</param>
         /// <param name="DownloadProgressBar">使用的进度条</param>
         /// <param name="DownloadStatusLabel">使用的提示文本标签</param>
-        public static void DwonloadFile(string FileUrl, string SavedFileName, ProgressBar DownloadProgressBar,Label DownloadStatusLabel)
+        public static void DwonloadFile(string FileUrl, string SavedFileName, ProgressBar DownloadProgressBar, Label DownloadStatusLabel)
         {
 
             DownloadProgressBar.Maximum = 100;
@@ -856,7 +855,7 @@ namespace DocumentTools
 
         }
 
-        public static void ConvertImage2Ico(string ImageFileName,string SaveFileName, int icoSize)
+        public static void ConvertImage2Ico(string ImageFileName, string SaveFileName, int icoSize)
         {
             using (Bitmap TempBitMapLoad = new Bitmap(ImageFileName))
             {
