@@ -18,7 +18,12 @@ namespace DocumentTools
         Pdf2Excel,
         WordReplace,
         ExcelReplace,
-        Image2Ico
+        Image2Ico,
+        Word2Excel,
+        Excel2Word,
+        SplitPdf,
+        AddWaterMarkPdf,
+        RemovePdfWaterMark,
     }
 
     internal class UI
@@ -218,6 +223,30 @@ namespace DocumentTools
             AddFilesToListView("WORD文档", "*.doc;*.docx", BodyForm.MainForm.MergeWordFileList);
         }
 
+        public static void AddWord2ExcelFiles()
+        {
+            AddFilesToListView("WORD文档","*.doc;*.docx",BodyForm.MainForm.Word2ExcelFileList);
+        }
+
+        public static void AddExcel2WordFiles()
+        {
+            AddFilesToListView("EXCEL文档", "*.xls;*.xlsx", BodyForm.MainForm.Excel2WordFileList);
+        }
+
+        public  static void AddSplitPdfFiles()
+        {
+            AddFilesToListView("PDF文档","*.pdf",BodyForm.MainForm.SplitPdfFileList);
+        }
+
+        public static void AddWaterMarkPdfFiles()
+        {
+            AddFilesToListView("PDF文档","*.pdf",BodyForm.MainForm.PdfWaterMarkFileList);
+        }
+
+        public static void AddRemoveWaterFiles()
+        {
+            AddFilesToListView("PDF文档", "*.pdf", BodyForm.MainForm.RemovePdfWaterMarkFileList);
+        }
 
 
         /// <summary>
@@ -285,6 +314,27 @@ namespace DocumentTools
                             // 批量图片转为ICO
                             case ConvertFileType.Image2Ico:
                                 Util.ConvertImage2Ico(ListViewFirstColumnText, ConvertedFileName, Convert.ToInt32(BodyForm.MainForm.IcoSizeDrop.SelectedValue));
+                                break;
+
+                            // Word批量转换为Excel
+                            case ConvertFileType.Word2Excel:
+                                Util.ConvertWord2Excel(ListViewFirstColumnText,ConvertedFileName);
+                                break;
+                            // Excel批量转换为Word
+                            case ConvertFileType.Excel2Word:
+                                Util.ConvertExcel2Word(ListViewFirstColumnText,ConvertedFileName);
+                                break;
+                            // pdf拆分
+                            case ConvertFileType.SplitPdf:
+                                Util.SplitPdf(ListViewFirstColumnText, SelectSavePathstring);
+                                break;
+                            // pdf添加水印
+                            case ConvertFileType.AddWaterMarkPdf:
+                                Util.AddWaterMark2Pdf(ListViewFirstColumnText,ConvertedFileName,BodyForm.MainForm.PdfWaterMarkText.Text,float.Parse(BodyForm.MainForm.PdfWaterMarkOpcityNumber.Text.ToString()),BodyForm.MainForm.PdfWaterMarkRotateDegNumber.Text,BodyForm.MainForm.PdfWaterMarkHorSetting.SelectedIndex,BodyForm.MainForm.PDFWaterMarkVerSetting.SelectedIndex, PrivateFontSetting.FontColor, PrivateFontSetting.FontName, PrivateFontSetting.FontSize);
+                                break;
+                            // pdf移除水印
+                            case ConvertFileType.RemovePdfWaterMark:
+                                Util.RemovePdfWaterMark(ListViewFirstColumnText, ConvertedFileName);
                                 break;
                             default: break;
                         }

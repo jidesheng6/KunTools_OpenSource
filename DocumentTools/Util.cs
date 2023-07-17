@@ -1,6 +1,9 @@
 ﻿using Aspose.BarCode.BarCodeRecognition;
 using Aspose.Cells;
 using Aspose.Cells.Rendering;
+using Aspose.Pdf;
+using Aspose.Pdf.Text;
+using Microsoft.ML.OnnxRuntime.Tensors;
 using Microsoft.VisualBasic.Devices;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using NAudio.Wave;
@@ -136,12 +139,15 @@ namespace DocumentTools
             Aspose.Words.Saving.PdfSaveOptions TempPdfaveOption = new Aspose.Words.Saving.PdfSaveOptions()
             {
                 FontEmbeddingMode = Aspose.Words.Saving.PdfFontEmbeddingMode.EmbedAll,
+                ColorMode = Aspose.Words.Saving.ColorMode.Normal,
                 ImageColorSpaceExportMode = Aspose.Words.Saving.PdfImageColorSpaceExportMode.Auto,
                 ImageCompression = Aspose.Words.Saving.PdfImageCompression.Auto,
                 PageMode = Aspose.Words.Saving.PdfPageMode.UseOutlines,
                 ZoomBehavior = Aspose.Words.Saving.PdfZoomBehavior.None,
                 SaveFormat = Aspose.Words.SaveFormat.Pdf,
                 UseHighQualityRendering = true,
+                UseAntiAliasing = true,
+                PreblendImages = false,
             };
 
             //设置PDF保存带word中的目录
@@ -581,7 +587,11 @@ namespace DocumentTools
         }
 
 
-
+        /// <summary>
+        /// 合并WORD功能
+        /// </summary>
+        /// <param name="DocumentsFileNames">文件列表</param>
+        /// <param name="SavedDocumentFileName">合并后word的名称</param>
         public static void MergeWordFile(List<string> DocumentsFileNames, string SavedDocumentFileName)
         {
             Aspose.Hook.HookManager.StartHook();
@@ -597,6 +607,190 @@ namespace DocumentTools
             MergeDocument.FirstSection.Remove();
             MergeDocument.Save(SavedDocumentFileName);
         }
+
+        /// <summary>
+        /// 将Word转换为Excel，暂时只能转换单页的Word文档
+        /// </summary>
+        /// <param name="DocumentFileName">文档名称</param>
+        /// <param name="SavedDcoumentFileName">保存后的文件名称</param>
+        public static void ConvertWord2Excel(string DocumentFileName,string SavedDcoumentFileName)
+        {
+            Aspose.Hook.HookManager.StartHook();
+
+            Aspose.Words.Document TempLoadDocument = new Aspose.Words.Document(DocumentFileName);
+
+            Aspose.Words.Saving.XlsxSaveOptions TempSaveXlsOption = new Aspose.Words.Saving.XlsxSaveOptions();
+
+            TempSaveXlsOption.SaveFormat = Aspose.Words.SaveFormat.Xlsx;
+            TempSaveXlsOption.CompressionLevel = Aspose.Words.Saving.CompressionLevel.Maximum;
+
+            TempLoadDocument.Save(SavedDcoumentFileName, TempSaveXlsOption);
+        }
+        /// <summary>
+        /// 将Excel转换为Word，转换的格式不是太完美
+        /// </summary>
+        /// <param name="DocumentFileName">文档名称</param>
+        /// <param name="SaveDocumentFileName">转换后的文件名称</param>
+        public static void ConvertExcel2Word(string DocumentFileName,string SaveDocumentFileName)
+        {
+            Aspose.Hook.HookManager.StartHook();
+
+            Aspose.Cells.Workbook TempLoadWorkBook =  new Aspose.Cells.Workbook(DocumentFileName);
+
+            Aspose.Cells.DocxSaveOptions TempDocxSaveOption = new Aspose.Cells.DocxSaveOptions();
+
+            TempDocxSaveOption.AllColumnsInOnePagePerSheet = false;
+            TempDocxSaveOption.CheckWorkbookDefaultFont = true;
+            TempDocxSaveOption.MergeAreas = true;
+            TempDocxSaveOption.ValidateMergedAreas = true;
+            TempLoadWorkBook.Save(SaveDocumentFileName,TempDocxSaveOption);
+        }
+
+        /// <summary>
+        /// 拆分PDF
+        /// </summary>
+        /// <param name="DocumentFileName">文档名称</param>
+        /// <param name="SavedPath">保存目录</param>
+        public static void SplitPdf(string DocumentFileName,string SavedPath)
+        {
+            Aspose.Hook.HookManager.StartHook();
+
+            Aspose.Pdf.Document TempLoadDocument = new Aspose.Pdf.Document(DocumentFileName);
+
+
+            int PdfPageNumber = 1;
+
+            foreach(Aspose.Pdf.Page TempPage in TempLoadDocument.Pages)
+            {
+                string SavedFileName = $"{Path.Combine(SavedPath,Path.GetFileNameWithoutExtension(DocumentFileName)+$"_第{PdfPageNumber}页.pdf")}";
+                Aspose.Pdf.Document ExportTempDocument = new Aspose.Pdf.Document();
+                ExportTempDocument.Pages.Add(TempPage);
+                ExportTempDocument.Save(SavedFileName);
+                PdfPageNumber++;
+            }
+        }
+
+        /// <summary>
+        /// 为pdf添加水印
+        /// </summary>
+        /// <param name="DocuementFileName">文档名称</param>
+        /// <param name="SaveFileName">保存后的名称</param>
+        /// <param name="WaterMarkContent">水印文本</param>
+        /// <param name="WaterMarkOpactiyNum">不透明度</param>
+        /// <param name="WaterMarkRotateDegNum">旋转角度</param>
+        /// <param name="WaterMarkHorAlign">水平对齐方式</param>
+        /// <param name="WaterMarkVerAlign">垂直对齐方式</param>
+        /// <param name="WaterMarkFontColor">字体颜色</param>
+        /// <param name="WaterMarkFontName">字体名称</param>
+        /// <param name="WaterMarkFontSize">字体大小</param>
+        public static void AddWaterMark2Pdf(string DocuementFileName,string SaveFileName,string WaterMarkContent,float WaterMarkOpactiyNum,string WaterMarkRotateDegNum,int WaterMarkHorAlignIndex,int WaterMarkVerAlignIndex, System.Drawing.Color WaterMarkFontColor,string WaterMarkFontName="宋体", float WaterMarkFontSize=12)
+        {
+            Aspose.Hook.HookManager.StartHook();
+            Aspose.Pdf.Document TempLoadDocument = new Aspose.Pdf.Document(DocuementFileName);
+
+
+            foreach(Aspose.Pdf.Page TempPage in TempLoadDocument.Pages)
+            {
+                WatermarkArtifact TempAddArtifact = new WatermarkArtifact();
+
+                TextState TempTextState = new TextState();
+
+                TempTextState.Font = FontRepository.FindFont(WaterMarkFontName);
+                TempTextState.FontSize = WaterMarkFontSize;
+                TempTextState.ForegroundColor = Aspose.Pdf.Color.FromArgb(WaterMarkFontColor.R, WaterMarkFontColor.G, WaterMarkFontColor.B);
+
+                TempAddArtifact.SetTextAndState(
+                    WaterMarkContent, TempTextState
+                    );
+                //通过获取combox索引来设置对齐方式
+                switch(WaterMarkHorAlignIndex)
+                {
+                    case 0:
+                        TempAddArtifact.ArtifactHorizontalAlignment = Aspose.Pdf.HorizontalAlignment.None;
+                        break;
+                    case 1:
+                        TempAddArtifact.ArtifactHorizontalAlignment = Aspose.Pdf.HorizontalAlignment.Left;
+                        break;
+                    case 2:
+                        TempAddArtifact.ArtifactHorizontalAlignment = Aspose.Pdf.HorizontalAlignment.Center;
+                        break;
+                    case 3:
+                        TempAddArtifact.ArtifactHorizontalAlignment = Aspose.Pdf.HorizontalAlignment.Right;
+                        break;
+                    case 4:
+                        TempAddArtifact.ArtifactHorizontalAlignment = Aspose.Pdf.HorizontalAlignment.Justify;
+                        break;
+                    case 5:
+                        TempAddArtifact.ArtifactHorizontalAlignment = Aspose.Pdf.HorizontalAlignment.FullJustify;
+                        break;
+                    default:
+                        break;
+
+                }
+
+                switch(WaterMarkVerAlignIndex)
+                {
+                    case 0:
+                        TempAddArtifact.ArtifactVerticalAlignment = Aspose.Pdf.VerticalAlignment.None;
+                        break;
+                    case 1:
+                        TempAddArtifact.ArtifactVerticalAlignment = Aspose.Pdf.VerticalAlignment.Top;
+                        break;
+                    case 2:
+                        TempAddArtifact.ArtifactVerticalAlignment = Aspose.Pdf.VerticalAlignment.Center;
+                        break;
+                    case 3:
+                        TempAddArtifact.ArtifactVerticalAlignment = Aspose.Pdf.VerticalAlignment.Bottom;
+                        break;
+                    default:
+                        break;
+                }
+
+                TempAddArtifact.Rotation = Convert.ToInt32(WaterMarkRotateDegNum);
+                TempAddArtifact.Opacity = WaterMarkOpactiyNum;
+                TempAddArtifact.IsBackground = true;
+                TempPage.Artifacts.Add(TempAddArtifact);
+            }
+
+            TempLoadDocument.Save(SaveFileName,Aspose.Pdf.SaveFormat.Pdf);
+
+
+
+        }
+        
+        
+        /// <summary>
+        /// 移除pdf水印
+        /// </summary>
+        /// <param name="DocumentFileName"></param>
+        /// <param name="SavedFileName"></param>
+        public static void RemovePdfWaterMark(string DocumentFileName,string SavedFileName)
+        {
+            Aspose.Hook.HookManager.StartHook();
+
+            Aspose.Pdf.Document TempLoadDocument = new Aspose.Pdf.Document(DocumentFileName);
+
+            List<Artifact> WaterMarks = new List<Artifact>();
+
+            foreach(Aspose.Pdf.Page TempPage in TempLoadDocument.Pages)
+            {
+                foreach(Aspose.Pdf.Artifact TempWaterMark in TempPage.Artifacts)
+                {
+                    if(TempWaterMark.Subtype == Artifact.ArtifactSubtype.Watermark)
+                    {
+                        WaterMarks.Add(TempWaterMark);
+                    }
+                }
+
+                foreach(Aspose.Pdf.Artifact Remove_WaterMark in WaterMarks)
+                {
+                    TempPage.Artifacts.Delete(Remove_WaterMark);
+                }
+            }
+            TempLoadDocument.Save(SavedFileName);
+
+        }
+
 
         /// <summary>
         /// 读取文件中的DataMatrix，交给treeview处理，功能写的差不多了，随便写写了

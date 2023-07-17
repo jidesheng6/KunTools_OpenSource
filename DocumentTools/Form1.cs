@@ -10,6 +10,8 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Configuration;
+
 namespace DocumentTools
 {
 
@@ -27,15 +29,68 @@ namespace DocumentTools
         List<Bitmap> TempScannedImageBmpList = new List<Bitmap>();
 
 
+        #region 控件大小随窗体大小等比例缩放
+
+        private readonly float x; //定义当前窗体的宽度
+        private readonly float y; //定义当前窗体的高度
+
+        private void setTag(Control cons)
+        {
+            foreach (Control con in cons.Controls)
+            {
+                con.Tag = con.Width + ";" + con.Height + ";" + con.Left + ";" + con.Top + ";" + con.Font.Size;
+                if (con.Controls.Count > 0) setTag(con);
+            }
+        }
+
+        private void setControls(float newx, float newy, Control cons)
+        {
+            //遍历窗体中的控件，重新设置控件的值
+            foreach (Control con in cons.Controls)
+                //获取控件的Tag属性值，并分割后存储字符串数组
+                if (con.Tag != null)
+                {
+                    var mytag = con.Tag.ToString().Split(';');
+                    //根据窗体缩放的比例确定控件的值
+                    con.Width = Convert.ToInt32(Convert.ToSingle(mytag[0]) * newx); //宽度
+                    con.Height = Convert.ToInt32(Convert.ToSingle(mytag[1]) * newy); //高度
+                    con.Left = Convert.ToInt32(Convert.ToSingle(mytag[2]) * newx); //左边距
+                    con.Top = Convert.ToInt32(Convert.ToSingle(mytag[3]) * newy); //顶边距
+                    var currentSize = Convert.ToSingle(mytag[4]) * newy; //字体大小                   
+                    if (currentSize > 0) con.Font = new Font(con.Font.Name, currentSize, con.Font.Style, con.Font.Unit);
+                    con.Focus();
+                    if (con.Controls.Count > 0) setControls(newx, newy, con);
+                }
+        }
+
+
+        /// <summary>
+        /// 重置窗体布局
+        /// </summary>
+        private void ReWinformLayout()
+        {
+            var newx = Width / x;
+            var newy = Height / y;
+            setControls(newx, newy, this);
+
+        }
+
+        #endregion
+
+
         public BodyForm()
         {
             InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
             MainForm = this;
+
+            x = Width;
+            y = Height;
+            setTag(this);
         }
         private void BodyForm_Load(object sender, EventArgs e)
         {
-            this.Text = $"Pwnint32_DocuemtToos【软件完全离线|更新请看关于软件|编译日期：{DateTime.Now.ToString("yy.M.d")}】";
+            this.Text = $"坤_Tools【软件完全离线|更新请看关于软件|编译日期：{DateTime.Now.ToString("yy.M.d")}】";
             InitListView();
             InitComboxValue();
             this.AllowDrop = true;
@@ -52,6 +107,18 @@ namespace DocumentTools
             this.DecodeDataMatrixView.FullRowSelect = true;
             ReleaseRegistry.Enabled = false;
 
+
+            
+            //如果配置文件存在就按照配置文件中的参数来设置
+            if(File.Exists(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile))
+            {
+                //设置起始页面
+                MainTabPage.SelectedIndex = int.Parse(ConfigurationManager.AppSettings["StartPageIndex"]);
+            }
+            else
+            {
+                MainTabPage.SelectedIndex = 0;
+            }
 
             //Util.PlayMp3WithStream();
 
@@ -203,6 +270,66 @@ namespace DocumentTools
 
             this.MergeWordFileList.DragEnter += ListViewDragEnter;
             this.MergeWordFileList.DragDrop += ListviewDragDrop;
+
+            // Word2ExcelFileList
+            this.Word2ExcelFileList.View = View.Details;
+            this.Word2ExcelFileList.FullRowSelect = true;
+            this.Word2ExcelFileList.AllowDrop = true;
+            this.Word2ExcelFileList.Columns.Add("文件名称", 300);
+            this.Word2ExcelFileList.Columns.Add("添加时间", 300);
+            this.Word2ExcelFileList.Columns.Add("转换后文件名称", 300);
+            this.Word2ExcelFileList.Name = "Word2ExcelFileList";
+
+            this.Word2ExcelFileList.DragEnter += ListViewDragEnter;
+            this.Word2ExcelFileList.DragDrop += ListviewDragDrop;
+
+            // Word2ExcelFileList
+            this.Excel2WordFileList.View = View.Details;
+            this.Excel2WordFileList.FullRowSelect = true;
+            this.Excel2WordFileList.AllowDrop = true;
+            this.Excel2WordFileList.Columns.Add("文件名称", 300);
+            this.Excel2WordFileList.Columns.Add("添加时间", 300);
+            this.Excel2WordFileList.Columns.Add("转换后文件名称", 300);
+            this.Excel2WordFileList.Name = "Excel2WordFileList";
+
+            this.Excel2WordFileList.DragEnter += ListViewDragEnter;
+            this.Excel2WordFileList.DragDrop += ListviewDragDrop;
+
+            // SplitPdfFileList
+            this.SplitPdfFileList.View = View.Details;
+            this.SplitPdfFileList.FullRowSelect = true;
+            this.SplitPdfFileList.AllowDrop = true;
+            this.SplitPdfFileList.Columns.Add("文件名称", 300);
+            this.SplitPdfFileList.Columns.Add("添加时间", 300);
+            this.SplitPdfFileList.Columns.Add("转换后文件名称", 300);
+            this.SplitPdfFileList.Name = "SplitPdfFileList";
+
+            this.SplitPdfFileList.DragEnter += ListViewDragEnter;
+            this.SplitPdfFileList.DragDrop += ListviewDragDrop;
+
+            // PdfWaterMarkFileList
+            this.PdfWaterMarkFileList.View = View.Details;
+            this.PdfWaterMarkFileList.FullRowSelect = true;
+            this.PdfWaterMarkFileList.AllowDrop = true;
+            this.PdfWaterMarkFileList.Columns.Add("文件名称", 300);
+            this.PdfWaterMarkFileList.Columns.Add("添加时间", 300);
+            this.PdfWaterMarkFileList.Columns.Add("转换后文件名称", 300);
+            this.PdfWaterMarkFileList.Name = "PdfWaterMarkFileList";
+
+            this.PdfWaterMarkFileList.DragEnter += ListViewDragEnter;
+            this.PdfWaterMarkFileList.DragDrop += ListviewDragDrop;
+
+            // RemovePdfWaterMarkFileList
+            this.RemovePdfWaterMarkFileList.View = View.Details;
+            this.RemovePdfWaterMarkFileList.FullRowSelect = true;
+            this.RemovePdfWaterMarkFileList.AllowDrop = true;
+            this.RemovePdfWaterMarkFileList.Columns.Add("文件名称", 300);
+            this.RemovePdfWaterMarkFileList.Columns.Add("添加时间", 300);
+            this.RemovePdfWaterMarkFileList.Columns.Add("转换后文件名称", 300);
+            this.RemovePdfWaterMarkFileList.Name = "RemovePdfWaterMarkFileList";
+
+            this.RemovePdfWaterMarkFileList.DragEnter += ListViewDragEnter;
+            this.RemovePdfWaterMarkFileList.DragDrop += ListviewDragDrop;
         }
 
         private void InitComboxValue()
@@ -271,12 +398,52 @@ namespace DocumentTools
             this.IcoSizeDrop.ValueMember = "IcoSizeValue";
 
 
+            DataTable PdfWaterMarkHorSettingTable = new DataTable();
+
+            PdfWaterMarkHorSettingTable.Columns.Add("DisplayValue");
+            PdfWaterMarkHorSettingTable.Columns.Add("RealValue");
+            PdfWaterMarkHorSettingTable.Rows.Add("不对齐",Aspose.Pdf.HorizontalAlignment.None);
+            PdfWaterMarkHorSettingTable.Rows.Add("左对齐",Aspose.Pdf.HorizontalAlignment.Left);
+            PdfWaterMarkHorSettingTable.Rows.Add("居中对齐",Aspose.Pdf.HorizontalAlignment.Center);
+            PdfWaterMarkHorSettingTable.Rows.Add("右对齐",Aspose.Pdf.HorizontalAlignment.Right);
+            PdfWaterMarkHorSettingTable.Rows.Add("未知对齐方式1",Aspose.Pdf.HorizontalAlignment.Justify);
+            PdfWaterMarkHorSettingTable.Rows.Add("未知对齐方式2", Aspose.Pdf.HorizontalAlignment.FullJustify);
+
+            this.PdfWaterMarkHorSetting.DataSource = PdfWaterMarkHorSettingTable;
+            this.PdfWaterMarkHorSetting.DisplayMember = "DisplayValue";
+            this.PdfWaterMarkHorSetting.ValueMember = "RealValue";
+
+            this.PdfWaterMarkHorSetting.SelectedIndex = 2;
+
+
+            DataTable PdfWaterMarkVerSettingTable = new DataTable();
+            PdfWaterMarkVerSettingTable.Columns.Add("DisplayValue");
+            PdfWaterMarkVerSettingTable.Columns.Add("RealValue");
+            PdfWaterMarkVerSettingTable.Rows.Add("不对齐", Aspose.Pdf.VerticalAlignment.None);
+            PdfWaterMarkVerSettingTable.Rows.Add("顶部对齐", Aspose.Pdf.VerticalAlignment.Top);
+            PdfWaterMarkVerSettingTable.Rows.Add("居中对齐", Aspose.Pdf.VerticalAlignment.Center);
+            PdfWaterMarkVerSettingTable.Rows.Add("底部对齐", Aspose.Pdf.VerticalAlignment.Bottom);
+
+            this.PDFWaterMarkVerSetting.DataSource = PdfWaterMarkVerSettingTable;
+            this.PDFWaterMarkVerSetting.DisplayMember = "DisplayValue";
+            this.PDFWaterMarkVerSetting.ValueMember = "RealValue";
+
+            this.PDFWaterMarkVerSetting.SelectedIndex = 2;
+
+            this.PdfWaterMarkOpcityNumber.DataSource = new float[] {0.0f,0.1f,0.2f,0.3f,0.4f,0.5f,0.6f,0.7f,0.8f,0.9f,1.0f };
+            this.PdfWaterMarkOpcityNumber.FormatString = "F1"; //控制文本格式，这里显示小数点后1位
+            this.PdfWaterMarkOpcityNumber.SelectedIndex = 5;
+
+
 
             this.MeregeFilePage.DropDownStyle = ComboBoxStyle.DropDownList;
             this.TwainColorMode.DropDownStyle = ComboBoxStyle.DropDownList;
             this.TwainDpi.DropDownStyle = ComboBoxStyle.DropDownList;
             this.TwainPaperSizeBox.DropDownStyle = ComboBoxStyle.DropDownList;
             this.IcoSizeDrop.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.PdfWaterMarkHorSetting.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.PDFWaterMarkVerSetting.DropDownStyle= ComboBoxStyle.DropDownList;
+            this.PdfWaterMarkOpcityNumber.DropDownStyle = ComboBoxStyle.DropDownList;
 
 
 
@@ -558,6 +725,21 @@ namespace DocumentTools
                     case "MergeWordFileList":
                         UI.RemoveListViewItem(false, MergeWordFileList, MergeWordFileList.FocusedItem.Index);
                         break;
+                    case "Word2ExcelFileList":
+                        UI.RemoveListViewItem(false, Word2ExcelFileList, Word2ExcelFileList.FocusedItem.Index);
+                        break;
+                    case "Excel2WordFileList":
+                        UI.RemoveListViewItem(false, Excel2WordFileList, Excel2WordFileList.FocusedItem.Index);
+                        break;
+                    case "SplitPdfFileList":
+                        UI.RemoveListViewItem(false, SplitPdfFileList, SplitPdfFileList.FocusedItem.Index);
+                        break;
+                    case "PdfWaterMarkFileList":
+                        UI.RemoveListViewItem(false, PdfWaterMarkFileList, PdfWaterMarkFileList.FocusedItem.Index);
+                        break;
+                    case "RemovePdfWaterMarkFileList":
+                        UI.RemoveListViewItem(false, RemovePdfWaterMarkFileList, RemovePdfWaterMarkFileList.FocusedItem.Index);
+                        break;
                     default: break;
                 }
             }
@@ -618,6 +800,21 @@ namespace DocumentTools
                         break;
                     case "MergeWordFileList":
                         UI.RemoveListViewItem(true, MergeWordFileList);
+                        break;
+                    case "Word2ExcelFileList":
+                        UI.RemoveListViewItem (true, Word2ExcelFileList);
+                        break;
+                    case "Excel2WordFileList":
+                        UI.RemoveListViewItem(true, Excel2WordFileList);
+                        break;
+                    case "SplitPdfFileList":
+                        UI.RemoveListViewItem(true, SplitPdfFileList);
+                        break;
+                    case "PdfWaterMarkFileList":
+                        UI.RemoveListViewItem(true,PdfWaterMarkFileList);
+                        break;
+                    case "RemovePdfWaterMarkFileList":
+                        UI.RemoveListViewItem(true, RemovePdfWaterMarkFileList);
                         break;
                     default: break;
                 }
@@ -752,13 +949,28 @@ namespace DocumentTools
                 case "MergeWordFileList":
                     UI.AddFilesToListviewWithNotDialog(DropFiles, this.MergeWordFileList, new string[] { ".doc", ".docx" });
                     break;
+                case "Word2ExcelFileList":
+                    UI.AddFilesToListviewWithNotDialog(DropFiles,this.Word2ExcelFileList,new string[] { ".doc",".docx"});
+                    break;
+                case "Excel2WordFileList":
+                    UI.AddFilesToListviewWithNotDialog(DropFiles,this.Excel2WordFileList,new string[] { ".xls",".xlsx"});
+                    break;
+                case "SplitPdfFileList":
+                    UI.AddFilesToListviewWithNotDialog(DropFiles,this.SplitPdfFileList,new string[] { ".pdf"});
+                    break;
+                case "PdfWaterMarkFileList":
+                    UI.AddFilesToListviewWithNotDialog(DropFiles,this.PdfWaterMarkFileList,new string[] { ".pdf"});
+                    break;
+                case "RemovePdfWaterMarkFileList":
+                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.RemovePdfWaterMarkFileList, new string[] { ".pdf" });
+                    break;
                 default: break;
             }
         }
 
         private void DownloadFrameWorkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("https://dotnet.microsoft.com/zh-cn/download/dotnet-framework/net472");
+            Process.Start("https://dotnet.microsoft.com/zh-cn/download/dotnet-framework/net48");
         }
 
         #region Twain设备的初始化和扫描事件订阅过程代码
@@ -1058,7 +1270,6 @@ namespace DocumentTools
 
         private void TurialRegex_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("https://deerchao.cn/tutorials/regex/regex-1.htm");
         }
 
         private void OnlineRegextTool_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -1089,7 +1300,6 @@ namespace DocumentTools
 
         private void ExcelRegexReadMe_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("https://deerchao.cn/tutorials/regex/regex-1.htm");
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -1318,6 +1528,191 @@ namespace DocumentTools
                 }
             }
         }
+
+        private void SelectWord2ExcelFiles_Click(object sender, EventArgs e)
+        {
+            UI.AddWord2ExcelFiles();
+        }
+
+        private void Word2ExcelFileList_MouseClick(object sender, MouseEventArgs e)
+        {
+            //右键项目才显示菜单
+            if (e.Button == MouseButtons.Right)
+            {
+                this.ListViewRightMenu.Show(this.Word2ExcelFileList, e.Location);
+            }
+        }
+
+        private void ConvertWord2Excel_Click(object sender, EventArgs e)
+        {
+            Task.Run(() =>
+            {
+                try
+                {
+                    UI.ConvertStart(this.Word2ExcelFileList, this.ConverWord2ExcelStatusText, ConvertFileType.Word2Excel, ".xlsx");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            });
+        }
+
+        private void SelectExcel2WordFiles_Click(object sender, EventArgs e)
+        {
+            UI.AddExcel2WordFiles();
+        }
+
+        private void Excel2WordFileList_MouseClick(object sender, MouseEventArgs e)
+        {
+            //右键项目才显示菜单
+            if (e.Button == MouseButtons.Right)
+            {
+                this.ListViewRightMenu.Show(this.Excel2WordFileList, e.Location);
+            }
+        }
+
+        private void ConvertExcel2Word_Click(object sender, EventArgs e)
+        {
+            Task.Run(() =>
+            {
+                try
+                {
+                    UI.ConvertStart(this.Excel2WordFileList, this.ConvertExcel2WordStatusText, ConvertFileType.Excel2Word, ".docx");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            });
+        }
+
+        private void SelectSplitPdf_Click(object sender, EventArgs e)
+        {
+            UI.AddSplitPdfFiles();
+        }
+
+        private void SplitPdfFileList_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                this.ListViewRightMenu.Show(this.SplitPdfFileList, e.Location);
+            }
+        }
+
+        private void StartSplitPdf_Click(object sender, EventArgs e)
+        {
+            Task.Run(() =>
+            {
+                try
+                {
+                    UI.ConvertStart(this.SplitPdfFileList, this.SplitPdfStatusText, ConvertFileType.SplitPdf,"");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            });
+        }
+
+        private void SelectWaterMarkPdfFiles_Click(object sender, EventArgs e)
+        {
+            UI.AddWaterMarkPdfFiles();
+        }
+
+        private void PdfWaterMarkFileList_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                this.ListViewRightMenu.Show(this.PdfWaterMarkFileList, e.Location);
+            }
+        }
+
+        private void PDFWaterMarkTextFontSetting_Click(object sender, EventArgs e)
+        {
+           DialogResult FontSelectDialogResult =  FontSelectDialog.ShowDialog();
+
+            if(FontSelectDialogResult == DialogResult.OK)
+            {
+                PrivateFontSetting.FontName = FontSelectDialog.Font.FontFamily.GetName(1033);
+                PrivateFontSetting.FontSize = FontSelectDialog.Font.Size;
+            }
+        }
+
+        private void PdfWaterMarkFontColorSettings_Click(object sender, EventArgs e)
+        {
+            DialogResult ColorSelectDialogResult = ColorSelectDialog.ShowDialog();
+
+            if(ColorSelectDialogResult==DialogResult.OK)
+            {
+                PrivateFontSetting.FontColor = ColorSelectDialog.Color;
+            }
+        }
+
+        private void AddWaterMark2Pdf_Click(object sender, EventArgs e)
+        {
+            Task.Run(() =>
+            {
+                try
+                {
+                    UI.ConvertStart(this.PdfWaterMarkFileList, this.AddWaterMark2PdfStatusText, ConvertFileType.AddWaterMarkPdf, ".pdf");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            });
+            
+        }
+
+        private void SelectRemovePdfWaterMarkFiles_Click(object sender, EventArgs e)
+        {
+            UI.AddRemoveWaterFiles();
+        }
+
+        private void RemovePdfWaterMarkFileList_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                this.ListViewRightMenu.Show(this.RemovePdfWaterMarkFileList, e.Location);
+            }
+        }
+
+        private void RemovePdfWaterMark_Click(object sender, EventArgs e)
+        {
+            Task.Run(() =>
+            {
+                try
+                {
+                    UI.ConvertStart(this.RemovePdfWaterMarkFileList, this.RemovePdfWaterMarkStatusText, ConvertFileType.RemovePdfWaterMark, ".pdf");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            });
+        }
+
+        private void BodyForm_Resize(object sender, EventArgs e)
+        {
+            ReWinformLayout();
+        }
+    }
+
+    internal class PrivateFontSetting
+    {
+        //public fontfam
+
+        public static string FontName { get; set; } = "SimSun";
+
+        public static float FontSize { get; set; } = 12;
+
+        public static Color FontColor { get; set; } = Color.Red;
     }
 
 }
