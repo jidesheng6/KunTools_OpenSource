@@ -330,7 +330,7 @@ namespace DocumentTools
                                 break;
                             // pdf添加水印
                             case ConvertFileType.AddWaterMarkPdf:
-                                Util.AddWaterMark2Pdf(ListViewFirstColumnText,ConvertedFileName,BodyForm.MainForm.PdfWaterMarkText.Text,float.Parse(BodyForm.MainForm.PdfWaterMarkOpcityNumber.Text.ToString()),BodyForm.MainForm.PdfWaterMarkRotateDegNumber.Text,BodyForm.MainForm.PdfWaterMarkHorSetting.SelectedIndex,BodyForm.MainForm.PDFWaterMarkVerSetting.SelectedIndex, PrivateFontSetting.FontColor, PrivateFontSetting.FontName, PrivateFontSetting.FontSize);
+                                Util.AddWaterMark2Pdf(ListViewFirstColumnText,ConvertedFileName,BodyForm.MainForm.PdfWaterMarkText.Text,float.Parse(BodyForm.MainForm.PdfWaterMarkOpcityNumber.Text.ToString()),BodyForm.MainForm.PdfWaterMarkRotateDegNumber.Text,BodyForm.MainForm.PdfWaterMarkHorSetting.SelectedIndex,BodyForm.MainForm.PDFWaterMarkVerSetting.SelectedIndex, PrivateFontSetting.FontColor, PrivateFontSetting.FontName, PrivateFontSetting.FontSize,BodyForm.MainForm.AddWaterMarkBackGroudImageFileName,BodyForm.MainForm.WaterMarkImageHeight.Text,BodyForm.MainForm.WaterMarkImageWidth.Text);
                                 break;
                             // pdf移除水印
                             case ConvertFileType.RemovePdfWaterMark:

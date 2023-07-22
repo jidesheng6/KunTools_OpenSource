@@ -13,6 +13,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Resources;
@@ -131,7 +132,7 @@ namespace DocumentTools
             //设置加载word文档的时候参数
             Aspose.Words.Loading.LoadOptions TempDocuemntLoadOption = new Aspose.Words.Loading.LoadOptions()
             {
-                ConvertMetafilesToPng = true,
+                ConvertMetafilesToPng = false,
                 MswVersion = Aspose.Words.Settings.MsWordVersion.Word2010,
             };
 
@@ -147,7 +148,9 @@ namespace DocumentTools
                 SaveFormat = Aspose.Words.SaveFormat.Pdf,
                 UseHighQualityRendering = true,
                 UseAntiAliasing = true,
-                PreblendImages = false,
+                PreblendImages = true,
+                JpegQuality = 100,
+                Compliance = Aspose.Words.Saving.PdfCompliance.Pdf20,
             };
 
             //设置PDF保存带word中的目录
@@ -683,7 +686,7 @@ namespace DocumentTools
         /// <param name="WaterMarkFontColor">字体颜色</param>
         /// <param name="WaterMarkFontName">字体名称</param>
         /// <param name="WaterMarkFontSize">字体大小</param>
-        public static void AddWaterMark2Pdf(string DocuementFileName,string SaveFileName,string WaterMarkContent,float WaterMarkOpactiyNum,string WaterMarkRotateDegNum,int WaterMarkHorAlignIndex,int WaterMarkVerAlignIndex, System.Drawing.Color WaterMarkFontColor,string WaterMarkFontName="宋体", float WaterMarkFontSize=12)
+        public static void AddWaterMark2Pdf(string DocuementFileName,string SaveFileName,string WaterMarkContent,float WaterMarkOpactiyNum,string WaterMarkRotateDegNum,int WaterMarkHorAlignIndex,int WaterMarkVerAlignIndex, System.Drawing.Color WaterMarkFontColor,string WaterMarkFontName="宋体", float WaterMarkFontSize=12,string AddImageFileName="",string AddImageHeight="100",string AddImageWidth="100")
         {
             Aspose.Hook.HookManager.StartHook();
             Aspose.Pdf.Document TempLoadDocument = new Aspose.Pdf.Document(DocuementFileName);
@@ -691,19 +694,156 @@ namespace DocumentTools
 
             foreach(Aspose.Pdf.Page TempPage in TempLoadDocument.Pages)
             {
-                WatermarkArtifact TempAddArtifact = new WatermarkArtifact();
+                if(AddImageFileName!=string.Empty && WaterMarkContent==string.Empty)
+                {
+                    ImageStamp TempAddArtifact = new ImageStamp(AddImageFileName);
 
-                TextState TempTextState = new TextState();
+                    //通过获取combox索引来设置对齐方式
+                    switch (WaterMarkHorAlignIndex)
+                    {
+                        case 0:
+                            TempAddArtifact.HorizontalAlignment = Aspose.Pdf.HorizontalAlignment.None;
+                            break;
+                        case 1:
+                            TempAddArtifact.HorizontalAlignment = Aspose.Pdf.HorizontalAlignment.Left;
+                            break;
+                        case 2:
+                            TempAddArtifact.HorizontalAlignment = Aspose.Pdf.HorizontalAlignment.Center;
+                            break;
+                        case 3:
+                            TempAddArtifact.HorizontalAlignment = Aspose.Pdf.HorizontalAlignment.Right;
+                            break;
+                        case 4:
+                            TempAddArtifact.HorizontalAlignment = Aspose.Pdf.HorizontalAlignment.Justify;
+                            break;
+                        case 5:
+                            TempAddArtifact.HorizontalAlignment = Aspose.Pdf.HorizontalAlignment.FullJustify;
+                            break;
+                        default:
+                            break;
 
-                TempTextState.Font = FontRepository.FindFont(WaterMarkFontName);
-                TempTextState.FontSize = WaterMarkFontSize;
-                TempTextState.ForegroundColor = Aspose.Pdf.Color.FromArgb(WaterMarkFontColor.R, WaterMarkFontColor.G, WaterMarkFontColor.B);
+                    }
 
-                TempAddArtifact.SetTextAndState(
-                    WaterMarkContent, TempTextState
-                    );
+                    switch (WaterMarkVerAlignIndex)
+                    {
+                        case 0:
+                            TempAddArtifact.VerticalAlignment = Aspose.Pdf.VerticalAlignment.None;
+                            break;
+                        case 1:
+                            TempAddArtifact.VerticalAlignment = Aspose.Pdf.VerticalAlignment.Top;
+                            break;
+                        case 2:
+                            TempAddArtifact.VerticalAlignment = Aspose.Pdf.VerticalAlignment.Center;
+                            break;
+                        case 3:
+                            TempAddArtifact.VerticalAlignment = Aspose.Pdf.VerticalAlignment.Bottom;
+                            break;
+                        default:
+                            break;
+                    }
+
+                    TempAddArtifact.Opacity = WaterMarkOpactiyNum;
+                    TempAddArtifact.RotateAngle = Convert.ToInt32(WaterMarkRotateDegNum);
+                    TempAddArtifact.XIndent = 100;
+                    TempAddArtifact.YIndent = 100;
+                    TempAddArtifact.Width = double.Parse(AddImageWidth);
+                    TempAddArtifact.Height = double.Parse(AddImageHeight);
+                    TempPage.AddStamp(TempAddArtifact);
+                }
+                //没有图片就用文字水印
+                else
+                {
+                    WatermarkArtifact TempAddArtifact = new WatermarkArtifact();
+
+                    TextState TempTextState = new TextState();
+
+                    TempTextState.Font = FontRepository.FindFont(WaterMarkFontName);
+                    TempTextState.FontSize = WaterMarkFontSize;
+                    TempTextState.ForegroundColor = Aspose.Pdf.Color.FromArgb(WaterMarkFontColor.R, WaterMarkFontColor.G, WaterMarkFontColor.B);
+
+                    TempAddArtifact.SetTextAndState(
+                        WaterMarkContent, TempTextState
+                        );
+                    //通过获取combox索引来设置对齐方式
+                    switch (WaterMarkHorAlignIndex)
+                    {
+                        case 0:
+                            TempAddArtifact.ArtifactHorizontalAlignment = Aspose.Pdf.HorizontalAlignment.None;
+                            break;
+                        case 1:
+                            TempAddArtifact.ArtifactHorizontalAlignment = Aspose.Pdf.HorizontalAlignment.Left;
+                            break;
+                        case 2:
+                            TempAddArtifact.ArtifactHorizontalAlignment = Aspose.Pdf.HorizontalAlignment.Center;
+                            break;
+                        case 3:
+                            TempAddArtifact.ArtifactHorizontalAlignment = Aspose.Pdf.HorizontalAlignment.Right;
+                            break;
+                        case 4:
+                            TempAddArtifact.ArtifactHorizontalAlignment = Aspose.Pdf.HorizontalAlignment.Justify;
+                            break;
+                        case 5:
+                            TempAddArtifact.ArtifactHorizontalAlignment = Aspose.Pdf.HorizontalAlignment.FullJustify;
+                            break;
+                        default:
+                            break;
+
+                    }
+
+                    switch (WaterMarkVerAlignIndex)
+                    {
+                        case 0:
+                            TempAddArtifact.ArtifactVerticalAlignment = Aspose.Pdf.VerticalAlignment.None;
+                            break;
+                        case 1:
+                            TempAddArtifact.ArtifactVerticalAlignment = Aspose.Pdf.VerticalAlignment.Top;
+                            break;
+                        case 2:
+                            TempAddArtifact.ArtifactVerticalAlignment = Aspose.Pdf.VerticalAlignment.Center;
+                            break;
+                        case 3:
+                            TempAddArtifact.ArtifactVerticalAlignment = Aspose.Pdf.VerticalAlignment.Bottom;
+                            break;
+                        default:
+                            break;
+                    }
+
+                    TempAddArtifact.Rotation = Convert.ToInt32(WaterMarkRotateDegNum);
+                    TempAddArtifact.Opacity = WaterMarkOpactiyNum;
+                    TempAddArtifact.IsBackground = false;
+                    TempPage.Artifacts.Add(TempAddArtifact);
+                }
+
+
+            }
+
+            TempLoadDocument.Save(SaveFileName,Aspose.Pdf.SaveFormat.Pdf);
+
+
+
+        }
+
+        /// <summary>
+        /// 为pdf添加水印
+        /// </summary>
+        /// <param name="DocuementFileName">文档名称</param>
+        /// <param name="SaveFileName">保存后的名称</param>
+        /// <param name="WaterMarkOpactiyNum">不透明度</param>
+        /// <param name="WaterMarkRotateDegNum">旋转角度</param>
+        public static void AddWaterMark2Pdf(string DocuementFileName, string SaveFileName, float WaterMarkOpactiyNum, string WaterMarkRotateDegNum, int WaterMarkHorAlignIndex, int WaterMarkVerAlignIndex,string AddBackGroundImageFileName)
+        {
+            Aspose.Hook.HookManager.StartHook();
+            Aspose.Pdf.Document TempLoadDocument = new Aspose.Pdf.Document(DocuementFileName);
+
+
+            foreach (Aspose.Pdf.Page TempPage in TempLoadDocument.Pages)
+            {
+                BackgroundArtifact TempAddArtifact = new BackgroundArtifact();
+
+                TempAddArtifact.BackgroundImage = File.OpenRead(AddBackGroundImageFileName);
+
                 //通过获取combox索引来设置对齐方式
-                switch(WaterMarkHorAlignIndex)
+                switch (WaterMarkHorAlignIndex)
                 {
                     case 0:
                         TempAddArtifact.ArtifactHorizontalAlignment = Aspose.Pdf.HorizontalAlignment.None;
@@ -728,7 +868,7 @@ namespace DocumentTools
 
                 }
 
-                switch(WaterMarkVerAlignIndex)
+                switch (WaterMarkVerAlignIndex)
                 {
                     case 0:
                         TempAddArtifact.ArtifactVerticalAlignment = Aspose.Pdf.VerticalAlignment.None;
@@ -748,17 +888,16 @@ namespace DocumentTools
 
                 TempAddArtifact.Rotation = Convert.ToInt32(WaterMarkRotateDegNum);
                 TempAddArtifact.Opacity = WaterMarkOpactiyNum;
-                TempAddArtifact.IsBackground = true;
                 TempPage.Artifacts.Add(TempAddArtifact);
+
+                TempAddArtifact.Dispose();
             }
 
-            TempLoadDocument.Save(SaveFileName,Aspose.Pdf.SaveFormat.Pdf);
-
-
+            TempLoadDocument.Save(SaveFileName, Aspose.Pdf.SaveFormat.Pdf);
 
         }
-        
-        
+
+
         /// <summary>
         /// 移除pdf水印
         /// </summary>
@@ -770,21 +909,14 @@ namespace DocumentTools
 
             Aspose.Pdf.Document TempLoadDocument = new Aspose.Pdf.Document(DocumentFileName);
 
-            List<Artifact> WaterMarks = new List<Artifact>();
-
             foreach(Aspose.Pdf.Page TempPage in TempLoadDocument.Pages)
             {
                 foreach(Aspose.Pdf.Artifact TempWaterMark in TempPage.Artifacts)
                 {
-                    if(TempWaterMark.Subtype == Artifact.ArtifactSubtype.Watermark)
+                    if(TempWaterMark.Subtype == Artifact.ArtifactSubtype.Watermark || TempWaterMark.Subtype == Artifact.ArtifactSubtype.Background)
                     {
-                        WaterMarks.Add(TempWaterMark);
+                        TempPage.Artifacts.Delete(TempWaterMark);
                     }
-                }
-
-                foreach(Aspose.Pdf.Artifact Remove_WaterMark in WaterMarks)
-                {
-                    TempPage.Artifacts.Delete(Remove_WaterMark);
                 }
             }
             TempLoadDocument.Save(SavedFileName);

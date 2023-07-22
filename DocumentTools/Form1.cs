@@ -11,6 +11,9 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Configuration;
+using System.ComponentModel;
+using System.Text.RegularExpressions;
+using System.Windows.Forms.VisualStyles;
 
 namespace DocumentTools
 {
@@ -26,8 +29,9 @@ namespace DocumentTools
         private int TotalTempImageCount = 0;
         private double ScanSeconds = 0;
         private Bitmap PictureBoxPreviewImage;
-        List<Bitmap> TempScannedImageBmpList = new List<Bitmap>();
+        private List<Bitmap> TempScannedImageBmpList = new List<Bitmap>();
 
+        public string AddWaterMarkBackGroudImageFileName = string.Empty;
 
         #region 控件大小随窗体大小等比例缩放
 
@@ -87,10 +91,11 @@ namespace DocumentTools
             x = Width;
             y = Height;
             setTag(this);
+
         }
         private void BodyForm_Load(object sender, EventArgs e)
         {
-            this.Text = $"坤_Tools【软件完全离线|更新请看关于软件|编译日期：{DateTime.Now.ToString("yy.M.d")}】";
+            this.Text = $"坤_Tools【软件完全离线|更新请看关于软件|编译日期：{DateTime.Now:yy.M.d}】";
             InitListView();
             InitComboxValue();
             this.AllowDrop = true;
@@ -114,10 +119,16 @@ namespace DocumentTools
             {
                 //设置起始页面
                 MainTabPage.SelectedIndex = int.Parse(ConfigurationManager.AppSettings["StartPageIndex"]);
+
+                string OpenTabPageHeight = ConfigurationManager.AppSettings["TabPageHeight"];
+                this.MainTabPage.DrawMode = OpenTabPageHeight=="on"? TabDrawMode.OwnerDrawFixed: TabDrawMode.Normal;
+
             }
             else
             {
                 MainTabPage.SelectedIndex = 0;
+
+                this.MainTabPage.DrawMode = TabDrawMode.Normal;
             }
 
             //Util.PlayMp3WithStream();
@@ -130,6 +141,23 @@ namespace DocumentTools
             {
                 MessageBox.Show("没有在系统中找到TwainDsm数据源管理器，请自行下载TwainDsm.dll文件放在程序目录下调用，否则无法使用twain调试功能", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+
+            this.WaterMarkImageHeight.Validating += ValidTextBoxContent;
+            this.WaterMarkImageHeight.Validated += ValidedTextBoxContent;
+
+            this.WaterMarkImageWidth.Validating += ValidTextBoxContent;
+            this.WaterMarkImageWidth.Validated += ValidedTextBoxContent;
+
+            this.PdfWaterMarkRotateDegNumber.Validating += ValidTextBoxContent;
+            this.PdfWaterMarkRotateDegNumber.Validated += ValidedTextBoxContent;
+
+
+           
+
+
+
+
 
 
         }
@@ -1702,7 +1730,92 @@ namespace DocumentTools
         {
             ReWinformLayout();
         }
+
+        private void AddBackGroudImage_Click(object sender, EventArgs e)
+        {
+          IEnumerable<string> BackGroundImageFileNames =  Util.ShwoSelectDialog(false, false, "图片文件", "*.jpg;*png;*.jpeg;*.bmp");
+
+            if(BackGroundImageFileNames.FirstOrDefault()!=default)
+            {
+                AddWaterMarkBackGroudImageFileName = BackGroundImageFileNames.FirstOrDefault();
+
+                Image TempLoadImage = Image.FromFile(AddWaterMarkBackGroudImageFileName);
+
+                WaterMarkImage.Image = TempLoadImage;
+
+                this.WaterMarkImageHeight.Text = TempLoadImage.Height.ToString();
+
+                this.WaterMarkImageWidth.Text = TempLoadImage.Width.ToString();
+            }
+        }
+
+        private void ValidTextBoxContent(object sender,CancelEventArgs e)
+        {
+            TextBox TempTextBox = (TextBox)sender;
+
+            string TempText = TempTextBox.Text;
+
+            if(!IsNumber(TempText))
+            {
+                e.Cancel = true;
+                MainFormError.SetError(TempTextBox,"请输入正确的数字");
+            }
+            
+        }
+
+        private void ValidedTextBoxContent(object sender, EventArgs e)
+        {
+            MainFormError.Clear();
+        }
+
+        private bool IsNumber(string InputString)
+        {
+
+            Regex TempRegex = new Regex("^[0-9]*$");
+
+            bool NumberStatus =  TempRegex.IsMatch(InputString) == true ? true : false;
+
+            return NumberStatus;
+
+        }
+
+
+        #region 重绘tabpage的标签颜色
+        private void MainTabPage_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            Font PageFont;
+            Brush BackBrush, ForeBrush;
+
+            Rectangle TabRec = e.Bounds;
+
+            TabRec = new Rectangle(TabRec.X, TabRec.Y + 4, TabRec.Width, TabRec.Height - 4);
+
+
+            if (e.Index == this.MainTabPage.SelectedIndex)
+            {
+
+                PageFont = new Font(e.Font,FontStyle.Regular);
+                BackBrush = new System.Drawing.Drawing2D.LinearGradientBrush(e.Bounds, SystemColors.Control, SystemColors.Control, System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal);
+
+                ForeBrush = Brushes.Red;
+            }
+            else
+            {
+                PageFont = e.Font;
+                BackBrush = new SolidBrush(SystemColors.Control);
+                ForeBrush = new SolidBrush(Color.Black);
+            }
+
+            string TabName = this.MainTabPage.TabPages[e.Index].Text;
+
+            StringFormat FormatTab = new StringFormat();
+
+            e.Graphics.FillRectangle(BackBrush, e.Bounds);
+
+            e.Graphics.DrawString(TabName,PageFont,ForeBrush,TabRec,FormatTab);
+        }
     }
+    #endregion
 
     internal class PrivateFontSetting
     {

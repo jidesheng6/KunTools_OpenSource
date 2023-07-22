@@ -105,20 +105,20 @@
     <Reference Include="Aspose.BarCode, Version=23.6.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
       <HintPath>..\packages\Aspose.BarCode.23.6.0\lib\net48\Aspose.BarCode.dll</HintPath>
     </Reference>
-    <Reference Include="Aspose.Cells, Version=23.6.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
-      <HintPath>..\packages\Aspose.Cells.23.6.0\lib\net40\Aspose.Cells.dll</HintPath>
+    <Reference Include="Aspose.Cells, Version=23.7.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
+      <HintPath>..\packages\Aspose.Cells.23.7.0\lib\net40\Aspose.Cells.dll</HintPath>
     </Reference>
     <Reference Include="Aspose.Hook">
-      <HintPath>D:\.net_out_dll\aspose\2023.5.31\Aspose.Hook.dll</HintPath>
+      <HintPath>..\..\..\..\..\.net_out_dll\aspose\2023.7.17\Aspose.Hook.dll</HintPath>
     </Reference>
-    <Reference Include="Aspose.PDF, Version=23.6.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
-      <HintPath>..\packages\Aspose.PDF.23.6.0\lib\net4.0\Aspose.PDF.dll</HintPath>
+    <Reference Include="Aspose.PDF, Version=23.7.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
+      <HintPath>..\packages\Aspose.PDF.23.7.0\lib\net4.0\Aspose.PDF.dll</HintPath>
     </Reference>
-    <Reference Include="Aspose.Words, Version=23.6.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
-      <HintPath>..\packages\Aspose.Words.23.6.0\lib\net461\Aspose.Words.dll</HintPath>
+    <Reference Include="Aspose.Words, Version=23.7.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
+      <HintPath>..\packages\Aspose.Words.23.7.0\lib\net461\Aspose.Words.dll</HintPath>
     </Reference>
-    <Reference Include="Aspose.Words.Pdf2Word, Version=23.6.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
-      <HintPath>..\packages\Aspose.Words.23.6.0\lib\net461\Aspose.Words.Pdf2Word.dll</HintPath>
+    <Reference Include="Aspose.Words.Pdf2Word, Version=23.7.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
+      <HintPath>..\packages\Aspose.Words.23.7.0\lib\net461\Aspose.Words.Pdf2Word.dll</HintPath>
     </Reference>
     <Reference Include="Costura, Version=5.7.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Costura.Fody.5.7.0\lib\netstandard1.0\Costura.dll</HintPath>

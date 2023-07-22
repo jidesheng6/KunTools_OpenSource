@@ -79,11 +79,17 @@
             this.SelectSplitPdf = new System.Windows.Forms.Button();
             this.SplitPdfFileList = new System.Windows.Forms.ListView();
             this.TabPage_18 = new System.Windows.Forms.TabPage();
+            this.label31 = new System.Windows.Forms.Label();
             this.AddWaterMark2PdfStatusText = new System.Windows.Forms.Label();
             this.AddWaterMark2Pdf = new System.Windows.Forms.Button();
             this.SelectWaterMarkPdfFiles = new System.Windows.Forms.Button();
             this.groupBox18 = new System.Windows.Forms.GroupBox();
-            this.label31 = new System.Windows.Forms.Label();
+            this.label33 = new System.Windows.Forms.Label();
+            this.label32 = new System.Windows.Forms.Label();
+            this.WaterMarkImageWidth = new System.Windows.Forms.TextBox();
+            this.AddBackGroudImage = new System.Windows.Forms.Button();
+            this.WaterMarkImageHeight = new System.Windows.Forms.TextBox();
+            this.WaterMarkImage = new System.Windows.Forms.PictureBox();
             this.PdfWaterMarkOpcityNumber = new System.Windows.Forms.ComboBox();
             this.label30 = new System.Windows.Forms.Label();
             this.PdfWaterMarkRotateDegNumber = new System.Windows.Forms.TextBox();
@@ -252,6 +258,7 @@
             this.打开文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ColorSelectDialog = new System.Windows.Forms.ColorDialog();
             this.FontSelectDialog = new System.Windows.Forms.FontDialog();
+            this.MainFormError = new System.Windows.Forms.ErrorProvider(this.components);
             this.MainTabPage.SuspendLayout();
             this.TabPage_01.SuspendLayout();
             this.TabPage_02.SuspendLayout();
@@ -262,6 +269,7 @@
             this.TabPage_17.SuspendLayout();
             this.TabPage_18.SuspendLayout();
             this.groupBox18.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.WaterMarkImage)).BeginInit();
             this.TabPage_19.SuspendLayout();
             this.TabPage_15.SuspendLayout();
             this.TabPage_16.SuspendLayout();
@@ -294,6 +302,7 @@
             this.groupBox3.SuspendLayout();
             this.ListViewRightMenu.SuspendLayout();
             this.TreeViewContentMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.MainFormError)).BeginInit();
             this.SuspendLayout();
             // 
             // MainTabPage
@@ -325,6 +334,7 @@
             this.MainTabPage.Size = new System.Drawing.Size(983, 564);
             this.MainTabPage.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.MainTabPage.TabIndex = 0;
+            this.MainTabPage.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.MainTabPage_DrawItem);
             this.MainTabPage.DoubleClick += new System.EventHandler(this.MainTabPage_DoubleClick);
             // 
             // TabPage_01
@@ -424,10 +434,10 @@
             this.TabPage_02.Controls.Add(this.Convert2DocButton);
             this.TabPage_02.Controls.Add(this.SelectPdfButton);
             this.TabPage_02.Controls.Add(this.PdfFileListView);
-            this.TabPage_02.Location = new System.Drawing.Point(4, 76);
+            this.TabPage_02.Location = new System.Drawing.Point(4, 28);
             this.TabPage_02.Name = "TabPage_02";
             this.TabPage_02.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage_02.Size = new System.Drawing.Size(975, 484);
+            this.TabPage_02.Size = new System.Drawing.Size(975, 532);
             this.TabPage_02.TabIndex = 1;
             this.TabPage_02.Text = "PDF转WORD";
             this.TabPage_02.UseVisualStyleBackColor = true;
@@ -499,9 +509,9 @@
             this.TabPage_03.Controls.Add(this.ConvertExcel2PdfButton);
             this.TabPage_03.Controls.Add(this.SelectExcelFileButton);
             this.TabPage_03.Controls.Add(this.ExcelFileListView);
-            this.TabPage_03.Location = new System.Drawing.Point(4, 76);
+            this.TabPage_03.Location = new System.Drawing.Point(4, 28);
             this.TabPage_03.Name = "TabPage_03";
-            this.TabPage_03.Size = new System.Drawing.Size(975, 484);
+            this.TabPage_03.Size = new System.Drawing.Size(975, 532);
             this.TabPage_03.TabIndex = 2;
             this.TabPage_03.Text = "EXCEL转PDF";
             this.TabPage_03.UseVisualStyleBackColor = true;
@@ -563,9 +573,9 @@
             this.TabPage_07.Controls.Add(this.ConvertPDF2Excel);
             this.TabPage_07.Controls.Add(this.SelectPDF2ExcelButton);
             this.TabPage_07.Controls.Add(this.PDF2ExcelFileView);
-            this.TabPage_07.Location = new System.Drawing.Point(4, 76);
+            this.TabPage_07.Location = new System.Drawing.Point(4, 28);
             this.TabPage_07.Name = "TabPage_07";
-            this.TabPage_07.Size = new System.Drawing.Size(975, 484);
+            this.TabPage_07.Size = new System.Drawing.Size(975, 532);
             this.TabPage_07.TabIndex = 6;
             this.TabPage_07.Text = "PDF转EXCEL";
             this.TabPage_07.UseVisualStyleBackColor = true;
@@ -627,10 +637,10 @@
             this.TabPage_14.Controls.Add(this.MergeWordFile);
             this.TabPage_14.Controls.Add(this.SelectMergeWordFiles);
             this.TabPage_14.Controls.Add(this.MergeWordFileList);
-            this.TabPage_14.Location = new System.Drawing.Point(4, 76);
+            this.TabPage_14.Location = new System.Drawing.Point(4, 28);
             this.TabPage_14.Name = "TabPage_14";
             this.TabPage_14.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage_14.Size = new System.Drawing.Size(975, 484);
+            this.TabPage_14.Size = new System.Drawing.Size(975, 532);
             this.TabPage_14.TabIndex = 13;
             this.TabPage_14.Text = "合并WORD";
             this.TabPage_14.UseVisualStyleBackColor = true;
@@ -695,9 +705,9 @@
             this.TabPage_06.Controls.Add(this.MeregePdfFileButtonConvert);
             this.TabPage_06.Controls.Add(this.MergePdfFileSelectButton);
             this.TabPage_06.Controls.Add(this.MergePdfFileView);
-            this.TabPage_06.Location = new System.Drawing.Point(4, 76);
+            this.TabPage_06.Location = new System.Drawing.Point(4, 28);
             this.TabPage_06.Name = "TabPage_06";
-            this.TabPage_06.Size = new System.Drawing.Size(975, 484);
+            this.TabPage_06.Size = new System.Drawing.Size(975, 532);
             this.TabPage_06.TabIndex = 5;
             this.TabPage_06.Text = "合并PDF";
             this.TabPage_06.UseVisualStyleBackColor = true;
@@ -785,10 +795,10 @@
             this.TabPage_17.Controls.Add(this.StartSplitPdf);
             this.TabPage_17.Controls.Add(this.SelectSplitPdf);
             this.TabPage_17.Controls.Add(this.SplitPdfFileList);
-            this.TabPage_17.Location = new System.Drawing.Point(4, 76);
+            this.TabPage_17.Location = new System.Drawing.Point(4, 28);
             this.TabPage_17.Name = "TabPage_17";
             this.TabPage_17.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage_17.Size = new System.Drawing.Size(975, 484);
+            this.TabPage_17.Size = new System.Drawing.Size(975, 532);
             this.TabPage_17.TabIndex = 16;
             this.TabPage_17.Text = "拆分PDF";
             this.TabPage_17.UseVisualStyleBackColor = true;
@@ -835,17 +845,28 @@
             // 
             // TabPage_18
             // 
+            this.TabPage_18.Controls.Add(this.label31);
             this.TabPage_18.Controls.Add(this.AddWaterMark2PdfStatusText);
             this.TabPage_18.Controls.Add(this.AddWaterMark2Pdf);
             this.TabPage_18.Controls.Add(this.SelectWaterMarkPdfFiles);
             this.TabPage_18.Controls.Add(this.groupBox18);
             this.TabPage_18.Controls.Add(this.PdfWaterMarkFileList);
-            this.TabPage_18.Location = new System.Drawing.Point(4, 76);
+            this.TabPage_18.Location = new System.Drawing.Point(4, 28);
             this.TabPage_18.Name = "TabPage_18";
-            this.TabPage_18.Size = new System.Drawing.Size(975, 484);
+            this.TabPage_18.Size = new System.Drawing.Size(975, 532);
             this.TabPage_18.TabIndex = 17;
             this.TabPage_18.Text = "添加PDF水印";
             this.TabPage_18.UseVisualStyleBackColor = true;
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.ForeColor = System.Drawing.Color.Tomato;
+            this.label31.Location = new System.Drawing.Point(443, 406);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(242, 54);
+            this.label31.TabIndex = 15;
+            this.label31.Text = "提示：如果不设置字体和颜色\r\n\r\n默认为宋体、12号、红色";
             // 
             // AddWaterMark2PdfStatusText
             // 
@@ -879,7 +900,12 @@
             // 
             // groupBox18
             // 
-            this.groupBox18.Controls.Add(this.label31);
+            this.groupBox18.Controls.Add(this.label33);
+            this.groupBox18.Controls.Add(this.label32);
+            this.groupBox18.Controls.Add(this.WaterMarkImageWidth);
+            this.groupBox18.Controls.Add(this.AddBackGroudImage);
+            this.groupBox18.Controls.Add(this.WaterMarkImageHeight);
+            this.groupBox18.Controls.Add(this.WaterMarkImage);
             this.groupBox18.Controls.Add(this.PdfWaterMarkOpcityNumber);
             this.groupBox18.Controls.Add(this.label30);
             this.groupBox18.Controls.Add(this.PdfWaterMarkRotateDegNumber);
@@ -901,20 +927,62 @@
             this.groupBox18.TabStop = false;
             this.groupBox18.Text = "水印设置";
             // 
-            // label31
+            // label33
             // 
-            this.label31.AutoSize = true;
-            this.label31.ForeColor = System.Drawing.Color.Tomato;
-            this.label31.Location = new System.Drawing.Point(697, 77);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(242, 54);
-            this.label31.TabIndex = 15;
-            this.label31.Text = "提示：如果不设置字体和颜色\r\n\r\n默认为宋体、12号、红色";
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(531, 127);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(80, 18);
+            this.label33.TabIndex = 20;
+            this.label33.Text = "图片宽度";
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(531, 84);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(80, 18);
+            this.label32.TabIndex = 19;
+            this.label32.Text = "图片高度";
+            // 
+            // WaterMarkImageWidth
+            // 
+            this.WaterMarkImageWidth.Location = new System.Drawing.Point(617, 121);
+            this.WaterMarkImageWidth.Name = "WaterMarkImageWidth";
+            this.WaterMarkImageWidth.Size = new System.Drawing.Size(121, 28);
+            this.WaterMarkImageWidth.TabIndex = 18;
+            // 
+            // AddBackGroudImage
+            // 
+            this.AddBackGroudImage.Location = new System.Drawing.Point(753, 118);
+            this.AddBackGroudImage.Name = "AddBackGroudImage";
+            this.AddBackGroudImage.Size = new System.Drawing.Size(204, 33);
+            this.AddBackGroudImage.TabIndex = 15;
+            this.AddBackGroudImage.Text = "选择图片水印...";
+            this.AddBackGroudImage.UseVisualStyleBackColor = true;
+            this.AddBackGroudImage.Click += new System.EventHandler(this.AddBackGroudImage_Click);
+            // 
+            // WaterMarkImageHeight
+            // 
+            this.WaterMarkImageHeight.Location = new System.Drawing.Point(617, 78);
+            this.WaterMarkImageHeight.Name = "WaterMarkImageHeight";
+            this.WaterMarkImageHeight.Size = new System.Drawing.Size(121, 28);
+            this.WaterMarkImageHeight.TabIndex = 17;
+            // 
+            // WaterMarkImage
+            // 
+            this.WaterMarkImage.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.WaterMarkImage.Location = new System.Drawing.Point(755, 31);
+            this.WaterMarkImage.Name = "WaterMarkImage";
+            this.WaterMarkImage.Size = new System.Drawing.Size(202, 84);
+            this.WaterMarkImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.WaterMarkImage.TabIndex = 16;
+            this.WaterMarkImage.TabStop = false;
             // 
             // PdfWaterMarkOpcityNumber
             // 
             this.PdfWaterMarkOpcityNumber.FormattingEnabled = true;
-            this.PdfWaterMarkOpcityNumber.Location = new System.Drawing.Point(783, 34);
+            this.PdfWaterMarkOpcityNumber.Location = new System.Drawing.Point(617, 31);
             this.PdfWaterMarkOpcityNumber.Name = "PdfWaterMarkOpcityNumber";
             this.PdfWaterMarkOpcityNumber.Size = new System.Drawing.Size(121, 26);
             this.PdfWaterMarkOpcityNumber.TabIndex = 14;
@@ -922,7 +990,7 @@
             // label30
             // 
             this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(697, 40);
+            this.label30.Location = new System.Drawing.Point(531, 37);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(80, 18);
             this.label30.TabIndex = 13;
@@ -930,7 +998,7 @@
             // 
             // PdfWaterMarkRotateDegNumber
             // 
-            this.PdfWaterMarkRotateDegNumber.Location = new System.Drawing.Point(466, 107);
+            this.PdfWaterMarkRotateDegNumber.Location = new System.Drawing.Point(403, 119);
             this.PdfWaterMarkRotateDegNumber.Name = "PdfWaterMarkRotateDegNumber";
             this.PdfWaterMarkRotateDegNumber.Size = new System.Drawing.Size(121, 28);
             this.PdfWaterMarkRotateDegNumber.TabIndex = 12;
@@ -939,7 +1007,7 @@
             // label29
             // 
             this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(345, 115);
+            this.label29.Location = new System.Drawing.Point(282, 127);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(116, 18);
             this.label29.TabIndex = 11;
@@ -948,7 +1016,7 @@
             // PDFWaterMarkVerSetting
             // 
             this.PDFWaterMarkVerSetting.FormattingEnabled = true;
-            this.PDFWaterMarkVerSetting.Location = new System.Drawing.Point(466, 73);
+            this.PDFWaterMarkVerSetting.Location = new System.Drawing.Point(403, 81);
             this.PDFWaterMarkVerSetting.Name = "PDFWaterMarkVerSetting";
             this.PDFWaterMarkVerSetting.Size = new System.Drawing.Size(121, 26);
             this.PDFWaterMarkVerSetting.TabIndex = 10;
@@ -956,7 +1024,7 @@
             // PdfWaterMarkHorSetting
             // 
             this.PdfWaterMarkHorSetting.FormattingEnabled = true;
-            this.PdfWaterMarkHorSetting.Location = new System.Drawing.Point(466, 36);
+            this.PdfWaterMarkHorSetting.Location = new System.Drawing.Point(404, 40);
             this.PdfWaterMarkHorSetting.Name = "PdfWaterMarkHorSetting";
             this.PdfWaterMarkHorSetting.Size = new System.Drawing.Size(121, 26);
             this.PdfWaterMarkHorSetting.TabIndex = 9;
@@ -964,7 +1032,7 @@
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(344, 77);
+            this.label28.Location = new System.Drawing.Point(281, 85);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(116, 18);
             this.label28.TabIndex = 8;
@@ -973,7 +1041,7 @@
             // shui
             // 
             this.shui.AutoSize = true;
-            this.shui.Location = new System.Drawing.Point(344, 39);
+            this.shui.Location = new System.Drawing.Point(282, 43);
             this.shui.Name = "shui";
             this.shui.Size = new System.Drawing.Size(116, 18);
             this.shui.TabIndex = 7;
@@ -1049,9 +1117,9 @@
             this.TabPage_19.Controls.Add(this.RemovePdfWaterMark);
             this.TabPage_19.Controls.Add(this.SelectRemovePdfWaterMarkFiles);
             this.TabPage_19.Controls.Add(this.RemovePdfWaterMarkFileList);
-            this.TabPage_19.Location = new System.Drawing.Point(4, 76);
+            this.TabPage_19.Location = new System.Drawing.Point(4, 28);
             this.TabPage_19.Name = "TabPage_19";
-            this.TabPage_19.Size = new System.Drawing.Size(975, 484);
+            this.TabPage_19.Size = new System.Drawing.Size(975, 532);
             this.TabPage_19.TabIndex = 18;
             this.TabPage_19.Text = "移除PDF水印";
             this.TabPage_19.UseVisualStyleBackColor = true;
@@ -1102,9 +1170,9 @@
             this.TabPage_15.Controls.Add(this.ConvertWord2Excel);
             this.TabPage_15.Controls.Add(this.SelectWord2ExcelFiles);
             this.TabPage_15.Controls.Add(this.Word2ExcelFileList);
-            this.TabPage_15.Location = new System.Drawing.Point(4, 76);
+            this.TabPage_15.Location = new System.Drawing.Point(4, 28);
             this.TabPage_15.Name = "TabPage_15";
-            this.TabPage_15.Size = new System.Drawing.Size(975, 484);
+            this.TabPage_15.Size = new System.Drawing.Size(975, 532);
             this.TabPage_15.TabIndex = 14;
             this.TabPage_15.Text = "WORD转EXCEL";
             this.TabPage_15.UseVisualStyleBackColor = true;
@@ -1156,9 +1224,9 @@
             this.TabPage_16.Controls.Add(this.ConvertExcel2Word);
             this.TabPage_16.Controls.Add(this.SelectExcel2WordFiles);
             this.TabPage_16.Controls.Add(this.Excel2WordFileList);
-            this.TabPage_16.Location = new System.Drawing.Point(4, 76);
+            this.TabPage_16.Location = new System.Drawing.Point(4, 52);
             this.TabPage_16.Name = "TabPage_16";
-            this.TabPage_16.Size = new System.Drawing.Size(975, 484);
+            this.TabPage_16.Size = new System.Drawing.Size(975, 508);
             this.TabPage_16.TabIndex = 15;
             this.TabPage_16.Text = "EXCEL转WORD";
             this.TabPage_16.UseVisualStyleBackColor = true;
@@ -1226,9 +1294,9 @@
             this.TabPage_04.Controls.Add(this.ConvertWord2ImageButton);
             this.TabPage_04.Controls.Add(this.ConvertImageList);
             this.TabPage_04.Controls.Add(this.DocumentsListView);
-            this.TabPage_04.Location = new System.Drawing.Point(4, 76);
+            this.TabPage_04.Location = new System.Drawing.Point(4, 52);
             this.TabPage_04.Name = "TabPage_04";
-            this.TabPage_04.Size = new System.Drawing.Size(975, 484);
+            this.TabPage_04.Size = new System.Drawing.Size(975, 508);
             this.TabPage_04.TabIndex = 3;
             this.TabPage_04.Text = "WORD/PDF/EXCEL转图片";
             this.TabPage_04.UseVisualStyleBackColor = true;
@@ -1351,9 +1419,9 @@
             this.TabPage_10.Controls.Add(this.ReplaceWordContentButton);
             this.TabPage_10.Controls.Add(this.SelectReplaceWordFilesButton);
             this.TabPage_10.Controls.Add(this.ReplaceWordFileList);
-            this.TabPage_10.Location = new System.Drawing.Point(4, 76);
+            this.TabPage_10.Location = new System.Drawing.Point(4, 52);
             this.TabPage_10.Name = "TabPage_10";
-            this.TabPage_10.Size = new System.Drawing.Size(975, 484);
+            this.TabPage_10.Size = new System.Drawing.Size(975, 508);
             this.TabPage_10.TabIndex = 9;
             this.TabPage_10.Text = "WORD内容批量替换";
             this.TabPage_10.UseVisualStyleBackColor = true;
@@ -1488,9 +1556,9 @@
             this.TabPage_11.Controls.Add(this.ReplaceExcelContentButton);
             this.TabPage_11.Controls.Add(this.SelectRelaceExcelButton);
             this.TabPage_11.Controls.Add(this.ReplaceExcelFileView);
-            this.TabPage_11.Location = new System.Drawing.Point(4, 76);
+            this.TabPage_11.Location = new System.Drawing.Point(4, 52);
             this.TabPage_11.Name = "TabPage_11";
-            this.TabPage_11.Size = new System.Drawing.Size(975, 484);
+            this.TabPage_11.Size = new System.Drawing.Size(975, 508);
             this.TabPage_11.TabIndex = 10;
             this.TabPage_11.Text = "EXCEL内容批量替换";
             this.TabPage_11.UseVisualStyleBackColor = true;
@@ -1676,9 +1744,9 @@
             this.TabPage_12.Controls.Add(this.SelectDataMatrixWord);
             this.TabPage_12.Controls.Add(this.groupBox14);
             this.TabPage_12.Controls.Add(this.DecodeMatrixWordListView);
-            this.TabPage_12.Location = new System.Drawing.Point(4, 76);
+            this.TabPage_12.Location = new System.Drawing.Point(4, 52);
             this.TabPage_12.Name = "TabPage_12";
-            this.TabPage_12.Size = new System.Drawing.Size(975, 484);
+            this.TabPage_12.Size = new System.Drawing.Size(975, 508);
             this.TabPage_12.TabIndex = 11;
             this.TabPage_12.Text = "特殊二维码校验";
             this.TabPage_12.UseVisualStyleBackColor = true;
@@ -1753,9 +1821,9 @@
             this.TabPage_05.Controls.Add(this.ConvertTextButton);
             this.TabPage_05.Controls.Add(this.groupBox2);
             this.TabPage_05.Controls.Add(this.groupBox1);
-            this.TabPage_05.Location = new System.Drawing.Point(4, 76);
+            this.TabPage_05.Location = new System.Drawing.Point(4, 52);
             this.TabPage_05.Name = "TabPage_05";
-            this.TabPage_05.Size = new System.Drawing.Size(975, 484);
+            this.TabPage_05.Size = new System.Drawing.Size(975, 508);
             this.TabPage_05.TabIndex = 4;
             this.TabPage_05.Text = "姓名横转竖列";
             this.TabPage_05.UseVisualStyleBackColor = true;
@@ -2575,6 +2643,10 @@
             this.打开文件ToolStripMenuItem.Text = "打开文件";
             this.打开文件ToolStripMenuItem.Click += new System.EventHandler(this.打开文件ToolStripMenuItem_Click);
             // 
+            // MainFormError
+            // 
+            this.MainFormError.ContainerControl = this;
+            // 
             // BodyForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
@@ -2611,6 +2683,7 @@
             this.TabPage_18.PerformLayout();
             this.groupBox18.ResumeLayout(false);
             this.groupBox18.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.WaterMarkImage)).EndInit();
             this.TabPage_19.ResumeLayout(false);
             this.TabPage_19.PerformLayout();
             this.TabPage_15.ResumeLayout(false);
@@ -2668,6 +2741,7 @@
             this.groupBox3.PerformLayout();
             this.ListViewRightMenu.ResumeLayout(false);
             this.TreeViewContentMenu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.MainFormError)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2896,6 +2970,13 @@
         private System.Windows.Forms.Button SelectRemovePdfWaterMarkFiles;
         private System.Windows.Forms.Button RemovePdfWaterMark;
         private System.Windows.Forms.Label RemovePdfWaterMarkStatusText;
+        private System.Windows.Forms.Button AddBackGroudImage;
+        private System.Windows.Forms.PictureBox WaterMarkImage;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.ErrorProvider MainFormError;
+        internal System.Windows.Forms.TextBox WaterMarkImageWidth;
+        internal System.Windows.Forms.TextBox WaterMarkImageHeight;
     }
 }
 
