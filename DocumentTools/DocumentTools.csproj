@@ -114,6 +114,9 @@
     <Reference Include="Aspose.PDF, Version=23.7.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
       <HintPath>..\packages\Aspose.PDF.23.7.0\lib\net4.0\Aspose.PDF.dll</HintPath>
     </Reference>
+    <Reference Include="Aspose.Slides, Version=23.7.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
+      <HintPath>..\packages\Aspose.Slides.NET.23.7.0\lib\net4.0-client\Aspose.Slides.dll</HintPath>
+    </Reference>
     <Reference Include="Aspose.Words, Version=23.7.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
       <HintPath>..\packages\Aspose.Words.23.7.0\lib\net461\Aspose.Words.dll</HintPath>
     </Reference>
@@ -423,7 +426,10 @@
   <PropertyGroup>
     <PostBuildEvent>if $(PlatformName) == x86 copy /y "$(TargetPath)" "$(TargetDir)\DocumentTools_x86$(TargetExt)"
 if $(PlatformName) == x64 copy /y "$(TargetPath)" "$(TargetDir)\DocumentTools_x64$(TargetExt)"
-</PostBuildEvent>
+
+
+if $(PlatformName) == x86 copy /y "$(TargetDir)\$(TargetFileName).config" "$(TargetDir)\DocumentTools_x86$(TargetExt).config"
+if $(PlatformName) == x64 copy /y "$(TargetDir)\$(TargetFileName).config" "$(TargetDir)\DocumentTools_x64$(TargetExt).config"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>

@@ -14,6 +14,9 @@ using System.Configuration;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
 using System.Windows.Forms.VisualStyles;
+using System.Net;
+using System.Net.Http;
+using System.Net.Sockets;
 
 namespace DocumentTools
 {
@@ -32,6 +35,8 @@ namespace DocumentTools
         private List<Bitmap> TempScannedImageBmpList = new List<Bitmap>();
 
         public string AddWaterMarkBackGroudImageFileName = string.Empty;
+
+        string NowVersion = "23.7.26";
 
         #region 控件大小随窗体大小等比例缩放
 
@@ -82,6 +87,14 @@ namespace DocumentTools
         #endregion
 
 
+        private void OutPutListViewIndex()
+        {
+            foreach(TabPage TempPage in this.MainTabPage.TabPages)
+            {
+                Debug.WriteLine(TempPage.Text+"："+MainTabPage.TabPages.IndexOf(TempPage));
+            }
+        }
+
         public BodyForm()
         {
             InitializeComponent();
@@ -92,12 +105,15 @@ namespace DocumentTools
             y = Height;
             setTag(this);
 
+            
+
         }
         private void BodyForm_Load(object sender, EventArgs e)
         {
             this.Text = $"坤_Tools【软件完全离线|更新请看关于软件|编译日期：{DateTime.Now:yy.M.d}】";
             InitListView();
             InitComboxValue();
+            OutPutListViewIndex();
             this.AllowDrop = true;
             this.PageExportCheck.Checked = true;
             this.PageExportCheck.Enabled = false;
@@ -152,15 +168,8 @@ namespace DocumentTools
             this.PdfWaterMarkRotateDegNumber.Validating += ValidTextBoxContent;
             this.PdfWaterMarkRotateDegNumber.Validated += ValidedTextBoxContent;
 
-
-           
-
-
-
-
-
-
         }
+
 
 
         private void InitListView()
@@ -172,10 +181,12 @@ namespace DocumentTools
             this.WordFileListView.Columns.Add("文件名称", 300);
             this.WordFileListView.Columns.Add("添加时间", 300);
             this.WordFileListView.Columns.Add("转换后文件名称", 300);
+            this.WordFileListView.Sorting = SortOrder.Ascending;
             this.WordFileListView.Name = "WordFileListView";
 
             this.WordFileListView.DragEnter += ListViewDragEnter;
             this.WordFileListView.DragDrop += ListviewDragDrop;
+            this.WordFileListView.ColumnClick += ListviewSortHandler;
 
             //PdfFileListView
             this.PdfFileListView.View = View.Details;
@@ -184,10 +195,12 @@ namespace DocumentTools
             this.PdfFileListView.Columns.Add("文件名称", 300);
             this.PdfFileListView.Columns.Add("添加时间", 300);
             this.PdfFileListView.Columns.Add("转换后文件名称", 300);
+            this.PdfFileListView.Sorting = SortOrder.Ascending;
             this.PdfFileListView.Name = "PdfFileListView";
 
             this.PdfFileListView.DragEnter += ListViewDragEnter;
             this.PdfFileListView.DragDrop += ListviewDragDrop;
+            this.PdfFileListView.ColumnClick += ListviewSortHandler;
 
             //ExcelFileListView
             this.ExcelFileListView.View = View.Details;
@@ -196,10 +209,12 @@ namespace DocumentTools
             this.ExcelFileListView.Columns.Add("文件名称", 300);
             this.ExcelFileListView.Columns.Add("添加时间", 300);
             this.ExcelFileListView.Columns.Add("转换后文件名称", 300);
+            this.ExcelFileListView.Sorting = SortOrder.Ascending;
             this.ExcelFileListView.Name = "ExcelFileListView";
 
             this.ExcelFileListView.DragEnter += ListViewDragEnter;
             this.ExcelFileListView.DragDrop += ListviewDragDrop;
+            this.ExcelFileListView.ColumnClick += ListviewSortHandler;
 
             //DocumentsListView
             this.DocumentsListView.View = View.Details;
@@ -208,10 +223,12 @@ namespace DocumentTools
             this.DocumentsListView.Columns.Add("文件名称", 300);
             this.DocumentsListView.Columns.Add("添加时间", 300);
             this.DocumentsListView.Columns.Add("转换后文件名称", 300);
+            this.DocumentsListView.Sorting = SortOrder.Ascending;
             this.DocumentsListView.Name = "DocumentsListView";
 
             this.DocumentsListView.DragEnter += ListViewDragEnter;
             this.DocumentsListView.DragDrop += ListviewDragDrop;
+            this.DocumentsListView.ColumnClick += ListviewSortHandler;
 
             //PDF2ExcelFileView
             this.PDF2ExcelFileView.View = View.Details;
@@ -220,10 +237,12 @@ namespace DocumentTools
             this.PDF2ExcelFileView.Columns.Add("文件名称", 300);
             this.PDF2ExcelFileView.Columns.Add("添加时间", 300);
             this.PDF2ExcelFileView.Columns.Add("转换后文件名称", 300);
+            this.PDF2ExcelFileView.Sorting = SortOrder.Ascending;
             this.PDF2ExcelFileView.Name = "PDF2ExcelFileView";
 
             this.PDF2ExcelFileView.DragEnter += ListViewDragEnter;
             this.PDF2ExcelFileView.DragDrop += ListviewDragDrop;
+            this.PDF2ExcelFileView.ColumnClick += ListviewSortHandler;
 
             //MergePdfFileView
             this.MergePdfFileView.View = View.Details;
@@ -232,10 +251,12 @@ namespace DocumentTools
             this.MergePdfFileView.Columns.Add("文件名称", 300);
             this.MergePdfFileView.Columns.Add("添加时间", 300);
             this.MergePdfFileView.Columns.Add("转换后文件名称", 300);
+            this.MergePdfFileView.Sorting = SortOrder.Ascending;
             this.MergePdfFileView.Name = "MergePdfFileView";
 
             this.MergePdfFileView.DragEnter += ListViewDragEnter;
             this.MergePdfFileView.DragDrop += ListviewDragDrop;
+            this.MergePdfFileView.ColumnClick += ListviewSortHandler;
 
 
             //ReplaceWordFileList
@@ -245,10 +266,12 @@ namespace DocumentTools
             this.ReplaceWordFileList.Columns.Add("文件名称", 300);
             this.ReplaceWordFileList.Columns.Add("添加时间", 300);
             this.ReplaceWordFileList.Columns.Add("转换后文件名称", 300);
+            this.ReplaceWordFileList.Sorting = SortOrder.Ascending;
             this.ReplaceWordFileList.Name = "ReplaceWordFileList";
 
             this.ReplaceWordFileList.DragEnter += ListViewDragEnter;
             this.ReplaceWordFileList.DragDrop += ListviewDragDrop;
+            this.ReplaceWordFileList.ColumnClick += ListviewSortHandler;
 
             //ReplaceExcelFileView
             this.ReplaceExcelFileView.View = View.Details;
@@ -257,10 +280,12 @@ namespace DocumentTools
             this.ReplaceExcelFileView.Columns.Add("文件名称", 300);
             this.ReplaceExcelFileView.Columns.Add("添加时间", 300);
             this.ReplaceExcelFileView.Columns.Add("转换后文件名称", 300);
+            this.ReplaceExcelFileView.Sorting = SortOrder.Ascending;
             this.ReplaceExcelFileView.Name = "ReplaceExcelFileView";
 
             this.ReplaceExcelFileView.DragEnter += ListViewDragEnter;
             this.ReplaceExcelFileView.DragDrop += ListviewDragDrop;
+            this.ReplaceExcelFileView.ColumnClick += ListviewSortHandler;
 
             //DecodeMatrixWordListView
             this.DecodeMatrixWordListView.View = View.Details;
@@ -269,10 +294,12 @@ namespace DocumentTools
             this.DecodeMatrixWordListView.Columns.Add("文件名称", 300);
             this.DecodeMatrixWordListView.Columns.Add("添加时间", 300);
             this.DecodeMatrixWordListView.Columns.Add("转换后文件名称", 300);
+            this.DecodeMatrixWordListView.Sorting = SortOrder.Ascending;
             this.DecodeMatrixWordListView.Name = "DecodeMatrixWordListView";
 
             this.DecodeMatrixWordListView.DragEnter += ListViewDragEnter;
             this.DecodeMatrixWordListView.DragDrop += ListviewDragDrop;
+            this.DecodeMatrixWordListView.ColumnClick += ListviewSortHandler;
 
             //IcoFileView
             this.IcoFileView.View = View.Details;
@@ -281,10 +308,12 @@ namespace DocumentTools
             this.IcoFileView.Columns.Add("文件名称", 300);
             this.IcoFileView.Columns.Add("添加时间", 300);
             this.IcoFileView.Columns.Add("转换后文件名称", 300);
+            this.IcoFileView.Sorting = SortOrder.Ascending;
             this.IcoFileView.Name = "IcoFileView";
 
             this.IcoFileView.DragEnter += ListViewDragEnter;
             this.IcoFileView.DragDrop += ListviewDragDrop;
+            this.IcoFileView.ColumnClick += ListviewSortHandler;
 
 
             // MergeWordFileList
@@ -294,10 +323,12 @@ namespace DocumentTools
             this.MergeWordFileList.Columns.Add("文件名称", 300);
             this.MergeWordFileList.Columns.Add("添加时间", 300);
             this.MergeWordFileList.Columns.Add("转换后文件名称", 300);
+            this.MergeWordFileList.Sorting = SortOrder.Ascending;
             this.MergeWordFileList.Name = "MergeWordFileList";
 
             this.MergeWordFileList.DragEnter += ListViewDragEnter;
             this.MergeWordFileList.DragDrop += ListviewDragDrop;
+            this.MergeWordFileList.ColumnClick += ListviewSortHandler;
 
             // Word2ExcelFileList
             this.Word2ExcelFileList.View = View.Details;
@@ -306,10 +337,12 @@ namespace DocumentTools
             this.Word2ExcelFileList.Columns.Add("文件名称", 300);
             this.Word2ExcelFileList.Columns.Add("添加时间", 300);
             this.Word2ExcelFileList.Columns.Add("转换后文件名称", 300);
+            this.Word2ExcelFileList.Sorting = SortOrder.Ascending;
             this.Word2ExcelFileList.Name = "Word2ExcelFileList";
 
             this.Word2ExcelFileList.DragEnter += ListViewDragEnter;
             this.Word2ExcelFileList.DragDrop += ListviewDragDrop;
+            this.Word2ExcelFileList.ColumnClick += ListviewSortHandler;
 
             // Word2ExcelFileList
             this.Excel2WordFileList.View = View.Details;
@@ -318,10 +351,12 @@ namespace DocumentTools
             this.Excel2WordFileList.Columns.Add("文件名称", 300);
             this.Excel2WordFileList.Columns.Add("添加时间", 300);
             this.Excel2WordFileList.Columns.Add("转换后文件名称", 300);
+            this.Excel2WordFileList.Sorting = SortOrder.Ascending;
             this.Excel2WordFileList.Name = "Excel2WordFileList";
 
             this.Excel2WordFileList.DragEnter += ListViewDragEnter;
             this.Excel2WordFileList.DragDrop += ListviewDragDrop;
+            this.Excel2WordFileList.ColumnClick += ListviewSortHandler;
 
             // SplitPdfFileList
             this.SplitPdfFileList.View = View.Details;
@@ -330,10 +365,12 @@ namespace DocumentTools
             this.SplitPdfFileList.Columns.Add("文件名称", 300);
             this.SplitPdfFileList.Columns.Add("添加时间", 300);
             this.SplitPdfFileList.Columns.Add("转换后文件名称", 300);
+            this.SplitPdfFileList.Sorting = SortOrder.Ascending;
             this.SplitPdfFileList.Name = "SplitPdfFileList";
 
             this.SplitPdfFileList.DragEnter += ListViewDragEnter;
             this.SplitPdfFileList.DragDrop += ListviewDragDrop;
+            this.SplitPdfFileList.ColumnClick += ListviewSortHandler;
 
             // PdfWaterMarkFileList
             this.PdfWaterMarkFileList.View = View.Details;
@@ -342,10 +379,12 @@ namespace DocumentTools
             this.PdfWaterMarkFileList.Columns.Add("文件名称", 300);
             this.PdfWaterMarkFileList.Columns.Add("添加时间", 300);
             this.PdfWaterMarkFileList.Columns.Add("转换后文件名称", 300);
+            this.PdfWaterMarkFileList.Sorting = SortOrder.Ascending;
             this.PdfWaterMarkFileList.Name = "PdfWaterMarkFileList";
 
             this.PdfWaterMarkFileList.DragEnter += ListViewDragEnter;
             this.PdfWaterMarkFileList.DragDrop += ListviewDragDrop;
+            this.PdfWaterMarkFileList.ColumnClick += ListviewSortHandler;
 
             // RemovePdfWaterMarkFileList
             this.RemovePdfWaterMarkFileList.View = View.Details;
@@ -354,10 +393,55 @@ namespace DocumentTools
             this.RemovePdfWaterMarkFileList.Columns.Add("文件名称", 300);
             this.RemovePdfWaterMarkFileList.Columns.Add("添加时间", 300);
             this.RemovePdfWaterMarkFileList.Columns.Add("转换后文件名称", 300);
+            this.RemovePdfWaterMarkFileList.Sorting = SortOrder.Ascending;
             this.RemovePdfWaterMarkFileList.Name = "RemovePdfWaterMarkFileList";
 
             this.RemovePdfWaterMarkFileList.DragEnter += ListViewDragEnter;
             this.RemovePdfWaterMarkFileList.DragDrop += ListviewDragDrop;
+            this.RemovePdfWaterMarkFileList.ColumnClick += ListviewSortHandler;
+
+
+            // PPT2PdfFileList
+            this.PPT2PdfFileList.View = View.Details;
+            this.PPT2PdfFileList.FullRowSelect = true;
+            this.PPT2PdfFileList.AllowDrop = true;
+            this.PPT2PdfFileList.Columns.Add("文件名称", 300);
+            this.PPT2PdfFileList.Columns.Add("添加时间", 300);
+            this.PPT2PdfFileList.Columns.Add("转换后文件名称", 300);
+            this.PPT2PdfFileList.Sorting = SortOrder.Ascending;
+            this.PPT2PdfFileList.Name = "PPT2PdfFileList";
+
+            this.PPT2PdfFileList.DragEnter += ListViewDragEnter;
+            this.PPT2PdfFileList.DragDrop += ListviewDragDrop;
+            this.PPT2PdfFileList.ColumnClick += ListviewSortHandler;
+
+            // PDF2PPTFileList
+            this.PDF2PPTFileList.View = View.Details;
+            this.PDF2PPTFileList.FullRowSelect = true;
+            this.PDF2PPTFileList.AllowDrop = true;
+            this.PDF2PPTFileList.Columns.Add("文件名称", 300);
+            this.PDF2PPTFileList.Columns.Add("添加时间", 300);
+            this.PDF2PPTFileList.Columns.Add("转换后文件名称", 300);
+            this.PDF2PPTFileList.Sorting = SortOrder.Ascending;
+            this.PDF2PPTFileList.Name = "PDF2PPTFileList";
+
+            this.PDF2PPTFileList.DragEnter += ListViewDragEnter;
+            this.PDF2PPTFileList.DragDrop += ListviewDragDrop;
+            this.PDF2PPTFileList.ColumnClick += ListviewSortHandler;
+
+            // ConvertPdfComplianceFileList
+            this.ConvertPdfComplianceFileList.View = View.Details;
+            this.ConvertPdfComplianceFileList.FullRowSelect = true;
+            this.ConvertPdfComplianceFileList.AllowDrop = true;
+            this.ConvertPdfComplianceFileList.Columns.Add("文件名称", 300);
+            this.ConvertPdfComplianceFileList.Columns.Add("添加时间", 300);
+            this.ConvertPdfComplianceFileList.Columns.Add("转换后文件名称", 300);
+            this.ConvertPdfComplianceFileList.Sorting = SortOrder.Ascending;
+            this.ConvertPdfComplianceFileList.Name = "ConvertPdfComplianceFileList";
+
+            this.ConvertPdfComplianceFileList.DragEnter += ListViewDragEnter;
+            this.ConvertPdfComplianceFileList.DragDrop += ListviewDragDrop;
+            this.ConvertPdfComplianceFileList.ColumnClick += ListviewSortHandler;
         }
 
         private void InitComboxValue()
@@ -464,6 +548,26 @@ namespace DocumentTools
 
 
 
+            this.PDFComplianceBox.DataSource = Enum.GetNames(typeof(Aspose.Words.Saving.PdfCompliance));
+
+
+            DataTable ExportNotePageData = new DataTable();
+            ExportNotePageData.Columns.Add("DisplayValue");
+            ExportNotePageData.Columns.Add("RealValue");
+            ExportNotePageData.Rows.Add("不导出",Aspose.Slides.Export.NotesPositions.None);
+            ExportNotePageData.Rows.Add("自动调整",Aspose.Slides.Export.NotesPositions.BottomFull);
+            ExportNotePageData.Rows.Add("强制单页",Aspose.Slides.Export.NotesPositions.BottomTruncated);
+
+            this.ExportNotePageCombox.DataSource = ExportNotePageData;
+            this.ExportNotePageCombox.DisplayMember = "DisplayValue";
+            this.ExportNotePageCombox.ValueMember = "RealValue";
+
+
+            this.ConvertPdfComplianceVersion.DataSource = Enum.GetNames(typeof(Aspose.Pdf.PdfFormat));
+
+
+
+
             this.MeregeFilePage.DropDownStyle = ComboBoxStyle.DropDownList;
             this.TwainColorMode.DropDownStyle = ComboBoxStyle.DropDownList;
             this.TwainDpi.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -472,6 +576,9 @@ namespace DocumentTools
             this.PdfWaterMarkHorSetting.DropDownStyle = ComboBoxStyle.DropDownList;
             this.PDFWaterMarkVerSetting.DropDownStyle= ComboBoxStyle.DropDownList;
             this.PdfWaterMarkOpcityNumber.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.PDFComplianceBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.ExportNotePageCombox.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.ConvertPdfComplianceVersion.DropDownStyle = ComboBoxStyle.DropDownList;
 
 
 
@@ -768,6 +875,15 @@ namespace DocumentTools
                     case "RemovePdfWaterMarkFileList":
                         UI.RemoveListViewItem(false, RemovePdfWaterMarkFileList, RemovePdfWaterMarkFileList.FocusedItem.Index);
                         break;
+                    case "PPT2PdfFileList":
+                        UI.RemoveListViewItem(false, PPT2PdfFileList, PPT2PdfFileList.FocusedItem.Index);
+                        break;
+                    case "PDF2PPTFileList":
+                        UI.RemoveListViewItem(false, PDF2PPTFileList, PDF2PPTFileList.FocusedItem.Index);
+                        break;
+                    case "ConvertPdfComplianceFileList":
+                        UI.RemoveListViewItem(false, ConvertPdfComplianceFileList, ConvertPdfComplianceFileList.FocusedItem.Index);
+                        break;
                     default: break;
                 }
             }
@@ -843,6 +959,15 @@ namespace DocumentTools
                         break;
                     case "RemovePdfWaterMarkFileList":
                         UI.RemoveListViewItem(true, RemovePdfWaterMarkFileList);
+                        break;
+                    case "PPT2PdfFileList":
+                        UI.RemoveListViewItem(true, PPT2PdfFileList);
+                        break;
+                    case "PDF2PPTFileList":
+                        UI.RemoveListViewItem(true, PDF2PPTFileList);
+                        break;
+                    case "ConvertPdfComplianceFileList":
+                        UI.RemoveListViewItem(true, ConvertPdfComplianceFileList);
                         break;
                     default: break;
                 }
@@ -991,6 +1116,15 @@ namespace DocumentTools
                     break;
                 case "RemovePdfWaterMarkFileList":
                     UI.AddFilesToListviewWithNotDialog(DropFiles, this.RemovePdfWaterMarkFileList, new string[] { ".pdf" });
+                    break;
+                case "PPT2PdfFileList":
+                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.PPT2PdfFileList, new string[] { ".ppt",".pptx" });
+                    break;
+                case "PDF2PPTFileList":
+                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.PDF2PPTFileList, new string[] { ".pdf" });
+                    break;
+                case "ConvertPdfComplianceFileList":
+                    UI.AddFilesToListviewWithNotDialog(DropFiles,this.ConvertPdfComplianceFileList,new string[] { ".pdf"});
                     break;
                 default: break;
             }
@@ -1773,7 +1907,7 @@ namespace DocumentTools
 
             Regex TempRegex = new Regex("^[0-9]*$");
 
-            bool NumberStatus =  TempRegex.IsMatch(InputString) == true ? true : false;
+            bool NumberStatus = TempRegex.IsMatch(InputString);
 
             return NumberStatus;
 
@@ -1814,8 +1948,147 @@ namespace DocumentTools
 
             e.Graphics.DrawString(TabName,PageFont,ForeBrush,TabRec,FormatTab);
         }
+        #endregion
+
+        private async void ChceckVersion_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Uri CheckVersionUrl = new Uri("http://jdsnmsl.tpddns.cn:3009/pwn/Version/raw/branch/main/DocumentTools.txt");
+
+                using (HttpClient client = new HttpClient())
+                {
+
+                    string RemoteVersion = await client.GetStringAsync(CheckVersionUrl);
+
+                    if (int.Parse(NowVersion.Replace(".", "")) < int.Parse(RemoteVersion.Replace(".", "")))
+                    {
+                        MessageBox.Show($"当前版本为：{NowVersion}，最新版本为：{RemoteVersion}，建议及时更新", "检查更新", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
+                    else
+                    {
+                        MessageBox.Show($"当前版本为最新版本：{NowVersion}", "检查更新", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+
+        }
+
+        private void SelectPPT2PdfFile_Click(object sender, EventArgs e)
+        {
+            UI.AddPPT2PdfFiles();
+        }
+
+        private void ConvertPPT2PDF_Click(object sender, EventArgs e)
+        {
+            Task.Run(() =>
+            {
+                try
+                {
+                    UI.ConvertStart(this.PPT2PdfFileList, this.ConvertPPT2PDFStatusText, ConvertFileType.PPT2PDF, ".pdf");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            });
+        }
+
+        private void PPT2PdfFileList_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                this.ListViewRightMenu.Show(this.PPT2PdfFileList, e.Location);
+            }
+        }
+
+        private void ListviewSortHandler(object sender,ColumnClickEventArgs e)
+        {
+            ListView TempListview = sender as ListView;
+
+            if(e.Column==0)
+            {
+                if (TempListview.Sorting == SortOrder.Descending)
+                {
+                    TempListview.Sorting = SortOrder.Ascending;
+                }
+                else if (TempListview.Sorting == SortOrder.Ascending)
+                {
+                    TempListview.Sorting = SortOrder.Descending;
+                }
+
+                TempListview.Sort();
+            }
+
+
+        }
+
+        private void ConvertPDF2PPT_Click(object sender, EventArgs e)
+        {
+            Task.Run(() =>
+            {
+                try
+                {
+                    UI.ConvertStart(this.PDF2PPTFileList, this.Pdf2PPTStatusText, ConvertFileType.PDF2PPT, ".pptx");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            });
+        }
+
+        private void SelectConvertPDF2PPT_Click(object sender, EventArgs e)
+        {
+            UI.AddPdf2PPTFiles();
+        }
+
+        private void PDF2PPTFileList_MouseClick(object sender, MouseEventArgs e)
+        {
+            //右键项目才显示菜单
+            if (e.Button == MouseButtons.Right)
+            {
+                this.ListViewRightMenu.Show(this.WordFileListView, e.Location);
+            }
+        }
+
+        private void ConvertPdfComplianceFileList_MouseClick(object sender, MouseEventArgs e)
+        {
+            //右键项目才显示菜单
+            if (e.Button == MouseButtons.Right)
+            {
+                this.ListViewRightMenu.Show(this.ConvertPdfComplianceFileList, e.Location);
+            }
+        }
+
+        private void SelectConvertComplaincePdf_Click(object sender, EventArgs e)
+        {
+            UI.AddConvertComplanicePdfFiles();
+        }
+
+        private void ConvertPdfCompliance_Click(object sender, EventArgs e)
+        {
+            Task.Run(() =>
+            {
+                try
+                {
+                    UI.ConvertStart(this.ConvertPdfComplianceFileList, this.ConvertPdfComplianceStatusText, ConvertFileType.ConvertPdfCompliance, ".pdf");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            });
+        }
     }
-    #endregion
 
     internal class PrivateFontSetting
     {

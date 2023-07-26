@@ -24,6 +24,9 @@ namespace DocumentTools
         SplitPdf,
         AddWaterMarkPdf,
         RemovePdfWaterMark,
+        PPT2PDF,
+        PDF2PPT,
+        ConvertPdfCompliance,
     }
 
     internal class UI
@@ -45,8 +48,10 @@ namespace DocumentTools
                 ListViewControl.BeginUpdate();
                 foreach (string TempDocumentFileName in TempDocuemntFileNames)
                 {
-                    ListViewItem TempDocuemntFileNamesListView = new ListViewItem();
-                    TempDocuemntFileNamesListView.Text = TempDocumentFileName;
+                    ListViewItem TempDocuemntFileNamesListView = new ListViewItem
+                    {
+                        Text = TempDocumentFileName
+                    };
                     TempDocuemntFileNamesListView.SubItems.Add(Util.GetNowDateTime());
                     ListViewControl.Items.Add(TempDocuemntFileNamesListView);
                     ListViewControl.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
@@ -75,8 +80,10 @@ namespace DocumentTools
                         {
                             if (Path.GetExtension(File) == FileFilter)
                             {
-                                ListViewItem FileListListView = new ListViewItem();
-                                FileListListView.Text = File;
+                                ListViewItem FileListListView = new ListViewItem
+                                {
+                                    Text = File
+                                };
                                 FileListListView.SubItems.Add(Util.GetNowDateTime());
                                 ListviewControl.Items.Add(FileListListView);
                                 ListviewControl.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
@@ -248,7 +255,20 @@ namespace DocumentTools
             AddFilesToListView("PDF文档", "*.pdf", BodyForm.MainForm.RemovePdfWaterMarkFileList);
         }
 
+        public static void AddPPT2PdfFiles()
+        {
+            AddFilesToListView("演示文稿", "*.ppt;*.pptx", BodyForm.MainForm.PPT2PdfFileList);
+        }
 
+        public static void AddPdf2PPTFiles()
+        {
+            AddFilesToListView("PDF文档","*.pdf",BodyForm.MainForm.PDF2PPTFileList);
+        }
+
+        public static void AddConvertComplanicePdfFiles()
+        {
+            AddFilesToListView("PDF文档", "*.pdf", BodyForm.MainForm.ConvertPdfComplianceFileList);
+        }
         /// <summary>
         /// 转换文件通用方法
         /// </summary>
@@ -282,7 +302,10 @@ namespace DocumentTools
                             case ConvertFileType.Word2Pdf:
                                 TempSaveDocxPathString = Path.Combine(SelectSavePathstring, "TempDocx");
                                 Directory.CreateDirectory(TempSaveDocxPathString);
-                                Util.ConvertWord2Pdf(ListViewFirstColumnText, ConvertedFileName, TempSaveDocxPathString);
+
+                                object SelectedPdfCompliance =  Enum.Parse(typeof(Aspose.Words.Saving.PdfCompliance),BodyForm.MainForm.PDFComplianceBox.SelectedItem.ToString());
+
+                                Util.ConvertWord2Pdf(ListViewFirstColumnText, ConvertedFileName, TempSaveDocxPathString, (Aspose.Words.Saving.PdfCompliance)SelectedPdfCompliance);
                                 break;
                             //pdf转word
                             case ConvertFileType.Pdf2Word:
@@ -335,6 +358,20 @@ namespace DocumentTools
                             // pdf移除水印
                             case ConvertFileType.RemovePdfWaterMark:
                                 Util.RemovePdfWaterMark(ListViewFirstColumnText, ConvertedFileName);
+                                break;
+                            // ppt转pdf
+                            case ConvertFileType.PPT2PDF:
+                                object SelectCommentPostion = Enum.Parse(typeof(Aspose.Slides.Export.NotesPositions), BodyForm.MainForm.ExportNotePageCombox.SelectedValue.ToString());
+                                Util.ConvertPPT2PDF(ListViewFirstColumnText, ConvertedFileName,BodyForm.MainForm.DrawBlackLine.Checked,BodyForm.MainForm.ConvertPPT2PDFPassword.Text.Trim(),BodyForm.MainForm.ExportHiddenPage.Checked,(Aspose.Slides.Export.NotesPositions)SelectCommentPostion);
+                                break;
+                            // pdf转ppt
+                            case ConvertFileType.PDF2PPT:
+                                Util.ConvertPDF2PPT(ListViewFirstColumnText, ConvertedFileName, BodyForm.MainForm.ExtraOcrBox.Checked, BodyForm.MainForm.SplitShapeBox.Checked, BodyForm.MainForm.RenderImageBox.Checked);
+                                break;
+                            // pdf版本转换
+                            case ConvertFileType.ConvertPdfCompliance:
+                                object SelectPdfCompliance = Enum.Parse(typeof(Aspose.Pdf.PdfFormat),BodyForm.MainForm.ConvertPdfComplianceVersion.SelectedItem.ToString());
+                                Util.ConvertPdfCompliance(ListViewFirstColumnText,ConvertedFileName,(Aspose.Pdf.PdfFormat)SelectPdfCompliance);
                                 break;
                             default: break;
                         }

@@ -32,6 +32,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BodyForm));
             this.MainTabPage = new System.Windows.Forms.TabControl();
             this.TabPage_01 = new System.Windows.Forms.TabPage();
+            this.label34 = new System.Windows.Forms.Label();
+            this.PDFComplianceBox = new System.Windows.Forms.ComboBox();
             this.MergePdfButton = new System.Windows.Forms.Button();
             this.RemoveTempDocx = new System.Windows.Forms.CheckBox();
             this.OpenPdfOptions = new System.Windows.Forms.CheckBox();
@@ -58,6 +60,26 @@
             this.ConvertPDF2Excel = new System.Windows.Forms.Button();
             this.SelectPDF2ExcelButton = new System.Windows.Forms.Button();
             this.PDF2ExcelFileView = new System.Windows.Forms.ListView();
+            this.TabPage_20 = new System.Windows.Forms.TabPage();
+            this.label37 = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
+            this.ConvertPPT2PDFPassword = new System.Windows.Forms.TextBox();
+            this.label35 = new System.Windows.Forms.Label();
+            this.ExportNotePageCombox = new System.Windows.Forms.ComboBox();
+            this.DrawBlackLine = new System.Windows.Forms.CheckBox();
+            this.ExportHiddenPage = new System.Windows.Forms.CheckBox();
+            this.ConvertPPT2PDFStatusText = new System.Windows.Forms.Label();
+            this.ConvertPPT2PDF = new System.Windows.Forms.Button();
+            this.SelectPPT2PdfFile = new System.Windows.Forms.Button();
+            this.PPT2PdfFileList = new System.Windows.Forms.ListView();
+            this.TabPage_21 = new System.Windows.Forms.TabPage();
+            this.RenderImageBox = new System.Windows.Forms.CheckBox();
+            this.SplitShapeBox = new System.Windows.Forms.CheckBox();
+            this.ExtraOcrBox = new System.Windows.Forms.CheckBox();
+            this.Pdf2PPTStatusText = new System.Windows.Forms.Label();
+            this.ConvertPDF2PPT = new System.Windows.Forms.Button();
+            this.SelectConvertPDF2PPT = new System.Windows.Forms.Button();
+            this.PDF2PPTFileList = new System.Windows.Forms.ListView();
             this.TabPage_14 = new System.Windows.Forms.TabPage();
             this.MeregeWordStatusText = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
@@ -110,6 +132,13 @@
             this.RemovePdfWaterMark = new System.Windows.Forms.Button();
             this.SelectRemovePdfWaterMarkFiles = new System.Windows.Forms.Button();
             this.RemovePdfWaterMarkFileList = new System.Windows.Forms.ListView();
+            this.TabPage_22 = new System.Windows.Forms.TabPage();
+            this.ConvertPdfComplianceVersion = new System.Windows.Forms.ComboBox();
+            this.label39 = new System.Windows.Forms.Label();
+            this.ConvertPdfComplianceStatusText = new System.Windows.Forms.Label();
+            this.ConvertPdfCompliance = new System.Windows.Forms.Button();
+            this.SelectConvertComplaincePdf = new System.Windows.Forms.Button();
+            this.ConvertPdfComplianceFileList = new System.Windows.Forms.ListView();
             this.TabPage_15 = new System.Windows.Forms.TabPage();
             this.ConverWord2ExcelStatusText = new System.Windows.Forms.Label();
             this.ConvertWord2Excel = new System.Windows.Forms.Button();
@@ -237,6 +266,7 @@
             this.TabPage_08 = new System.Windows.Forms.TabPage();
             this.label12 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.ChceckVersion = new System.Windows.Forms.Button();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.label13 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -264,6 +294,8 @@
             this.TabPage_02.SuspendLayout();
             this.TabPage_03.SuspendLayout();
             this.TabPage_07.SuspendLayout();
+            this.TabPage_20.SuspendLayout();
+            this.TabPage_21.SuspendLayout();
             this.TabPage_14.SuspendLayout();
             this.TabPage_06.SuspendLayout();
             this.TabPage_17.SuspendLayout();
@@ -271,6 +303,7 @@
             this.groupBox18.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WaterMarkImage)).BeginInit();
             this.TabPage_19.SuspendLayout();
+            this.TabPage_22.SuspendLayout();
             this.TabPage_15.SuspendLayout();
             this.TabPage_16.SuspendLayout();
             this.TabPage_04.SuspendLayout();
@@ -311,11 +344,14 @@
             this.MainTabPage.Controls.Add(this.TabPage_02);
             this.MainTabPage.Controls.Add(this.TabPage_03);
             this.MainTabPage.Controls.Add(this.TabPage_07);
+            this.MainTabPage.Controls.Add(this.TabPage_20);
+            this.MainTabPage.Controls.Add(this.TabPage_21);
             this.MainTabPage.Controls.Add(this.TabPage_14);
             this.MainTabPage.Controls.Add(this.TabPage_06);
             this.MainTabPage.Controls.Add(this.TabPage_17);
             this.MainTabPage.Controls.Add(this.TabPage_18);
             this.MainTabPage.Controls.Add(this.TabPage_19);
+            this.MainTabPage.Controls.Add(this.TabPage_22);
             this.MainTabPage.Controls.Add(this.TabPage_15);
             this.MainTabPage.Controls.Add(this.TabPage_16);
             this.MainTabPage.Controls.Add(this.TabPage_04);
@@ -339,6 +375,8 @@
             // 
             // TabPage_01
             // 
+            this.TabPage_01.Controls.Add(this.label34);
+            this.TabPage_01.Controls.Add(this.PDFComplianceBox);
             this.TabPage_01.Controls.Add(this.MergePdfButton);
             this.TabPage_01.Controls.Add(this.RemoveTempDocx);
             this.TabPage_01.Controls.Add(this.OpenPdfOptions);
@@ -353,6 +391,23 @@
             this.TabPage_01.TabIndex = 0;
             this.TabPage_01.Text = "WORD转PDF";
             this.TabPage_01.UseVisualStyleBackColor = true;
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(510, 350);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(71, 18);
+            this.label34.TabIndex = 8;
+            this.label34.Text = "PDF标准";
+            // 
+            // PDFComplianceBox
+            // 
+            this.PDFComplianceBox.FormattingEnabled = true;
+            this.PDFComplianceBox.Location = new System.Drawing.Point(587, 345);
+            this.PDFComplianceBox.Name = "PDFComplianceBox";
+            this.PDFComplianceBox.Size = new System.Drawing.Size(121, 26);
+            this.PDFComplianceBox.TabIndex = 7;
             // 
             // MergePdfButton
             // 
@@ -629,6 +684,217 @@
             this.PDF2ExcelFileView.TabIndex = 0;
             this.PDF2ExcelFileView.UseCompatibleStateImageBehavior = false;
             this.PDF2ExcelFileView.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PDF2ExcelFileView_MouseClick);
+            // 
+            // TabPage_20
+            // 
+            this.TabPage_20.Controls.Add(this.label37);
+            this.TabPage_20.Controls.Add(this.label36);
+            this.TabPage_20.Controls.Add(this.ConvertPPT2PDFPassword);
+            this.TabPage_20.Controls.Add(this.label35);
+            this.TabPage_20.Controls.Add(this.ExportNotePageCombox);
+            this.TabPage_20.Controls.Add(this.DrawBlackLine);
+            this.TabPage_20.Controls.Add(this.ExportHiddenPage);
+            this.TabPage_20.Controls.Add(this.ConvertPPT2PDFStatusText);
+            this.TabPage_20.Controls.Add(this.ConvertPPT2PDF);
+            this.TabPage_20.Controls.Add(this.SelectPPT2PdfFile);
+            this.TabPage_20.Controls.Add(this.PPT2PdfFileList);
+            this.TabPage_20.Location = new System.Drawing.Point(4, 28);
+            this.TabPage_20.Name = "TabPage_20";
+            this.TabPage_20.Padding = new System.Windows.Forms.Padding(3);
+            this.TabPage_20.Size = new System.Drawing.Size(975, 532);
+            this.TabPage_20.TabIndex = 19;
+            this.TabPage_20.Text = "PPT转PDF";
+            this.TabPage_20.UseVisualStyleBackColor = true;
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.ForeColor = System.Drawing.Color.Tomato;
+            this.label37.Location = new System.Drawing.Point(446, 385);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(251, 90);
+            this.label37.TabIndex = 10;
+            this.label37.Text = "提示：设置密码后\r\n\r\n生成的PDF文档将没有任何权限\r\n\r\n包括复制、打印、编辑等等";
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(553, 349);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(80, 18);
+            this.label36.TabIndex = 9;
+            this.label36.Text = "设置密码";
+            // 
+            // ConvertPPT2PDFPassword
+            // 
+            this.ConvertPPT2PDFPassword.Location = new System.Drawing.Point(639, 344);
+            this.ConvertPPT2PDFPassword.Name = "ConvertPPT2PDFPassword";
+            this.ConvertPPT2PDFPassword.Size = new System.Drawing.Size(147, 28);
+            this.ConvertPPT2PDFPassword.TabIndex = 8;
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(286, 348);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(134, 18);
+            this.label35.TabIndex = 7;
+            this.label35.Text = "备注页导出方式";
+            // 
+            // ExportNotePageCombox
+            // 
+            this.ExportNotePageCombox.FormattingEnabled = true;
+            this.ExportNotePageCombox.Location = new System.Drawing.Point(426, 344);
+            this.ExportNotePageCombox.Name = "ExportNotePageCombox";
+            this.ExportNotePageCombox.Size = new System.Drawing.Size(121, 26);
+            this.ExportNotePageCombox.TabIndex = 6;
+            // 
+            // DrawBlackLine
+            // 
+            this.DrawBlackLine.AutoSize = true;
+            this.DrawBlackLine.Location = new System.Drawing.Point(174, 348);
+            this.DrawBlackLine.Name = "DrawBlackLine";
+            this.DrawBlackLine.Size = new System.Drawing.Size(106, 22);
+            this.DrawBlackLine.TabIndex = 5;
+            this.DrawBlackLine.Text = "绘制黑框";
+            this.DrawBlackLine.UseVisualStyleBackColor = true;
+            // 
+            // ExportHiddenPage
+            // 
+            this.ExportHiddenPage.AutoSize = true;
+            this.ExportHiddenPage.Location = new System.Drawing.Point(8, 349);
+            this.ExportHiddenPage.Name = "ExportHiddenPage";
+            this.ExportHiddenPage.Size = new System.Drawing.Size(160, 22);
+            this.ExportHiddenPage.TabIndex = 4;
+            this.ExportHiddenPage.Text = "隐藏页面也导出";
+            this.ExportHiddenPage.UseVisualStyleBackColor = true;
+            // 
+            // ConvertPPT2PDFStatusText
+            // 
+            this.ConvertPPT2PDFStatusText.AutoSize = true;
+            this.ConvertPPT2PDFStatusText.ForeColor = System.Drawing.Color.ForestGreen;
+            this.ConvertPPT2PDFStatusText.Location = new System.Drawing.Point(246, 424);
+            this.ConvertPPT2PDFStatusText.Name = "ConvertPPT2PDFStatusText";
+            this.ConvertPPT2PDFStatusText.Size = new System.Drawing.Size(143, 18);
+            this.ConvertPPT2PDFStatusText.TabIndex = 3;
+            this.ConvertPPT2PDFStatusText.Text = "正在处理X个文件";
+            // 
+            // ConvertPPT2PDF
+            // 
+            this.ConvertPPT2PDF.Location = new System.Drawing.Point(746, 406);
+            this.ConvertPPT2PDF.Name = "ConvertPPT2PDF";
+            this.ConvertPPT2PDF.Size = new System.Drawing.Size(221, 55);
+            this.ConvertPPT2PDF.TabIndex = 2;
+            this.ConvertPPT2PDF.Text = "开始处理";
+            this.ConvertPPT2PDF.UseVisualStyleBackColor = true;
+            this.ConvertPPT2PDF.Click += new System.EventHandler(this.ConvertPPT2PDF_Click);
+            // 
+            // SelectPPT2PdfFile
+            // 
+            this.SelectPPT2PdfFile.Location = new System.Drawing.Point(6, 406);
+            this.SelectPPT2PdfFile.Name = "SelectPPT2PdfFile";
+            this.SelectPPT2PdfFile.Size = new System.Drawing.Size(221, 55);
+            this.SelectPPT2PdfFile.TabIndex = 1;
+            this.SelectPPT2PdfFile.Text = "选择文件";
+            this.SelectPPT2PdfFile.UseVisualStyleBackColor = true;
+            this.SelectPPT2PdfFile.Click += new System.EventHandler(this.SelectPPT2PdfFile_Click);
+            // 
+            // PPT2PdfFileList
+            // 
+            this.PPT2PdfFileList.HideSelection = false;
+            this.PPT2PdfFileList.Location = new System.Drawing.Point(6, 6);
+            this.PPT2PdfFileList.Name = "PPT2PdfFileList";
+            this.PPT2PdfFileList.Size = new System.Drawing.Size(961, 326);
+            this.PPT2PdfFileList.TabIndex = 0;
+            this.PPT2PdfFileList.UseCompatibleStateImageBehavior = false;
+            this.PPT2PdfFileList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PPT2PdfFileList_MouseClick);
+            // 
+            // TabPage_21
+            // 
+            this.TabPage_21.Controls.Add(this.RenderImageBox);
+            this.TabPage_21.Controls.Add(this.SplitShapeBox);
+            this.TabPage_21.Controls.Add(this.ExtraOcrBox);
+            this.TabPage_21.Controls.Add(this.Pdf2PPTStatusText);
+            this.TabPage_21.Controls.Add(this.ConvertPDF2PPT);
+            this.TabPage_21.Controls.Add(this.SelectConvertPDF2PPT);
+            this.TabPage_21.Controls.Add(this.PDF2PPTFileList);
+            this.TabPage_21.Location = new System.Drawing.Point(4, 28);
+            this.TabPage_21.Name = "TabPage_21";
+            this.TabPage_21.Size = new System.Drawing.Size(975, 532);
+            this.TabPage_21.TabIndex = 20;
+            this.TabPage_21.Text = "PDF转PPT";
+            this.TabPage_21.UseVisualStyleBackColor = true;
+            // 
+            // RenderImageBox
+            // 
+            this.RenderImageBox.AutoSize = true;
+            this.RenderImageBox.Location = new System.Drawing.Point(457, 349);
+            this.RenderImageBox.Name = "RenderImageBox";
+            this.RenderImageBox.Size = new System.Drawing.Size(196, 22);
+            this.RenderImageBox.TabIndex = 6;
+            this.RenderImageBox.Text = "所有页面识别为图片";
+            this.RenderImageBox.UseVisualStyleBackColor = true;
+            // 
+            // SplitShapeBox
+            // 
+            this.SplitShapeBox.AutoSize = true;
+            this.SplitShapeBox.Location = new System.Drawing.Point(291, 349);
+            this.SplitShapeBox.Name = "SplitShapeBox";
+            this.SplitShapeBox.Size = new System.Drawing.Size(160, 22);
+            this.SplitShapeBox.TabIndex = 5;
+            this.SplitShapeBox.Text = "分离图像与图形";
+            this.SplitShapeBox.UseVisualStyleBackColor = true;
+            // 
+            // ExtraOcrBox
+            // 
+            this.ExtraOcrBox.AutoSize = true;
+            this.ExtraOcrBox.Location = new System.Drawing.Point(8, 349);
+            this.ExtraOcrBox.Name = "ExtraOcrBox";
+            this.ExtraOcrBox.Size = new System.Drawing.Size(277, 22);
+            this.ExtraOcrBox.TabIndex = 4;
+            this.ExtraOcrBox.Text = "开启OCR子层识别（非扫描件）";
+            this.ExtraOcrBox.UseVisualStyleBackColor = true;
+            // 
+            // Pdf2PPTStatusText
+            // 
+            this.Pdf2PPTStatusText.AutoSize = true;
+            this.Pdf2PPTStatusText.BackColor = System.Drawing.Color.Transparent;
+            this.Pdf2PPTStatusText.ForeColor = System.Drawing.Color.ForestGreen;
+            this.Pdf2PPTStatusText.Location = new System.Drawing.Point(246, 424);
+            this.Pdf2PPTStatusText.Name = "Pdf2PPTStatusText";
+            this.Pdf2PPTStatusText.Size = new System.Drawing.Size(143, 18);
+            this.Pdf2PPTStatusText.TabIndex = 3;
+            this.Pdf2PPTStatusText.Text = "正在处理X个文件";
+            // 
+            // ConvertPDF2PPT
+            // 
+            this.ConvertPDF2PPT.Location = new System.Drawing.Point(746, 406);
+            this.ConvertPDF2PPT.Name = "ConvertPDF2PPT";
+            this.ConvertPDF2PPT.Size = new System.Drawing.Size(221, 55);
+            this.ConvertPDF2PPT.TabIndex = 2;
+            this.ConvertPDF2PPT.Text = "开始处理";
+            this.ConvertPDF2PPT.UseVisualStyleBackColor = true;
+            this.ConvertPDF2PPT.Click += new System.EventHandler(this.ConvertPDF2PPT_Click);
+            // 
+            // SelectConvertPDF2PPT
+            // 
+            this.SelectConvertPDF2PPT.Location = new System.Drawing.Point(6, 406);
+            this.SelectConvertPDF2PPT.Name = "SelectConvertPDF2PPT";
+            this.SelectConvertPDF2PPT.Size = new System.Drawing.Size(221, 55);
+            this.SelectConvertPDF2PPT.TabIndex = 1;
+            this.SelectConvertPDF2PPT.Text = "选择文件";
+            this.SelectConvertPDF2PPT.UseVisualStyleBackColor = true;
+            this.SelectConvertPDF2PPT.Click += new System.EventHandler(this.SelectConvertPDF2PPT_Click);
+            // 
+            // PDF2PPTFileList
+            // 
+            this.PDF2PPTFileList.HideSelection = false;
+            this.PDF2PPTFileList.Location = new System.Drawing.Point(6, 6);
+            this.PDF2PPTFileList.Name = "PDF2PPTFileList";
+            this.PDF2PPTFileList.Size = new System.Drawing.Size(961, 326);
+            this.PDF2PPTFileList.TabIndex = 0;
+            this.PDF2PPTFileList.UseCompatibleStateImageBehavior = false;
+            this.PDF2PPTFileList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PDF2PPTFileList_MouseClick);
             // 
             // TabPage_14
             // 
@@ -1117,9 +1383,9 @@
             this.TabPage_19.Controls.Add(this.RemovePdfWaterMark);
             this.TabPage_19.Controls.Add(this.SelectRemovePdfWaterMarkFiles);
             this.TabPage_19.Controls.Add(this.RemovePdfWaterMarkFileList);
-            this.TabPage_19.Location = new System.Drawing.Point(4, 28);
+            this.TabPage_19.Location = new System.Drawing.Point(4, 52);
             this.TabPage_19.Name = "TabPage_19";
-            this.TabPage_19.Size = new System.Drawing.Size(975, 532);
+            this.TabPage_19.Size = new System.Drawing.Size(975, 508);
             this.TabPage_19.TabIndex = 18;
             this.TabPage_19.Text = "移除PDF水印";
             this.TabPage_19.UseVisualStyleBackColor = true;
@@ -1164,15 +1430,87 @@
             this.RemovePdfWaterMarkFileList.UseCompatibleStateImageBehavior = false;
             this.RemovePdfWaterMarkFileList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.RemovePdfWaterMarkFileList_MouseClick);
             // 
+            // TabPage_22
+            // 
+            this.TabPage_22.Controls.Add(this.ConvertPdfComplianceVersion);
+            this.TabPage_22.Controls.Add(this.label39);
+            this.TabPage_22.Controls.Add(this.ConvertPdfComplianceStatusText);
+            this.TabPage_22.Controls.Add(this.ConvertPdfCompliance);
+            this.TabPage_22.Controls.Add(this.SelectConvertComplaincePdf);
+            this.TabPage_22.Controls.Add(this.ConvertPdfComplianceFileList);
+            this.TabPage_22.Location = new System.Drawing.Point(4, 76);
+            this.TabPage_22.Name = "TabPage_22";
+            this.TabPage_22.Size = new System.Drawing.Size(975, 484);
+            this.TabPage_22.TabIndex = 21;
+            this.TabPage_22.Text = "PDF版本转换";
+            this.TabPage_22.UseVisualStyleBackColor = true;
+            // 
+            // ConvertPdfComplianceVersion
+            // 
+            this.ConvertPdfComplianceVersion.FormattingEnabled = true;
+            this.ConvertPdfComplianceVersion.Location = new System.Drawing.Point(99, 345);
+            this.ConvertPdfComplianceVersion.Name = "ConvertPdfComplianceVersion";
+            this.ConvertPdfComplianceVersion.Size = new System.Drawing.Size(121, 26);
+            this.ConvertPdfComplianceVersion.TabIndex = 5;
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(12, 348);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(80, 18);
+            this.label39.TabIndex = 4;
+            this.label39.Text = "转换版本";
+            // 
+            // ConvertPdfComplianceStatusText
+            // 
+            this.ConvertPdfComplianceStatusText.AutoSize = true;
+            this.ConvertPdfComplianceStatusText.ForeColor = System.Drawing.Color.ForestGreen;
+            this.ConvertPdfComplianceStatusText.Location = new System.Drawing.Point(246, 424);
+            this.ConvertPdfComplianceStatusText.Name = "ConvertPdfComplianceStatusText";
+            this.ConvertPdfComplianceStatusText.Size = new System.Drawing.Size(143, 18);
+            this.ConvertPdfComplianceStatusText.TabIndex = 3;
+            this.ConvertPdfComplianceStatusText.Text = "正在处理X个文件";
+            // 
+            // ConvertPdfCompliance
+            // 
+            this.ConvertPdfCompliance.Location = new System.Drawing.Point(746, 406);
+            this.ConvertPdfCompliance.Name = "ConvertPdfCompliance";
+            this.ConvertPdfCompliance.Size = new System.Drawing.Size(221, 55);
+            this.ConvertPdfCompliance.TabIndex = 2;
+            this.ConvertPdfCompliance.Text = "开始处理";
+            this.ConvertPdfCompliance.UseVisualStyleBackColor = true;
+            this.ConvertPdfCompliance.Click += new System.EventHandler(this.ConvertPdfCompliance_Click);
+            // 
+            // SelectConvertComplaincePdf
+            // 
+            this.SelectConvertComplaincePdf.Location = new System.Drawing.Point(6, 406);
+            this.SelectConvertComplaincePdf.Name = "SelectConvertComplaincePdf";
+            this.SelectConvertComplaincePdf.Size = new System.Drawing.Size(221, 55);
+            this.SelectConvertComplaincePdf.TabIndex = 1;
+            this.SelectConvertComplaincePdf.Text = "选择文件";
+            this.SelectConvertComplaincePdf.UseVisualStyleBackColor = true;
+            this.SelectConvertComplaincePdf.Click += new System.EventHandler(this.SelectConvertComplaincePdf_Click);
+            // 
+            // ConvertPdfComplianceFileList
+            // 
+            this.ConvertPdfComplianceFileList.HideSelection = false;
+            this.ConvertPdfComplianceFileList.Location = new System.Drawing.Point(6, 6);
+            this.ConvertPdfComplianceFileList.Name = "ConvertPdfComplianceFileList";
+            this.ConvertPdfComplianceFileList.Size = new System.Drawing.Size(961, 326);
+            this.ConvertPdfComplianceFileList.TabIndex = 0;
+            this.ConvertPdfComplianceFileList.UseCompatibleStateImageBehavior = false;
+            this.ConvertPdfComplianceFileList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ConvertPdfComplianceFileList_MouseClick);
+            // 
             // TabPage_15
             // 
             this.TabPage_15.Controls.Add(this.ConverWord2ExcelStatusText);
             this.TabPage_15.Controls.Add(this.ConvertWord2Excel);
             this.TabPage_15.Controls.Add(this.SelectWord2ExcelFiles);
             this.TabPage_15.Controls.Add(this.Word2ExcelFileList);
-            this.TabPage_15.Location = new System.Drawing.Point(4, 28);
+            this.TabPage_15.Location = new System.Drawing.Point(4, 52);
             this.TabPage_15.Name = "TabPage_15";
-            this.TabPage_15.Size = new System.Drawing.Size(975, 532);
+            this.TabPage_15.Size = new System.Drawing.Size(975, 508);
             this.TabPage_15.TabIndex = 14;
             this.TabPage_15.Text = "WORD转EXCEL";
             this.TabPage_15.UseVisualStyleBackColor = true;
@@ -1744,9 +2082,9 @@
             this.TabPage_12.Controls.Add(this.SelectDataMatrixWord);
             this.TabPage_12.Controls.Add(this.groupBox14);
             this.TabPage_12.Controls.Add(this.DecodeMatrixWordListView);
-            this.TabPage_12.Location = new System.Drawing.Point(4, 52);
+            this.TabPage_12.Location = new System.Drawing.Point(4, 76);
             this.TabPage_12.Name = "TabPage_12";
-            this.TabPage_12.Size = new System.Drawing.Size(975, 508);
+            this.TabPage_12.Size = new System.Drawing.Size(975, 484);
             this.TabPage_12.TabIndex = 11;
             this.TabPage_12.Text = "特殊二维码校验";
             this.TabPage_12.UseVisualStyleBackColor = true;
@@ -1821,9 +2159,9 @@
             this.TabPage_05.Controls.Add(this.ConvertTextButton);
             this.TabPage_05.Controls.Add(this.groupBox2);
             this.TabPage_05.Controls.Add(this.groupBox1);
-            this.TabPage_05.Location = new System.Drawing.Point(4, 52);
+            this.TabPage_05.Location = new System.Drawing.Point(4, 76);
             this.TabPage_05.Name = "TabPage_05";
-            this.TabPage_05.Size = new System.Drawing.Size(975, 508);
+            this.TabPage_05.Size = new System.Drawing.Size(975, 484);
             this.TabPage_05.TabIndex = 4;
             this.TabPage_05.Text = "姓名横转竖列";
             this.TabPage_05.UseVisualStyleBackColor = true;
@@ -2469,6 +2807,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.ChceckVersion);
             this.groupBox4.Controls.Add(this.linkLabel2);
             this.groupBox4.Controls.Add(this.label13);
             this.groupBox4.Controls.Add(this.label11);
@@ -2480,6 +2819,16 @@
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "软件说明";
+            // 
+            // ChceckVersion
+            // 
+            this.ChceckVersion.Location = new System.Drawing.Point(551, 188);
+            this.ChceckVersion.Name = "ChceckVersion";
+            this.ChceckVersion.Size = new System.Drawing.Size(130, 36);
+            this.ChceckVersion.TabIndex = 6;
+            this.ChceckVersion.Text = "检查更新";
+            this.ChceckVersion.UseVisualStyleBackColor = true;
+            this.ChceckVersion.Click += new System.EventHandler(this.ChceckVersion_Click);
             // 
             // linkLabel2
             // 
@@ -2673,6 +3022,10 @@
             this.TabPage_03.PerformLayout();
             this.TabPage_07.ResumeLayout(false);
             this.TabPage_07.PerformLayout();
+            this.TabPage_20.ResumeLayout(false);
+            this.TabPage_20.PerformLayout();
+            this.TabPage_21.ResumeLayout(false);
+            this.TabPage_21.PerformLayout();
             this.TabPage_14.ResumeLayout(false);
             this.TabPage_14.PerformLayout();
             this.TabPage_06.ResumeLayout(false);
@@ -2686,6 +3039,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.WaterMarkImage)).EndInit();
             this.TabPage_19.ResumeLayout(false);
             this.TabPage_19.PerformLayout();
+            this.TabPage_22.ResumeLayout(false);
+            this.TabPage_22.PerformLayout();
             this.TabPage_15.ResumeLayout(false);
             this.TabPage_15.PerformLayout();
             this.TabPage_16.ResumeLayout(false);
@@ -2977,6 +3332,36 @@
         private System.Windows.Forms.ErrorProvider MainFormError;
         internal System.Windows.Forms.TextBox WaterMarkImageWidth;
         internal System.Windows.Forms.TextBox WaterMarkImageHeight;
+        private System.Windows.Forms.Label label34;
+        internal System.Windows.Forms.ComboBox PDFComplianceBox;
+        private System.Windows.Forms.Button ChceckVersion;
+        private System.Windows.Forms.TabPage TabPage_20;
+        private System.Windows.Forms.TabPage TabPage_21;
+        private System.Windows.Forms.Button ConvertPPT2PDF;
+        private System.Windows.Forms.Button SelectPPT2PdfFile;
+        internal System.Windows.Forms.ListView PPT2PdfFileList;
+        private System.Windows.Forms.Label ConvertPPT2PDFStatusText;
+        private System.Windows.Forms.Label label35;
+        internal System.Windows.Forms.ComboBox ExportNotePageCombox;
+        internal System.Windows.Forms.CheckBox DrawBlackLine;
+        internal System.Windows.Forms.CheckBox ExportHiddenPage;
+        private System.Windows.Forms.Label label36;
+        internal System.Windows.Forms.TextBox ConvertPPT2PDFPassword;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.Button SelectConvertPDF2PPT;
+        private System.Windows.Forms.Button ConvertPDF2PPT;
+        private System.Windows.Forms.Label Pdf2PPTStatusText;
+        internal System.Windows.Forms.ListView PDF2PPTFileList;
+        internal System.Windows.Forms.CheckBox SplitShapeBox;
+        internal System.Windows.Forms.CheckBox ExtraOcrBox;
+        internal System.Windows.Forms.CheckBox RenderImageBox;
+        private System.Windows.Forms.TabPage TabPage_22;
+        internal System.Windows.Forms.ListView ConvertPdfComplianceFileList;
+        private System.Windows.Forms.Button SelectConvertComplaincePdf;
+        private System.Windows.Forms.Button ConvertPdfCompliance;
+        private System.Windows.Forms.Label ConvertPdfComplianceStatusText;
+        private System.Windows.Forms.Label label39;
+        internal System.Windows.Forms.ComboBox ConvertPdfComplianceVersion;
     }
 }
 
