@@ -17,6 +17,8 @@ using System.Windows.Forms.VisualStyles;
 using System.Net;
 using System.Net.Http;
 using System.Net.Sockets;
+using System.Net.Http.Headers;
+using System.Runtime.InteropServices;
 
 namespace DocumentTools
 {
@@ -1958,7 +1960,8 @@ namespace DocumentTools
 
                 using (HttpClient client = new HttpClient())
                 {
-
+                    string UserAgentName = $"{Application.ProductName}_{RuntimeInformation.ProcessArchitecture}";
+                    client.DefaultRequestHeaders.Add("User-Agent", UserAgentName);
                     string RemoteVersion = await client.GetStringAsync(CheckVersionUrl);
 
                     if (int.Parse(NowVersion.Replace(".", "")) < int.Parse(RemoteVersion.Replace(".", "")))

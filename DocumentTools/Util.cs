@@ -660,7 +660,10 @@ namespace DocumentTools
                     AllColumnsInOnePagePerSheet = false,
                     CheckWorkbookDefaultFont = true,
                     MergeAreas = true,
-                    ValidateMergedAreas = true
+                    ValidateMergedAreas = true,
+                    GridlineType = GridlineType.Hair,
+                    TextCrossType = TextCrossType.Default,
+                    OnePagePerSheet = false,
                 };
                 TempLoadWorkBook.Save(SaveDocumentFileName, TempDocxSaveOption);
             }
