@@ -125,6 +125,7 @@ namespace DocumentTools
             this.DecodeDataMatrixView.ShowRootLines = true;
             this.DecodeDataMatrixView.FullRowSelect = true;
             this.CompressImage_OutPutImageFormat.Enabled = false;
+            this.IcoSizeDrop.Enabled = false;
             //ReleaseRegistry.Enabled = false;
             Image2PDFCOmpressImage.Enabled = false;
 
@@ -2395,6 +2396,11 @@ namespace DocumentTools
             {
                 this.CompressImage_OutPutImageFormat.Enabled = false;
             }
+        }
+
+        private void PlayCXKMusic_Click(object sender, EventArgs e)
+        {
+            Util.PlayMp3WithStream();
         }
     }
 }

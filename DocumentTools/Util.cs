@@ -1506,18 +1506,23 @@ namespace DocumentTools
 
         public static void ConvertImage2Ico(string ImageFileName, string SaveFileName, int icoSize)
         {
-            using (Bitmap TempBitMapLoad = new Bitmap(ImageFileName))
+
+            Aspose.Hook.HookManager.StartHook();
+
+            using (Aspose.Imaging.Image TempLoadImage = Aspose.Imaging.Image.Load(ImageFileName))
             {
-                using (Bitmap TempResizeBitMap = new Bitmap(TempBitMapLoad, new Size(icoSize, icoSize)))
+                Aspose.Imaging.ImageOptions.IcoOptions TempIcoOption = new Aspose.Imaging.ImageOptions.IcoOptions
                 {
-                    using (Icon TempIcon = Icon.FromHandle(TempResizeBitMap.GetHicon()))
+                    BitsPerPixel = 32,
+                    VectorRasterizationOptions = new Aspose.Imaging.ImageOptions.VectorRasterizationOptions
                     {
-                        using (FileStream TempIconStream = new FileStream(SaveFileName, FileMode.OpenOrCreate))
-                        {
-                            TempIcon.Save(TempIconStream);
-                        }
-                    }
-                }
+                        PageHeight = icoSize,
+                        PageWidth = icoSize,
+                    },
+
+                };
+
+                TempLoadImage.Save(SaveFileName, TempIcoOption);
             }
         }
     }
