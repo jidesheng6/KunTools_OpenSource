@@ -34,7 +34,7 @@ namespace DocumentTools
 
         public string AddWaterMarkBackGroudImageFileName = string.Empty;
 
-        string NowVersion = "23.7.31";
+        string NowVersion = "23.8.1";
 
         #region 控件大小随窗体大小等比例缩放
 
@@ -125,6 +125,7 @@ namespace DocumentTools
             this.DecodeDataMatrixView.ShowRootLines = true;
             this.DecodeDataMatrixView.FullRowSelect = true;
             this.CompressImage_OutPutImageFormat.Enabled = false;
+            this.IcoSizeDrop.Enabled = false;
             //ReleaseRegistry.Enabled = false;
             Image2PDFCOmpressImage.Enabled = false;
 
@@ -661,8 +662,8 @@ namespace DocumentTools
             this.CompressBmpMode_Combox.DataSource = Enum.GetNames(typeof(Aspose.Imaging.FileFormats.Bmp.BitmapCompression));
 
 
-            this.CompressBmpPixeBits_Combox.DataSource = new int[] { 1, 4, 8, 16, 24, 32 };//BMP像素深度范围
-            this.CompressBmpPixeBits_Combox.SelectedIndex = 4;
+            this.CompressBmpPixeBits_Combox.DataSource = new int[] {  4, 8, 16, 24, 32 };//BMP像素深度范围
+            this.CompressBmpPixeBits_Combox.SelectedIndex = 3;
 
             DataTable CompressImage_OutPutFormat = new DataTable();
             CompressImage_OutPutFormat.Columns.Add("DisplayValue");
@@ -2395,6 +2396,11 @@ namespace DocumentTools
             {
                 this.CompressImage_OutPutImageFormat.Enabled = false;
             }
+        }
+
+        private void PlayCXKMusic_Click(object sender, EventArgs e)
+        {
+            Util.PlayMp3WithStream();
         }
     }
 }

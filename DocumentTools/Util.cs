@@ -1,6 +1,7 @@
 ﻿using Aspose.BarCode.BarCodeRecognition;
 using Aspose.Cells;
 using Aspose.Cells.Rendering;
+using Aspose.Imaging;
 using Aspose.Pdf;
 using Aspose.Pdf.Annotations;
 using Aspose.Pdf.Text;
@@ -1205,23 +1206,33 @@ namespace DocumentTools
                         TempJpgOption.CompressionType = Compress_Jpeg_Mode;
                         TempJpgOption.ColorType = Compress_Jpeg_ColorMode;
                         TempJpgOption.Quality = Compress_Jpeg_Quailty;
-                        TempLoadImage.Save(SavedFileName, TempJpgOption);
                         break;
                     case ".jpeg":
                         TempJpgOption.CompressionType = Compress_Jpeg_Mode;
                         TempJpgOption.ColorType = Compress_Jpeg_ColorMode;
                         TempJpgOption.Quality = Compress_Jpeg_Quailty;
-                        TempLoadImage.Save(SavedFileName, TempJpgOption);
                         break;
                     case ".png":
                         TempPngOption.CompressionLevel = Compress_Png_Level;
                         TempPngOption.ColorType = Compress_Png_ColorType;
-                        TempLoadImage.Save(SavedFileName, TempPngOption);
                         break;
                     case ".bmp":
                         TempBmpOption.Compression = Compress_Bmp_Compression;
                         TempBmpOption.BitsPerPixel = Compress_Bmp_Bits_Pixel;
-                        TempLoadImage.Save(SavedFileName, TempBmpOption);
+                        if(Compress_Bmp_Compression == Aspose.Imaging.FileFormats.Bmp.BitmapCompression.Rle4 &&
+                            Compress_Bmp_Bits_Pixel==4)
+                        {
+                            TempBmpOption.Palette = ColorPaletteHelper.Create4Bit();
+                        }
+                        else if(Compress_Bmp_Compression == Aspose.Imaging.FileFormats.Bmp.BitmapCompression.Rle8 &&
+                            Compress_Bmp_Bits_Pixel == 8)
+                        {
+                            TempBmpOption.Palette = ColorPaletteHelper.Create8Bit();
+                        }
+                        else
+                        {
+                            TempBmpOption.Palette = ColorPaletteHelper.CreateMonochrome();
+                        }
                         break;
                     default:
                         break;
@@ -1506,18 +1517,23 @@ namespace DocumentTools
 
         public static void ConvertImage2Ico(string ImageFileName, string SaveFileName, int icoSize)
         {
-            using (Bitmap TempBitMapLoad = new Bitmap(ImageFileName))
+
+            Aspose.Hook.HookManager.StartHook();
+
+            using (Aspose.Imaging.Image TempLoadImage = Aspose.Imaging.Image.Load(ImageFileName))
             {
-                using (Bitmap TempResizeBitMap = new Bitmap(TempBitMapLoad, new Size(icoSize, icoSize)))
+                Aspose.Imaging.ImageOptions.IcoOptions TempIcoOption = new Aspose.Imaging.ImageOptions.IcoOptions
                 {
-                    using (Icon TempIcon = Icon.FromHandle(TempResizeBitMap.GetHicon()))
+                    BitsPerPixel = 32,
+                    VectorRasterizationOptions = new Aspose.Imaging.ImageOptions.VectorRasterizationOptions
                     {
-                        using (FileStream TempIconStream = new FileStream(SaveFileName, FileMode.OpenOrCreate))
-                        {
-                            TempIcon.Save(TempIconStream);
-                        }
-                    }
-                }
+                        PageHeight = icoSize,
+                        PageWidth = icoSize,
+                    },
+
+                };
+
+                TempLoadImage.Save(SaveFileName, TempIcoOption);
             }
         }
     }

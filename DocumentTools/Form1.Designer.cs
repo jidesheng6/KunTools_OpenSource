@@ -332,6 +332,8 @@
             this.TabPage_08 = new System.Windows.Forms.TabPage();
             this.label12 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.PlayCXKMusic = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.ChceckVersion = new System.Windows.Forms.Button();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.label13 = new System.Windows.Forms.Label();
@@ -408,6 +410,7 @@
             this.groupBox15.SuspendLayout();
             this.TabPage_08.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.ListViewRightMenu.SuspendLayout();
             this.TreeViewContentMenu.SuspendLayout();
@@ -2135,7 +2138,7 @@
             // CompressPDF_ImageCompressVersion
             // 
             this.CompressPDF_ImageCompressVersion.FormattingEnabled = true;
-            this.CompressPDF_ImageCompressVersion.Location = new System.Drawing.Point(649, 21);
+            this.CompressPDF_ImageCompressVersion.Location = new System.Drawing.Point(649, 22);
             this.CompressPDF_ImageCompressVersion.Name = "CompressPDF_ImageCompressVersion";
             this.CompressPDF_ImageCompressVersion.Size = new System.Drawing.Size(75, 26);
             this.CompressPDF_ImageCompressVersion.TabIndex = 9;
@@ -2143,7 +2146,7 @@
             // label46
             // 
             this.label46.AutoSize = true;
-            this.label46.Location = new System.Drawing.Point(565, 27);
+            this.label46.Location = new System.Drawing.Point(565, 26);
             this.label46.Name = "label46";
             this.label46.Size = new System.Drawing.Size(80, 18);
             this.label46.TabIndex = 8;
@@ -3551,6 +3554,8 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.PlayCXKMusic);
+            this.groupBox4.Controls.Add(this.pictureBox1);
             this.groupBox4.Controls.Add(this.ChceckVersion);
             this.groupBox4.Controls.Add(this.linkLabel2);
             this.groupBox4.Controls.Add(this.label13);
@@ -3563,6 +3568,26 @@
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "软件说明";
+            // 
+            // PlayCXKMusic
+            // 
+            this.PlayCXKMusic.Location = new System.Drawing.Point(808, 27);
+            this.PlayCXKMusic.Name = "PlayCXKMusic";
+            this.PlayCXKMusic.Size = new System.Drawing.Size(148, 36);
+            this.PlayCXKMusic.TabIndex = 8;
+            this.PlayCXKMusic.Text = "点一下";
+            this.PlayCXKMusic.UseVisualStyleBackColor = true;
+            this.PlayCXKMusic.Click += new System.EventHandler(this.PlayCXKMusic_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(808, 95);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(148, 129);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 7;
+            this.pictureBox1.TabStop = false;
             // 
             // ChceckVersion
             // 
@@ -3856,6 +3881,7 @@
             this.TabPage_08.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.ListViewRightMenu.ResumeLayout(false);
@@ -4192,6 +4218,8 @@
         internal System.Windows.Forms.ComboBox CompressImage_OutPutImageFormat;
         internal System.Windows.Forms.ComboBox CompressPngColorMode_Combox;
         private System.Windows.Forms.Label CompressImageStatusText;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button PlayCXKMusic;
     }
 }
 
