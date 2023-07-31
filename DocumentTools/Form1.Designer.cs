@@ -182,6 +182,52 @@
             this.ConvertImage2PDF = new System.Windows.Forms.Button();
             this.SelectConvertImage2PDF = new System.Windows.Forms.Button();
             this.ConvertImage2PDFFileList = new System.Windows.Forms.ListView();
+            this.TabPage_24 = new System.Windows.Forms.TabPage();
+            this.CompressPDFStatusText = new System.Windows.Forms.Label();
+            this.groupBox21 = new System.Windows.Forms.GroupBox();
+            this.CompressPDF_CompressImageFlate = new System.Windows.Forms.CheckBox();
+            this.CompressPDF_RemoveForms = new System.Windows.Forms.CheckBox();
+            this.CompressPDF_CancelEmbedFont = new System.Windows.Forms.CheckBox();
+            this.CompressPDF_LinkSameStream = new System.Windows.Forms.CheckBox();
+            this.CompressPDF_RemoveUnuseStream = new System.Windows.Forms.CheckBox();
+            this.CompressPDF_RemoveUnuseObject = new System.Windows.Forms.CheckBox();
+            this.CompressPDF_ImageCompressVersion = new System.Windows.Forms.ComboBox();
+            this.label46 = new System.Windows.Forms.Label();
+            this.CompressPDF_ImageResoution = new System.Windows.Forms.ComboBox();
+            this.label45 = new System.Windows.Forms.Label();
+            this.CompressPDF_ImageQuailty = new System.Windows.Forms.ComboBox();
+            this.label44 = new System.Windows.Forms.Label();
+            this.CompressPDF_CompressImage = new System.Windows.Forms.CheckBox();
+            this.CompressPDF_WEB = new System.Windows.Forms.CheckBox();
+            this.CompressPDF = new System.Windows.Forms.Button();
+            this.SelectCompressPDFFiles = new System.Windows.Forms.Button();
+            this.CompressPdfFileList = new System.Windows.Forms.ListView();
+            this.TabPage_25 = new System.Windows.Forms.TabPage();
+            this.CompressImageStatusText = new System.Windows.Forms.Label();
+            this.groupBox25 = new System.Windows.Forms.GroupBox();
+            this.CompressImage_NotUseSelfExt = new System.Windows.Forms.CheckBox();
+            this.CompressImage_OutPutImageFormat = new System.Windows.Forms.ComboBox();
+            this.label54 = new System.Windows.Forms.Label();
+            this.groupBox24 = new System.Windows.Forms.GroupBox();
+            this.CompressBmpPixeBits_Combox = new System.Windows.Forms.ComboBox();
+            this.CompressBmpMode_Combox = new System.Windows.Forms.ComboBox();
+            this.label50 = new System.Windows.Forms.Label();
+            this.label53 = new System.Windows.Forms.Label();
+            this.groupBox23 = new System.Windows.Forms.GroupBox();
+            this.CompressPngColorMode_Combox = new System.Windows.Forms.ComboBox();
+            this.CompressPngLevel_Combox = new System.Windows.Forms.ComboBox();
+            this.label51 = new System.Windows.Forms.Label();
+            this.label52 = new System.Windows.Forms.Label();
+            this.groupBox22 = new System.Windows.Forms.GroupBox();
+            this.CompressJpegQuailty_Combox = new System.Windows.Forms.ComboBox();
+            this.label49 = new System.Windows.Forms.Label();
+            this.CompressJpegColorMode_Combox = new System.Windows.Forms.ComboBox();
+            this.CompressJpegMode_Combox = new System.Windows.Forms.ComboBox();
+            this.label48 = new System.Windows.Forms.Label();
+            this.label47 = new System.Windows.Forms.Label();
+            this.CompressImage = new System.Windows.Forms.Button();
+            this.SelectCompressImageFile = new System.Windows.Forms.Button();
+            this.CompressImageFileList = new System.Windows.Forms.ListView();
             this.TabPage_10 = new System.Windows.Forms.TabPage();
             this.TurialRegex = new System.Windows.Forms.LinkLabel();
             this.OnlineRegextTool = new System.Windows.Forms.LinkLabel();
@@ -297,25 +343,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.TabPage_24 = new System.Windows.Forms.TabPage();
-            this.groupBox21 = new System.Windows.Forms.GroupBox();
-            this.CompressPDF_CompressImageFlate = new System.Windows.Forms.CheckBox();
-            this.CompressPDF_RemoveForms = new System.Windows.Forms.CheckBox();
-            this.CompressPDF_CancelEmbedFont = new System.Windows.Forms.CheckBox();
-            this.CompressPDF_LinkSameStream = new System.Windows.Forms.CheckBox();
-            this.CompressPDF_RemoveUnuseStream = new System.Windows.Forms.CheckBox();
-            this.CompressPDF_RemoveUnuseObject = new System.Windows.Forms.CheckBox();
-            this.CompressPDF_ImageCompressVersion = new System.Windows.Forms.ComboBox();
-            this.label46 = new System.Windows.Forms.Label();
-            this.CompressPDF_ImageResoution = new System.Windows.Forms.ComboBox();
-            this.label45 = new System.Windows.Forms.Label();
-            this.CompressPDF_ImageQuailty = new System.Windows.Forms.ComboBox();
-            this.label44 = new System.Windows.Forms.Label();
-            this.CompressPDF_CompressImage = new System.Windows.Forms.CheckBox();
-            this.CompressPDF_WEB = new System.Windows.Forms.CheckBox();
-            this.CompressPDF = new System.Windows.Forms.Button();
-            this.SelectCompressPDFFiles = new System.Windows.Forms.Button();
-            this.CompressPdfFileList = new System.Windows.Forms.ListView();
             this.SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.ListViewRightMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.删除本项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -328,7 +355,6 @@
             this.ColorSelectDialog = new System.Windows.Forms.ColorDialog();
             this.FontSelectDialog = new System.Windows.Forms.FontDialog();
             this.MainFormError = new System.Windows.Forms.ErrorProvider(this.components);
-            this.CompressPDFStatusText = new System.Windows.Forms.Label();
             this.MainTabPage.SuspendLayout();
             this.TabPage_01.SuspendLayout();
             this.TabPage_02.SuspendLayout();
@@ -350,6 +376,13 @@
             this.TabPage_23.SuspendLayout();
             this.groupBox19.SuspendLayout();
             this.groupBox20.SuspendLayout();
+            this.TabPage_24.SuspendLayout();
+            this.groupBox21.SuspendLayout();
+            this.TabPage_25.SuspendLayout();
+            this.groupBox25.SuspendLayout();
+            this.groupBox24.SuspendLayout();
+            this.groupBox23.SuspendLayout();
+            this.groupBox22.SuspendLayout();
             this.TabPage_10.SuspendLayout();
             this.groupBox10.SuspendLayout();
             this.groupBox9.SuspendLayout();
@@ -376,8 +409,6 @@
             this.TabPage_08.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.TabPage_24.SuspendLayout();
-            this.groupBox21.SuspendLayout();
             this.ListViewRightMenu.SuspendLayout();
             this.TreeViewContentMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainFormError)).BeginInit();
@@ -401,6 +432,8 @@
             this.MainTabPage.Controls.Add(this.TabPage_16);
             this.MainTabPage.Controls.Add(this.TabPage_04);
             this.MainTabPage.Controls.Add(this.TabPage_23);
+            this.MainTabPage.Controls.Add(this.TabPage_24);
+            this.MainTabPage.Controls.Add(this.TabPage_25);
             this.MainTabPage.Controls.Add(this.TabPage_10);
             this.MainTabPage.Controls.Add(this.TabPage_11);
             this.MainTabPage.Controls.Add(this.TabPage_12);
@@ -408,13 +441,12 @@
             this.MainTabPage.Controls.Add(this.TabPage_09);
             this.MainTabPage.Controls.Add(this.TabPage_13);
             this.MainTabPage.Controls.Add(this.TabPage_08);
-            this.MainTabPage.Controls.Add(this.TabPage_24);
             this.MainTabPage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainTabPage.Location = new System.Drawing.Point(0, 0);
             this.MainTabPage.Multiline = true;
             this.MainTabPage.Name = "MainTabPage";
             this.MainTabPage.SelectedIndex = 0;
-            this.MainTabPage.Size = new System.Drawing.Size(983, 564);
+            this.MainTabPage.Size = new System.Drawing.Size(983, 578);
             this.MainTabPage.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.MainTabPage.TabIndex = 0;
             this.MainTabPage.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.MainTabPage_DrawItem);
@@ -434,7 +466,7 @@
             this.TabPage_01.Location = new System.Drawing.Point(4, 76);
             this.TabPage_01.Name = "TabPage_01";
             this.TabPage_01.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage_01.Size = new System.Drawing.Size(975, 484);
+            this.TabPage_01.Size = new System.Drawing.Size(975, 498);
             this.TabPage_01.TabIndex = 0;
             this.TabPage_01.Text = "WORD转PDF";
             this.TabPage_01.UseVisualStyleBackColor = true;
@@ -539,7 +571,7 @@
             this.TabPage_02.Location = new System.Drawing.Point(4, 76);
             this.TabPage_02.Name = "TabPage_02";
             this.TabPage_02.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage_02.Size = new System.Drawing.Size(975, 484);
+            this.TabPage_02.Size = new System.Drawing.Size(975, 498);
             this.TabPage_02.TabIndex = 1;
             this.TabPage_02.Text = "PDF转WORD";
             this.TabPage_02.UseVisualStyleBackColor = true;
@@ -613,7 +645,7 @@
             this.TabPage_03.Controls.Add(this.ExcelFileListView);
             this.TabPage_03.Location = new System.Drawing.Point(4, 76);
             this.TabPage_03.Name = "TabPage_03";
-            this.TabPage_03.Size = new System.Drawing.Size(975, 484);
+            this.TabPage_03.Size = new System.Drawing.Size(975, 498);
             this.TabPage_03.TabIndex = 2;
             this.TabPage_03.Text = "EXCEL转PDF";
             this.TabPage_03.UseVisualStyleBackColor = true;
@@ -677,7 +709,7 @@
             this.TabPage_07.Controls.Add(this.PDF2ExcelFileView);
             this.TabPage_07.Location = new System.Drawing.Point(4, 76);
             this.TabPage_07.Name = "TabPage_07";
-            this.TabPage_07.Size = new System.Drawing.Size(975, 484);
+            this.TabPage_07.Size = new System.Drawing.Size(975, 498);
             this.TabPage_07.TabIndex = 6;
             this.TabPage_07.Text = "PDF转EXCEL";
             this.TabPage_07.UseVisualStyleBackColor = true;
@@ -748,7 +780,7 @@
             this.TabPage_20.Location = new System.Drawing.Point(4, 76);
             this.TabPage_20.Name = "TabPage_20";
             this.TabPage_20.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage_20.Size = new System.Drawing.Size(975, 484);
+            this.TabPage_20.Size = new System.Drawing.Size(975, 498);
             this.TabPage_20.TabIndex = 19;
             this.TabPage_20.Text = "PPT转PDF";
             this.TabPage_20.UseVisualStyleBackColor = true;
@@ -757,7 +789,7 @@
             // 
             this.label37.AutoSize = true;
             this.label37.ForeColor = System.Drawing.Color.Tomato;
-            this.label37.Location = new System.Drawing.Point(446, 385);
+            this.label37.Location = new System.Drawing.Point(437, 391);
             this.label37.Name = "label37";
             this.label37.Size = new System.Drawing.Size(251, 90);
             this.label37.TabIndex = 10;
@@ -867,7 +899,7 @@
             this.TabPage_21.Controls.Add(this.PDF2PPTFileList);
             this.TabPage_21.Location = new System.Drawing.Point(4, 76);
             this.TabPage_21.Name = "TabPage_21";
-            this.TabPage_21.Size = new System.Drawing.Size(975, 484);
+            this.TabPage_21.Size = new System.Drawing.Size(975, 498);
             this.TabPage_21.TabIndex = 20;
             this.TabPage_21.Text = "PDF转PPT";
             this.TabPage_21.UseVisualStyleBackColor = true;
@@ -953,7 +985,7 @@
             this.TabPage_14.Location = new System.Drawing.Point(4, 76);
             this.TabPage_14.Name = "TabPage_14";
             this.TabPage_14.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage_14.Size = new System.Drawing.Size(975, 484);
+            this.TabPage_14.Size = new System.Drawing.Size(975, 498);
             this.TabPage_14.TabIndex = 13;
             this.TabPage_14.Text = "合并WORD";
             this.TabPage_14.UseVisualStyleBackColor = true;
@@ -1020,9 +1052,9 @@
             this.TabPage_06.Controls.Add(this.MergePdfFileView);
             this.TabPage_06.Location = new System.Drawing.Point(4, 76);
             this.TabPage_06.Name = "TabPage_06";
-            this.TabPage_06.Size = new System.Drawing.Size(975, 484);
+            this.TabPage_06.Size = new System.Drawing.Size(975, 498);
             this.TabPage_06.TabIndex = 5;
-            this.TabPage_06.Text = "合并PDF（图片转PDF）";
+            this.TabPage_06.Text = "合并PDF";
             this.TabPage_06.UseVisualStyleBackColor = true;
             // 
             // label5
@@ -1111,7 +1143,7 @@
             this.TabPage_17.Location = new System.Drawing.Point(4, 76);
             this.TabPage_17.Name = "TabPage_17";
             this.TabPage_17.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage_17.Size = new System.Drawing.Size(975, 484);
+            this.TabPage_17.Size = new System.Drawing.Size(975, 498);
             this.TabPage_17.TabIndex = 16;
             this.TabPage_17.Text = "拆分PDF";
             this.TabPage_17.UseVisualStyleBackColor = true;
@@ -1166,7 +1198,7 @@
             this.TabPage_18.Controls.Add(this.PdfWaterMarkFileList);
             this.TabPage_18.Location = new System.Drawing.Point(4, 76);
             this.TabPage_18.Name = "TabPage_18";
-            this.TabPage_18.Size = new System.Drawing.Size(975, 484);
+            this.TabPage_18.Size = new System.Drawing.Size(975, 498);
             this.TabPage_18.TabIndex = 17;
             this.TabPage_18.Text = "添加PDF水印";
             this.TabPage_18.UseVisualStyleBackColor = true;
@@ -1432,7 +1464,7 @@
             this.TabPage_19.Controls.Add(this.RemovePdfWaterMarkFileList);
             this.TabPage_19.Location = new System.Drawing.Point(4, 76);
             this.TabPage_19.Name = "TabPage_19";
-            this.TabPage_19.Size = new System.Drawing.Size(975, 484);
+            this.TabPage_19.Size = new System.Drawing.Size(975, 498);
             this.TabPage_19.TabIndex = 18;
             this.TabPage_19.Text = "移除PDF水印";
             this.TabPage_19.UseVisualStyleBackColor = true;
@@ -1487,7 +1519,7 @@
             this.TabPage_22.Controls.Add(this.ConvertPdfComplianceFileList);
             this.TabPage_22.Location = new System.Drawing.Point(4, 76);
             this.TabPage_22.Name = "TabPage_22";
-            this.TabPage_22.Size = new System.Drawing.Size(975, 484);
+            this.TabPage_22.Size = new System.Drawing.Size(975, 498);
             this.TabPage_22.TabIndex = 21;
             this.TabPage_22.Text = "PDF版本转换";
             this.TabPage_22.UseVisualStyleBackColor = true;
@@ -1557,7 +1589,7 @@
             this.TabPage_15.Controls.Add(this.Word2ExcelFileList);
             this.TabPage_15.Location = new System.Drawing.Point(4, 76);
             this.TabPage_15.Name = "TabPage_15";
-            this.TabPage_15.Size = new System.Drawing.Size(975, 484);
+            this.TabPage_15.Size = new System.Drawing.Size(975, 498);
             this.TabPage_15.TabIndex = 14;
             this.TabPage_15.Text = "WORD转EXCEL";
             this.TabPage_15.UseVisualStyleBackColor = true;
@@ -1611,7 +1643,7 @@
             this.TabPage_16.Controls.Add(this.Excel2WordFileList);
             this.TabPage_16.Location = new System.Drawing.Point(4, 76);
             this.TabPage_16.Name = "TabPage_16";
-            this.TabPage_16.Size = new System.Drawing.Size(975, 484);
+            this.TabPage_16.Size = new System.Drawing.Size(975, 498);
             this.TabPage_16.TabIndex = 15;
             this.TabPage_16.Text = "EXCEL转WORD";
             this.TabPage_16.UseVisualStyleBackColor = true;
@@ -1681,7 +1713,7 @@
             this.TabPage_04.Controls.Add(this.DocumentsListView);
             this.TabPage_04.Location = new System.Drawing.Point(4, 76);
             this.TabPage_04.Name = "TabPage_04";
-            this.TabPage_04.Size = new System.Drawing.Size(975, 484);
+            this.TabPage_04.Size = new System.Drawing.Size(975, 498);
             this.TabPage_04.TabIndex = 3;
             this.TabPage_04.Text = "WORD/PDF/EXCEL转图片";
             this.TabPage_04.UseVisualStyleBackColor = true;
@@ -1801,7 +1833,7 @@
             this.TabPage_23.Controls.Add(this.ConvertImage2PDFFileList);
             this.TabPage_23.Location = new System.Drawing.Point(4, 76);
             this.TabPage_23.Name = "TabPage_23";
-            this.TabPage_23.Size = new System.Drawing.Size(975, 484);
+            this.TabPage_23.Size = new System.Drawing.Size(975, 498);
             this.TabPage_23.TabIndex = 22;
             this.TabPage_23.Text = "图片转PDF";
             this.TabPage_23.UseVisualStyleBackColor = true;
@@ -1993,6 +2025,471 @@
             this.ConvertImage2PDFFileList.UseCompatibleStateImageBehavior = false;
             this.ConvertImage2PDFFileList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ConvertImage2PDFFileList_MouseClick);
             // 
+            // TabPage_24
+            // 
+            this.TabPage_24.Controls.Add(this.CompressPDFStatusText);
+            this.TabPage_24.Controls.Add(this.groupBox21);
+            this.TabPage_24.Controls.Add(this.CompressPDF);
+            this.TabPage_24.Controls.Add(this.SelectCompressPDFFiles);
+            this.TabPage_24.Controls.Add(this.CompressPdfFileList);
+            this.TabPage_24.Location = new System.Drawing.Point(4, 76);
+            this.TabPage_24.Name = "TabPage_24";
+            this.TabPage_24.Size = new System.Drawing.Size(975, 498);
+            this.TabPage_24.TabIndex = 23;
+            this.TabPage_24.Text = "压缩PDF";
+            this.TabPage_24.UseVisualStyleBackColor = true;
+            // 
+            // CompressPDFStatusText
+            // 
+            this.CompressPDFStatusText.AutoSize = true;
+            this.CompressPDFStatusText.ForeColor = System.Drawing.Color.ForestGreen;
+            this.CompressPDFStatusText.Location = new System.Drawing.Point(236, 422);
+            this.CompressPDFStatusText.Name = "CompressPDFStatusText";
+            this.CompressPDFStatusText.Size = new System.Drawing.Size(143, 18);
+            this.CompressPDFStatusText.TabIndex = 4;
+            this.CompressPDFStatusText.Text = "正在处理X个文件";
+            // 
+            // groupBox21
+            // 
+            this.groupBox21.Controls.Add(this.CompressPDF_CompressImageFlate);
+            this.groupBox21.Controls.Add(this.CompressPDF_RemoveForms);
+            this.groupBox21.Controls.Add(this.CompressPDF_CancelEmbedFont);
+            this.groupBox21.Controls.Add(this.CompressPDF_LinkSameStream);
+            this.groupBox21.Controls.Add(this.CompressPDF_RemoveUnuseStream);
+            this.groupBox21.Controls.Add(this.CompressPDF_RemoveUnuseObject);
+            this.groupBox21.Controls.Add(this.CompressPDF_ImageCompressVersion);
+            this.groupBox21.Controls.Add(this.label46);
+            this.groupBox21.Controls.Add(this.CompressPDF_ImageResoution);
+            this.groupBox21.Controls.Add(this.label45);
+            this.groupBox21.Controls.Add(this.CompressPDF_ImageQuailty);
+            this.groupBox21.Controls.Add(this.label44);
+            this.groupBox21.Controls.Add(this.CompressPDF_CompressImage);
+            this.groupBox21.Controls.Add(this.CompressPDF_WEB);
+            this.groupBox21.Location = new System.Drawing.Point(11, 283);
+            this.groupBox21.Name = "groupBox21";
+            this.groupBox21.Size = new System.Drawing.Size(958, 117);
+            this.groupBox21.TabIndex = 3;
+            this.groupBox21.TabStop = false;
+            this.groupBox21.Text = "参数设置";
+            // 
+            // CompressPDF_CompressImageFlate
+            // 
+            this.CompressPDF_CompressImageFlate.AutoSize = true;
+            this.CompressPDF_CompressImageFlate.Location = new System.Drawing.Point(737, 22);
+            this.CompressPDF_CompressImageFlate.Name = "CompressPDF_CompressImageFlate";
+            this.CompressPDF_CompressImageFlate.Size = new System.Drawing.Size(187, 22);
+            this.CompressPDF_CompressImageFlate.TabIndex = 15;
+            this.CompressPDF_CompressImageFlate.Text = "使用Flate压缩图像";
+            this.CompressPDF_CompressImageFlate.UseVisualStyleBackColor = true;
+            // 
+            // CompressPDF_RemoveForms
+            // 
+            this.CompressPDF_RemoveForms.AutoSize = true;
+            this.CompressPDF_RemoveForms.Location = new System.Drawing.Point(568, 78);
+            this.CompressPDF_RemoveForms.Name = "CompressPDF_RemoveForms";
+            this.CompressPDF_RemoveForms.Size = new System.Drawing.Size(124, 22);
+            this.CompressPDF_RemoveForms.TabIndex = 14;
+            this.CompressPDF_RemoveForms.Text = "删除表单域";
+            this.CompressPDF_RemoveForms.UseVisualStyleBackColor = true;
+            // 
+            // CompressPDF_CancelEmbedFont
+            // 
+            this.CompressPDF_CancelEmbedFont.AutoSize = true;
+            this.CompressPDF_CancelEmbedFont.Location = new System.Drawing.Point(386, 78);
+            this.CompressPDF_CancelEmbedFont.Name = "CompressPDF_CancelEmbedFont";
+            this.CompressPDF_CancelEmbedFont.Size = new System.Drawing.Size(142, 22);
+            this.CompressPDF_CancelEmbedFont.TabIndex = 13;
+            this.CompressPDF_CancelEmbedFont.Text = "取消嵌入字体";
+            this.CompressPDF_CancelEmbedFont.UseVisualStyleBackColor = true;
+            // 
+            // CompressPDF_LinkSameStream
+            // 
+            this.CompressPDF_LinkSameStream.AutoSize = true;
+            this.CompressPDF_LinkSameStream.Location = new System.Drawing.Point(224, 78);
+            this.CompressPDF_LinkSameStream.Name = "CompressPDF_LinkSameStream";
+            this.CompressPDF_LinkSameStream.Size = new System.Drawing.Size(124, 22);
+            this.CompressPDF_LinkSameStream.TabIndex = 12;
+            this.CompressPDF_LinkSameStream.Text = "链接重复流";
+            this.CompressPDF_LinkSameStream.UseVisualStyleBackColor = true;
+            // 
+            // CompressPDF_RemoveUnuseStream
+            // 
+            this.CompressPDF_RemoveUnuseStream.AutoSize = true;
+            this.CompressPDF_RemoveUnuseStream.Location = new System.Drawing.Point(6, 78);
+            this.CompressPDF_RemoveUnuseStream.Name = "CompressPDF_RemoveUnuseStream";
+            this.CompressPDF_RemoveUnuseStream.Size = new System.Drawing.Size(196, 22);
+            this.CompressPDF_RemoveUnuseStream.TabIndex = 11;
+            this.CompressPDF_RemoveUnuseStream.Text = "移除未使用的文件流";
+            this.CompressPDF_RemoveUnuseStream.UseVisualStyleBackColor = true;
+            // 
+            // CompressPDF_RemoveUnuseObject
+            // 
+            this.CompressPDF_RemoveUnuseObject.AutoSize = true;
+            this.CompressPDF_RemoveUnuseObject.Location = new System.Drawing.Point(737, 78);
+            this.CompressPDF_RemoveUnuseObject.Name = "CompressPDF_RemoveUnuseObject";
+            this.CompressPDF_RemoveUnuseObject.Size = new System.Drawing.Size(160, 22);
+            this.CompressPDF_RemoveUnuseObject.TabIndex = 10;
+            this.CompressPDF_RemoveUnuseObject.Text = "移除未使用对象";
+            this.CompressPDF_RemoveUnuseObject.UseVisualStyleBackColor = true;
+            // 
+            // CompressPDF_ImageCompressVersion
+            // 
+            this.CompressPDF_ImageCompressVersion.FormattingEnabled = true;
+            this.CompressPDF_ImageCompressVersion.Location = new System.Drawing.Point(649, 21);
+            this.CompressPDF_ImageCompressVersion.Name = "CompressPDF_ImageCompressVersion";
+            this.CompressPDF_ImageCompressVersion.Size = new System.Drawing.Size(75, 26);
+            this.CompressPDF_ImageCompressVersion.TabIndex = 9;
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.Location = new System.Drawing.Point(565, 27);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(80, 18);
+            this.label46.TabIndex = 8;
+            this.label46.Text = "压缩算法";
+            // 
+            // CompressPDF_ImageResoution
+            // 
+            this.CompressPDF_ImageResoution.FormattingEnabled = true;
+            this.CompressPDF_ImageResoution.Location = new System.Drawing.Point(484, 22);
+            this.CompressPDF_ImageResoution.Name = "CompressPDF_ImageResoution";
+            this.CompressPDF_ImageResoution.Size = new System.Drawing.Size(75, 26);
+            this.CompressPDF_ImageResoution.TabIndex = 7;
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Location = new System.Drawing.Point(383, 27);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(98, 18);
+            this.label45.TabIndex = 6;
+            this.label45.Text = "最大分辨率";
+            // 
+            // CompressPDF_ImageQuailty
+            // 
+            this.CompressPDF_ImageQuailty.FormattingEnabled = true;
+            this.CompressPDF_ImageQuailty.Location = new System.Drawing.Point(308, 22);
+            this.CompressPDF_ImageQuailty.Name = "CompressPDF_ImageQuailty";
+            this.CompressPDF_ImageQuailty.Size = new System.Drawing.Size(68, 26);
+            this.CompressPDF_ImageQuailty.TabIndex = 5;
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Location = new System.Drawing.Point(221, 28);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(80, 18);
+            this.label44.TabIndex = 4;
+            this.label44.Text = "图像质量";
+            // 
+            // CompressPDF_CompressImage
+            // 
+            this.CompressPDF_CompressImage.AutoSize = true;
+            this.CompressPDF_CompressImage.Location = new System.Drawing.Point(109, 27);
+            this.CompressPDF_CompressImage.Name = "CompressPDF_CompressImage";
+            this.CompressPDF_CompressImage.Size = new System.Drawing.Size(106, 22);
+            this.CompressPDF_CompressImage.TabIndex = 1;
+            this.CompressPDF_CompressImage.Text = "压缩图像";
+            this.CompressPDF_CompressImage.UseVisualStyleBackColor = true;
+            // 
+            // CompressPDF_WEB
+            // 
+            this.CompressPDF_WEB.AutoSize = true;
+            this.CompressPDF_WEB.Location = new System.Drawing.Point(6, 27);
+            this.CompressPDF_WEB.Name = "CompressPDF_WEB";
+            this.CompressPDF_WEB.Size = new System.Drawing.Size(97, 22);
+            this.CompressPDF_WEB.TabIndex = 0;
+            this.CompressPDF_WEB.Text = "WEB优化";
+            this.CompressPDF_WEB.UseVisualStyleBackColor = true;
+            // 
+            // CompressPDF
+            // 
+            this.CompressPDF.Location = new System.Drawing.Point(746, 406);
+            this.CompressPDF.Name = "CompressPDF";
+            this.CompressPDF.Size = new System.Drawing.Size(221, 55);
+            this.CompressPDF.TabIndex = 2;
+            this.CompressPDF.Text = "开始处理";
+            this.CompressPDF.UseVisualStyleBackColor = true;
+            this.CompressPDF.Click += new System.EventHandler(this.CompressPDF_Click);
+            // 
+            // SelectCompressPDFFiles
+            // 
+            this.SelectCompressPDFFiles.Location = new System.Drawing.Point(8, 406);
+            this.SelectCompressPDFFiles.Name = "SelectCompressPDFFiles";
+            this.SelectCompressPDFFiles.Size = new System.Drawing.Size(221, 55);
+            this.SelectCompressPDFFiles.TabIndex = 1;
+            this.SelectCompressPDFFiles.Text = "选择文件";
+            this.SelectCompressPDFFiles.UseVisualStyleBackColor = true;
+            this.SelectCompressPDFFiles.Click += new System.EventHandler(this.SelectCompressPDFFiles_Click);
+            // 
+            // CompressPdfFileList
+            // 
+            this.CompressPdfFileList.HideSelection = false;
+            this.CompressPdfFileList.Location = new System.Drawing.Point(11, 3);
+            this.CompressPdfFileList.Name = "CompressPdfFileList";
+            this.CompressPdfFileList.Size = new System.Drawing.Size(961, 272);
+            this.CompressPdfFileList.TabIndex = 0;
+            this.CompressPdfFileList.UseCompatibleStateImageBehavior = false;
+            this.CompressPdfFileList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CompressPdfFileList_MouseClick);
+            // 
+            // TabPage_25
+            // 
+            this.TabPage_25.Controls.Add(this.CompressImageStatusText);
+            this.TabPage_25.Controls.Add(this.groupBox25);
+            this.TabPage_25.Controls.Add(this.groupBox24);
+            this.TabPage_25.Controls.Add(this.groupBox23);
+            this.TabPage_25.Controls.Add(this.groupBox22);
+            this.TabPage_25.Controls.Add(this.CompressImage);
+            this.TabPage_25.Controls.Add(this.SelectCompressImageFile);
+            this.TabPage_25.Controls.Add(this.CompressImageFileList);
+            this.TabPage_25.Location = new System.Drawing.Point(4, 76);
+            this.TabPage_25.Name = "TabPage_25";
+            this.TabPage_25.Size = new System.Drawing.Size(975, 498);
+            this.TabPage_25.TabIndex = 24;
+            this.TabPage_25.Text = "压缩图片";
+            this.TabPage_25.UseVisualStyleBackColor = true;
+            // 
+            // CompressImageStatusText
+            // 
+            this.CompressImageStatusText.AutoSize = true;
+            this.CompressImageStatusText.ForeColor = System.Drawing.Color.ForestGreen;
+            this.CompressImageStatusText.Location = new System.Drawing.Point(236, 434);
+            this.CompressImageStatusText.Name = "CompressImageStatusText";
+            this.CompressImageStatusText.Size = new System.Drawing.Size(143, 18);
+            this.CompressImageStatusText.TabIndex = 9;
+            this.CompressImageStatusText.Text = "正在处理X个文件";
+            // 
+            // groupBox25
+            // 
+            this.groupBox25.Controls.Add(this.CompressImage_NotUseSelfExt);
+            this.groupBox25.Controls.Add(this.CompressImage_OutPutImageFormat);
+            this.groupBox25.Controls.Add(this.label54);
+            this.groupBox25.Location = new System.Drawing.Point(746, 261);
+            this.groupBox25.Name = "groupBox25";
+            this.groupBox25.Size = new System.Drawing.Size(221, 149);
+            this.groupBox25.TabIndex = 8;
+            this.groupBox25.TabStop = false;
+            this.groupBox25.Text = "保存参数设置";
+            // 
+            // CompressImage_NotUseSelfExt
+            // 
+            this.CompressImage_NotUseSelfExt.AutoSize = true;
+            this.CompressImage_NotUseSelfExt.Location = new System.Drawing.Point(10, 32);
+            this.CompressImage_NotUseSelfExt.Name = "CompressImage_NotUseSelfExt";
+            this.CompressImage_NotUseSelfExt.Size = new System.Drawing.Size(196, 22);
+            this.CompressImage_NotUseSelfExt.TabIndex = 4;
+            this.CompressImage_NotUseSelfExt.Text = "不使用源后缀名保存";
+            this.CompressImage_NotUseSelfExt.UseVisualStyleBackColor = true;
+            this.CompressImage_NotUseSelfExt.CheckedChanged += new System.EventHandler(this.CompressImage_NotUseSelfExt_CheckedChanged);
+            // 
+            // CompressImage_OutPutImageFormat
+            // 
+            this.CompressImage_OutPutImageFormat.FormattingEnabled = true;
+            this.CompressImage_OutPutImageFormat.Location = new System.Drawing.Point(93, 104);
+            this.CompressImage_OutPutImageFormat.Name = "CompressImage_OutPutImageFormat";
+            this.CompressImage_OutPutImageFormat.Size = new System.Drawing.Size(121, 26);
+            this.CompressImage_OutPutImageFormat.TabIndex = 3;
+            // 
+            // label54
+            // 
+            this.label54.AutoSize = true;
+            this.label54.Location = new System.Drawing.Point(7, 108);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(80, 18);
+            this.label54.TabIndex = 1;
+            this.label54.Text = "保存格式";
+            // 
+            // groupBox24
+            // 
+            this.groupBox24.Controls.Add(this.CompressBmpPixeBits_Combox);
+            this.groupBox24.Controls.Add(this.CompressBmpMode_Combox);
+            this.groupBox24.Controls.Add(this.label50);
+            this.groupBox24.Controls.Add(this.label53);
+            this.groupBox24.Location = new System.Drawing.Point(502, 261);
+            this.groupBox24.Name = "groupBox24";
+            this.groupBox24.Size = new System.Drawing.Size(238, 149);
+            this.groupBox24.TabIndex = 7;
+            this.groupBox24.TabStop = false;
+            this.groupBox24.Text = "BMP参数设置";
+            // 
+            // CompressBmpPixeBits_Combox
+            // 
+            this.CompressBmpPixeBits_Combox.FormattingEnabled = true;
+            this.CompressBmpPixeBits_Combox.Location = new System.Drawing.Point(93, 104);
+            this.CompressBmpPixeBits_Combox.Name = "CompressBmpPixeBits_Combox";
+            this.CompressBmpPixeBits_Combox.Size = new System.Drawing.Size(121, 26);
+            this.CompressBmpPixeBits_Combox.TabIndex = 3;
+            // 
+            // CompressBmpMode_Combox
+            // 
+            this.CompressBmpMode_Combox.FormattingEnabled = true;
+            this.CompressBmpMode_Combox.Location = new System.Drawing.Point(93, 28);
+            this.CompressBmpMode_Combox.Name = "CompressBmpMode_Combox";
+            this.CompressBmpMode_Combox.Size = new System.Drawing.Size(121, 26);
+            this.CompressBmpMode_Combox.TabIndex = 2;
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Location = new System.Drawing.Point(7, 108);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(80, 18);
+            this.label50.TabIndex = 1;
+            this.label50.Text = "色彩位数";
+            // 
+            // label53
+            // 
+            this.label53.AutoSize = true;
+            this.label53.Location = new System.Drawing.Point(7, 32);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(80, 18);
+            this.label53.TabIndex = 0;
+            this.label53.Text = "压缩模式";
+            // 
+            // groupBox23
+            // 
+            this.groupBox23.Controls.Add(this.CompressPngColorMode_Combox);
+            this.groupBox23.Controls.Add(this.CompressPngLevel_Combox);
+            this.groupBox23.Controls.Add(this.label51);
+            this.groupBox23.Controls.Add(this.label52);
+            this.groupBox23.Location = new System.Drawing.Point(252, 261);
+            this.groupBox23.Name = "groupBox23";
+            this.groupBox23.Size = new System.Drawing.Size(238, 149);
+            this.groupBox23.TabIndex = 6;
+            this.groupBox23.TabStop = false;
+            this.groupBox23.Text = "PNG参数设置";
+            // 
+            // CompressPngColorMode_Combox
+            // 
+            this.CompressPngColorMode_Combox.FormattingEnabled = true;
+            this.CompressPngColorMode_Combox.Location = new System.Drawing.Point(93, 104);
+            this.CompressPngColorMode_Combox.Name = "CompressPngColorMode_Combox";
+            this.CompressPngColorMode_Combox.Size = new System.Drawing.Size(121, 26);
+            this.CompressPngColorMode_Combox.TabIndex = 3;
+            // 
+            // CompressPngLevel_Combox
+            // 
+            this.CompressPngLevel_Combox.FormattingEnabled = true;
+            this.CompressPngLevel_Combox.Location = new System.Drawing.Point(93, 28);
+            this.CompressPngLevel_Combox.Name = "CompressPngLevel_Combox";
+            this.CompressPngLevel_Combox.Size = new System.Drawing.Size(121, 26);
+            this.CompressPngLevel_Combox.TabIndex = 2;
+            // 
+            // label51
+            // 
+            this.label51.AutoSize = true;
+            this.label51.Location = new System.Drawing.Point(7, 108);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(80, 18);
+            this.label51.TabIndex = 1;
+            this.label51.Text = "颜色模式";
+            // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.Location = new System.Drawing.Point(7, 32);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(80, 18);
+            this.label52.TabIndex = 0;
+            this.label52.Text = "压缩级别";
+            // 
+            // groupBox22
+            // 
+            this.groupBox22.Controls.Add(this.CompressJpegQuailty_Combox);
+            this.groupBox22.Controls.Add(this.label49);
+            this.groupBox22.Controls.Add(this.CompressJpegColorMode_Combox);
+            this.groupBox22.Controls.Add(this.CompressJpegMode_Combox);
+            this.groupBox22.Controls.Add(this.label48);
+            this.groupBox22.Controls.Add(this.label47);
+            this.groupBox22.Location = new System.Drawing.Point(8, 261);
+            this.groupBox22.Name = "groupBox22";
+            this.groupBox22.Size = new System.Drawing.Size(238, 149);
+            this.groupBox22.TabIndex = 3;
+            this.groupBox22.TabStop = false;
+            this.groupBox22.Text = "JPG/JPEG参数设置";
+            // 
+            // CompressJpegQuailty_Combox
+            // 
+            this.CompressJpegQuailty_Combox.FormattingEnabled = true;
+            this.CompressJpegQuailty_Combox.Location = new System.Drawing.Point(93, 107);
+            this.CompressJpegQuailty_Combox.Name = "CompressJpegQuailty_Combox";
+            this.CompressJpegQuailty_Combox.Size = new System.Drawing.Size(121, 26);
+            this.CompressJpegQuailty_Combox.TabIndex = 5;
+            // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.Location = new System.Drawing.Point(7, 111);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(80, 18);
+            this.label49.TabIndex = 4;
+            this.label49.Text = "图像质量";
+            // 
+            // CompressJpegColorMode_Combox
+            // 
+            this.CompressJpegColorMode_Combox.FormattingEnabled = true;
+            this.CompressJpegColorMode_Combox.Location = new System.Drawing.Point(93, 66);
+            this.CompressJpegColorMode_Combox.Name = "CompressJpegColorMode_Combox";
+            this.CompressJpegColorMode_Combox.Size = new System.Drawing.Size(121, 26);
+            this.CompressJpegColorMode_Combox.TabIndex = 3;
+            // 
+            // CompressJpegMode_Combox
+            // 
+            this.CompressJpegMode_Combox.FormattingEnabled = true;
+            this.CompressJpegMode_Combox.Location = new System.Drawing.Point(93, 28);
+            this.CompressJpegMode_Combox.Name = "CompressJpegMode_Combox";
+            this.CompressJpegMode_Combox.Size = new System.Drawing.Size(121, 26);
+            this.CompressJpegMode_Combox.TabIndex = 2;
+            // 
+            // label48
+            // 
+            this.label48.AutoSize = true;
+            this.label48.Location = new System.Drawing.Point(7, 70);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(80, 18);
+            this.label48.TabIndex = 1;
+            this.label48.Text = "颜色模式";
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.Location = new System.Drawing.Point(7, 32);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(80, 18);
+            this.label47.TabIndex = 0;
+            this.label47.Text = "压缩模式";
+            // 
+            // CompressImage
+            // 
+            this.CompressImage.Location = new System.Drawing.Point(746, 415);
+            this.CompressImage.Name = "CompressImage";
+            this.CompressImage.Size = new System.Drawing.Size(221, 55);
+            this.CompressImage.TabIndex = 2;
+            this.CompressImage.Text = "开始处理";
+            this.CompressImage.UseVisualStyleBackColor = true;
+            this.CompressImage.Click += new System.EventHandler(this.CompressImage_Click);
+            // 
+            // SelectCompressImageFile
+            // 
+            this.SelectCompressImageFile.Location = new System.Drawing.Point(8, 416);
+            this.SelectCompressImageFile.Name = "SelectCompressImageFile";
+            this.SelectCompressImageFile.Size = new System.Drawing.Size(221, 55);
+            this.SelectCompressImageFile.TabIndex = 1;
+            this.SelectCompressImageFile.Text = "选择文件";
+            this.SelectCompressImageFile.UseVisualStyleBackColor = true;
+            this.SelectCompressImageFile.Click += new System.EventHandler(this.SelectCompressImageFile_Click);
+            // 
+            // CompressImageFileList
+            // 
+            this.CompressImageFileList.HideSelection = false;
+            this.CompressImageFileList.Location = new System.Drawing.Point(6, 6);
+            this.CompressImageFileList.Name = "CompressImageFileList";
+            this.CompressImageFileList.Size = new System.Drawing.Size(961, 249);
+            this.CompressImageFileList.TabIndex = 0;
+            this.CompressImageFileList.UseCompatibleStateImageBehavior = false;
+            this.CompressImageFileList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CompressImageFileList_MouseClick);
+            // 
             // TabPage_10
             // 
             this.TabPage_10.Controls.Add(this.TurialRegex);
@@ -2007,7 +2504,7 @@
             this.TabPage_10.Controls.Add(this.ReplaceWordFileList);
             this.TabPage_10.Location = new System.Drawing.Point(4, 76);
             this.TabPage_10.Name = "TabPage_10";
-            this.TabPage_10.Size = new System.Drawing.Size(975, 484);
+            this.TabPage_10.Size = new System.Drawing.Size(975, 498);
             this.TabPage_10.TabIndex = 9;
             this.TabPage_10.Text = "WORD内容批量替换";
             this.TabPage_10.UseVisualStyleBackColor = true;
@@ -2144,7 +2641,7 @@
             this.TabPage_11.Controls.Add(this.ReplaceExcelFileView);
             this.TabPage_11.Location = new System.Drawing.Point(4, 76);
             this.TabPage_11.Name = "TabPage_11";
-            this.TabPage_11.Size = new System.Drawing.Size(975, 484);
+            this.TabPage_11.Size = new System.Drawing.Size(975, 498);
             this.TabPage_11.TabIndex = 10;
             this.TabPage_11.Text = "EXCEL内容批量替换";
             this.TabPage_11.UseVisualStyleBackColor = true;
@@ -2332,7 +2829,7 @@
             this.TabPage_12.Controls.Add(this.DecodeMatrixWordListView);
             this.TabPage_12.Location = new System.Drawing.Point(4, 76);
             this.TabPage_12.Name = "TabPage_12";
-            this.TabPage_12.Size = new System.Drawing.Size(975, 484);
+            this.TabPage_12.Size = new System.Drawing.Size(975, 498);
             this.TabPage_12.TabIndex = 11;
             this.TabPage_12.Text = "特殊二维码校验";
             this.TabPage_12.UseVisualStyleBackColor = true;
@@ -2409,7 +2906,7 @@
             this.TabPage_05.Controls.Add(this.groupBox1);
             this.TabPage_05.Location = new System.Drawing.Point(4, 76);
             this.TabPage_05.Name = "TabPage_05";
-            this.TabPage_05.Size = new System.Drawing.Size(975, 484);
+            this.TabPage_05.Size = new System.Drawing.Size(975, 498);
             this.TabPage_05.TabIndex = 4;
             this.TabPage_05.Text = "姓名横转竖列";
             this.TabPage_05.UseVisualStyleBackColor = true;
@@ -2490,7 +2987,7 @@
             this.groupBox2.Controls.Add(this.TargetTextBox);
             this.groupBox2.Location = new System.Drawing.Point(686, 16);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(281, 465);
+            this.groupBox2.Size = new System.Drawing.Size(281, 474);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "处理后姓名";
@@ -2499,7 +2996,7 @@
             // 
             this.TargetTextBox.Location = new System.Drawing.Point(6, 23);
             this.TargetTextBox.Name = "TargetTextBox";
-            this.TargetTextBox.Size = new System.Drawing.Size(269, 432);
+            this.TargetTextBox.Size = new System.Drawing.Size(269, 445);
             this.TargetTextBox.TabIndex = 3;
             this.TargetTextBox.Text = "";
             this.TargetTextBox.TextChanged += new System.EventHandler(this.TargetTextBox_TextChanged);
@@ -2509,7 +3006,7 @@
             this.groupBox1.Controls.Add(this.SourceTextBox);
             this.groupBox1.Location = new System.Drawing.Point(5, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(281, 465);
+            this.groupBox1.Size = new System.Drawing.Size(281, 487);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "处理前姓名";
@@ -2518,7 +3015,7 @@
             // 
             this.SourceTextBox.Location = new System.Drawing.Point(4, 24);
             this.SourceTextBox.Name = "SourceTextBox";
-            this.SourceTextBox.Size = new System.Drawing.Size(269, 432);
+            this.SourceTextBox.Size = new System.Drawing.Size(269, 457);
             this.SourceTextBox.TabIndex = 2;
             this.SourceTextBox.Text = "";
             this.SourceTextBox.TextChanged += new System.EventHandler(this.SourceTextBox_TextChanged);
@@ -2532,7 +3029,7 @@
             this.TabPage_09.Controls.Add(this.groupBox5);
             this.TabPage_09.Location = new System.Drawing.Point(4, 76);
             this.TabPage_09.Name = "TabPage_09";
-            this.TabPage_09.Size = new System.Drawing.Size(975, 484);
+            this.TabPage_09.Size = new System.Drawing.Size(975, 498);
             this.TabPage_09.TabIndex = 8;
             this.TabPage_09.Text = "Twain扫描仪调试";
             this.TabPage_09.UseVisualStyleBackColor = true;
@@ -2542,7 +3039,7 @@
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MemoryStatusLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 453);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 467);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(975, 31);
             this.statusStrip1.TabIndex = 5;
@@ -2564,7 +3061,7 @@
             this.groupBox8.Controls.Add(this.ScannTotalNumber);
             this.groupBox8.Location = new System.Drawing.Point(278, 186);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(689, 255);
+            this.groupBox8.Size = new System.Drawing.Size(689, 278);
             this.groupBox8.TabIndex = 4;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "数据信息";
@@ -2631,7 +3128,7 @@
             this.groupBox7.Controls.Add(this.PreviewPictureBox);
             this.groupBox7.Location = new System.Drawing.Point(8, 186);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(264, 255);
+            this.groupBox7.Size = new System.Drawing.Size(264, 278);
             this.groupBox7.TabIndex = 3;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "扫描图片预览";
@@ -2650,7 +3147,7 @@
             this.PreviewPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PreviewPictureBox.Location = new System.Drawing.Point(6, 59);
             this.PreviewPictureBox.Name = "PreviewPictureBox";
-            this.PreviewPictureBox.Size = new System.Drawing.Size(252, 190);
+            this.PreviewPictureBox.Size = new System.Drawing.Size(252, 213);
             this.PreviewPictureBox.TabIndex = 2;
             this.PreviewPictureBox.TabStop = false;
             // 
@@ -2873,7 +3370,7 @@
             this.TabPage_13.Controls.Add(this.groupBox15);
             this.TabPage_13.Location = new System.Drawing.Point(4, 76);
             this.TabPage_13.Name = "TabPage_13";
-            this.TabPage_13.Size = new System.Drawing.Size(975, 484);
+            this.TabPage_13.Size = new System.Drawing.Size(975, 498);
             this.TabPage_13.TabIndex = 12;
             this.TabPage_13.Text = "其他功能";
             this.TabPage_13.UseVisualStyleBackColor = true;
@@ -3037,7 +3534,7 @@
             this.TabPage_08.Controls.Add(this.groupBox3);
             this.TabPage_08.Location = new System.Drawing.Point(4, 76);
             this.TabPage_08.Name = "TabPage_08";
-            this.TabPage_08.Size = new System.Drawing.Size(975, 484);
+            this.TabPage_08.Size = new System.Drawing.Size(975, 498);
             this.TabPage_08.TabIndex = 7;
             this.TabPage_08.Text = "关于软件";
             this.TabPage_08.UseVisualStyleBackColor = true;
@@ -3046,7 +3543,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.ForeColor = System.Drawing.Color.Tomato;
-            this.label12.Location = new System.Drawing.Point(11, 439);
+            this.label12.Location = new System.Drawing.Point(11, 455);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(962, 18);
             this.label12.TabIndex = 2;
@@ -3178,204 +3675,6 @@
             this.label6.TabIndex = 0;
             this.label6.Text = "开发语言：C#";
             // 
-            // TabPage_24
-            // 
-            this.TabPage_24.Controls.Add(this.CompressPDFStatusText);
-            this.TabPage_24.Controls.Add(this.groupBox21);
-            this.TabPage_24.Controls.Add(this.CompressPDF);
-            this.TabPage_24.Controls.Add(this.SelectCompressPDFFiles);
-            this.TabPage_24.Controls.Add(this.CompressPdfFileList);
-            this.TabPage_24.Location = new System.Drawing.Point(4, 76);
-            this.TabPage_24.Name = "TabPage_24";
-            this.TabPage_24.Size = new System.Drawing.Size(975, 484);
-            this.TabPage_24.TabIndex = 23;
-            this.TabPage_24.Text = "压缩PDF";
-            this.TabPage_24.UseVisualStyleBackColor = true;
-            // 
-            // groupBox21
-            // 
-            this.groupBox21.Controls.Add(this.CompressPDF_CompressImageFlate);
-            this.groupBox21.Controls.Add(this.CompressPDF_RemoveForms);
-            this.groupBox21.Controls.Add(this.CompressPDF_CancelEmbedFont);
-            this.groupBox21.Controls.Add(this.CompressPDF_LinkSameStream);
-            this.groupBox21.Controls.Add(this.CompressPDF_RemoveUnuseStream);
-            this.groupBox21.Controls.Add(this.CompressPDF_RemoveUnuseObject);
-            this.groupBox21.Controls.Add(this.CompressPDF_ImageCompressVersion);
-            this.groupBox21.Controls.Add(this.label46);
-            this.groupBox21.Controls.Add(this.CompressPDF_ImageResoution);
-            this.groupBox21.Controls.Add(this.label45);
-            this.groupBox21.Controls.Add(this.CompressPDF_ImageQuailty);
-            this.groupBox21.Controls.Add(this.label44);
-            this.groupBox21.Controls.Add(this.CompressPDF_CompressImage);
-            this.groupBox21.Controls.Add(this.CompressPDF_WEB);
-            this.groupBox21.Location = new System.Drawing.Point(11, 289);
-            this.groupBox21.Name = "groupBox21";
-            this.groupBox21.Size = new System.Drawing.Size(958, 117);
-            this.groupBox21.TabIndex = 3;
-            this.groupBox21.TabStop = false;
-            this.groupBox21.Text = "参数设置";
-            // 
-            // CompressPDF_CompressImageFlate
-            // 
-            this.CompressPDF_CompressImageFlate.AutoSize = true;
-            this.CompressPDF_CompressImageFlate.Location = new System.Drawing.Point(737, 22);
-            this.CompressPDF_CompressImageFlate.Name = "CompressPDF_CompressImageFlate";
-            this.CompressPDF_CompressImageFlate.Size = new System.Drawing.Size(187, 22);
-            this.CompressPDF_CompressImageFlate.TabIndex = 15;
-            this.CompressPDF_CompressImageFlate.Text = "使用Flate压缩图像";
-            this.CompressPDF_CompressImageFlate.UseVisualStyleBackColor = true;
-            // 
-            // CompressPDF_RemoveForms
-            // 
-            this.CompressPDF_RemoveForms.AutoSize = true;
-            this.CompressPDF_RemoveForms.Location = new System.Drawing.Point(568, 78);
-            this.CompressPDF_RemoveForms.Name = "CompressPDF_RemoveForms";
-            this.CompressPDF_RemoveForms.Size = new System.Drawing.Size(124, 22);
-            this.CompressPDF_RemoveForms.TabIndex = 14;
-            this.CompressPDF_RemoveForms.Text = "删除表单域";
-            this.CompressPDF_RemoveForms.UseVisualStyleBackColor = true;
-            // 
-            // CompressPDF_CancelEmbedFont
-            // 
-            this.CompressPDF_CancelEmbedFont.AutoSize = true;
-            this.CompressPDF_CancelEmbedFont.Location = new System.Drawing.Point(386, 78);
-            this.CompressPDF_CancelEmbedFont.Name = "CompressPDF_CancelEmbedFont";
-            this.CompressPDF_CancelEmbedFont.Size = new System.Drawing.Size(142, 22);
-            this.CompressPDF_CancelEmbedFont.TabIndex = 13;
-            this.CompressPDF_CancelEmbedFont.Text = "取消嵌入字体";
-            this.CompressPDF_CancelEmbedFont.UseVisualStyleBackColor = true;
-            // 
-            // CompressPDF_LinkSameStream
-            // 
-            this.CompressPDF_LinkSameStream.AutoSize = true;
-            this.CompressPDF_LinkSameStream.Location = new System.Drawing.Point(224, 78);
-            this.CompressPDF_LinkSameStream.Name = "CompressPDF_LinkSameStream";
-            this.CompressPDF_LinkSameStream.Size = new System.Drawing.Size(124, 22);
-            this.CompressPDF_LinkSameStream.TabIndex = 12;
-            this.CompressPDF_LinkSameStream.Text = "链接重复流";
-            this.CompressPDF_LinkSameStream.UseVisualStyleBackColor = true;
-            // 
-            // CompressPDF_RemoveUnuseStream
-            // 
-            this.CompressPDF_RemoveUnuseStream.AutoSize = true;
-            this.CompressPDF_RemoveUnuseStream.Location = new System.Drawing.Point(6, 78);
-            this.CompressPDF_RemoveUnuseStream.Name = "CompressPDF_RemoveUnuseStream";
-            this.CompressPDF_RemoveUnuseStream.Size = new System.Drawing.Size(196, 22);
-            this.CompressPDF_RemoveUnuseStream.TabIndex = 11;
-            this.CompressPDF_RemoveUnuseStream.Text = "移除未使用的文件流";
-            this.CompressPDF_RemoveUnuseStream.UseVisualStyleBackColor = true;
-            // 
-            // CompressPDF_RemoveUnuseObject
-            // 
-            this.CompressPDF_RemoveUnuseObject.AutoSize = true;
-            this.CompressPDF_RemoveUnuseObject.Location = new System.Drawing.Point(737, 78);
-            this.CompressPDF_RemoveUnuseObject.Name = "CompressPDF_RemoveUnuseObject";
-            this.CompressPDF_RemoveUnuseObject.Size = new System.Drawing.Size(160, 22);
-            this.CompressPDF_RemoveUnuseObject.TabIndex = 10;
-            this.CompressPDF_RemoveUnuseObject.Text = "移除未使用对象";
-            this.CompressPDF_RemoveUnuseObject.UseVisualStyleBackColor = true;
-            // 
-            // CompressPDF_ImageCompressVersion
-            // 
-            this.CompressPDF_ImageCompressVersion.FormattingEnabled = true;
-            this.CompressPDF_ImageCompressVersion.Location = new System.Drawing.Point(649, 21);
-            this.CompressPDF_ImageCompressVersion.Name = "CompressPDF_ImageCompressVersion";
-            this.CompressPDF_ImageCompressVersion.Size = new System.Drawing.Size(75, 26);
-            this.CompressPDF_ImageCompressVersion.TabIndex = 9;
-            // 
-            // label46
-            // 
-            this.label46.AutoSize = true;
-            this.label46.Location = new System.Drawing.Point(565, 27);
-            this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(80, 18);
-            this.label46.TabIndex = 8;
-            this.label46.Text = "压缩算法";
-            // 
-            // CompressPDF_ImageResoution
-            // 
-            this.CompressPDF_ImageResoution.FormattingEnabled = true;
-            this.CompressPDF_ImageResoution.Location = new System.Drawing.Point(484, 22);
-            this.CompressPDF_ImageResoution.Name = "CompressPDF_ImageResoution";
-            this.CompressPDF_ImageResoution.Size = new System.Drawing.Size(75, 26);
-            this.CompressPDF_ImageResoution.TabIndex = 7;
-            // 
-            // label45
-            // 
-            this.label45.AutoSize = true;
-            this.label45.Location = new System.Drawing.Point(383, 27);
-            this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(98, 18);
-            this.label45.TabIndex = 6;
-            this.label45.Text = "最大分辨率";
-            // 
-            // CompressPDF_ImageQuailty
-            // 
-            this.CompressPDF_ImageQuailty.FormattingEnabled = true;
-            this.CompressPDF_ImageQuailty.Location = new System.Drawing.Point(308, 22);
-            this.CompressPDF_ImageQuailty.Name = "CompressPDF_ImageQuailty";
-            this.CompressPDF_ImageQuailty.Size = new System.Drawing.Size(68, 26);
-            this.CompressPDF_ImageQuailty.TabIndex = 5;
-            // 
-            // label44
-            // 
-            this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(221, 28);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(80, 18);
-            this.label44.TabIndex = 4;
-            this.label44.Text = "图像质量";
-            // 
-            // CompressPDF_CompressImage
-            // 
-            this.CompressPDF_CompressImage.AutoSize = true;
-            this.CompressPDF_CompressImage.Location = new System.Drawing.Point(109, 27);
-            this.CompressPDF_CompressImage.Name = "CompressPDF_CompressImage";
-            this.CompressPDF_CompressImage.Size = new System.Drawing.Size(106, 22);
-            this.CompressPDF_CompressImage.TabIndex = 1;
-            this.CompressPDF_CompressImage.Text = "压缩图像";
-            this.CompressPDF_CompressImage.UseVisualStyleBackColor = true;
-            // 
-            // CompressPDF_WEB
-            // 
-            this.CompressPDF_WEB.AutoSize = true;
-            this.CompressPDF_WEB.Location = new System.Drawing.Point(6, 27);
-            this.CompressPDF_WEB.Name = "CompressPDF_WEB";
-            this.CompressPDF_WEB.Size = new System.Drawing.Size(97, 22);
-            this.CompressPDF_WEB.TabIndex = 0;
-            this.CompressPDF_WEB.Text = "WEB优化";
-            this.CompressPDF_WEB.UseVisualStyleBackColor = true;
-            // 
-            // CompressPDF
-            // 
-            this.CompressPDF.Location = new System.Drawing.Point(746, 412);
-            this.CompressPDF.Name = "CompressPDF";
-            this.CompressPDF.Size = new System.Drawing.Size(221, 55);
-            this.CompressPDF.TabIndex = 2;
-            this.CompressPDF.Text = "开始处理";
-            this.CompressPDF.UseVisualStyleBackColor = true;
-            this.CompressPDF.Click += new System.EventHandler(this.CompressPDF_Click);
-            // 
-            // SelectCompressPDFFiles
-            // 
-            this.SelectCompressPDFFiles.Location = new System.Drawing.Point(8, 412);
-            this.SelectCompressPDFFiles.Name = "SelectCompressPDFFiles";
-            this.SelectCompressPDFFiles.Size = new System.Drawing.Size(221, 55);
-            this.SelectCompressPDFFiles.TabIndex = 1;
-            this.SelectCompressPDFFiles.Text = "选择文件";
-            this.SelectCompressPDFFiles.UseVisualStyleBackColor = true;
-            this.SelectCompressPDFFiles.Click += new System.EventHandler(this.SelectCompressPDFFiles_Click);
-            // 
-            // CompressPdfFileList
-            // 
-            this.CompressPdfFileList.HideSelection = false;
-            this.CompressPdfFileList.Location = new System.Drawing.Point(11, 3);
-            this.CompressPdfFileList.Name = "CompressPdfFileList";
-            this.CompressPdfFileList.Size = new System.Drawing.Size(961, 280);
-            this.CompressPdfFileList.TabIndex = 0;
-            this.CompressPdfFileList.UseCompatibleStateImageBehavior = false;
-            this.CompressPdfFileList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CompressPdfFileList_MouseClick);
-            // 
             // ListViewRightMenu
             // 
             this.ListViewRightMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
@@ -3441,23 +3740,13 @@
             // 
             this.MainFormError.ContainerControl = this;
             // 
-            // CompressPDFStatusText
-            // 
-            this.CompressPDFStatusText.AutoSize = true;
-            this.CompressPDFStatusText.ForeColor = System.Drawing.Color.ForestGreen;
-            this.CompressPDFStatusText.Location = new System.Drawing.Point(236, 427);
-            this.CompressPDFStatusText.Name = "CompressPDFStatusText";
-            this.CompressPDFStatusText.Size = new System.Drawing.Size(143, 18);
-            this.CompressPDFStatusText.TabIndex = 4;
-            this.CompressPDFStatusText.Text = "正在处理X个文件";
-            // 
             // BodyForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(983, 564);
+            this.ClientSize = new System.Drawing.Size(983, 578);
             this.Controls.Add(this.MainTabPage);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -3508,6 +3797,20 @@
             this.groupBox19.PerformLayout();
             this.groupBox20.ResumeLayout(false);
             this.groupBox20.PerformLayout();
+            this.TabPage_24.ResumeLayout(false);
+            this.TabPage_24.PerformLayout();
+            this.groupBox21.ResumeLayout(false);
+            this.groupBox21.PerformLayout();
+            this.TabPage_25.ResumeLayout(false);
+            this.TabPage_25.PerformLayout();
+            this.groupBox25.ResumeLayout(false);
+            this.groupBox25.PerformLayout();
+            this.groupBox24.ResumeLayout(false);
+            this.groupBox24.PerformLayout();
+            this.groupBox23.ResumeLayout(false);
+            this.groupBox23.PerformLayout();
+            this.groupBox22.ResumeLayout(false);
+            this.groupBox22.PerformLayout();
             this.TabPage_10.ResumeLayout(false);
             this.TabPage_10.PerformLayout();
             this.groupBox10.ResumeLayout(false);
@@ -3555,10 +3858,6 @@
             this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.TabPage_24.ResumeLayout(false);
-            this.TabPage_24.PerformLayout();
-            this.groupBox21.ResumeLayout(false);
-            this.groupBox21.PerformLayout();
             this.ListViewRightMenu.ResumeLayout(false);
             this.TreeViewContentMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.MainFormError)).EndInit();
@@ -3867,6 +4166,32 @@
         internal System.Windows.Forms.CheckBox CompressPDF_CompressImageFlate;
         internal System.Windows.Forms.CheckBox CompressPDF_RemoveForms;
         private System.Windows.Forms.Label CompressPDFStatusText;
+        private System.Windows.Forms.TabPage TabPage_25;
+        internal System.Windows.Forms.ListView CompressImageFileList;
+        private System.Windows.Forms.Button SelectCompressImageFile;
+        private System.Windows.Forms.Button CompressImage;
+        private System.Windows.Forms.GroupBox groupBox22;
+        private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.Label label49;
+        private System.Windows.Forms.GroupBox groupBox23;
+        private System.Windows.Forms.Label label51;
+        private System.Windows.Forms.Label label52;
+        private System.Windows.Forms.GroupBox groupBox24;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.Label label53;
+        private System.Windows.Forms.GroupBox groupBox25;
+        private System.Windows.Forms.Label label54;
+        internal System.Windows.Forms.ComboBox CompressJpegQuailty_Combox;
+        internal System.Windows.Forms.ComboBox CompressJpegColorMode_Combox;
+        internal System.Windows.Forms.ComboBox CompressJpegMode_Combox;
+        internal System.Windows.Forms.ComboBox CompressPngLevel_Combox;
+        internal System.Windows.Forms.ComboBox CompressBmpMode_Combox;
+        internal System.Windows.Forms.ComboBox CompressBmpPixeBits_Combox;
+        internal System.Windows.Forms.CheckBox CompressImage_NotUseSelfExt;
+        internal System.Windows.Forms.ComboBox CompressImage_OutPutImageFormat;
+        internal System.Windows.Forms.ComboBox CompressPngColorMode_Combox;
+        private System.Windows.Forms.Label CompressImageStatusText;
     }
 }
 

@@ -5,7 +5,6 @@ using Aspose.Pdf;
 using Aspose.Pdf.Annotations;
 using Aspose.Pdf.Text;
 using Aspose.Slides.Export;
-using Microsoft.ML.OnnxRuntime.Tensors;
 using Microsoft.VisualBasic.Devices;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using NAudio.Wave;
@@ -15,7 +14,6 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Resources;
@@ -126,7 +124,7 @@ namespace DocumentTools
         /// <param name="documentFileName">doc/docx文档路径</param>
         /// <param name="SavePdfName">导出pdf的路径</param>
         /// <param name="tempSaveDocxPath">临时存放转换的docx目录</param>
-        public static void ConvertWord2Pdf(string documentFileName, string SavePdfName, string tempSaveDocxPath,Aspose.Words.Saving.PdfCompliance PdfComplanceOption)
+        public static void ConvertWord2Pdf(string documentFileName, string SavePdfName, string tempSaveDocxPath, Aspose.Words.Saving.PdfCompliance PdfComplanceOption)
         {
             Aspose.Hook.HookManager.StartHook();
             string DocumentName, SaveDocxName;
@@ -320,7 +318,7 @@ namespace DocumentTools
         /// <param name="Margin_LEFT"></param>
         /// <param name="Margin_Bottom"></param>
         /// <param name="Margin_RIGHT"></param>
-        public static void ConvertImage2PDF(string ImageFileName,string SavedDocumentFileName,bool IsNeedMerge,List<string> ImageFilesList,bool LandStyle,bool AutoOptiomizePdf,bool CompressPdfImage,double Margin_TOP=0,double Margin_LEFT=0,double Margin_Bottom=0,double Margin_RIGHT=0)
+        public static void ConvertImage2PDF(string ImageFileName, string SavedDocumentFileName, bool IsNeedMerge, List<string> ImageFilesList, bool LandStyle, bool AutoOptiomizePdf, bool CompressPdfImage, double Margin_TOP = 0, double Margin_LEFT = 0, double Margin_Bottom = 0, double Margin_RIGHT = 0)
         {
             Aspose.Hook.HookManager.StartHook();
 
@@ -337,7 +335,7 @@ namespace DocumentTools
                 TempOpt.ImageCompressionOptions.Encoding = Aspose.Pdf.Optimization.ImageEncoding.Flate;
             }
 
-            if(IsNeedMerge)
+            if (IsNeedMerge)
             {
                 ImageFilesList.ForEach(file =>
                 {
@@ -350,7 +348,7 @@ namespace DocumentTools
                     TempPage.PageInfo.Margin.Bottom = Margin_Bottom;
                     TempPage.Paragraphs.Add(TempLoadImage);
                 });
-                if(AutoOptiomizePdf)
+                if (AutoOptiomizePdf)
                 {
                     BuilderDocument.Optimize();
                     BuilderDocument.OptimizeResources(TempOpt);
@@ -361,7 +359,7 @@ namespace DocumentTools
             {
                 Page TempPage = BuilderDocument.Pages.Add();
                 Aspose.Pdf.Image TempLoadImage = new Aspose.Pdf.Image { File = ImageFileName };
-                TempPage.PageInfo.IsLandscape=LandStyle;
+                TempPage.PageInfo.IsLandscape = LandStyle;
                 TempPage.PageInfo.Margin.Top = Margin_TOP;
                 TempPage.PageInfo.Margin.Left = Margin_LEFT;
                 TempPage.PageInfo.Margin.Right = Margin_RIGHT;
@@ -700,7 +698,7 @@ namespace DocumentTools
         /// </summary>
         /// <param name="DocumentFileName">文档名称</param>
         /// <param name="SavedDcoumentFileName">保存后的文件名称</param>
-        public static void ConvertWord2Excel(string DocumentFileName,string SavedDcoumentFileName)
+        public static void ConvertWord2Excel(string DocumentFileName, string SavedDcoumentFileName)
         {
             Aspose.Hook.HookManager.StartHook();
 
@@ -721,7 +719,7 @@ namespace DocumentTools
         /// </summary>
         /// <param name="DocumentFileName">文档名称</param>
         /// <param name="SaveDocumentFileName">转换后的文件名称</param>
-        public static void ConvertExcel2Word(string DocumentFileName,string SaveDocumentFileName)
+        public static void ConvertExcel2Word(string DocumentFileName, string SaveDocumentFileName)
         {
             Aspose.Hook.HookManager.StartHook();
             using (Aspose.Cells.Workbook TempLoadWorkBook = new Aspose.Cells.Workbook(DocumentFileName))
@@ -745,7 +743,7 @@ namespace DocumentTools
         /// </summary>
         /// <param name="DocumentFileName">文档名称</param>
         /// <param name="SavedPath">保存目录</param>
-        public static void SplitPdf(string DocumentFileName,string SavedPath)
+        public static void SplitPdf(string DocumentFileName, string SavedPath)
         {
             Aspose.Hook.HookManager.StartHook();
 
@@ -778,10 +776,10 @@ namespace DocumentTools
         /// <param name="WaterMarkFontColor">字体颜色</param>
         /// <param name="WaterMarkFontName">字体名称</param>
         /// <param name="WaterMarkFontSize">字体大小</param>
-        public static void AddWaterMark2Pdf(string DocuementFileName,string SaveFileName,string WaterMarkContent,float WaterMarkOpactiyNum,string WaterMarkRotateDegNum,int WaterMarkHorAlignIndex,int WaterMarkVerAlignIndex, System.Drawing.Color WaterMarkFontColor,string WaterMarkFontName="宋体", float WaterMarkFontSize=12,string AddImageFileName="",string AddImageHeight="100",string AddImageWidth="100")
+        public static void AddWaterMark2Pdf(string DocuementFileName, string SaveFileName, string WaterMarkContent, float WaterMarkOpactiyNum, string WaterMarkRotateDegNum, int WaterMarkHorAlignIndex, int WaterMarkVerAlignIndex, System.Drawing.Color WaterMarkFontColor, string WaterMarkFontName = "宋体", float WaterMarkFontSize = 12, string AddImageFileName = "", string AddImageHeight = "100", string AddImageWidth = "100")
         {
             Aspose.Hook.HookManager.StartHook();
-            
+
 
             using (Aspose.Pdf.Document TempLoadDocument = new Aspose.Pdf.Document(DocuementFileName))
             {
@@ -924,7 +922,7 @@ namespace DocumentTools
         /// <param name="WaterMarkOpactiyNum">不透明度</param>
         /// <param name="WaterMarkRotateDegNum">旋转角度</param>
         [Obsolete]
-        public static void AddWaterMark2Pdf(string DocuementFileName, string SaveFileName, float WaterMarkOpactiyNum, string WaterMarkRotateDegNum, int WaterMarkHorAlignIndex, int WaterMarkVerAlignIndex,string AddBackGroundImageFileName)
+        public static void AddWaterMark2Pdf(string DocuementFileName, string SaveFileName, float WaterMarkOpactiyNum, string WaterMarkRotateDegNum, int WaterMarkHorAlignIndex, int WaterMarkVerAlignIndex, string AddBackGroundImageFileName)
         {
             Aspose.Hook.HookManager.StartHook();
             using (Aspose.Pdf.Document TempLoadDocument = new Aspose.Pdf.Document(DocuementFileName))
@@ -997,18 +995,18 @@ namespace DocumentTools
         /// </summary>
         /// <param name="DocumentFileName"></param>
         /// <param name="SavedFileName"></param>
-        public static void RemovePdfWaterMark(string DocumentFileName,string SavedFileName)
+        public static void RemovePdfWaterMark(string DocumentFileName, string SavedFileName)
         {
             Aspose.Hook.HookManager.StartHook();
 
             Aspose.Pdf.Document TempLoadDocument = new Aspose.Pdf.Document(DocumentFileName);
 
-            foreach(Aspose.Pdf.Page TempPage in TempLoadDocument.Pages)
+            foreach (Aspose.Pdf.Page TempPage in TempLoadDocument.Pages)
             {
                 foreach (Aspose.Pdf.Artifact TempWaterMark in TempPage.Artifacts)
                 {
                     Debug.WriteLine(TempWaterMark.Subtype);
-                    if(TempWaterMark.Subtype == Artifact.ArtifactSubtype.Watermark || TempWaterMark.Subtype == Artifact.ArtifactSubtype.Background)
+                    if (TempWaterMark.Subtype == Artifact.ArtifactSubtype.Watermark || TempWaterMark.Subtype == Artifact.ArtifactSubtype.Background)
                     {
                         TempPage.Artifacts.Delete(TempWaterMark);
                     }
@@ -1027,14 +1025,14 @@ namespace DocumentTools
         /// <param name="ProtectedPassword">文档密码</param>
         /// <param name="ExportHiddenPage">是否导出隐藏幻灯片</param>
         /// <param name="Position">备注页是否导出</param>
-        public static void ConvertPPT2PDF(string DocumentFileName,string SavedFileName,bool DrawBlackLine,string ProtectedPassword,bool ExportHiddenPage,Aspose.Slides.Export.NotesPositions Position)
+        public static void ConvertPPT2PDF(string DocumentFileName, string SavedFileName, bool DrawBlackLine, string ProtectedPassword, bool ExportHiddenPage, Aspose.Slides.Export.NotesPositions Position)
         {
             Aspose.Hook.HookManager.StartHook();
 
             using (Aspose.Slides.Presentation TempDocument = new Aspose.Slides.Presentation(DocumentFileName))
             {
                 Aspose.Slides.Export.PdfOptions TempPdfOption = new Aspose.Slides.Export.PdfOptions()
-                { 
+                {
                     DrawSlidesFrame = DrawBlackLine,
                     JpegQuality = 100,
                     ShowHiddenSlides = ExportHiddenPage,
@@ -1044,7 +1042,7 @@ namespace DocumentTools
                 INotesCommentsLayoutingOptions layoutingOptions = TempPdfOption.NotesCommentsLayouting;
                 layoutingOptions.NotesPosition = Position;
 
-                TempDocument.Save(SavedFileName,Aspose.Slides.Export.SaveFormat.Pdf,TempPdfOption);
+                TempDocument.Save(SavedFileName, Aspose.Slides.Export.SaveFormat.Pdf, TempPdfOption);
             }
         }
         /// <summary>
@@ -1055,7 +1053,7 @@ namespace DocumentTools
         /// <param name="ExtraOcr">是否开启ocr识别</param>
         /// <param name="SplitImageShape">是否分割图形图像</param>
         /// <param name="RenderAsImage">是否导出为图片</param>
-        public static void ConvertPDF2PPT(string DocumnentFileName,string SavedFileName,bool ExtraOcr,bool SplitImageShape,bool RenderAsImage)
+        public static void ConvertPDF2PPT(string DocumnentFileName, string SavedFileName, bool ExtraOcr, bool SplitImageShape, bool RenderAsImage)
         {
             Aspose.Hook.HookManager.StartHook();
             using (Aspose.Pdf.Document TempDocument = new Aspose.Pdf.Document(DocumnentFileName))
@@ -1066,9 +1064,9 @@ namespace DocumentTools
                     SeparateImages = SplitImageShape,
                     SlidesAsImages = RenderAsImage,
                 };
-                TempDocument.Save(SavedFileName,TempPPTOption);
+                TempDocument.Save(SavedFileName, TempPPTOption);
             }
-              
+
         }
 
         /// <summary>
@@ -1077,7 +1075,7 @@ namespace DocumentTools
         /// <param name="DocumentFileName"></param>
         /// <param name="SavedFileName"></param>
         /// <param name="ConvertFormat"></param>
-        public static void ConvertPdfCompliance(string DocumentFileName,string SavedFileName,Aspose.Pdf.PdfFormat ConvertFormat)
+        public static void ConvertPdfCompliance(string DocumentFileName, string SavedFileName, Aspose.Pdf.PdfFormat ConvertFormat)
         {
             Aspose.Hook.HookManager.StartHook();
 
@@ -1085,7 +1083,7 @@ namespace DocumentTools
             {
                 using (MemoryStream TempMemoryStream = new MemoryStream())
                 {
-                    TempDocument.Convert(TempMemoryStream,ConvertFormat,ConvertErrorAction.Delete);
+                    TempDocument.Convert(TempMemoryStream, ConvertFormat, ConvertErrorAction.Delete);
                     TempDocument.Save(SavedFileName);
                 }
             }
@@ -1108,16 +1106,16 @@ namespace DocumentTools
         /// <param name="CompressPDF_CancelEmbedFont">是否取消字体内嵌</param>
         /// <param name="CompressPDF_RemoveForms">是否移除表单域</param>
         /// <param name="CompressPDF_RemoveUnUseObject">是否移除未使用的对象</param>
-        public static void CompressPDF(string DocumentFileName,string SavedFileName,
-                                        bool CompressPDF_WEB,bool CommpressPDF_CompressImage,
-                                        int CompressPDF_CompressImageQuailty,int CompressPDF_ImageMaxDPI,Aspose.Pdf.Optimization.ImageCompressionVersion CompressPDF_CompressImageVersion,
-                                        bool CompressPDF_UseFlateCode,bool CompressPDF_RemoveUnUseStream,
-                                        bool CompressPDF_LinkeSameStream,bool CompressPDF_CancelEmbedFont,
-                                        bool CompressPDF_RemoveForms,bool CompressPDF_RemoveUnUseObject)
+        public static void CompressPDF(string DocumentFileName, string SavedFileName,
+                                        bool CompressPDF_WEB, bool CommpressPDF_CompressImage,
+                                        int CompressPDF_CompressImageQuailty, int CompressPDF_ImageMaxDPI, Aspose.Pdf.Optimization.ImageCompressionVersion CompressPDF_CompressImageVersion,
+                                        bool CompressPDF_UseFlateCode, bool CompressPDF_RemoveUnUseStream,
+                                        bool CompressPDF_LinkeSameStream, bool CompressPDF_CancelEmbedFont,
+                                        bool CompressPDF_RemoveForms, bool CompressPDF_RemoveUnUseObject)
         {
 
             Aspose.Hook.HookManager.StartHook();
-            using(Aspose.Pdf.Document TempLoadDocument = new Document(DocumentFileName))
+            using (Aspose.Pdf.Document TempLoadDocument = new Document(DocumentFileName))
             {
                 Aspose.Pdf.Optimization.OptimizationOptions TempComressOption = new Aspose.Pdf.Optimization.OptimizationOptions();
 
@@ -1166,6 +1164,88 @@ namespace DocumentTools
             }
         }
 
+        /// <summary>
+        /// 压缩图片
+        /// </summary>
+        /// <param name="ImageFileName"></param>
+        /// <param name="SavedFileName"></param>
+        /// <param name="Compress_Jpeg_Mode"></param>
+        /// <param name="Compress_Jpeg_ColorMode"></param>
+        /// <param name="Compress_Jpeg_Quailty"></param>
+        /// <param name="Compress_Png_Level"></param>
+        /// <param name="Compress_Png_ColorType"></param>
+        /// <param name="Compress_Bmp_Compression"></param>
+        /// <param name="Compress_Bmp_Bits_Pixel"></param>
+        public static void CompressImage(string ImageFileName, string SavedFileName,
+                                        Aspose.Imaging.FileFormats.Jpeg.JpegCompressionMode Compress_Jpeg_Mode,
+                                        Aspose.Imaging.FileFormats.Jpeg.JpegCompressionColorMode Compress_Jpeg_ColorMode,
+                                        int Compress_Jpeg_Quailty,
+                                        int Compress_Png_Level, Aspose.Imaging.FileFormats.Png.PngColorType Compress_Png_ColorType,
+                                        Aspose.Imaging.FileFormats.Bmp.BitmapCompression Compress_Bmp_Compression, int Compress_Bmp_Bits_Pixel
+                                        )
+        {
+            Aspose.Hook.HookManager.StartHook();
+
+            //支持的图像格式：.jpg、.jpeg、.png、.bmp
+
+            using (Aspose.Imaging.Image TempLoadImage = Aspose.Imaging.Image.Load(ImageFileName))
+            {
+
+                string ImageExtensionString = Path.GetExtension(ImageFileName);//返回格式: .png
+
+                Aspose.Imaging.ImageOptions.JpegOptions TempJpgOption = new Aspose.Imaging.ImageOptions.JpegOptions();
+
+                Aspose.Imaging.ImageOptions.PngOptions TempPngOption = new Aspose.Imaging.ImageOptions.PngOptions();
+
+                Aspose.Imaging.ImageOptions.BmpOptions TempBmpOption = new Aspose.Imaging.ImageOptions.BmpOptions();
+
+                switch (ImageExtensionString)
+                {
+                    case ".jpg":
+                        TempJpgOption.CompressionType = Compress_Jpeg_Mode;
+                        TempJpgOption.ColorType = Compress_Jpeg_ColorMode;
+                        TempJpgOption.Quality = Compress_Jpeg_Quailty;
+                        TempLoadImage.Save(SavedFileName, TempJpgOption);
+                        break;
+                    case ".jpeg":
+                        TempJpgOption.CompressionType = Compress_Jpeg_Mode;
+                        TempJpgOption.ColorType = Compress_Jpeg_ColorMode;
+                        TempJpgOption.Quality = Compress_Jpeg_Quailty;
+                        TempLoadImage.Save(SavedFileName, TempJpgOption);
+                        break;
+                    case ".png":
+                        TempPngOption.CompressionLevel = Compress_Png_Level;
+                        TempPngOption.ColorType = Compress_Png_ColorType;
+                        TempLoadImage.Save(SavedFileName, TempPngOption);
+                        break;
+                    case ".bmp":
+                        TempBmpOption.Compression = Compress_Bmp_Compression;
+                        TempBmpOption.BitsPerPixel = Compress_Bmp_Bits_Pixel;
+                        TempLoadImage.Save(SavedFileName, TempBmpOption);
+                        break;
+                    default:
+                        break;
+                }
+
+                switch (Path.GetExtension(SavedFileName))
+                {
+                    case ".jpg":
+                        TempLoadImage.Save(SavedFileName, TempJpgOption);
+                        break;
+                    case ".jpeg":
+                        TempLoadImage.Save(SavedFileName, TempJpgOption);
+                        break;
+                    case ".png":
+                        TempLoadImage.Save(SavedFileName, TempPngOption);
+                        break;
+                    case ".bmp":
+                        TempLoadImage.Save(SavedFileName, TempBmpOption);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
 
         /// <summary>
         /// 读取文件中的DataMatrix，交给treeview处理，功能写的差不多了，随便写写了

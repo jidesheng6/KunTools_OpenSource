@@ -28,6 +28,7 @@ namespace DocumentTools
         PDF2PPT,
         ConvertPdfCompliance,
         CompressPDF,
+        CompressImage,
     }
 
     internal class UI
@@ -233,7 +234,7 @@ namespace DocumentTools
 
         public static void AddWord2ExcelFiles()
         {
-            AddFilesToListView("WORD文档","*.doc;*.docx",BodyForm.MainForm.Word2ExcelFileList);
+            AddFilesToListView("WORD文档", "*.doc;*.docx", BodyForm.MainForm.Word2ExcelFileList);
         }
 
         public static void AddExcel2WordFiles()
@@ -241,14 +242,14 @@ namespace DocumentTools
             AddFilesToListView("EXCEL文档", "*.xls;*.xlsx", BodyForm.MainForm.Excel2WordFileList);
         }
 
-        public  static void AddSplitPdfFiles()
+        public static void AddSplitPdfFiles()
         {
-            AddFilesToListView("PDF文档","*.pdf",BodyForm.MainForm.SplitPdfFileList);
+            AddFilesToListView("PDF文档", "*.pdf", BodyForm.MainForm.SplitPdfFileList);
         }
 
         public static void AddWaterMarkPdfFiles()
         {
-            AddFilesToListView("PDF文档","*.pdf",BodyForm.MainForm.PdfWaterMarkFileList);
+            AddFilesToListView("PDF文档", "*.pdf", BodyForm.MainForm.PdfWaterMarkFileList);
         }
 
         public static void AddRemoveWaterFiles()
@@ -263,7 +264,7 @@ namespace DocumentTools
 
         public static void AddPdf2PPTFiles()
         {
-            AddFilesToListView("PDF文档","*.pdf",BodyForm.MainForm.PDF2PPTFileList);
+            AddFilesToListView("PDF文档", "*.pdf", BodyForm.MainForm.PDF2PPTFileList);
         }
 
         public static void AddConvertComplanicePdfFiles()
@@ -281,6 +282,10 @@ namespace DocumentTools
             AddFilesToListView("PDF文档", "*.pdf", BodyForm.MainForm.CompressPdfFileList);
         }
 
+        public static void AddCompressImageFiles()
+        {
+            AddFilesToListView("PDF文档", "*.jpg;*.jpeg;*.png;*.bmp", BodyForm.MainForm.CompressImageFileList);
+        }
 
         /// <summary>
         /// 转换文件通用方法
@@ -302,7 +307,7 @@ namespace DocumentTools
                     for (int TempIndex = 0; TempIndex < ListViewControl.Items.Count; TempIndex++)
                     {
                         string ListViewFirstColumnText = ListViewControl.Items[TempIndex].Text;
-                        string FileNameWithOutExtension = Path.GetFileNameWithoutExtension(ListViewFirstColumnText);
+                        string FileNameWithOutExtension = Path.GetFileNameWithoutExtension(ListViewFirstColumnText);//不带后缀的文件名
                         string ConvertedFileName = Path.Combine(SelectSavePathstring, FileNameWithOutExtension + ExtensionString);
                         ListViewControl.Items[TempIndex].SubItems.Add(ConvertedFileName);
                         ListViewControl.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
@@ -316,7 +321,7 @@ namespace DocumentTools
                                 TempSaveDocxPathString = Path.Combine(SelectSavePathstring, "TempDocx");
                                 Directory.CreateDirectory(TempSaveDocxPathString);
 
-                                object SelectedPdfCompliance =  Enum.Parse(typeof(Aspose.Words.Saving.PdfCompliance),BodyForm.MainForm.PDFComplianceBox.SelectedItem.ToString());
+                                object SelectedPdfCompliance = Enum.Parse(typeof(Aspose.Words.Saving.PdfCompliance), BodyForm.MainForm.PDFComplianceBox.SelectedItem.ToString());
 
                                 Util.ConvertWord2Pdf(ListViewFirstColumnText, ConvertedFileName, TempSaveDocxPathString, (Aspose.Words.Saving.PdfCompliance)SelectedPdfCompliance);
                                 break;
@@ -354,11 +359,11 @@ namespace DocumentTools
 
                             // Word批量转换为Excel
                             case ConvertFileType.Word2Excel:
-                                Util.ConvertWord2Excel(ListViewFirstColumnText,ConvertedFileName);
+                                Util.ConvertWord2Excel(ListViewFirstColumnText, ConvertedFileName);
                                 break;
                             // Excel批量转换为Word
                             case ConvertFileType.Excel2Word:
-                                Util.ConvertExcel2Word(ListViewFirstColumnText,ConvertedFileName);
+                                Util.ConvertExcel2Word(ListViewFirstColumnText, ConvertedFileName);
                                 break;
                             // pdf拆分
                             case ConvertFileType.SplitPdf:
@@ -366,7 +371,7 @@ namespace DocumentTools
                                 break;
                             // pdf添加水印
                             case ConvertFileType.AddWaterMarkPdf:
-                                Util.AddWaterMark2Pdf(ListViewFirstColumnText,ConvertedFileName,BodyForm.MainForm.PdfWaterMarkText.Text,float.Parse(BodyForm.MainForm.PdfWaterMarkOpcityNumber.Text.ToString()),BodyForm.MainForm.PdfWaterMarkRotateDegNumber.Text,BodyForm.MainForm.PdfWaterMarkHorSetting.SelectedIndex,BodyForm.MainForm.PDFWaterMarkVerSetting.SelectedIndex, PrivateFontSetting.FontColor, PrivateFontSetting.FontName, PrivateFontSetting.FontSize,BodyForm.MainForm.AddWaterMarkBackGroudImageFileName,BodyForm.MainForm.WaterMarkImageHeight.Text,BodyForm.MainForm.WaterMarkImageWidth.Text);
+                                Util.AddWaterMark2Pdf(ListViewFirstColumnText, ConvertedFileName, BodyForm.MainForm.PdfWaterMarkText.Text, float.Parse(BodyForm.MainForm.PdfWaterMarkOpcityNumber.Text.ToString()), BodyForm.MainForm.PdfWaterMarkRotateDegNumber.Text, BodyForm.MainForm.PdfWaterMarkHorSetting.SelectedIndex, BodyForm.MainForm.PDFWaterMarkVerSetting.SelectedIndex, PrivateFontSetting.FontColor, PrivateFontSetting.FontName, PrivateFontSetting.FontSize, BodyForm.MainForm.AddWaterMarkBackGroudImageFileName, BodyForm.MainForm.WaterMarkImageHeight.Text, BodyForm.MainForm.WaterMarkImageWidth.Text);
                                 break;
                             // pdf移除水印
                             case ConvertFileType.RemovePdfWaterMark:
@@ -375,7 +380,7 @@ namespace DocumentTools
                             // ppt转pdf
                             case ConvertFileType.PPT2PDF:
                                 object SelectCommentPostion = Enum.Parse(typeof(Aspose.Slides.Export.NotesPositions), BodyForm.MainForm.ExportNotePageCombox.SelectedValue.ToString());
-                                Util.ConvertPPT2PDF(ListViewFirstColumnText, ConvertedFileName,BodyForm.MainForm.DrawBlackLine.Checked,BodyForm.MainForm.ConvertPPT2PDFPassword.Text.Trim(),BodyForm.MainForm.ExportHiddenPage.Checked,(Aspose.Slides.Export.NotesPositions)SelectCommentPostion);
+                                Util.ConvertPPT2PDF(ListViewFirstColumnText, ConvertedFileName, BodyForm.MainForm.DrawBlackLine.Checked, BodyForm.MainForm.ConvertPPT2PDFPassword.Text.Trim(), BodyForm.MainForm.ExportHiddenPage.Checked, (Aspose.Slides.Export.NotesPositions)SelectCommentPostion);
                                 break;
                             // pdf转ppt
                             case ConvertFileType.PDF2PPT:
@@ -383,20 +388,44 @@ namespace DocumentTools
                                 break;
                             // pdf版本转换
                             case ConvertFileType.ConvertPdfCompliance:
-                                object SelectPdfCompliance = Enum.Parse(typeof(Aspose.Pdf.PdfFormat),BodyForm.MainForm.ConvertPdfComplianceVersion.SelectedItem.ToString());
-                                Util.ConvertPdfCompliance(ListViewFirstColumnText,ConvertedFileName,(Aspose.Pdf.PdfFormat)SelectPdfCompliance);
+                                object SelectPdfCompliance = Enum.Parse(typeof(Aspose.Pdf.PdfFormat), BodyForm.MainForm.ConvertPdfComplianceVersion.SelectedItem.ToString());
+                                Util.ConvertPdfCompliance(ListViewFirstColumnText, ConvertedFileName, (Aspose.Pdf.PdfFormat)SelectPdfCompliance);
                                 break;
                             // 压缩PDF
                             case ConvertFileType.CompressPDF:
                                 Util.CompressPDF(ListViewFirstColumnText, ConvertedFileName,
-                                                 BodyForm.MainForm.CompressPDF_WEB.Checked,BodyForm.MainForm.CompressPDF_CompressImage.Checked,
+                                                 BodyForm.MainForm.CompressPDF_WEB.Checked, BodyForm.MainForm.CompressPDF_CompressImage.Checked,
                                                  int.Parse(BodyForm.MainForm.CompressPDF_ImageQuailty.SelectedItem.ToString()),
                                                  int.Parse(BodyForm.MainForm.CompressPDF_ImageResoution.SelectedItem.ToString()),
-                                                 (Aspose.Pdf.Optimization.ImageCompressionVersion)Enum.Parse(typeof(Aspose.Pdf.Optimization.ImageCompressionVersion),BodyForm.MainForm.CompressPDF_ImageCompressVersion.SelectedValue.ToString()),
-                                                 BodyForm.MainForm.CompressPDF_CompressImageFlate.Checked,BodyForm.MainForm.CompressPDF_RemoveUnuseStream.Checked,
-                                                 BodyForm.MainForm.CompressPDF_LinkSameStream.Checked,BodyForm.MainForm.CompressPDF_CancelEmbedFont.Checked,
-                                                 BodyForm.MainForm.CompressPDF_RemoveForms.Checked,BodyForm.MainForm.CompressPDF_RemoveUnuseObject.Checked
+                                                 (Aspose.Pdf.Optimization.ImageCompressionVersion)Enum.Parse(typeof(Aspose.Pdf.Optimization.ImageCompressionVersion), BodyForm.MainForm.CompressPDF_ImageCompressVersion.SelectedValue.ToString()),
+                                                 BodyForm.MainForm.CompressPDF_CompressImageFlate.Checked, BodyForm.MainForm.CompressPDF_RemoveUnuseStream.Checked,
+                                                 BodyForm.MainForm.CompressPDF_LinkSameStream.Checked, BodyForm.MainForm.CompressPDF_CancelEmbedFont.Checked,
+                                                 BodyForm.MainForm.CompressPDF_RemoveForms.Checked, BodyForm.MainForm.CompressPDF_RemoveUnuseObject.Checked
                                                  );
+                                break;
+                            // 压缩图片
+                            case ConvertFileType.CompressImage:
+                                bool UseSelfExt = BodyForm.MainForm.CompressImage_NotUseSelfExt.Checked;//是否不使用源文件后缀名
+                                string SavedFileName = string.Empty;
+                                if (UseSelfExt)
+                                {
+                                    SavedFileName = ConvertedFileName;
+                                }
+                                else
+                                {
+                                    string ImageFileExtenString = Path.GetExtension(ListViewFirstColumnText);
+
+                                    SavedFileName = Path.Combine(SelectSavePathstring, FileNameWithOutExtension + ImageFileExtenString);
+                                }
+
+                                Util.CompressImage(ListViewFirstColumnText, SavedFileName,
+                                                   (Aspose.Imaging.FileFormats.Jpeg.JpegCompressionMode)Enum.Parse(typeof(Aspose.Imaging.FileFormats.Jpeg.JpegCompressionMode), BodyForm.MainForm.CompressJpegMode_Combox.SelectedItem.ToString()),
+                                                   (Aspose.Imaging.FileFormats.Jpeg.JpegCompressionColorMode)Enum.Parse(typeof(Aspose.Imaging.FileFormats.Jpeg.JpegCompressionColorMode), BodyForm.MainForm.CompressJpegColorMode_Combox.SelectedItem.ToString()),
+                                                   int.Parse(BodyForm.MainForm.CompressJpegQuailty_Combox.SelectedItem.ToString()), int.Parse(BodyForm.MainForm.CompressPngLevel_Combox.SelectedItem.ToString()),
+                                                   (Aspose.Imaging.FileFormats.Png.PngColorType)Enum.Parse(typeof(Aspose.Imaging.FileFormats.Png.PngColorType), BodyForm.MainForm.CompressPngColorMode_Combox.SelectedItem.ToString()),
+                                                   (Aspose.Imaging.FileFormats.Bmp.BitmapCompression)Enum.Parse(typeof(Aspose.Imaging.FileFormats.Bmp.BitmapCompression), BodyForm.MainForm.CompressBmpMode_Combox.SelectedItem.ToString()),
+                                                   int.Parse(BodyForm.MainForm.CompressBmpPixeBits_Combox.SelectedItem.ToString())
+                                                   );
                                 break;
                             default: break;
                         }

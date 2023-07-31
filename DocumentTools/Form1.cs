@@ -2,23 +2,19 @@
 using NTwain.Data;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Configuration;
-using System.ComponentModel;
-using System.Text.RegularExpressions;
-using System.Windows.Forms.VisualStyles;
-using System.Net;
-using System.Net.Http;
-using System.Net.Sockets;
-using System.Net.Http.Headers;
-using System.Runtime.InteropServices;
 
 namespace DocumentTools
 {
@@ -91,9 +87,9 @@ namespace DocumentTools
 
         private void OutPutListViewIndex()
         {
-            foreach(TabPage TempPage in this.MainTabPage.TabPages)
+            foreach (TabPage TempPage in this.MainTabPage.TabPages)
             {
-                Debug.WriteLine(TempPage.Text+"："+MainTabPage.TabPages.IndexOf(TempPage));
+                Debug.WriteLine(TempPage.Text + "：" + MainTabPage.TabPages.IndexOf(TempPage));
             }
         }
 
@@ -107,7 +103,7 @@ namespace DocumentTools
             y = Height;
             setTag(this);
 
-            
+
 
         }
         private void BodyForm_Load(object sender, EventArgs e)
@@ -128,8 +124,10 @@ namespace DocumentTools
             this.DecodeDataMatrixView.ShowLines = true;
             this.DecodeDataMatrixView.ShowRootLines = true;
             this.DecodeDataMatrixView.FullRowSelect = true;
-            ReleaseRegistry.Enabled = false;
+            this.CompressImage_OutPutImageFormat.Enabled = false;
+            //ReleaseRegistry.Enabled = false;
             Image2PDFCOmpressImage.Enabled = false;
+
 
 
 
@@ -140,7 +138,7 @@ namespace DocumentTools
                 MainTabPage.SelectedIndex = int.Parse(ConfigurationManager.AppSettings["StartPageIndex"]);
 
                 string OpenTabPageHeight = ConfigurationManager.AppSettings["TabPageHeight"];
-                this.MainTabPage.DrawMode = OpenTabPageHeight=="on"? TabDrawMode.OwnerDrawFixed: TabDrawMode.Normal;
+                this.MainTabPage.DrawMode = OpenTabPageHeight == "on" ? TabDrawMode.OwnerDrawFixed : TabDrawMode.Normal;
 
             }
             else
@@ -485,6 +483,20 @@ namespace DocumentTools
             this.CompressPdfFileList.DragEnter += ListViewDragEnter;
             this.CompressPdfFileList.DragDrop += ListviewDragDrop;
             this.CompressPdfFileList.ColumnClick += ListviewSortHandler;
+
+            // CompressImageFileList
+            this.CompressImageFileList.View = View.Details;
+            this.CompressImageFileList.FullRowSelect = true;
+            this.CompressImageFileList.AllowDrop = true;
+            this.CompressImageFileList.Columns.Add("文件名称", 300);
+            this.CompressImageFileList.Columns.Add("添加时间", 300);
+            this.CompressImageFileList.Columns.Add("转换后文件名称", 300);
+            this.CompressImageFileList.Sorting = SortOrder.Ascending;
+            this.CompressImageFileList.Name = "CompressImageFileList";
+
+            this.CompressImageFileList.DragEnter += ListViewDragEnter;
+            this.CompressImageFileList.DragDrop += ListviewDragDrop;
+            this.CompressImageFileList.ColumnClick += ListviewSortHandler;
         }
 
         private void InitComboxValue()
@@ -557,11 +569,11 @@ namespace DocumentTools
 
             PdfWaterMarkHorSettingTable.Columns.Add("DisplayValue");
             PdfWaterMarkHorSettingTable.Columns.Add("RealValue");
-            PdfWaterMarkHorSettingTable.Rows.Add("不对齐",Aspose.Pdf.HorizontalAlignment.None);
-            PdfWaterMarkHorSettingTable.Rows.Add("左对齐",Aspose.Pdf.HorizontalAlignment.Left);
-            PdfWaterMarkHorSettingTable.Rows.Add("居中对齐",Aspose.Pdf.HorizontalAlignment.Center);
-            PdfWaterMarkHorSettingTable.Rows.Add("右对齐",Aspose.Pdf.HorizontalAlignment.Right);
-            PdfWaterMarkHorSettingTable.Rows.Add("未知对齐方式1",Aspose.Pdf.HorizontalAlignment.Justify);
+            PdfWaterMarkHorSettingTable.Rows.Add("不对齐", Aspose.Pdf.HorizontalAlignment.None);
+            PdfWaterMarkHorSettingTable.Rows.Add("左对齐", Aspose.Pdf.HorizontalAlignment.Left);
+            PdfWaterMarkHorSettingTable.Rows.Add("居中对齐", Aspose.Pdf.HorizontalAlignment.Center);
+            PdfWaterMarkHorSettingTable.Rows.Add("右对齐", Aspose.Pdf.HorizontalAlignment.Right);
+            PdfWaterMarkHorSettingTable.Rows.Add("未知对齐方式1", Aspose.Pdf.HorizontalAlignment.Justify);
             PdfWaterMarkHorSettingTable.Rows.Add("未知对齐方式2", Aspose.Pdf.HorizontalAlignment.FullJustify);
 
             this.PdfWaterMarkHorSetting.DataSource = PdfWaterMarkHorSettingTable;
@@ -585,7 +597,7 @@ namespace DocumentTools
 
             this.PDFWaterMarkVerSetting.SelectedIndex = 2;
 
-            this.PdfWaterMarkOpcityNumber.DataSource = new float[] {0.0f,0.1f,0.2f,0.3f,0.4f,0.5f,0.6f,0.7f,0.8f,0.9f,1.0f };
+            this.PdfWaterMarkOpcityNumber.DataSource = new float[] { 0.0f, 0.1f, 0.2f, 0.3f, 0.4f, 0.5f, 0.6f, 0.7f, 0.8f, 0.9f, 1.0f };
             this.PdfWaterMarkOpcityNumber.FormatString = "F1"; //控制文本格式，这里显示小数点后1位
             this.PdfWaterMarkOpcityNumber.SelectedIndex = 5;
 
@@ -597,9 +609,9 @@ namespace DocumentTools
             DataTable ExportNotePageData = new DataTable();
             ExportNotePageData.Columns.Add("DisplayValue");
             ExportNotePageData.Columns.Add("RealValue");
-            ExportNotePageData.Rows.Add("不导出",Aspose.Slides.Export.NotesPositions.None);
-            ExportNotePageData.Rows.Add("自动调整",Aspose.Slides.Export.NotesPositions.BottomFull);
-            ExportNotePageData.Rows.Add("强制单页",Aspose.Slides.Export.NotesPositions.BottomTruncated);
+            ExportNotePageData.Rows.Add("不导出", Aspose.Slides.Export.NotesPositions.None);
+            ExportNotePageData.Rows.Add("自动调整", Aspose.Slides.Export.NotesPositions.BottomFull);
+            ExportNotePageData.Rows.Add("强制单页", Aspose.Slides.Export.NotesPositions.BottomTruncated);
 
             this.ExportNotePageCombox.DataSource = ExportNotePageData;
             this.ExportNotePageCombox.DisplayMember = "DisplayValue";
@@ -611,8 +623,8 @@ namespace DocumentTools
             DataTable Image2PDFPageStyle = new DataTable();
             Image2PDFPageStyle.Columns.Add("DisplayValue");
             Image2PDFPageStyle.Columns.Add("RealValue");
-            Image2PDFPageStyle.Rows.Add("横排",true);
-            Image2PDFPageStyle.Rows.Add("竖排",false);
+            Image2PDFPageStyle.Rows.Add("横排", true);
+            Image2PDFPageStyle.Rows.Add("竖排", false);
 
             this.Image2PDFCombox.DataSource = Image2PDFPageStyle;
             this.Image2PDFCombox.DisplayMember = "DisplayValue";
@@ -623,15 +635,46 @@ namespace DocumentTools
             DataTable CompressImageVersion = new DataTable();
             CompressImageVersion.Columns.Add("DisplayValue");
             CompressImageVersion.Columns.Add("RealValue");
-            CompressImageVersion.Rows.Add("标准",Aspose.Pdf.Optimization.ImageCompressionVersion.Standard);
-            CompressImageVersion.Rows.Add("快速",Aspose.Pdf.Optimization.ImageCompressionVersion.Fast);
-            CompressImageVersion.Rows.Add("混合",Aspose.Pdf.Optimization.ImageCompressionVersion.Mixed);
+            CompressImageVersion.Rows.Add("标准", Aspose.Pdf.Optimization.ImageCompressionVersion.Standard);
+            CompressImageVersion.Rows.Add("快速", Aspose.Pdf.Optimization.ImageCompressionVersion.Fast);
+            CompressImageVersion.Rows.Add("混合", Aspose.Pdf.Optimization.ImageCompressionVersion.Mixed);
 
             this.CompressPDF_ImageCompressVersion.DataSource = CompressImageVersion;
             this.CompressPDF_ImageCompressVersion.DisplayMember = "DisplayValue";
             this.CompressPDF_ImageCompressVersion.ValueMember = "RealValue";
 
             this.CompressPDF_ImageResoution.DataSource = Enumerable.Range(0, 600).Where(x => x % 50 == 0).ToList();
+
+            this.CompressJpegMode_Combox.DataSource = Enum.GetNames(typeof(Aspose.Imaging.FileFormats.Jpeg.JpegCompressionMode));
+
+            this.CompressJpegColorMode_Combox.DataSource = Enum.GetNames(typeof(Aspose.Imaging.FileFormats.Jpeg.JpegCompressionColorMode));
+            this.CompressJpegColorMode_Combox.SelectedIndex = 4;
+
+            this.CompressJpegQuailty_Combox.DataSource = Enumerable.Range(1, 100).ToList();
+            this.CompressJpegQuailty_Combox.SelectedIndex = 99;
+
+            this.CompressPngLevel_Combox.DataSource = Enumerable.Range(0, 10).ToList();
+
+            this.CompressPngColorMode_Combox.DataSource = Enum.GetNames(typeof(Aspose.Imaging.FileFormats.Png.PngColorType));
+            this.CompressPngColorMode_Combox.SelectedIndex = 1;
+
+            this.CompressBmpMode_Combox.DataSource = Enum.GetNames(typeof(Aspose.Imaging.FileFormats.Bmp.BitmapCompression));
+
+
+            this.CompressBmpPixeBits_Combox.DataSource = new int[] { 1, 4, 8, 16, 24, 32 };//BMP像素深度范围
+            this.CompressBmpPixeBits_Combox.SelectedIndex = 4;
+
+            DataTable CompressImage_OutPutFormat = new DataTable();
+            CompressImage_OutPutFormat.Columns.Add("DisplayValue");
+            CompressImage_OutPutFormat.Columns.Add("RealValue");
+            CompressImage_OutPutFormat.Rows.Add("JPG", ".jpg");
+            CompressImage_OutPutFormat.Rows.Add("JPEG", ".jpeg");
+            CompressImage_OutPutFormat.Rows.Add("PNG", ".png");
+            CompressImage_OutPutFormat.Rows.Add("BMP", ".bmp");
+
+            this.CompressImage_OutPutImageFormat.DataSource = CompressImage_OutPutFormat;
+            this.CompressImage_OutPutImageFormat.DisplayMember = "DisplayValue";
+            this.CompressImage_OutPutImageFormat.ValueMember = "RealValue";
 
 
             this.MeregeFilePage.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -640,15 +683,23 @@ namespace DocumentTools
             this.TwainPaperSizeBox.DropDownStyle = ComboBoxStyle.DropDownList;
             this.IcoSizeDrop.DropDownStyle = ComboBoxStyle.DropDownList;
             this.PdfWaterMarkHorSetting.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.PDFWaterMarkVerSetting.DropDownStyle= ComboBoxStyle.DropDownList;
+            this.PDFWaterMarkVerSetting.DropDownStyle = ComboBoxStyle.DropDownList;
             this.PdfWaterMarkOpcityNumber.DropDownStyle = ComboBoxStyle.DropDownList;
             this.PDFComplianceBox.DropDownStyle = ComboBoxStyle.DropDownList;
             this.ExportNotePageCombox.DropDownStyle = ComboBoxStyle.DropDownList;
             this.ConvertPdfComplianceVersion.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.Image2PDFCombox.DropDownStyle= ComboBoxStyle.DropDownList;
-            this.CompressPDF_ImageCompressVersion.DropDownStyle= ComboBoxStyle.DropDownList;
-            this.CompressPDF_ImageQuailty.DropDownStyle= ComboBoxStyle.DropDownList;
-            this.CompressPDF_ImageResoution.DropDownStyle= ComboBoxStyle.DropDownList;
+            this.Image2PDFCombox.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.CompressPDF_ImageCompressVersion.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.CompressPDF_ImageQuailty.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.CompressPDF_ImageResoution.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.CompressJpegMode_Combox.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.CompressJpegColorMode_Combox.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.CompressJpegQuailty_Combox.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.CompressPngLevel_Combox.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.CompressPngColorMode_Combox.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.CompressBmpMode_Combox.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.CompressBmpPixeBits_Combox.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.CompressImage_OutPutImageFormat.DropDownStyle = ComboBoxStyle.DropDownList;
 
 
 
@@ -960,6 +1011,9 @@ namespace DocumentTools
                     case "CompressPdfFileList":
                         UI.RemoveListViewItem(false, CompressPdfFileList, CompressPdfFileList.FocusedItem.Index);
                         break;
+                    case "CompressImageFileList":
+                        UI.RemoveListViewItem(false, CompressImageFileList, CompressImageFileList.FocusedItem.Index);
+                        break;
                     default: break;
                 }
             }
@@ -1022,7 +1076,7 @@ namespace DocumentTools
                         UI.RemoveListViewItem(true, MergeWordFileList);
                         break;
                     case "Word2ExcelFileList":
-                        UI.RemoveListViewItem (true, Word2ExcelFileList);
+                        UI.RemoveListViewItem(true, Word2ExcelFileList);
                         break;
                     case "Excel2WordFileList":
                         UI.RemoveListViewItem(true, Excel2WordFileList);
@@ -1031,7 +1085,7 @@ namespace DocumentTools
                         UI.RemoveListViewItem(true, SplitPdfFileList);
                         break;
                     case "PdfWaterMarkFileList":
-                        UI.RemoveListViewItem(true,PdfWaterMarkFileList);
+                        UI.RemoveListViewItem(true, PdfWaterMarkFileList);
                         break;
                     case "RemovePdfWaterMarkFileList":
                         UI.RemoveListViewItem(true, RemovePdfWaterMarkFileList);
@@ -1050,6 +1104,9 @@ namespace DocumentTools
                         break;
                     case "CompressPdfFileList":
                         UI.RemoveListViewItem(true, CompressPdfFileList);
+                        break;
+                    case "CompressImageFileList":
+                        UI.RemoveListViewItem(true, CompressImageFileList);
                         break;
                     default: break;
 
@@ -1186,34 +1243,37 @@ namespace DocumentTools
                     UI.AddFilesToListviewWithNotDialog(DropFiles, this.MergeWordFileList, new string[] { ".doc", ".docx" });
                     break;
                 case "Word2ExcelFileList":
-                    UI.AddFilesToListviewWithNotDialog(DropFiles,this.Word2ExcelFileList,new string[] { ".doc",".docx"});
+                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.Word2ExcelFileList, new string[] { ".doc", ".docx" });
                     break;
                 case "Excel2WordFileList":
-                    UI.AddFilesToListviewWithNotDialog(DropFiles,this.Excel2WordFileList,new string[] { ".xls",".xlsx"});
+                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.Excel2WordFileList, new string[] { ".xls", ".xlsx" });
                     break;
                 case "SplitPdfFileList":
-                    UI.AddFilesToListviewWithNotDialog(DropFiles,this.SplitPdfFileList,new string[] { ".pdf"});
+                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.SplitPdfFileList, new string[] { ".pdf" });
                     break;
                 case "PdfWaterMarkFileList":
-                    UI.AddFilesToListviewWithNotDialog(DropFiles,this.PdfWaterMarkFileList,new string[] { ".pdf"});
+                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.PdfWaterMarkFileList, new string[] { ".pdf" });
                     break;
                 case "RemovePdfWaterMarkFileList":
                     UI.AddFilesToListviewWithNotDialog(DropFiles, this.RemovePdfWaterMarkFileList, new string[] { ".pdf" });
                     break;
                 case "PPT2PdfFileList":
-                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.PPT2PdfFileList, new string[] { ".ppt",".pptx" });
+                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.PPT2PdfFileList, new string[] { ".ppt", ".pptx" });
                     break;
                 case "PDF2PPTFileList":
                     UI.AddFilesToListviewWithNotDialog(DropFiles, this.PDF2PPTFileList, new string[] { ".pdf" });
                     break;
                 case "ConvertPdfComplianceFileList":
-                    UI.AddFilesToListviewWithNotDialog(DropFiles,this.ConvertPdfComplianceFileList,new string[] { ".pdf"});
+                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.ConvertPdfComplianceFileList, new string[] { ".pdf" });
                     break;
                 case "ConvertImage2PDFFileList":
                     UI.AddFilesToListviewWithNotDialog(DropFiles, this.ConvertImage2PDFFileList, new string[] { ".jpg", ".jpeg", ".png", ".bmp" });
                     break;
                 case "CompressPdfFileList":
                     UI.AddFilesToListviewWithNotDialog(DropFiles, this.CompressPdfFileList, new string[] { ".pdf" });
+                    break;
+                case "CompressImageFileList":
+                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.CompressImageFileList, new string[] { ".jpg", ".jpeg", ".png", ".bmp" });
                     break;
                 default: break;
             }
@@ -1859,7 +1919,7 @@ namespace DocumentTools
             {
                 try
                 {
-                    UI.ConvertStart(this.SplitPdfFileList, this.SplitPdfStatusText, ConvertFileType.SplitPdf,"");
+                    UI.ConvertStart(this.SplitPdfFileList, this.SplitPdfStatusText, ConvertFileType.SplitPdf, "");
                 }
                 catch (Exception ex)
                 {
@@ -1884,9 +1944,9 @@ namespace DocumentTools
 
         private void PDFWaterMarkTextFontSetting_Click(object sender, EventArgs e)
         {
-           DialogResult FontSelectDialogResult =  FontSelectDialog.ShowDialog();
+            DialogResult FontSelectDialogResult = FontSelectDialog.ShowDialog();
 
-            if(FontSelectDialogResult == DialogResult.OK)
+            if (FontSelectDialogResult == DialogResult.OK)
             {
                 PrivateFontSetting.FontName = FontSelectDialog.Font.FontFamily.GetName(1033);
                 PrivateFontSetting.FontSize = FontSelectDialog.Font.Size;
@@ -1897,7 +1957,7 @@ namespace DocumentTools
         {
             DialogResult ColorSelectDialogResult = ColorSelectDialog.ShowDialog();
 
-            if(ColorSelectDialogResult==DialogResult.OK)
+            if (ColorSelectDialogResult == DialogResult.OK)
             {
                 PrivateFontSetting.FontColor = ColorSelectDialog.Color;
             }
@@ -1917,7 +1977,7 @@ namespace DocumentTools
                 }
 
             });
-            
+
         }
 
         private void SelectRemovePdfWaterMarkFiles_Click(object sender, EventArgs e)
@@ -1956,9 +2016,9 @@ namespace DocumentTools
 
         private void AddBackGroudImage_Click(object sender, EventArgs e)
         {
-          IEnumerable<string> BackGroundImageFileNames =  Util.ShwoSelectDialog(false, false, "图片文件", "*.jpg;*png;*.jpeg;*.bmp");
+            IEnumerable<string> BackGroundImageFileNames = Util.ShwoSelectDialog(false, false, "图片文件", "*.jpg;*png;*.jpeg;*.bmp");
 
-            if(BackGroundImageFileNames.FirstOrDefault()!=default)
+            if (BackGroundImageFileNames.FirstOrDefault() != default)
             {
                 AddWaterMarkBackGroudImageFileName = BackGroundImageFileNames.FirstOrDefault();
 
@@ -1972,18 +2032,18 @@ namespace DocumentTools
             }
         }
 
-        private void ValidTextBoxContent(object sender,CancelEventArgs e)
+        private void ValidTextBoxContent(object sender, CancelEventArgs e)
         {
             TextBox TempTextBox = (TextBox)sender;
 
             string TempText = TempTextBox.Text;
 
-            if(!IsNumber(TempText))
+            if (!IsNumber(TempText))
             {
                 e.Cancel = true;
-                MainFormError.SetError(TempTextBox,"请输入正确的数字");
+                MainFormError.SetError(TempTextBox, "请输入正确的数字");
             }
-            
+
         }
 
         private void ValidedTextBoxContent(object sender, EventArgs e)
@@ -2017,7 +2077,7 @@ namespace DocumentTools
             if (e.Index == this.MainTabPage.SelectedIndex)
             {
 
-                PageFont = new Font(e.Font,FontStyle.Regular);
+                PageFont = new Font(e.Font, FontStyle.Regular);
                 BackBrush = new System.Drawing.Drawing2D.LinearGradientBrush(e.Bounds, SystemColors.Control, SystemColors.Control, System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal);
 
                 ForeBrush = Brushes.Red;
@@ -2035,7 +2095,7 @@ namespace DocumentTools
 
             e.Graphics.FillRectangle(BackBrush, e.Bounds);
 
-            e.Graphics.DrawString(TabName,PageFont,ForeBrush,TabRec,FormatTab);
+            e.Graphics.DrawString(TabName, PageFont, ForeBrush, TabRec, FormatTab);
         }
         #endregion
 
@@ -2055,7 +2115,7 @@ namespace DocumentTools
                     {
                         MessageBox.Show($"当前版本为：{NowVersion}，最新版本为：{RemoteVersion}，建议及时更新", "检查更新", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
-                    else if(int.Parse(NowVersion.Replace(".", "")) == int.Parse(RemoteVersion.Replace(".", "")))
+                    else if (int.Parse(NowVersion.Replace(".", "")) == int.Parse(RemoteVersion.Replace(".", "")))
                     {
                         MessageBox.Show($"当前版本为最新版本：{NowVersion}", "检查更新", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 
@@ -2103,11 +2163,11 @@ namespace DocumentTools
             }
         }
 
-        private void ListviewSortHandler(object sender,ColumnClickEventArgs e)
+        private void ListviewSortHandler(object sender, ColumnClickEventArgs e)
         {
             ListView TempListview = sender as ListView;
 
-            if(e.Column==0)
+            if (e.Column == 0)
             {
                 if (TempListview.Sorting == SortOrder.Descending)
                 {
@@ -2202,11 +2262,11 @@ namespace DocumentTools
             Task<List<string>> ImageFiles = UI.GetListViewFirstItemContent(this.ConvertImage2PDFFileList);
             if (ImageFiles.Result.Count > 0)
             {
-                    try
+                try
+                {
+                    if (ExportSignlePDF.Checked)
                     {
-                        if (ExportSignlePDF.Checked)
-                        {
-                            IEnumerable<string> SavePaths = Util.ShwoSelectDialog(true, true, "", "");
+                        IEnumerable<string> SavePaths = Util.ShwoSelectDialog(true, true, "", "");
                         Task.Run(() =>
                         {
                             string SavePath = SavePaths.FirstOrDefault();
@@ -2220,7 +2280,7 @@ namespace DocumentTools
                                         ImageCount++;
                                         this.COnvertImage2PDFStatusText.Text = $"正在转换第{ImageCount}个文件";
                                         string SavePdfName = $"{Path.Combine(SavePath, Path.GetFileNameWithoutExtension(TempFile) + ".pdf")}";
-                                        Util.ConvertImage2PDF(TempFile, SavePdfName, false, ImageFiles.Result,bool.Parse(this.Image2PDFCombox.SelectedValue.ToString()),this.Image2PDFOptiomize.Checked,this.Image2PDFCOmpressImage.Checked,double.Parse(this.ImagePdfPageSIze_UP.Text),double.Parse(this.ImagePdfPageSIze_LEFT.Text),double.Parse(this.ImagePdfPageSIze_BOTTOM.Text),double.Parse(this.ImagePdfPageSIze_RIGHT.Text));
+                                        Util.ConvertImage2PDF(TempFile, SavePdfName, false, ImageFiles.Result, bool.Parse(this.Image2PDFCombox.SelectedValue.ToString()), this.Image2PDFOptiomize.Checked, this.Image2PDFCOmpressImage.Checked, double.Parse(this.ImagePdfPageSIze_UP.Text), double.Parse(this.ImagePdfPageSIze_LEFT.Text), double.Parse(this.ImagePdfPageSIze_BOTTOM.Text), double.Parse(this.ImagePdfPageSIze_RIGHT.Text));
 
                                         this.COnvertImage2PDFStatusText.Text = $"转换完毕";
                                     });
@@ -2235,10 +2295,10 @@ namespace DocumentTools
                                 }
                             }
                         });
-                        }
-                        else
-                        {
-                            string MeregePdfFileName = Util.ShowSaveFileDialog("PDF文档|.pdf", "设置文件名称");
+                    }
+                    else
+                    {
+                        string MeregePdfFileName = Util.ShowSaveFileDialog("PDF文档|.pdf", "设置文件名称");
                         Task.Run(() =>
                         {
                             if (MeregePdfFileName != string.Empty)
@@ -2256,14 +2316,14 @@ namespace DocumentTools
                                 }));
                             }
                         });
-                        }
-                    }
-                catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
+        }
 
         private void CompressPdfFileList_MouseClick(object sender, MouseEventArgs e)
         {
@@ -2293,16 +2353,59 @@ namespace DocumentTools
 
             });
         }
+
+        private void CompressImageFileList_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                this.ListViewRightMenu.Show(this.CompressImageFileList, e.Location);
+            }
+        }
+
+        private void SelectCompressImageFile_Click(object sender, EventArgs e)
+        {
+            UI.AddCompressImageFiles();
+        }
+
+        private void CompressImage_Click(object sender, EventArgs e)
+        {
+
+
+            Task.Run(() =>
+            {
+                try
+                {
+                    UI.ConvertStart(this.CompressImageFileList, this.CompressImageStatusText, ConvertFileType.CompressImage, this.CompressImage_OutPutImageFormat.SelectedValue.ToString());
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            });
+        }
+
+        private void CompressImage_NotUseSelfExt_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.CompressImage_NotUseSelfExt.Checked)
+            {
+                this.CompressImage_OutPutImageFormat.Enabled = true;
+            }
+            else
+            {
+                this.CompressImage_OutPutImageFormat.Enabled = false;
+            }
+        }
     }
-    }
+}
 
-    internal class PrivateFontSetting
-    {
-        //public fontfam
+internal class PrivateFontSetting
+{
+    //public fontfam
 
-        public static string FontName { get; set; } = "SimSun";
+    public static string FontName { get; set; } = "SimSun";
 
-        public static float FontSize { get; set; } = 12;
+    public static float FontSize { get; set; } = 12;
 
-        public static Color FontColor { get; set; } = Color.Red;
-    }
+    public static Color FontColor { get; set; } = Color.Red;
+}
