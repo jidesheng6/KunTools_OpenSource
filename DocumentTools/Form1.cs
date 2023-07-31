@@ -38,7 +38,7 @@ namespace DocumentTools
 
         public string AddWaterMarkBackGroudImageFileName = string.Empty;
 
-        string NowVersion = "23.7.26";
+        string NowVersion = "23.7.31";
 
         #region 控件大小随窗体大小等比例缩放
 
@@ -112,7 +112,7 @@ namespace DocumentTools
         }
         private void BodyForm_Load(object sender, EventArgs e)
         {
-            this.Text = $"坤_Tools【软件完全离线|更新请看关于软件|编译日期：{DateTime.Now:yy.M.d}】";
+            this.Text = $"坤_Tools【软件完全离线|更新请看关于软件|版本：{NowVersion}】";
             InitListView();
             InitComboxValue();
             OutPutListViewIndex();
@@ -129,11 +129,12 @@ namespace DocumentTools
             this.DecodeDataMatrixView.ShowRootLines = true;
             this.DecodeDataMatrixView.FullRowSelect = true;
             ReleaseRegistry.Enabled = false;
+            Image2PDFCOmpressImage.Enabled = false;
 
 
-            
+
             //如果配置文件存在就按照配置文件中的参数来设置
-            if(File.Exists(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile))
+            if (File.Exists(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile))
             {
                 //设置起始页面
                 MainTabPage.SelectedIndex = int.Parse(ConfigurationManager.AppSettings["StartPageIndex"]);
@@ -169,6 +170,18 @@ namespace DocumentTools
 
             this.PdfWaterMarkRotateDegNumber.Validating += ValidTextBoxContent;
             this.PdfWaterMarkRotateDegNumber.Validated += ValidedTextBoxContent;
+
+            this.ImagePdfPageSIze_UP.Validating += ValidTextBoxContent;
+            this.ImagePdfPageSIze_UP.Validated += ValidedTextBoxContent;
+
+            this.ImagePdfPageSIze_LEFT.Validating += ValidTextBoxContent;
+            this.ImagePdfPageSIze_LEFT.Validated += ValidedTextBoxContent;
+
+            this.ImagePdfPageSIze_BOTTOM.Validating += ValidTextBoxContent;
+            this.ImagePdfPageSIze_BOTTOM.Validated += ValidedTextBoxContent;
+
+            this.ImagePdfPageSIze_RIGHT.Validating += ValidTextBoxContent;
+            this.ImagePdfPageSIze_RIGHT.Validated += ValidedTextBoxContent;
 
         }
 
@@ -444,6 +457,34 @@ namespace DocumentTools
             this.ConvertPdfComplianceFileList.DragEnter += ListViewDragEnter;
             this.ConvertPdfComplianceFileList.DragDrop += ListviewDragDrop;
             this.ConvertPdfComplianceFileList.ColumnClick += ListviewSortHandler;
+
+            // ConvertImage2PDFFileList
+            this.ConvertImage2PDFFileList.View = View.Details;
+            this.ConvertImage2PDFFileList.FullRowSelect = true;
+            this.ConvertImage2PDFFileList.AllowDrop = true;
+            this.ConvertImage2PDFFileList.Columns.Add("文件名称", 300);
+            this.ConvertImage2PDFFileList.Columns.Add("添加时间", 300);
+            this.ConvertImage2PDFFileList.Columns.Add("转换后文件名称", 300);
+            this.ConvertImage2PDFFileList.Sorting = SortOrder.Ascending;
+            this.ConvertImage2PDFFileList.Name = "ConvertImage2PDFFileList";
+
+            this.ConvertImage2PDFFileList.DragEnter += ListViewDragEnter;
+            this.ConvertImage2PDFFileList.DragDrop += ListviewDragDrop;
+            this.ConvertImage2PDFFileList.ColumnClick += ListviewSortHandler;
+
+            // CompressPdfFileList
+            this.CompressPdfFileList.View = View.Details;
+            this.CompressPdfFileList.FullRowSelect = true;
+            this.CompressPdfFileList.AllowDrop = true;
+            this.CompressPdfFileList.Columns.Add("文件名称", 300);
+            this.CompressPdfFileList.Columns.Add("添加时间", 300);
+            this.CompressPdfFileList.Columns.Add("转换后文件名称", 300);
+            this.CompressPdfFileList.Sorting = SortOrder.Ascending;
+            this.CompressPdfFileList.Name = "CompressPdfFileList";
+
+            this.CompressPdfFileList.DragEnter += ListViewDragEnter;
+            this.CompressPdfFileList.DragDrop += ListviewDragDrop;
+            this.CompressPdfFileList.ColumnClick += ListviewSortHandler;
         }
 
         private void InitComboxValue()
@@ -567,7 +608,30 @@ namespace DocumentTools
 
             this.ConvertPdfComplianceVersion.DataSource = Enum.GetNames(typeof(Aspose.Pdf.PdfFormat));
 
+            DataTable Image2PDFPageStyle = new DataTable();
+            Image2PDFPageStyle.Columns.Add("DisplayValue");
+            Image2PDFPageStyle.Columns.Add("RealValue");
+            Image2PDFPageStyle.Rows.Add("横排",true);
+            Image2PDFPageStyle.Rows.Add("竖排",false);
 
+            this.Image2PDFCombox.DataSource = Image2PDFPageStyle;
+            this.Image2PDFCombox.DisplayMember = "DisplayValue";
+            this.Image2PDFCombox.ValueMember = "RealValue";
+
+            this.CompressPDF_ImageQuailty.DataSource = Enumerable.Range(0, 101).ToList();
+
+            DataTable CompressImageVersion = new DataTable();
+            CompressImageVersion.Columns.Add("DisplayValue");
+            CompressImageVersion.Columns.Add("RealValue");
+            CompressImageVersion.Rows.Add("标准",Aspose.Pdf.Optimization.ImageCompressionVersion.Standard);
+            CompressImageVersion.Rows.Add("快速",Aspose.Pdf.Optimization.ImageCompressionVersion.Fast);
+            CompressImageVersion.Rows.Add("混合",Aspose.Pdf.Optimization.ImageCompressionVersion.Mixed);
+
+            this.CompressPDF_ImageCompressVersion.DataSource = CompressImageVersion;
+            this.CompressPDF_ImageCompressVersion.DisplayMember = "DisplayValue";
+            this.CompressPDF_ImageCompressVersion.ValueMember = "RealValue";
+
+            this.CompressPDF_ImageResoution.DataSource = Enumerable.Range(0, 600).Where(x => x % 50 == 0).ToList();
 
 
             this.MeregeFilePage.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -581,6 +645,10 @@ namespace DocumentTools
             this.PDFComplianceBox.DropDownStyle = ComboBoxStyle.DropDownList;
             this.ExportNotePageCombox.DropDownStyle = ComboBoxStyle.DropDownList;
             this.ConvertPdfComplianceVersion.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.Image2PDFCombox.DropDownStyle= ComboBoxStyle.DropDownList;
+            this.CompressPDF_ImageCompressVersion.DropDownStyle= ComboBoxStyle.DropDownList;
+            this.CompressPDF_ImageQuailty.DropDownStyle= ComboBoxStyle.DropDownList;
+            this.CompressPDF_ImageResoution.DropDownStyle= ComboBoxStyle.DropDownList;
 
 
 
@@ -886,6 +954,12 @@ namespace DocumentTools
                     case "ConvertPdfComplianceFileList":
                         UI.RemoveListViewItem(false, ConvertPdfComplianceFileList, ConvertPdfComplianceFileList.FocusedItem.Index);
                         break;
+                    case "ConvertImage2PDFFileList":
+                        UI.RemoveListViewItem(false, ConvertImage2PDFFileList, ConvertImage2PDFFileList.FocusedItem.Index);
+                        break;
+                    case "CompressPdfFileList":
+                        UI.RemoveListViewItem(false, CompressPdfFileList, CompressPdfFileList.FocusedItem.Index);
+                        break;
                     default: break;
                 }
             }
@@ -971,7 +1045,14 @@ namespace DocumentTools
                     case "ConvertPdfComplianceFileList":
                         UI.RemoveListViewItem(true, ConvertPdfComplianceFileList);
                         break;
+                    case "ConvertImage2PDFFileList":
+                        UI.RemoveListViewItem(true, ConvertImage2PDFFileList);
+                        break;
+                    case "CompressPdfFileList":
+                        UI.RemoveListViewItem(true, CompressPdfFileList);
+                        break;
                     default: break;
+
                 }
             }
 
@@ -1127,6 +1208,12 @@ namespace DocumentTools
                     break;
                 case "ConvertPdfComplianceFileList":
                     UI.AddFilesToListviewWithNotDialog(DropFiles,this.ConvertPdfComplianceFileList,new string[] { ".pdf"});
+                    break;
+                case "ConvertImage2PDFFileList":
+                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.ConvertImage2PDFFileList, new string[] { ".jpg", ".jpeg", ".png", ".bmp" });
+                    break;
+                case "CompressPdfFileList":
+                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.CompressPdfFileList, new string[] { ".pdf" });
                     break;
                 default: break;
             }
@@ -1968,9 +2055,14 @@ namespace DocumentTools
                     {
                         MessageBox.Show($"当前版本为：{NowVersion}，最新版本为：{RemoteVersion}，建议及时更新", "检查更新", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
-                    else
+                    else if(int.Parse(NowVersion.Replace(".", "")) == int.Parse(RemoteVersion.Replace(".", "")))
                     {
                         MessageBox.Show($"当前版本为最新版本：{NowVersion}", "检查更新", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+
+                    }
+                    else
+                    {
+                        MessageBox.Show($"当前版本和服务器版本不一致，请及时前往更新地址查看最新更新日志", "检查更新", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
                     }
                 }
@@ -2091,6 +2183,117 @@ namespace DocumentTools
 
             });
         }
+
+        private void ConvertImage2PDFFileList_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                this.ListViewRightMenu.Show(this.ConvertImage2PDFFileList, e.Location);
+            }
+        }
+
+        private void SelectConvertImage2PDF_Click(object sender, EventArgs e)
+        {
+            UI.AddConvertImage2PDFFiles();
+        }
+
+        private void ConvertImage2PDF_Click(object sender, EventArgs e)
+        {
+            Task<List<string>> ImageFiles = UI.GetListViewFirstItemContent(this.ConvertImage2PDFFileList);
+            if (ImageFiles.Result.Count > 0)
+            {
+                    try
+                    {
+                        if (ExportSignlePDF.Checked)
+                        {
+                            IEnumerable<string> SavePaths = Util.ShwoSelectDialog(true, true, "", "");
+                        Task.Run(() =>
+                        {
+                            string SavePath = SavePaths.FirstOrDefault();
+                            if (SavePath != string.Empty || SavePath != default)
+                            {
+                                if (SavePath != null)
+                                {
+                                    int ImageCount = 0;
+                                    ImageFiles.Result.ForEach(TempFile =>
+                                    {
+                                        ImageCount++;
+                                        this.COnvertImage2PDFStatusText.Text = $"正在转换第{ImageCount}个文件";
+                                        string SavePdfName = $"{Path.Combine(SavePath, Path.GetFileNameWithoutExtension(TempFile) + ".pdf")}";
+                                        Util.ConvertImage2PDF(TempFile, SavePdfName, false, ImageFiles.Result,bool.Parse(this.Image2PDFCombox.SelectedValue.ToString()),this.Image2PDFOptiomize.Checked,this.Image2PDFCOmpressImage.Checked,double.Parse(this.ImagePdfPageSIze_UP.Text),double.Parse(this.ImagePdfPageSIze_LEFT.Text),double.Parse(this.ImagePdfPageSIze_BOTTOM.Text),double.Parse(this.ImagePdfPageSIze_RIGHT.Text));
+
+                                        this.COnvertImage2PDFStatusText.Text = $"转换完毕";
+                                    });
+                                    this.BeginInvoke(new Action(() =>
+                                    {
+                                        DialogResult OpenResult = MessageBox.Show("合并完毕，是否需要打开合并文件所在目录？", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
+                                        if (OpenResult == DialogResult.Yes)
+                                        {
+                                            Process.Start(SavePath);
+                                        }
+                                    }));
+                                }
+                            }
+                        });
+                        }
+                        else
+                        {
+                            string MeregePdfFileName = Util.ShowSaveFileDialog("PDF文档|.pdf", "设置文件名称");
+                        Task.Run(() =>
+                        {
+                            if (MeregePdfFileName != string.Empty)
+                            {
+                                this.COnvertImage2PDFStatusText.Text = "正在合并中...";
+                                Util.ConvertImage2PDF("", MeregePdfFileName, true, ImageFiles.Result, bool.Parse(this.Image2PDFCombox.SelectedValue.ToString()), this.Image2PDFOptiomize.Checked, this.Image2PDFCOmpressImage.Checked, double.Parse(this.ImagePdfPageSIze_UP.Text), double.Parse(this.ImagePdfPageSIze_LEFT.Text), double.Parse(this.ImagePdfPageSIze_BOTTOM.Text), double.Parse(this.ImagePdfPageSIze_RIGHT.Text));
+                                this.COnvertImage2PDFStatusText.Text = "合并完毕";
+                                this.BeginInvoke(new Action(() =>
+                                {
+                                    DialogResult OpenResult = MessageBox.Show("合并完毕，是否需要打开合并文件所在目录？", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
+                                    if (OpenResult == DialogResult.Yes)
+                                    {
+                                        Process.Start(Path.GetDirectoryName(MeregePdfFileName));
+                                    }
+                                }));
+                            }
+                        });
+                        }
+                    }
+                catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+
+        private void CompressPdfFileList_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                this.ListViewRightMenu.Show(this.CompressPdfFileList, e.Location);
+            }
+        }
+
+        private void SelectCompressPDFFiles_Click(object sender, EventArgs e)
+        {
+            UI.AddCompressPDFFiles();
+        }
+
+        private void CompressPDF_Click(object sender, EventArgs e)
+        {
+            Task.Run(() =>
+            {
+                try
+                {
+                    UI.ConvertStart(this.CompressPdfFileList, this.CompressPDFStatusText, ConvertFileType.CompressPDF, ".pdf");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            });
+        }
+    }
     }
 
     internal class PrivateFontSetting
@@ -2103,5 +2306,3 @@ namespace DocumentTools
 
         public static Color FontColor { get; set; } = Color.Red;
     }
-
-}

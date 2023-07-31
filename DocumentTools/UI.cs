@@ -27,6 +27,7 @@ namespace DocumentTools
         PPT2PDF,
         PDF2PPT,
         ConvertPdfCompliance,
+        CompressPDF,
     }
 
     internal class UI
@@ -269,6 +270,18 @@ namespace DocumentTools
         {
             AddFilesToListView("PDF文档", "*.pdf", BodyForm.MainForm.ConvertPdfComplianceFileList);
         }
+
+        public static void AddConvertImage2PDFFiles()
+        {
+            AddFilesToListView("图片文件", "*.jpg;*.jpeg;*.png;*.bmp", BodyForm.MainForm.ConvertImage2PDFFileList);
+        }
+
+        public static void AddCompressPDFFiles()
+        {
+            AddFilesToListView("PDF文档", "*.pdf", BodyForm.MainForm.CompressPdfFileList);
+        }
+
+
         /// <summary>
         /// 转换文件通用方法
         /// </summary>
@@ -372,6 +385,18 @@ namespace DocumentTools
                             case ConvertFileType.ConvertPdfCompliance:
                                 object SelectPdfCompliance = Enum.Parse(typeof(Aspose.Pdf.PdfFormat),BodyForm.MainForm.ConvertPdfComplianceVersion.SelectedItem.ToString());
                                 Util.ConvertPdfCompliance(ListViewFirstColumnText,ConvertedFileName,(Aspose.Pdf.PdfFormat)SelectPdfCompliance);
+                                break;
+                            // 压缩PDF
+                            case ConvertFileType.CompressPDF:
+                                Util.CompressPDF(ListViewFirstColumnText, ConvertedFileName,
+                                                 BodyForm.MainForm.CompressPDF_WEB.Checked,BodyForm.MainForm.CompressPDF_CompressImage.Checked,
+                                                 int.Parse(BodyForm.MainForm.CompressPDF_ImageQuailty.SelectedItem.ToString()),
+                                                 int.Parse(BodyForm.MainForm.CompressPDF_ImageResoution.SelectedItem.ToString()),
+                                                 (Aspose.Pdf.Optimization.ImageCompressionVersion)Enum.Parse(typeof(Aspose.Pdf.Optimization.ImageCompressionVersion),BodyForm.MainForm.CompressPDF_ImageCompressVersion.SelectedValue.ToString()),
+                                                 BodyForm.MainForm.CompressPDF_CompressImageFlate.Checked,BodyForm.MainForm.CompressPDF_RemoveUnuseStream.Checked,
+                                                 BodyForm.MainForm.CompressPDF_LinkSameStream.Checked,BodyForm.MainForm.CompressPDF_CancelEmbedFont.Checked,
+                                                 BodyForm.MainForm.CompressPDF_RemoveForms.Checked,BodyForm.MainForm.CompressPDF_RemoveUnuseObject.Checked
+                                                 );
                                 break;
                             default: break;
                         }

@@ -2,6 +2,7 @@
 using Aspose.Cells;
 using Aspose.Cells.Rendering;
 using Aspose.Pdf;
+using Aspose.Pdf.Annotations;
 using Aspose.Pdf.Text;
 using Aspose.Slides.Export;
 using Microsoft.ML.OnnxRuntime.Tensors;
@@ -302,6 +303,76 @@ namespace DocumentTools
             {
                 Aspose.Pdf.Facades.PdfFileEditor TempPdfEditor = new Aspose.Pdf.Facades.PdfFileEditor();
                 TempPdfEditor.Concatenate(TempFileList.ToArray(), mergrePdfFileName);
+            }
+        }
+
+        /// <summary>
+        /// 图片转为PDF
+        /// </summary>
+        /// <param name="ImageFileName"></param>
+        /// <param name="SavedDocumentFileName"></param>
+        /// <param name="IsNeedMerge"></param>
+        /// <param name="ImageFilesList"></param>
+        /// <param name="LandStyle"></param>
+        /// <param name="AutoOptiomizePdf"></param>
+        /// <param name="CompressPdfImage"></param>
+        /// <param name="Margin_TOP"></param>
+        /// <param name="Margin_LEFT"></param>
+        /// <param name="Margin_Bottom"></param>
+        /// <param name="Margin_RIGHT"></param>
+        public static void ConvertImage2PDF(string ImageFileName,string SavedDocumentFileName,bool IsNeedMerge,List<string> ImageFilesList,bool LandStyle,bool AutoOptiomizePdf,bool CompressPdfImage,double Margin_TOP=0,double Margin_LEFT=0,double Margin_Bottom=0,double Margin_RIGHT=0)
+        {
+            Aspose.Hook.HookManager.StartHook();
+
+            Aspose.Pdf.Document BuilderDocument = new Aspose.Pdf.Document();
+            Aspose.Pdf.Optimization.OptimizationOptions TempOpt = new Aspose.Pdf.Optimization.OptimizationOptions();
+            TempOpt.RemoveUnusedObjects = true;
+            TempOpt.RemoveUnusedStreams = true;
+            TempOpt.AllowReusePageContent = true;
+            TempOpt.LinkDuplcateStreams = true;
+
+            if (CompressPdfImage)
+            {
+                TempOpt.ImageCompressionOptions.CompressImages = true;
+                TempOpt.ImageCompressionOptions.Encoding = Aspose.Pdf.Optimization.ImageEncoding.Flate;
+            }
+
+            if(IsNeedMerge)
+            {
+                ImageFilesList.ForEach(file =>
+                {
+                    Page TempPage = BuilderDocument.Pages.Add();
+                    Aspose.Pdf.Image TempLoadImage = new Aspose.Pdf.Image { File = file };
+                    TempPage.PageInfo.IsLandscape = LandStyle;
+                    TempPage.PageInfo.Margin.Top = Margin_TOP;
+                    TempPage.PageInfo.Margin.Left = Margin_LEFT;
+                    TempPage.PageInfo.Margin.Right = Margin_RIGHT;
+                    TempPage.PageInfo.Margin.Bottom = Margin_Bottom;
+                    TempPage.Paragraphs.Add(TempLoadImage);
+                });
+                if(AutoOptiomizePdf)
+                {
+                    BuilderDocument.Optimize();
+                    BuilderDocument.OptimizeResources(TempOpt);
+                }
+                BuilderDocument.Save(SavedDocumentFileName);
+            }
+            else
+            {
+                Page TempPage = BuilderDocument.Pages.Add();
+                Aspose.Pdf.Image TempLoadImage = new Aspose.Pdf.Image { File = ImageFileName };
+                TempPage.PageInfo.IsLandscape=LandStyle;
+                TempPage.PageInfo.Margin.Top = Margin_TOP;
+                TempPage.PageInfo.Margin.Left = Margin_LEFT;
+                TempPage.PageInfo.Margin.Right = Margin_RIGHT;
+                TempPage.PageInfo.Margin.Bottom = Margin_Bottom;
+                TempPage.Paragraphs.Add(TempLoadImage);
+                if (AutoOptiomizePdf)
+                {
+                    BuilderDocument.Optimize();
+                    BuilderDocument.OptimizeResources(TempOpt);
+                }
+                BuilderDocument.Save(SavedDocumentFileName);
             }
         }
 
@@ -646,7 +717,7 @@ namespace DocumentTools
             TempLoadDocument.Save(SavedDcoumentFileName, TempSaveXlsOption);
         }
         /// <summary>
-        /// 将Excel转换为Word，转换的格式不是太完美
+        /// 将Excel转换为Word，转换的格式不是太完美，等23.8版本出来，换控件以后会好很多
         /// </summary>
         /// <param name="DocumentFileName">文档名称</param>
         /// <param name="SaveDocumentFileName">转换后的文件名称</param>
@@ -1000,6 +1071,12 @@ namespace DocumentTools
               
         }
 
+        /// <summary>
+        /// 转换PDF版本
+        /// </summary>
+        /// <param name="DocumentFileName"></param>
+        /// <param name="SavedFileName"></param>
+        /// <param name="ConvertFormat"></param>
         public static void ConvertPdfCompliance(string DocumentFileName,string SavedFileName,Aspose.Pdf.PdfFormat ConvertFormat)
         {
             Aspose.Hook.HookManager.StartHook();
@@ -1014,6 +1091,81 @@ namespace DocumentTools
             }
 
         }
+
+        /// <summary>
+        /// 压缩PDF
+        /// </summary>
+        /// <param name="DocumentFileName">文档名称</param>
+        /// <param name="SavedFileName">保存后的文档名称</param>
+        /// <param name="CompressPDF_WEB">是否进行web优化</param>
+        /// <param name="CommpressPDF_CompressImage">是否压缩图片</param>
+        /// <param name="CompressPDF_CompressImageQuailty">压缩的图片质量</param>
+        /// <param name="CompressPDF_ImageMaxDPI">如果数值大于0，则修改图像的最大DPI值</param>
+        /// <param name="CompressPDF_CompressImageVersion">压缩的算法</param>
+        /// <param name="CompressPDF_UseFlateCode">是否使用flate编码</param>
+        /// <param name="CompressPDF_RemoveUnUseStream">是否移除未使用的流</param>
+        /// <param name="CompressPDF_LinkeSameStream">是否链接重复流</param>
+        /// <param name="CompressPDF_CancelEmbedFont">是否取消字体内嵌</param>
+        /// <param name="CompressPDF_RemoveForms">是否移除表单域</param>
+        /// <param name="CompressPDF_RemoveUnUseObject">是否移除未使用的对象</param>
+        public static void CompressPDF(string DocumentFileName,string SavedFileName,
+                                        bool CompressPDF_WEB,bool CommpressPDF_CompressImage,
+                                        int CompressPDF_CompressImageQuailty,int CompressPDF_ImageMaxDPI,Aspose.Pdf.Optimization.ImageCompressionVersion CompressPDF_CompressImageVersion,
+                                        bool CompressPDF_UseFlateCode,bool CompressPDF_RemoveUnUseStream,
+                                        bool CompressPDF_LinkeSameStream,bool CompressPDF_CancelEmbedFont,
+                                        bool CompressPDF_RemoveForms,bool CompressPDF_RemoveUnUseObject)
+        {
+
+            Aspose.Hook.HookManager.StartHook();
+            using(Aspose.Pdf.Document TempLoadDocument = new Document(DocumentFileName))
+            {
+                Aspose.Pdf.Optimization.OptimizationOptions TempComressOption = new Aspose.Pdf.Optimization.OptimizationOptions();
+
+                if (CompressPDF_WEB)//如果勾选了WEB优化，就执行自动优化
+                {
+                    TempLoadDocument.Optimize();
+                }
+
+                if (CommpressPDF_CompressImage)//勾选了压缩图片，则图片质量设置就生效
+                {
+                    TempComressOption.ImageCompressionOptions.CompressImages = true;
+                    TempComressOption.ImageCompressionOptions.ImageQuality = CompressPDF_CompressImageQuailty;
+                }
+
+                if (CompressPDF_ImageMaxDPI > 0)//如果设置DPI大于0，则修改DPI生效
+                {
+                    TempComressOption.ImageCompressionOptions.ResizeImages = true;
+                    TempComressOption.ImageCompressionOptions.MaxResolution = CompressPDF_ImageMaxDPI;
+                }
+
+                if (CompressPDF_UseFlateCode)//如果勾选flate编码，则生效
+                {
+                    TempComressOption.ImageCompressionOptions.Encoding = Aspose.Pdf.Optimization.ImageEncoding.Flate;
+                }
+
+                if (CompressPDF_RemoveForms)//如果勾选了移除表单域，则进行移除
+                {
+                    foreach (Page TempPage in TempLoadDocument.Pages)
+                    {
+                        foreach (Annotation annotation in TempPage.Annotations)
+                        {
+                            annotation.Flatten();
+                        }
+                    }
+                }
+
+                TempComressOption.ImageCompressionOptions.Version = CompressPDF_CompressImageVersion;
+                TempComressOption.RemoveUnusedStreams = CompressPDF_RemoveUnUseStream;
+                TempComressOption.LinkDuplcateStreams = CompressPDF_LinkeSameStream;
+                TempComressOption.RemoveUnusedObjects = CompressPDF_RemoveUnUseObject;
+                TempComressOption.UnembedFonts = CompressPDF_CancelEmbedFont;
+
+                TempLoadDocument.OptimizeResources(TempComressOption);//设置优化参数，此时生效
+
+                TempLoadDocument.Save(SavedFileName);
+            }
+        }
+
 
         /// <summary>
         /// 读取文件中的DataMatrix，交给treeview处理，功能写的差不多了，随便写写了
