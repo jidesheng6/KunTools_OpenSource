@@ -311,7 +311,7 @@ namespace DocumentTools
                         string ConvertedFileName = Path.Combine(SelectSavePathstring, FileNameWithOutExtension + ExtensionString);
                         ListViewControl.Items[TempIndex].SubItems.Add(ConvertedFileName);
                         ListViewControl.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
-                        StatusLabelControl.Text = $"正在处理{TempIndex + 1}个文件";
+                        StatusLabelControl.Text = $"正在处理第{TempIndex + 1}个文件";
 
                         //根据不同类型调用不同的函数
                         switch (ConverType)
@@ -464,6 +464,80 @@ namespace DocumentTools
                         }
                     }));
                 }
+            }
+        }
+
+        /// <summary>
+        /// 将Listview中的项目向上移动（文本）
+        /// </summary>
+        /// <param name="ListViewControl"></param>
+        public static void MoveUpListViewItem(ListView ListViewControl)
+        {
+            //列表中有项目才响应
+            if(ListViewControl.Items.Count>0)
+            {
+                //获取当前选中项目的索引
+                int NowSelectIndex = ListViewControl.SelectedIndices[0];
+
+                if(NowSelectIndex>0)
+                {
+                    //项目索引不在第一个时才处理
+
+                    ListViewItem NowSelectItem = ListViewControl.Items[NowSelectIndex]; //当前选中的项目
+                    ListViewItem AboveSelectItem = ListViewControl.Items[NowSelectIndex - 1];//当前选中项目的上一个项目
+
+                    ListViewControl.BeginUpdate();
+
+                    string TempText = AboveSelectItem.Text;
+
+                    AboveSelectItem.Text = NowSelectItem.Text;//移动后，上方的文本变为原来选中的文本
+
+                    NowSelectItem.Text = TempText;// 移动后，原来位置，对于移动后位置来说，就是下方的文本变为之前上方的文本
+
+                    ListViewControl.Items[NowSelectIndex-1].Selected = true;// 选中移动后的文本
+
+                    ListViewControl.EndUpdate();
+
+                }
+
+                ListViewControl.Focus();//选中控件，获取焦点
+            }
+        }
+
+        /// <summary>
+        /// 将Listview中的项目向下移动（文本）
+        /// </summary>
+        /// <param name="ListViewControl"></param>
+        public static void MoveDownListViewItem(ListView ListViewControl)
+        {
+            //列表中有项目才响应
+            if (ListViewControl.Items.Count > 0)
+            {
+                //获取当前选中项目的索引
+                int NowSelectIndex = ListViewControl.SelectedIndices[0];
+
+                if (NowSelectIndex < ListViewControl.Items.Count - 1)
+                {
+                    //项目索引不在第一个时才处理
+
+                    ListViewItem NowSelectItem = ListViewControl.Items[NowSelectIndex]; //当前选中的项目
+                    ListViewItem BottomSelectItem = ListViewControl.Items[NowSelectIndex + 1];//当前选中项目的下一个项目
+
+                    ListViewControl.BeginUpdate();
+
+                    string TempText = BottomSelectItem.Text;
+
+                    BottomSelectItem.Text = NowSelectItem.Text;
+
+                    NowSelectItem.Text = TempText;
+
+                    ListViewControl.Items[NowSelectIndex + 1].Selected = true;// 选中移动后的文本
+
+                    ListViewControl.EndUpdate();
+
+                }
+
+                ListViewControl.Focus();//选中控件，获取焦点
             }
         }
 

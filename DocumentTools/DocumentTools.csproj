@@ -397,10 +397,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="6.ico" />
-    <None Include="Resources\wzdsny.mp3" />
+    <Content Include="Resources\wzdsny.mp3" />
     <Content Include="v2-30675d7656fcb8e2cc959cedd8b8db19_r.ico" />
     <Content Include="转换.ico" />
-    <None Include="Resources\zdsny.mp3" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

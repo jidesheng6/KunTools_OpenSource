@@ -34,7 +34,7 @@ namespace DocumentTools
 
         public string AddWaterMarkBackGroudImageFileName = string.Empty;
 
-        string NowVersion = "23.8.1";
+        string NowVersion = "23.8.2";
 
         #region 控件大小随窗体大小等比例缩放
 
@@ -111,6 +111,7 @@ namespace DocumentTools
             this.Text = $"坤_Tools【软件完全离线|更新请看关于软件|版本：{NowVersion}】";
             InitListView();
             InitComboxValue();
+            InitMoveItemButtonHandler();
             OutPutListViewIndex();
             this.AllowDrop = true;
             this.PageExportCheck.Checked = true;
@@ -182,16 +183,19 @@ namespace DocumentTools
             this.ImagePdfPageSIze_RIGHT.Validating += ValidTextBoxContent;
             this.ImagePdfPageSIze_RIGHT.Validated += ValidedTextBoxContent;
 
+
+         
         }
 
 
-
+        //初始化Listview
         private void InitListView()
         {
             // WordFileListView
             this.WordFileListView.View = View.Details;
             this.WordFileListView.FullRowSelect = true;
             this.WordFileListView.AllowDrop = true;
+            this.WordFileListView.MultiSelect = false;
             this.WordFileListView.Columns.Add("文件名称", 300);
             this.WordFileListView.Columns.Add("添加时间", 300);
             this.WordFileListView.Columns.Add("转换后文件名称", 300);
@@ -205,6 +209,7 @@ namespace DocumentTools
             //PdfFileListView
             this.PdfFileListView.View = View.Details;
             this.PdfFileListView.FullRowSelect = true;
+            this.PdfFileListView.MultiSelect = false;
             this.PdfFileListView.AllowDrop = true;
             this.PdfFileListView.Columns.Add("文件名称", 300);
             this.PdfFileListView.Columns.Add("添加时间", 300);
@@ -220,6 +225,7 @@ namespace DocumentTools
             this.ExcelFileListView.View = View.Details;
             this.ExcelFileListView.FullRowSelect = true;
             this.ExcelFileListView.AllowDrop = true;
+            this.ExcelFileListView.MultiSelect = false;
             this.ExcelFileListView.Columns.Add("文件名称", 300);
             this.ExcelFileListView.Columns.Add("添加时间", 300);
             this.ExcelFileListView.Columns.Add("转换后文件名称", 300);
@@ -233,6 +239,7 @@ namespace DocumentTools
             //DocumentsListView
             this.DocumentsListView.View = View.Details;
             this.DocumentsListView.FullRowSelect = true;
+            this.DocumentsListView.MultiSelect = false;
             this.DocumentsListView.AllowDrop = true;
             this.DocumentsListView.Columns.Add("文件名称", 300);
             this.DocumentsListView.Columns.Add("添加时间", 300);
@@ -247,6 +254,7 @@ namespace DocumentTools
             //PDF2ExcelFileView
             this.PDF2ExcelFileView.View = View.Details;
             this.PDF2ExcelFileView.FullRowSelect = true;
+            this.PDF2ExcelFileView.MultiSelect = false;
             this.PDF2ExcelFileView.AllowDrop = true;
             this.PDF2ExcelFileView.Columns.Add("文件名称", 300);
             this.PDF2ExcelFileView.Columns.Add("添加时间", 300);
@@ -261,6 +269,7 @@ namespace DocumentTools
             //MergePdfFileView
             this.MergePdfFileView.View = View.Details;
             this.MergePdfFileView.FullRowSelect = true;
+            this.MergePdfFileView.MultiSelect = false;
             this.MergePdfFileView.AllowDrop = true;
             this.MergePdfFileView.Columns.Add("文件名称", 300);
             this.MergePdfFileView.Columns.Add("添加时间", 300);
@@ -276,6 +285,7 @@ namespace DocumentTools
             //ReplaceWordFileList
             this.ReplaceWordFileList.View = View.Details;
             this.ReplaceWordFileList.FullRowSelect = true;
+            this.ReplaceWordFileList.MultiSelect = false;
             this.ReplaceWordFileList.AllowDrop = true;
             this.ReplaceWordFileList.Columns.Add("文件名称", 300);
             this.ReplaceWordFileList.Columns.Add("添加时间", 300);
@@ -290,6 +300,7 @@ namespace DocumentTools
             //ReplaceExcelFileView
             this.ReplaceExcelFileView.View = View.Details;
             this.ReplaceExcelFileView.FullRowSelect = true;
+            this.ReplaceExcelFileView.MultiSelect = false;
             this.ReplaceExcelFileView.AllowDrop = true;
             this.ReplaceExcelFileView.Columns.Add("文件名称", 300);
             this.ReplaceExcelFileView.Columns.Add("添加时间", 300);
@@ -304,6 +315,7 @@ namespace DocumentTools
             //DecodeMatrixWordListView
             this.DecodeMatrixWordListView.View = View.Details;
             this.DecodeMatrixWordListView.FullRowSelect = true;
+            this.DecodeMatrixWordListView.MultiSelect = false;
             this.DecodeMatrixWordListView.AllowDrop = true;
             this.DecodeMatrixWordListView.Columns.Add("文件名称", 300);
             this.DecodeMatrixWordListView.Columns.Add("添加时间", 300);
@@ -318,6 +330,7 @@ namespace DocumentTools
             //IcoFileView
             this.IcoFileView.View = View.Details;
             this.IcoFileView.FullRowSelect = true;
+            this.IcoFileView.MultiSelect = false;
             this.IcoFileView.AllowDrop = true;
             this.IcoFileView.Columns.Add("文件名称", 300);
             this.IcoFileView.Columns.Add("添加时间", 300);
@@ -333,6 +346,7 @@ namespace DocumentTools
             // MergeWordFileList
             this.MergeWordFileList.View = View.Details;
             this.MergeWordFileList.FullRowSelect = true;
+            this.MergeWordFileList.MultiSelect = false;
             this.MergeWordFileList.AllowDrop = true;
             this.MergeWordFileList.Columns.Add("文件名称", 300);
             this.MergeWordFileList.Columns.Add("添加时间", 300);
@@ -347,6 +361,7 @@ namespace DocumentTools
             // Word2ExcelFileList
             this.Word2ExcelFileList.View = View.Details;
             this.Word2ExcelFileList.FullRowSelect = true;
+            this.Word2ExcelFileList.MultiSelect = false;
             this.Word2ExcelFileList.AllowDrop = true;
             this.Word2ExcelFileList.Columns.Add("文件名称", 300);
             this.Word2ExcelFileList.Columns.Add("添加时间", 300);
@@ -361,6 +376,7 @@ namespace DocumentTools
             // Word2ExcelFileList
             this.Excel2WordFileList.View = View.Details;
             this.Excel2WordFileList.FullRowSelect = true;
+            this.Excel2WordFileList.MultiSelect = false;
             this.Excel2WordFileList.AllowDrop = true;
             this.Excel2WordFileList.Columns.Add("文件名称", 300);
             this.Excel2WordFileList.Columns.Add("添加时间", 300);
@@ -375,6 +391,7 @@ namespace DocumentTools
             // SplitPdfFileList
             this.SplitPdfFileList.View = View.Details;
             this.SplitPdfFileList.FullRowSelect = true;
+            this.SplitPdfFileList.MultiSelect = false;
             this.SplitPdfFileList.AllowDrop = true;
             this.SplitPdfFileList.Columns.Add("文件名称", 300);
             this.SplitPdfFileList.Columns.Add("添加时间", 300);
@@ -389,6 +406,7 @@ namespace DocumentTools
             // PdfWaterMarkFileList
             this.PdfWaterMarkFileList.View = View.Details;
             this.PdfWaterMarkFileList.FullRowSelect = true;
+            this.PdfWaterMarkFileList.MultiSelect = false;
             this.PdfWaterMarkFileList.AllowDrop = true;
             this.PdfWaterMarkFileList.Columns.Add("文件名称", 300);
             this.PdfWaterMarkFileList.Columns.Add("添加时间", 300);
@@ -403,6 +421,7 @@ namespace DocumentTools
             // RemovePdfWaterMarkFileList
             this.RemovePdfWaterMarkFileList.View = View.Details;
             this.RemovePdfWaterMarkFileList.FullRowSelect = true;
+            this.RemovePdfWaterMarkFileList.MultiSelect = false;
             this.RemovePdfWaterMarkFileList.AllowDrop = true;
             this.RemovePdfWaterMarkFileList.Columns.Add("文件名称", 300);
             this.RemovePdfWaterMarkFileList.Columns.Add("添加时间", 300);
@@ -418,6 +437,7 @@ namespace DocumentTools
             // PPT2PdfFileList
             this.PPT2PdfFileList.View = View.Details;
             this.PPT2PdfFileList.FullRowSelect = true;
+            this.PPT2PdfFileList.MultiSelect = false;
             this.PPT2PdfFileList.AllowDrop = true;
             this.PPT2PdfFileList.Columns.Add("文件名称", 300);
             this.PPT2PdfFileList.Columns.Add("添加时间", 300);
@@ -432,6 +452,7 @@ namespace DocumentTools
             // PDF2PPTFileList
             this.PDF2PPTFileList.View = View.Details;
             this.PDF2PPTFileList.FullRowSelect = true;
+            this.PDF2PPTFileList.MultiSelect = false;
             this.PDF2PPTFileList.AllowDrop = true;
             this.PDF2PPTFileList.Columns.Add("文件名称", 300);
             this.PDF2PPTFileList.Columns.Add("添加时间", 300);
@@ -446,6 +467,7 @@ namespace DocumentTools
             // ConvertPdfComplianceFileList
             this.ConvertPdfComplianceFileList.View = View.Details;
             this.ConvertPdfComplianceFileList.FullRowSelect = true;
+            this.ConvertPdfComplianceFileList.MultiSelect = false;
             this.ConvertPdfComplianceFileList.AllowDrop = true;
             this.ConvertPdfComplianceFileList.Columns.Add("文件名称", 300);
             this.ConvertPdfComplianceFileList.Columns.Add("添加时间", 300);
@@ -460,6 +482,7 @@ namespace DocumentTools
             // ConvertImage2PDFFileList
             this.ConvertImage2PDFFileList.View = View.Details;
             this.ConvertImage2PDFFileList.FullRowSelect = true;
+            this.ConvertImage2PDFFileList.MultiSelect = false;
             this.ConvertImage2PDFFileList.AllowDrop = true;
             this.ConvertImage2PDFFileList.Columns.Add("文件名称", 300);
             this.ConvertImage2PDFFileList.Columns.Add("添加时间", 300);
@@ -474,6 +497,7 @@ namespace DocumentTools
             // CompressPdfFileList
             this.CompressPdfFileList.View = View.Details;
             this.CompressPdfFileList.FullRowSelect = true;
+            this.CompressPdfFileList.MultiSelect = false;
             this.CompressPdfFileList.AllowDrop = true;
             this.CompressPdfFileList.Columns.Add("文件名称", 300);
             this.CompressPdfFileList.Columns.Add("添加时间", 300);
@@ -488,6 +512,7 @@ namespace DocumentTools
             // CompressImageFileList
             this.CompressImageFileList.View = View.Details;
             this.CompressImageFileList.FullRowSelect = true;
+            this.CompressImageFileList.MultiSelect = false;
             this.CompressImageFileList.AllowDrop = true;
             this.CompressImageFileList.Columns.Add("文件名称", 300);
             this.CompressImageFileList.Columns.Add("添加时间", 300);
@@ -500,6 +525,7 @@ namespace DocumentTools
             this.CompressImageFileList.ColumnClick += ListviewSortHandler;
         }
 
+        //初始化ComBox数据
         private void InitComboxValue()
         {
             DataTable ImageConverTypeData = new DataTable();
@@ -662,7 +688,7 @@ namespace DocumentTools
             this.CompressBmpMode_Combox.DataSource = Enum.GetNames(typeof(Aspose.Imaging.FileFormats.Bmp.BitmapCompression));
 
 
-            this.CompressBmpPixeBits_Combox.DataSource = new int[] {  4, 8, 16, 24, 32 };//BMP像素深度范围
+            this.CompressBmpPixeBits_Combox.DataSource = new int[] { 4, 8, 16, 24, 32 };//BMP像素深度范围
             this.CompressBmpPixeBits_Combox.SelectedIndex = 3;
 
             DataTable CompressImage_OutPutFormat = new DataTable();
@@ -704,6 +730,212 @@ namespace DocumentTools
 
 
 
+        }
+
+        //注册移动Listview项目的按钮事件
+        private void InitMoveItemButtonHandler()
+        {
+            #region 上下移动项目位置按钮注册点击事件
+            WordFileListView_MoveUp.Click += (s1, s2) =>
+            {
+                UI.MoveUpListViewItem(WordFileListView);
+            };
+            WordFileListView_MoveDown.Click += (s1, s2) =>
+            {
+                UI.MoveDownListViewItem(WordFileListView);
+            };
+
+            PdfFileListView_MoveUp.Click += (s1, s2) =>
+            {
+                UI.MoveUpListViewItem(PdfFileListView);
+            };
+            PdfFileListView_MoveDown.Click += (s1, s2) =>
+            {
+                UI.MoveDownListViewItem(PdfFileListView);
+            };
+
+            ExcelFileListView_MoveUp.Click += (s1, s2) =>
+            {
+                UI.MoveUpListViewItem(ExcelFileListView);
+            };
+            ExcelFileListView_MoveDown.Click += (s1, s2) =>
+            {
+                UI.MoveDownListViewItem(ExcelFileListView);
+            };
+
+            PDF2ExcelFileView_MoveUp.Click += (s1, s2) =>
+            {
+                UI.MoveUpListViewItem(PDF2ExcelFileView);
+            };
+            PDF2ExcelFileView_MoveDown.Click += (s1, s2) =>
+            {
+                UI.MoveDownListViewItem(PDF2ExcelFileView);
+            };
+
+            PPT2PdfFileList_MoveUp.Click += (s1, s2) =>
+            {
+                UI.MoveUpListViewItem(PPT2PdfFileList);
+            };
+            PPT2PdfFileList_MoveDown.Click += (s1, s2) =>
+            {
+                UI.MoveDownListViewItem(PPT2PdfFileList);
+            };
+
+            PDF2PPTFileList_MoveUp.Click += (s1, s2) =>
+            {
+                UI.MoveUpListViewItem(PDF2PPTFileList);
+            };
+            PDF2PPTFileList_MoveDown.Click += (s1, s2) =>
+            {
+                UI.MoveDownListViewItem(PDF2PPTFileList);
+            };
+
+
+            MergeWordFileList_MoveUp.Click += (s1, s2) =>
+            {
+                UI.MoveUpListViewItem(MergeWordFileList);
+            };
+            MergeWordFileList_MoveDown.Click += (s1, s2) =>
+            {
+                UI.MoveDownListViewItem(MergeWordFileList);
+            };
+
+            MergePdfFileView_MoveUp.Click += (s1, s2) =>
+            {
+                UI.MoveUpListViewItem(MergePdfFileView);
+            };
+            MergePdfFileView_MoveDown.Click += (s1, s2) =>
+            {
+                UI.MoveDownListViewItem(MergePdfFileView);
+            };
+
+            SplitPdfFileList_MoveUp.Click += (s1, s2) =>
+            {
+                UI.MoveUpListViewItem(SplitPdfFileList);
+            };
+            SplitPdfFileList_MoveDown.Click += (s1, s2) =>
+            {
+                UI.MoveDownListViewItem(SplitPdfFileList);
+            };
+
+            PdfWaterMarkFileList_MoveUp.Click += (s1, s2) =>
+            {
+                UI.MoveUpListViewItem(PdfWaterMarkFileList);
+            };
+            PdfWaterMarkFileList_MoveDown.Click += (s1, s2) =>
+            {
+                UI.MoveDownListViewItem(PdfWaterMarkFileList);
+            };
+
+            ReplaceWordFileList_MoveUp.Click += (s1, s2) =>
+            {
+                UI.MoveUpListViewItem(ReplaceWordFileList);
+            };
+            ReplaceWordFileList_MoveDown.Click += (s1, s2) =>
+            {
+                UI.MoveDownListViewItem(ReplaceWordFileList);
+            };
+
+            ReplaceExcelFileView_MoveUp.Click += (s1, s2) =>
+            {
+                UI.MoveUpListViewItem(ReplaceExcelFileView);
+            };
+            ReplaceExcelFileView_MoveDown.Click += (s1, s2) =>
+            {
+                UI.MoveDownListViewItem(ReplaceExcelFileView);
+            };
+
+            DecodeMatrixWordListView_MoveUp.Click += (s1, s2) =>
+            {
+                UI.MoveUpListViewItem(DecodeMatrixWordListView);
+            };
+            DecodeMatrixWordListView_MoveDown.Click += (s1, s2) =>
+            {
+                UI.MoveDownListViewItem(DecodeMatrixWordListView);
+            };
+
+            IcoFileView_MoveUp.Click += (s1, s2) =>
+            {
+                UI.MoveUpListViewItem(IcoFileView);
+            };
+            IcoFileView_MoveDown.Click += (s1, s2) =>
+            {
+                UI.MoveDownListViewItem(IcoFileView);
+            };
+
+            RemovePdfWaterMarkFileList_MoveUp.Click += (s1, s2) =>
+            {
+                UI.MoveUpListViewItem(RemovePdfWaterMarkFileList);
+            };
+            RemovePdfWaterMarkFileList_MoveDown.Click += (s1, s2) =>
+            {
+                UI.MoveDownListViewItem(RemovePdfWaterMarkFileList);
+            };
+
+            Word2ExcelFileList_MoveUp.Click += (s1, s2) =>
+            {
+                UI.MoveUpListViewItem(Word2ExcelFileList);
+            };
+            Word2ExcelFileList_MoveDown.Click += (s1, s2) =>
+            {
+                UI.MoveDownListViewItem(Word2ExcelFileList);
+            };
+
+            Excel2WordFileList_MoveUp.Click += (s1, s2) =>
+            {
+                UI.MoveUpListViewItem(Excel2WordFileList);
+            };
+            Excel2WordFileList_MoveDown.Click += (s1, s2) =>
+            {
+                UI.MoveDownListViewItem(Excel2WordFileList);
+            };
+
+            DocumentsListView_MoveUp.Click += (s1, s2) =>
+            {
+                UI.MoveUpListViewItem(DocumentsListView);
+            };
+            DocumentsListView_MoveDown.Click += (s1, s2) =>
+            {
+                UI.MoveDownListViewItem(DocumentsListView);
+            };
+
+            ConvertImage2PDFFileList_MoveUp.Click += (s1, s2) =>
+            {
+                UI.MoveUpListViewItem(ConvertImage2PDFFileList);
+            };
+            ConvertImage2PDFFileList_MoveDown.Click += (s1, s2) =>
+            {
+                UI.MoveDownListViewItem(ConvertImage2PDFFileList);
+            };
+
+            CompressPdfFileList_MoveUp.Click += (s1, s2) =>
+            {
+                UI.MoveUpListViewItem(CompressPdfFileList);
+            };
+            CompressPdfFileList_MoveDown.Click += (s1, s2) =>
+            {
+                UI.MoveDownListViewItem(CompressPdfFileList);
+            };
+
+            CompressImageFileList_MoveUp.Click += (s1, s2) =>
+            {
+                UI.MoveUpListViewItem(CompressImageFileList);
+            };
+            CompressImageFileList_MoveDown.Click += (s1, s2) =>
+            {
+                UI.MoveDownListViewItem(CompressImageFileList);
+            };
+
+            ConvertPdfComplianceFileList_MoveUp.Click += (s1, s2) =>
+            {
+                UI.MoveUpListViewItem(ConvertPdfComplianceFileList);
+            };
+            ConvertPdfComplianceFileList_MoveDown.Click += (s1, s2) =>
+            {
+                UI.MoveDownListViewItem(ConvertPdfComplianceFileList);
+            };
+
+            #endregion
         }
 
         private void ChooseDocButton_Click(object sender, EventArgs e)
@@ -2402,8 +2634,23 @@ namespace DocumentTools
         {
             Util.PlayMp3WithStream();
         }
+
+        private void MoveUpListViewItemHandler(object sender,EventArgs e)
+        {
+            Button TempButton = sender as Button;
+
+            switch(TempButton.Name)
+            {
+                case "WordFileListView_MoveUp":
+                    UI.MoveUpListViewItem(WordFileListView);
+                    break;
+                default:
+                    break;
+            }
+        }
+
     }
-}
+    }
 
 internal class PrivateFontSetting
 {
