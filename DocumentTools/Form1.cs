@@ -12,6 +12,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -31,6 +32,7 @@ namespace DocumentTools
         private double ScanSeconds = 0;
         private Bitmap PictureBoxPreviewImage;
         private List<Bitmap> TempScannedImageBmpList = new List<Bitmap>();
+        private bool NameReplaceMode = false;
 
         public string AddWaterMarkBackGroudImageFileName = string.Empty;
 
@@ -184,7 +186,7 @@ namespace DocumentTools
             this.ImagePdfPageSIze_RIGHT.Validated += ValidedTextBoxContent;
 
 
-         
+
         }
 
 
@@ -1056,25 +1058,65 @@ namespace DocumentTools
 
         private void ConvertTextButton_Click(object sender, EventArgs e)
         {
-            List<string> TempLines = new List<string>();
-            TargetTextBox.Lines = Util.AddText2List(SourceTextBox.Text, RemoveNumberCheck.Checked, RemoveSquareCheck.Checked, NameStorkeChcek.Checked);
-            //双字对齐功能，放在全部的文本处理完毕以后再进行重新处理，不然只能针对源文本字符长度进行判断，不太合适
-            if (DoubleTextAlignCheck.Checked && this.TargetTextBox.Text != string.Empty)
+            try
             {
-                string DoubleText;
-                foreach (string TargetTextTemp in this.TargetTextBox.Lines)
+                List<string> TempLines = new List<string>();
+                TargetTextBox.Lines = Util.AddText2List(SourceTextBox.Text, RemoveNumberCheck.Checked, RemoveSquareCheck.Checked, NameStorkeChcek.Checked);
+                //双字对齐功能，放在全部的文本处理完毕以后再进行重新处理，不然只能针对源文本字符长度进行判断，不太合适
+
+                if (this.TargetTextBox.Text != string.Empty)
                 {
-                    DoubleText = TargetTextTemp;
-                    if (DoubleText.Length == 2)
+                    if (DoubleTextAlignCheck.Checked)
                     {
-                        DoubleText = DoubleText.Insert(1, "  ");
+                        string DoubleText;
+                        foreach (string TargetTextTemp in this.TargetTextBox.Lines)
+                        {
+                            DoubleText = TargetTextTemp;
+                            if (DoubleText.Length == 2)
+                            {
+                                DoubleText = DoubleText.Insert(1, "  ");
+                            }
+                            TempLines.Add(DoubleText);//把不需要对齐的也一起加回来
+                        }
+                        TargetTextBox.Lines = TempLines.ToArray();
                     }
-                    TempLines.Add(DoubleText);//把不需要对齐的也一起加回来
+                    if (NameReplaceWord.Checked)
+                    {
+                        List<string> TempText = new List<string>();
+                        string text = string.Empty;
+                        foreach (string Text in this.TargetTextBox.Lines)
+                        {
+                            if(NameReplaceMode)
+                            {
+                                text = Regex.Replace(Text, NameReplaceWord_Search.Text, NameReplaceWord_Target.Text);
+                            }
+                            else
+                            {
+                                text = Text.Replace(NameReplaceWord_Search.Text, NameReplaceWord_Target.Text);
+                            }
+
+                            TempText.Add(text);
+                        }
+
+                        TargetTextBox.Lines = TempText.ToArray();
+                    }
+
+                    if(NameAutoCopy.Checked)
+                    {
+                        Clipboard.SetText(TargetTextBox.Text);
+                        NameAutoCopyStatusText.Text = "[已复制到剪贴板]";
+                        NameAutoCopyStatusText.ForeColor = Color.ForestGreen;
+                    }
+                    else
+                    {
+                        NameAutoCopyStatusText.Text = "";
+                    }
                 }
-                TargetTextBox.Lines = TempLines.ToArray();
             }
-
-
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
 
@@ -2635,20 +2677,21 @@ namespace DocumentTools
             Util.PlayMp3WithStream();
         }
 
-        private void MoveUpListViewItemHandler(object sender,EventArgs e)
+        private void NameReplaceRegexMode_Click(object sender, EventArgs e)
         {
-            Button TempButton = sender as Button;
-
-            switch(TempButton.Name)
+            if (NameReplaceMode)
             {
-                case "WordFileListView_MoveUp":
-                    UI.MoveUpListViewItem(WordFileListView);
-                    break;
-                default:
-                    break;
+                NameReplaceMode = false;
+                NameReplaceRegexMode.Text = "[正则模式：关]";
+                NameReplaceRegexMode.ForeColor = Color.Red;
+            }
+            else
+            {
+                NameReplaceMode = true;
+                NameReplaceRegexMode.Text = "[正则模式：开]";
+                NameReplaceRegexMode.ForeColor = Color.ForestGreen;
             }
         }
-
     }
     }
 

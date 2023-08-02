@@ -310,6 +310,13 @@
             this.DecodeDataMatrixView = new System.Windows.Forms.TreeView();
             this.DecodeMatrixWordListView = new System.Windows.Forms.ListView();
             this.TabPage_05 = new System.Windows.Forms.TabPage();
+            this.NameReplaceRegexMode = new System.Windows.Forms.Label();
+            this.NameAutoCopyStatusText = new System.Windows.Forms.Label();
+            this.NameAutoCopy = new System.Windows.Forms.CheckBox();
+            this.NameReplaceWord = new System.Windows.Forms.CheckBox();
+            this.label56 = new System.Windows.Forms.Label();
+            this.NameReplaceWord_Target = new System.Windows.Forms.TextBox();
+            this.NameReplaceWord_Search = new System.Windows.Forms.TextBox();
             this.NameStorkeChcek = new System.Windows.Forms.CheckBox();
             this.MutilLineMode = new System.Windows.Forms.CheckBox();
             this.DoubleTextAlignCheck = new System.Windows.Forms.CheckBox();
@@ -3362,6 +3369,13 @@
             // 
             // TabPage_05
             // 
+            this.TabPage_05.Controls.Add(this.NameReplaceRegexMode);
+            this.TabPage_05.Controls.Add(this.NameAutoCopyStatusText);
+            this.TabPage_05.Controls.Add(this.NameAutoCopy);
+            this.TabPage_05.Controls.Add(this.NameReplaceWord);
+            this.TabPage_05.Controls.Add(this.label56);
+            this.TabPage_05.Controls.Add(this.NameReplaceWord_Target);
+            this.TabPage_05.Controls.Add(this.NameReplaceWord_Search);
             this.TabPage_05.Controls.Add(this.NameStorkeChcek);
             this.TabPage_05.Controls.Add(this.MutilLineMode);
             this.TabPage_05.Controls.Add(this.DoubleTextAlignCheck);
@@ -3378,10 +3392,73 @@
             this.TabPage_05.Text = "姓名横转竖列";
             this.TabPage_05.UseVisualStyleBackColor = true;
             // 
+            // NameReplaceRegexMode
+            // 
+            this.NameReplaceRegexMode.AutoSize = true;
+            this.NameReplaceRegexMode.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.NameReplaceRegexMode.ForeColor = System.Drawing.Color.Red;
+            this.NameReplaceRegexMode.Location = new System.Drawing.Point(543, 198);
+            this.NameReplaceRegexMode.Name = "NameReplaceRegexMode";
+            this.NameReplaceRegexMode.Size = new System.Drawing.Size(134, 18);
+            this.NameReplaceRegexMode.TabIndex = 17;
+            this.NameReplaceRegexMode.Text = "[正则模式：关]";
+            this.NameReplaceRegexMode.Click += new System.EventHandler(this.NameReplaceRegexMode_Click);
+            // 
+            // NameAutoCopyStatusText
+            // 
+            this.NameAutoCopyStatusText.AutoSize = true;
+            this.NameAutoCopyStatusText.Location = new System.Drawing.Point(530, 231);
+            this.NameAutoCopyStatusText.Name = "NameAutoCopyStatusText";
+            this.NameAutoCopyStatusText.Size = new System.Drawing.Size(0, 18);
+            this.NameAutoCopyStatusText.TabIndex = 16;
+            // 
+            // NameAutoCopy
+            // 
+            this.NameAutoCopy.AutoSize = true;
+            this.NameAutoCopy.Location = new System.Drawing.Point(424, 231);
+            this.NameAutoCopy.Name = "NameAutoCopy";
+            this.NameAutoCopy.Size = new System.Drawing.Size(106, 22);
+            this.NameAutoCopy.TabIndex = 15;
+            this.NameAutoCopy.Text = "自动复制";
+            this.NameAutoCopy.UseVisualStyleBackColor = true;
+            // 
+            // NameReplaceWord
+            // 
+            this.NameReplaceWord.AutoSize = true;
+            this.NameReplaceWord.Location = new System.Drawing.Point(292, 198);
+            this.NameReplaceWord.Name = "NameReplaceWord";
+            this.NameReplaceWord.Size = new System.Drawing.Size(106, 22);
+            this.NameReplaceWord.TabIndex = 13;
+            this.NameReplaceWord.Text = "替换文字";
+            this.NameReplaceWord.UseVisualStyleBackColor = true;
+            // 
+            // label56
+            // 
+            this.label56.AutoSize = true;
+            this.label56.Location = new System.Drawing.Point(454, 199);
+            this.label56.Name = "label56";
+            this.label56.Size = new System.Drawing.Size(26, 18);
+            this.label56.TabIndex = 12;
+            this.label56.Text = "为";
+            // 
+            // NameReplaceWord_Target
+            // 
+            this.NameReplaceWord_Target.Location = new System.Drawing.Point(486, 194);
+            this.NameReplaceWord_Target.Name = "NameReplaceWord_Target";
+            this.NameReplaceWord_Target.Size = new System.Drawing.Size(50, 28);
+            this.NameReplaceWord_Target.TabIndex = 11;
+            // 
+            // NameReplaceWord_Search
+            // 
+            this.NameReplaceWord_Search.Location = new System.Drawing.Point(404, 193);
+            this.NameReplaceWord_Search.Name = "NameReplaceWord_Search";
+            this.NameReplaceWord_Search.Size = new System.Drawing.Size(44, 28);
+            this.NameReplaceWord_Search.TabIndex = 10;
+            // 
             // NameStorkeChcek
             // 
             this.NameStorkeChcek.AutoSize = true;
-            this.NameStorkeChcek.Location = new System.Drawing.Point(421, 239);
+            this.NameStorkeChcek.Location = new System.Drawing.Point(424, 259);
             this.NameStorkeChcek.Name = "NameStorkeChcek";
             this.NameStorkeChcek.Size = new System.Drawing.Size(106, 22);
             this.NameStorkeChcek.TabIndex = 8;
@@ -3391,7 +3468,7 @@
             // MutilLineMode
             // 
             this.MutilLineMode.AutoSize = true;
-            this.MutilLineMode.Location = new System.Drawing.Point(421, 267);
+            this.MutilLineMode.Location = new System.Drawing.Point(424, 287);
             this.MutilLineMode.Name = "MutilLineMode";
             this.MutilLineMode.Size = new System.Drawing.Size(106, 22);
             this.MutilLineMode.TabIndex = 7;
@@ -3402,7 +3479,7 @@
             // DoubleTextAlignCheck
             // 
             this.DoubleTextAlignCheck.AutoSize = true;
-            this.DoubleTextAlignCheck.Location = new System.Drawing.Point(421, 295);
+            this.DoubleTextAlignCheck.Location = new System.Drawing.Point(424, 315);
             this.DoubleTextAlignCheck.Name = "DoubleTextAlignCheck";
             this.DoubleTextAlignCheck.Size = new System.Drawing.Size(106, 22);
             this.DoubleTextAlignCheck.TabIndex = 6;
@@ -3412,7 +3489,7 @@
             // RemoveNumberCheck
             // 
             this.RemoveNumberCheck.AutoSize = true;
-            this.RemoveNumberCheck.Location = new System.Drawing.Point(421, 323);
+            this.RemoveNumberCheck.Location = new System.Drawing.Point(424, 343);
             this.RemoveNumberCheck.Name = "RemoveNumberCheck";
             this.RemoveNumberCheck.Size = new System.Drawing.Size(106, 22);
             this.RemoveNumberCheck.TabIndex = 5;
@@ -3422,7 +3499,7 @@
             // RemoveSquareCheck
             // 
             this.RemoveSquareCheck.AutoSize = true;
-            this.RemoveSquareCheck.Location = new System.Drawing.Point(421, 351);
+            this.RemoveSquareCheck.Location = new System.Drawing.Point(424, 371);
             this.RemoveSquareCheck.Name = "RemoveSquareCheck";
             this.RemoveSquareCheck.Size = new System.Drawing.Size(106, 22);
             this.RemoveSquareCheck.TabIndex = 4;
@@ -3433,7 +3510,7 @@
             // 
             this.TargetTextNumberText.AutoSize = true;
             this.TargetTextNumberText.ForeColor = System.Drawing.Color.ForestGreen;
-            this.TargetTextNumberText.Location = new System.Drawing.Point(418, 387);
+            this.TargetTextNumberText.Location = new System.Drawing.Point(421, 407);
             this.TargetTextNumberText.Name = "TargetTextNumberText";
             this.TargetTextNumberText.Size = new System.Drawing.Size(143, 18);
             this.TargetTextNumberText.TabIndex = 3;
@@ -3441,7 +3518,7 @@
             // 
             // ConvertTextButton
             // 
-            this.ConvertTextButton.Location = new System.Drawing.Point(404, 422);
+            this.ConvertTextButton.Location = new System.Drawing.Point(408, 441);
             this.ConvertTextButton.Name = "ConvertTextButton";
             this.ConvertTextButton.Size = new System.Drawing.Size(190, 43);
             this.ConvertTextButton.TabIndex = 2;
@@ -4748,6 +4825,13 @@
         private System.Windows.Forms.Button CompressPdfFileList_MoveDown;
         private System.Windows.Forms.Button CompressImageFileList_MoveUp;
         private System.Windows.Forms.Button CompressImageFileList_MoveDown;
+        private System.Windows.Forms.TextBox NameReplaceWord_Search;
+        private System.Windows.Forms.Label label56;
+        private System.Windows.Forms.TextBox NameReplaceWord_Target;
+        private System.Windows.Forms.CheckBox NameReplaceWord;
+        private System.Windows.Forms.CheckBox NameAutoCopy;
+        private System.Windows.Forms.Label NameAutoCopyStatusText;
+        private System.Windows.Forms.Label NameReplaceRegexMode;
     }
 }
 
