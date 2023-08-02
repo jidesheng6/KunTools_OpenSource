@@ -4,6 +4,7 @@ using Aspose.Cells.Rendering;
 using Aspose.Imaging;
 using Aspose.Pdf;
 using Aspose.Pdf.Annotations;
+using Aspose.Pdf.Facades;
 using Aspose.Pdf.Text;
 using Aspose.Slides.Export;
 using Microsoft.VisualBasic.Devices;
@@ -1161,6 +1162,7 @@ namespace DocumentTools
 
                 TempLoadDocument.OptimizeResources(TempComressOption);//设置优化参数，此时生效
 
+
                 TempLoadDocument.Save(SavedFileName);
             }
         }
@@ -1535,6 +1537,37 @@ namespace DocumentTools
 
                 TempLoadImage.Save(SaveFileName, TempIcoOption);
             }
+        }
+
+        public static string GetFileSizeDisplayString(long fileSizeBytes)
+        {
+            const double KB_Value = 1024;
+            const double MB_Value = KB_Value * 1024;
+            const double GB_Value = MB_Value * 1024;
+
+            string ReturnValue = string.Empty;
+
+            if(fileSizeBytes<KB_Value)
+            {
+                ReturnValue = $"{fileSizeBytes} 字节";
+            }
+            else if(fileSizeBytes<MB_Value)
+            {
+                double KB_Size = fileSizeBytes/ KB_Value;
+                ReturnValue = $"{KB_Size:F2} KB";
+            }
+            else if(fileSizeBytes<GB_Value)
+            {
+                double MB_SIZE = fileSizeBytes / MB_Value;
+                ReturnValue = $"{MB_SIZE:F2} MB";
+            }
+            else
+            {
+                double GB_SIZE = fileSizeBytes / GB_Value;
+                ReturnValue = $"{GB_SIZE:F2} GB";
+            }
+
+            return ReturnValue; 
         }
     }
 

@@ -201,6 +201,7 @@ namespace DocumentTools
             this.WordFileListView.Columns.Add("文件名称", 300);
             this.WordFileListView.Columns.Add("添加时间", 300);
             this.WordFileListView.Columns.Add("转换后文件名称", 300);
+            this.WordFileListView.Columns.Add("文件大小", 300);
             this.WordFileListView.Sorting = SortOrder.Ascending;
             this.WordFileListView.Name = "WordFileListView";
 
@@ -216,6 +217,7 @@ namespace DocumentTools
             this.PdfFileListView.Columns.Add("文件名称", 300);
             this.PdfFileListView.Columns.Add("添加时间", 300);
             this.PdfFileListView.Columns.Add("转换后文件名称", 300);
+            this.PdfFileListView.Columns.Add("文件大小", 300);
             this.PdfFileListView.Sorting = SortOrder.Ascending;
             this.PdfFileListView.Name = "PdfFileListView";
 
@@ -231,6 +233,7 @@ namespace DocumentTools
             this.ExcelFileListView.Columns.Add("文件名称", 300);
             this.ExcelFileListView.Columns.Add("添加时间", 300);
             this.ExcelFileListView.Columns.Add("转换后文件名称", 300);
+            this.ExcelFileListView.Columns.Add("文件大小", 300);
             this.ExcelFileListView.Sorting = SortOrder.Ascending;
             this.ExcelFileListView.Name = "ExcelFileListView";
 
@@ -246,6 +249,7 @@ namespace DocumentTools
             this.DocumentsListView.Columns.Add("文件名称", 300);
             this.DocumentsListView.Columns.Add("添加时间", 300);
             this.DocumentsListView.Columns.Add("转换后文件名称", 300);
+            this.DocumentsListView.Columns.Add("文件大小", 300);
             this.DocumentsListView.Sorting = SortOrder.Ascending;
             this.DocumentsListView.Name = "DocumentsListView";
 
@@ -261,6 +265,7 @@ namespace DocumentTools
             this.PDF2ExcelFileView.Columns.Add("文件名称", 300);
             this.PDF2ExcelFileView.Columns.Add("添加时间", 300);
             this.PDF2ExcelFileView.Columns.Add("转换后文件名称", 300);
+            this.PDF2ExcelFileView.Columns.Add("文件大小", 300);
             this.PDF2ExcelFileView.Sorting = SortOrder.Ascending;
             this.PDF2ExcelFileView.Name = "PDF2ExcelFileView";
 
@@ -276,6 +281,7 @@ namespace DocumentTools
             this.MergePdfFileView.Columns.Add("文件名称", 300);
             this.MergePdfFileView.Columns.Add("添加时间", 300);
             this.MergePdfFileView.Columns.Add("转换后文件名称", 300);
+            this.MergePdfFileView.Columns.Add("文件大小", 300);
             this.MergePdfFileView.Sorting = SortOrder.Ascending;
             this.MergePdfFileView.Name = "MergePdfFileView";
 
@@ -292,6 +298,7 @@ namespace DocumentTools
             this.ReplaceWordFileList.Columns.Add("文件名称", 300);
             this.ReplaceWordFileList.Columns.Add("添加时间", 300);
             this.ReplaceWordFileList.Columns.Add("转换后文件名称", 300);
+            this.ReplaceWordFileList.Columns.Add("文件大小", 300);
             this.ReplaceWordFileList.Sorting = SortOrder.Ascending;
             this.ReplaceWordFileList.Name = "ReplaceWordFileList";
 
@@ -307,6 +314,7 @@ namespace DocumentTools
             this.ReplaceExcelFileView.Columns.Add("文件名称", 300);
             this.ReplaceExcelFileView.Columns.Add("添加时间", 300);
             this.ReplaceExcelFileView.Columns.Add("转换后文件名称", 300);
+            this.ReplaceExcelFileView.Columns.Add("文件大小", 300);
             this.ReplaceExcelFileView.Sorting = SortOrder.Ascending;
             this.ReplaceExcelFileView.Name = "ReplaceExcelFileView";
 
@@ -322,6 +330,7 @@ namespace DocumentTools
             this.DecodeMatrixWordListView.Columns.Add("文件名称", 300);
             this.DecodeMatrixWordListView.Columns.Add("添加时间", 300);
             this.DecodeMatrixWordListView.Columns.Add("转换后文件名称", 300);
+            this.DecodeMatrixWordListView.Columns.Add("文件大小", 300);
             this.DecodeMatrixWordListView.Sorting = SortOrder.Ascending;
             this.DecodeMatrixWordListView.Name = "DecodeMatrixWordListView";
 
@@ -337,6 +346,7 @@ namespace DocumentTools
             this.IcoFileView.Columns.Add("文件名称", 300);
             this.IcoFileView.Columns.Add("添加时间", 300);
             this.IcoFileView.Columns.Add("转换后文件名称", 300);
+            this.IcoFileView.Columns.Add("文件大小", 300);
             this.IcoFileView.Sorting = SortOrder.Ascending;
             this.IcoFileView.Name = "IcoFileView";
 
@@ -353,6 +363,7 @@ namespace DocumentTools
             this.MergeWordFileList.Columns.Add("文件名称", 300);
             this.MergeWordFileList.Columns.Add("添加时间", 300);
             this.MergeWordFileList.Columns.Add("转换后文件名称", 300);
+            this.MergeWordFileList.Columns.Add("文件大小", 300);
             this.MergeWordFileList.Sorting = SortOrder.Ascending;
             this.MergeWordFileList.Name = "MergeWordFileList";
 
@@ -368,6 +379,7 @@ namespace DocumentTools
             this.Word2ExcelFileList.Columns.Add("文件名称", 300);
             this.Word2ExcelFileList.Columns.Add("添加时间", 300);
             this.Word2ExcelFileList.Columns.Add("转换后文件名称", 300);
+            this.Word2ExcelFileList.Columns.Add("文件大小", 300);
             this.Word2ExcelFileList.Sorting = SortOrder.Ascending;
             this.Word2ExcelFileList.Name = "Word2ExcelFileList";
 
@@ -383,6 +395,7 @@ namespace DocumentTools
             this.Excel2WordFileList.Columns.Add("文件名称", 300);
             this.Excel2WordFileList.Columns.Add("添加时间", 300);
             this.Excel2WordFileList.Columns.Add("转换后文件名称", 300);
+            this.Excel2WordFileList.Columns.Add("文件大小", 300);
             this.Excel2WordFileList.Sorting = SortOrder.Ascending;
             this.Excel2WordFileList.Name = "Excel2WordFileList";
 
@@ -398,6 +411,7 @@ namespace DocumentTools
             this.SplitPdfFileList.Columns.Add("文件名称", 300);
             this.SplitPdfFileList.Columns.Add("添加时间", 300);
             this.SplitPdfFileList.Columns.Add("转换后文件名称", 300);
+            this.SplitPdfFileList.Columns.Add("文件大小", 300);
             this.SplitPdfFileList.Sorting = SortOrder.Ascending;
             this.SplitPdfFileList.Name = "SplitPdfFileList";
 
@@ -413,6 +427,7 @@ namespace DocumentTools
             this.PdfWaterMarkFileList.Columns.Add("文件名称", 300);
             this.PdfWaterMarkFileList.Columns.Add("添加时间", 300);
             this.PdfWaterMarkFileList.Columns.Add("转换后文件名称", 300);
+            this.PdfWaterMarkFileList.Columns.Add("文件大小", 300);
             this.PdfWaterMarkFileList.Sorting = SortOrder.Ascending;
             this.PdfWaterMarkFileList.Name = "PdfWaterMarkFileList";
 
@@ -428,6 +443,7 @@ namespace DocumentTools
             this.RemovePdfWaterMarkFileList.Columns.Add("文件名称", 300);
             this.RemovePdfWaterMarkFileList.Columns.Add("添加时间", 300);
             this.RemovePdfWaterMarkFileList.Columns.Add("转换后文件名称", 300);
+            this.RemovePdfWaterMarkFileList.Columns.Add("文件大小", 300);
             this.RemovePdfWaterMarkFileList.Sorting = SortOrder.Ascending;
             this.RemovePdfWaterMarkFileList.Name = "RemovePdfWaterMarkFileList";
 
@@ -444,6 +460,7 @@ namespace DocumentTools
             this.PPT2PdfFileList.Columns.Add("文件名称", 300);
             this.PPT2PdfFileList.Columns.Add("添加时间", 300);
             this.PPT2PdfFileList.Columns.Add("转换后文件名称", 300);
+            this.PPT2PdfFileList.Columns.Add("文件大小", 300);
             this.PPT2PdfFileList.Sorting = SortOrder.Ascending;
             this.PPT2PdfFileList.Name = "PPT2PdfFileList";
 
@@ -459,6 +476,7 @@ namespace DocumentTools
             this.PDF2PPTFileList.Columns.Add("文件名称", 300);
             this.PDF2PPTFileList.Columns.Add("添加时间", 300);
             this.PDF2PPTFileList.Columns.Add("转换后文件名称", 300);
+            this.PDF2PPTFileList.Columns.Add("文件大小", 300);
             this.PDF2PPTFileList.Sorting = SortOrder.Ascending;
             this.PDF2PPTFileList.Name = "PDF2PPTFileList";
 
@@ -474,6 +492,7 @@ namespace DocumentTools
             this.ConvertPdfComplianceFileList.Columns.Add("文件名称", 300);
             this.ConvertPdfComplianceFileList.Columns.Add("添加时间", 300);
             this.ConvertPdfComplianceFileList.Columns.Add("转换后文件名称", 300);
+            this.ConvertPdfComplianceFileList.Columns.Add("文件大小", 300);
             this.ConvertPdfComplianceFileList.Sorting = SortOrder.Ascending;
             this.ConvertPdfComplianceFileList.Name = "ConvertPdfComplianceFileList";
 
@@ -489,6 +508,7 @@ namespace DocumentTools
             this.ConvertImage2PDFFileList.Columns.Add("文件名称", 300);
             this.ConvertImage2PDFFileList.Columns.Add("添加时间", 300);
             this.ConvertImage2PDFFileList.Columns.Add("转换后文件名称", 300);
+            this.ConvertImage2PDFFileList.Columns.Add("文件大小", 300);
             this.ConvertImage2PDFFileList.Sorting = SortOrder.Ascending;
             this.ConvertImage2PDFFileList.Name = "ConvertImage2PDFFileList";
 
@@ -504,6 +524,7 @@ namespace DocumentTools
             this.CompressPdfFileList.Columns.Add("文件名称", 300);
             this.CompressPdfFileList.Columns.Add("添加时间", 300);
             this.CompressPdfFileList.Columns.Add("转换后文件名称", 300);
+            this.CompressPdfFileList.Columns.Add("文件大小", 300);
             this.CompressPdfFileList.Sorting = SortOrder.Ascending;
             this.CompressPdfFileList.Name = "CompressPdfFileList";
 
@@ -519,6 +540,7 @@ namespace DocumentTools
             this.CompressImageFileList.Columns.Add("文件名称", 300);
             this.CompressImageFileList.Columns.Add("添加时间", 300);
             this.CompressImageFileList.Columns.Add("转换后文件名称", 300);
+            this.CompressImageFileList.Columns.Add("文件大小", 300);
             this.CompressImageFileList.Sorting = SortOrder.Ascending;
             this.CompressImageFileList.Name = "CompressImageFileList";
 

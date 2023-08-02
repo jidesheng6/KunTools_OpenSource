@@ -429,7 +429,13 @@ namespace DocumentTools
                                 break;
                             default: break;
                         }
+                        FileInfo ConverdFileInfo = new FileInfo(ConvertedFileName);
+                        //获取转换后的文件大小
+                        ListViewControl.Items[TempIndex].SubItems.Add(Util.GetFileSizeDisplayString(ConverdFileInfo.Length));
+                        
+                        ListViewControl.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
                     }
+
                     //处理完毕后需要做的事情
                     switch (ConverType)
                     {
