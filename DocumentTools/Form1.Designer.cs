@@ -44,11 +44,14 @@
             this.ChooseDocButton = new System.Windows.Forms.Button();
             this.WordFileListView = new System.Windows.Forms.ListView();
             this.TabPage_02 = new System.Windows.Forms.TabPage();
+            this.PDF2WORD_Mode = new System.Windows.Forms.ComboBox();
+            this.label55 = new System.Windows.Forms.Label();
+            this.PDF2WORD_UseSUbOcr = new System.Windows.Forms.CheckBox();
+            this.PDF2WORD_UseBullet = new System.Windows.Forms.CheckBox();
             this.PdfFileListView_MoveDown = new System.Windows.Forms.Button();
             this.PdfFileListView_MoveUp = new System.Windows.Forms.Button();
             this.ProcessPage_P2W = new System.Windows.Forms.Label();
             this.PdfStatusText = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.Convert2DocButton = new System.Windows.Forms.Button();
             this.SelectPdfButton = new System.Windows.Forms.Button();
             this.PdfFileListView = new System.Windows.Forms.ListView();
@@ -408,6 +411,7 @@
             this.ColorSelectDialog = new System.Windows.Forms.ColorDialog();
             this.FontSelectDialog = new System.Windows.Forms.FontDialog();
             this.MainFormError = new System.Windows.Forms.ErrorProvider(this.components);
+            this.label1 = new System.Windows.Forms.Label();
             this.MainTabPage.SuspendLayout();
             this.TabPage_01.SuspendLayout();
             this.TabPage_02.SuspendLayout();
@@ -636,11 +640,15 @@
             // 
             // TabPage_02
             // 
+            this.TabPage_02.Controls.Add(this.label1);
+            this.TabPage_02.Controls.Add(this.PDF2WORD_Mode);
+            this.TabPage_02.Controls.Add(this.label55);
+            this.TabPage_02.Controls.Add(this.PDF2WORD_UseSUbOcr);
+            this.TabPage_02.Controls.Add(this.PDF2WORD_UseBullet);
             this.TabPage_02.Controls.Add(this.PdfFileListView_MoveDown);
             this.TabPage_02.Controls.Add(this.PdfFileListView_MoveUp);
             this.TabPage_02.Controls.Add(this.ProcessPage_P2W);
             this.TabPage_02.Controls.Add(this.PdfStatusText);
-            this.TabPage_02.Controls.Add(this.label1);
             this.TabPage_02.Controls.Add(this.Convert2DocButton);
             this.TabPage_02.Controls.Add(this.SelectPdfButton);
             this.TabPage_02.Controls.Add(this.PdfFileListView);
@@ -651,6 +659,43 @@
             this.TabPage_02.TabIndex = 1;
             this.TabPage_02.Text = "PDF转WORD";
             this.TabPage_02.UseVisualStyleBackColor = true;
+            // 
+            // PDF2WORD_Mode
+            // 
+            this.PDF2WORD_Mode.FormattingEnabled = true;
+            this.PDF2WORD_Mode.Location = new System.Drawing.Point(417, 347);
+            this.PDF2WORD_Mode.Name = "PDF2WORD_Mode";
+            this.PDF2WORD_Mode.Size = new System.Drawing.Size(336, 26);
+            this.PDF2WORD_Mode.TabIndex = 11;
+            // 
+            // label55
+            // 
+            this.label55.AutoSize = true;
+            this.label55.Location = new System.Drawing.Point(331, 352);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(80, 18);
+            this.label55.TabIndex = 10;
+            this.label55.Text = "输出模式";
+            // 
+            // PDF2WORD_UseSUbOcr
+            // 
+            this.PDF2WORD_UseSUbOcr.AutoSize = true;
+            this.PDF2WORD_UseSUbOcr.Location = new System.Drawing.Point(156, 351);
+            this.PDF2WORD_UseSUbOcr.Name = "PDF2WORD_UseSUbOcr";
+            this.PDF2WORD_UseSUbOcr.Size = new System.Drawing.Size(169, 22);
+            this.PDF2WORD_UseSUbOcr.TabIndex = 9;
+            this.PDF2WORD_UseSUbOcr.Text = "开启OCR子层识别";
+            this.PDF2WORD_UseSUbOcr.UseVisualStyleBackColor = true;
+            // 
+            // PDF2WORD_UseBullet
+            // 
+            this.PDF2WORD_UseBullet.AutoSize = true;
+            this.PDF2WORD_UseBullet.Location = new System.Drawing.Point(8, 351);
+            this.PDF2WORD_UseBullet.Name = "PDF2WORD_UseBullet";
+            this.PDF2WORD_UseBullet.Size = new System.Drawing.Size(142, 22);
+            this.PDF2WORD_UseBullet.TabIndex = 8;
+            this.PDF2WORD_UseBullet.Text = "开启子弹识别";
+            this.PDF2WORD_UseBullet.UseVisualStyleBackColor = true;
             // 
             // PdfFileListView_MoveDown
             // 
@@ -689,16 +734,6 @@
             this.PdfStatusText.Size = new System.Drawing.Size(143, 18);
             this.PdfStatusText.TabIndex = 4;
             this.PdfStatusText.Text = "正在处理X个文件";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.Color.Tomato;
-            this.label1.Location = new System.Drawing.Point(6, 355);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(449, 18);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "提示：PDF转WORD无法保证和源文档格式一致，谨慎使用";
             // 
             // Convert2DocButton
             // 
@@ -4326,6 +4361,16 @@
             // 
             this.MainFormError.ContainerControl = this;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.Tomato;
+            this.label1.Location = new System.Drawing.Point(760, 351);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(179, 18);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "注：不支持扫描件PDF";
+            // 
             // BodyForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
@@ -4464,7 +4509,6 @@
         private System.Windows.Forms.Button SelectPdfButton;
         private System.Windows.Forms.Button Convert2DocButton;
         internal System.Windows.Forms.ListView PdfFileListView;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label PdfStatusText;
         private System.Windows.Forms.TabPage TabPage_03;
         internal System.Windows.Forms.ListView ExcelFileListView;
@@ -4832,6 +4876,11 @@
         private System.Windows.Forms.CheckBox NameAutoCopy;
         private System.Windows.Forms.Label NameAutoCopyStatusText;
         private System.Windows.Forms.Label NameReplaceRegexMode;
+        private System.Windows.Forms.Label label55;
+        internal System.Windows.Forms.CheckBox PDF2WORD_UseSUbOcr;
+        internal System.Windows.Forms.CheckBox PDF2WORD_UseBullet;
+        internal System.Windows.Forms.ComboBox PDF2WORD_Mode;
+        private System.Windows.Forms.Label label1;
     }
 }
 

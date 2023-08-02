@@ -327,7 +327,7 @@ namespace DocumentTools
                                 break;
                             //pdf转word
                             case ConvertFileType.Pdf2Word:
-                                Util.ConvertPdf2Word(ListViewFirstColumnText, ConvertedFileName);
+                                Util.ConvertPdf2Word(ListViewFirstColumnText, ConvertedFileName,BodyForm.MainForm.PDF2WORD_UseBullet.Checked,BodyForm.MainForm.PDF2WORD_UseSUbOcr.Checked,(Aspose.Pdf.DocSaveOptions.RecognitionMode)Enum.Parse(typeof(Aspose.Pdf.DocSaveOptions.RecognitionMode),BodyForm.MainForm.PDF2WORD_Mode.SelectedValue.ToString()));
                                 break;
                             //excel转pdf
                             case ConvertFileType.Excel2Pdf:
@@ -434,6 +434,7 @@ namespace DocumentTools
                         ListViewControl.Items[TempIndex].SubItems.Add(Util.GetFileSizeDisplayString(ConverdFileInfo.Length));
                         
                         ListViewControl.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+
                     }
 
                     //处理完毕后需要做的事情

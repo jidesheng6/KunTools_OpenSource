@@ -727,6 +727,16 @@ namespace DocumentTools
             this.CompressImage_OutPutImageFormat.DisplayMember = "DisplayValue";
             this.CompressImage_OutPutImageFormat.ValueMember = "RealValue";
 
+            DataTable PDF2WORDMOde = new DataTable();
+            PDF2WORDMOde.Columns.Add("DisplayValue");
+            PDF2WORDMOde.Columns.Add("RealValue");
+            PDF2WORDMOde.Rows.Add("文本框模式（文档美观，不易编辑）",Aspose.Pdf.DocSaveOptions.RecognitionMode.Textbox);
+            PDF2WORDMOde.Rows.Add("全识别模式（文档不美观，较好编辑",Aspose.Pdf.DocSaveOptions.RecognitionMode.Flow);
+
+            this.PDF2WORD_Mode.DataSource = PDF2WORDMOde;
+            this.PDF2WORD_Mode.DisplayMember = "DisplayValue";
+            this.PDF2WORD_Mode.ValueMember = "RealValue";
+
 
             this.MeregeFilePage.DropDownStyle = ComboBoxStyle.DropDownList;
             this.TwainColorMode.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -751,6 +761,7 @@ namespace DocumentTools
             this.CompressBmpMode_Combox.DropDownStyle = ComboBoxStyle.DropDownList;
             this.CompressBmpPixeBits_Combox.DropDownStyle = ComboBoxStyle.DropDownList;
             this.CompressImage_OutPutImageFormat.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.PDF2WORD_Mode.DropDownStyle = ComboBoxStyle.DropDownList;
 
 
 

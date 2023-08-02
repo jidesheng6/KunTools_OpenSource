@@ -205,16 +205,16 @@ namespace DocumentTools
         /// </summary>
         /// <param name="pdfFileName">pdf文件名</param>
         /// <param name="SavePdfName">导出docx</param>
-        public static void ConvertPdf2Word(string pdfFileName, string SavePdfName)
+        public static void ConvertPdf2Word(string pdfFileName, string SavePdfName, bool UseBullet,bool UseSubOcr,Aspose.Pdf.DocSaveOptions.RecognitionMode UseMode)
         {
             Aspose.Hook.HookManager.StartHook();
 
             Aspose.Pdf.DocSaveOptions TempDocxSaveOption = new Aspose.Pdf.DocSaveOptions
             {
-                ExtractOcrSublayerOnly = true,
+                ExtractOcrSublayerOnly = UseSubOcr,
                 Format = Aspose.Pdf.DocSaveOptions.DocFormat.DocX,
-                Mode = Aspose.Pdf.DocSaveOptions.RecognitionMode.Textbox,
-                RecognizeBullets = true,
+                Mode = UseMode,
+                RecognizeBullets = UseBullet,
                 CustomProgressHandler = new Aspose.Pdf.UnifiedSaveOptions.ConversionProgressEventHandler(WritePdf2WordDebugInfo)
             };
 
