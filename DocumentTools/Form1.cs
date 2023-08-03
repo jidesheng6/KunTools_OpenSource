@@ -12,7 +12,6 @@ using System.Linq;
 using System.Net.Http;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -32,11 +31,12 @@ namespace DocumentTools
         private double ScanSeconds = 0;
         private Bitmap PictureBoxPreviewImage;
         private List<Bitmap> TempScannedImageBmpList = new List<Bitmap>();
-        private bool NameReplaceMode = false;
-
+        
+        public bool NameReplaceMode = false;
+        public string ShowOpenTargetDialog = "on";//是否启用完成后显示打开转换目录弹窗
         public string AddWaterMarkBackGroudImageFileName = string.Empty;
 
-        string NowVersion = "23.8.2";
+        string NowVersion = "23.8.3";
 
         #region 控件大小随窗体大小等比例缩放
 
@@ -91,8 +91,58 @@ namespace DocumentTools
         {
             foreach (TabPage TempPage in this.MainTabPage.TabPages)
             {
-                Debug.WriteLine(TempPage.Text + "：" + MainTabPage.TabPages.IndexOf(TempPage));
+                Debug.WriteLine($"A：\n{TempPage.Text}：{MainTabPage.TabPages.IndexOf(TempPage)}");
+                Debug.WriteLine($"B：\n{TempPage.Text}：{MainTabPage.TabPages.IndexOf(TempPage)+1}");
             }
+        }
+
+        private void SetInitTabPage()
+        {
+            MainTabPage.SelectedIndex = int.Parse(ConfigurationManager.AppSettings["StartPageIndex"]);
+        }
+
+        private void SetTabCardHeighLight()
+        {
+            string OpenTabPageHeight = ConfigurationManager.AppSettings["TabPageHeight"];
+            this.MainTabPage.DrawMode = OpenTabPageHeight == "on" ? TabDrawMode.OwnerDrawFixed : TabDrawMode.Normal;
+
+        }
+
+        private void SetConfirmDialogShow()
+        {
+            ShowOpenTargetDialog = ConfigurationManager.AppSettings["ShowOpenTargetDialog"];
+        }
+
+        private void SetTabPageVisable()
+        {
+            List<string> DisablePageIndexList = ConfigurationManager.AppSettings["HidePageIndex"].Split(',').ToList();
+
+            foreach (string DisablePageIndex in DisablePageIndexList)
+            {
+                if (DisablePageIndex != string.Empty)
+                {
+                    if (int.TryParse(DisablePageIndex, out int PageIndex))
+                    {
+                        if (PageIndex > 0 & PageIndex <= MainTabPage.TabCount)
+                        {
+                            MainTabPage.TabPages[PageIndex - 1].Parent = null;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void InitConfigSettings()
+        {
+            //如果配置文件存在就按照配置文件中的参数来设置
+            if (File.Exists(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile))
+            {
+                SetInitTabPage();//设置起始页面
+                SetTabCardHeighLight();//设置标签卡高亮
+                SetConfirmDialogShow();//设置是否显示转换后弹窗
+                SetTabPageVisable();//设置标签卡隐藏
+            }
+
         }
 
         public BodyForm()
@@ -114,6 +164,7 @@ namespace DocumentTools
             InitListView();
             InitComboxValue();
             InitMoveItemButtonHandler();
+            InitConfigSettings();
             OutPutListViewIndex();
             this.AllowDrop = true;
             this.PageExportCheck.Checked = true;
@@ -130,27 +181,7 @@ namespace DocumentTools
             this.CompressImage_OutPutImageFormat.Enabled = false;
             this.IcoSizeDrop.Enabled = false;
             //ReleaseRegistry.Enabled = false;
-            Image2PDFCOmpressImage.Enabled = false;
-
-
-
-
-            //如果配置文件存在就按照配置文件中的参数来设置
-            if (File.Exists(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile))
-            {
-                //设置起始页面
-                MainTabPage.SelectedIndex = int.Parse(ConfigurationManager.AppSettings["StartPageIndex"]);
-
-                string OpenTabPageHeight = ConfigurationManager.AppSettings["TabPageHeight"];
-                this.MainTabPage.DrawMode = OpenTabPageHeight == "on" ? TabDrawMode.OwnerDrawFixed : TabDrawMode.Normal;
-
-            }
-            else
-            {
-                MainTabPage.SelectedIndex = 0;
-
-                this.MainTabPage.DrawMode = TabDrawMode.Normal;
-            }
+            this.Image2PDFCOmpressImage.Enabled = false;
 
             //Util.PlayMp3WithStream();
 
@@ -730,8 +761,8 @@ namespace DocumentTools
             DataTable PDF2WORDMOde = new DataTable();
             PDF2WORDMOde.Columns.Add("DisplayValue");
             PDF2WORDMOde.Columns.Add("RealValue");
-            PDF2WORDMOde.Rows.Add("文本框模式（文档美观，不易编辑）",Aspose.Pdf.DocSaveOptions.RecognitionMode.Textbox);
-            PDF2WORDMOde.Rows.Add("全识别模式（文档不美观，较好编辑",Aspose.Pdf.DocSaveOptions.RecognitionMode.Flow);
+            PDF2WORDMOde.Rows.Add("文本框模式（文档美观，不易编辑）", Aspose.Pdf.DocSaveOptions.RecognitionMode.Textbox);
+            PDF2WORDMOde.Rows.Add("全识别模式（文档不美观，较好编辑", Aspose.Pdf.DocSaveOptions.RecognitionMode.Flow);
 
             this.PDF2WORD_Mode.DataSource = PDF2WORDMOde;
             this.PDF2WORD_Mode.DisplayMember = "DisplayValue";
@@ -1094,7 +1125,9 @@ namespace DocumentTools
             try
             {
                 List<string> TempLines = new List<string>();
-                TargetTextBox.Lines = Util.AddText2List(SourceTextBox.Text, RemoveNumberCheck.Checked, RemoveSquareCheck.Checked, NameStorkeChcek.Checked);
+                TargetTextBox.Lines = Util.AddText2List(SourceTextBox.Text, RemoveNumberCheck.Checked, RemoveSquareCheck.Checked, NameStorkeChcek.Checked,
+                                      NameReplaceWord.Checked,NameReplaceWord_Search.Text,NameReplaceWord_Target.Text
+                                       );
                 //双字对齐功能，放在全部的文本处理完毕以后再进行重新处理，不然只能针对源文本字符长度进行判断，不太合适
 
                 if (this.TargetTextBox.Text != string.Empty)
@@ -1113,28 +1146,9 @@ namespace DocumentTools
                         }
                         TargetTextBox.Lines = TempLines.ToArray();
                     }
-                    if (NameReplaceWord.Checked)
-                    {
-                        List<string> TempText = new List<string>();
-                        string text = string.Empty;
-                        foreach (string Text in this.TargetTextBox.Lines)
-                        {
-                            if(NameReplaceMode)
-                            {
-                                text = Regex.Replace(Text, NameReplaceWord_Search.Text, NameReplaceWord_Target.Text);
-                            }
-                            else
-                            {
-                                text = Text.Replace(NameReplaceWord_Search.Text, NameReplaceWord_Target.Text);
-                            }
 
-                            TempText.Add(text);
-                        }
 
-                        TargetTextBox.Lines = TempText.ToArray();
-                    }
-
-                    if(NameAutoCopy.Checked)
+                    if (NameAutoCopy.Checked)
                     {
                         Clipboard.SetText(TargetTextBox.Text);
                         NameAutoCopyStatusText.Text = "[已复制到剪贴板]";
@@ -2726,7 +2740,7 @@ namespace DocumentTools
             }
         }
     }
-    }
+}
 
 internal class PrivateFontSetting
 {

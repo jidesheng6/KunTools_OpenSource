@@ -44,6 +44,7 @@
             this.ChooseDocButton = new System.Windows.Forms.Button();
             this.WordFileListView = new System.Windows.Forms.ListView();
             this.TabPage_02 = new System.Windows.Forms.TabPage();
+            this.label1 = new System.Windows.Forms.Label();
             this.PDF2WORD_Mode = new System.Windows.Forms.ComboBox();
             this.label55 = new System.Windows.Forms.Label();
             this.PDF2WORD_UseSUbOcr = new System.Windows.Forms.CheckBox();
@@ -411,7 +412,7 @@
             this.ColorSelectDialog = new System.Windows.Forms.ColorDialog();
             this.FontSelectDialog = new System.Windows.Forms.FontDialog();
             this.MainFormError = new System.Windows.Forms.ErrorProvider(this.components);
-            this.label1 = new System.Windows.Forms.Label();
+            this.label57 = new System.Windows.Forms.Label();
             this.MainTabPage.SuspendLayout();
             this.TabPage_01.SuspendLayout();
             this.TabPage_02.SuspendLayout();
@@ -659,6 +660,16 @@
             this.TabPage_02.TabIndex = 1;
             this.TabPage_02.Text = "PDF转WORD";
             this.TabPage_02.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.Tomato;
+            this.label1.Location = new System.Drawing.Point(760, 351);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(179, 18);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "注：不支持扫描件PDF";
             // 
             // PDF2WORD_Mode
             // 
@@ -3404,6 +3415,7 @@
             // 
             // TabPage_05
             // 
+            this.TabPage_05.Controls.Add(this.label57);
             this.TabPage_05.Controls.Add(this.NameReplaceRegexMode);
             this.TabPage_05.Controls.Add(this.NameAutoCopyStatusText);
             this.TabPage_05.Controls.Add(this.NameAutoCopy);
@@ -3430,6 +3442,7 @@
             // NameReplaceRegexMode
             // 
             this.NameReplaceRegexMode.AutoSize = true;
+            this.NameReplaceRegexMode.Cursor = System.Windows.Forms.Cursors.Hand;
             this.NameReplaceRegexMode.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.NameReplaceRegexMode.ForeColor = System.Drawing.Color.Red;
             this.NameReplaceRegexMode.Location = new System.Drawing.Point(543, 198);
@@ -4361,15 +4374,15 @@
             // 
             this.MainFormError.ContainerControl = this;
             // 
-            // label1
+            // label57
             // 
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.Color.Tomato;
-            this.label1.Location = new System.Drawing.Point(760, 351);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(179, 18);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "注：不支持扫描件PDF";
+            this.label57.AutoSize = true;
+            this.label57.ForeColor = System.Drawing.Color.Red;
+            this.label57.Location = new System.Drawing.Point(292, 16);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(361, 18);
+            this.label57.TabIndex = 18;
+            this.label57.Text = "本功能会自动删除文字内的特殊符号、⚪、▢";
             // 
             // BodyForm
             // 
@@ -4881,6 +4894,7 @@
         internal System.Windows.Forms.CheckBox PDF2WORD_UseBullet;
         internal System.Windows.Forms.ComboBox PDF2WORD_Mode;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label57;
     }
 }
 
