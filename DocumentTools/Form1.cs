@@ -12,7 +12,6 @@ using System.Linq;
 using System.Net.Http;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -34,6 +33,7 @@ namespace DocumentTools
         private List<Bitmap> TempScannedImageBmpList = new List<Bitmap>();
         private bool NameReplaceMode = false;
 
+        public string ShowOpenTargetDialog = string.Empty;//是否启用完成后显示打开转换目录弹窗
         public string AddWaterMarkBackGroudImageFileName = string.Empty;
 
         string NowVersion = "23.8.2";
@@ -144,12 +144,16 @@ namespace DocumentTools
                 string OpenTabPageHeight = ConfigurationManager.AppSettings["TabPageHeight"];
                 this.MainTabPage.DrawMode = OpenTabPageHeight == "on" ? TabDrawMode.OwnerDrawFixed : TabDrawMode.Normal;
 
+                ShowOpenTargetDialog = ConfigurationManager.AppSettings["ShowOpenTargetDialog"];
+
             }
             else
             {
                 MainTabPage.SelectedIndex = 0;
 
                 this.MainTabPage.DrawMode = TabDrawMode.Normal;
+
+                ShowOpenTargetDialog = "on";
             }
 
             //Util.PlayMp3WithStream();
@@ -730,8 +734,8 @@ namespace DocumentTools
             DataTable PDF2WORDMOde = new DataTable();
             PDF2WORDMOde.Columns.Add("DisplayValue");
             PDF2WORDMOde.Columns.Add("RealValue");
-            PDF2WORDMOde.Rows.Add("文本框模式（文档美观，不易编辑）",Aspose.Pdf.DocSaveOptions.RecognitionMode.Textbox);
-            PDF2WORDMOde.Rows.Add("全识别模式（文档不美观，较好编辑",Aspose.Pdf.DocSaveOptions.RecognitionMode.Flow);
+            PDF2WORDMOde.Rows.Add("文本框模式（文档美观，不易编辑）", Aspose.Pdf.DocSaveOptions.RecognitionMode.Textbox);
+            PDF2WORDMOde.Rows.Add("全识别模式（文档不美观，较好编辑", Aspose.Pdf.DocSaveOptions.RecognitionMode.Flow);
 
             this.PDF2WORD_Mode.DataSource = PDF2WORDMOde;
             this.PDF2WORD_Mode.DisplayMember = "DisplayValue";
@@ -1119,7 +1123,7 @@ namespace DocumentTools
                         string text = string.Empty;
                         foreach (string Text in this.TargetTextBox.Lines)
                         {
-                            if(NameReplaceMode)
+                            if (NameReplaceMode)
                             {
                                 text = Regex.Replace(Text, NameReplaceWord_Search.Text, NameReplaceWord_Target.Text);
                             }
@@ -1134,7 +1138,7 @@ namespace DocumentTools
                         TargetTextBox.Lines = TempText.ToArray();
                     }
 
-                    if(NameAutoCopy.Checked)
+                    if (NameAutoCopy.Checked)
                     {
                         Clipboard.SetText(TargetTextBox.Text);
                         NameAutoCopyStatusText.Text = "[已复制到剪贴板]";
@@ -2726,7 +2730,7 @@ namespace DocumentTools
             }
         }
     }
-    }
+}
 
 internal class PrivateFontSetting
 {

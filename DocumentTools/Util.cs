@@ -4,7 +4,6 @@ using Aspose.Cells.Rendering;
 using Aspose.Imaging;
 using Aspose.Pdf;
 using Aspose.Pdf.Annotations;
-using Aspose.Pdf.Facades;
 using Aspose.Pdf.Text;
 using Aspose.Slides.Export;
 using Microsoft.VisualBasic.Devices;
@@ -13,7 +12,6 @@ using NAudio.Wave;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Net;
@@ -205,7 +203,7 @@ namespace DocumentTools
         /// </summary>
         /// <param name="pdfFileName">pdf文件名</param>
         /// <param name="SavePdfName">导出docx</param>
-        public static void ConvertPdf2Word(string pdfFileName, string SavePdfName, bool UseBullet,bool UseSubOcr,Aspose.Pdf.DocSaveOptions.RecognitionMode UseMode)
+        public static void ConvertPdf2Word(string pdfFileName, string SavePdfName, bool UseBullet, bool UseSubOcr, Aspose.Pdf.DocSaveOptions.RecognitionMode UseMode)
         {
             Aspose.Hook.HookManager.StartHook();
 
@@ -1221,12 +1219,12 @@ namespace DocumentTools
                     case ".bmp":
                         TempBmpOption.Compression = Compress_Bmp_Compression;
                         TempBmpOption.BitsPerPixel = Compress_Bmp_Bits_Pixel;
-                        if(Compress_Bmp_Compression == Aspose.Imaging.FileFormats.Bmp.BitmapCompression.Rle4 &&
-                            Compress_Bmp_Bits_Pixel==4)
+                        if (Compress_Bmp_Compression == Aspose.Imaging.FileFormats.Bmp.BitmapCompression.Rle4 &&
+                            Compress_Bmp_Bits_Pixel == 4)
                         {
                             TempBmpOption.Palette = ColorPaletteHelper.Create4Bit();
                         }
-                        else if(Compress_Bmp_Compression == Aspose.Imaging.FileFormats.Bmp.BitmapCompression.Rle8 &&
+                        else if (Compress_Bmp_Compression == Aspose.Imaging.FileFormats.Bmp.BitmapCompression.Rle8 &&
                             Compress_Bmp_Bits_Pixel == 8)
                         {
                             TempBmpOption.Palette = ColorPaletteHelper.Create8Bit();
@@ -1547,16 +1545,16 @@ namespace DocumentTools
 
             string ReturnValue = string.Empty;
 
-            if(fileSizeBytes<KB_Value)
+            if (fileSizeBytes < KB_Value)
             {
                 ReturnValue = $"{fileSizeBytes} 字节";
             }
-            else if(fileSizeBytes<MB_Value)
+            else if (fileSizeBytes < MB_Value)
             {
-                double KB_Size = fileSizeBytes/ KB_Value;
+                double KB_Size = fileSizeBytes / KB_Value;
                 ReturnValue = $"{KB_Size:F2} KB";
             }
-            else if(fileSizeBytes<GB_Value)
+            else if (fileSizeBytes < GB_Value)
             {
                 double MB_SIZE = fileSizeBytes / MB_Value;
                 ReturnValue = $"{MB_SIZE:F2} MB";
@@ -1567,7 +1565,7 @@ namespace DocumentTools
                 ReturnValue = $"{GB_SIZE:F2} GB";
             }
 
-            return ReturnValue; 
+            return ReturnValue;
         }
     }
 

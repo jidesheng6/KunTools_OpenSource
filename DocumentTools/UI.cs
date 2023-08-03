@@ -327,7 +327,7 @@ namespace DocumentTools
                                 break;
                             //pdf转word
                             case ConvertFileType.Pdf2Word:
-                                Util.ConvertPdf2Word(ListViewFirstColumnText, ConvertedFileName,BodyForm.MainForm.PDF2WORD_UseBullet.Checked,BodyForm.MainForm.PDF2WORD_UseSUbOcr.Checked,(Aspose.Pdf.DocSaveOptions.RecognitionMode)Enum.Parse(typeof(Aspose.Pdf.DocSaveOptions.RecognitionMode),BodyForm.MainForm.PDF2WORD_Mode.SelectedValue.ToString()));
+                                Util.ConvertPdf2Word(ListViewFirstColumnText, ConvertedFileName, BodyForm.MainForm.PDF2WORD_UseBullet.Checked, BodyForm.MainForm.PDF2WORD_UseSUbOcr.Checked, (Aspose.Pdf.DocSaveOptions.RecognitionMode)Enum.Parse(typeof(Aspose.Pdf.DocSaveOptions.RecognitionMode), BodyForm.MainForm.PDF2WORD_Mode.SelectedValue.ToString()));
                                 break;
                             //excel转pdf
                             case ConvertFileType.Excel2Pdf:
@@ -432,8 +432,10 @@ namespace DocumentTools
                         FileInfo ConverdFileInfo = new FileInfo(ConvertedFileName);
                         //获取转换后的文件大小
                         ListViewControl.Items[TempIndex].SubItems.Add(Util.GetFileSizeDisplayString(ConverdFileInfo.Length));
-                        
+
                         ListViewControl.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+
+                        StatusLabelControl.Text = "处理完毕";
 
                     }
 
@@ -464,10 +466,13 @@ namespace DocumentTools
 
                     BodyForm.MainForm.BeginInvoke(new Action(() =>
                     {
-                        DialogResult MessageBoxResult = MessageBox.Show("处理完毕，是否需要打开转换后目录？", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                        if (MessageBoxResult == DialogResult.Yes)
+                        if (BodyForm.MainForm.ShowOpenTargetDialog == "on")
                         {
-                            Process.Start(SelectSavePathstring);
+                            DialogResult MessageBoxResult = MessageBox.Show("处理完毕，是否需要打开转换后目录？", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (MessageBoxResult == DialogResult.Yes)
+                            {
+                                Process.Start(SelectSavePathstring);
+                            }
                         }
                     }));
                 }
@@ -481,12 +486,12 @@ namespace DocumentTools
         public static void MoveUpListViewItem(ListView ListViewControl)
         {
             //列表中有项目才响应
-            if(ListViewControl.Items.Count>0)
+            if (ListViewControl.Items.Count > 0)
             {
                 //获取当前选中项目的索引
                 int NowSelectIndex = ListViewControl.SelectedIndices[0];
 
-                if(NowSelectIndex>0)
+                if (NowSelectIndex > 0)
                 {
                     //项目索引不在第一个时才处理
 
@@ -501,7 +506,7 @@ namespace DocumentTools
 
                     NowSelectItem.Text = TempText;// 移动后，原来位置，对于移动后位置来说，就是下方的文本变为之前上方的文本
 
-                    ListViewControl.Items[NowSelectIndex-1].Selected = true;// 选中移动后的文本
+                    ListViewControl.Items[NowSelectIndex - 1].Selected = true;// 选中移动后的文本
 
                     ListViewControl.EndUpdate();
 
