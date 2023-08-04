@@ -11,10 +11,13 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Gma.System.MouseKeyHook;
 
 namespace DocumentTools
 {
@@ -31,12 +34,13 @@ namespace DocumentTools
         private double ScanSeconds = 0;
         private Bitmap PictureBoxPreviewImage;
         private List<Bitmap> TempScannedImageBmpList = new List<Bitmap>();
-        
+        private IKeyboardEvents GlobalHook = Hook.GlobalEvents();//全局钩子事件
+
         public bool NameReplaceMode = false;
         public string ShowOpenTargetDialog = "on";//是否启用完成后显示打开转换目录弹窗
         public string AddWaterMarkBackGroudImageFileName = string.Empty;
 
-        string NowVersion = "23.8.3";
+        string NowVersion = "23.8.5";
 
         #region 控件大小随窗体大小等比例缩放
 
@@ -123,9 +127,9 @@ namespace DocumentTools
                 {
                     if (int.TryParse(DisablePageIndex, out int PageIndex))
                     {
-                        if (PageIndex > 0 & PageIndex <= MainTabPage.TabCount)
+                        if (PageIndex >= 0 & PageIndex <= MainTabPage.TabCount-1)
                         {
-                            MainTabPage.TabPages[PageIndex - 1].Parent = null;
+                            MainTabPage.TabPages[PageIndex].Parent = null;
                         }
                     }
                 }
@@ -164,6 +168,8 @@ namespace DocumentTools
             InitListView();
             InitComboxValue();
             InitMoveItemButtonHandler();
+            InitRemoveItemHandler();
+            InitToolTipHandler();
             InitConfigSettings();
             OutPutListViewIndex();
             this.AllowDrop = true;
@@ -184,6 +190,9 @@ namespace DocumentTools
             this.Image2PDFCOmpressImage.Enabled = false;
 
             //Util.PlayMp3WithStream();
+
+            ShortStatus.Text = Util.GetShortStatus();
+            ShortStatus.ForeColor = ShortStatus.Text=="已移除"? Color.Red: Color.Green;
 
             try
             {
@@ -1004,6 +1013,277 @@ namespace DocumentTools
             #endregion
         }
 
+        //注册删除Listview项目的事件
+
+        private void InitRemoveItemHandler()
+        {
+
+            word2pdf_clear.Click += (s1, s2) => {
+                UI.RemoveListViewItem(true, this.WordFileListView);
+            };
+
+            pdf2word_clear.Click += (s1, s2) => {
+                UI.RemoveListViewItem(true, this.PdfFileListView);
+            };
+
+            excel2pdf_clear.Click += (s1, s2) => {
+                UI.RemoveListViewItem(true, this.ExcelFileListView);
+            };
+
+            pdf2excel_clear.Click += (s1, s2) => {
+                UI.RemoveListViewItem(true, this.PdfFileListView);
+            };
+
+            ppt2pdf_clear.Click += (s1, s2) => {
+                UI.RemoveListViewItem(true, this.PdfFileListView);
+            };
+
+            pdf2ppt_clear.Click += (s1, s2) => {
+                UI.RemoveListViewItem(true, this.PDF2PPTFileList);
+            };
+
+            meregeword_clear.Click += (s1, s2) => {
+                UI.RemoveListViewItem(true, this.PdfFileListView);
+            };
+
+            meregepdf_clear.Click += (s1, s2) => {
+                UI.RemoveListViewItem(true, this.MergePdfFileView);
+            };
+
+            sqplitpdf_clear.Click += (s1, s2) => {
+                UI.RemoveListViewItem(true, this.SplitPdfFileList);
+            };
+
+            addpdfwater_clear.Click += (s1, s2) => {
+                UI.RemoveListViewItem(true, this.PdfWaterMarkFileList);
+            };
+
+            removepdfwater_clear.Click += (s1, s2) => {
+                UI.RemoveListViewItem(true, this.RemovePdfWaterMarkFileList);
+            };
+
+            pdfversion_clear.Click += (s1, s2) => {
+                UI.RemoveListViewItem(true, this.ConvertPdfComplianceFileList);
+            };
+
+            word2excel_clear.Click += (s1, s2) => {
+                UI.RemoveListViewItem(true, this.Word2ExcelFileList);
+            };
+
+            excel2word_clear.Click += (s1, s2) => {
+                UI.RemoveListViewItem(true, this.Excel2WordFileList);
+            };
+
+            document2image_clear.Click += (s1, s2) => {
+                UI.RemoveListViewItem(true, this.DocumentsListView);
+            };
+
+            image2pdf_clear.Click += (s1, s2) => {
+                UI.RemoveListViewItem(true, this.ConvertImage2PDFFileList);
+            };
+
+            compresspdf_clear.Click += (s1, s2) => {
+                UI.RemoveListViewItem(true, this.CompressPdfFileList);
+            };
+
+            compressimage_clear.Click += (s1, s2) => {
+                UI.RemoveListViewItem(true, this.CompressImageFileList);
+            };
+
+            wordreplace_clear.Click += (s1, s2) => {
+                UI.RemoveListViewItem(true, this.ReplaceWordFileList);
+            };
+
+            excelreplace_clear.Click += (s1, s2) => {
+                UI.RemoveListViewItem(true, this.ReplaceExcelFileView);
+            };
+
+            datamatrix_clear.Click += (s1, s2) => {
+                UI.RemoveListViewItem(true, this.DecodeMatrixWordListView);
+            };
+
+            image2ico_clear.Click += (s1, s2) => {
+                UI.RemoveListViewItem(true, this.IcoFileView);
+            };
+
+            word2pdf_remove.Click += (s1, s2) => {
+                UI.RemoveListViewItem(false, this.WordFileListView);
+            };
+
+            pdf2word_remove.Click += (s1, s2) => {
+                UI.RemoveListViewItem(false, this.PdfFileListView);
+            };
+
+            excel2pdf_remove.Click += (s1, s2) => {
+                UI.RemoveListViewItem(false, this.ExcelFileListView);
+            };
+
+            pdf2excel_remove.Click += (s1, s2) => {
+                UI.RemoveListViewItem(false, this.PDF2ExcelFileView);
+            };
+
+            ppt2pdf_remove.Click += (s1, s2) => {
+                UI.RemoveListViewItem(false, this.PPT2PdfFileList);
+            };
+
+            pdf2ppt_remove.Click += (s1, s2) => {
+                UI.RemoveListViewItem(false, this.PDF2PPTFileList);
+            };
+
+            meregeword_remove.Click += (s1, s2) => {
+                UI.RemoveListViewItem(false, this.MergeWordFileList);
+            };
+
+            meregepdf_remove.Click += (s1, s2) => {
+                UI.RemoveListViewItem(false, this.MergePdfFileView);
+            };
+
+            sqplitpdf_remove.Click += (s1, s2) => {
+                UI.RemoveListViewItem(false, this.SplitPdfFileList);
+            };
+
+            addpdfwater_remove.Click += (s1, s2) => {
+                UI.RemoveListViewItem(false, this.PdfWaterMarkFileList);
+            };
+
+            removepdfwater_remove.Click += (s1, s2) => {
+                UI.RemoveListViewItem(false, this.RemovePdfWaterMarkFileList);
+            };
+
+            pdfversion_remove.Click += (s1, s2) => {
+                UI.RemoveListViewItem(false, this.ConvertPdfComplianceFileList);
+            };
+
+            word2excel_remove.Click += (s1, s2) => {
+                UI.RemoveListViewItem(false, this.Word2ExcelFileList);
+            };
+
+            excel2word_remove.Click += (s1, s2) => {
+                UI.RemoveListViewItem(false, this.Excel2WordFileList);
+            };
+
+            document2image_remove.Click += (s1, s2) => {
+                UI.RemoveListViewItem(false, this.DocumentsListView);
+            };
+
+            image2pdf_remove.Click += (s1, s2) => {
+                UI.RemoveListViewItem(false, this.ConvertImage2PDFFileList);
+            };
+
+            compresspdf_remove.Click += (s1, s2) => {
+                UI.RemoveListViewItem(false, this.CompressPdfFileList);
+            };
+
+            compressimage_remove.Click += (s1, s2) => {
+                UI.RemoveListViewItem(false, this.CompressImageFileList);
+            };
+
+            wordreplace_remove.Click += (s1, s2) => {
+                UI.RemoveListViewItem(false, this.ReplaceWordFileList);
+            };
+
+            excelreplace_remove.Click += (s1, s2) => {
+                UI.RemoveListViewItem(false, this.ReplaceExcelFileView);
+            };
+
+            datamatrix_remove.Click += (s1, s2) => {
+                UI.RemoveListViewItem(false, this.DecodeMatrixWordListView);
+            };
+
+            image2ico_remove.Click += (s1, s2) => {
+                UI.RemoveListViewItem(false, this.IcoFileView);
+            };
+
+
+        }
+        
+        //注册TooTip到符号按钮上
+        private void InitToolTipHandler()
+        {
+            MainToolsTip.SetToolTip(this.word2pdf_clear, "清空列表中所有文件");
+            MainToolsTip.SetToolTip(this.word2pdf_remove, "移除选中文件");
+            MainToolsTip.SetToolTip(this.WordFileListView_MoveDown, "向下移动选中文件");
+            MainToolsTip.SetToolTip(this.WordFileListView_MoveUp, "向上移动选中文件");
+            MainToolsTip.SetToolTip(this.pdf2word_clear, "清空列表中所有文件");
+            MainToolsTip.SetToolTip(this.pdf2word_remove, "移除选中文件");
+            MainToolsTip.SetToolTip(this.PdfFileListView_MoveDown, "向下移动选中文件");
+            MainToolsTip.SetToolTip(this.PdfFileListView_MoveUp, "向上移动选中文件");
+            MainToolsTip.SetToolTip(this.ExcelFileListView_MoveDown, "向下移动选中文件");
+            MainToolsTip.SetToolTip(this.ExcelFileListView_MoveUp, "向上移动选中文件");
+            MainToolsTip.SetToolTip(this.excel2pdf_clear, "清空列表中所有文件");
+            MainToolsTip.SetToolTip(this.excel2pdf_remove, "移除选中文件");
+            MainToolsTip.SetToolTip(this.PDF2ExcelFileView_MoveDown, "向下移动选中文件");
+            MainToolsTip.SetToolTip(this.PDF2ExcelFileView_MoveUp, "向上移动选中文件");
+            MainToolsTip.SetToolTip(this.pdf2excel_clear, "清空列表中所有文件");
+            MainToolsTip.SetToolTip(this.pdf2excel_remove, "移除选中文件");
+            MainToolsTip.SetToolTip(this.PDF2PPTFileList_MoveDown, "向下移动选中文件");
+            MainToolsTip.SetToolTip(this.PDF2PPTFileList_MoveUp, "向上移动选中文件");
+            MainToolsTip.SetToolTip(this.pdf2ppt_clear, "清空列表中所有文件");
+            MainToolsTip.SetToolTip(this.pdf2ppt_remove, "移除选中文件");
+            MainToolsTip.SetToolTip(this.MergePdfFileView_MoveDown, "向下移动选中文件");
+            MainToolsTip.SetToolTip(this.MergePdfFileView_MoveUp, "向上移动选中文件");
+            MainToolsTip.SetToolTip(this.meregepdf_clear, "清空列表中所有文件");
+            MainToolsTip.SetToolTip(this.meregepdf_remove, "移除选中文件");
+            MainToolsTip.SetToolTip(this.SplitPdfFileList_MoveDown, "向下移动选中文件");
+            MainToolsTip.SetToolTip(this.SplitPdfFileList_MoveUp, "向上移动选中文件");
+            MainToolsTip.SetToolTip(this.sqplitpdf_clear, "清空列表中所有文件");
+            MainToolsTip.SetToolTip(this.sqplitpdf_remove, "移除选中文件");
+            MainToolsTip.SetToolTip(this.PdfWaterMarkFileList_MoveDown, "向下移动选中文件");
+            MainToolsTip.SetToolTip(this.PdfWaterMarkFileList_MoveUp, "向上移动选中文件");
+            MainToolsTip.SetToolTip(this.addpdfwater_clear, "清空列表中所有文件");
+            MainToolsTip.SetToolTip(this.addpdfwater_remove, "移除选中文件");
+            MainToolsTip.SetToolTip(this.RemovePdfWaterMarkFileList_MoveDown, "向下移动选中文件");
+            MainToolsTip.SetToolTip(this.RemovePdfWaterMarkFileList_MoveUp, "向上移动选中文件");
+            MainToolsTip.SetToolTip(this.removepdfwater_clear, "清空列表中所有文件");
+            MainToolsTip.SetToolTip(this.removepdfwater_remove, "移除选中文件");
+            MainToolsTip.SetToolTip(this.ConvertPdfComplianceFileList_MoveDown, "向下移动选中文件");
+            MainToolsTip.SetToolTip(this.ConvertPdfComplianceFileList_MoveUp, "向上移动选中文件");
+            MainToolsTip.SetToolTip(this.pdfversion_clear, "清空列表中所有文件");
+            MainToolsTip.SetToolTip(this.pdfversion_remove, "移除选中文件");
+            MainToolsTip.SetToolTip(this.Word2ExcelFileList_MoveDown, "向下移动选中文件");
+            MainToolsTip.SetToolTip(this.Word2ExcelFileList_MoveUp, "向上移动选中文件");
+            MainToolsTip.SetToolTip(this.word2excel_clear, "清空列表中所有文件");
+            MainToolsTip.SetToolTip(this.word2excel_remove, "移除选中文件");
+            MainToolsTip.SetToolTip(this.Excel2WordFileList_MoveDown, "向下移动选中文件");
+            MainToolsTip.SetToolTip(this.Excel2WordFileList_MoveUp, "向上移动选中文件");
+            MainToolsTip.SetToolTip(this.excel2word_clear, "清空列表中所有文件");
+            MainToolsTip.SetToolTip(this.excel2word_remove, "移除选中文件");
+            MainToolsTip.SetToolTip(this.DocumentsListView_MoveDown, "向下移动选中文件");
+            MainToolsTip.SetToolTip(this.DocumentsListView_MoveUp, "向上移动选中文件");
+            MainToolsTip.SetToolTip(this.document2image_clear, "清空列表中所有文件");
+            MainToolsTip.SetToolTip(this.document2image_remove, "移除选中文件");
+            MainToolsTip.SetToolTip(this.ConvertImage2PDFFileList_MoveDown, "向下移动选中文件");
+            MainToolsTip.SetToolTip(this.ConvertImage2PDFFileList_MoveUp, "向上移动选中文件");
+            MainToolsTip.SetToolTip(this.image2pdf_clear, "清空列表中所有文件");
+            MainToolsTip.SetToolTip(this.image2pdf_remove, "移除选中文件");
+            MainToolsTip.SetToolTip(this.CompressPdfFileList_MoveDown, "向下移动选中文件");
+            MainToolsTip.SetToolTip(this.CompressPdfFileList_MoveUp, "向上移动选中文件");
+            MainToolsTip.SetToolTip(this.compresspdf_clear, "清空列表中所有文件");
+            MainToolsTip.SetToolTip(this.compresspdf_remove, "移除选中文件");
+            MainToolsTip.SetToolTip(this.CompressImageFileList_MoveDown, "向下移动选中文件");
+            MainToolsTip.SetToolTip(this.CompressImageFileList_MoveUp, "向上移动选中文件");
+            MainToolsTip.SetToolTip(this.compressimage_clear, "清空列表中所有文件");
+            MainToolsTip.SetToolTip(this.compressimage_remove, "移除选中文件");
+            MainToolsTip.SetToolTip(this.ReplaceWordFileList_MoveDown, "向下移动选中文件");
+            MainToolsTip.SetToolTip(this.ReplaceWordFileList_MoveUp, "向上移动选中文件");
+            MainToolsTip.SetToolTip(this.wordreplace_clear, "清空列表中所有文件");
+            MainToolsTip.SetToolTip(this.wordreplace_remove, "移除选中文件");
+            MainToolsTip.SetToolTip(this.ReplaceExcelFileView_MoveDown, "向下移动选中文件");
+            MainToolsTip.SetToolTip(this.ReplaceExcelFileView_MoveUp, "向上移动选中文件");
+            MainToolsTip.SetToolTip(this.excelreplace_clear, "清空列表中所有文件");
+            MainToolsTip.SetToolTip(this.excelreplace_remove, "移除选中文件");
+            MainToolsTip.SetToolTip(this.DecodeMatrixWordListView_MoveDown, "向下移动选中文件");
+            MainToolsTip.SetToolTip(this.DecodeMatrixWordListView_MoveUp, "向上移动选中文件");
+            MainToolsTip.SetToolTip(this.datamatrix_clear, "清空列表中所有文件");
+            MainToolsTip.SetToolTip(this.datamatrix_remove, "移除选中文件");
+            MainToolsTip.SetToolTip(this.IcoFileView_MoveDown, "向下移动选中文件");
+            MainToolsTip.SetToolTip(this.IcoFileView_MoveUp, "向上移动选中文件");
+            MainToolsTip.SetToolTip(this.image2ico_clear, "清空列表中所有文件");
+            MainToolsTip.SetToolTip(this.image2ico_remove, "移除选中文件");
+
+
+        }
+
         private void ChooseDocButton_Click(object sender, EventArgs e)
         {
             Task<int> FileCount = UI.AddWordFiles();
@@ -1271,70 +1551,70 @@ namespace DocumentTools
                 switch (TempListview.Name)
                 {
                     case "WordFileListView":
-                        UI.RemoveListViewItem(false, WordFileListView, WordFileListView.FocusedItem.Index);
+                        UI.RemoveListViewItem(false, WordFileListView);
                         break;
                     case "PdfFileListView":
-                        UI.RemoveListViewItem(false, PdfFileListView, PdfFileListView.FocusedItem.Index);
+                        UI.RemoveListViewItem(false, PdfFileListView);
                         break;
                     case "ExcelFileListView":
-                        UI.RemoveListViewItem(false, ExcelFileListView, ExcelFileListView.FocusedItem.Index);
+                        UI.RemoveListViewItem(false, ExcelFileListView);
                         break;
                     case "DocumentsListView":
-                        UI.RemoveListViewItem(false, DocumentsListView, DocumentsListView.FocusedItem.Index);
+                        UI.RemoveListViewItem(false, DocumentsListView);
                         break;
                     case "PDF2ExcelFileView":
-                        UI.RemoveListViewItem(false, PDF2ExcelFileView, PDF2ExcelFileView.FocusedItem.Index);
+                        UI.RemoveListViewItem(false, PDF2ExcelFileView);
                         break;
                     case "MergePdfFileView":
-                        UI.RemoveListViewItem(false, MergePdfFileView, MergePdfFileView.FocusedItem.Index);
+                        UI.RemoveListViewItem(false, MergePdfFileView);
                         break;
                     case "ReplaceWordFileList":
-                        UI.RemoveListViewItem(false, ReplaceWordFileList, ReplaceWordFileList.FocusedItem.Index);
+                        UI.RemoveListViewItem(false, ReplaceWordFileList);
                         break;
                     case "ReplaceExcelFileView":
-                        UI.RemoveListViewItem(false, ReplaceExcelFileView, ReplaceExcelFileView.FocusedItem.Index);
+                        UI.RemoveListViewItem(false, ReplaceExcelFileView);
                         break;
                     case "DecodeMatrixWordListView":
-                        UI.RemoveListViewItem(false, DecodeMatrixWordListView, DecodeMatrixWordListView.FocusedItem.Index);
+                        UI.RemoveListViewItem(false, DecodeMatrixWordListView);
                         break;
                     case "IcoFileView":
-                        UI.RemoveListViewItem(false, IcoFileView, IcoFileView.FocusedItem.Index);
+                        UI.RemoveListViewItem(false, IcoFileView);
                         break;
                     case "MergeWordFileList":
-                        UI.RemoveListViewItem(false, MergeWordFileList, MergeWordFileList.FocusedItem.Index);
+                        UI.RemoveListViewItem(false, MergeWordFileList);
                         break;
                     case "Word2ExcelFileList":
-                        UI.RemoveListViewItem(false, Word2ExcelFileList, Word2ExcelFileList.FocusedItem.Index);
+                        UI.RemoveListViewItem(false, Word2ExcelFileList);
                         break;
                     case "Excel2WordFileList":
-                        UI.RemoveListViewItem(false, Excel2WordFileList, Excel2WordFileList.FocusedItem.Index);
+                        UI.RemoveListViewItem(false, Excel2WordFileList);
                         break;
                     case "SplitPdfFileList":
-                        UI.RemoveListViewItem(false, SplitPdfFileList, SplitPdfFileList.FocusedItem.Index);
+                        UI.RemoveListViewItem(false, SplitPdfFileList);
                         break;
                     case "PdfWaterMarkFileList":
-                        UI.RemoveListViewItem(false, PdfWaterMarkFileList, PdfWaterMarkFileList.FocusedItem.Index);
+                        UI.RemoveListViewItem(false, PdfWaterMarkFileList);
                         break;
                     case "RemovePdfWaterMarkFileList":
-                        UI.RemoveListViewItem(false, RemovePdfWaterMarkFileList, RemovePdfWaterMarkFileList.FocusedItem.Index);
+                        UI.RemoveListViewItem(false, RemovePdfWaterMarkFileList);
                         break;
                     case "PPT2PdfFileList":
-                        UI.RemoveListViewItem(false, PPT2PdfFileList, PPT2PdfFileList.FocusedItem.Index);
+                        UI.RemoveListViewItem(false, PPT2PdfFileList);
                         break;
                     case "PDF2PPTFileList":
-                        UI.RemoveListViewItem(false, PDF2PPTFileList, PDF2PPTFileList.FocusedItem.Index);
+                        UI.RemoveListViewItem(false, PDF2PPTFileList);
                         break;
                     case "ConvertPdfComplianceFileList":
-                        UI.RemoveListViewItem(false, ConvertPdfComplianceFileList, ConvertPdfComplianceFileList.FocusedItem.Index);
+                        UI.RemoveListViewItem(false, ConvertPdfComplianceFileList);
                         break;
                     case "ConvertImage2PDFFileList":
-                        UI.RemoveListViewItem(false, ConvertImage2PDFFileList, ConvertImage2PDFFileList.FocusedItem.Index);
+                        UI.RemoveListViewItem(false, ConvertImage2PDFFileList);
                         break;
                     case "CompressPdfFileList":
-                        UI.RemoveListViewItem(false, CompressPdfFileList, CompressPdfFileList.FocusedItem.Index);
+                        UI.RemoveListViewItem(false, CompressPdfFileList);
                         break;
                     case "CompressImageFileList":
-                        UI.RemoveListViewItem(false, CompressImageFileList, CompressImageFileList.FocusedItem.Index);
+                        UI.RemoveListViewItem(false, CompressImageFileList);
                         break;
                     default: break;
                 }
@@ -2737,6 +3017,72 @@ namespace DocumentTools
                 NameReplaceMode = true;
                 NameReplaceRegexMode.Text = "[正则模式：开]";
                 NameReplaceRegexMode.ForeColor = Color.ForestGreen;
+            }
+        }
+
+        #region 锁定解锁键盘操作
+        private void LockKeyBoard_Click(object sender, EventArgs e)
+        {
+
+            GlobalHook.KeyDown += HookKeyboard_KeyDown;
+            GlobalHook.KeyUp   += HookKeyboard_KeyUp;
+            KeyBoardLockStatus.Text = $"已锁定";
+            KeyBoardLockStatus.ForeColor = Color.Red;
+        }
+
+        private void UnlockKeyBoard_Click(object sender, EventArgs e)
+        {
+            GlobalHook.KeyDown -= HookKeyboard_KeyDown;
+            GlobalHook.KeyUp   -= HookKeyboard_KeyUp;
+
+            KeyBoardLockStatus.Text = "已解锁";
+            KeyBoardLockStatus.ForeColor = Color.Green;
+        }
+
+        private void HookKeyboard_KeyDown(object sender,KeyEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void HookKeyboard_KeyUp(object sender, KeyEventArgs e)
+        {
+            e.Handled = true;
+        }
+        #endregion
+
+        private void RemoveShort_Click(object sender, EventArgs e)
+        {
+            Util.RemoveShort();
+            ShortStatus.Text = "已移除";
+            ShortStatus.ForeColor = Color.Red;
+            if (AutoRestartExplorer.Checked)
+            {
+                Process.GetProcesses().ToList().ForEach(p=>
+                {
+                    if(p.ProcessName=="explorer")
+                    {
+                        p.Kill();
+                    }
+                });
+                Process.Start("explorer.exe");
+            }
+        }
+
+        private void RestoreShort_Click(object sender, EventArgs e)
+        {
+            Util.RestoreShort();
+            ShortStatus.Text = "已恢复";
+            ShortStatus.ForeColor = Color.Green;
+            if (AutoRestartExplorer.Checked)
+            {
+                Process.GetProcesses().ToList().ForEach(p =>
+                {
+                    if (p.ProcessName == "explorer")
+                    {
+                        p.Kill();
+                    }
+                });
+                Process.Start("explorer.exe");
             }
         }
     }

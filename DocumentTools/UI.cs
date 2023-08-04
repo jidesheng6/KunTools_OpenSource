@@ -164,16 +164,30 @@ namespace DocumentTools
         /// </summary>
         /// <param name="ClearAllItems"></param>
         /// <param name="ListViewControl"></param>
-        /// <param name="ItemsIndex"></param>
-        public static void RemoveListViewItem(bool ClearAllItems, ListView ListViewControl, int ItemsIndex = 0)
+        public static void RemoveListViewItem(bool ClearAllItems, ListView ListViewControl)
         {
-            if (ClearAllItems)
+            if(ListViewControl.Items.Count!=0 )
             {
-                ListViewControl.Items.Clear();
-            }
-            else
-            {
-                ListViewControl.Items.RemoveAt(ItemsIndex);
+                if (ClearAllItems)
+                {
+                    ListViewControl.Items.Clear();
+                }
+                else
+                {
+
+                    if(ListViewControl.FocusedItem != null && ListViewControl.FocusedItem.Index >= 0)
+                    {
+                        //删除列表一个项目,先移除，移动到没有项目时，focuseditem会变为null，这时候就不处理了
+                        //同时移除后会自动选中临近的item，所以用focuseditem就可以了
+                        ListViewControl.Items.RemoveAt(ListViewControl.FocusedItem.Index);
+                        if (ListViewControl.FocusedItem != null)
+                        {
+                            ListViewControl.Items[ListViewControl.FocusedItem.Index].Selected = true;
+                        }
+                    }
+
+                }
+                ListViewControl.Focus();
             }
         }
 

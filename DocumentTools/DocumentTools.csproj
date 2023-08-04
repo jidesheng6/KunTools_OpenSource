@@ -130,6 +130,9 @@
       <HintPath>..\packages\Costura.Fody.5.7.0\lib\netstandard1.0\Costura.dll</HintPath>
     </Reference>
     <Reference Include="CustomMarshalers" />
+    <Reference Include="Gma.System.MouseKeyHook, Version=5.7.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MouseKeyHook.5.7.1\lib\net48\Gma.System.MouseKeyHook.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.ML.OnnxRuntime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=f27f157f0a5b7bb6, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ML.OnnxRuntime.Managed.1.15.1\lib\netstandard2.0\Microsoft.ML.OnnxRuntime.dll</HintPath>
     </Reference>
@@ -398,6 +401,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="6.ico" />
+    <None Include="Resources\Remove.png" />
+    <None Include="Resources\Clear.png" />
     <Content Include="Resources\wzdsny.mp3" />
     <Content Include="v2-30675d7656fcb8e2cc959cedd8b8db19_r.ico" />
     <Content Include="转换.ico" />

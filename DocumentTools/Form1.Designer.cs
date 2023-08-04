@@ -32,6 +32,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BodyForm));
             this.MainTabPage = new System.Windows.Forms.TabControl();
             this.TabPage_01 = new System.Windows.Forms.TabPage();
+            this.word2pdf_clear = new System.Windows.Forms.Button();
+            this.word2pdf_remove = new System.Windows.Forms.Button();
             this.WordFileListView_MoveDown = new System.Windows.Forms.Button();
             this.WordFileListView_MoveUp = new System.Windows.Forms.Button();
             this.label34 = new System.Windows.Forms.Label();
@@ -46,6 +48,8 @@
             this.TabPage_02 = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
             this.PDF2WORD_Mode = new System.Windows.Forms.ComboBox();
+            this.pdf2word_clear = new System.Windows.Forms.Button();
+            this.pdf2word_remove = new System.Windows.Forms.Button();
             this.label55 = new System.Windows.Forms.Label();
             this.PDF2WORD_UseSUbOcr = new System.Windows.Forms.CheckBox();
             this.PDF2WORD_UseBullet = new System.Windows.Forms.CheckBox();
@@ -59,6 +63,8 @@
             this.TabPage_03 = new System.Windows.Forms.TabPage();
             this.ExcelFileListView_MoveDown = new System.Windows.Forms.Button();
             this.ExcelFileListView_MoveUp = new System.Windows.Forms.Button();
+            this.excel2pdf_clear = new System.Windows.Forms.Button();
+            this.excel2pdf_remove = new System.Windows.Forms.Button();
             this.ExportEachSheet = new System.Windows.Forms.CheckBox();
             this.Excel2PdfStatusText = new System.Windows.Forms.Label();
             this.ConvertExcel2PdfButton = new System.Windows.Forms.Button();
@@ -67,6 +73,8 @@
             this.TabPage_07 = new System.Windows.Forms.TabPage();
             this.PDF2ExcelFileView_MoveDown = new System.Windows.Forms.Button();
             this.PDF2ExcelFileView_MoveUp = new System.Windows.Forms.Button();
+            this.pdf2excel_clear = new System.Windows.Forms.Button();
+            this.pdf2excel_remove = new System.Windows.Forms.Button();
             this.ExcelSheelMode = new System.Windows.Forms.CheckBox();
             this.ConvertPDF2ExcelStatusText = new System.Windows.Forms.Label();
             this.ConvertPDF2Excel = new System.Windows.Forms.Button();
@@ -75,6 +83,8 @@
             this.TabPage_20 = new System.Windows.Forms.TabPage();
             this.PPT2PdfFileList_MoveDown = new System.Windows.Forms.Button();
             this.PPT2PdfFileList_MoveUp = new System.Windows.Forms.Button();
+            this.ppt2pdf_clear = new System.Windows.Forms.Button();
+            this.ppt2pdf_remove = new System.Windows.Forms.Button();
             this.label37 = new System.Windows.Forms.Label();
             this.label36 = new System.Windows.Forms.Label();
             this.ConvertPPT2PDFPassword = new System.Windows.Forms.TextBox();
@@ -89,6 +99,8 @@
             this.TabPage_21 = new System.Windows.Forms.TabPage();
             this.PDF2PPTFileList_MoveDown = new System.Windows.Forms.Button();
             this.PDF2PPTFileList_MoveUp = new System.Windows.Forms.Button();
+            this.pdf2ppt_clear = new System.Windows.Forms.Button();
+            this.pdf2ppt_remove = new System.Windows.Forms.Button();
             this.RenderImageBox = new System.Windows.Forms.CheckBox();
             this.SplitShapeBox = new System.Windows.Forms.CheckBox();
             this.ExtraOcrBox = new System.Windows.Forms.CheckBox();
@@ -99,6 +111,8 @@
             this.TabPage_14 = new System.Windows.Forms.TabPage();
             this.MergeWordFileList_MoveDown = new System.Windows.Forms.Button();
             this.MergeWordFileList_MoveUp = new System.Windows.Forms.Button();
+            this.meregeword_clear = new System.Windows.Forms.Button();
+            this.meregeword_remove = new System.Windows.Forms.Button();
             this.MeregeWordStatusText = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.MergeWordFile = new System.Windows.Forms.Button();
@@ -107,6 +121,8 @@
             this.TabPage_06 = new System.Windows.Forms.TabPage();
             this.MergePdfFileView_MoveDown = new System.Windows.Forms.Button();
             this.MergePdfFileView_MoveUp = new System.Windows.Forms.Button();
+            this.meregepdf_clear = new System.Windows.Forms.Button();
+            this.meregepdf_remove = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.MeregeFilePage = new System.Windows.Forms.ComboBox();
             this.PictureMergeMode = new System.Windows.Forms.CheckBox();
@@ -118,6 +134,8 @@
             this.TabPage_17 = new System.Windows.Forms.TabPage();
             this.SplitPdfFileList_MoveDown = new System.Windows.Forms.Button();
             this.SplitPdfFileList_MoveUp = new System.Windows.Forms.Button();
+            this.sqplitpdf_clear = new System.Windows.Forms.Button();
+            this.sqplitpdf_remove = new System.Windows.Forms.Button();
             this.SplitPdfStatusText = new System.Windows.Forms.Label();
             this.StartSplitPdf = new System.Windows.Forms.Button();
             this.SelectSplitPdf = new System.Windows.Forms.Button();
@@ -125,6 +143,8 @@
             this.TabPage_18 = new System.Windows.Forms.TabPage();
             this.PdfWaterMarkFileList_MoveDown = new System.Windows.Forms.Button();
             this.PdfWaterMarkFileList_MoveUp = new System.Windows.Forms.Button();
+            this.addpdfwater_clear = new System.Windows.Forms.Button();
+            this.addpdfwater_remove = new System.Windows.Forms.Button();
             this.label31 = new System.Windows.Forms.Label();
             this.AddWaterMark2PdfStatusText = new System.Windows.Forms.Label();
             this.AddWaterMark2Pdf = new System.Windows.Forms.Button();
@@ -154,6 +174,8 @@
             this.TabPage_19 = new System.Windows.Forms.TabPage();
             this.RemovePdfWaterMarkFileList_MoveDown = new System.Windows.Forms.Button();
             this.RemovePdfWaterMarkFileList_MoveUp = new System.Windows.Forms.Button();
+            this.removepdfwater_clear = new System.Windows.Forms.Button();
+            this.removepdfwater_remove = new System.Windows.Forms.Button();
             this.RemovePdfWaterMarkStatusText = new System.Windows.Forms.Label();
             this.RemovePdfWaterMark = new System.Windows.Forms.Button();
             this.SelectRemovePdfWaterMarkFiles = new System.Windows.Forms.Button();
@@ -161,6 +183,8 @@
             this.TabPage_22 = new System.Windows.Forms.TabPage();
             this.ConvertPdfComplianceFileList_MoveDown = new System.Windows.Forms.Button();
             this.ConvertPdfComplianceFileList_MoveUp = new System.Windows.Forms.Button();
+            this.pdfversion_clear = new System.Windows.Forms.Button();
+            this.pdfversion_remove = new System.Windows.Forms.Button();
             this.ConvertPdfComplianceVersion = new System.Windows.Forms.ComboBox();
             this.label39 = new System.Windows.Forms.Label();
             this.ConvertPdfComplianceStatusText = new System.Windows.Forms.Label();
@@ -170,6 +194,8 @@
             this.TabPage_15 = new System.Windows.Forms.TabPage();
             this.Word2ExcelFileList_MoveDown = new System.Windows.Forms.Button();
             this.Word2ExcelFileList_MoveUp = new System.Windows.Forms.Button();
+            this.word2excel_clear = new System.Windows.Forms.Button();
+            this.word2excel_remove = new System.Windows.Forms.Button();
             this.ConverWord2ExcelStatusText = new System.Windows.Forms.Label();
             this.ConvertWord2Excel = new System.Windows.Forms.Button();
             this.SelectWord2ExcelFiles = new System.Windows.Forms.Button();
@@ -177,6 +203,8 @@
             this.TabPage_16 = new System.Windows.Forms.TabPage();
             this.Excel2WordFileList_MoveDown = new System.Windows.Forms.Button();
             this.Excel2WordFileList_MoveUp = new System.Windows.Forms.Button();
+            this.excel2word_clear = new System.Windows.Forms.Button();
+            this.excel2word_remove = new System.Windows.Forms.Button();
             this.label24 = new System.Windows.Forms.Label();
             this.ConvertExcel2WordStatusText = new System.Windows.Forms.Label();
             this.ConvertExcel2Word = new System.Windows.Forms.Button();
@@ -185,6 +213,8 @@
             this.TabPage_04 = new System.Windows.Forms.TabPage();
             this.DocumentsListView_MoveDown = new System.Windows.Forms.Button();
             this.DocumentsListView_MoveUp = new System.Windows.Forms.Button();
+            this.document2image_clear = new System.Windows.Forms.Button();
+            this.document2image_remove = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.PageExportCheck = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -199,6 +229,8 @@
             this.TabPage_23 = new System.Windows.Forms.TabPage();
             this.ConvertImage2PDFFileList_MoveDown = new System.Windows.Forms.Button();
             this.ConvertImage2PDFFileList_MoveUp = new System.Windows.Forms.Button();
+            this.image2pdf_clear = new System.Windows.Forms.Button();
+            this.image2pdf_remove = new System.Windows.Forms.Button();
             this.COnvertImage2PDFStatusText = new System.Windows.Forms.Label();
             this.groupBox19 = new System.Windows.Forms.GroupBox();
             this.Image2PDFCOmpressImage = new System.Windows.Forms.CheckBox();
@@ -221,6 +253,8 @@
             this.TabPage_24 = new System.Windows.Forms.TabPage();
             this.CompressPdfFileList_MoveDown = new System.Windows.Forms.Button();
             this.CompressPdfFileList_MoveUp = new System.Windows.Forms.Button();
+            this.compresspdf_clear = new System.Windows.Forms.Button();
+            this.compresspdf_remove = new System.Windows.Forms.Button();
             this.CompressPDFStatusText = new System.Windows.Forms.Label();
             this.groupBox21 = new System.Windows.Forms.GroupBox();
             this.CompressPDF_CompressImageFlate = new System.Windows.Forms.CheckBox();
@@ -243,6 +277,8 @@
             this.TabPage_25 = new System.Windows.Forms.TabPage();
             this.CompressImageFileList_MoveDown = new System.Windows.Forms.Button();
             this.CompressImageFileList_MoveUp = new System.Windows.Forms.Button();
+            this.compressimage_clear = new System.Windows.Forms.Button();
+            this.compressimage_remove = new System.Windows.Forms.Button();
             this.CompressImageStatusText = new System.Windows.Forms.Label();
             this.groupBox25 = new System.Windows.Forms.GroupBox();
             this.CompressImage_NotUseSelfExt = new System.Windows.Forms.CheckBox();
@@ -271,6 +307,8 @@
             this.TabPage_10 = new System.Windows.Forms.TabPage();
             this.ReplaceWordFileList_MoveDown = new System.Windows.Forms.Button();
             this.ReplaceWordFileList_MoveUp = new System.Windows.Forms.Button();
+            this.wordreplace_clear = new System.Windows.Forms.Button();
+            this.wordreplace_remove = new System.Windows.Forms.Button();
             this.TurialRegex = new System.Windows.Forms.LinkLabel();
             this.OnlineRegextTool = new System.Windows.Forms.LinkLabel();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
@@ -286,6 +324,8 @@
             this.TabPage_11 = new System.Windows.Forms.TabPage();
             this.ReplaceExcelFileView_MoveDown = new System.Windows.Forms.Button();
             this.ReplaceExcelFileView_MoveUp = new System.Windows.Forms.Button();
+            this.excelreplace_clear = new System.Windows.Forms.Button();
+            this.excelreplace_remove = new System.Windows.Forms.Button();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.ExcelRegexReadMe = new System.Windows.Forms.LinkLabel();
             this.UseRegex = new System.Windows.Forms.CheckBox();
@@ -307,6 +347,8 @@
             this.TabPage_12 = new System.Windows.Forms.TabPage();
             this.DecodeMatrixWordListView_MoveDown = new System.Windows.Forms.Button();
             this.DecodeMatrixWordListView_MoveUp = new System.Windows.Forms.Button();
+            this.datamatrix_clear = new System.Windows.Forms.Button();
+            this.datamatrix_remove = new System.Windows.Forms.Button();
             this.DecodeDataMatixStatusText = new System.Windows.Forms.Label();
             this.DecodeDataMarix = new System.Windows.Forms.Button();
             this.SelectDataMatrixWord = new System.Windows.Forms.Button();
@@ -314,6 +356,7 @@
             this.DecodeDataMatrixView = new System.Windows.Forms.TreeView();
             this.DecodeMatrixWordListView = new System.Windows.Forms.ListView();
             this.TabPage_05 = new System.Windows.Forms.TabPage();
+            this.label57 = new System.Windows.Forms.Label();
             this.NameReplaceRegexMode = new System.Windows.Forms.Label();
             this.NameAutoCopyStatusText = new System.Windows.Forms.Label();
             this.NameAutoCopy = new System.Windows.Forms.CheckBox();
@@ -368,8 +411,10 @@
             this.SelectTwainDevice = new System.Windows.Forms.LinkLabel();
             this.TabPage_13 = new System.Windows.Forms.TabPage();
             this.groupBox17 = new System.Windows.Forms.GroupBox();
+            this.image2ico_remove = new System.Windows.Forms.Button();
             this.IcoFileView_MoveDown = new System.Windows.Forms.Button();
             this.IcoFileView_MoveUp = new System.Windows.Forms.Button();
+            this.image2ico_clear = new System.Windows.Forms.Button();
             this.IcoSizeDrop = new System.Windows.Forms.ComboBox();
             this.label22 = new System.Windows.Forms.Label();
             this.Image2IcoStatusText = new System.Windows.Forms.Label();
@@ -384,6 +429,18 @@
             this.ProcessLabel = new System.Windows.Forms.Label();
             this.Downloadfx35Progress = new System.Windows.Forms.ProgressBar();
             this.DownloadNetfx35 = new System.Windows.Forms.Button();
+            this.TabPage_26 = new System.Windows.Forms.TabPage();
+            this.groupBox28 = new System.Windows.Forms.GroupBox();
+            this.label58 = new System.Windows.Forms.Label();
+            this.groupBox27 = new System.Windows.Forms.GroupBox();
+            this.AutoRestartExplorer = new System.Windows.Forms.CheckBox();
+            this.ShortStatus = new System.Windows.Forms.Label();
+            this.RestoreShort = new System.Windows.Forms.Button();
+            this.RemoveShort = new System.Windows.Forms.Button();
+            this.groupBox26 = new System.Windows.Forms.GroupBox();
+            this.KeyBoardLockStatus = new System.Windows.Forms.Label();
+            this.UnlockKeyBoard = new System.Windows.Forms.Button();
+            this.LockKeyBoard = new System.Windows.Forms.Button();
             this.TabPage_08 = new System.Windows.Forms.TabPage();
             this.label12 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -412,7 +469,7 @@
             this.ColorSelectDialog = new System.Windows.Forms.ColorDialog();
             this.FontSelectDialog = new System.Windows.Forms.FontDialog();
             this.MainFormError = new System.Windows.Forms.ErrorProvider(this.components);
-            this.label57 = new System.Windows.Forms.Label();
+            this.MainToolsTip = new System.Windows.Forms.ToolTip(this.components);
             this.MainTabPage.SuspendLayout();
             this.TabPage_01.SuspendLayout();
             this.TabPage_02.SuspendLayout();
@@ -464,6 +521,10 @@
             this.groupBox17.SuspendLayout();
             this.groupBox16.SuspendLayout();
             this.groupBox15.SuspendLayout();
+            this.TabPage_26.SuspendLayout();
+            this.groupBox28.SuspendLayout();
+            this.groupBox27.SuspendLayout();
+            this.groupBox26.SuspendLayout();
             this.TabPage_08.SuspendLayout();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -499,6 +560,7 @@
             this.MainTabPage.Controls.Add(this.TabPage_05);
             this.MainTabPage.Controls.Add(this.TabPage_09);
             this.MainTabPage.Controls.Add(this.TabPage_13);
+            this.MainTabPage.Controls.Add(this.TabPage_26);
             this.MainTabPage.Controls.Add(this.TabPage_08);
             this.MainTabPage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainTabPage.Location = new System.Drawing.Point(0, 0);
@@ -513,6 +575,8 @@
             // 
             // TabPage_01
             // 
+            this.TabPage_01.Controls.Add(this.word2pdf_clear);
+            this.TabPage_01.Controls.Add(this.word2pdf_remove);
             this.TabPage_01.Controls.Add(this.WordFileListView_MoveDown);
             this.TabPage_01.Controls.Add(this.WordFileListView_MoveUp);
             this.TabPage_01.Controls.Add(this.label34);
@@ -532,11 +596,31 @@
             this.TabPage_01.Text = "WORD转PDF";
             this.TabPage_01.UseVisualStyleBackColor = true;
             // 
+            // word2pdf_clear
+            // 
+            this.word2pdf_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            this.word2pdf_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.word2pdf_clear.Location = new System.Drawing.Point(933, 184);
+            this.word2pdf_clear.Name = "word2pdf_clear";
+            this.word2pdf_clear.Size = new System.Drawing.Size(34, 73);
+            this.word2pdf_clear.TabIndex = 12;
+            this.word2pdf_clear.UseVisualStyleBackColor = true;
+            // 
+            // word2pdf_remove
+            // 
+            this.word2pdf_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            this.word2pdf_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.word2pdf_remove.Location = new System.Drawing.Point(933, 74);
+            this.word2pdf_remove.Name = "word2pdf_remove";
+            this.word2pdf_remove.Size = new System.Drawing.Size(34, 73);
+            this.word2pdf_remove.TabIndex = 11;
+            this.word2pdf_remove.UseVisualStyleBackColor = true;
+            // 
             // WordFileListView_MoveDown
             // 
-            this.WordFileListView_MoveDown.Location = new System.Drawing.Point(933, 254);
+            this.WordFileListView_MoveDown.Location = new System.Drawing.Point(933, 290);
             this.WordFileListView_MoveDown.Name = "WordFileListView_MoveDown";
-            this.WordFileListView_MoveDown.Size = new System.Drawing.Size(34, 78);
+            this.WordFileListView_MoveDown.Size = new System.Drawing.Size(34, 42);
             this.WordFileListView_MoveDown.TabIndex = 10;
             this.WordFileListView_MoveDown.Text = "▽";
             this.WordFileListView_MoveDown.UseVisualStyleBackColor = true;
@@ -545,7 +629,7 @@
             // 
             this.WordFileListView_MoveUp.Location = new System.Drawing.Point(933, 6);
             this.WordFileListView_MoveUp.Name = "WordFileListView_MoveUp";
-            this.WordFileListView_MoveUp.Size = new System.Drawing.Size(34, 78);
+            this.WordFileListView_MoveUp.Size = new System.Drawing.Size(34, 42);
             this.WordFileListView_MoveUp.TabIndex = 9;
             this.WordFileListView_MoveUp.Text = "△";
             this.WordFileListView_MoveUp.UseVisualStyleBackColor = true;
@@ -643,6 +727,8 @@
             // 
             this.TabPage_02.Controls.Add(this.label1);
             this.TabPage_02.Controls.Add(this.PDF2WORD_Mode);
+            this.TabPage_02.Controls.Add(this.pdf2word_clear);
+            this.TabPage_02.Controls.Add(this.pdf2word_remove);
             this.TabPage_02.Controls.Add(this.label55);
             this.TabPage_02.Controls.Add(this.PDF2WORD_UseSUbOcr);
             this.TabPage_02.Controls.Add(this.PDF2WORD_UseBullet);
@@ -679,6 +765,26 @@
             this.PDF2WORD_Mode.Size = new System.Drawing.Size(336, 26);
             this.PDF2WORD_Mode.TabIndex = 11;
             // 
+            // pdf2word_clear
+            // 
+            this.pdf2word_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            this.pdf2word_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pdf2word_clear.Location = new System.Drawing.Point(933, 184);
+            this.pdf2word_clear.Name = "pdf2word_clear";
+            this.pdf2word_clear.Size = new System.Drawing.Size(34, 73);
+            this.pdf2word_clear.TabIndex = 12;
+            this.pdf2word_clear.UseVisualStyleBackColor = true;
+            // 
+            // pdf2word_remove
+            // 
+            this.pdf2word_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            this.pdf2word_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pdf2word_remove.Location = new System.Drawing.Point(933, 74);
+            this.pdf2word_remove.Name = "pdf2word_remove";
+            this.pdf2word_remove.Size = new System.Drawing.Size(34, 73);
+            this.pdf2word_remove.TabIndex = 12;
+            this.pdf2word_remove.UseVisualStyleBackColor = true;
+            // 
             // label55
             // 
             this.label55.AutoSize = true;
@@ -710,9 +816,9 @@
             // 
             // PdfFileListView_MoveDown
             // 
-            this.PdfFileListView_MoveDown.Location = new System.Drawing.Point(933, 254);
+            this.PdfFileListView_MoveDown.Location = new System.Drawing.Point(933, 290);
             this.PdfFileListView_MoveDown.Name = "PdfFileListView_MoveDown";
-            this.PdfFileListView_MoveDown.Size = new System.Drawing.Size(34, 78);
+            this.PdfFileListView_MoveDown.Size = new System.Drawing.Size(34, 42);
             this.PdfFileListView_MoveDown.TabIndex = 7;
             this.PdfFileListView_MoveDown.Text = "▽";
             this.PdfFileListView_MoveDown.UseVisualStyleBackColor = true;
@@ -721,7 +827,7 @@
             // 
             this.PdfFileListView_MoveUp.Location = new System.Drawing.Point(933, 6);
             this.PdfFileListView_MoveUp.Name = "PdfFileListView_MoveUp";
-            this.PdfFileListView_MoveUp.Size = new System.Drawing.Size(34, 78);
+            this.PdfFileListView_MoveUp.Size = new System.Drawing.Size(34, 42);
             this.PdfFileListView_MoveUp.TabIndex = 6;
             this.PdfFileListView_MoveUp.Text = "△";
             this.PdfFileListView_MoveUp.UseVisualStyleBackColor = true;
@@ -780,6 +886,8 @@
             // 
             this.TabPage_03.Controls.Add(this.ExcelFileListView_MoveDown);
             this.TabPage_03.Controls.Add(this.ExcelFileListView_MoveUp);
+            this.TabPage_03.Controls.Add(this.excel2pdf_clear);
+            this.TabPage_03.Controls.Add(this.excel2pdf_remove);
             this.TabPage_03.Controls.Add(this.ExportEachSheet);
             this.TabPage_03.Controls.Add(this.Excel2PdfStatusText);
             this.TabPage_03.Controls.Add(this.ConvertExcel2PdfButton);
@@ -794,9 +902,9 @@
             // 
             // ExcelFileListView_MoveDown
             // 
-            this.ExcelFileListView_MoveDown.Location = new System.Drawing.Point(933, 254);
+            this.ExcelFileListView_MoveDown.Location = new System.Drawing.Point(933, 290);
             this.ExcelFileListView_MoveDown.Name = "ExcelFileListView_MoveDown";
-            this.ExcelFileListView_MoveDown.Size = new System.Drawing.Size(34, 78);
+            this.ExcelFileListView_MoveDown.Size = new System.Drawing.Size(34, 42);
             this.ExcelFileListView_MoveDown.TabIndex = 7;
             this.ExcelFileListView_MoveDown.Text = "▽";
             this.ExcelFileListView_MoveDown.UseVisualStyleBackColor = true;
@@ -805,10 +913,30 @@
             // 
             this.ExcelFileListView_MoveUp.Location = new System.Drawing.Point(933, 6);
             this.ExcelFileListView_MoveUp.Name = "ExcelFileListView_MoveUp";
-            this.ExcelFileListView_MoveUp.Size = new System.Drawing.Size(34, 78);
+            this.ExcelFileListView_MoveUp.Size = new System.Drawing.Size(34, 42);
             this.ExcelFileListView_MoveUp.TabIndex = 6;
             this.ExcelFileListView_MoveUp.Text = "△";
             this.ExcelFileListView_MoveUp.UseVisualStyleBackColor = true;
+            // 
+            // excel2pdf_clear
+            // 
+            this.excel2pdf_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            this.excel2pdf_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.excel2pdf_clear.Location = new System.Drawing.Point(933, 184);
+            this.excel2pdf_clear.Name = "excel2pdf_clear";
+            this.excel2pdf_clear.Size = new System.Drawing.Size(34, 73);
+            this.excel2pdf_clear.TabIndex = 12;
+            this.excel2pdf_clear.UseVisualStyleBackColor = true;
+            // 
+            // excel2pdf_remove
+            // 
+            this.excel2pdf_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            this.excel2pdf_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.excel2pdf_remove.Location = new System.Drawing.Point(933, 74);
+            this.excel2pdf_remove.Name = "excel2pdf_remove";
+            this.excel2pdf_remove.Size = new System.Drawing.Size(34, 73);
+            this.excel2pdf_remove.TabIndex = 11;
+            this.excel2pdf_remove.UseVisualStyleBackColor = true;
             // 
             // ExportEachSheet
             // 
@@ -864,6 +992,8 @@
             // 
             this.TabPage_07.Controls.Add(this.PDF2ExcelFileView_MoveDown);
             this.TabPage_07.Controls.Add(this.PDF2ExcelFileView_MoveUp);
+            this.TabPage_07.Controls.Add(this.pdf2excel_clear);
+            this.TabPage_07.Controls.Add(this.pdf2excel_remove);
             this.TabPage_07.Controls.Add(this.ExcelSheelMode);
             this.TabPage_07.Controls.Add(this.ConvertPDF2ExcelStatusText);
             this.TabPage_07.Controls.Add(this.ConvertPDF2Excel);
@@ -878,9 +1008,9 @@
             // 
             // PDF2ExcelFileView_MoveDown
             // 
-            this.PDF2ExcelFileView_MoveDown.Location = new System.Drawing.Point(933, 254);
+            this.PDF2ExcelFileView_MoveDown.Location = new System.Drawing.Point(933, 290);
             this.PDF2ExcelFileView_MoveDown.Name = "PDF2ExcelFileView_MoveDown";
-            this.PDF2ExcelFileView_MoveDown.Size = new System.Drawing.Size(34, 78);
+            this.PDF2ExcelFileView_MoveDown.Size = new System.Drawing.Size(34, 42);
             this.PDF2ExcelFileView_MoveDown.TabIndex = 6;
             this.PDF2ExcelFileView_MoveDown.Text = "▽";
             this.PDF2ExcelFileView_MoveDown.UseVisualStyleBackColor = true;
@@ -889,10 +1019,30 @@
             // 
             this.PDF2ExcelFileView_MoveUp.Location = new System.Drawing.Point(933, 6);
             this.PDF2ExcelFileView_MoveUp.Name = "PDF2ExcelFileView_MoveUp";
-            this.PDF2ExcelFileView_MoveUp.Size = new System.Drawing.Size(34, 78);
+            this.PDF2ExcelFileView_MoveUp.Size = new System.Drawing.Size(34, 42);
             this.PDF2ExcelFileView_MoveUp.TabIndex = 5;
             this.PDF2ExcelFileView_MoveUp.Text = "△";
             this.PDF2ExcelFileView_MoveUp.UseVisualStyleBackColor = true;
+            // 
+            // pdf2excel_clear
+            // 
+            this.pdf2excel_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            this.pdf2excel_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pdf2excel_clear.Location = new System.Drawing.Point(933, 184);
+            this.pdf2excel_clear.Name = "pdf2excel_clear";
+            this.pdf2excel_clear.Size = new System.Drawing.Size(34, 73);
+            this.pdf2excel_clear.TabIndex = 12;
+            this.pdf2excel_clear.UseVisualStyleBackColor = true;
+            // 
+            // pdf2excel_remove
+            // 
+            this.pdf2excel_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            this.pdf2excel_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pdf2excel_remove.Location = new System.Drawing.Point(933, 74);
+            this.pdf2excel_remove.Name = "pdf2excel_remove";
+            this.pdf2excel_remove.Size = new System.Drawing.Size(34, 73);
+            this.pdf2excel_remove.TabIndex = 11;
+            this.pdf2excel_remove.UseVisualStyleBackColor = true;
             // 
             // ExcelSheelMode
             // 
@@ -948,6 +1098,8 @@
             // 
             this.TabPage_20.Controls.Add(this.PPT2PdfFileList_MoveDown);
             this.TabPage_20.Controls.Add(this.PPT2PdfFileList_MoveUp);
+            this.TabPage_20.Controls.Add(this.ppt2pdf_clear);
+            this.TabPage_20.Controls.Add(this.ppt2pdf_remove);
             this.TabPage_20.Controls.Add(this.label37);
             this.TabPage_20.Controls.Add(this.label36);
             this.TabPage_20.Controls.Add(this.ConvertPPT2PDFPassword);
@@ -969,9 +1121,9 @@
             // 
             // PPT2PdfFileList_MoveDown
             // 
-            this.PPT2PdfFileList_MoveDown.Location = new System.Drawing.Point(933, 254);
+            this.PPT2PdfFileList_MoveDown.Location = new System.Drawing.Point(933, 290);
             this.PPT2PdfFileList_MoveDown.Name = "PPT2PdfFileList_MoveDown";
-            this.PPT2PdfFileList_MoveDown.Size = new System.Drawing.Size(34, 78);
+            this.PPT2PdfFileList_MoveDown.Size = new System.Drawing.Size(34, 42);
             this.PPT2PdfFileList_MoveDown.TabIndex = 12;
             this.PPT2PdfFileList_MoveDown.Text = "▽";
             this.PPT2PdfFileList_MoveDown.UseVisualStyleBackColor = true;
@@ -980,10 +1132,30 @@
             // 
             this.PPT2PdfFileList_MoveUp.Location = new System.Drawing.Point(933, 6);
             this.PPT2PdfFileList_MoveUp.Name = "PPT2PdfFileList_MoveUp";
-            this.PPT2PdfFileList_MoveUp.Size = new System.Drawing.Size(34, 78);
+            this.PPT2PdfFileList_MoveUp.Size = new System.Drawing.Size(34, 42);
             this.PPT2PdfFileList_MoveUp.TabIndex = 11;
             this.PPT2PdfFileList_MoveUp.Text = "△";
             this.PPT2PdfFileList_MoveUp.UseVisualStyleBackColor = true;
+            // 
+            // ppt2pdf_clear
+            // 
+            this.ppt2pdf_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            this.ppt2pdf_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.ppt2pdf_clear.Location = new System.Drawing.Point(933, 184);
+            this.ppt2pdf_clear.Name = "ppt2pdf_clear";
+            this.ppt2pdf_clear.Size = new System.Drawing.Size(34, 73);
+            this.ppt2pdf_clear.TabIndex = 12;
+            this.ppt2pdf_clear.UseVisualStyleBackColor = true;
+            // 
+            // ppt2pdf_remove
+            // 
+            this.ppt2pdf_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            this.ppt2pdf_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.ppt2pdf_remove.Location = new System.Drawing.Point(933, 74);
+            this.ppt2pdf_remove.Name = "ppt2pdf_remove";
+            this.ppt2pdf_remove.Size = new System.Drawing.Size(34, 73);
+            this.ppt2pdf_remove.TabIndex = 11;
+            this.ppt2pdf_remove.UseVisualStyleBackColor = true;
             // 
             // label37
             // 
@@ -1092,6 +1264,8 @@
             // 
             this.TabPage_21.Controls.Add(this.PDF2PPTFileList_MoveDown);
             this.TabPage_21.Controls.Add(this.PDF2PPTFileList_MoveUp);
+            this.TabPage_21.Controls.Add(this.pdf2ppt_clear);
+            this.TabPage_21.Controls.Add(this.pdf2ppt_remove);
             this.TabPage_21.Controls.Add(this.RenderImageBox);
             this.TabPage_21.Controls.Add(this.SplitShapeBox);
             this.TabPage_21.Controls.Add(this.ExtraOcrBox);
@@ -1108,9 +1282,9 @@
             // 
             // PDF2PPTFileList_MoveDown
             // 
-            this.PDF2PPTFileList_MoveDown.Location = new System.Drawing.Point(933, 254);
+            this.PDF2PPTFileList_MoveDown.Location = new System.Drawing.Point(933, 290);
             this.PDF2PPTFileList_MoveDown.Name = "PDF2PPTFileList_MoveDown";
-            this.PDF2PPTFileList_MoveDown.Size = new System.Drawing.Size(34, 78);
+            this.PDF2PPTFileList_MoveDown.Size = new System.Drawing.Size(34, 42);
             this.PDF2PPTFileList_MoveDown.TabIndex = 8;
             this.PDF2PPTFileList_MoveDown.Text = "▽";
             this.PDF2PPTFileList_MoveDown.UseVisualStyleBackColor = true;
@@ -1119,10 +1293,30 @@
             // 
             this.PDF2PPTFileList_MoveUp.Location = new System.Drawing.Point(933, 6);
             this.PDF2PPTFileList_MoveUp.Name = "PDF2PPTFileList_MoveUp";
-            this.PDF2PPTFileList_MoveUp.Size = new System.Drawing.Size(34, 78);
+            this.PDF2PPTFileList_MoveUp.Size = new System.Drawing.Size(34, 42);
             this.PDF2PPTFileList_MoveUp.TabIndex = 7;
             this.PDF2PPTFileList_MoveUp.Text = "△";
             this.PDF2PPTFileList_MoveUp.UseVisualStyleBackColor = true;
+            // 
+            // pdf2ppt_clear
+            // 
+            this.pdf2ppt_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            this.pdf2ppt_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pdf2ppt_clear.Location = new System.Drawing.Point(933, 184);
+            this.pdf2ppt_clear.Name = "pdf2ppt_clear";
+            this.pdf2ppt_clear.Size = new System.Drawing.Size(34, 73);
+            this.pdf2ppt_clear.TabIndex = 12;
+            this.pdf2ppt_clear.UseVisualStyleBackColor = true;
+            // 
+            // pdf2ppt_remove
+            // 
+            this.pdf2ppt_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            this.pdf2ppt_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pdf2ppt_remove.Location = new System.Drawing.Point(933, 74);
+            this.pdf2ppt_remove.Name = "pdf2ppt_remove";
+            this.pdf2ppt_remove.Size = new System.Drawing.Size(34, 73);
+            this.pdf2ppt_remove.TabIndex = 11;
+            this.pdf2ppt_remove.UseVisualStyleBackColor = true;
             // 
             // RenderImageBox
             // 
@@ -1199,6 +1393,8 @@
             // 
             this.TabPage_14.Controls.Add(this.MergeWordFileList_MoveDown);
             this.TabPage_14.Controls.Add(this.MergeWordFileList_MoveUp);
+            this.TabPage_14.Controls.Add(this.meregeword_clear);
+            this.TabPage_14.Controls.Add(this.meregeword_remove);
             this.TabPage_14.Controls.Add(this.MeregeWordStatusText);
             this.TabPage_14.Controls.Add(this.label23);
             this.TabPage_14.Controls.Add(this.MergeWordFile);
@@ -1214,9 +1410,9 @@
             // 
             // MergeWordFileList_MoveDown
             // 
-            this.MergeWordFileList_MoveDown.Location = new System.Drawing.Point(933, 254);
+            this.MergeWordFileList_MoveDown.Location = new System.Drawing.Point(933, 290);
             this.MergeWordFileList_MoveDown.Name = "MergeWordFileList_MoveDown";
-            this.MergeWordFileList_MoveDown.Size = new System.Drawing.Size(34, 78);
+            this.MergeWordFileList_MoveDown.Size = new System.Drawing.Size(34, 42);
             this.MergeWordFileList_MoveDown.TabIndex = 6;
             this.MergeWordFileList_MoveDown.Text = "▽";
             this.MergeWordFileList_MoveDown.UseVisualStyleBackColor = true;
@@ -1225,10 +1421,30 @@
             // 
             this.MergeWordFileList_MoveUp.Location = new System.Drawing.Point(933, 6);
             this.MergeWordFileList_MoveUp.Name = "MergeWordFileList_MoveUp";
-            this.MergeWordFileList_MoveUp.Size = new System.Drawing.Size(34, 78);
+            this.MergeWordFileList_MoveUp.Size = new System.Drawing.Size(34, 42);
             this.MergeWordFileList_MoveUp.TabIndex = 5;
             this.MergeWordFileList_MoveUp.Text = "△";
             this.MergeWordFileList_MoveUp.UseVisualStyleBackColor = true;
+            // 
+            // meregeword_clear
+            // 
+            this.meregeword_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            this.meregeword_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.meregeword_clear.Location = new System.Drawing.Point(933, 184);
+            this.meregeword_clear.Name = "meregeword_clear";
+            this.meregeword_clear.Size = new System.Drawing.Size(34, 73);
+            this.meregeword_clear.TabIndex = 12;
+            this.meregeword_clear.UseVisualStyleBackColor = true;
+            // 
+            // meregeword_remove
+            // 
+            this.meregeword_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            this.meregeword_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.meregeword_remove.Location = new System.Drawing.Point(933, 74);
+            this.meregeword_remove.Name = "meregeword_remove";
+            this.meregeword_remove.Size = new System.Drawing.Size(34, 73);
+            this.meregeword_remove.TabIndex = 11;
+            this.meregeword_remove.UseVisualStyleBackColor = true;
             // 
             // MeregeWordStatusText
             // 
@@ -1284,6 +1500,8 @@
             // 
             this.TabPage_06.Controls.Add(this.MergePdfFileView_MoveDown);
             this.TabPage_06.Controls.Add(this.MergePdfFileView_MoveUp);
+            this.TabPage_06.Controls.Add(this.meregepdf_clear);
+            this.TabPage_06.Controls.Add(this.meregepdf_remove);
             this.TabPage_06.Controls.Add(this.label5);
             this.TabPage_06.Controls.Add(this.MeregeFilePage);
             this.TabPage_06.Controls.Add(this.PictureMergeMode);
@@ -1301,9 +1519,9 @@
             // 
             // MergePdfFileView_MoveDown
             // 
-            this.MergePdfFileView_MoveDown.Location = new System.Drawing.Point(933, 254);
+            this.MergePdfFileView_MoveDown.Location = new System.Drawing.Point(933, 290);
             this.MergePdfFileView_MoveDown.Name = "MergePdfFileView_MoveDown";
-            this.MergePdfFileView_MoveDown.Size = new System.Drawing.Size(34, 78);
+            this.MergePdfFileView_MoveDown.Size = new System.Drawing.Size(34, 42);
             this.MergePdfFileView_MoveDown.TabIndex = 9;
             this.MergePdfFileView_MoveDown.Text = "▽";
             this.MergePdfFileView_MoveDown.UseVisualStyleBackColor = true;
@@ -1312,10 +1530,30 @@
             // 
             this.MergePdfFileView_MoveUp.Location = new System.Drawing.Point(933, 6);
             this.MergePdfFileView_MoveUp.Name = "MergePdfFileView_MoveUp";
-            this.MergePdfFileView_MoveUp.Size = new System.Drawing.Size(34, 78);
+            this.MergePdfFileView_MoveUp.Size = new System.Drawing.Size(34, 42);
             this.MergePdfFileView_MoveUp.TabIndex = 8;
             this.MergePdfFileView_MoveUp.Text = "△";
             this.MergePdfFileView_MoveUp.UseVisualStyleBackColor = true;
+            // 
+            // meregepdf_clear
+            // 
+            this.meregepdf_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            this.meregepdf_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.meregepdf_clear.Location = new System.Drawing.Point(933, 184);
+            this.meregepdf_clear.Name = "meregepdf_clear";
+            this.meregepdf_clear.Size = new System.Drawing.Size(34, 73);
+            this.meregepdf_clear.TabIndex = 12;
+            this.meregepdf_clear.UseVisualStyleBackColor = true;
+            // 
+            // meregepdf_remove
+            // 
+            this.meregepdf_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            this.meregepdf_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.meregepdf_remove.Location = new System.Drawing.Point(933, 74);
+            this.meregepdf_remove.Name = "meregepdf_remove";
+            this.meregepdf_remove.Size = new System.Drawing.Size(34, 73);
+            this.meregepdf_remove.TabIndex = 11;
+            this.meregepdf_remove.UseVisualStyleBackColor = true;
             // 
             // label5
             // 
@@ -1398,6 +1636,8 @@
             // 
             this.TabPage_17.Controls.Add(this.SplitPdfFileList_MoveDown);
             this.TabPage_17.Controls.Add(this.SplitPdfFileList_MoveUp);
+            this.TabPage_17.Controls.Add(this.sqplitpdf_clear);
+            this.TabPage_17.Controls.Add(this.sqplitpdf_remove);
             this.TabPage_17.Controls.Add(this.SplitPdfStatusText);
             this.TabPage_17.Controls.Add(this.StartSplitPdf);
             this.TabPage_17.Controls.Add(this.SelectSplitPdf);
@@ -1412,9 +1652,9 @@
             // 
             // SplitPdfFileList_MoveDown
             // 
-            this.SplitPdfFileList_MoveDown.Location = new System.Drawing.Point(933, 254);
+            this.SplitPdfFileList_MoveDown.Location = new System.Drawing.Point(933, 290);
             this.SplitPdfFileList_MoveDown.Name = "SplitPdfFileList_MoveDown";
-            this.SplitPdfFileList_MoveDown.Size = new System.Drawing.Size(34, 78);
+            this.SplitPdfFileList_MoveDown.Size = new System.Drawing.Size(34, 42);
             this.SplitPdfFileList_MoveDown.TabIndex = 5;
             this.SplitPdfFileList_MoveDown.Text = "▽";
             this.SplitPdfFileList_MoveDown.UseVisualStyleBackColor = true;
@@ -1423,10 +1663,30 @@
             // 
             this.SplitPdfFileList_MoveUp.Location = new System.Drawing.Point(933, 6);
             this.SplitPdfFileList_MoveUp.Name = "SplitPdfFileList_MoveUp";
-            this.SplitPdfFileList_MoveUp.Size = new System.Drawing.Size(34, 78);
+            this.SplitPdfFileList_MoveUp.Size = new System.Drawing.Size(34, 42);
             this.SplitPdfFileList_MoveUp.TabIndex = 4;
             this.SplitPdfFileList_MoveUp.Text = "△";
             this.SplitPdfFileList_MoveUp.UseVisualStyleBackColor = true;
+            // 
+            // sqplitpdf_clear
+            // 
+            this.sqplitpdf_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            this.sqplitpdf_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.sqplitpdf_clear.Location = new System.Drawing.Point(933, 184);
+            this.sqplitpdf_clear.Name = "sqplitpdf_clear";
+            this.sqplitpdf_clear.Size = new System.Drawing.Size(34, 73);
+            this.sqplitpdf_clear.TabIndex = 12;
+            this.sqplitpdf_clear.UseVisualStyleBackColor = true;
+            // 
+            // sqplitpdf_remove
+            // 
+            this.sqplitpdf_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            this.sqplitpdf_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.sqplitpdf_remove.Location = new System.Drawing.Point(933, 74);
+            this.sqplitpdf_remove.Name = "sqplitpdf_remove";
+            this.sqplitpdf_remove.Size = new System.Drawing.Size(34, 73);
+            this.sqplitpdf_remove.TabIndex = 11;
+            this.sqplitpdf_remove.UseVisualStyleBackColor = true;
             // 
             // SplitPdfStatusText
             // 
@@ -1472,6 +1732,8 @@
             // 
             this.TabPage_18.Controls.Add(this.PdfWaterMarkFileList_MoveDown);
             this.TabPage_18.Controls.Add(this.PdfWaterMarkFileList_MoveUp);
+            this.TabPage_18.Controls.Add(this.addpdfwater_clear);
+            this.TabPage_18.Controls.Add(this.addpdfwater_remove);
             this.TabPage_18.Controls.Add(this.label31);
             this.TabPage_18.Controls.Add(this.AddWaterMark2PdfStatusText);
             this.TabPage_18.Controls.Add(this.AddWaterMark2Pdf);
@@ -1487,9 +1749,9 @@
             // 
             // PdfWaterMarkFileList_MoveDown
             // 
-            this.PdfWaterMarkFileList_MoveDown.Location = new System.Drawing.Point(933, 152);
+            this.PdfWaterMarkFileList_MoveDown.Location = new System.Drawing.Point(933, 188);
             this.PdfWaterMarkFileList_MoveDown.Name = "PdfWaterMarkFileList_MoveDown";
-            this.PdfWaterMarkFileList_MoveDown.Size = new System.Drawing.Size(34, 78);
+            this.PdfWaterMarkFileList_MoveDown.Size = new System.Drawing.Size(34, 42);
             this.PdfWaterMarkFileList_MoveDown.TabIndex = 17;
             this.PdfWaterMarkFileList_MoveDown.Text = "▽";
             this.PdfWaterMarkFileList_MoveDown.UseVisualStyleBackColor = true;
@@ -1498,10 +1760,30 @@
             // 
             this.PdfWaterMarkFileList_MoveUp.Location = new System.Drawing.Point(933, 6);
             this.PdfWaterMarkFileList_MoveUp.Name = "PdfWaterMarkFileList_MoveUp";
-            this.PdfWaterMarkFileList_MoveUp.Size = new System.Drawing.Size(34, 78);
+            this.PdfWaterMarkFileList_MoveUp.Size = new System.Drawing.Size(34, 42);
             this.PdfWaterMarkFileList_MoveUp.TabIndex = 16;
             this.PdfWaterMarkFileList_MoveUp.Text = "△";
             this.PdfWaterMarkFileList_MoveUp.UseVisualStyleBackColor = true;
+            // 
+            // addpdfwater_clear
+            // 
+            this.addpdfwater_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            this.addpdfwater_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.addpdfwater_clear.Location = new System.Drawing.Point(933, 117);
+            this.addpdfwater_clear.Name = "addpdfwater_clear";
+            this.addpdfwater_clear.Size = new System.Drawing.Size(34, 49);
+            this.addpdfwater_clear.TabIndex = 12;
+            this.addpdfwater_clear.UseVisualStyleBackColor = true;
+            // 
+            // addpdfwater_remove
+            // 
+            this.addpdfwater_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            this.addpdfwater_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.addpdfwater_remove.Location = new System.Drawing.Point(933, 65);
+            this.addpdfwater_remove.Name = "addpdfwater_remove";
+            this.addpdfwater_remove.Size = new System.Drawing.Size(34, 46);
+            this.addpdfwater_remove.TabIndex = 11;
+            this.addpdfwater_remove.UseVisualStyleBackColor = true;
             // 
             // label31
             // 
@@ -1760,6 +2042,8 @@
             // 
             this.TabPage_19.Controls.Add(this.RemovePdfWaterMarkFileList_MoveDown);
             this.TabPage_19.Controls.Add(this.RemovePdfWaterMarkFileList_MoveUp);
+            this.TabPage_19.Controls.Add(this.removepdfwater_clear);
+            this.TabPage_19.Controls.Add(this.removepdfwater_remove);
             this.TabPage_19.Controls.Add(this.RemovePdfWaterMarkStatusText);
             this.TabPage_19.Controls.Add(this.RemovePdfWaterMark);
             this.TabPage_19.Controls.Add(this.SelectRemovePdfWaterMarkFiles);
@@ -1773,9 +2057,9 @@
             // 
             // RemovePdfWaterMarkFileList_MoveDown
             // 
-            this.RemovePdfWaterMarkFileList_MoveDown.Location = new System.Drawing.Point(933, 254);
+            this.RemovePdfWaterMarkFileList_MoveDown.Location = new System.Drawing.Point(933, 290);
             this.RemovePdfWaterMarkFileList_MoveDown.Name = "RemovePdfWaterMarkFileList_MoveDown";
-            this.RemovePdfWaterMarkFileList_MoveDown.Size = new System.Drawing.Size(34, 78);
+            this.RemovePdfWaterMarkFileList_MoveDown.Size = new System.Drawing.Size(34, 42);
             this.RemovePdfWaterMarkFileList_MoveDown.TabIndex = 5;
             this.RemovePdfWaterMarkFileList_MoveDown.Text = "▽";
             this.RemovePdfWaterMarkFileList_MoveDown.UseVisualStyleBackColor = true;
@@ -1784,10 +2068,30 @@
             // 
             this.RemovePdfWaterMarkFileList_MoveUp.Location = new System.Drawing.Point(933, 6);
             this.RemovePdfWaterMarkFileList_MoveUp.Name = "RemovePdfWaterMarkFileList_MoveUp";
-            this.RemovePdfWaterMarkFileList_MoveUp.Size = new System.Drawing.Size(34, 78);
+            this.RemovePdfWaterMarkFileList_MoveUp.Size = new System.Drawing.Size(34, 42);
             this.RemovePdfWaterMarkFileList_MoveUp.TabIndex = 4;
             this.RemovePdfWaterMarkFileList_MoveUp.Text = "△";
             this.RemovePdfWaterMarkFileList_MoveUp.UseVisualStyleBackColor = true;
+            // 
+            // removepdfwater_clear
+            // 
+            this.removepdfwater_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            this.removepdfwater_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.removepdfwater_clear.Location = new System.Drawing.Point(933, 184);
+            this.removepdfwater_clear.Name = "removepdfwater_clear";
+            this.removepdfwater_clear.Size = new System.Drawing.Size(34, 73);
+            this.removepdfwater_clear.TabIndex = 12;
+            this.removepdfwater_clear.UseVisualStyleBackColor = true;
+            // 
+            // removepdfwater_remove
+            // 
+            this.removepdfwater_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            this.removepdfwater_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.removepdfwater_remove.Location = new System.Drawing.Point(933, 74);
+            this.removepdfwater_remove.Name = "removepdfwater_remove";
+            this.removepdfwater_remove.Size = new System.Drawing.Size(34, 73);
+            this.removepdfwater_remove.TabIndex = 11;
+            this.removepdfwater_remove.UseVisualStyleBackColor = true;
             // 
             // RemovePdfWaterMarkStatusText
             // 
@@ -1833,6 +2137,8 @@
             // 
             this.TabPage_22.Controls.Add(this.ConvertPdfComplianceFileList_MoveDown);
             this.TabPage_22.Controls.Add(this.ConvertPdfComplianceFileList_MoveUp);
+            this.TabPage_22.Controls.Add(this.pdfversion_clear);
+            this.TabPage_22.Controls.Add(this.pdfversion_remove);
             this.TabPage_22.Controls.Add(this.ConvertPdfComplianceVersion);
             this.TabPage_22.Controls.Add(this.label39);
             this.TabPage_22.Controls.Add(this.ConvertPdfComplianceStatusText);
@@ -1848,9 +2154,9 @@
             // 
             // ConvertPdfComplianceFileList_MoveDown
             // 
-            this.ConvertPdfComplianceFileList_MoveDown.Location = new System.Drawing.Point(933, 254);
+            this.ConvertPdfComplianceFileList_MoveDown.Location = new System.Drawing.Point(933, 290);
             this.ConvertPdfComplianceFileList_MoveDown.Name = "ConvertPdfComplianceFileList_MoveDown";
-            this.ConvertPdfComplianceFileList_MoveDown.Size = new System.Drawing.Size(34, 78);
+            this.ConvertPdfComplianceFileList_MoveDown.Size = new System.Drawing.Size(34, 42);
             this.ConvertPdfComplianceFileList_MoveDown.TabIndex = 7;
             this.ConvertPdfComplianceFileList_MoveDown.Text = "▽";
             this.ConvertPdfComplianceFileList_MoveDown.UseVisualStyleBackColor = true;
@@ -1859,10 +2165,30 @@
             // 
             this.ConvertPdfComplianceFileList_MoveUp.Location = new System.Drawing.Point(933, 6);
             this.ConvertPdfComplianceFileList_MoveUp.Name = "ConvertPdfComplianceFileList_MoveUp";
-            this.ConvertPdfComplianceFileList_MoveUp.Size = new System.Drawing.Size(34, 78);
+            this.ConvertPdfComplianceFileList_MoveUp.Size = new System.Drawing.Size(34, 42);
             this.ConvertPdfComplianceFileList_MoveUp.TabIndex = 6;
             this.ConvertPdfComplianceFileList_MoveUp.Text = "△";
             this.ConvertPdfComplianceFileList_MoveUp.UseVisualStyleBackColor = true;
+            // 
+            // pdfversion_clear
+            // 
+            this.pdfversion_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            this.pdfversion_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pdfversion_clear.Location = new System.Drawing.Point(933, 184);
+            this.pdfversion_clear.Name = "pdfversion_clear";
+            this.pdfversion_clear.Size = new System.Drawing.Size(34, 73);
+            this.pdfversion_clear.TabIndex = 12;
+            this.pdfversion_clear.UseVisualStyleBackColor = true;
+            // 
+            // pdfversion_remove
+            // 
+            this.pdfversion_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            this.pdfversion_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pdfversion_remove.Location = new System.Drawing.Point(933, 74);
+            this.pdfversion_remove.Name = "pdfversion_remove";
+            this.pdfversion_remove.Size = new System.Drawing.Size(34, 73);
+            this.pdfversion_remove.TabIndex = 11;
+            this.pdfversion_remove.UseVisualStyleBackColor = true;
             // 
             // ConvertPdfComplianceVersion
             // 
@@ -1925,6 +2251,8 @@
             // 
             this.TabPage_15.Controls.Add(this.Word2ExcelFileList_MoveDown);
             this.TabPage_15.Controls.Add(this.Word2ExcelFileList_MoveUp);
+            this.TabPage_15.Controls.Add(this.word2excel_clear);
+            this.TabPage_15.Controls.Add(this.word2excel_remove);
             this.TabPage_15.Controls.Add(this.ConverWord2ExcelStatusText);
             this.TabPage_15.Controls.Add(this.ConvertWord2Excel);
             this.TabPage_15.Controls.Add(this.SelectWord2ExcelFiles);
@@ -1938,9 +2266,9 @@
             // 
             // Word2ExcelFileList_MoveDown
             // 
-            this.Word2ExcelFileList_MoveDown.Location = new System.Drawing.Point(933, 254);
+            this.Word2ExcelFileList_MoveDown.Location = new System.Drawing.Point(933, 290);
             this.Word2ExcelFileList_MoveDown.Name = "Word2ExcelFileList_MoveDown";
-            this.Word2ExcelFileList_MoveDown.Size = new System.Drawing.Size(34, 78);
+            this.Word2ExcelFileList_MoveDown.Size = new System.Drawing.Size(34, 42);
             this.Word2ExcelFileList_MoveDown.TabIndex = 5;
             this.Word2ExcelFileList_MoveDown.Text = "▽";
             this.Word2ExcelFileList_MoveDown.UseVisualStyleBackColor = true;
@@ -1949,10 +2277,30 @@
             // 
             this.Word2ExcelFileList_MoveUp.Location = new System.Drawing.Point(933, 6);
             this.Word2ExcelFileList_MoveUp.Name = "Word2ExcelFileList_MoveUp";
-            this.Word2ExcelFileList_MoveUp.Size = new System.Drawing.Size(34, 78);
+            this.Word2ExcelFileList_MoveUp.Size = new System.Drawing.Size(34, 42);
             this.Word2ExcelFileList_MoveUp.TabIndex = 4;
             this.Word2ExcelFileList_MoveUp.Text = "△";
             this.Word2ExcelFileList_MoveUp.UseVisualStyleBackColor = true;
+            // 
+            // word2excel_clear
+            // 
+            this.word2excel_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            this.word2excel_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.word2excel_clear.Location = new System.Drawing.Point(933, 184);
+            this.word2excel_clear.Name = "word2excel_clear";
+            this.word2excel_clear.Size = new System.Drawing.Size(34, 73);
+            this.word2excel_clear.TabIndex = 12;
+            this.word2excel_clear.UseVisualStyleBackColor = true;
+            // 
+            // word2excel_remove
+            // 
+            this.word2excel_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            this.word2excel_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.word2excel_remove.Location = new System.Drawing.Point(933, 74);
+            this.word2excel_remove.Name = "word2excel_remove";
+            this.word2excel_remove.Size = new System.Drawing.Size(34, 73);
+            this.word2excel_remove.TabIndex = 11;
+            this.word2excel_remove.UseVisualStyleBackColor = true;
             // 
             // ConverWord2ExcelStatusText
             // 
@@ -1998,6 +2346,8 @@
             // 
             this.TabPage_16.Controls.Add(this.Excel2WordFileList_MoveDown);
             this.TabPage_16.Controls.Add(this.Excel2WordFileList_MoveUp);
+            this.TabPage_16.Controls.Add(this.excel2word_clear);
+            this.TabPage_16.Controls.Add(this.excel2word_remove);
             this.TabPage_16.Controls.Add(this.label24);
             this.TabPage_16.Controls.Add(this.ConvertExcel2WordStatusText);
             this.TabPage_16.Controls.Add(this.ConvertExcel2Word);
@@ -2012,9 +2362,9 @@
             // 
             // Excel2WordFileList_MoveDown
             // 
-            this.Excel2WordFileList_MoveDown.Location = new System.Drawing.Point(933, 254);
+            this.Excel2WordFileList_MoveDown.Location = new System.Drawing.Point(933, 290);
             this.Excel2WordFileList_MoveDown.Name = "Excel2WordFileList_MoveDown";
-            this.Excel2WordFileList_MoveDown.Size = new System.Drawing.Size(34, 78);
+            this.Excel2WordFileList_MoveDown.Size = new System.Drawing.Size(34, 42);
             this.Excel2WordFileList_MoveDown.TabIndex = 6;
             this.Excel2WordFileList_MoveDown.Text = "▽";
             this.Excel2WordFileList_MoveDown.UseVisualStyleBackColor = true;
@@ -2023,10 +2373,30 @@
             // 
             this.Excel2WordFileList_MoveUp.Location = new System.Drawing.Point(933, 6);
             this.Excel2WordFileList_MoveUp.Name = "Excel2WordFileList_MoveUp";
-            this.Excel2WordFileList_MoveUp.Size = new System.Drawing.Size(34, 78);
+            this.Excel2WordFileList_MoveUp.Size = new System.Drawing.Size(34, 42);
             this.Excel2WordFileList_MoveUp.TabIndex = 5;
             this.Excel2WordFileList_MoveUp.Text = "△";
             this.Excel2WordFileList_MoveUp.UseVisualStyleBackColor = true;
+            // 
+            // excel2word_clear
+            // 
+            this.excel2word_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            this.excel2word_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.excel2word_clear.Location = new System.Drawing.Point(933, 184);
+            this.excel2word_clear.Name = "excel2word_clear";
+            this.excel2word_clear.Size = new System.Drawing.Size(34, 73);
+            this.excel2word_clear.TabIndex = 12;
+            this.excel2word_clear.UseVisualStyleBackColor = true;
+            // 
+            // excel2word_remove
+            // 
+            this.excel2word_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            this.excel2word_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.excel2word_remove.Location = new System.Drawing.Point(933, 74);
+            this.excel2word_remove.Name = "excel2word_remove";
+            this.excel2word_remove.Size = new System.Drawing.Size(34, 73);
+            this.excel2word_remove.TabIndex = 11;
+            this.excel2word_remove.UseVisualStyleBackColor = true;
             // 
             // label24
             // 
@@ -2082,6 +2452,8 @@
             // 
             this.TabPage_04.Controls.Add(this.DocumentsListView_MoveDown);
             this.TabPage_04.Controls.Add(this.DocumentsListView_MoveUp);
+            this.TabPage_04.Controls.Add(this.document2image_clear);
+            this.TabPage_04.Controls.Add(this.document2image_remove);
             this.TabPage_04.Controls.Add(this.label4);
             this.TabPage_04.Controls.Add(this.PageExportCheck);
             this.TabPage_04.Controls.Add(this.label3);
@@ -2102,9 +2474,9 @@
             // 
             // DocumentsListView_MoveDown
             // 
-            this.DocumentsListView_MoveDown.Location = new System.Drawing.Point(933, 254);
+            this.DocumentsListView_MoveDown.Location = new System.Drawing.Point(933, 290);
             this.DocumentsListView_MoveDown.Name = "DocumentsListView_MoveDown";
-            this.DocumentsListView_MoveDown.Size = new System.Drawing.Size(34, 78);
+            this.DocumentsListView_MoveDown.Size = new System.Drawing.Size(34, 42);
             this.DocumentsListView_MoveDown.TabIndex = 12;
             this.DocumentsListView_MoveDown.Text = "▽";
             this.DocumentsListView_MoveDown.UseVisualStyleBackColor = true;
@@ -2113,10 +2485,30 @@
             // 
             this.DocumentsListView_MoveUp.Location = new System.Drawing.Point(933, 6);
             this.DocumentsListView_MoveUp.Name = "DocumentsListView_MoveUp";
-            this.DocumentsListView_MoveUp.Size = new System.Drawing.Size(34, 78);
+            this.DocumentsListView_MoveUp.Size = new System.Drawing.Size(34, 42);
             this.DocumentsListView_MoveUp.TabIndex = 11;
             this.DocumentsListView_MoveUp.Text = "△";
             this.DocumentsListView_MoveUp.UseVisualStyleBackColor = true;
+            // 
+            // document2image_clear
+            // 
+            this.document2image_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            this.document2image_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.document2image_clear.Location = new System.Drawing.Point(933, 184);
+            this.document2image_clear.Name = "document2image_clear";
+            this.document2image_clear.Size = new System.Drawing.Size(34, 73);
+            this.document2image_clear.TabIndex = 12;
+            this.document2image_clear.UseVisualStyleBackColor = true;
+            // 
+            // document2image_remove
+            // 
+            this.document2image_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            this.document2image_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.document2image_remove.Location = new System.Drawing.Point(933, 74);
+            this.document2image_remove.Name = "document2image_remove";
+            this.document2image_remove.Size = new System.Drawing.Size(34, 73);
+            this.document2image_remove.TabIndex = 11;
+            this.document2image_remove.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
@@ -2228,6 +2620,8 @@
             // 
             this.TabPage_23.Controls.Add(this.ConvertImage2PDFFileList_MoveDown);
             this.TabPage_23.Controls.Add(this.ConvertImage2PDFFileList_MoveUp);
+            this.TabPage_23.Controls.Add(this.image2pdf_clear);
+            this.TabPage_23.Controls.Add(this.image2pdf_remove);
             this.TabPage_23.Controls.Add(this.COnvertImage2PDFStatusText);
             this.TabPage_23.Controls.Add(this.groupBox19);
             this.TabPage_23.Controls.Add(this.ConvertImage2PDF);
@@ -2242,9 +2636,9 @@
             // 
             // ConvertImage2PDFFileList_MoveDown
             // 
-            this.ConvertImage2PDFFileList_MoveDown.Location = new System.Drawing.Point(933, 175);
+            this.ConvertImage2PDFFileList_MoveDown.Location = new System.Drawing.Point(933, 211);
             this.ConvertImage2PDFFileList_MoveDown.Name = "ConvertImage2PDFFileList_MoveDown";
-            this.ConvertImage2PDFFileList_MoveDown.Size = new System.Drawing.Size(34, 78);
+            this.ConvertImage2PDFFileList_MoveDown.Size = new System.Drawing.Size(34, 42);
             this.ConvertImage2PDFFileList_MoveDown.TabIndex = 6;
             this.ConvertImage2PDFFileList_MoveDown.Text = "▽";
             this.ConvertImage2PDFFileList_MoveDown.UseVisualStyleBackColor = true;
@@ -2253,10 +2647,30 @@
             // 
             this.ConvertImage2PDFFileList_MoveUp.Location = new System.Drawing.Point(933, 6);
             this.ConvertImage2PDFFileList_MoveUp.Name = "ConvertImage2PDFFileList_MoveUp";
-            this.ConvertImage2PDFFileList_MoveUp.Size = new System.Drawing.Size(34, 78);
+            this.ConvertImage2PDFFileList_MoveUp.Size = new System.Drawing.Size(34, 42);
             this.ConvertImage2PDFFileList_MoveUp.TabIndex = 5;
             this.ConvertImage2PDFFileList_MoveUp.Text = "△";
             this.ConvertImage2PDFFileList_MoveUp.UseVisualStyleBackColor = true;
+            // 
+            // image2pdf_clear
+            // 
+            this.image2pdf_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            this.image2pdf_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.image2pdf_clear.Location = new System.Drawing.Point(933, 133);
+            this.image2pdf_clear.Name = "image2pdf_clear";
+            this.image2pdf_clear.Size = new System.Drawing.Size(34, 73);
+            this.image2pdf_clear.TabIndex = 12;
+            this.image2pdf_clear.UseVisualStyleBackColor = true;
+            // 
+            // image2pdf_remove
+            // 
+            this.image2pdf_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            this.image2pdf_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.image2pdf_remove.Location = new System.Drawing.Point(933, 54);
+            this.image2pdf_remove.Name = "image2pdf_remove";
+            this.image2pdf_remove.Size = new System.Drawing.Size(34, 73);
+            this.image2pdf_remove.TabIndex = 11;
+            this.image2pdf_remove.UseVisualStyleBackColor = true;
             // 
             // COnvertImage2PDFStatusText
             // 
@@ -2449,6 +2863,8 @@
             // 
             this.TabPage_24.Controls.Add(this.CompressPdfFileList_MoveDown);
             this.TabPage_24.Controls.Add(this.CompressPdfFileList_MoveUp);
+            this.TabPage_24.Controls.Add(this.compresspdf_clear);
+            this.TabPage_24.Controls.Add(this.compresspdf_remove);
             this.TabPage_24.Controls.Add(this.CompressPDFStatusText);
             this.TabPage_24.Controls.Add(this.groupBox21);
             this.TabPage_24.Controls.Add(this.CompressPDF);
@@ -2463,9 +2879,9 @@
             // 
             // CompressPdfFileList_MoveDown
             // 
-            this.CompressPdfFileList_MoveDown.Location = new System.Drawing.Point(935, 197);
+            this.CompressPdfFileList_MoveDown.Location = new System.Drawing.Point(935, 233);
             this.CompressPdfFileList_MoveDown.Name = "CompressPdfFileList_MoveDown";
-            this.CompressPdfFileList_MoveDown.Size = new System.Drawing.Size(34, 78);
+            this.CompressPdfFileList_MoveDown.Size = new System.Drawing.Size(34, 42);
             this.CompressPdfFileList_MoveDown.TabIndex = 6;
             this.CompressPdfFileList_MoveDown.Text = "▽";
             this.CompressPdfFileList_MoveDown.UseVisualStyleBackColor = true;
@@ -2474,10 +2890,30 @@
             // 
             this.CompressPdfFileList_MoveUp.Location = new System.Drawing.Point(935, 6);
             this.CompressPdfFileList_MoveUp.Name = "CompressPdfFileList_MoveUp";
-            this.CompressPdfFileList_MoveUp.Size = new System.Drawing.Size(34, 78);
+            this.CompressPdfFileList_MoveUp.Size = new System.Drawing.Size(34, 42);
             this.CompressPdfFileList_MoveUp.TabIndex = 5;
             this.CompressPdfFileList_MoveUp.Text = "△";
             this.CompressPdfFileList_MoveUp.UseVisualStyleBackColor = true;
+            // 
+            // compresspdf_clear
+            // 
+            this.compresspdf_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            this.compresspdf_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.compresspdf_clear.Location = new System.Drawing.Point(936, 149);
+            this.compresspdf_clear.Name = "compresspdf_clear";
+            this.compresspdf_clear.Size = new System.Drawing.Size(34, 73);
+            this.compresspdf_clear.TabIndex = 12;
+            this.compresspdf_clear.UseVisualStyleBackColor = true;
+            // 
+            // compresspdf_remove
+            // 
+            this.compresspdf_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            this.compresspdf_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.compresspdf_remove.Location = new System.Drawing.Point(935, 54);
+            this.compresspdf_remove.Name = "compresspdf_remove";
+            this.compresspdf_remove.Size = new System.Drawing.Size(34, 73);
+            this.compresspdf_remove.TabIndex = 11;
+            this.compresspdf_remove.UseVisualStyleBackColor = true;
             // 
             // CompressPDFStatusText
             // 
@@ -2677,6 +3113,8 @@
             // 
             this.TabPage_25.Controls.Add(this.CompressImageFileList_MoveDown);
             this.TabPage_25.Controls.Add(this.CompressImageFileList_MoveUp);
+            this.TabPage_25.Controls.Add(this.compressimage_clear);
+            this.TabPage_25.Controls.Add(this.compressimage_remove);
             this.TabPage_25.Controls.Add(this.CompressImageStatusText);
             this.TabPage_25.Controls.Add(this.groupBox25);
             this.TabPage_25.Controls.Add(this.groupBox24);
@@ -2694,9 +3132,9 @@
             // 
             // CompressImageFileList_MoveDown
             // 
-            this.CompressImageFileList_MoveDown.Location = new System.Drawing.Point(933, 177);
+            this.CompressImageFileList_MoveDown.Location = new System.Drawing.Point(933, 213);
             this.CompressImageFileList_MoveDown.Name = "CompressImageFileList_MoveDown";
-            this.CompressImageFileList_MoveDown.Size = new System.Drawing.Size(34, 78);
+            this.CompressImageFileList_MoveDown.Size = new System.Drawing.Size(34, 42);
             this.CompressImageFileList_MoveDown.TabIndex = 11;
             this.CompressImageFileList_MoveDown.Text = "▽";
             this.CompressImageFileList_MoveDown.UseVisualStyleBackColor = true;
@@ -2705,10 +3143,30 @@
             // 
             this.CompressImageFileList_MoveUp.Location = new System.Drawing.Point(933, 6);
             this.CompressImageFileList_MoveUp.Name = "CompressImageFileList_MoveUp";
-            this.CompressImageFileList_MoveUp.Size = new System.Drawing.Size(34, 78);
+            this.CompressImageFileList_MoveUp.Size = new System.Drawing.Size(34, 42);
             this.CompressImageFileList_MoveUp.TabIndex = 10;
             this.CompressImageFileList_MoveUp.Text = "△";
             this.CompressImageFileList_MoveUp.UseVisualStyleBackColor = true;
+            // 
+            // compressimage_clear
+            // 
+            this.compressimage_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            this.compressimage_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.compressimage_clear.Location = new System.Drawing.Point(933, 134);
+            this.compressimage_clear.Name = "compressimage_clear";
+            this.compressimage_clear.Size = new System.Drawing.Size(34, 73);
+            this.compressimage_clear.TabIndex = 12;
+            this.compressimage_clear.UseVisualStyleBackColor = true;
+            // 
+            // compressimage_remove
+            // 
+            this.compressimage_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            this.compressimage_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.compressimage_remove.Location = new System.Drawing.Point(933, 54);
+            this.compressimage_remove.Name = "compressimage_remove";
+            this.compressimage_remove.Size = new System.Drawing.Size(34, 73);
+            this.compressimage_remove.TabIndex = 11;
+            this.compressimage_remove.UseVisualStyleBackColor = true;
             // 
             // CompressImageStatusText
             // 
@@ -2954,6 +3412,8 @@
             // 
             this.TabPage_10.Controls.Add(this.ReplaceWordFileList_MoveDown);
             this.TabPage_10.Controls.Add(this.ReplaceWordFileList_MoveUp);
+            this.TabPage_10.Controls.Add(this.wordreplace_clear);
+            this.TabPage_10.Controls.Add(this.wordreplace_remove);
             this.TabPage_10.Controls.Add(this.TurialRegex);
             this.TabPage_10.Controls.Add(this.OnlineRegextTool);
             this.TabPage_10.Controls.Add(this.groupBox10);
@@ -2973,9 +3433,9 @@
             // 
             // ReplaceWordFileList_MoveDown
             // 
-            this.ReplaceWordFileList_MoveDown.Location = new System.Drawing.Point(933, 235);
+            this.ReplaceWordFileList_MoveDown.Location = new System.Drawing.Point(932, 271);
             this.ReplaceWordFileList_MoveDown.Name = "ReplaceWordFileList_MoveDown";
-            this.ReplaceWordFileList_MoveDown.Size = new System.Drawing.Size(34, 78);
+            this.ReplaceWordFileList_MoveDown.Size = new System.Drawing.Size(34, 42);
             this.ReplaceWordFileList_MoveDown.TabIndex = 12;
             this.ReplaceWordFileList_MoveDown.Text = "▽";
             this.ReplaceWordFileList_MoveDown.UseVisualStyleBackColor = true;
@@ -2984,10 +3444,30 @@
             // 
             this.ReplaceWordFileList_MoveUp.Location = new System.Drawing.Point(933, 6);
             this.ReplaceWordFileList_MoveUp.Name = "ReplaceWordFileList_MoveUp";
-            this.ReplaceWordFileList_MoveUp.Size = new System.Drawing.Size(34, 78);
+            this.ReplaceWordFileList_MoveUp.Size = new System.Drawing.Size(34, 42);
             this.ReplaceWordFileList_MoveUp.TabIndex = 11;
             this.ReplaceWordFileList_MoveUp.Text = "△";
             this.ReplaceWordFileList_MoveUp.UseVisualStyleBackColor = true;
+            // 
+            // wordreplace_clear
+            // 
+            this.wordreplace_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            this.wordreplace_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.wordreplace_clear.Location = new System.Drawing.Point(932, 165);
+            this.wordreplace_clear.Name = "wordreplace_clear";
+            this.wordreplace_clear.Size = new System.Drawing.Size(35, 100);
+            this.wordreplace_clear.TabIndex = 12;
+            this.wordreplace_clear.UseVisualStyleBackColor = true;
+            // 
+            // wordreplace_remove
+            // 
+            this.wordreplace_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            this.wordreplace_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.wordreplace_remove.Location = new System.Drawing.Point(932, 54);
+            this.wordreplace_remove.Name = "wordreplace_remove";
+            this.wordreplace_remove.Size = new System.Drawing.Size(35, 87);
+            this.wordreplace_remove.TabIndex = 11;
+            this.wordreplace_remove.UseVisualStyleBackColor = true;
             // 
             // TurialRegex
             // 
@@ -3110,6 +3590,8 @@
             this.TabPage_11.BackColor = System.Drawing.Color.Transparent;
             this.TabPage_11.Controls.Add(this.ReplaceExcelFileView_MoveDown);
             this.TabPage_11.Controls.Add(this.ReplaceExcelFileView_MoveUp);
+            this.TabPage_11.Controls.Add(this.excelreplace_clear);
+            this.TabPage_11.Controls.Add(this.excelreplace_remove);
             this.TabPage_11.Controls.Add(this.linkLabel1);
             this.TabPage_11.Controls.Add(this.ExcelRegexReadMe);
             this.TabPage_11.Controls.Add(this.UseRegex);
@@ -3130,9 +3612,9 @@
             // 
             // ReplaceExcelFileView_MoveDown
             // 
-            this.ReplaceExcelFileView_MoveDown.Location = new System.Drawing.Point(933, 200);
+            this.ReplaceExcelFileView_MoveDown.Location = new System.Drawing.Point(933, 233);
             this.ReplaceExcelFileView_MoveDown.Name = "ReplaceExcelFileView_MoveDown";
-            this.ReplaceExcelFileView_MoveDown.Size = new System.Drawing.Size(34, 78);
+            this.ReplaceExcelFileView_MoveDown.Size = new System.Drawing.Size(34, 42);
             this.ReplaceExcelFileView_MoveDown.TabIndex = 11;
             this.ReplaceExcelFileView_MoveDown.Text = "▽";
             this.ReplaceExcelFileView_MoveDown.UseVisualStyleBackColor = true;
@@ -3141,10 +3623,30 @@
             // 
             this.ReplaceExcelFileView_MoveUp.Location = new System.Drawing.Point(933, 6);
             this.ReplaceExcelFileView_MoveUp.Name = "ReplaceExcelFileView_MoveUp";
-            this.ReplaceExcelFileView_MoveUp.Size = new System.Drawing.Size(34, 78);
+            this.ReplaceExcelFileView_MoveUp.Size = new System.Drawing.Size(34, 42);
             this.ReplaceExcelFileView_MoveUp.TabIndex = 10;
             this.ReplaceExcelFileView_MoveUp.Text = "△";
             this.ReplaceExcelFileView_MoveUp.UseVisualStyleBackColor = true;
+            // 
+            // excelreplace_clear
+            // 
+            this.excelreplace_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            this.excelreplace_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.excelreplace_clear.Location = new System.Drawing.Point(933, 154);
+            this.excelreplace_clear.Name = "excelreplace_clear";
+            this.excelreplace_clear.Size = new System.Drawing.Size(34, 73);
+            this.excelreplace_clear.TabIndex = 12;
+            this.excelreplace_clear.UseVisualStyleBackColor = true;
+            // 
+            // excelreplace_remove
+            // 
+            this.excelreplace_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            this.excelreplace_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.excelreplace_remove.Location = new System.Drawing.Point(933, 54);
+            this.excelreplace_remove.Name = "excelreplace_remove";
+            this.excelreplace_remove.Size = new System.Drawing.Size(34, 73);
+            this.excelreplace_remove.TabIndex = 11;
+            this.excelreplace_remove.UseVisualStyleBackColor = true;
             // 
             // linkLabel1
             // 
@@ -3324,6 +3826,8 @@
             // 
             this.TabPage_12.Controls.Add(this.DecodeMatrixWordListView_MoveDown);
             this.TabPage_12.Controls.Add(this.DecodeMatrixWordListView_MoveUp);
+            this.TabPage_12.Controls.Add(this.datamatrix_clear);
+            this.TabPage_12.Controls.Add(this.datamatrix_remove);
             this.TabPage_12.Controls.Add(this.DecodeDataMatixStatusText);
             this.TabPage_12.Controls.Add(this.DecodeDataMarix);
             this.TabPage_12.Controls.Add(this.SelectDataMatrixWord);
@@ -3339,9 +3843,9 @@
             // 
             // DecodeMatrixWordListView_MoveDown
             // 
-            this.DecodeMatrixWordListView_MoveDown.Location = new System.Drawing.Point(933, 101);
+            this.DecodeMatrixWordListView_MoveDown.Location = new System.Drawing.Point(933, 137);
             this.DecodeMatrixWordListView_MoveDown.Name = "DecodeMatrixWordListView_MoveDown";
-            this.DecodeMatrixWordListView_MoveDown.Size = new System.Drawing.Size(34, 78);
+            this.DecodeMatrixWordListView_MoveDown.Size = new System.Drawing.Size(34, 42);
             this.DecodeMatrixWordListView_MoveDown.TabIndex = 6;
             this.DecodeMatrixWordListView_MoveDown.Text = "▽";
             this.DecodeMatrixWordListView_MoveDown.UseVisualStyleBackColor = true;
@@ -3350,10 +3854,30 @@
             // 
             this.DecodeMatrixWordListView_MoveUp.Location = new System.Drawing.Point(933, 6);
             this.DecodeMatrixWordListView_MoveUp.Name = "DecodeMatrixWordListView_MoveUp";
-            this.DecodeMatrixWordListView_MoveUp.Size = new System.Drawing.Size(34, 78);
+            this.DecodeMatrixWordListView_MoveUp.Size = new System.Drawing.Size(34, 42);
             this.DecodeMatrixWordListView_MoveUp.TabIndex = 5;
             this.DecodeMatrixWordListView_MoveUp.Text = "△";
             this.DecodeMatrixWordListView_MoveUp.UseVisualStyleBackColor = true;
+            // 
+            // datamatrix_clear
+            // 
+            this.datamatrix_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            this.datamatrix_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.datamatrix_clear.Location = new System.Drawing.Point(934, 95);
+            this.datamatrix_clear.Name = "datamatrix_clear";
+            this.datamatrix_clear.Size = new System.Drawing.Size(34, 36);
+            this.datamatrix_clear.TabIndex = 12;
+            this.datamatrix_clear.UseVisualStyleBackColor = true;
+            // 
+            // datamatrix_remove
+            // 
+            this.datamatrix_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            this.datamatrix_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.datamatrix_remove.Location = new System.Drawing.Point(934, 53);
+            this.datamatrix_remove.Name = "datamatrix_remove";
+            this.datamatrix_remove.Size = new System.Drawing.Size(34, 35);
+            this.datamatrix_remove.TabIndex = 11;
+            this.datamatrix_remove.UseVisualStyleBackColor = true;
             // 
             // DecodeDataMatixStatusText
             // 
@@ -3438,6 +3962,16 @@
             this.TabPage_05.TabIndex = 4;
             this.TabPage_05.Text = "姓名横转竖列";
             this.TabPage_05.UseVisualStyleBackColor = true;
+            // 
+            // label57
+            // 
+            this.label57.AutoSize = true;
+            this.label57.ForeColor = System.Drawing.Color.Red;
+            this.label57.Location = new System.Drawing.Point(292, 16);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(361, 18);
+            this.label57.TabIndex = 18;
+            this.label57.Text = "本功能会自动删除文字内的特殊符号、⚪、▢";
             // 
             // NameReplaceRegexMode
             // 
@@ -3969,8 +4503,10 @@
             // 
             // groupBox17
             // 
+            this.groupBox17.Controls.Add(this.image2ico_remove);
             this.groupBox17.Controls.Add(this.IcoFileView_MoveDown);
             this.groupBox17.Controls.Add(this.IcoFileView_MoveUp);
+            this.groupBox17.Controls.Add(this.image2ico_clear);
             this.groupBox17.Controls.Add(this.IcoSizeDrop);
             this.groupBox17.Controls.Add(this.label22);
             this.groupBox17.Controls.Add(this.Image2IcoStatusText);
@@ -3984,11 +4520,20 @@
             this.groupBox17.TabStop = false;
             this.groupBox17.Text = "ICO图标转换";
             // 
+            // image2ico_remove
+            // 
+            this.image2ico_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            this.image2ico_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.image2ico_remove.Location = new System.Drawing.Point(916, 75);
+            this.image2ico_remove.Name = "image2ico_remove";
+            this.image2ico_remove.Size = new System.Drawing.Size(34, 40);
+            this.image2ico_remove.TabIndex = 13;
+            // 
             // IcoFileView_MoveDown
             // 
-            this.IcoFileView_MoveDown.Location = new System.Drawing.Point(916, 134);
+            this.IcoFileView_MoveDown.Location = new System.Drawing.Point(916, 170);
             this.IcoFileView_MoveDown.Name = "IcoFileView_MoveDown";
-            this.IcoFileView_MoveDown.Size = new System.Drawing.Size(34, 78);
+            this.IcoFileView_MoveDown.Size = new System.Drawing.Size(34, 42);
             this.IcoFileView_MoveDown.TabIndex = 7;
             this.IcoFileView_MoveDown.Text = "▽";
             this.IcoFileView_MoveDown.UseVisualStyleBackColor = true;
@@ -3997,10 +4542,20 @@
             // 
             this.IcoFileView_MoveUp.Location = new System.Drawing.Point(916, 27);
             this.IcoFileView_MoveUp.Name = "IcoFileView_MoveUp";
-            this.IcoFileView_MoveUp.Size = new System.Drawing.Size(34, 78);
+            this.IcoFileView_MoveUp.Size = new System.Drawing.Size(34, 42);
             this.IcoFileView_MoveUp.TabIndex = 6;
             this.IcoFileView_MoveUp.Text = "△";
             this.IcoFileView_MoveUp.UseVisualStyleBackColor = true;
+            // 
+            // image2ico_clear
+            // 
+            this.image2ico_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            this.image2ico_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.image2ico_clear.Location = new System.Drawing.Point(916, 121);
+            this.image2ico_clear.Name = "image2ico_clear";
+            this.image2ico_clear.Size = new System.Drawing.Size(34, 43);
+            this.image2ico_clear.TabIndex = 12;
+            this.image2ico_clear.UseVisualStyleBackColor = true;
             // 
             // IcoSizeDrop
             // 
@@ -4138,6 +4693,144 @@
             this.DownloadNetfx35.Text = "开始下载（从私有网盘）";
             this.DownloadNetfx35.UseVisualStyleBackColor = true;
             this.DownloadNetfx35.Click += new System.EventHandler(this.DownloadNetfx35_Click);
+            // 
+            // TabPage_26
+            // 
+            this.TabPage_26.Controls.Add(this.groupBox28);
+            this.TabPage_26.Controls.Add(this.groupBox27);
+            this.TabPage_26.Controls.Add(this.groupBox26);
+            this.TabPage_26.Location = new System.Drawing.Point(4, 76);
+            this.TabPage_26.Name = "TabPage_26";
+            this.TabPage_26.Size = new System.Drawing.Size(975, 498);
+            this.TabPage_26.TabIndex = 25;
+            this.TabPage_26.Text = "系统工具";
+            this.TabPage_26.UseVisualStyleBackColor = true;
+            // 
+            // groupBox28
+            // 
+            this.groupBox28.Controls.Add(this.label58);
+            this.groupBox28.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.groupBox28.Location = new System.Drawing.Point(8, 227);
+            this.groupBox28.Name = "groupBox28";
+            this.groupBox28.Size = new System.Drawing.Size(959, 263);
+            this.groupBox28.TabIndex = 4;
+            this.groupBox28.TabStop = false;
+            this.groupBox28.Text = "说明";
+            // 
+            // label58
+            // 
+            this.label58.AutoSize = true;
+            this.label58.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label58.ForeColor = System.Drawing.Color.OrangeRed;
+            this.label58.Location = new System.Drawing.Point(8, 52);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(934, 192);
+            this.label58.TabIndex = 0;
+            this.label58.Text = "1、键盘工具：主要为了解决给笔记本清洁键盘使用，防止误触\r\n\r\n2、快捷方式小箭头：需要去除快捷方式箭头使用，移除后需要重启资源管理器或者电脑\r\n\r\n3、本说明纯" +
+    "粹为了占满页面，目前没什么功能在本页面添加\r\n\r\n4、快捷方式小箭头检测方式只支持本软件移除/恢复后状态查询\r\n\r\n";
+            // 
+            // groupBox27
+            // 
+            this.groupBox27.Controls.Add(this.AutoRestartExplorer);
+            this.groupBox27.Controls.Add(this.ShortStatus);
+            this.groupBox27.Controls.Add(this.RestoreShort);
+            this.groupBox27.Controls.Add(this.RemoveShort);
+            this.groupBox27.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.groupBox27.Location = new System.Drawing.Point(544, 3);
+            this.groupBox27.Name = "groupBox27";
+            this.groupBox27.Size = new System.Drawing.Size(423, 206);
+            this.groupBox27.TabIndex = 3;
+            this.groupBox27.TabStop = false;
+            this.groupBox27.Text = "快捷方式小箭头";
+            // 
+            // AutoRestartExplorer
+            // 
+            this.AutoRestartExplorer.AutoSize = true;
+            this.AutoRestartExplorer.Location = new System.Drawing.Point(165, 154);
+            this.AutoRestartExplorer.Name = "AutoRestartExplorer";
+            this.AutoRestartExplorer.Size = new System.Drawing.Size(252, 28);
+            this.AutoRestartExplorer.TabIndex = 3;
+            this.AutoRestartExplorer.Text = "自动重启资源管理器";
+            this.AutoRestartExplorer.UseVisualStyleBackColor = true;
+            // 
+            // ShortStatus
+            // 
+            this.ShortStatus.AutoSize = true;
+            this.ShortStatus.Font = new System.Drawing.Font("宋体", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ShortStatus.ForeColor = System.Drawing.Color.Red;
+            this.ShortStatus.Location = new System.Drawing.Point(23, 148);
+            this.ShortStatus.Name = "ShortStatus";
+            this.ShortStatus.Size = new System.Drawing.Size(79, 33);
+            this.ShortStatus.TabIndex = 2;
+            this.ShortStatus.Text = "快捷";
+            // 
+            // RestoreShort
+            // 
+            this.RestoreShort.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.RestoreShort.Location = new System.Drawing.Point(236, 58);
+            this.RestoreShort.Name = "RestoreShort";
+            this.RestoreShort.Size = new System.Drawing.Size(154, 63);
+            this.RestoreShort.TabIndex = 1;
+            this.RestoreShort.Text = "恢复箭头";
+            this.RestoreShort.UseVisualStyleBackColor = true;
+            this.RestoreShort.Click += new System.EventHandler(this.RestoreShort_Click);
+            // 
+            // RemoveShort
+            // 
+            this.RemoveShort.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.RemoveShort.Location = new System.Drawing.Point(6, 58);
+            this.RemoveShort.Name = "RemoveShort";
+            this.RemoveShort.Size = new System.Drawing.Size(154, 63);
+            this.RemoveShort.TabIndex = 0;
+            this.RemoveShort.Text = "移除箭头";
+            this.RemoveShort.UseVisualStyleBackColor = true;
+            this.RemoveShort.Click += new System.EventHandler(this.RemoveShort_Click);
+            // 
+            // groupBox26
+            // 
+            this.groupBox26.Controls.Add(this.KeyBoardLockStatus);
+            this.groupBox26.Controls.Add(this.UnlockKeyBoard);
+            this.groupBox26.Controls.Add(this.LockKeyBoard);
+            this.groupBox26.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.groupBox26.Location = new System.Drawing.Point(8, 3);
+            this.groupBox26.Name = "groupBox26";
+            this.groupBox26.Size = new System.Drawing.Size(423, 206);
+            this.groupBox26.TabIndex = 0;
+            this.groupBox26.TabStop = false;
+            this.groupBox26.Text = "键盘工具";
+            // 
+            // KeyBoardLockStatus
+            // 
+            this.KeyBoardLockStatus.AutoSize = true;
+            this.KeyBoardLockStatus.Font = new System.Drawing.Font("宋体", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.KeyBoardLockStatus.ForeColor = System.Drawing.Color.Green;
+            this.KeyBoardLockStatus.Location = new System.Drawing.Point(148, 147);
+            this.KeyBoardLockStatus.Name = "KeyBoardLockStatus";
+            this.KeyBoardLockStatus.Size = new System.Drawing.Size(111, 33);
+            this.KeyBoardLockStatus.TabIndex = 2;
+            this.KeyBoardLockStatus.Text = "已解锁";
+            // 
+            // UnlockKeyBoard
+            // 
+            this.UnlockKeyBoard.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.UnlockKeyBoard.Location = new System.Drawing.Point(236, 58);
+            this.UnlockKeyBoard.Name = "UnlockKeyBoard";
+            this.UnlockKeyBoard.Size = new System.Drawing.Size(154, 63);
+            this.UnlockKeyBoard.TabIndex = 1;
+            this.UnlockKeyBoard.Text = "解锁键盘";
+            this.UnlockKeyBoard.UseVisualStyleBackColor = true;
+            this.UnlockKeyBoard.Click += new System.EventHandler(this.UnlockKeyBoard_Click);
+            // 
+            // LockKeyBoard
+            // 
+            this.LockKeyBoard.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.LockKeyBoard.Location = new System.Drawing.Point(6, 58);
+            this.LockKeyBoard.Name = "LockKeyBoard";
+            this.LockKeyBoard.Size = new System.Drawing.Size(154, 63);
+            this.LockKeyBoard.TabIndex = 0;
+            this.LockKeyBoard.Text = "锁定键盘";
+            this.LockKeyBoard.UseVisualStyleBackColor = true;
+            this.LockKeyBoard.Click += new System.EventHandler(this.LockKeyBoard_Click);
             // 
             // TabPage_08
             // 
@@ -4374,15 +5067,11 @@
             // 
             this.MainFormError.ContainerControl = this;
             // 
-            // label57
+            // MainToolsTip
             // 
-            this.label57.AutoSize = true;
-            this.label57.ForeColor = System.Drawing.Color.Red;
-            this.label57.Location = new System.Drawing.Point(292, 16);
-            this.label57.Name = "label57";
-            this.label57.Size = new System.Drawing.Size(361, 18);
-            this.label57.TabIndex = 18;
-            this.label57.Text = "本功能会自动删除文字内的特殊符号、⚪、▢";
+            this.MainToolsTip.AutoPopDelay = 5000;
+            this.MainToolsTip.InitialDelay = 100;
+            this.MainToolsTip.ReshowDelay = 100;
             // 
             // BodyForm
             // 
@@ -4496,6 +5185,13 @@
             this.groupBox16.ResumeLayout(false);
             this.groupBox15.ResumeLayout(false);
             this.groupBox15.PerformLayout();
+            this.TabPage_26.ResumeLayout(false);
+            this.groupBox28.ResumeLayout(false);
+            this.groupBox28.PerformLayout();
+            this.groupBox27.ResumeLayout(false);
+            this.groupBox27.PerformLayout();
+            this.groupBox26.ResumeLayout(false);
+            this.groupBox26.PerformLayout();
             this.TabPage_08.ResumeLayout(false);
             this.TabPage_08.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -4895,6 +5591,63 @@
         internal System.Windows.Forms.ComboBox PDF2WORD_Mode;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label57;
+        private System.Windows.Forms.Button word2pdf_clear;
+        private System.Windows.Forms.Button word2pdf_remove;
+        private System.Windows.Forms.Button pdf2word_clear;
+        private System.Windows.Forms.Button pdf2word_remove;
+        private System.Windows.Forms.Button excel2pdf_clear;
+        private System.Windows.Forms.Button excel2pdf_remove;
+        private System.Windows.Forms.Button pdf2excel_clear;
+        private System.Windows.Forms.Button pdf2excel_remove;
+        private System.Windows.Forms.Button ppt2pdf_clear;
+        private System.Windows.Forms.Button ppt2pdf_remove;
+        private System.Windows.Forms.Button pdf2ppt_clear;
+        private System.Windows.Forms.Button pdf2ppt_remove;
+        private System.Windows.Forms.Button meregeword_clear;
+        private System.Windows.Forms.Button meregeword_remove;
+        private System.Windows.Forms.Button meregepdf_clear;
+        private System.Windows.Forms.Button meregepdf_remove;
+        private System.Windows.Forms.Button sqplitpdf_clear;
+        private System.Windows.Forms.Button sqplitpdf_remove;
+        private System.Windows.Forms.Button addpdfwater_clear;
+        private System.Windows.Forms.Button addpdfwater_remove;
+        private System.Windows.Forms.Button removepdfwater_clear;
+        private System.Windows.Forms.Button removepdfwater_remove;
+        private System.Windows.Forms.Button pdfversion_clear;
+        private System.Windows.Forms.Button pdfversion_remove;
+        private System.Windows.Forms.Button word2excel_clear;
+        private System.Windows.Forms.Button word2excel_remove;
+        private System.Windows.Forms.Button excel2word_clear;
+        private System.Windows.Forms.Button excel2word_remove;
+        private System.Windows.Forms.Button document2image_clear;
+        private System.Windows.Forms.Button document2image_remove;
+        private System.Windows.Forms.Button image2pdf_clear;
+        private System.Windows.Forms.Button image2pdf_remove;
+        private System.Windows.Forms.Button compresspdf_clear;
+        private System.Windows.Forms.Button compresspdf_remove;
+        private System.Windows.Forms.Button compressimage_clear;
+        private System.Windows.Forms.Button compressimage_remove;
+        private System.Windows.Forms.Button wordreplace_clear;
+        private System.Windows.Forms.Button wordreplace_remove;
+        private System.Windows.Forms.Button excelreplace_clear;
+        private System.Windows.Forms.Button excelreplace_remove;
+        private System.Windows.Forms.Button datamatrix_clear;
+        private System.Windows.Forms.Button datamatrix_remove;
+        private System.Windows.Forms.Button image2ico_clear;
+        private System.Windows.Forms.Button image2ico_remove;
+        private System.Windows.Forms.ToolTip MainToolsTip;
+        private System.Windows.Forms.TabPage TabPage_26;
+        private System.Windows.Forms.GroupBox groupBox26;
+        private System.Windows.Forms.Button UnlockKeyBoard;
+        private System.Windows.Forms.Button LockKeyBoard;
+        private System.Windows.Forms.Label KeyBoardLockStatus;
+        private System.Windows.Forms.GroupBox groupBox27;
+        private System.Windows.Forms.Label ShortStatus;
+        private System.Windows.Forms.Button RestoreShort;
+        private System.Windows.Forms.Button RemoveShort;
+        private System.Windows.Forms.CheckBox AutoRestartExplorer;
+        private System.Windows.Forms.GroupBox groupBox28;
+        private System.Windows.Forms.Label label58;
     }
 }
 

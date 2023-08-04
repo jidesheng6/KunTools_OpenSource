@@ -7,6 +7,7 @@ using Aspose.Pdf.Annotations;
 using Aspose.Pdf.Text;
 using Aspose.Slides.Export;
 using Microsoft.VisualBasic.Devices;
+using Microsoft.Win32;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using NAudio.Wave;
 using System;
@@ -14,9 +15,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Resources;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
@@ -1591,7 +1594,152 @@ namespace DocumentTools
 
             return ReturnValue;
         }
+
+        /// <summary>
+        /// 移除小箭头
+        /// </summary>
+        public static void RemoveShort()
+        {
+            string SystemRootDir = Environment.GetEnvironmentVariable("systemroot");
+            SetRegistryValue(RegistryHive.LocalMachine, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons","29", $"{SystemRootDir}\\system32\\imageres.dll,197", RegistryValueKind.String);
+            SetIconCacheAttr();
+
+        }
+        /// <summary>
+        /// 恢复小箭头
+        /// </summary>
+        public static void RestoreShort()
+        {
+            DeleteRegistryKey(RegistryHive.LocalMachine, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons","29");
+            SetIconCacheAttr();
+        }
+        /// <summary>
+        /// 获取小箭头去除状态
+        /// </summary>
+        /// <returns></returns>
+        public static string GetShortStatus()
+        {
+            object TempObj = GetRegistryValue(RegistryHive.LocalMachine, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons", "29");
+
+            if(TempObj != null && TempObj.ToString().Contains("imageres.dll"))
+            {
+                return "已移除";
+            }
+            else
+            {
+                return "未移除";
+            }
+            
+        }
+
+
+        /// <summary>
+        /// 设置ico属性
+        /// </summary>
+        private static void SetIconCacheAttr()
+        {
+            string UserProfileDir, IconCacheFile;
+            UserProfileDir = Environment.GetEnvironmentVariable("userprofile");
+            IconCacheFile = $@"{UserProfileDir}\AppData\Local\iconcache.db";
+            if (File.Exists(IconCacheFile))
+            {
+                File.SetAttributes(IconCacheFile, FileAttributes.Normal);
+                File.Delete(IconCacheFile);
+            }
+        }
+        /// <summary>
+        /// 设置注册表键值
+        /// </summary>
+        /// <param name="OpenRegistryHive"></param>
+        /// <param name="OpenRegistryPath"></param>
+        /// <param name="WriteRegistryName"></param>
+        /// <param name="WriteRegistryValue"></param>
+        /// <param name="WriteKind"></param>
+        private static void SetRegistryValue(RegistryHive OpenRegistryHive,string OpenRegistryPath,string WriteRegistryName, object WriteRegistryValue,RegistryValueKind WriteKind)
+        {
+            RegistryKey TempRootRegistryKey = null;
+            if (Environment.Is64BitOperatingSystem)
+            {
+                TempRootRegistryKey = RegistryKey.OpenBaseKey(OpenRegistryHive, RegistryView.Registry64);
+            }
+            else
+            {
+                TempRootRegistryKey = RegistryKey.OpenBaseKey(OpenRegistryHive, RegistryView.Registry32);
+            }
+            
+            TempRootRegistryKey.CreateSubKey(OpenRegistryPath, true);
+
+
+            RegistryKey TempSubKey =  TempRootRegistryKey.OpenSubKey(OpenRegistryPath,true);
+
+            if (TempSubKey!=null)
+            {
+                TempSubKey.SetValue(WriteRegistryName, WriteRegistryValue, WriteKind);
+                TempSubKey.Close();
+            }
+            TempRootRegistryKey.Dispose();
+        }
+        /// <summary>
+        /// 获取注册表键值
+        /// </summary>
+        /// <param name="OpenRegistryHive"></param>
+        /// <param name="OpenRegistryPath"></param>
+        /// <param name="RegistryName"></param>
+        /// <returns></returns>
+        private static object GetRegistryValue(RegistryHive OpenRegistryHive, string OpenRegistryPath, string RegistryName)
+        {
+            object TempValue = null;
+            RegistryKey TempRootRegistryKey = null;
+            if (Environment.Is64BitOperatingSystem)
+            {
+                TempRootRegistryKey = RegistryKey.OpenBaseKey(OpenRegistryHive, RegistryView.Registry64);
+            }
+            else
+            {
+                TempRootRegistryKey = RegistryKey.OpenBaseKey(OpenRegistryHive, RegistryView.Registry32);
+            }
+            RegistryKey TempSubKey = TempRootRegistryKey.OpenSubKey(OpenRegistryPath);
+
+            if (TempSubKey != null)
+            {
+                TempValue = TempSubKey.GetValue(RegistryName);
+                
+                if(TempValue != null)
+                {
+                    TempSubKey.Close();
+                }
+            }
+            TempRootRegistryKey.Dispose();
+            return TempValue;
+        }
+        /// <summary>
+        /// 删除注册表键值
+        /// </summary>
+        /// <param name="OpenRegistryHive"></param>
+        /// <param name="OpenRegistryPath"></param>
+        /// <param name="DeleteName"></param>
+        private static void DeleteRegistryKey(RegistryHive OpenRegistryHive, string OpenRegistryPath,string DeleteName)
+        {
+            RegistryKey TempRootRegistryKey = null;
+            if (Environment.Is64BitOperatingSystem)
+            {
+                TempRootRegistryKey = RegistryKey.OpenBaseKey(OpenRegistryHive, RegistryView.Registry64);
+            }
+            else
+            {
+                TempRootRegistryKey = RegistryKey.OpenBaseKey(OpenRegistryHive, RegistryView.Registry32);
+            }
+            RegistryKey TempSubKey = TempRootRegistryKey.OpenSubKey(OpenRegistryPath, true);
+
+            if(TempSubKey!=null && TempSubKey.GetValueNames().Contains(DeleteName))
+            {
+                TempSubKey.DeleteValue(DeleteName);
+                TempSubKey.Close();
+            }
+            TempRootRegistryKey.Dispose();
+        }
     }
+
 
 
 
