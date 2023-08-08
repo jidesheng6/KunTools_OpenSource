@@ -5481,6 +5481,26 @@
             this.MainToolsTip.InitialDelay = 100;
             this.MainToolsTip.ReshowDelay = 100;
             // 
+            // label59
+            // 
+            this.label59.AutoSize = true;
+            this.label59.ForeColor = System.Drawing.Color.Tomato;
+            this.label59.Location = new System.Drawing.Point(4, 353);
+            this.label59.Name = "label59";
+            this.label59.Size = new System.Drawing.Size(485, 18);
+            this.label59.TabIndex = 29;
+            this.label59.Text = "提示：EPUB转PDF需确保EPUB格式正确，功能不稳定，请慎用";
+            // 
+            // label60
+            // 
+            this.label60.AutoSize = true;
+            this.label60.ForeColor = System.Drawing.Color.Tomato;
+            this.label60.Location = new System.Drawing.Point(8, 357);
+            this.label60.Name = "label60";
+            this.label60.Size = new System.Drawing.Size(494, 18);
+            this.label60.TabIndex = 30;
+            this.label60.Text = "提示：EPUB转WORD需确保EPUB格式正确，功能不稳定，请慎用";
+            // 
             // BodyForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
