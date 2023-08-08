@@ -67,7 +67,7 @@ namespace DocumentTools
                 // 在 Task.Run() 内部执行 ListView 的更新
                 ListViewControl.BeginInvoke(new Action(() =>
                 {
-                    if(itemsToAdd.Count>0)
+                    if (itemsToAdd.Count > 0)
                     {
                         ListViewControl.BeginUpdate();
                         ListViewControl.Items.AddRange(itemsToAdd.ToArray());
@@ -113,7 +113,7 @@ namespace DocumentTools
                     // 在 Task.Run() 内部使用 BeginInvoke() 执行 ListView 的更新
                     ListviewControl.BeginInvoke(new Action(() =>
                     {
-                        if(itemsToAdd.Count> 0)
+                        if (itemsToAdd.Count > 0)
                         {
                             ListviewControl.BeginUpdate();
                             ListviewControl.Items.AddRange(itemsToAdd.ToArray());
@@ -194,7 +194,7 @@ namespace DocumentTools
         /// <param name="ListViewControl"></param>
         public static void RemoveListViewItem(bool ClearAllItems, ListView ListViewControl)
         {
-            if(ListViewControl.Items.Count!=0 )
+            if (ListViewControl.Items.Count != 0)
             {
                 if (ClearAllItems)
                 {
@@ -203,7 +203,7 @@ namespace DocumentTools
                 else
                 {
 
-                    if(ListViewControl.FocusedItem != null && ListViewControl.FocusedItem.Index >= 0)
+                    if (ListViewControl.FocusedItem != null && ListViewControl.FocusedItem.Index >= 0)
                     {
                         //删除列表一个项目,先移除，移动到没有项目时，focuseditem会变为null，这时候就不处理了
                         //同时移除后会自动选中临近的item，所以用focuseditem就可以了
@@ -331,7 +331,7 @@ namespace DocumentTools
 
         public static void AddWord2EPUBFiles()
         {
-            AddFilesToListView("WORD文档","*.doc;*.docx",BodyForm.MainForm.Word2EPUBFileList);
+            AddFilesToListView("WORD文档", "*.doc;*.docx", BodyForm.MainForm.Word2EPUBFileList);
         }
 
         public static void AddEPUB2WORDFiles()
@@ -359,7 +359,7 @@ namespace DocumentTools
                 IEnumerable<string> ISelectSavePathstring = Util.ShwoSelectDialog(false, true, "", "");
                 string SelectSavePathstring = ISelectSavePathstring.FirstOrDefault();
 
-                if (SelectSavePathstring != default || SelectSavePathstring!=string.Empty)
+                if (SelectSavePathstring != default || SelectSavePathstring != string.Empty)
                 {
                     for (int TempIndex = 0; TempIndex < ListViewControl.Items.Count; TempIndex++)
                     {
@@ -485,13 +485,13 @@ namespace DocumentTools
                                 Util.ConvertHtml2PDF(ListViewFirstColumnText, ConvertedFileName);
                                 break;
                             case ConvertFileType.Word2Epub:
-                                Util.ConvertWord2EPUB(ListViewFirstColumnText,ConvertedFileName,BodyForm.MainForm.Word2EpubAuthorName.Text);
+                                Util.ConvertWord2EPUB(ListViewFirstColumnText, ConvertedFileName, BodyForm.MainForm.Word2EpubAuthorName.Text);
                                 break;
                             case ConvertFileType.Epub2Word:
-                                Util.ConvertEPUB2Word(ListViewFirstColumnText,ConvertedFileName);
+                                Util.ConvertEPUB2Word(ListViewFirstColumnText, ConvertedFileName);
                                 break;
                             case ConvertFileType.Epub2Pdf:
-                                Util.ConvertEPUB2Pdf(ListViewFirstColumnText,ConvertedFileName);
+                                Util.ConvertEPUB2Pdf(ListViewFirstColumnText, ConvertedFileName);
                                 break;
                             default: break;
                         }
@@ -507,8 +507,8 @@ namespace DocumentTools
 
                         ListViewControl.BeginInvoke(new Action(() =>
                         {
-                            ListViewControl.Items[TempIndex-1].Selected = true;
-                            ListViewControl.EnsureVisible(TempIndex-1);
+                            ListViewControl.Items[TempIndex - 1].Selected = true;
+                            ListViewControl.EnsureVisible(TempIndex - 1);
                             ListViewControl.Focus();
                         }));
                     }
@@ -608,7 +608,7 @@ namespace DocumentTools
                     ListViewControl.BeginUpdate();
 
                     (NowSelectItem.Text, BottomSelectItem.Text) = (BottomSelectItem.Text, NowSelectItem.Text);
-                    
+
                     ListViewControl.Items[NowSelectIndex + 1].Selected = true;// 选中移动后的文本
 
                     ListViewControl.EndUpdate();

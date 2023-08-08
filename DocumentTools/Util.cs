@@ -2,7 +2,6 @@
 using Aspose.Cells;
 using Aspose.Cells.Rendering;
 using Aspose.Html.Net;
-using Aspose.Html.Services;
 using Aspose.Imaging;
 using Aspose.Pdf;
 using Aspose.Pdf.Annotations;
@@ -21,7 +20,6 @@ using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Resources;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -479,8 +477,6 @@ namespace DocumentTools
             Aspose.Pdf.Devices.ImageDevice TempPdfImageDevice = null;
             Aspose.Pdf.Devices.TiffDevice TempPdfTifDevice = null;
             Aspose.Pdf.Devices.Resolution TempPdfImageResolution = new Aspose.Pdf.Devices.Resolution(DpiValue);
-
-            Aspose.Slides.Presentation TempPresentationDocument = null;
             switch (FileType)
             {
                 case ".doc":
@@ -499,10 +495,10 @@ namespace DocumentTools
                     TempExcelDocument = new Aspose.Cells.Workbook(DocumentsFileName);
                     break;
                 case ".ppt":
-                    TempPresentationDocument = new Aspose.Slides.Presentation(DocumentsFileName);
+                    _ = new Aspose.Slides.Presentation(DocumentsFileName);
                     break;
                 case ".pptx":
-                    TempPresentationDocument = new Aspose.Slides.Presentation(DocumentsFileName);
+                    _ = new Aspose.Slides.Presentation(DocumentsFileName);
                     break;
                 default: break;
             }
@@ -1364,7 +1360,7 @@ namespace DocumentTools
         /// <param name="RemoveNumber">是否移除数字</param>
         /// <param name="RemoveSquare">是否移除括号</param>
         /// <returns></returns>
-        public static string[] AddText2List(string InputText, bool RemoveNumber, bool RemoveSquare, bool NameStorke,bool NameReplace,string SearchText,string ReplaceText)
+        public static string[] AddText2List(string InputText, bool RemoveNumber, bool RemoveSquare, bool NameStorke, bool NameReplace, string SearchText, string ReplaceText)
         {
             List<string> TextList = new List<string>();
 
@@ -1397,11 +1393,11 @@ namespace DocumentTools
                     {
                         if (BodyForm.MainForm.NameReplaceMode)
                         {
-                            TempInputTextNoSpace = Regex.Replace(TempInputTextNoSpace,SearchText,ReplaceText,RegexOptions.Multiline);
+                            TempInputTextNoSpace = Regex.Replace(TempInputTextNoSpace, SearchText, ReplaceText, RegexOptions.Multiline);
                         }
                         else
                         {
-                            TempInputTextNoSpace = TempInputTextNoSpace.Replace(SearchText,ReplaceText);
+                            TempInputTextNoSpace = TempInputTextNoSpace.Replace(SearchText, ReplaceText);
                         }
                     }
 
@@ -1434,11 +1430,11 @@ namespace DocumentTools
                             AddListText = RemoveSpeciCharacter(new string[] { "\\(.+?\\)|\\（.+?\\）|\\(\\)|\\（\\）" }, AddListText);
                         }
 
-                        if (NameReplace && SearchText!=string.Empty)
+                        if (NameReplace && SearchText != string.Empty)
                         {
                             if (BodyForm.MainForm.NameReplaceMode)
                             {
-                                AddListText = Regex.Replace(AddListText, SearchText, ReplaceText,RegexOptions.Multiline);
+                                AddListText = Regex.Replace(AddListText, SearchText, ReplaceText, RegexOptions.Multiline);
                             }
                             else
                             {
@@ -1518,7 +1514,7 @@ namespace DocumentTools
             {
                 DownloadStatusLabel.Text = $"下载完毕，文件名称为：{SavedFileName}";
                 DownloadProgressBar.Value = 0;
-                MessageBox.Show($"下载完毕，文件在软件同目录下：{SavedFileName}","下载文件",MessageBoxButtons.OK,MessageBoxIcon.Asterisk);
+                MessageBox.Show($"下载完毕，文件在软件同目录下：{SavedFileName}", "下载文件", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 DownloadStatusLabel.Text = "下载进度：0%";
             };
 
@@ -1555,33 +1551,33 @@ namespace DocumentTools
         /// </summary>
         /// <param name="DocumentFileName"></param>
         /// <param name="SavedFileName"></param>
-        public static void ConvertHtml2PDF(string DocumentFileName,string SavedFileName)
+        public static void ConvertHtml2PDF(string DocumentFileName, string SavedFileName)
         {
             Aspose.Hook.HookManager.StartHook();
-
-            Aspose.Html.Configuration TempConfig = new Aspose.Html.Configuration();
+            _ = new Aspose.Html.Configuration();
             Aspose.Html.Rendering.Pdf.PdfRenderingOptions TempPdfRenderOption = new Aspose.Html.Rendering.Pdf.PdfRenderingOptions();
             TempPdfRenderOption.Css.MediaType = Aspose.Html.Rendering.MediaType.Screen;
             TempPdfRenderOption.PageSetup.AdjustToWidestPage = true;
 
-            using (Aspose.Html.HTMLDocument TempDocument = new Aspose.Html.HTMLDocument(DocumentFileName)) {
+            using (Aspose.Html.HTMLDocument TempDocument = new Aspose.Html.HTMLDocument(DocumentFileName))
+            {
 
                 using Aspose.Html.Rendering.Pdf.PdfDevice TempPdfDevice = new Aspose.Html.Rendering.Pdf.PdfDevice(TempPdfRenderOption, SavedFileName);
                 TempDocument.RenderTo(TempPdfDevice);
             };
 
-           //INetworkService networkService =  TempConfig.GetService<INetworkService>();
+            //INetworkService networkService =  TempConfig.GetService<INetworkService>();
 
-           // networkService.MessageHandlers.Insert(0, new TimeoutMessageHandler());
+            // networkService.MessageHandlers.Insert(0, new TimeoutMessageHandler());
 
-           //    Aspose.Html.Saving.PdfSaveOptions TempOption = new Aspose.Html.Saving.PdfSaveOptions()
-           //         {
-           //             JpegQuality = 100,
-           //         };
+            //    Aspose.Html.Saving.PdfSaveOptions TempOption = new Aspose.Html.Saving.PdfSaveOptions()
+            //         {
+            //             JpegQuality = 100,
+            //         };
 
-           //    TempOption.PageSetup.AdjustToWidestPage = true;
+            //    TempOption.PageSetup.AdjustToWidestPage = true;
 
-           //     Aspose.Html.Converters.Converter.ConvertHTML(DocumentFileName, TempConfig,TempOption,SavedFileName);
+            //     Aspose.Html.Converters.Converter.ConvertHTML(DocumentFileName, TempConfig,TempOption,SavedFileName);
         }
 
         /// <summary>
@@ -1589,10 +1585,11 @@ namespace DocumentTools
         /// </summary>
         /// <param name="DocumentFileName"></param>
         /// <param name="SavedFileName"></param>
-        public static void ConvertWord2EPUB(string DocumentFileName,string SavedFileName,string AuthorName) {
+        public static void ConvertWord2EPUB(string DocumentFileName, string SavedFileName, string AuthorName)
+        {
             Aspose.Hook.HookManager.StartHook();
 
-            Aspose.Words.Document TempLoadDocument =  new Aspose.Words.Document(DocumentFileName);
+            Aspose.Words.Document TempLoadDocument = new Aspose.Words.Document(DocumentFileName);
 
             TempLoadDocument.BuiltInDocumentProperties.Title = Path.GetFileNameWithoutExtension(DocumentFileName);
             TempLoadDocument.BuiltInDocumentProperties.Author = AuthorName == string.Empty ? "DocumentTools" : AuthorName;
@@ -1617,7 +1614,7 @@ namespace DocumentTools
                 SaveFormat = Aspose.Words.SaveFormat.Epub
             };
 
-            TempLoadDocument.Save(SavedFileName,TempHtmlSaveOption);
+            TempLoadDocument.Save(SavedFileName, TempHtmlSaveOption);
 
         }
         /// <summary>
@@ -1625,7 +1622,8 @@ namespace DocumentTools
         /// </summary>
         /// <param name="DocumentFileName"></param>
         /// <param name="SavedFileName"></param>
-        public static void ConvertEPUB2Word(string DocumentFileName,string SavedFileName) {
+        public static void ConvertEPUB2Word(string DocumentFileName, string SavedFileName)
+        {
             Aspose.Hook.HookManager.StartHook();
 
             Aspose.Html.Saving.DocSaveOptions TempSaveOption = new Aspose.Html.Saving.DocSaveOptions();
@@ -1637,7 +1635,7 @@ namespace DocumentTools
             //using Aspose.Html.HTMLDocument TempLoadDocument = new Aspose.Html.HTMLDocument(DocumentFileName);
             //TempLoadDocument.RenderTo(docDevice);
 
-            Aspose.Html.Converters.Converter.ConvertEPUB(DocumentFileName,TempSaveOption,SavedFileName);
+            Aspose.Html.Converters.Converter.ConvertEPUB(DocumentFileName, TempSaveOption, SavedFileName);
         }
 
         /// <summary>
@@ -1645,7 +1643,7 @@ namespace DocumentTools
         /// </summary>
         /// <param name="DocumentFileName"></param>
         /// <param name="SavedFileName"></param>
-        public static void ConvertEPUB2Pdf(string DocumentFileName,string SavedFileName)
+        public static void ConvertEPUB2Pdf(string DocumentFileName, string SavedFileName)
         {
             Aspose.Hook.HookManager.StartHook();
 
@@ -1655,8 +1653,8 @@ namespace DocumentTools
             };
             TempSaveOption.PageSetup.AdjustToWidestPage = true;
 
-            Aspose.Html.Converters.Converter.ConvertEPUB(DocumentFileName,TempSaveOption,SavedFileName);
-            
+            Aspose.Html.Converters.Converter.ConvertEPUB(DocumentFileName, TempSaveOption, SavedFileName);
+
         }
 
         public static string GetPdfVersion(string DocumentFileName)
@@ -1665,7 +1663,27 @@ namespace DocumentTools
 
             Aspose.Pdf.Document TempDocument = new Aspose.Pdf.Document(DocumentFileName);
 
-            return $"PDF文件版本：{TempDocument.Version}";
+            StringBuilder stringBuilder = new StringBuilder();
+
+            stringBuilder.AppendLine($"PDF文档版本：{TempDocument.Version}");
+            stringBuilder.AppendLine();
+            stringBuilder.AppendLine($"PDF文档作者：{(TempDocument.Info.Author ?? "无")}");
+            stringBuilder.AppendLine();
+            stringBuilder.AppendLine($"PDF文档创建者：{(TempDocument.Info.Creator ?? "无")}");
+            stringBuilder.AppendLine();
+            stringBuilder.AppendLine($"PDF文档提供者：{(TempDocument.Info.Producer ?? "无")}");
+            stringBuilder.AppendLine();
+            stringBuilder.AppendLine($"PDF文档主题：{(TempDocument.Info.Subject ?? "无")}");
+            stringBuilder.AppendLine();
+            stringBuilder.AppendLine($"PDF文档创建日期：{TempDocument.Info.CreationDate}");
+            stringBuilder.AppendLine();
+            stringBuilder.AppendLine($"PDF文档修改日期：{TempDocument.Info.ModDate}");
+            stringBuilder.AppendLine();
+            stringBuilder.AppendLine($"PDF是否符合PDF/A标准：{(TempDocument.IsPdfaCompliant == true ? "符合" : "不符合")}");
+            stringBuilder.AppendLine();
+            stringBuilder.AppendLine($"PDF是否符合PDF/UA标准：{(TempDocument.IsPdfUaCompliant == true ? "符合" : "不符合")}");
+
+            return stringBuilder.ToString();
         }
 
         public static string GetFileSizeDisplayString(long fileSizeBytes)
@@ -1705,7 +1723,7 @@ namespace DocumentTools
         public static void RemoveShort()
         {
             string SystemRootDir = Environment.GetEnvironmentVariable("systemroot");
-            SetRegistryValue(RegistryHive.LocalMachine, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons","29", $"{SystemRootDir}\\system32\\imageres.dll,197", RegistryValueKind.String);
+            SetRegistryValue(RegistryHive.LocalMachine, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons", "29", $"{SystemRootDir}\\system32\\imageres.dll,197", RegistryValueKind.String);
             SetIconCacheAttr();
 
         }
@@ -1714,7 +1732,7 @@ namespace DocumentTools
         /// </summary>
         public static void RestoreShort()
         {
-            DeleteRegistryKey(RegistryHive.LocalMachine, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons","29");
+            DeleteRegistryKey(RegistryHive.LocalMachine, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons", "29");
             SetIconCacheAttr();
         }
         /// <summary>
@@ -1725,7 +1743,7 @@ namespace DocumentTools
         {
             object TempObj = GetRegistryValue(RegistryHive.LocalMachine, @"Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons", "29");
 
-            if(TempObj != null && TempObj.ToString().Contains("imageres.dll"))
+            if (TempObj != null && TempObj.ToString().Contains("imageres.dll"))
             {
                 return "已移除";
             }
@@ -1733,7 +1751,7 @@ namespace DocumentTools
             {
                 return "未移除";
             }
-            
+
         }
 
 
@@ -1759,7 +1777,7 @@ namespace DocumentTools
         /// <param name="WriteRegistryName"></param>
         /// <param name="WriteRegistryValue"></param>
         /// <param name="WriteKind"></param>
-        private static void SetRegistryValue(RegistryHive OpenRegistryHive,string OpenRegistryPath,string WriteRegistryName, object WriteRegistryValue,RegistryValueKind WriteKind)
+        private static void SetRegistryValue(RegistryHive OpenRegistryHive, string OpenRegistryPath, string WriteRegistryName, object WriteRegistryValue, RegistryValueKind WriteKind)
         {
             RegistryKey TempRootRegistryKey;
             if (Environment.Is64BitOperatingSystem)
@@ -1770,13 +1788,13 @@ namespace DocumentTools
             {
                 TempRootRegistryKey = RegistryKey.OpenBaseKey(OpenRegistryHive, RegistryView.Registry32);
             }
-            
+
             TempRootRegistryKey.CreateSubKey(OpenRegistryPath, true);
 
 
-            RegistryKey TempSubKey =  TempRootRegistryKey.OpenSubKey(OpenRegistryPath,true);
+            RegistryKey TempSubKey = TempRootRegistryKey.OpenSubKey(OpenRegistryPath, true);
 
-            if (TempSubKey!=null)
+            if (TempSubKey != null)
             {
                 TempSubKey.SetValue(WriteRegistryName, WriteRegistryValue, WriteKind);
                 TempSubKey.Close();
@@ -1807,8 +1825,8 @@ namespace DocumentTools
             if (TempSubKey != null)
             {
                 TempValue = TempSubKey.GetValue(RegistryName);
-                
-                if(TempValue != null)
+
+                if (TempValue != null)
                 {
                     TempSubKey.Close();
                 }
@@ -1822,7 +1840,7 @@ namespace DocumentTools
         /// <param name="OpenRegistryHive"></param>
         /// <param name="OpenRegistryPath"></param>
         /// <param name="DeleteName"></param>
-        private static void DeleteRegistryKey(RegistryHive OpenRegistryHive, string OpenRegistryPath,string DeleteName)
+        private static void DeleteRegistryKey(RegistryHive OpenRegistryHive, string OpenRegistryPath, string DeleteName)
         {
             RegistryKey TempRootRegistryKey;
             if (Environment.Is64BitOperatingSystem)
@@ -1835,7 +1853,7 @@ namespace DocumentTools
             }
             RegistryKey TempSubKey = TempRootRegistryKey.OpenSubKey(OpenRegistryPath, true);
 
-            if(TempSubKey!=null && TempSubKey.GetValueNames().Contains(DeleteName))
+            if (TempSubKey != null && TempSubKey.GetValueNames().Contains(DeleteName))
             {
                 TempSubKey.DeleteValue(DeleteName);
                 TempSubKey.Close();

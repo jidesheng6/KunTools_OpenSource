@@ -1,5 +1,4 @@
-﻿using Aspose.Pdf.Operators;
-using Gma.System.MouseKeyHook;
+﻿using Gma.System.MouseKeyHook;
 using NTwain;
 using NTwain.Data;
 using System;
@@ -31,33 +30,33 @@ namespace DocumentTools
         private int TotalTempImageCount = 0;
         private double ScanSeconds = 0;
         private Bitmap PictureBoxPreviewImage;
-        private List<Bitmap> TempScannedImageBmpList = new List<Bitmap>();
-        private IKeyboardEvents GlobalHook = Hook.GlobalEvents();//全局钩子事件
-        private ImageList TempImageList = new ImageList(){ ImageSize =  new Size(1,35)};
+        private readonly List<Bitmap> TempScannedImageBmpList = new List<Bitmap>();
+        private readonly IKeyboardEvents GlobalHook = Hook.GlobalEvents();//全局钩子事件
+        private readonly ImageList TempImageList = new ImageList() { ImageSize = new Size(1, 25) };
         private string ListviewShowGridLines = "on";
 
         public bool NameReplaceMode = false;
         public string ShowOpenTargetDialog = "on";//是否启用完成后显示打开转换目录弹窗
         public string AddWaterMarkBackGroudImageFileName = string.Empty;
-        
 
-        string NowVersion = "23.8.7";
+
+        readonly string NowVersion = "23.8.7";
 
         #region 控件大小随窗体大小等比例缩放
 
         private readonly float x; //定义当前窗体的宽度
         private readonly float y; //定义当前窗体的高度
 
-        private void setTag(Control cons)
+        private void SetTag(Control cons)
         {
             foreach (Control con in cons.Controls)
             {
                 con.Tag = con.Width + ";" + con.Height + ";" + con.Left + ";" + con.Top + ";" + con.Font.Size;
-                if (con.Controls.Count > 0) setTag(con);
+                if (con.Controls.Count > 0) SetTag(con);
             }
         }
 
-        private void setControls(float newx, float newy, Control cons)
+        private void SetControls(float newx, float newy, Control cons)
         {
             //遍历窗体中的控件，重新设置控件的值
             foreach (Control con in cons.Controls)
@@ -73,7 +72,7 @@ namespace DocumentTools
                     var currentSize = Convert.ToSingle(mytag[4]) * newy; //字体大小                   
                     if (currentSize > 0) con.Font = new Font(con.Font.Name, currentSize, con.Font.Style, con.Font.Unit);
                     con.Focus();
-                    if (con.Controls.Count > 0) setControls(newx, newy, con);
+                    if (con.Controls.Count > 0) SetControls(newx, newy, con);
                 }
         }
 
@@ -85,7 +84,7 @@ namespace DocumentTools
         {
             var newx = Width / x;
             var newy = Height / y;
-            setControls(newx, newy, this);
+            SetControls(newx, newy, this);
 
         }
 
@@ -127,7 +126,7 @@ namespace DocumentTools
                 {
                     if (int.TryParse(DisablePageIndex, out int PageIndex))
                     {
-                        if (PageIndex >= 0 & PageIndex <= MainTabPage.TabCount-1)
+                        if (PageIndex >= 0 & PageIndex <= MainTabPage.TabCount - 1)
                         {
                             MainTabPage.TabPages[PageIndex].Parent = null;
                         }
@@ -136,13 +135,13 @@ namespace DocumentTools
             }
         }
 
-       private void SetListViewLineHeight()
+        private void SetListViewLineHeight()
         {
             string ListViewLineHeight = ConfigurationManager.AppSettings["ListViewLineHeight"];
 
-            if(int.TryParse(ListViewLineHeight, out int LineHeight) && LineHeight>0 && LineHeight<=256)
+            if (int.TryParse(ListViewLineHeight, out int LineHeight) && LineHeight > 0 && LineHeight <= 256)
             {
-                TempImageList.ImageSize = new Size(1,LineHeight);
+                TempImageList.ImageSize = new Size(1, LineHeight);
             }
         }
 
@@ -174,7 +173,7 @@ namespace DocumentTools
 
             x = Width;
             y = Height;
-            setTag(this);
+            SetTag(this);
 
 
 
@@ -209,7 +208,7 @@ namespace DocumentTools
             //Util.PlayMp3WithStream();
 
             ShortStatus.Text = Util.GetShortStatus();
-            ShortStatus.ForeColor = ShortStatus.Text=="已移除"? Color.Red: Color.Green;
+            ShortStatus.ForeColor = ShortStatus.Text == "已移除" ? Color.Red : Color.Green;
 
             try
             {
@@ -253,17 +252,18 @@ namespace DocumentTools
 
             //初始化所有listview
 
-            GetFormMembers(typeof(ListView)).ForEach(x => {
+            GetFormMembers(typeof(ListView)).ForEach(x =>
+            {
                 ListView TempListView = x as ListView;
                 TempListView.View = View.Details;
                 TempListView.FullRowSelect = true;
                 TempListView.AllowDrop = true;
                 TempListView.ShowItemToolTips = true;
                 TempListView.MultiSelect = false;
-                TempListView.GridLines = ListviewShowGridLines=="on";
-                TempListView.Columns.Add("文件名称", 300,HorizontalAlignment.Left);
-                TempListView.Columns.Add("添加时间", 300,HorizontalAlignment.Left);
-                TempListView.Columns.Add("转换后文件名称", 300,HorizontalAlignment.Left);
+                TempListView.GridLines = ListviewShowGridLines == "on";
+                TempListView.Columns.Add("文件名称", 300, HorizontalAlignment.Left);
+                TempListView.Columns.Add("添加时间", 300, HorizontalAlignment.Left);
+                TempListView.Columns.Add("转换后文件名称", 300, HorizontalAlignment.Left);
                 TempListView.Columns.Add("文件大小", 300, HorizontalAlignment.Left);
                 TempListView.SmallImageList = TempImageList;
                 TempListView.Sorting = SortOrder.Ascending;
@@ -275,7 +275,7 @@ namespace DocumentTools
 
                 TempListView.MouseClick += (MouseSender, MouseEvent) =>
                 {
-                    if(MouseEvent.Button == MouseButtons.Right)
+                    if (MouseEvent.Button == MouseButtons.Right)
                     {
                         ListViewRightMenu.Show(TempListView, MouseEvent.Location);
                     }
@@ -493,9 +493,9 @@ namespace DocumentTools
 
                 if (x.FieldType == controlType)
                 {
-                  object TempObj =  x.GetValue(this);
+                    object TempObj = x.GetValue(this);
 
-                    if(TempObj != null)
+                    if (TempObj != null)
                     {
                         controlTypes.Add(TempObj);
                     }
@@ -507,12 +507,13 @@ namespace DocumentTools
         private void InitMoveItemButtonHandler()
         {
             #region 上下移动项目位置按钮注册点击事件
-            GetFormMembers(typeof(Button)).ForEach(x => { 
-            
+            GetFormMembers(typeof(Button)).ForEach(x =>
+            {
+
                 Button TempButton = x as Button;
                 string[] SplitButtonName = TempButton.Name.Split('_');
 
-                if(SplitButtonName.Length == 2 )//只有确实分割了才处理
+                if (SplitButtonName.Length == 2)//只有确实分割了才处理
                 {
                     GetFormMembers(typeof(ListView)).ForEach(listview =>
                     {
@@ -543,99 +544,123 @@ namespace DocumentTools
         {
 
 
-            word2pdf_clear.Click += (s1, s2) => {
+            word2pdf_clear.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(true, this.WordFileListView);
             };
 
-            pdf2word_clear.Click += (s1, s2) => {
+            pdf2word_clear.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(true, this.PdfFileListView);
             };
 
-            excel2pdf_clear.Click += (s1, s2) => {
+            excel2pdf_clear.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(true, this.ExcelFileListView);
             };
 
-            pdf2excel_clear.Click += (s1, s2) => {
+            pdf2excel_clear.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(true, this.PdfFileListView);
             };
 
-            ppt2pdf_clear.Click += (s1, s2) => {
+            ppt2pdf_clear.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(true, this.PdfFileListView);
             };
 
-            pdf2ppt_clear.Click += (s1, s2) => {
+            pdf2ppt_clear.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(true, this.PDF2PPTFileList);
             };
 
-            meregeword_clear.Click += (s1, s2) => {
+            meregeword_clear.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(true, this.PdfFileListView);
             };
 
-            meregepdf_clear.Click += (s1, s2) => {
+            meregepdf_clear.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(true, this.MergePdfFileView);
             };
 
-            sqplitpdf_clear.Click += (s1, s2) => {
+            sqplitpdf_clear.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(true, this.SplitPdfFileList);
             };
 
-            addpdfwater_clear.Click += (s1, s2) => {
+            addpdfwater_clear.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(true, this.PdfWaterMarkFileList);
             };
 
-            removepdfwater_clear.Click += (s1, s2) => {
+            removepdfwater_clear.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(true, this.RemovePdfWaterMarkFileList);
             };
 
-            pdfversion_clear.Click += (s1, s2) => {
+            pdfversion_clear.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(true, this.ConvertPdfComplianceFileList);
             };
 
-            word2excel_clear.Click += (s1, s2) => {
+            word2excel_clear.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(true, this.Word2ExcelFileList);
             };
 
-            excel2word_clear.Click += (s1, s2) => {
+            excel2word_clear.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(true, this.Excel2WordFileList);
             };
 
-            document2image_clear.Click += (s1, s2) => {
+            document2image_clear.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(true, this.DocumentsListView);
             };
 
-            image2pdf_clear.Click += (s1, s2) => {
+            image2pdf_clear.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(true, this.ConvertImage2PDFFileList);
             };
 
-            compresspdf_clear.Click += (s1, s2) => {
+            compresspdf_clear.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(true, this.CompressPdfFileList);
             };
 
-            compressimage_clear.Click += (s1, s2) => {
+            compressimage_clear.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(true, this.CompressImageFileList);
             };
 
-            wordreplace_clear.Click += (s1, s2) => {
+            wordreplace_clear.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(true, this.ReplaceWordFileList);
             };
 
-            excelreplace_clear.Click += (s1, s2) => {
+            excelreplace_clear.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(true, this.ReplaceExcelFileView);
             };
 
-            datamatrix_clear.Click += (s1, s2) => {
+            datamatrix_clear.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(true, this.DecodeMatrixWordListView);
             };
 
-            image2ico_clear.Click += (s1, s2) => {
+            image2ico_clear.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(true, this.IcoFileView);
             };
 
-            word2epub_clear.Click += (s1, s2) => {
+            word2epub_clear.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(true, this.Word2EPUBFileList);
             };
 
-            epub2word_clear.Click += (s1, s2) => {
+            epub2word_clear.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(true, this.EPUB2WORDFileList);
             };
 
@@ -645,99 +670,123 @@ namespace DocumentTools
             };
 
             //remove
-            word2pdf_remove.Click += (s1, s2) => {
+            word2pdf_remove.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(false, this.WordFileListView);
             };
 
-            pdf2word_remove.Click += (s1, s2) => {
+            pdf2word_remove.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(false, this.PdfFileListView);
             };
 
-            excel2pdf_remove.Click += (s1, s2) => {
+            excel2pdf_remove.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(false, this.ExcelFileListView);
             };
 
-            pdf2excel_remove.Click += (s1, s2) => {
+            pdf2excel_remove.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(false, this.PDF2ExcelFileView);
             };
 
-            ppt2pdf_remove.Click += (s1, s2) => {
+            ppt2pdf_remove.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(false, this.PPT2PdfFileList);
             };
 
-            pdf2ppt_remove.Click += (s1, s2) => {
+            pdf2ppt_remove.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(false, this.PDF2PPTFileList);
             };
 
-            meregeword_remove.Click += (s1, s2) => {
+            meregeword_remove.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(false, this.MergeWordFileList);
             };
 
-            meregepdf_remove.Click += (s1, s2) => {
+            meregepdf_remove.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(false, this.MergePdfFileView);
             };
 
-            sqplitpdf_remove.Click += (s1, s2) => {
+            sqplitpdf_remove.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(false, this.SplitPdfFileList);
             };
 
-            addpdfwater_remove.Click += (s1, s2) => {
+            addpdfwater_remove.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(false, this.PdfWaterMarkFileList);
             };
 
-            removepdfwater_remove.Click += (s1, s2) => {
+            removepdfwater_remove.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(false, this.RemovePdfWaterMarkFileList);
             };
 
-            pdfversion_remove.Click += (s1, s2) => {
+            pdfversion_remove.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(false, this.ConvertPdfComplianceFileList);
             };
 
-            word2excel_remove.Click += (s1, s2) => {
+            word2excel_remove.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(false, this.Word2ExcelFileList);
             };
 
-            excel2word_remove.Click += (s1, s2) => {
+            excel2word_remove.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(false, this.Excel2WordFileList);
             };
 
-            document2image_remove.Click += (s1, s2) => {
+            document2image_remove.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(false, this.DocumentsListView);
             };
 
-            image2pdf_remove.Click += (s1, s2) => {
+            image2pdf_remove.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(false, this.ConvertImage2PDFFileList);
             };
 
-            compresspdf_remove.Click += (s1, s2) => {
+            compresspdf_remove.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(false, this.CompressPdfFileList);
             };
 
-            compressimage_remove.Click += (s1, s2) => {
+            compressimage_remove.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(false, this.CompressImageFileList);
             };
 
-            wordreplace_remove.Click += (s1, s2) => {
+            wordreplace_remove.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(false, this.ReplaceWordFileList);
             };
 
-            excelreplace_remove.Click += (s1, s2) => {
+            excelreplace_remove.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(false, this.ReplaceExcelFileView);
             };
 
-            datamatrix_remove.Click += (s1, s2) => {
+            datamatrix_remove.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(false, this.DecodeMatrixWordListView);
             };
 
-            image2ico_remove.Click += (s1, s2) => {
+            image2ico_remove.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(false, this.IcoFileView);
             };
 
-            word2epub_remove.Click += (s1, s2) => {
+            word2epub_remove.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(false, this.Word2EPUBFileList);
             };
 
-            epub2word_remove.Click += (s1, s2) => {
+            epub2word_remove.Click += (s1, s2) =>
+            {
                 UI.RemoveListViewItem(false, this.EPUB2WORDFileList);
             };
             epub2pdf_remove.Click += (s1, s2) =>
@@ -747,7 +796,7 @@ namespace DocumentTools
 
 
         }
-        
+
         //注册TooTip到符号按钮上
         private void InitToolTipHandler()
         {
@@ -755,15 +804,15 @@ namespace DocumentTools
             {
                 Button TempButton = member as Button;
 
-                if(TempButton.Name.Contains("_clear"))
+                if (TempButton.Name.Contains("_clear"))
                 {
                     MainToolsTip.SetToolTip(TempButton, "清空列表中所有文件");
                 }
-                else if(TempButton.Name.Contains("_remove"))
+                else if (TempButton.Name.Contains("_remove"))
                 {
                     MainToolsTip.SetToolTip(TempButton, "移除选中文件");
                 }
-                else if(TempButton.Name.Contains("MoveDown"))
+                else if (TempButton.Name.Contains("MoveDown"))
                 {
                     MainToolsTip.SetToolTip(TempButton, "向下移动选中文件");
                 }
@@ -897,7 +946,7 @@ namespace DocumentTools
             {
                 List<string> TempLines = new List<string>();
                 TargetTextBox.Lines = Util.AddText2List(SourceTextBox.Text, RemoveNumberCheck.Checked, RemoveSquareCheck.Checked, NameStorkeChcek.Checked,
-                                      NameReplaceWord.Checked,NameReplaceWord_Search.Text,NameReplaceWord_Target.Text
+                                      NameReplaceWord.Checked, NameReplaceWord_Search.Text, NameReplaceWord_Target.Text
                                        );
                 //双字对齐功能，放在全部的文本处理完毕以后再进行重新处理，不然只能针对源文本字符长度进行判断，不太合适
 
@@ -1033,7 +1082,7 @@ namespace DocumentTools
         /// <param name="e"></param>
         private void 删除本项ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(ListViewRightMenu.SourceControl.GetType() == typeof(ListView))
+            if (ListViewRightMenu.SourceControl.GetType() == typeof(ListView))
             {
                 ListView TempListView = ListViewRightMenu.SourceControl as ListView;
                 UI.RemoveListViewItem(false, TempListView);
@@ -1152,7 +1201,7 @@ namespace DocumentTools
                     UI.AddFilesToListviewWithNotDialog(DropFiles, this.CompressImageFileList, new string[] { ".jpg", ".jpeg", ".png", ".bmp" });
                     break;
                 case "Word2EPUBFileList":
-                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.Word2EPUBFileList, new string[] { ".doc",".docx" });
+                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.Word2EPUBFileList, new string[] { ".doc", ".docx" });
                     break;
                 case "EPUB2WORDFileList":
                     UI.AddFilesToListviewWithNotDialog(DropFiles, this.EPUB2WORDFileList, new string[] { ".epub" });
@@ -1489,7 +1538,7 @@ namespace DocumentTools
         {
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LinkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("https://c.runoob.com/front-end/854/");
         }
@@ -1577,7 +1626,7 @@ namespace DocumentTools
             MessageBox.Show("释放完成，文件在软件同目录下", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
 
-        private void label9_DoubleClick(object sender, EventArgs e)
+        private void Label9_DoubleClick(object sender, EventArgs e)
         {
             if (ReleaseRegistry.Enabled)
             {
@@ -1633,12 +1682,12 @@ namespace DocumentTools
             }
         }
 
-        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LinkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process.Start("https://www.52pojie.cn/thread-1769111-1-1.html");
         }
 
- 
+
 
         private void SelectMergeWordFiles_Click(object sender, EventArgs e)
         {
@@ -2168,7 +2217,7 @@ namespace DocumentTools
         {
 
             GlobalHook.KeyDown += HookKeyboard_KeyDown;
-            GlobalHook.KeyUp   += HookKeyboard_KeyUp;
+            GlobalHook.KeyUp += HookKeyboard_KeyUp;
             KeyBoardLockStatus.Text = $"已锁定";
             KeyBoardLockStatus.ForeColor = Color.Red;
         }
@@ -2176,13 +2225,13 @@ namespace DocumentTools
         private void UnlockKeyBoard_Click(object sender, EventArgs e)
         {
             GlobalHook.KeyDown -= HookKeyboard_KeyDown;
-            GlobalHook.KeyUp   -= HookKeyboard_KeyUp;
+            GlobalHook.KeyUp -= HookKeyboard_KeyUp;
 
             KeyBoardLockStatus.Text = "已解锁";
             KeyBoardLockStatus.ForeColor = Color.Green;
         }
 
-        private void HookKeyboard_KeyDown(object sender,KeyEventArgs e)
+        private void HookKeyboard_KeyDown(object sender, KeyEventArgs e)
         {
             e.Handled = true;
         }
@@ -2200,9 +2249,9 @@ namespace DocumentTools
             ShortStatus.ForeColor = Color.Red;
             if (AutoRestartExplorer.Checked)
             {
-                Process.GetProcesses().ToList().ForEach(p=>
+                Process.GetProcesses().ToList().ForEach(p =>
                 {
-                    if(p.ProcessName=="explorer")
+                    if (p.ProcessName == "explorer")
                     {
                         p.Kill();
                     }
@@ -2240,7 +2289,7 @@ namespace DocumentTools
             {
                 try
                 {
-                    UI.ConvertStart(this.Word2EPUBFileList, this.ConvertWord2EpubStatusText, ConvertFileType.Word2Epub,".epub");
+                    UI.ConvertStart(this.Word2EPUBFileList, this.ConvertWord2EpubStatusText, ConvertFileType.Word2Epub, ".epub");
                 }
                 catch (Exception ex)
                 {
@@ -2273,7 +2322,7 @@ namespace DocumentTools
                 }
                 catch (Exception ex)
                 {
-                    
+
                     MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
@@ -2311,13 +2360,91 @@ namespace DocumentTools
             });
         }
 
+
+        //private void ConvertHTML2PDF_Click(object sender, EventArgs e)
+        //{
+        //    Task.Run(() =>
+        //    {
+        //        try
+        //        {
+        //            UI.ConvertStart(this.Word2EPUBFileList, this.ConvertWord2EpubStatusText, ConvertFileType.Word2Epub, ".epub");
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //        }
+
+        //    });
+        //}
+
+        //private void SelectEpub2WordFiles_Click(object sender, EventArgs e)
+        //{
+        //    UI.AddEPUB2WORDFiles();
+        //}
+
+        //private void ConvertEpub2Word_Click(object sender, EventArgs e)
+        //{
+        //    Task.Run(() =>
+        //    {
+        //        try
+        //        {
+        //            UI.ConvertStart(this.EPUB2WORDFileList, this.ConvertEpub2WordStatusText, ConvertFileType.Epub2Word, ".docx");
+        //        }
+        //        catch (NullReferenceException)
+        //        {
+        //            MessageBox.Show($"EPUB格式不正确，请移除错误文件后重试", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //        }
+        //        catch (IndexOutOfRangeException)
+        //        {
+        //            MessageBox.Show($"EPUB格式不正确，请移除错误文件后重试", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //        }
+        //        catch (Exception ex)
+        //        {
+
+        //            MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //        }
+
+        //    });
+        //}
+
+        //private void SelectEPUB2PDFFiles_Click(object sender, EventArgs e)
+        //{
+        //    UI.AddEPUB2PDFFiles();
+        //}
+
+        //private void ConvertEPUB2PDF_Click(object sender, EventArgs e)
+        //{
+        //    Task.Run(() =>
+        //    {
+        //        try
+        //        {
+        //            UI.ConvertStart(this.EPUB2PDFFileList, this.ConvertEPUB2PDFStatusText, ConvertFileType.Epub2Pdf, ".pdf");
+        //        }
+        //        catch (NullReferenceException)
+        //        {
+        //            MessageBox.Show($"EPUB格式不正确，请移除错误文件后重试", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //        }
+        //        catch (IndexOutOfRangeException)
+        //        {
+        //            MessageBox.Show($"EPUB格式不正确，请移除错误文件后重试", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+        //        }
+        //        catch (Exception ex)
+        //        {
+
+        //            MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //        }
+
+        //    });
+        //}
+
         private void 打开源文件目录ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(ListViewRightMenu.SourceControl.GetType()==typeof(ListView))
+            if (ListViewRightMenu.SourceControl.GetType() == typeof(ListView))
             {
                 ListView TempListView = ListViewRightMenu.SourceControl as ListView;
 
-                if(File.Exists(TempListView.FocusedItem.Text))
+                if (File.Exists(TempListView.FocusedItem.Text))
                 {
                     Process.Start(Path.GetDirectoryName(TempListView.FocusedItem.Text));
                 }
@@ -2345,7 +2472,7 @@ namespace DocumentTools
             {
                 ListView TempListView = ListViewRightMenu.SourceControl as ListView;
 
-                if(TempListView.FocusedItem.SubItems.Count>=4)
+                if (TempListView.FocusedItem.SubItems.Count >= 4)
                 {
                     if (File.Exists(TempListView.FocusedItem.SubItems[2].Text))
                     {
@@ -2379,7 +2506,7 @@ namespace DocumentTools
 
                 string PdfFileName = TempListView.FocusedItem.Text;
 
-                if(File.Exists(PdfFileName)&&Path.GetExtension(PdfFileName)==".pdf")
+                if (File.Exists(PdfFileName) && Path.GetExtension(PdfFileName) == ".pdf")
                 {
                     Task.Run(() =>
                     {
@@ -2392,6 +2519,10 @@ namespace DocumentTools
                         }));
 
                     });
+                }
+                else
+                {
+                    MessageBox.Show("所选文件不存在或不是PDF文件", "信息", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
         }
