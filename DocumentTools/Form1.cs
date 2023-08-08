@@ -107,7 +107,16 @@ namespace DocumentTools
         private void SetTabCardHeighLight()
         {
             string OpenTabPageHeight = ConfigurationManager.AppSettings["TabPageHeight"];
-            this.MainTabPage.DrawMode = OpenTabPageHeight == "on" ? TabDrawMode.OwnerDrawFixed : TabDrawMode.Normal;
+
+            if(OpenTabPageHeight=="on")
+            {
+                this.MainTabPage.DrawMode = TabDrawMode.OwnerDrawFixed;
+            }
+            else
+            {
+                this.MainTabPage.DrawMode = TabDrawMode.Normal;
+                MainTabPage.ImageList = TabPageIcoList;
+            }
 
         }
 
@@ -187,6 +196,7 @@ namespace DocumentTools
             InitMoveItemButtonHandler();
             InitRemoveItemHandler();
             InitToolTipHandler();
+            InitTabPageIcon();
             OutPutListViewIndex();
             this.AllowDrop = true;
             this.PageExportCheck.Checked = true;
@@ -822,6 +832,89 @@ namespace DocumentTools
                 }
             });
 
+        }
+
+        //为tabpage添加图标
+        private void InitTabPageIcon()
+        {
+            GetFormMembers(typeof(TabPage)).ForEach(member => {
+                if (member is TabPage TempPage)
+                {
+                    string TabPageCaption = TempPage.Text;
+                    if (TabPageCaption.StartsWith("WORD转"))
+                    {
+                        TempPage.ImageIndex = 0;
+                    }
+                    else if(TabPageCaption.StartsWith("PDF"))
+                    {
+                        TempPage.ImageIndex = 1;
+                    }
+                    else if(TabPageCaption.StartsWith("EXCEL转"))
+                    {
+                        TempPage.ImageIndex = 2;
+                    }
+                    else if(TabPageCaption.StartsWith("PPT转"))
+                    {
+                        TempPage.ImageIndex = 3;
+                    }
+                    else if (TabPageCaption.StartsWith("WORD内"))
+                    {
+                        TempPage.ImageIndex = 0;
+                    }
+                    else if (TabPageCaption.StartsWith("EXCEL内"))
+                    {
+                        TempPage.ImageIndex = 1;
+                    }
+                    else if (TabPageCaption.StartsWith("EPUB"))
+                    {
+                        TempPage.ImageIndex = 4;
+                    }
+                    else if (TabPageCaption.StartsWith("压缩"))
+                    {
+                        TempPage.ImageIndex = 7;
+                    }
+                    else if (TabPageCaption.Contains("图片"))
+                    {
+                        TempPage.ImageIndex = 5;
+                    }
+                    else if (TabPageCaption.EndsWith("水印"))
+                    {
+                        TempPage.ImageIndex = 13;
+                    }
+                    else if (TabPageCaption.EndsWith("WORD"))
+                    {
+                        TempPage.ImageIndex = 0;
+                    }
+                    else if (TabPageCaption.EndsWith("PDF"))
+                    {
+                        TempPage.ImageIndex = 1;
+                    }
+                    else if (TabPageCaption.StartsWith("特殊"))
+                    {
+                        TempPage.ImageIndex = 8;
+                    }
+                    else if (TabPageCaption.StartsWith("Twain"))
+                    {
+                        TempPage.ImageIndex = 9;
+                    }
+                    else if (TabPageCaption.StartsWith("其他"))
+                    {
+                        TempPage.ImageIndex = 10;
+                    }
+                    else if (TabPageCaption.StartsWith("系统"))
+                    {
+                        TempPage.ImageIndex = 11;
+                    }
+                    else if (TabPageCaption.StartsWith("关于"))
+                    {
+                        TempPage.ImageIndex = 12;
+                    }
+                    else if (TabPageCaption.StartsWith("姓名"))
+                    {
+                        TempPage.ImageIndex = 14;
+                    }
+                }
+            });
         }
 
         private void ChooseDocButton_Click(object sender, EventArgs e)
