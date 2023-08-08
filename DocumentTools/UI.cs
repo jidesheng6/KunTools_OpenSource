@@ -366,10 +366,7 @@ namespace DocumentTools
                         string ListViewFirstColumnText = ListViewControl.Items[TempIndex].Text;
                         string FileNameWithOutExtension = Path.GetFileNameWithoutExtension(ListViewFirstColumnText);//不带后缀的文件名
                         string ConvertedFileName = Path.Combine(SelectSavePathstring, FileNameWithOutExtension + ExtensionString);
-                        ListViewControl.Items[TempIndex].SubItems.Add(ConvertedFileName);
-                        ListViewControl.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
                         StatusLabelControl.Text = $"正在处理第{TempIndex + 1}个文件";
-
                         //根据不同类型调用不同的函数
                         switch (ConverType)
                         {
@@ -488,7 +485,7 @@ namespace DocumentTools
                                 Util.ConvertHtml2PDF(ListViewFirstColumnText, ConvertedFileName);
                                 break;
                             case ConvertFileType.Word2Epub:
-                                Util.ConvertWord2EPUB(ListViewFirstColumnText,ConvertedFileName);
+                                Util.ConvertWord2EPUB(ListViewFirstColumnText,ConvertedFileName,BodyForm.MainForm.Word2EpubAuthorName.Text);
                                 break;
                             case ConvertFileType.Epub2Word:
                                 Util.ConvertEPUB2Word(ListViewFirstColumnText,ConvertedFileName);
@@ -498,6 +495,9 @@ namespace DocumentTools
                                 break;
                             default: break;
                         }
+                        ListViewControl.Items[TempIndex].SubItems.Add(ConvertedFileName);
+                        ListViewControl.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+
                         FileInfo ConverdFileInfo = new FileInfo(ConvertedFileName);
 
                         //获取转换后的文件大小
@@ -507,9 +507,9 @@ namespace DocumentTools
 
                         ListViewControl.BeginInvoke(new Action(() =>
                         {
-                            ListViewControl.Focus();
                             ListViewControl.Items[TempIndex-1].Selected = true;
                             ListViewControl.EnsureVisible(TempIndex-1);
+                            ListViewControl.Focus();
                         }));
                     }
                     StatusLabelControl.Text = "处理完毕";

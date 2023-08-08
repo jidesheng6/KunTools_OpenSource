@@ -227,6 +227,8 @@
             this.ConvertImageList = new System.Windows.Forms.ComboBox();
             this.DocumentsListView = new System.Windows.Forms.ListView();
             this.TabPage_27 = new System.Windows.Forms.TabPage();
+            this.Word2EpubAuthorName = new System.Windows.Forms.TextBox();
+            this.label61 = new System.Windows.Forms.Label();
             this.ConvertWord2EpubStatusText = new System.Windows.Forms.Label();
             this.word2epub_clear = new System.Windows.Forms.Button();
             this.word2epub_remove = new System.Windows.Forms.Button();
@@ -236,6 +238,7 @@
             this.SelectWord2EpubFiles = new System.Windows.Forms.Button();
             this.Word2EPUBFileList = new System.Windows.Forms.ListView();
             this.TabPage_28 = new System.Windows.Forms.TabPage();
+            this.label60 = new System.Windows.Forms.Label();
             this.EPUB2WORDFileList_MoveDown = new System.Windows.Forms.Button();
             this.EPUB2WORDFileList_MoveUp = new System.Windows.Forms.Button();
             this.epub2word_clear = new System.Windows.Forms.Button();
@@ -245,6 +248,7 @@
             this.SelectEpub2WordFiles = new System.Windows.Forms.Button();
             this.EPUB2WORDFileList = new System.Windows.Forms.ListView();
             this.TabPage_29 = new System.Windows.Forms.TabPage();
+            this.label59 = new System.Windows.Forms.Label();
             this.EPUB2PDFFileList_MoveDown = new System.Windows.Forms.Button();
             this.EPUB2PDFFileList_MoveUp = new System.Windows.Forms.Button();
             this.epub2pdf_clear = new System.Windows.Forms.Button();
@@ -486,8 +490,15 @@
             this.label6 = new System.Windows.Forms.Label();
             this.SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.ListViewRightMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.列表操作ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.删除本项ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.清空列表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.文件操作ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.打开源文件目录ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.打开源文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.打开转换后目录ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.打开转换后文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.获取PDF文件版本信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MemoryTimer = new System.Windows.Forms.Timer(this.components);
             this.TreeViewContentMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.展开折叠本节点全部ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -497,8 +508,6 @@
             this.FontSelectDialog = new System.Windows.Forms.FontDialog();
             this.MainFormError = new System.Windows.Forms.ErrorProvider(this.components);
             this.MainToolsTip = new System.Windows.Forms.ToolTip(this.components);
-            this.label59 = new System.Windows.Forms.Label();
-            this.label60 = new System.Windows.Forms.Label();
             this.MainTabPage.SuspendLayout();
             this.TabPage_01.SuspendLayout();
             this.TabPage_02.SuspendLayout();
@@ -2638,6 +2647,8 @@
             // 
             // TabPage_27
             // 
+            this.TabPage_27.Controls.Add(this.Word2EpubAuthorName);
+            this.TabPage_27.Controls.Add(this.label61);
             this.TabPage_27.Controls.Add(this.ConvertWord2EpubStatusText);
             this.TabPage_27.Controls.Add(this.word2epub_clear);
             this.TabPage_27.Controls.Add(this.word2epub_remove);
@@ -2652,6 +2663,23 @@
             this.TabPage_27.TabIndex = 26;
             this.TabPage_27.Text = "WORD转EPUB";
             this.TabPage_27.UseVisualStyleBackColor = true;
+            // 
+            // Word2EpubAuthorName
+            // 
+            this.Word2EpubAuthorName.Location = new System.Drawing.Point(128, 344);
+            this.Word2EpubAuthorName.MaxLength = 50;
+            this.Word2EpubAuthorName.Name = "Word2EpubAuthorName";
+            this.Word2EpubAuthorName.Size = new System.Drawing.Size(132, 28);
+            this.Word2EpubAuthorName.TabIndex = 18;
+            // 
+            // label61
+            // 
+            this.label61.AutoSize = true;
+            this.label61.Location = new System.Drawing.Point(9, 350);
+            this.label61.Name = "label61";
+            this.label61.Size = new System.Drawing.Size(116, 18);
+            this.label61.TabIndex = 17;
+            this.label61.Text = "设置作者名称";
             // 
             // ConvertWord2EpubStatusText
             // 
@@ -2748,6 +2776,16 @@
             this.TabPage_28.Text = "EPUB转WORD";
             this.TabPage_28.UseVisualStyleBackColor = true;
             // 
+            // label60
+            // 
+            this.label60.AutoSize = true;
+            this.label60.ForeColor = System.Drawing.Color.Tomato;
+            this.label60.Location = new System.Drawing.Point(8, 357);
+            this.label60.Name = "label60";
+            this.label60.Size = new System.Drawing.Size(494, 18);
+            this.label60.TabIndex = 30;
+            this.label60.Text = "提示：EPUB转WORD需确保EPUB格式正确，功能不稳定，请慎用";
+            // 
             // EPUB2WORDFileList_MoveDown
             // 
             this.EPUB2WORDFileList_MoveDown.Location = new System.Drawing.Point(934, 294);
@@ -2842,6 +2880,16 @@
             this.TabPage_29.TabIndex = 28;
             this.TabPage_29.Text = "EPUB转PDF";
             this.TabPage_29.UseVisualStyleBackColor = true;
+            // 
+            // label59
+            // 
+            this.label59.AutoSize = true;
+            this.label59.ForeColor = System.Drawing.Color.Tomato;
+            this.label59.Location = new System.Drawing.Point(4, 353);
+            this.label59.Name = "label59";
+            this.label59.Size = new System.Drawing.Size(485, 18);
+            this.label59.TabIndex = 29;
+            this.label59.Text = "提示：EPUB转PDF需确保EPUB格式正确，功能不稳定，请慎用";
             // 
             // EPUB2PDFFileList_MoveDown
             // 
@@ -5302,24 +5350,89 @@
             // 
             this.ListViewRightMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.ListViewRightMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.列表操作ToolStripMenuItem,
+            this.文件操作ToolStripMenuItem,
+            this.获取PDF文件版本信息ToolStripMenuItem});
+            this.ListViewRightMenu.Name = "contextMenuStrip1";
+            this.ListViewRightMenu.Size = new System.Drawing.Size(268, 133);
+            // 
+            // 列表操作ToolStripMenuItem
+            // 
+            this.列表操作ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.删除本项ToolStripMenuItem,
             this.清空列表ToolStripMenuItem});
-            this.ListViewRightMenu.Name = "contextMenuStrip1";
-            this.ListViewRightMenu.Size = new System.Drawing.Size(153, 64);
+            this.列表操作ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("列表操作ToolStripMenuItem.Image")));
+            this.列表操作ToolStripMenuItem.Name = "列表操作ToolStripMenuItem";
+            this.列表操作ToolStripMenuItem.Size = new System.Drawing.Size(267, 32);
+            this.列表操作ToolStripMenuItem.Text = "列表操作";
             // 
             // 删除本项ToolStripMenuItem
             // 
+            this.删除本项ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.Remove;
             this.删除本项ToolStripMenuItem.Name = "删除本项ToolStripMenuItem";
-            this.删除本项ToolStripMenuItem.Size = new System.Drawing.Size(152, 30);
+            this.删除本项ToolStripMenuItem.Size = new System.Drawing.Size(182, 34);
             this.删除本项ToolStripMenuItem.Text = "删除本项";
             this.删除本项ToolStripMenuItem.Click += new System.EventHandler(this.删除本项ToolStripMenuItem_Click);
             // 
             // 清空列表ToolStripMenuItem
             // 
+            this.清空列表ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.Clear;
             this.清空列表ToolStripMenuItem.Name = "清空列表ToolStripMenuItem";
-            this.清空列表ToolStripMenuItem.Size = new System.Drawing.Size(152, 30);
+            this.清空列表ToolStripMenuItem.Size = new System.Drawing.Size(182, 34);
             this.清空列表ToolStripMenuItem.Text = "清空列表";
             this.清空列表ToolStripMenuItem.Click += new System.EventHandler(this.清空列表ToolStripMenuItem_Click);
+            // 
+            // 文件操作ToolStripMenuItem
+            // 
+            this.文件操作ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.打开源文件目录ToolStripMenuItem,
+            this.打开源文件ToolStripMenuItem,
+            this.打开转换后目录ToolStripMenuItem,
+            this.打开转换后文件ToolStripMenuItem});
+            this.文件操作ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("文件操作ToolStripMenuItem.Image")));
+            this.文件操作ToolStripMenuItem.Name = "文件操作ToolStripMenuItem";
+            this.文件操作ToolStripMenuItem.Size = new System.Drawing.Size(267, 32);
+            this.文件操作ToolStripMenuItem.Text = "文件操作";
+            // 
+            // 打开源文件目录ToolStripMenuItem
+            // 
+            this.打开源文件目录ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("打开源文件目录ToolStripMenuItem.Image")));
+            this.打开源文件目录ToolStripMenuItem.Name = "打开源文件目录ToolStripMenuItem";
+            this.打开源文件目录ToolStripMenuItem.Size = new System.Drawing.Size(236, 34);
+            this.打开源文件目录ToolStripMenuItem.Text = "打开源文件目录";
+            this.打开源文件目录ToolStripMenuItem.Click += new System.EventHandler(this.打开源文件目录ToolStripMenuItem_Click);
+            // 
+            // 打开源文件ToolStripMenuItem
+            // 
+            this.打开源文件ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("打开源文件ToolStripMenuItem.Image")));
+            this.打开源文件ToolStripMenuItem.Name = "打开源文件ToolStripMenuItem";
+            this.打开源文件ToolStripMenuItem.Size = new System.Drawing.Size(236, 34);
+            this.打开源文件ToolStripMenuItem.Text = "打开源文件";
+            this.打开源文件ToolStripMenuItem.Click += new System.EventHandler(this.打开源文件ToolStripMenuItem_Click);
+            // 
+            // 打开转换后目录ToolStripMenuItem
+            // 
+            this.打开转换后目录ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("打开转换后目录ToolStripMenuItem.Image")));
+            this.打开转换后目录ToolStripMenuItem.Name = "打开转换后目录ToolStripMenuItem";
+            this.打开转换后目录ToolStripMenuItem.Size = new System.Drawing.Size(236, 34);
+            this.打开转换后目录ToolStripMenuItem.Text = "打开转换后目录";
+            this.打开转换后目录ToolStripMenuItem.Click += new System.EventHandler(this.打开转换后目录ToolStripMenuItem_Click);
+            // 
+            // 打开转换后文件ToolStripMenuItem
+            // 
+            this.打开转换后文件ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("打开转换后文件ToolStripMenuItem.Image")));
+            this.打开转换后文件ToolStripMenuItem.Name = "打开转换后文件ToolStripMenuItem";
+            this.打开转换后文件ToolStripMenuItem.Size = new System.Drawing.Size(236, 34);
+            this.打开转换后文件ToolStripMenuItem.Text = "打开转换后文件";
+            this.打开转换后文件ToolStripMenuItem.Click += new System.EventHandler(this.打开转换后文件ToolStripMenuItem_Click);
+            // 
+            // 获取PDF文件版本信息ToolStripMenuItem
+            // 
+            this.获取PDF文件版本信息ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("获取PDF文件版本信息ToolStripMenuItem.Image")));
+            this.获取PDF文件版本信息ToolStripMenuItem.Name = "获取PDF文件版本信息ToolStripMenuItem";
+            this.获取PDF文件版本信息ToolStripMenuItem.Size = new System.Drawing.Size(267, 32);
+            this.获取PDF文件版本信息ToolStripMenuItem.Text = "获取PDF文件版本信息";
+            this.获取PDF文件版本信息ToolStripMenuItem.Click += new System.EventHandler(this.获取PDF文件版本信息ToolStripMenuItem_Click);
             // 
             // MemoryTimer
             // 
@@ -5367,26 +5480,6 @@
             this.MainToolsTip.AutoPopDelay = 5000;
             this.MainToolsTip.InitialDelay = 100;
             this.MainToolsTip.ReshowDelay = 100;
-            // 
-            // label59
-            // 
-            this.label59.AutoSize = true;
-            this.label59.ForeColor = System.Drawing.Color.Tomato;
-            this.label59.Location = new System.Drawing.Point(4, 353);
-            this.label59.Name = "label59";
-            this.label59.Size = new System.Drawing.Size(485, 18);
-            this.label59.TabIndex = 29;
-            this.label59.Text = "提示：EPUB转PDF需确保EPUB格式正确，功能不稳定，请慎用";
-            // 
-            // label60
-            // 
-            this.label60.AutoSize = true;
-            this.label60.ForeColor = System.Drawing.Color.Tomato;
-            this.label60.Location = new System.Drawing.Point(8, 357);
-            this.label60.Name = "label60";
-            this.label60.Size = new System.Drawing.Size(494, 18);
-            this.label60.TabIndex = 30;
-            this.label60.Text = "提示：EPUB转WORD需确保EPUB格式正确，功能不稳定，请慎用";
             // 
             // BodyForm
             // 
@@ -5587,8 +5680,7 @@
         private System.Windows.Forms.CheckBox OpenMeregePdfFile;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ContextMenuStrip ListViewRightMenu;
-        private System.Windows.Forms.ToolStripMenuItem 删除本项ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 清空列表ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 列表操作ToolStripMenuItem;
         private System.Windows.Forms.TabPage TabPage_08;
         private System.Windows.Forms.CheckBox PictureMergeMode;
         private System.Windows.Forms.ComboBox MeregeFilePage;
@@ -5998,6 +6090,16 @@
         internal System.Windows.Forms.ListView EPUB2PDFFileList;
         private System.Windows.Forms.Label label59;
         private System.Windows.Forms.Label label60;
+        private System.Windows.Forms.ToolStripMenuItem 文件操作ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 打开源文件目录ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 打开源文件ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 打开转换后目录ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 打开转换后文件ToolStripMenuItem;
+        private System.Windows.Forms.Label label61;
+        internal System.Windows.Forms.TextBox Word2EpubAuthorName;
+        private System.Windows.Forms.ToolStripMenuItem 清空列表ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 删除本项ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 获取PDF文件版本信息ToolStripMenuItem;
     }
 }
 

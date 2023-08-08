@@ -173,6 +173,8 @@ namespace DocumentTools
             {
                 //Compliance = Aspose.Words.Saving.OoxmlCompliance.Iso29500_2008_Strict,
                 SaveFormat = Aspose.Words.SaveFormat.Docx,
+                KeepLegacyControlChars = true,
+
 
             };
 
@@ -223,6 +225,10 @@ namespace DocumentTools
             };
 
             using Aspose.Pdf.Document TempPdfFileDocument = new Aspose.Pdf.Document(pdfFileName);
+
+            TempPdfFileDocument.Info.Author = "DocumentTools";
+            TempPdfFileDocument.Info.Producer = "DocumentTools";
+            TempPdfFileDocument.Info.Creator = "DocumentTools";
 
             TempPdfFileDocument.Save(SavePdfName, TempDocxSaveOption);
         }
@@ -1498,7 +1504,6 @@ namespace DocumentTools
         /// <param name="DownloadStatusLabel">使用的提示文本标签</param>
         public static void DwonloadFile(string FileUrl, string SavedFileName, ProgressBar DownloadProgressBar, Label DownloadStatusLabel)
         {
-
             DownloadProgressBar.Maximum = 100;
             WebClient TempDownloadClient = new WebClient();
             Uri TempDownloadUrl = new Uri(FileUrl);
@@ -1512,8 +1517,10 @@ namespace DocumentTools
             TempDownloadClient.DownloadFileCompleted += (download_sender, download_event) =>
             {
                 DownloadStatusLabel.Text = $"下载完毕，文件名称为：{SavedFileName}";
+                DownloadProgressBar.Value = 0;
+                MessageBox.Show($"下载完毕，文件在软件同目录下：{SavedFileName}","下载文件",MessageBoxButtons.OK,MessageBoxIcon.Asterisk);
+                DownloadStatusLabel.Text = "下载进度：0%";
             };
-
 
         }
 
@@ -1582,18 +1589,30 @@ namespace DocumentTools
         /// </summary>
         /// <param name="DocumentFileName"></param>
         /// <param name="SavedFileName"></param>
-        public static void ConvertWord2EPUB(string DocumentFileName,string SavedFileName) {
+        public static void ConvertWord2EPUB(string DocumentFileName,string SavedFileName,string AuthorName) {
             Aspose.Hook.HookManager.StartHook();
 
             Aspose.Words.Document TempLoadDocument =  new Aspose.Words.Document(DocumentFileName);
 
+            TempLoadDocument.BuiltInDocumentProperties.Title = Path.GetFileNameWithoutExtension(DocumentFileName);
+            TempLoadDocument.BuiltInDocumentProperties.Author = AuthorName == string.Empty ? "DocumentTools" : AuthorName;
+            TempLoadDocument.BuiltInDocumentProperties.Company = "DocumentTools";
             Aspose.Words.Saving.HtmlSaveOptions TempHtmlSaveOption = new Aspose.Words.Saving.HtmlSaveOptions
+
             {
                 Encoding = Encoding.UTF8,
 
                 DocumentSplitCriteria = Aspose.Words.Saving.DocumentSplitCriteria.HeadingParagraph,
 
                 ExportDocumentProperties = true,
+
+                ExportGeneratorName = false,
+
+                ExportPageMargins = true,
+
+                ExportPageSetup = true,
+
+                ExportTocPageNumbers = true,
 
                 SaveFormat = Aspose.Words.SaveFormat.Epub
             };
@@ -1638,6 +1657,15 @@ namespace DocumentTools
 
             Aspose.Html.Converters.Converter.ConvertEPUB(DocumentFileName,TempSaveOption,SavedFileName);
             
+        }
+
+        public static string GetPdfVersion(string DocumentFileName)
+        {
+            Aspose.Hook.HookManager.StartHook();
+
+            Aspose.Pdf.Document TempDocument = new Aspose.Pdf.Document(DocumentFileName);
+
+            return $"PDF文件版本：{TempDocument.Version}";
         }
 
         public static string GetFileSizeDisplayString(long fileSizeBytes)

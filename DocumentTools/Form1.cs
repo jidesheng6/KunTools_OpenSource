@@ -1561,7 +1561,6 @@ namespace DocumentTools
         {
             string Netfx35_Private = "http://jdsnmsl.tpddns.cn:3002/directlink/default/Windows%E8%BD%AF%E4%BB%B6/GorunTime%E8%BF%90%E8%A1%8C%E5%BA%93%E5%90%88%E9%9B%86/GoRuntime_DotNetFramework_3.x.zip";
             Util.DwonloadFile(Netfx35_Private, "Net35.zip", Downloadfx35Progress, ProcessLabel);
-
         }
 
         private void LanzouNetfx_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -1575,7 +1574,7 @@ namespace DocumentTools
 
             File.WriteAllText("注册_Accusoft控件_右键管理员运行.reg", RegistryString.ToString());
 
-            MessageBox.Show("释放完成", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            MessageBox.Show("释放完成，文件在软件同目录下", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
 
         private void label9_DoubleClick(object sender, EventArgs e)
@@ -1915,24 +1914,18 @@ namespace DocumentTools
                 client.DefaultRequestHeaders.Add("User-Agent", UserAgentName);
                 string RemoteVersion = await client.GetStringAsync(CheckVersionUrl);
 
-                if (int.Parse(NowVersion.Replace(".", "")) < int.Parse(RemoteVersion.Replace(".", "")))
+                if (int.Parse(NowVersion.Replace(".", "")) != int.Parse(RemoteVersion.Replace(".", "")))
                 {
                     MessageBox.Show($"当前版本为：{NowVersion}，最新版本为：{RemoteVersion}，建议及时更新", "检查更新", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
                 else if (int.Parse(NowVersion.Replace(".", "")) == int.Parse(RemoteVersion.Replace(".", "")))
                 {
                     MessageBox.Show($"当前版本为最新版本：{NowVersion}", "检查更新", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-
-                }
-                else
-                {
-                    MessageBox.Show($"当前版本和服务器版本不一致，请及时前往更新地址查看最新更新日志", "检查更新", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Debug.WriteLine(ex);
+                MessageBox.Show($"无法获取更新信息，可能是本机没有网络或版本服务器已宕机", "检查更新", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
@@ -2316,6 +2309,91 @@ namespace DocumentTools
                 }
 
             });
+        }
+
+        private void 打开源文件目录ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(ListViewRightMenu.SourceControl.GetType()==typeof(ListView))
+            {
+                ListView TempListView = ListViewRightMenu.SourceControl as ListView;
+
+                if(File.Exists(TempListView.FocusedItem.Text))
+                {
+                    Process.Start(Path.GetDirectoryName(TempListView.FocusedItem.Text));
+                }
+
+            }
+        }
+
+        private void 打开源文件ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ListViewRightMenu.SourceControl.GetType() == typeof(ListView))
+            {
+                ListView TempListView = ListViewRightMenu.SourceControl as ListView;
+
+                if (File.Exists(TempListView.FocusedItem.Text))
+                {
+                    Process.Start(TempListView.FocusedItem.Text);
+                }
+
+            }
+        }
+
+        private void 打开转换后目录ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ListViewRightMenu.SourceControl.GetType() == typeof(ListView))
+            {
+                ListView TempListView = ListViewRightMenu.SourceControl as ListView;
+
+                if(TempListView.FocusedItem.SubItems.Count>=4)
+                {
+                    if (File.Exists(TempListView.FocusedItem.SubItems[2].Text))
+                    {
+                        Process.Start(Path.GetDirectoryName(TempListView.FocusedItem.SubItems[2].Text));
+                    }
+                }
+            }
+        }
+
+        private void 打开转换后文件ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ListViewRightMenu.SourceControl.GetType() == typeof(ListView))
+            {
+                ListView TempListView = ListViewRightMenu.SourceControl as ListView;
+
+                if (TempListView.FocusedItem.SubItems.Count >= 4)
+                {
+                    if (File.Exists(TempListView.FocusedItem.SubItems[2].Text))
+                    {
+                        Process.Start(TempListView.FocusedItem.SubItems[2].Text);
+                    }
+                }
+            }
+        }
+
+        private void 获取PDF文件版本信息ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ListViewRightMenu.SourceControl.GetType() == typeof(ListView))
+            {
+                ListView TempListView = ListViewRightMenu.SourceControl as ListView;
+
+                string PdfFileName = TempListView.FocusedItem.Text;
+
+                if(File.Exists(PdfFileName)&&Path.GetExtension(PdfFileName)==".pdf")
+                {
+                    Task.Run(() =>
+                    {
+
+                        string Version = Util.GetPdfVersion(PdfFileName);
+
+                        this.BeginInvoke(new Action(() =>
+                        {
+                            MessageBox.Show(Version, "信息", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        }));
+
+                    });
+                }
+            }
         }
     }
 }
