@@ -2091,6 +2091,10 @@ namespace DocumentTools
                 {
                     MessageBox.Show($"当前版本为最新版本：{NowVersion}", "检查更新", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 }
+                else if (int.Parse(NowVersion.Replace(".", "")) > int.Parse(RemoteVersion.Replace(".", "")))
+                {
+                    MessageBox.Show($"当前版本为预发布版本：{NowVersion}", "检查更新", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                }
             }
             catch (Exception)
             {
