@@ -612,7 +612,7 @@
             this.MainTabPage.Multiline = true;
             this.MainTabPage.Name = "MainTabPage";
             this.MainTabPage.SelectedIndex = 0;
-            this.MainTabPage.Size = new System.Drawing.Size(990, 639);
+            this.MainTabPage.Size = new System.Drawing.Size(990, 671);
             this.MainTabPage.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.MainTabPage.TabIndex = 0;
             this.MainTabPage.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.MainTabPage_DrawItem);
@@ -636,7 +636,7 @@
             this.TabPage_01.Location = new System.Drawing.Point(4, 100);
             this.TabPage_01.Name = "TabPage_01";
             this.TabPage_01.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage_01.Size = new System.Drawing.Size(982, 535);
+            this.TabPage_01.Size = new System.Drawing.Size(982, 567);
             this.TabPage_01.TabIndex = 0;
             this.TabPage_01.Text = "WORD转PDF";
             this.TabPage_01.UseVisualStyleBackColor = true;
@@ -645,9 +645,9 @@
             // 
             this.word2pdf_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
             this.word2pdf_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.word2pdf_clear.Location = new System.Drawing.Point(933, 184);
+            this.word2pdf_clear.Location = new System.Drawing.Point(933, 230);
             this.word2pdf_clear.Name = "word2pdf_clear";
-            this.word2pdf_clear.Size = new System.Drawing.Size(34, 73);
+            this.word2pdf_clear.Size = new System.Drawing.Size(34, 85);
             this.word2pdf_clear.TabIndex = 12;
             this.word2pdf_clear.UseVisualStyleBackColor = true;
             // 
@@ -655,17 +655,17 @@
             // 
             this.word2pdf_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
             this.word2pdf_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.word2pdf_remove.Location = new System.Drawing.Point(933, 74);
+            this.word2pdf_remove.Location = new System.Drawing.Point(933, 78);
             this.word2pdf_remove.Name = "word2pdf_remove";
-            this.word2pdf_remove.Size = new System.Drawing.Size(34, 73);
+            this.word2pdf_remove.Size = new System.Drawing.Size(34, 85);
             this.word2pdf_remove.TabIndex = 11;
             this.word2pdf_remove.UseVisualStyleBackColor = true;
             // 
             // WordFileListView_MoveDown
             // 
-            this.WordFileListView_MoveDown.Location = new System.Drawing.Point(933, 290);
+            this.WordFileListView_MoveDown.Location = new System.Drawing.Point(933, 321);
             this.WordFileListView_MoveDown.Name = "WordFileListView_MoveDown";
-            this.WordFileListView_MoveDown.Size = new System.Drawing.Size(34, 42);
+            this.WordFileListView_MoveDown.Size = new System.Drawing.Size(34, 66);
             this.WordFileListView_MoveDown.TabIndex = 10;
             this.WordFileListView_MoveDown.Text = "▽";
             this.WordFileListView_MoveDown.UseVisualStyleBackColor = true;
@@ -674,7 +674,7 @@
             // 
             this.WordFileListView_MoveUp.Location = new System.Drawing.Point(933, 6);
             this.WordFileListView_MoveUp.Name = "WordFileListView_MoveUp";
-            this.WordFileListView_MoveUp.Size = new System.Drawing.Size(34, 42);
+            this.WordFileListView_MoveUp.Size = new System.Drawing.Size(34, 66);
             this.WordFileListView_MoveUp.TabIndex = 9;
             this.WordFileListView_MoveUp.Text = "△";
             this.WordFileListView_MoveUp.UseVisualStyleBackColor = true;
@@ -682,7 +682,7 @@
             // label34
             // 
             this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(510, 349);
+            this.label34.Location = new System.Drawing.Point(512, 404);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(71, 18);
             this.label34.TabIndex = 8;
@@ -691,14 +691,14 @@
             // PDFComplianceBox
             // 
             this.PDFComplianceBox.FormattingEnabled = true;
-            this.PDFComplianceBox.Location = new System.Drawing.Point(587, 345);
+            this.PDFComplianceBox.Location = new System.Drawing.Point(589, 400);
             this.PDFComplianceBox.Name = "PDFComplianceBox";
             this.PDFComplianceBox.Size = new System.Drawing.Size(121, 26);
             this.PDFComplianceBox.TabIndex = 7;
             // 
             // MergePdfButton
             // 
-            this.MergePdfButton.Location = new System.Drawing.Point(748, 338);
+            this.MergePdfButton.Location = new System.Drawing.Point(750, 393);
             this.MergePdfButton.Name = "MergePdfButton";
             this.MergePdfButton.Size = new System.Drawing.Size(219, 50);
             this.MergePdfButton.TabIndex = 5;
@@ -709,7 +709,7 @@
             // RemoveTempDocx
             // 
             this.RemoveTempDocx.AutoSize = true;
-            this.RemoveTempDocx.Location = new System.Drawing.Point(235, 347);
+            this.RemoveTempDocx.Location = new System.Drawing.Point(237, 402);
             this.RemoveTempDocx.Name = "RemoveTempDocx";
             this.RemoveTempDocx.Size = new System.Drawing.Size(268, 22);
             this.RemoveTempDocx.TabIndex = 6;
@@ -719,7 +719,7 @@
             // OpenPdfOptions
             // 
             this.OpenPdfOptions.AutoSize = true;
-            this.OpenPdfOptions.Location = new System.Drawing.Point(6, 347);
+            this.OpenPdfOptions.Location = new System.Drawing.Point(8, 402);
             this.OpenPdfOptions.Name = "OpenPdfOptions";
             this.OpenPdfOptions.Size = new System.Drawing.Size(223, 22);
             this.OpenPdfOptions.TabIndex = 5;
@@ -730,7 +730,7 @@
             // 
             this.StatusText.AutoSize = true;
             this.StatusText.ForeColor = System.Drawing.Color.ForestGreen;
-            this.StatusText.Location = new System.Drawing.Point(246, 424);
+            this.StatusText.Location = new System.Drawing.Point(248, 479);
             this.StatusText.Name = "StatusText";
             this.StatusText.Size = new System.Drawing.Size(143, 18);
             this.StatusText.TabIndex = 4;
@@ -738,7 +738,7 @@
             // 
             // ConvertButton
             // 
-            this.ConvertButton.Location = new System.Drawing.Point(746, 406);
+            this.ConvertButton.Location = new System.Drawing.Point(748, 461);
             this.ConvertButton.Name = "ConvertButton";
             this.ConvertButton.Size = new System.Drawing.Size(221, 55);
             this.ConvertButton.TabIndex = 2;
@@ -749,7 +749,7 @@
             // ChooseDocButton
             // 
             this.ChooseDocButton.AutoSize = true;
-            this.ChooseDocButton.Location = new System.Drawing.Point(6, 406);
+            this.ChooseDocButton.Location = new System.Drawing.Point(8, 461);
             this.ChooseDocButton.Name = "ChooseDocButton";
             this.ChooseDocButton.Size = new System.Drawing.Size(221, 55);
             this.ChooseDocButton.TabIndex = 1;
@@ -762,7 +762,7 @@
             this.WordFileListView.HideSelection = false;
             this.WordFileListView.Location = new System.Drawing.Point(6, 6);
             this.WordFileListView.Name = "WordFileListView";
-            this.WordFileListView.Size = new System.Drawing.Size(921, 326);
+            this.WordFileListView.Size = new System.Drawing.Size(921, 381);
             this.WordFileListView.TabIndex = 0;
             this.WordFileListView.UseCompatibleStateImageBehavior = false;
             this.WordFileListView.View = System.Windows.Forms.View.List;
@@ -786,7 +786,7 @@
             this.TabPage_02.Location = new System.Drawing.Point(4, 100);
             this.TabPage_02.Name = "TabPage_02";
             this.TabPage_02.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage_02.Size = new System.Drawing.Size(975, 474);
+            this.TabPage_02.Size = new System.Drawing.Size(982, 538);
             this.TabPage_02.TabIndex = 1;
             this.TabPage_02.Text = "PDF转WORD";
             this.TabPage_02.UseVisualStyleBackColor = true;
@@ -795,7 +795,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.Color.Tomato;
-            this.label1.Location = new System.Drawing.Point(760, 351);
+            this.label1.Location = new System.Drawing.Point(760, 399);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(179, 18);
             this.label1.TabIndex = 12;
@@ -804,7 +804,7 @@
             // PDF2WORD_Mode
             // 
             this.PDF2WORD_Mode.FormattingEnabled = true;
-            this.PDF2WORD_Mode.Location = new System.Drawing.Point(417, 347);
+            this.PDF2WORD_Mode.Location = new System.Drawing.Point(417, 395);
             this.PDF2WORD_Mode.Name = "PDF2WORD_Mode";
             this.PDF2WORD_Mode.Size = new System.Drawing.Size(336, 26);
             this.PDF2WORD_Mode.TabIndex = 11;
@@ -813,9 +813,9 @@
             // 
             this.pdf2word_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
             this.pdf2word_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pdf2word_clear.Location = new System.Drawing.Point(933, 184);
+            this.pdf2word_clear.Location = new System.Drawing.Point(933, 230);
             this.pdf2word_clear.Name = "pdf2word_clear";
-            this.pdf2word_clear.Size = new System.Drawing.Size(34, 73);
+            this.pdf2word_clear.Size = new System.Drawing.Size(34, 85);
             this.pdf2word_clear.TabIndex = 12;
             this.pdf2word_clear.UseVisualStyleBackColor = true;
             // 
@@ -823,16 +823,16 @@
             // 
             this.pdf2word_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
             this.pdf2word_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pdf2word_remove.Location = new System.Drawing.Point(933, 74);
+            this.pdf2word_remove.Location = new System.Drawing.Point(933, 78);
             this.pdf2word_remove.Name = "pdf2word_remove";
-            this.pdf2word_remove.Size = new System.Drawing.Size(34, 73);
+            this.pdf2word_remove.Size = new System.Drawing.Size(34, 85);
             this.pdf2word_remove.TabIndex = 12;
             this.pdf2word_remove.UseVisualStyleBackColor = true;
             // 
             // label55
             // 
             this.label55.AutoSize = true;
-            this.label55.Location = new System.Drawing.Point(331, 352);
+            this.label55.Location = new System.Drawing.Point(331, 400);
             this.label55.Name = "label55";
             this.label55.Size = new System.Drawing.Size(80, 18);
             this.label55.TabIndex = 10;
@@ -841,7 +841,7 @@
             // PDF2WORD_UseSUbOcr
             // 
             this.PDF2WORD_UseSUbOcr.AutoSize = true;
-            this.PDF2WORD_UseSUbOcr.Location = new System.Drawing.Point(156, 351);
+            this.PDF2WORD_UseSUbOcr.Location = new System.Drawing.Point(156, 399);
             this.PDF2WORD_UseSUbOcr.Name = "PDF2WORD_UseSUbOcr";
             this.PDF2WORD_UseSUbOcr.Size = new System.Drawing.Size(169, 22);
             this.PDF2WORD_UseSUbOcr.TabIndex = 9;
@@ -851,7 +851,7 @@
             // PDF2WORD_UseBullet
             // 
             this.PDF2WORD_UseBullet.AutoSize = true;
-            this.PDF2WORD_UseBullet.Location = new System.Drawing.Point(8, 351);
+            this.PDF2WORD_UseBullet.Location = new System.Drawing.Point(8, 399);
             this.PDF2WORD_UseBullet.Name = "PDF2WORD_UseBullet";
             this.PDF2WORD_UseBullet.Size = new System.Drawing.Size(142, 22);
             this.PDF2WORD_UseBullet.TabIndex = 8;
@@ -860,9 +860,9 @@
             // 
             // PdfFileListView_MoveDown
             // 
-            this.PdfFileListView_MoveDown.Location = new System.Drawing.Point(933, 290);
+            this.PdfFileListView_MoveDown.Location = new System.Drawing.Point(933, 321);
             this.PdfFileListView_MoveDown.Name = "PdfFileListView_MoveDown";
-            this.PdfFileListView_MoveDown.Size = new System.Drawing.Size(34, 42);
+            this.PdfFileListView_MoveDown.Size = new System.Drawing.Size(34, 66);
             this.PdfFileListView_MoveDown.TabIndex = 7;
             this.PdfFileListView_MoveDown.Text = "▽";
             this.PdfFileListView_MoveDown.UseVisualStyleBackColor = true;
@@ -871,7 +871,7 @@
             // 
             this.PdfFileListView_MoveUp.Location = new System.Drawing.Point(933, 6);
             this.PdfFileListView_MoveUp.Name = "PdfFileListView_MoveUp";
-            this.PdfFileListView_MoveUp.Size = new System.Drawing.Size(34, 42);
+            this.PdfFileListView_MoveUp.Size = new System.Drawing.Size(34, 66);
             this.PdfFileListView_MoveUp.TabIndex = 6;
             this.PdfFileListView_MoveUp.Text = "△";
             this.PdfFileListView_MoveUp.UseVisualStyleBackColor = true;
@@ -880,7 +880,7 @@
             // 
             this.ProcessPage_P2W.AutoSize = true;
             this.ProcessPage_P2W.ForeColor = System.Drawing.Color.ForestGreen;
-            this.ProcessPage_P2W.Location = new System.Drawing.Point(386, 424);
+            this.ProcessPage_P2W.Location = new System.Drawing.Point(386, 472);
             this.ProcessPage_P2W.Name = "ProcessPage_P2W";
             this.ProcessPage_P2W.Size = new System.Drawing.Size(89, 18);
             this.ProcessPage_P2W.TabIndex = 5;
@@ -890,7 +890,7 @@
             // 
             this.PdfStatusText.AutoSize = true;
             this.PdfStatusText.ForeColor = System.Drawing.Color.ForestGreen;
-            this.PdfStatusText.Location = new System.Drawing.Point(246, 424);
+            this.PdfStatusText.Location = new System.Drawing.Point(246, 472);
             this.PdfStatusText.Name = "PdfStatusText";
             this.PdfStatusText.Size = new System.Drawing.Size(143, 18);
             this.PdfStatusText.TabIndex = 4;
@@ -898,7 +898,7 @@
             // 
             // Convert2DocButton
             // 
-            this.Convert2DocButton.Location = new System.Drawing.Point(746, 406);
+            this.Convert2DocButton.Location = new System.Drawing.Point(746, 454);
             this.Convert2DocButton.Name = "Convert2DocButton";
             this.Convert2DocButton.Size = new System.Drawing.Size(221, 55);
             this.Convert2DocButton.TabIndex = 2;
@@ -908,7 +908,7 @@
             // 
             // SelectPdfButton
             // 
-            this.SelectPdfButton.Location = new System.Drawing.Point(6, 406);
+            this.SelectPdfButton.Location = new System.Drawing.Point(6, 454);
             this.SelectPdfButton.Name = "SelectPdfButton";
             this.SelectPdfButton.Size = new System.Drawing.Size(221, 55);
             this.SelectPdfButton.TabIndex = 1;
@@ -921,7 +921,7 @@
             this.PdfFileListView.HideSelection = false;
             this.PdfFileListView.Location = new System.Drawing.Point(6, 6);
             this.PdfFileListView.Name = "PdfFileListView";
-            this.PdfFileListView.Size = new System.Drawing.Size(921, 326);
+            this.PdfFileListView.Size = new System.Drawing.Size(921, 381);
             this.PdfFileListView.TabIndex = 0;
             this.PdfFileListView.UseCompatibleStateImageBehavior = false;
             // 
@@ -938,16 +938,16 @@
             this.TabPage_03.Controls.Add(this.ExcelFileListView);
             this.TabPage_03.Location = new System.Drawing.Point(4, 100);
             this.TabPage_03.Name = "TabPage_03";
-            this.TabPage_03.Size = new System.Drawing.Size(975, 474);
+            this.TabPage_03.Size = new System.Drawing.Size(982, 538);
             this.TabPage_03.TabIndex = 2;
             this.TabPage_03.Text = "EXCEL转PDF";
             this.TabPage_03.UseVisualStyleBackColor = true;
             // 
             // ExcelFileListView_MoveDown
             // 
-            this.ExcelFileListView_MoveDown.Location = new System.Drawing.Point(933, 290);
+            this.ExcelFileListView_MoveDown.Location = new System.Drawing.Point(933, 321);
             this.ExcelFileListView_MoveDown.Name = "ExcelFileListView_MoveDown";
-            this.ExcelFileListView_MoveDown.Size = new System.Drawing.Size(34, 42);
+            this.ExcelFileListView_MoveDown.Size = new System.Drawing.Size(34, 66);
             this.ExcelFileListView_MoveDown.TabIndex = 7;
             this.ExcelFileListView_MoveDown.Text = "▽";
             this.ExcelFileListView_MoveDown.UseVisualStyleBackColor = true;
@@ -956,7 +956,7 @@
             // 
             this.ExcelFileListView_MoveUp.Location = new System.Drawing.Point(933, 6);
             this.ExcelFileListView_MoveUp.Name = "ExcelFileListView_MoveUp";
-            this.ExcelFileListView_MoveUp.Size = new System.Drawing.Size(34, 42);
+            this.ExcelFileListView_MoveUp.Size = new System.Drawing.Size(34, 66);
             this.ExcelFileListView_MoveUp.TabIndex = 6;
             this.ExcelFileListView_MoveUp.Text = "△";
             this.ExcelFileListView_MoveUp.UseVisualStyleBackColor = true;
@@ -965,9 +965,9 @@
             // 
             this.excel2pdf_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
             this.excel2pdf_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.excel2pdf_clear.Location = new System.Drawing.Point(933, 184);
+            this.excel2pdf_clear.Location = new System.Drawing.Point(933, 230);
             this.excel2pdf_clear.Name = "excel2pdf_clear";
-            this.excel2pdf_clear.Size = new System.Drawing.Size(34, 73);
+            this.excel2pdf_clear.Size = new System.Drawing.Size(34, 85);
             this.excel2pdf_clear.TabIndex = 12;
             this.excel2pdf_clear.UseVisualStyleBackColor = true;
             // 
@@ -975,16 +975,16 @@
             // 
             this.excel2pdf_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
             this.excel2pdf_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.excel2pdf_remove.Location = new System.Drawing.Point(933, 74);
+            this.excel2pdf_remove.Location = new System.Drawing.Point(933, 78);
             this.excel2pdf_remove.Name = "excel2pdf_remove";
-            this.excel2pdf_remove.Size = new System.Drawing.Size(34, 73);
+            this.excel2pdf_remove.Size = new System.Drawing.Size(34, 85);
             this.excel2pdf_remove.TabIndex = 11;
             this.excel2pdf_remove.UseVisualStyleBackColor = true;
             // 
             // ExportEachSheet
             // 
             this.ExportEachSheet.AutoSize = true;
-            this.ExportEachSheet.Location = new System.Drawing.Point(6, 347);
+            this.ExportEachSheet.Location = new System.Drawing.Point(8, 400);
             this.ExportEachSheet.Name = "ExportEachSheet";
             this.ExportEachSheet.Size = new System.Drawing.Size(286, 22);
             this.ExportEachSheet.TabIndex = 5;
@@ -995,7 +995,7 @@
             // 
             this.Excel2PdfStatusText.AutoSize = true;
             this.Excel2PdfStatusText.ForeColor = System.Drawing.Color.ForestGreen;
-            this.Excel2PdfStatusText.Location = new System.Drawing.Point(246, 424);
+            this.Excel2PdfStatusText.Location = new System.Drawing.Point(248, 477);
             this.Excel2PdfStatusText.Name = "Excel2PdfStatusText";
             this.Excel2PdfStatusText.Size = new System.Drawing.Size(143, 18);
             this.Excel2PdfStatusText.TabIndex = 4;
@@ -1003,7 +1003,7 @@
             // 
             // ConvertExcel2PdfButton
             // 
-            this.ConvertExcel2PdfButton.Location = new System.Drawing.Point(746, 406);
+            this.ConvertExcel2PdfButton.Location = new System.Drawing.Point(748, 459);
             this.ConvertExcel2PdfButton.Name = "ConvertExcel2PdfButton";
             this.ConvertExcel2PdfButton.Size = new System.Drawing.Size(221, 55);
             this.ConvertExcel2PdfButton.TabIndex = 3;
@@ -1013,7 +1013,7 @@
             // 
             // SelectExcelFileButton
             // 
-            this.SelectExcelFileButton.Location = new System.Drawing.Point(6, 406);
+            this.SelectExcelFileButton.Location = new System.Drawing.Point(8, 459);
             this.SelectExcelFileButton.Name = "SelectExcelFileButton";
             this.SelectExcelFileButton.Size = new System.Drawing.Size(221, 55);
             this.SelectExcelFileButton.TabIndex = 2;
@@ -1026,7 +1026,7 @@
             this.ExcelFileListView.HideSelection = false;
             this.ExcelFileListView.Location = new System.Drawing.Point(6, 6);
             this.ExcelFileListView.Name = "ExcelFileListView";
-            this.ExcelFileListView.Size = new System.Drawing.Size(921, 326);
+            this.ExcelFileListView.Size = new System.Drawing.Size(921, 381);
             this.ExcelFileListView.TabIndex = 1;
             this.ExcelFileListView.UseCompatibleStateImageBehavior = false;
             // 
@@ -1043,16 +1043,16 @@
             this.TabPage_07.Controls.Add(this.PDF2ExcelFileView);
             this.TabPage_07.Location = new System.Drawing.Point(4, 100);
             this.TabPage_07.Name = "TabPage_07";
-            this.TabPage_07.Size = new System.Drawing.Size(975, 474);
+            this.TabPage_07.Size = new System.Drawing.Size(982, 538);
             this.TabPage_07.TabIndex = 6;
             this.TabPage_07.Text = "PDF转EXCEL";
             this.TabPage_07.UseVisualStyleBackColor = true;
             // 
             // PDF2ExcelFileView_MoveDown
             // 
-            this.PDF2ExcelFileView_MoveDown.Location = new System.Drawing.Point(933, 290);
+            this.PDF2ExcelFileView_MoveDown.Location = new System.Drawing.Point(933, 321);
             this.PDF2ExcelFileView_MoveDown.Name = "PDF2ExcelFileView_MoveDown";
-            this.PDF2ExcelFileView_MoveDown.Size = new System.Drawing.Size(34, 42);
+            this.PDF2ExcelFileView_MoveDown.Size = new System.Drawing.Size(34, 66);
             this.PDF2ExcelFileView_MoveDown.TabIndex = 6;
             this.PDF2ExcelFileView_MoveDown.Text = "▽";
             this.PDF2ExcelFileView_MoveDown.UseVisualStyleBackColor = true;
@@ -1061,7 +1061,7 @@
             // 
             this.PDF2ExcelFileView_MoveUp.Location = new System.Drawing.Point(933, 6);
             this.PDF2ExcelFileView_MoveUp.Name = "PDF2ExcelFileView_MoveUp";
-            this.PDF2ExcelFileView_MoveUp.Size = new System.Drawing.Size(34, 42);
+            this.PDF2ExcelFileView_MoveUp.Size = new System.Drawing.Size(34, 66);
             this.PDF2ExcelFileView_MoveUp.TabIndex = 5;
             this.PDF2ExcelFileView_MoveUp.Text = "△";
             this.PDF2ExcelFileView_MoveUp.UseVisualStyleBackColor = true;
@@ -1070,9 +1070,9 @@
             // 
             this.pdf2excel_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
             this.pdf2excel_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pdf2excel_clear.Location = new System.Drawing.Point(933, 184);
+            this.pdf2excel_clear.Location = new System.Drawing.Point(935, 230);
             this.pdf2excel_clear.Name = "pdf2excel_clear";
-            this.pdf2excel_clear.Size = new System.Drawing.Size(34, 73);
+            this.pdf2excel_clear.Size = new System.Drawing.Size(34, 85);
             this.pdf2excel_clear.TabIndex = 12;
             this.pdf2excel_clear.UseVisualStyleBackColor = true;
             // 
@@ -1082,14 +1082,14 @@
             this.pdf2excel_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pdf2excel_remove.Location = new System.Drawing.Point(933, 74);
             this.pdf2excel_remove.Name = "pdf2excel_remove";
-            this.pdf2excel_remove.Size = new System.Drawing.Size(34, 73);
+            this.pdf2excel_remove.Size = new System.Drawing.Size(34, 85);
             this.pdf2excel_remove.TabIndex = 11;
             this.pdf2excel_remove.UseVisualStyleBackColor = true;
             // 
             // ExcelSheelMode
             // 
             this.ExcelSheelMode.AutoSize = true;
-            this.ExcelSheelMode.Location = new System.Drawing.Point(6, 347);
+            this.ExcelSheelMode.Location = new System.Drawing.Point(8, 403);
             this.ExcelSheelMode.Name = "ExcelSheelMode";
             this.ExcelSheelMode.Size = new System.Drawing.Size(259, 22);
             this.ExcelSheelMode.TabIndex = 4;
@@ -1100,7 +1100,7 @@
             // 
             this.ConvertPDF2ExcelStatusText.AutoSize = true;
             this.ConvertPDF2ExcelStatusText.ForeColor = System.Drawing.Color.ForestGreen;
-            this.ConvertPDF2ExcelStatusText.Location = new System.Drawing.Point(246, 424);
+            this.ConvertPDF2ExcelStatusText.Location = new System.Drawing.Point(248, 480);
             this.ConvertPDF2ExcelStatusText.Name = "ConvertPDF2ExcelStatusText";
             this.ConvertPDF2ExcelStatusText.Size = new System.Drawing.Size(143, 18);
             this.ConvertPDF2ExcelStatusText.TabIndex = 3;
@@ -1108,7 +1108,7 @@
             // 
             // ConvertPDF2Excel
             // 
-            this.ConvertPDF2Excel.Location = new System.Drawing.Point(746, 406);
+            this.ConvertPDF2Excel.Location = new System.Drawing.Point(748, 462);
             this.ConvertPDF2Excel.Name = "ConvertPDF2Excel";
             this.ConvertPDF2Excel.Size = new System.Drawing.Size(221, 55);
             this.ConvertPDF2Excel.TabIndex = 2;
@@ -1118,7 +1118,7 @@
             // 
             // SelectPDF2ExcelButton
             // 
-            this.SelectPDF2ExcelButton.Location = new System.Drawing.Point(6, 406);
+            this.SelectPDF2ExcelButton.Location = new System.Drawing.Point(8, 462);
             this.SelectPDF2ExcelButton.Name = "SelectPDF2ExcelButton";
             this.SelectPDF2ExcelButton.Size = new System.Drawing.Size(221, 55);
             this.SelectPDF2ExcelButton.TabIndex = 1;
@@ -1131,7 +1131,7 @@
             this.PDF2ExcelFileView.HideSelection = false;
             this.PDF2ExcelFileView.Location = new System.Drawing.Point(6, 6);
             this.PDF2ExcelFileView.Name = "PDF2ExcelFileView";
-            this.PDF2ExcelFileView.Size = new System.Drawing.Size(921, 326);
+            this.PDF2ExcelFileView.Size = new System.Drawing.Size(921, 381);
             this.PDF2ExcelFileView.TabIndex = 0;
             this.PDF2ExcelFileView.UseCompatibleStateImageBehavior = false;
             // 
@@ -1155,16 +1155,16 @@
             this.TabPage_20.Location = new System.Drawing.Point(4, 100);
             this.TabPage_20.Name = "TabPage_20";
             this.TabPage_20.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage_20.Size = new System.Drawing.Size(975, 474);
+            this.TabPage_20.Size = new System.Drawing.Size(982, 538);
             this.TabPage_20.TabIndex = 19;
             this.TabPage_20.Text = "PPT转PDF";
             this.TabPage_20.UseVisualStyleBackColor = true;
             // 
             // PPT2PdfFileList_MoveDown
             // 
-            this.PPT2PdfFileList_MoveDown.Location = new System.Drawing.Point(933, 290);
+            this.PPT2PdfFileList_MoveDown.Location = new System.Drawing.Point(933, 321);
             this.PPT2PdfFileList_MoveDown.Name = "PPT2PdfFileList_MoveDown";
-            this.PPT2PdfFileList_MoveDown.Size = new System.Drawing.Size(34, 42);
+            this.PPT2PdfFileList_MoveDown.Size = new System.Drawing.Size(34, 66);
             this.PPT2PdfFileList_MoveDown.TabIndex = 12;
             this.PPT2PdfFileList_MoveDown.Text = "▽";
             this.PPT2PdfFileList_MoveDown.UseVisualStyleBackColor = true;
@@ -1173,7 +1173,7 @@
             // 
             this.PPT2PdfFileList_MoveUp.Location = new System.Drawing.Point(933, 6);
             this.PPT2PdfFileList_MoveUp.Name = "PPT2PdfFileList_MoveUp";
-            this.PPT2PdfFileList_MoveUp.Size = new System.Drawing.Size(34, 42);
+            this.PPT2PdfFileList_MoveUp.Size = new System.Drawing.Size(34, 66);
             this.PPT2PdfFileList_MoveUp.TabIndex = 11;
             this.PPT2PdfFileList_MoveUp.Text = "△";
             this.PPT2PdfFileList_MoveUp.UseVisualStyleBackColor = true;
@@ -1182,9 +1182,9 @@
             // 
             this.ppt2pdf_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
             this.ppt2pdf_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ppt2pdf_clear.Location = new System.Drawing.Point(933, 184);
+            this.ppt2pdf_clear.Location = new System.Drawing.Point(933, 230);
             this.ppt2pdf_clear.Name = "ppt2pdf_clear";
-            this.ppt2pdf_clear.Size = new System.Drawing.Size(34, 73);
+            this.ppt2pdf_clear.Size = new System.Drawing.Size(34, 85);
             this.ppt2pdf_clear.TabIndex = 12;
             this.ppt2pdf_clear.UseVisualStyleBackColor = true;
             // 
@@ -1194,7 +1194,7 @@
             this.ppt2pdf_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ppt2pdf_remove.Location = new System.Drawing.Point(933, 74);
             this.ppt2pdf_remove.Name = "ppt2pdf_remove";
-            this.ppt2pdf_remove.Size = new System.Drawing.Size(34, 73);
+            this.ppt2pdf_remove.Size = new System.Drawing.Size(34, 85);
             this.ppt2pdf_remove.TabIndex = 11;
             this.ppt2pdf_remove.UseVisualStyleBackColor = true;
             // 
@@ -1202,7 +1202,7 @@
             // 
             this.label37.AutoSize = true;
             this.label37.ForeColor = System.Drawing.Color.Tomato;
-            this.label37.Location = new System.Drawing.Point(443, 380);
+            this.label37.Location = new System.Drawing.Point(443, 431);
             this.label37.Name = "label37";
             this.label37.Size = new System.Drawing.Size(251, 90);
             this.label37.TabIndex = 10;
@@ -1211,7 +1211,7 @@
             // label36
             // 
             this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(553, 349);
+            this.label36.Location = new System.Drawing.Point(553, 400);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(80, 18);
             this.label36.TabIndex = 9;
@@ -1219,7 +1219,7 @@
             // 
             // ConvertPPT2PDFPassword
             // 
-            this.ConvertPPT2PDFPassword.Location = new System.Drawing.Point(639, 344);
+            this.ConvertPPT2PDFPassword.Location = new System.Drawing.Point(639, 395);
             this.ConvertPPT2PDFPassword.Name = "ConvertPPT2PDFPassword";
             this.ConvertPPT2PDFPassword.Size = new System.Drawing.Size(147, 28);
             this.ConvertPPT2PDFPassword.TabIndex = 8;
@@ -1227,7 +1227,7 @@
             // label35
             // 
             this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(286, 348);
+            this.label35.Location = new System.Drawing.Point(286, 399);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(134, 18);
             this.label35.TabIndex = 7;
@@ -1236,7 +1236,7 @@
             // ExportNotePageCombox
             // 
             this.ExportNotePageCombox.FormattingEnabled = true;
-            this.ExportNotePageCombox.Location = new System.Drawing.Point(426, 344);
+            this.ExportNotePageCombox.Location = new System.Drawing.Point(426, 395);
             this.ExportNotePageCombox.Name = "ExportNotePageCombox";
             this.ExportNotePageCombox.Size = new System.Drawing.Size(121, 26);
             this.ExportNotePageCombox.TabIndex = 6;
@@ -1244,7 +1244,7 @@
             // DrawBlackLine
             // 
             this.DrawBlackLine.AutoSize = true;
-            this.DrawBlackLine.Location = new System.Drawing.Point(174, 348);
+            this.DrawBlackLine.Location = new System.Drawing.Point(174, 399);
             this.DrawBlackLine.Name = "DrawBlackLine";
             this.DrawBlackLine.Size = new System.Drawing.Size(106, 22);
             this.DrawBlackLine.TabIndex = 5;
@@ -1254,7 +1254,7 @@
             // ExportHiddenPage
             // 
             this.ExportHiddenPage.AutoSize = true;
-            this.ExportHiddenPage.Location = new System.Drawing.Point(8, 349);
+            this.ExportHiddenPage.Location = new System.Drawing.Point(8, 400);
             this.ExportHiddenPage.Name = "ExportHiddenPage";
             this.ExportHiddenPage.Size = new System.Drawing.Size(160, 22);
             this.ExportHiddenPage.TabIndex = 4;
@@ -1265,7 +1265,7 @@
             // 
             this.ConvertPPT2PDFStatusText.AutoSize = true;
             this.ConvertPPT2PDFStatusText.ForeColor = System.Drawing.Color.ForestGreen;
-            this.ConvertPPT2PDFStatusText.Location = new System.Drawing.Point(246, 424);
+            this.ConvertPPT2PDFStatusText.Location = new System.Drawing.Point(246, 475);
             this.ConvertPPT2PDFStatusText.Name = "ConvertPPT2PDFStatusText";
             this.ConvertPPT2PDFStatusText.Size = new System.Drawing.Size(143, 18);
             this.ConvertPPT2PDFStatusText.TabIndex = 3;
@@ -1273,7 +1273,7 @@
             // 
             // ConvertPPT2PDF
             // 
-            this.ConvertPPT2PDF.Location = new System.Drawing.Point(746, 406);
+            this.ConvertPPT2PDF.Location = new System.Drawing.Point(746, 457);
             this.ConvertPPT2PDF.Name = "ConvertPPT2PDF";
             this.ConvertPPT2PDF.Size = new System.Drawing.Size(221, 55);
             this.ConvertPPT2PDF.TabIndex = 2;
@@ -1283,7 +1283,7 @@
             // 
             // SelectPPT2PdfFile
             // 
-            this.SelectPPT2PdfFile.Location = new System.Drawing.Point(6, 406);
+            this.SelectPPT2PdfFile.Location = new System.Drawing.Point(6, 457);
             this.SelectPPT2PdfFile.Name = "SelectPPT2PdfFile";
             this.SelectPPT2PdfFile.Size = new System.Drawing.Size(221, 55);
             this.SelectPPT2PdfFile.TabIndex = 1;
@@ -1296,7 +1296,7 @@
             this.PPT2PdfFileList.HideSelection = false;
             this.PPT2PdfFileList.Location = new System.Drawing.Point(6, 6);
             this.PPT2PdfFileList.Name = "PPT2PdfFileList";
-            this.PPT2PdfFileList.Size = new System.Drawing.Size(921, 326);
+            this.PPT2PdfFileList.Size = new System.Drawing.Size(921, 381);
             this.PPT2PdfFileList.TabIndex = 0;
             this.PPT2PdfFileList.UseCompatibleStateImageBehavior = false;
             // 
@@ -1315,16 +1315,16 @@
             this.TabPage_21.Controls.Add(this.PDF2PPTFileList);
             this.TabPage_21.Location = new System.Drawing.Point(4, 100);
             this.TabPage_21.Name = "TabPage_21";
-            this.TabPage_21.Size = new System.Drawing.Size(975, 474);
+            this.TabPage_21.Size = new System.Drawing.Size(982, 538);
             this.TabPage_21.TabIndex = 20;
             this.TabPage_21.Text = "PDF转PPT";
             this.TabPage_21.UseVisualStyleBackColor = true;
             // 
             // PDF2PPTFileList_MoveDown
             // 
-            this.PDF2PPTFileList_MoveDown.Location = new System.Drawing.Point(933, 290);
+            this.PDF2PPTFileList_MoveDown.Location = new System.Drawing.Point(933, 321);
             this.PDF2PPTFileList_MoveDown.Name = "PDF2PPTFileList_MoveDown";
-            this.PDF2PPTFileList_MoveDown.Size = new System.Drawing.Size(34, 42);
+            this.PDF2PPTFileList_MoveDown.Size = new System.Drawing.Size(34, 66);
             this.PDF2PPTFileList_MoveDown.TabIndex = 8;
             this.PDF2PPTFileList_MoveDown.Text = "▽";
             this.PDF2PPTFileList_MoveDown.UseVisualStyleBackColor = true;
@@ -1333,7 +1333,7 @@
             // 
             this.PDF2PPTFileList_MoveUp.Location = new System.Drawing.Point(933, 6);
             this.PDF2PPTFileList_MoveUp.Name = "PDF2PPTFileList_MoveUp";
-            this.PDF2PPTFileList_MoveUp.Size = new System.Drawing.Size(34, 42);
+            this.PDF2PPTFileList_MoveUp.Size = new System.Drawing.Size(34, 66);
             this.PDF2PPTFileList_MoveUp.TabIndex = 7;
             this.PDF2PPTFileList_MoveUp.Text = "△";
             this.PDF2PPTFileList_MoveUp.UseVisualStyleBackColor = true;
@@ -1342,9 +1342,9 @@
             // 
             this.pdf2ppt_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
             this.pdf2ppt_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pdf2ppt_clear.Location = new System.Drawing.Point(933, 184);
+            this.pdf2ppt_clear.Location = new System.Drawing.Point(933, 230);
             this.pdf2ppt_clear.Name = "pdf2ppt_clear";
-            this.pdf2ppt_clear.Size = new System.Drawing.Size(34, 73);
+            this.pdf2ppt_clear.Size = new System.Drawing.Size(34, 85);
             this.pdf2ppt_clear.TabIndex = 12;
             this.pdf2ppt_clear.UseVisualStyleBackColor = true;
             // 
@@ -1354,14 +1354,14 @@
             this.pdf2ppt_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pdf2ppt_remove.Location = new System.Drawing.Point(933, 74);
             this.pdf2ppt_remove.Name = "pdf2ppt_remove";
-            this.pdf2ppt_remove.Size = new System.Drawing.Size(34, 73);
+            this.pdf2ppt_remove.Size = new System.Drawing.Size(34, 85);
             this.pdf2ppt_remove.TabIndex = 11;
             this.pdf2ppt_remove.UseVisualStyleBackColor = true;
             // 
             // RenderImageBox
             // 
             this.RenderImageBox.AutoSize = true;
-            this.RenderImageBox.Location = new System.Drawing.Point(457, 349);
+            this.RenderImageBox.Location = new System.Drawing.Point(457, 402);
             this.RenderImageBox.Name = "RenderImageBox";
             this.RenderImageBox.Size = new System.Drawing.Size(196, 22);
             this.RenderImageBox.TabIndex = 6;
@@ -1371,7 +1371,7 @@
             // SplitShapeBox
             // 
             this.SplitShapeBox.AutoSize = true;
-            this.SplitShapeBox.Location = new System.Drawing.Point(291, 349);
+            this.SplitShapeBox.Location = new System.Drawing.Point(291, 402);
             this.SplitShapeBox.Name = "SplitShapeBox";
             this.SplitShapeBox.Size = new System.Drawing.Size(160, 22);
             this.SplitShapeBox.TabIndex = 5;
@@ -1381,7 +1381,7 @@
             // ExtraOcrBox
             // 
             this.ExtraOcrBox.AutoSize = true;
-            this.ExtraOcrBox.Location = new System.Drawing.Point(8, 349);
+            this.ExtraOcrBox.Location = new System.Drawing.Point(8, 402);
             this.ExtraOcrBox.Name = "ExtraOcrBox";
             this.ExtraOcrBox.Size = new System.Drawing.Size(277, 22);
             this.ExtraOcrBox.TabIndex = 4;
@@ -1393,7 +1393,7 @@
             this.Pdf2PPTStatusText.AutoSize = true;
             this.Pdf2PPTStatusText.BackColor = System.Drawing.Color.Transparent;
             this.Pdf2PPTStatusText.ForeColor = System.Drawing.Color.ForestGreen;
-            this.Pdf2PPTStatusText.Location = new System.Drawing.Point(246, 424);
+            this.Pdf2PPTStatusText.Location = new System.Drawing.Point(246, 477);
             this.Pdf2PPTStatusText.Name = "Pdf2PPTStatusText";
             this.Pdf2PPTStatusText.Size = new System.Drawing.Size(143, 18);
             this.Pdf2PPTStatusText.TabIndex = 3;
@@ -1401,7 +1401,7 @@
             // 
             // ConvertPDF2PPT
             // 
-            this.ConvertPDF2PPT.Location = new System.Drawing.Point(746, 406);
+            this.ConvertPDF2PPT.Location = new System.Drawing.Point(746, 459);
             this.ConvertPDF2PPT.Name = "ConvertPDF2PPT";
             this.ConvertPDF2PPT.Size = new System.Drawing.Size(221, 55);
             this.ConvertPDF2PPT.TabIndex = 2;
@@ -1411,7 +1411,7 @@
             // 
             // SelectConvertPDF2PPT
             // 
-            this.SelectConvertPDF2PPT.Location = new System.Drawing.Point(6, 406);
+            this.SelectConvertPDF2PPT.Location = new System.Drawing.Point(6, 459);
             this.SelectConvertPDF2PPT.Name = "SelectConvertPDF2PPT";
             this.SelectConvertPDF2PPT.Size = new System.Drawing.Size(221, 55);
             this.SelectConvertPDF2PPT.TabIndex = 1;
@@ -1424,7 +1424,7 @@
             this.PDF2PPTFileList.HideSelection = false;
             this.PDF2PPTFileList.Location = new System.Drawing.Point(6, 6);
             this.PDF2PPTFileList.Name = "PDF2PPTFileList";
-            this.PDF2PPTFileList.Size = new System.Drawing.Size(921, 326);
+            this.PDF2PPTFileList.Size = new System.Drawing.Size(921, 381);
             this.PDF2PPTFileList.TabIndex = 0;
             this.PDF2PPTFileList.UseCompatibleStateImageBehavior = false;
             // 
@@ -1442,16 +1442,16 @@
             this.TabPage_14.Location = new System.Drawing.Point(4, 100);
             this.TabPage_14.Name = "TabPage_14";
             this.TabPage_14.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage_14.Size = new System.Drawing.Size(975, 474);
+            this.TabPage_14.Size = new System.Drawing.Size(982, 538);
             this.TabPage_14.TabIndex = 13;
             this.TabPage_14.Text = "合并WORD";
             this.TabPage_14.UseVisualStyleBackColor = true;
             // 
             // MergeWordFileList_MoveDown
             // 
-            this.MergeWordFileList_MoveDown.Location = new System.Drawing.Point(933, 290);
+            this.MergeWordFileList_MoveDown.Location = new System.Drawing.Point(933, 321);
             this.MergeWordFileList_MoveDown.Name = "MergeWordFileList_MoveDown";
-            this.MergeWordFileList_MoveDown.Size = new System.Drawing.Size(34, 42);
+            this.MergeWordFileList_MoveDown.Size = new System.Drawing.Size(34, 66);
             this.MergeWordFileList_MoveDown.TabIndex = 6;
             this.MergeWordFileList_MoveDown.Text = "▽";
             this.MergeWordFileList_MoveDown.UseVisualStyleBackColor = true;
@@ -1460,7 +1460,7 @@
             // 
             this.MergeWordFileList_MoveUp.Location = new System.Drawing.Point(933, 6);
             this.MergeWordFileList_MoveUp.Name = "MergeWordFileList_MoveUp";
-            this.MergeWordFileList_MoveUp.Size = new System.Drawing.Size(34, 42);
+            this.MergeWordFileList_MoveUp.Size = new System.Drawing.Size(34, 66);
             this.MergeWordFileList_MoveUp.TabIndex = 5;
             this.MergeWordFileList_MoveUp.Text = "△";
             this.MergeWordFileList_MoveUp.UseVisualStyleBackColor = true;
@@ -1469,9 +1469,9 @@
             // 
             this.meregeword_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
             this.meregeword_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.meregeword_clear.Location = new System.Drawing.Point(933, 184);
+            this.meregeword_clear.Location = new System.Drawing.Point(935, 230);
             this.meregeword_clear.Name = "meregeword_clear";
-            this.meregeword_clear.Size = new System.Drawing.Size(34, 73);
+            this.meregeword_clear.Size = new System.Drawing.Size(34, 85);
             this.meregeword_clear.TabIndex = 12;
             this.meregeword_clear.UseVisualStyleBackColor = true;
             // 
@@ -1479,9 +1479,9 @@
             // 
             this.meregeword_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
             this.meregeword_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.meregeword_remove.Location = new System.Drawing.Point(933, 74);
+            this.meregeword_remove.Location = new System.Drawing.Point(935, 78);
             this.meregeword_remove.Name = "meregeword_remove";
-            this.meregeword_remove.Size = new System.Drawing.Size(34, 73);
+            this.meregeword_remove.Size = new System.Drawing.Size(34, 85);
             this.meregeword_remove.TabIndex = 11;
             this.meregeword_remove.UseVisualStyleBackColor = true;
             // 
@@ -1489,7 +1489,7 @@
             // 
             this.MeregeWordStatusText.AutoSize = true;
             this.MeregeWordStatusText.ForeColor = System.Drawing.Color.ForestGreen;
-            this.MeregeWordStatusText.Location = new System.Drawing.Point(246, 424);
+            this.MeregeWordStatusText.Location = new System.Drawing.Point(248, 478);
             this.MeregeWordStatusText.Name = "MeregeWordStatusText";
             this.MeregeWordStatusText.Size = new System.Drawing.Size(143, 18);
             this.MeregeWordStatusText.TabIndex = 4;
@@ -1499,7 +1499,7 @@
             // 
             this.label23.AutoSize = true;
             this.label23.ForeColor = System.Drawing.Color.Tomato;
-            this.label23.Location = new System.Drawing.Point(6, 355);
+            this.label23.Location = new System.Drawing.Point(8, 409);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(656, 18);
             this.label23.TabIndex = 3;
@@ -1507,7 +1507,7 @@
             // 
             // MergeWordFile
             // 
-            this.MergeWordFile.Location = new System.Drawing.Point(746, 406);
+            this.MergeWordFile.Location = new System.Drawing.Point(748, 460);
             this.MergeWordFile.Name = "MergeWordFile";
             this.MergeWordFile.Size = new System.Drawing.Size(221, 55);
             this.MergeWordFile.TabIndex = 2;
@@ -1517,7 +1517,7 @@
             // 
             // SelectMergeWordFiles
             // 
-            this.SelectMergeWordFiles.Location = new System.Drawing.Point(6, 406);
+            this.SelectMergeWordFiles.Location = new System.Drawing.Point(8, 460);
             this.SelectMergeWordFiles.Name = "SelectMergeWordFiles";
             this.SelectMergeWordFiles.Size = new System.Drawing.Size(221, 55);
             this.SelectMergeWordFiles.TabIndex = 1;
@@ -1530,7 +1530,7 @@
             this.MergeWordFileList.HideSelection = false;
             this.MergeWordFileList.Location = new System.Drawing.Point(6, 6);
             this.MergeWordFileList.Name = "MergeWordFileList";
-            this.MergeWordFileList.Size = new System.Drawing.Size(921, 326);
+            this.MergeWordFileList.Size = new System.Drawing.Size(921, 381);
             this.MergeWordFileList.TabIndex = 0;
             this.MergeWordFileList.UseCompatibleStateImageBehavior = false;
             // 
@@ -1550,16 +1550,16 @@
             this.TabPage_06.Controls.Add(this.MergePdfFileView);
             this.TabPage_06.Location = new System.Drawing.Point(4, 100);
             this.TabPage_06.Name = "TabPage_06";
-            this.TabPage_06.Size = new System.Drawing.Size(975, 474);
+            this.TabPage_06.Size = new System.Drawing.Size(982, 538);
             this.TabPage_06.TabIndex = 5;
             this.TabPage_06.Text = "合并PDF";
             this.TabPage_06.UseVisualStyleBackColor = true;
             // 
             // MergePdfFileView_MoveDown
             // 
-            this.MergePdfFileView_MoveDown.Location = new System.Drawing.Point(933, 290);
+            this.MergePdfFileView_MoveDown.Location = new System.Drawing.Point(933, 321);
             this.MergePdfFileView_MoveDown.Name = "MergePdfFileView_MoveDown";
-            this.MergePdfFileView_MoveDown.Size = new System.Drawing.Size(34, 42);
+            this.MergePdfFileView_MoveDown.Size = new System.Drawing.Size(34, 66);
             this.MergePdfFileView_MoveDown.TabIndex = 9;
             this.MergePdfFileView_MoveDown.Text = "▽";
             this.MergePdfFileView_MoveDown.UseVisualStyleBackColor = true;
@@ -1568,7 +1568,7 @@
             // 
             this.MergePdfFileView_MoveUp.Location = new System.Drawing.Point(933, 6);
             this.MergePdfFileView_MoveUp.Name = "MergePdfFileView_MoveUp";
-            this.MergePdfFileView_MoveUp.Size = new System.Drawing.Size(34, 42);
+            this.MergePdfFileView_MoveUp.Size = new System.Drawing.Size(34, 66);
             this.MergePdfFileView_MoveUp.TabIndex = 8;
             this.MergePdfFileView_MoveUp.Text = "△";
             this.MergePdfFileView_MoveUp.UseVisualStyleBackColor = true;
@@ -1577,9 +1577,9 @@
             // 
             this.meregepdf_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
             this.meregepdf_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.meregepdf_clear.Location = new System.Drawing.Point(933, 184);
+            this.meregepdf_clear.Location = new System.Drawing.Point(933, 230);
             this.meregepdf_clear.Name = "meregepdf_clear";
-            this.meregepdf_clear.Size = new System.Drawing.Size(34, 73);
+            this.meregepdf_clear.Size = new System.Drawing.Size(34, 85);
             this.meregepdf_clear.TabIndex = 12;
             this.meregepdf_clear.UseVisualStyleBackColor = true;
             // 
@@ -1589,14 +1589,14 @@
             this.meregepdf_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.meregepdf_remove.Location = new System.Drawing.Point(933, 74);
             this.meregepdf_remove.Name = "meregepdf_remove";
-            this.meregepdf_remove.Size = new System.Drawing.Size(34, 73);
+            this.meregepdf_remove.Size = new System.Drawing.Size(34, 85);
             this.meregepdf_remove.TabIndex = 11;
             this.meregepdf_remove.UseVisualStyleBackColor = true;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(625, 347);
+            this.label5.Location = new System.Drawing.Point(627, 400);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(215, 18);
             this.label5.TabIndex = 7;
@@ -1605,7 +1605,7 @@
             // MeregeFilePage
             // 
             this.MeregeFilePage.FormattingEnabled = true;
-            this.MeregeFilePage.Location = new System.Drawing.Point(846, 344);
+            this.MeregeFilePage.Location = new System.Drawing.Point(848, 397);
             this.MeregeFilePage.Name = "MeregeFilePage";
             this.MeregeFilePage.Size = new System.Drawing.Size(121, 26);
             this.MeregeFilePage.TabIndex = 6;
@@ -1613,7 +1613,7 @@
             // PictureMergeMode
             // 
             this.PictureMergeMode.AutoSize = true;
-            this.PictureMergeMode.Location = new System.Drawing.Point(410, 348);
+            this.PictureMergeMode.Location = new System.Drawing.Point(412, 401);
             this.PictureMergeMode.Name = "PictureMergeMode";
             this.PictureMergeMode.Size = new System.Drawing.Size(151, 22);
             this.PictureMergeMode.TabIndex = 5;
@@ -1623,7 +1623,7 @@
             // OpenMeregePdfFile
             // 
             this.OpenMeregePdfFile.AutoSize = true;
-            this.OpenMeregePdfFile.Location = new System.Drawing.Point(6, 347);
+            this.OpenMeregePdfFile.Location = new System.Drawing.Point(8, 400);
             this.OpenMeregePdfFile.Name = "OpenMeregePdfFile";
             this.OpenMeregePdfFile.Size = new System.Drawing.Size(250, 22);
             this.OpenMeregePdfFile.TabIndex = 4;
@@ -1634,7 +1634,7 @@
             // 
             this.MeregePdfFileStatusText.AutoSize = true;
             this.MeregePdfFileStatusText.ForeColor = System.Drawing.Color.ForestGreen;
-            this.MeregePdfFileStatusText.Location = new System.Drawing.Point(246, 424);
+            this.MeregePdfFileStatusText.Location = new System.Drawing.Point(248, 477);
             this.MeregePdfFileStatusText.Name = "MeregePdfFileStatusText";
             this.MeregePdfFileStatusText.Size = new System.Drawing.Size(143, 18);
             this.MeregePdfFileStatusText.TabIndex = 3;
@@ -1642,7 +1642,7 @@
             // 
             // MeregePdfFileButtonConvert
             // 
-            this.MeregePdfFileButtonConvert.Location = new System.Drawing.Point(746, 406);
+            this.MeregePdfFileButtonConvert.Location = new System.Drawing.Point(748, 459);
             this.MeregePdfFileButtonConvert.Name = "MeregePdfFileButtonConvert";
             this.MeregePdfFileButtonConvert.Size = new System.Drawing.Size(221, 55);
             this.MeregePdfFileButtonConvert.TabIndex = 2;
@@ -1652,7 +1652,7 @@
             // 
             // MergePdfFileSelectButton
             // 
-            this.MergePdfFileSelectButton.Location = new System.Drawing.Point(6, 406);
+            this.MergePdfFileSelectButton.Location = new System.Drawing.Point(8, 459);
             this.MergePdfFileSelectButton.Name = "MergePdfFileSelectButton";
             this.MergePdfFileSelectButton.Size = new System.Drawing.Size(221, 55);
             this.MergePdfFileSelectButton.TabIndex = 1;
@@ -1665,7 +1665,7 @@
             this.MergePdfFileView.HideSelection = false;
             this.MergePdfFileView.Location = new System.Drawing.Point(6, 6);
             this.MergePdfFileView.Name = "MergePdfFileView";
-            this.MergePdfFileView.Size = new System.Drawing.Size(921, 326);
+            this.MergePdfFileView.Size = new System.Drawing.Size(921, 381);
             this.MergePdfFileView.TabIndex = 0;
             this.MergePdfFileView.UseCompatibleStateImageBehavior = false;
             // 
@@ -1682,16 +1682,16 @@
             this.TabPage_17.Location = new System.Drawing.Point(4, 100);
             this.TabPage_17.Name = "TabPage_17";
             this.TabPage_17.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage_17.Size = new System.Drawing.Size(975, 474);
+            this.TabPage_17.Size = new System.Drawing.Size(982, 538);
             this.TabPage_17.TabIndex = 16;
             this.TabPage_17.Text = "拆分PDF";
             this.TabPage_17.UseVisualStyleBackColor = true;
             // 
             // SplitPdfFileList_MoveDown
             // 
-            this.SplitPdfFileList_MoveDown.Location = new System.Drawing.Point(933, 290);
+            this.SplitPdfFileList_MoveDown.Location = new System.Drawing.Point(933, 321);
             this.SplitPdfFileList_MoveDown.Name = "SplitPdfFileList_MoveDown";
-            this.SplitPdfFileList_MoveDown.Size = new System.Drawing.Size(34, 42);
+            this.SplitPdfFileList_MoveDown.Size = new System.Drawing.Size(34, 66);
             this.SplitPdfFileList_MoveDown.TabIndex = 5;
             this.SplitPdfFileList_MoveDown.Text = "▽";
             this.SplitPdfFileList_MoveDown.UseVisualStyleBackColor = true;
@@ -1700,7 +1700,7 @@
             // 
             this.SplitPdfFileList_MoveUp.Location = new System.Drawing.Point(933, 6);
             this.SplitPdfFileList_MoveUp.Name = "SplitPdfFileList_MoveUp";
-            this.SplitPdfFileList_MoveUp.Size = new System.Drawing.Size(34, 42);
+            this.SplitPdfFileList_MoveUp.Size = new System.Drawing.Size(34, 66);
             this.SplitPdfFileList_MoveUp.TabIndex = 4;
             this.SplitPdfFileList_MoveUp.Text = "△";
             this.SplitPdfFileList_MoveUp.UseVisualStyleBackColor = true;
@@ -1709,9 +1709,9 @@
             // 
             this.sqplitpdf_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
             this.sqplitpdf_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.sqplitpdf_clear.Location = new System.Drawing.Point(933, 184);
+            this.sqplitpdf_clear.Location = new System.Drawing.Point(933, 230);
             this.sqplitpdf_clear.Name = "sqplitpdf_clear";
-            this.sqplitpdf_clear.Size = new System.Drawing.Size(34, 73);
+            this.sqplitpdf_clear.Size = new System.Drawing.Size(34, 85);
             this.sqplitpdf_clear.TabIndex = 12;
             this.sqplitpdf_clear.UseVisualStyleBackColor = true;
             // 
@@ -1721,7 +1721,7 @@
             this.sqplitpdf_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.sqplitpdf_remove.Location = new System.Drawing.Point(933, 74);
             this.sqplitpdf_remove.Name = "sqplitpdf_remove";
-            this.sqplitpdf_remove.Size = new System.Drawing.Size(34, 73);
+            this.sqplitpdf_remove.Size = new System.Drawing.Size(34, 85);
             this.sqplitpdf_remove.TabIndex = 11;
             this.sqplitpdf_remove.UseVisualStyleBackColor = true;
             // 
@@ -1729,7 +1729,7 @@
             // 
             this.SplitPdfStatusText.AutoSize = true;
             this.SplitPdfStatusText.ForeColor = System.Drawing.Color.ForestGreen;
-            this.SplitPdfStatusText.Location = new System.Drawing.Point(246, 424);
+            this.SplitPdfStatusText.Location = new System.Drawing.Point(248, 475);
             this.SplitPdfStatusText.Name = "SplitPdfStatusText";
             this.SplitPdfStatusText.Size = new System.Drawing.Size(143, 18);
             this.SplitPdfStatusText.TabIndex = 3;
@@ -1737,7 +1737,7 @@
             // 
             // StartSplitPdf
             // 
-            this.StartSplitPdf.Location = new System.Drawing.Point(746, 406);
+            this.StartSplitPdf.Location = new System.Drawing.Point(748, 457);
             this.StartSplitPdf.Name = "StartSplitPdf";
             this.StartSplitPdf.Size = new System.Drawing.Size(221, 55);
             this.StartSplitPdf.TabIndex = 2;
@@ -1747,7 +1747,7 @@
             // 
             // SelectSplitPdf
             // 
-            this.SelectSplitPdf.Location = new System.Drawing.Point(6, 406);
+            this.SelectSplitPdf.Location = new System.Drawing.Point(8, 457);
             this.SelectSplitPdf.Name = "SelectSplitPdf";
             this.SelectSplitPdf.Size = new System.Drawing.Size(221, 55);
             this.SelectSplitPdf.TabIndex = 1;
@@ -1760,7 +1760,7 @@
             this.SplitPdfFileList.HideSelection = false;
             this.SplitPdfFileList.Location = new System.Drawing.Point(6, 6);
             this.SplitPdfFileList.Name = "SplitPdfFileList";
-            this.SplitPdfFileList.Size = new System.Drawing.Size(921, 326);
+            this.SplitPdfFileList.Size = new System.Drawing.Size(921, 381);
             this.SplitPdfFileList.TabIndex = 0;
             this.SplitPdfFileList.UseCompatibleStateImageBehavior = false;
             // 
@@ -1778,16 +1778,16 @@
             this.TabPage_18.Controls.Add(this.PdfWaterMarkFileList);
             this.TabPage_18.Location = new System.Drawing.Point(4, 100);
             this.TabPage_18.Name = "TabPage_18";
-            this.TabPage_18.Size = new System.Drawing.Size(975, 474);
+            this.TabPage_18.Size = new System.Drawing.Size(982, 538);
             this.TabPage_18.TabIndex = 17;
             this.TabPage_18.Text = "添加PDF水印";
             this.TabPage_18.UseVisualStyleBackColor = true;
             // 
             // PdfWaterMarkFileList_MoveDown
             // 
-            this.PdfWaterMarkFileList_MoveDown.Location = new System.Drawing.Point(933, 188);
+            this.PdfWaterMarkFileList_MoveDown.Location = new System.Drawing.Point(933, 220);
             this.PdfWaterMarkFileList_MoveDown.Name = "PdfWaterMarkFileList_MoveDown";
-            this.PdfWaterMarkFileList_MoveDown.Size = new System.Drawing.Size(34, 42);
+            this.PdfWaterMarkFileList_MoveDown.Size = new System.Drawing.Size(34, 66);
             this.PdfWaterMarkFileList_MoveDown.TabIndex = 17;
             this.PdfWaterMarkFileList_MoveDown.Text = "▽";
             this.PdfWaterMarkFileList_MoveDown.UseVisualStyleBackColor = true;
@@ -1796,7 +1796,7 @@
             // 
             this.PdfWaterMarkFileList_MoveUp.Location = new System.Drawing.Point(933, 6);
             this.PdfWaterMarkFileList_MoveUp.Name = "PdfWaterMarkFileList_MoveUp";
-            this.PdfWaterMarkFileList_MoveUp.Size = new System.Drawing.Size(34, 42);
+            this.PdfWaterMarkFileList_MoveUp.Size = new System.Drawing.Size(34, 66);
             this.PdfWaterMarkFileList_MoveUp.TabIndex = 16;
             this.PdfWaterMarkFileList_MoveUp.Text = "△";
             this.PdfWaterMarkFileList_MoveUp.UseVisualStyleBackColor = true;
@@ -1805,9 +1805,9 @@
             // 
             this.addpdfwater_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
             this.addpdfwater_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.addpdfwater_clear.Location = new System.Drawing.Point(933, 117);
+            this.addpdfwater_clear.Location = new System.Drawing.Point(933, 151);
             this.addpdfwater_clear.Name = "addpdfwater_clear";
-            this.addpdfwater_clear.Size = new System.Drawing.Size(34, 49);
+            this.addpdfwater_clear.Size = new System.Drawing.Size(34, 63);
             this.addpdfwater_clear.TabIndex = 12;
             this.addpdfwater_clear.UseVisualStyleBackColor = true;
             // 
@@ -1815,9 +1815,9 @@
             // 
             this.addpdfwater_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
             this.addpdfwater_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.addpdfwater_remove.Location = new System.Drawing.Point(933, 65);
+            this.addpdfwater_remove.Location = new System.Drawing.Point(933, 78);
             this.addpdfwater_remove.Name = "addpdfwater_remove";
-            this.addpdfwater_remove.Size = new System.Drawing.Size(34, 46);
+            this.addpdfwater_remove.Size = new System.Drawing.Size(34, 63);
             this.addpdfwater_remove.TabIndex = 11;
             this.addpdfwater_remove.UseVisualStyleBackColor = true;
             // 
@@ -1825,7 +1825,7 @@
             // 
             this.label31.AutoSize = true;
             this.label31.ForeColor = System.Drawing.Color.Tomato;
-            this.label31.Location = new System.Drawing.Point(443, 406);
+            this.label31.Location = new System.Drawing.Point(450, 462);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(242, 54);
             this.label31.TabIndex = 15;
@@ -1835,7 +1835,7 @@
             // 
             this.AddWaterMark2PdfStatusText.AutoSize = true;
             this.AddWaterMark2PdfStatusText.ForeColor = System.Drawing.Color.ForestGreen;
-            this.AddWaterMark2PdfStatusText.Location = new System.Drawing.Point(235, 426);
+            this.AddWaterMark2PdfStatusText.Location = new System.Drawing.Point(242, 482);
             this.AddWaterMark2PdfStatusText.Name = "AddWaterMark2PdfStatusText";
             this.AddWaterMark2PdfStatusText.Size = new System.Drawing.Size(143, 18);
             this.AddWaterMark2PdfStatusText.TabIndex = 4;
@@ -1843,7 +1843,7 @@
             // 
             // AddWaterMark2Pdf
             // 
-            this.AddWaterMark2Pdf.Location = new System.Drawing.Point(746, 406);
+            this.AddWaterMark2Pdf.Location = new System.Drawing.Point(753, 462);
             this.AddWaterMark2Pdf.Name = "AddWaterMark2Pdf";
             this.AddWaterMark2Pdf.Size = new System.Drawing.Size(221, 55);
             this.AddWaterMark2Pdf.TabIndex = 3;
@@ -1853,7 +1853,7 @@
             // 
             // SelectWaterMarkPdfFiles
             // 
-            this.SelectWaterMarkPdfFiles.Location = new System.Drawing.Point(8, 408);
+            this.SelectWaterMarkPdfFiles.Location = new System.Drawing.Point(15, 464);
             this.SelectWaterMarkPdfFiles.Name = "SelectWaterMarkPdfFiles";
             this.SelectWaterMarkPdfFiles.Size = new System.Drawing.Size(221, 55);
             this.SelectWaterMarkPdfFiles.TabIndex = 2;
@@ -1883,7 +1883,7 @@
             this.groupBox18.Controls.Add(this.label26);
             this.groupBox18.Controls.Add(this.label25);
             this.groupBox18.Controls.Add(this.PdfWaterMarkText);
-            this.groupBox18.Location = new System.Drawing.Point(4, 236);
+            this.groupBox18.Location = new System.Drawing.Point(11, 292);
             this.groupBox18.Name = "groupBox18";
             this.groupBox18.Size = new System.Drawing.Size(963, 159);
             this.groupBox18.TabIndex = 1;
@@ -2069,7 +2069,7 @@
             this.PdfWaterMarkFileList.HideSelection = false;
             this.PdfWaterMarkFileList.Location = new System.Drawing.Point(6, 6);
             this.PdfWaterMarkFileList.Name = "PdfWaterMarkFileList";
-            this.PdfWaterMarkFileList.Size = new System.Drawing.Size(921, 224);
+            this.PdfWaterMarkFileList.Size = new System.Drawing.Size(921, 280);
             this.PdfWaterMarkFileList.TabIndex = 0;
             this.PdfWaterMarkFileList.UseCompatibleStateImageBehavior = false;
             // 
@@ -2085,16 +2085,16 @@
             this.TabPage_19.Controls.Add(this.RemovePdfWaterMarkFileList);
             this.TabPage_19.Location = new System.Drawing.Point(4, 100);
             this.TabPage_19.Name = "TabPage_19";
-            this.TabPage_19.Size = new System.Drawing.Size(975, 474);
+            this.TabPage_19.Size = new System.Drawing.Size(982, 538);
             this.TabPage_19.TabIndex = 18;
             this.TabPage_19.Text = "移除PDF水印";
             this.TabPage_19.UseVisualStyleBackColor = true;
             // 
             // RemovePdfWaterMarkFileList_MoveDown
             // 
-            this.RemovePdfWaterMarkFileList_MoveDown.Location = new System.Drawing.Point(933, 290);
+            this.RemovePdfWaterMarkFileList_MoveDown.Location = new System.Drawing.Point(933, 321);
             this.RemovePdfWaterMarkFileList_MoveDown.Name = "RemovePdfWaterMarkFileList_MoveDown";
-            this.RemovePdfWaterMarkFileList_MoveDown.Size = new System.Drawing.Size(34, 42);
+            this.RemovePdfWaterMarkFileList_MoveDown.Size = new System.Drawing.Size(34, 66);
             this.RemovePdfWaterMarkFileList_MoveDown.TabIndex = 5;
             this.RemovePdfWaterMarkFileList_MoveDown.Text = "▽";
             this.RemovePdfWaterMarkFileList_MoveDown.UseVisualStyleBackColor = true;
@@ -2103,7 +2103,7 @@
             // 
             this.RemovePdfWaterMarkFileList_MoveUp.Location = new System.Drawing.Point(933, 6);
             this.RemovePdfWaterMarkFileList_MoveUp.Name = "RemovePdfWaterMarkFileList_MoveUp";
-            this.RemovePdfWaterMarkFileList_MoveUp.Size = new System.Drawing.Size(34, 42);
+            this.RemovePdfWaterMarkFileList_MoveUp.Size = new System.Drawing.Size(34, 66);
             this.RemovePdfWaterMarkFileList_MoveUp.TabIndex = 4;
             this.RemovePdfWaterMarkFileList_MoveUp.Text = "△";
             this.RemovePdfWaterMarkFileList_MoveUp.UseVisualStyleBackColor = true;
@@ -2112,9 +2112,9 @@
             // 
             this.removepdfwater_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
             this.removepdfwater_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.removepdfwater_clear.Location = new System.Drawing.Point(933, 184);
+            this.removepdfwater_clear.Location = new System.Drawing.Point(933, 230);
             this.removepdfwater_clear.Name = "removepdfwater_clear";
-            this.removepdfwater_clear.Size = new System.Drawing.Size(34, 73);
+            this.removepdfwater_clear.Size = new System.Drawing.Size(34, 85);
             this.removepdfwater_clear.TabIndex = 12;
             this.removepdfwater_clear.UseVisualStyleBackColor = true;
             // 
@@ -2124,7 +2124,7 @@
             this.removepdfwater_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.removepdfwater_remove.Location = new System.Drawing.Point(933, 74);
             this.removepdfwater_remove.Name = "removepdfwater_remove";
-            this.removepdfwater_remove.Size = new System.Drawing.Size(34, 73);
+            this.removepdfwater_remove.Size = new System.Drawing.Size(34, 85);
             this.removepdfwater_remove.TabIndex = 11;
             this.removepdfwater_remove.UseVisualStyleBackColor = true;
             // 
@@ -2132,7 +2132,7 @@
             // 
             this.RemovePdfWaterMarkStatusText.AutoSize = true;
             this.RemovePdfWaterMarkStatusText.ForeColor = System.Drawing.Color.ForestGreen;
-            this.RemovePdfWaterMarkStatusText.Location = new System.Drawing.Point(234, 424);
+            this.RemovePdfWaterMarkStatusText.Location = new System.Drawing.Point(236, 490);
             this.RemovePdfWaterMarkStatusText.Name = "RemovePdfWaterMarkStatusText";
             this.RemovePdfWaterMarkStatusText.Size = new System.Drawing.Size(143, 18);
             this.RemovePdfWaterMarkStatusText.TabIndex = 3;
@@ -2140,7 +2140,7 @@
             // 
             // RemovePdfWaterMark
             // 
-            this.RemovePdfWaterMark.Location = new System.Drawing.Point(746, 406);
+            this.RemovePdfWaterMark.Location = new System.Drawing.Point(748, 472);
             this.RemovePdfWaterMark.Name = "RemovePdfWaterMark";
             this.RemovePdfWaterMark.Size = new System.Drawing.Size(221, 55);
             this.RemovePdfWaterMark.TabIndex = 2;
@@ -2150,7 +2150,7 @@
             // 
             // SelectRemovePdfWaterMarkFiles
             // 
-            this.SelectRemovePdfWaterMarkFiles.Location = new System.Drawing.Point(6, 406);
+            this.SelectRemovePdfWaterMarkFiles.Location = new System.Drawing.Point(8, 472);
             this.SelectRemovePdfWaterMarkFiles.Name = "SelectRemovePdfWaterMarkFiles";
             this.SelectRemovePdfWaterMarkFiles.Size = new System.Drawing.Size(221, 55);
             this.SelectRemovePdfWaterMarkFiles.TabIndex = 1;
@@ -2163,7 +2163,7 @@
             this.RemovePdfWaterMarkFileList.HideSelection = false;
             this.RemovePdfWaterMarkFileList.Location = new System.Drawing.Point(6, 6);
             this.RemovePdfWaterMarkFileList.Name = "RemovePdfWaterMarkFileList";
-            this.RemovePdfWaterMarkFileList.Size = new System.Drawing.Size(921, 326);
+            this.RemovePdfWaterMarkFileList.Size = new System.Drawing.Size(921, 381);
             this.RemovePdfWaterMarkFileList.TabIndex = 0;
             this.RemovePdfWaterMarkFileList.UseCompatibleStateImageBehavior = false;
             // 
@@ -2181,16 +2181,16 @@
             this.TabPage_22.Controls.Add(this.ConvertPdfComplianceFileList);
             this.TabPage_22.Location = new System.Drawing.Point(4, 100);
             this.TabPage_22.Name = "TabPage_22";
-            this.TabPage_22.Size = new System.Drawing.Size(975, 474);
+            this.TabPage_22.Size = new System.Drawing.Size(982, 538);
             this.TabPage_22.TabIndex = 21;
             this.TabPage_22.Text = "PDF版本转换";
             this.TabPage_22.UseVisualStyleBackColor = true;
             // 
             // ConvertPdfComplianceFileList_MoveDown
             // 
-            this.ConvertPdfComplianceFileList_MoveDown.Location = new System.Drawing.Point(933, 290);
+            this.ConvertPdfComplianceFileList_MoveDown.Location = new System.Drawing.Point(933, 321);
             this.ConvertPdfComplianceFileList_MoveDown.Name = "ConvertPdfComplianceFileList_MoveDown";
-            this.ConvertPdfComplianceFileList_MoveDown.Size = new System.Drawing.Size(34, 42);
+            this.ConvertPdfComplianceFileList_MoveDown.Size = new System.Drawing.Size(34, 66);
             this.ConvertPdfComplianceFileList_MoveDown.TabIndex = 7;
             this.ConvertPdfComplianceFileList_MoveDown.Text = "▽";
             this.ConvertPdfComplianceFileList_MoveDown.UseVisualStyleBackColor = true;
@@ -2199,7 +2199,7 @@
             // 
             this.ConvertPdfComplianceFileList_MoveUp.Location = new System.Drawing.Point(933, 6);
             this.ConvertPdfComplianceFileList_MoveUp.Name = "ConvertPdfComplianceFileList_MoveUp";
-            this.ConvertPdfComplianceFileList_MoveUp.Size = new System.Drawing.Size(34, 42);
+            this.ConvertPdfComplianceFileList_MoveUp.Size = new System.Drawing.Size(34, 66);
             this.ConvertPdfComplianceFileList_MoveUp.TabIndex = 6;
             this.ConvertPdfComplianceFileList_MoveUp.Text = "△";
             this.ConvertPdfComplianceFileList_MoveUp.UseVisualStyleBackColor = true;
@@ -2208,9 +2208,9 @@
             // 
             this.pdfversion_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
             this.pdfversion_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pdfversion_clear.Location = new System.Drawing.Point(933, 184);
+            this.pdfversion_clear.Location = new System.Drawing.Point(933, 230);
             this.pdfversion_clear.Name = "pdfversion_clear";
-            this.pdfversion_clear.Size = new System.Drawing.Size(34, 73);
+            this.pdfversion_clear.Size = new System.Drawing.Size(34, 85);
             this.pdfversion_clear.TabIndex = 12;
             this.pdfversion_clear.UseVisualStyleBackColor = true;
             // 
@@ -2220,14 +2220,14 @@
             this.pdfversion_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pdfversion_remove.Location = new System.Drawing.Point(933, 74);
             this.pdfversion_remove.Name = "pdfversion_remove";
-            this.pdfversion_remove.Size = new System.Drawing.Size(34, 73);
+            this.pdfversion_remove.Size = new System.Drawing.Size(34, 85);
             this.pdfversion_remove.TabIndex = 11;
             this.pdfversion_remove.UseVisualStyleBackColor = true;
             // 
             // ConvertPdfComplianceVersion
             // 
             this.ConvertPdfComplianceVersion.FormattingEnabled = true;
-            this.ConvertPdfComplianceVersion.Location = new System.Drawing.Point(99, 345);
+            this.ConvertPdfComplianceVersion.Location = new System.Drawing.Point(104, 404);
             this.ConvertPdfComplianceVersion.Name = "ConvertPdfComplianceVersion";
             this.ConvertPdfComplianceVersion.Size = new System.Drawing.Size(121, 26);
             this.ConvertPdfComplianceVersion.TabIndex = 5;
@@ -2235,7 +2235,7 @@
             // label39
             // 
             this.label39.AutoSize = true;
-            this.label39.Location = new System.Drawing.Point(12, 348);
+            this.label39.Location = new System.Drawing.Point(17, 407);
             this.label39.Name = "label39";
             this.label39.Size = new System.Drawing.Size(80, 18);
             this.label39.TabIndex = 4;
@@ -2245,7 +2245,7 @@
             // 
             this.ConvertPdfComplianceStatusText.AutoSize = true;
             this.ConvertPdfComplianceStatusText.ForeColor = System.Drawing.Color.ForestGreen;
-            this.ConvertPdfComplianceStatusText.Location = new System.Drawing.Point(246, 424);
+            this.ConvertPdfComplianceStatusText.Location = new System.Drawing.Point(251, 483);
             this.ConvertPdfComplianceStatusText.Name = "ConvertPdfComplianceStatusText";
             this.ConvertPdfComplianceStatusText.Size = new System.Drawing.Size(143, 18);
             this.ConvertPdfComplianceStatusText.TabIndex = 3;
@@ -2253,7 +2253,7 @@
             // 
             // ConvertPdfCompliance
             // 
-            this.ConvertPdfCompliance.Location = new System.Drawing.Point(746, 406);
+            this.ConvertPdfCompliance.Location = new System.Drawing.Point(751, 465);
             this.ConvertPdfCompliance.Name = "ConvertPdfCompliance";
             this.ConvertPdfCompliance.Size = new System.Drawing.Size(221, 55);
             this.ConvertPdfCompliance.TabIndex = 2;
@@ -2263,7 +2263,7 @@
             // 
             // SelectConvertComplaincePdf
             // 
-            this.SelectConvertComplaincePdf.Location = new System.Drawing.Point(6, 406);
+            this.SelectConvertComplaincePdf.Location = new System.Drawing.Point(11, 465);
             this.SelectConvertComplaincePdf.Name = "SelectConvertComplaincePdf";
             this.SelectConvertComplaincePdf.Size = new System.Drawing.Size(221, 55);
             this.SelectConvertComplaincePdf.TabIndex = 1;
@@ -2276,7 +2276,7 @@
             this.ConvertPdfComplianceFileList.HideSelection = false;
             this.ConvertPdfComplianceFileList.Location = new System.Drawing.Point(6, 6);
             this.ConvertPdfComplianceFileList.Name = "ConvertPdfComplianceFileList";
-            this.ConvertPdfComplianceFileList.Size = new System.Drawing.Size(921, 326);
+            this.ConvertPdfComplianceFileList.Size = new System.Drawing.Size(921, 381);
             this.ConvertPdfComplianceFileList.TabIndex = 0;
             this.ConvertPdfComplianceFileList.UseCompatibleStateImageBehavior = false;
             // 
@@ -2292,16 +2292,16 @@
             this.TabPage_15.Controls.Add(this.Word2ExcelFileList);
             this.TabPage_15.Location = new System.Drawing.Point(4, 100);
             this.TabPage_15.Name = "TabPage_15";
-            this.TabPage_15.Size = new System.Drawing.Size(975, 474);
+            this.TabPage_15.Size = new System.Drawing.Size(982, 538);
             this.TabPage_15.TabIndex = 14;
             this.TabPage_15.Text = "WORD转EXCEL";
             this.TabPage_15.UseVisualStyleBackColor = true;
             // 
             // Word2ExcelFileList_MoveDown
             // 
-            this.Word2ExcelFileList_MoveDown.Location = new System.Drawing.Point(933, 290);
+            this.Word2ExcelFileList_MoveDown.Location = new System.Drawing.Point(933, 321);
             this.Word2ExcelFileList_MoveDown.Name = "Word2ExcelFileList_MoveDown";
-            this.Word2ExcelFileList_MoveDown.Size = new System.Drawing.Size(34, 42);
+            this.Word2ExcelFileList_MoveDown.Size = new System.Drawing.Size(34, 66);
             this.Word2ExcelFileList_MoveDown.TabIndex = 5;
             this.Word2ExcelFileList_MoveDown.Text = "▽";
             this.Word2ExcelFileList_MoveDown.UseVisualStyleBackColor = true;
@@ -2310,7 +2310,7 @@
             // 
             this.Word2ExcelFileList_MoveUp.Location = new System.Drawing.Point(933, 6);
             this.Word2ExcelFileList_MoveUp.Name = "Word2ExcelFileList_MoveUp";
-            this.Word2ExcelFileList_MoveUp.Size = new System.Drawing.Size(34, 42);
+            this.Word2ExcelFileList_MoveUp.Size = new System.Drawing.Size(34, 66);
             this.Word2ExcelFileList_MoveUp.TabIndex = 4;
             this.Word2ExcelFileList_MoveUp.Text = "△";
             this.Word2ExcelFileList_MoveUp.UseVisualStyleBackColor = true;
@@ -2319,9 +2319,9 @@
             // 
             this.word2excel_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
             this.word2excel_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.word2excel_clear.Location = new System.Drawing.Point(933, 184);
+            this.word2excel_clear.Location = new System.Drawing.Point(933, 230);
             this.word2excel_clear.Name = "word2excel_clear";
-            this.word2excel_clear.Size = new System.Drawing.Size(34, 73);
+            this.word2excel_clear.Size = new System.Drawing.Size(34, 85);
             this.word2excel_clear.TabIndex = 12;
             this.word2excel_clear.UseVisualStyleBackColor = true;
             // 
@@ -2331,7 +2331,7 @@
             this.word2excel_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.word2excel_remove.Location = new System.Drawing.Point(933, 74);
             this.word2excel_remove.Name = "word2excel_remove";
-            this.word2excel_remove.Size = new System.Drawing.Size(34, 73);
+            this.word2excel_remove.Size = new System.Drawing.Size(34, 85);
             this.word2excel_remove.TabIndex = 11;
             this.word2excel_remove.UseVisualStyleBackColor = true;
             // 
@@ -2339,7 +2339,7 @@
             // 
             this.ConverWord2ExcelStatusText.AutoSize = true;
             this.ConverWord2ExcelStatusText.ForeColor = System.Drawing.Color.ForestGreen;
-            this.ConverWord2ExcelStatusText.Location = new System.Drawing.Point(246, 424);
+            this.ConverWord2ExcelStatusText.Location = new System.Drawing.Point(248, 478);
             this.ConverWord2ExcelStatusText.Name = "ConverWord2ExcelStatusText";
             this.ConverWord2ExcelStatusText.Size = new System.Drawing.Size(143, 18);
             this.ConverWord2ExcelStatusText.TabIndex = 3;
@@ -2347,7 +2347,7 @@
             // 
             // ConvertWord2Excel
             // 
-            this.ConvertWord2Excel.Location = new System.Drawing.Point(746, 406);
+            this.ConvertWord2Excel.Location = new System.Drawing.Point(748, 460);
             this.ConvertWord2Excel.Name = "ConvertWord2Excel";
             this.ConvertWord2Excel.Size = new System.Drawing.Size(221, 55);
             this.ConvertWord2Excel.TabIndex = 2;
@@ -2357,7 +2357,7 @@
             // 
             // SelectWord2ExcelFiles
             // 
-            this.SelectWord2ExcelFiles.Location = new System.Drawing.Point(6, 406);
+            this.SelectWord2ExcelFiles.Location = new System.Drawing.Point(8, 460);
             this.SelectWord2ExcelFiles.Name = "SelectWord2ExcelFiles";
             this.SelectWord2ExcelFiles.Size = new System.Drawing.Size(221, 55);
             this.SelectWord2ExcelFiles.TabIndex = 1;
@@ -2370,7 +2370,7 @@
             this.Word2ExcelFileList.HideSelection = false;
             this.Word2ExcelFileList.Location = new System.Drawing.Point(6, 6);
             this.Word2ExcelFileList.Name = "Word2ExcelFileList";
-            this.Word2ExcelFileList.Size = new System.Drawing.Size(921, 326);
+            this.Word2ExcelFileList.Size = new System.Drawing.Size(921, 381);
             this.Word2ExcelFileList.TabIndex = 0;
             this.Word2ExcelFileList.UseCompatibleStateImageBehavior = false;
             // 
@@ -2387,16 +2387,16 @@
             this.TabPage_16.Controls.Add(this.Excel2WordFileList);
             this.TabPage_16.Location = new System.Drawing.Point(4, 100);
             this.TabPage_16.Name = "TabPage_16";
-            this.TabPage_16.Size = new System.Drawing.Size(975, 474);
+            this.TabPage_16.Size = new System.Drawing.Size(982, 538);
             this.TabPage_16.TabIndex = 15;
             this.TabPage_16.Text = "EXCEL转WORD";
             this.TabPage_16.UseVisualStyleBackColor = true;
             // 
             // Excel2WordFileList_MoveDown
             // 
-            this.Excel2WordFileList_MoveDown.Location = new System.Drawing.Point(933, 290);
+            this.Excel2WordFileList_MoveDown.Location = new System.Drawing.Point(933, 321);
             this.Excel2WordFileList_MoveDown.Name = "Excel2WordFileList_MoveDown";
-            this.Excel2WordFileList_MoveDown.Size = new System.Drawing.Size(34, 42);
+            this.Excel2WordFileList_MoveDown.Size = new System.Drawing.Size(34, 66);
             this.Excel2WordFileList_MoveDown.TabIndex = 6;
             this.Excel2WordFileList_MoveDown.Text = "▽";
             this.Excel2WordFileList_MoveDown.UseVisualStyleBackColor = true;
@@ -2405,7 +2405,7 @@
             // 
             this.Excel2WordFileList_MoveUp.Location = new System.Drawing.Point(933, 6);
             this.Excel2WordFileList_MoveUp.Name = "Excel2WordFileList_MoveUp";
-            this.Excel2WordFileList_MoveUp.Size = new System.Drawing.Size(34, 42);
+            this.Excel2WordFileList_MoveUp.Size = new System.Drawing.Size(34, 66);
             this.Excel2WordFileList_MoveUp.TabIndex = 5;
             this.Excel2WordFileList_MoveUp.Text = "△";
             this.Excel2WordFileList_MoveUp.UseVisualStyleBackColor = true;
@@ -2414,9 +2414,9 @@
             // 
             this.excel2word_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
             this.excel2word_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.excel2word_clear.Location = new System.Drawing.Point(933, 184);
+            this.excel2word_clear.Location = new System.Drawing.Point(933, 230);
             this.excel2word_clear.Name = "excel2word_clear";
-            this.excel2word_clear.Size = new System.Drawing.Size(34, 73);
+            this.excel2word_clear.Size = new System.Drawing.Size(34, 85);
             this.excel2word_clear.TabIndex = 12;
             this.excel2word_clear.UseVisualStyleBackColor = true;
             // 
@@ -2426,7 +2426,7 @@
             this.excel2word_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.excel2word_remove.Location = new System.Drawing.Point(933, 74);
             this.excel2word_remove.Name = "excel2word_remove";
-            this.excel2word_remove.Size = new System.Drawing.Size(34, 73);
+            this.excel2word_remove.Size = new System.Drawing.Size(34, 85);
             this.excel2word_remove.TabIndex = 11;
             this.excel2word_remove.UseVisualStyleBackColor = true;
             // 
@@ -2434,7 +2434,7 @@
             // 
             this.label24.AutoSize = true;
             this.label24.ForeColor = System.Drawing.Color.Tomato;
-            this.label24.Location = new System.Drawing.Point(8, 362);
+            this.label24.Location = new System.Drawing.Point(8, 413);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(764, 18);
             this.label24.TabIndex = 4;
@@ -2444,7 +2444,7 @@
             // 
             this.ConvertExcel2WordStatusText.AutoSize = true;
             this.ConvertExcel2WordStatusText.ForeColor = System.Drawing.Color.ForestGreen;
-            this.ConvertExcel2WordStatusText.Location = new System.Drawing.Point(246, 424);
+            this.ConvertExcel2WordStatusText.Location = new System.Drawing.Point(246, 475);
             this.ConvertExcel2WordStatusText.Name = "ConvertExcel2WordStatusText";
             this.ConvertExcel2WordStatusText.Size = new System.Drawing.Size(143, 18);
             this.ConvertExcel2WordStatusText.TabIndex = 3;
@@ -2452,7 +2452,7 @@
             // 
             // ConvertExcel2Word
             // 
-            this.ConvertExcel2Word.Location = new System.Drawing.Point(746, 406);
+            this.ConvertExcel2Word.Location = new System.Drawing.Point(746, 457);
             this.ConvertExcel2Word.Name = "ConvertExcel2Word";
             this.ConvertExcel2Word.Size = new System.Drawing.Size(221, 55);
             this.ConvertExcel2Word.TabIndex = 2;
@@ -2462,7 +2462,7 @@
             // 
             // SelectExcel2WordFiles
             // 
-            this.SelectExcel2WordFiles.Location = new System.Drawing.Point(6, 406);
+            this.SelectExcel2WordFiles.Location = new System.Drawing.Point(6, 457);
             this.SelectExcel2WordFiles.Name = "SelectExcel2WordFiles";
             this.SelectExcel2WordFiles.Size = new System.Drawing.Size(221, 55);
             this.SelectExcel2WordFiles.TabIndex = 1;
@@ -2475,7 +2475,7 @@
             this.Excel2WordFileList.HideSelection = false;
             this.Excel2WordFileList.Location = new System.Drawing.Point(6, 6);
             this.Excel2WordFileList.Name = "Excel2WordFileList";
-            this.Excel2WordFileList.Size = new System.Drawing.Size(921, 326);
+            this.Excel2WordFileList.Size = new System.Drawing.Size(921, 381);
             this.Excel2WordFileList.TabIndex = 0;
             this.Excel2WordFileList.UseCompatibleStateImageBehavior = false;
             // 
@@ -2498,16 +2498,16 @@
             this.TabPage_04.Controls.Add(this.DocumentsListView);
             this.TabPage_04.Location = new System.Drawing.Point(4, 100);
             this.TabPage_04.Name = "TabPage_04";
-            this.TabPage_04.Size = new System.Drawing.Size(975, 474);
+            this.TabPage_04.Size = new System.Drawing.Size(982, 538);
             this.TabPage_04.TabIndex = 3;
             this.TabPage_04.Text = "WORD/PDF/EXCEL转图片";
             this.TabPage_04.UseVisualStyleBackColor = true;
             // 
             // DocumentsListView_MoveDown
             // 
-            this.DocumentsListView_MoveDown.Location = new System.Drawing.Point(933, 290);
+            this.DocumentsListView_MoveDown.Location = new System.Drawing.Point(933, 321);
             this.DocumentsListView_MoveDown.Name = "DocumentsListView_MoveDown";
-            this.DocumentsListView_MoveDown.Size = new System.Drawing.Size(34, 42);
+            this.DocumentsListView_MoveDown.Size = new System.Drawing.Size(34, 66);
             this.DocumentsListView_MoveDown.TabIndex = 12;
             this.DocumentsListView_MoveDown.Text = "▽";
             this.DocumentsListView_MoveDown.UseVisualStyleBackColor = true;
@@ -2516,7 +2516,7 @@
             // 
             this.DocumentsListView_MoveUp.Location = new System.Drawing.Point(933, 6);
             this.DocumentsListView_MoveUp.Name = "DocumentsListView_MoveUp";
-            this.DocumentsListView_MoveUp.Size = new System.Drawing.Size(34, 42);
+            this.DocumentsListView_MoveUp.Size = new System.Drawing.Size(34, 66);
             this.DocumentsListView_MoveUp.TabIndex = 11;
             this.DocumentsListView_MoveUp.Text = "△";
             this.DocumentsListView_MoveUp.UseVisualStyleBackColor = true;
@@ -2525,9 +2525,9 @@
             // 
             this.document2image_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
             this.document2image_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.document2image_clear.Location = new System.Drawing.Point(933, 184);
+            this.document2image_clear.Location = new System.Drawing.Point(933, 230);
             this.document2image_clear.Name = "document2image_clear";
-            this.document2image_clear.Size = new System.Drawing.Size(34, 73);
+            this.document2image_clear.Size = new System.Drawing.Size(34, 85);
             this.document2image_clear.TabIndex = 12;
             this.document2image_clear.UseVisualStyleBackColor = true;
             // 
@@ -2537,7 +2537,7 @@
             this.document2image_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.document2image_remove.Location = new System.Drawing.Point(933, 74);
             this.document2image_remove.Name = "document2image_remove";
-            this.document2image_remove.Size = new System.Drawing.Size(34, 73);
+            this.document2image_remove.Size = new System.Drawing.Size(34, 85);
             this.document2image_remove.TabIndex = 11;
             this.document2image_remove.UseVisualStyleBackColor = true;
             // 
@@ -2545,7 +2545,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.ForeColor = System.Drawing.Color.Tomato;
-            this.label4.Location = new System.Drawing.Point(3, 379);
+            this.label4.Location = new System.Drawing.Point(5, 437);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(260, 18);
             this.label4.TabIndex = 10;
@@ -2554,7 +2554,7 @@
             // PageExportCheck
             // 
             this.PageExportCheck.AutoSize = true;
-            this.PageExportCheck.Location = new System.Drawing.Point(172, 347);
+            this.PageExportCheck.Location = new System.Drawing.Point(174, 405);
             this.PageExportCheck.Name = "PageExportCheck";
             this.PageExportCheck.Size = new System.Drawing.Size(106, 22);
             this.PageExportCheck.TabIndex = 9;
@@ -2564,7 +2564,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(284, 347);
+            this.label3.Location = new System.Drawing.Point(286, 405);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(134, 18);
             this.label3.TabIndex = 8;
@@ -2573,7 +2573,7 @@
             // DpiItemList
             // 
             this.DpiItemList.FormattingEnabled = true;
-            this.DpiItemList.Location = new System.Drawing.Point(424, 343);
+            this.DpiItemList.Location = new System.Drawing.Point(426, 401);
             this.DpiItemList.Name = "DpiItemList";
             this.DpiItemList.Size = new System.Drawing.Size(121, 26);
             this.DpiItemList.TabIndex = 7;
@@ -2582,7 +2582,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(562, 347);
+            this.label2.Location = new System.Drawing.Point(564, 405);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(80, 18);
             this.label2.TabIndex = 6;
@@ -2590,7 +2590,7 @@
             // 
             // SelectWord2ImageFileButton
             // 
-            this.SelectWord2ImageFileButton.Location = new System.Drawing.Point(6, 406);
+            this.SelectWord2ImageFileButton.Location = new System.Drawing.Point(8, 464);
             this.SelectWord2ImageFileButton.Name = "SelectWord2ImageFileButton";
             this.SelectWord2ImageFileButton.Size = new System.Drawing.Size(221, 55);
             this.SelectWord2ImageFileButton.TabIndex = 5;
@@ -2602,7 +2602,7 @@
             // 
             this.ConvertWord2ImageStatus.AutoSize = true;
             this.ConvertWord2ImageStatus.ForeColor = System.Drawing.Color.ForestGreen;
-            this.ConvertWord2ImageStatus.Location = new System.Drawing.Point(246, 424);
+            this.ConvertWord2ImageStatus.Location = new System.Drawing.Point(248, 482);
             this.ConvertWord2ImageStatus.Name = "ConvertWord2ImageStatus";
             this.ConvertWord2ImageStatus.Size = new System.Drawing.Size(143, 18);
             this.ConvertWord2ImageStatus.TabIndex = 4;
@@ -2611,7 +2611,7 @@
             // SetGrayCheckBox
             // 
             this.SetGrayCheckBox.AutoSize = true;
-            this.SetGrayCheckBox.Location = new System.Drawing.Point(6, 347);
+            this.SetGrayCheckBox.Location = new System.Drawing.Point(8, 405);
             this.SetGrayCheckBox.Name = "SetGrayCheckBox";
             this.SetGrayCheckBox.Size = new System.Drawing.Size(160, 22);
             this.SetGrayCheckBox.TabIndex = 3;
@@ -2620,7 +2620,7 @@
             // 
             // ConvertWord2ImageButton
             // 
-            this.ConvertWord2ImageButton.Location = new System.Drawing.Point(746, 406);
+            this.ConvertWord2ImageButton.Location = new System.Drawing.Point(748, 464);
             this.ConvertWord2ImageButton.Name = "ConvertWord2ImageButton";
             this.ConvertWord2ImageButton.Size = new System.Drawing.Size(221, 55);
             this.ConvertWord2ImageButton.TabIndex = 2;
@@ -2631,7 +2631,7 @@
             // ConvertImageList
             // 
             this.ConvertImageList.FormattingEnabled = true;
-            this.ConvertImageList.Location = new System.Drawing.Point(648, 343);
+            this.ConvertImageList.Location = new System.Drawing.Point(650, 401);
             this.ConvertImageList.Name = "ConvertImageList";
             this.ConvertImageList.Size = new System.Drawing.Size(121, 26);
             this.ConvertImageList.TabIndex = 1;
@@ -2642,7 +2642,7 @@
             this.DocumentsListView.HideSelection = false;
             this.DocumentsListView.Location = new System.Drawing.Point(6, 6);
             this.DocumentsListView.Name = "DocumentsListView";
-            this.DocumentsListView.Size = new System.Drawing.Size(921, 326);
+            this.DocumentsListView.Size = new System.Drawing.Size(921, 381);
             this.DocumentsListView.TabIndex = 0;
             this.DocumentsListView.UseCompatibleStateImageBehavior = false;
             // 
@@ -2660,14 +2660,14 @@
             this.TabPage_27.Controls.Add(this.Word2EPUBFileList);
             this.TabPage_27.Location = new System.Drawing.Point(4, 100);
             this.TabPage_27.Name = "TabPage_27";
-            this.TabPage_27.Size = new System.Drawing.Size(975, 474);
+            this.TabPage_27.Size = new System.Drawing.Size(982, 538);
             this.TabPage_27.TabIndex = 26;
             this.TabPage_27.Text = "WORD转EPUB";
             this.TabPage_27.UseVisualStyleBackColor = true;
             // 
             // Word2EpubAuthorName
             // 
-            this.Word2EpubAuthorName.Location = new System.Drawing.Point(128, 344);
+            this.Word2EpubAuthorName.Location = new System.Drawing.Point(127, 394);
             this.Word2EpubAuthorName.MaxLength = 50;
             this.Word2EpubAuthorName.Name = "Word2EpubAuthorName";
             this.Word2EpubAuthorName.Size = new System.Drawing.Size(132, 28);
@@ -2676,7 +2676,7 @@
             // label61
             // 
             this.label61.AutoSize = true;
-            this.label61.Location = new System.Drawing.Point(9, 350);
+            this.label61.Location = new System.Drawing.Point(8, 400);
             this.label61.Name = "label61";
             this.label61.Size = new System.Drawing.Size(116, 18);
             this.label61.TabIndex = 17;
@@ -2686,7 +2686,7 @@
             // 
             this.ConvertWord2EpubStatusText.AutoSize = true;
             this.ConvertWord2EpubStatusText.ForeColor = System.Drawing.Color.ForestGreen;
-            this.ConvertWord2EpubStatusText.Location = new System.Drawing.Point(234, 422);
+            this.ConvertWord2EpubStatusText.Location = new System.Drawing.Point(233, 472);
             this.ConvertWord2EpubStatusText.Name = "ConvertWord2EpubStatusText";
             this.ConvertWord2EpubStatusText.Size = new System.Drawing.Size(143, 18);
             this.ConvertWord2EpubStatusText.TabIndex = 16;
@@ -2696,9 +2696,9 @@
             // 
             this.word2epub_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
             this.word2epub_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.word2epub_clear.Location = new System.Drawing.Point(933, 188);
+            this.word2epub_clear.Location = new System.Drawing.Point(932, 230);
             this.word2epub_clear.Name = "word2epub_clear";
-            this.word2epub_clear.Size = new System.Drawing.Size(34, 73);
+            this.word2epub_clear.Size = new System.Drawing.Size(34, 85);
             this.word2epub_clear.TabIndex = 15;
             this.word2epub_clear.UseVisualStyleBackColor = true;
             // 
@@ -2706,17 +2706,17 @@
             // 
             this.word2epub_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
             this.word2epub_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.word2epub_remove.Location = new System.Drawing.Point(933, 86);
+            this.word2epub_remove.Location = new System.Drawing.Point(933, 78);
             this.word2epub_remove.Name = "word2epub_remove";
-            this.word2epub_remove.Size = new System.Drawing.Size(34, 73);
+            this.word2epub_remove.Size = new System.Drawing.Size(34, 85);
             this.word2epub_remove.TabIndex = 14;
             this.word2epub_remove.UseVisualStyleBackColor = true;
             // 
             // Word2EPUBFileList_MoveDown
             // 
-            this.Word2EPUBFileList_MoveDown.Location = new System.Drawing.Point(933, 290);
+            this.Word2EPUBFileList_MoveDown.Location = new System.Drawing.Point(933, 321);
             this.Word2EPUBFileList_MoveDown.Name = "Word2EPUBFileList_MoveDown";
-            this.Word2EPUBFileList_MoveDown.Size = new System.Drawing.Size(34, 42);
+            this.Word2EPUBFileList_MoveDown.Size = new System.Drawing.Size(34, 66);
             this.Word2EPUBFileList_MoveDown.TabIndex = 13;
             this.Word2EPUBFileList_MoveDown.Text = "▽";
             this.Word2EPUBFileList_MoveDown.UseVisualStyleBackColor = true;
@@ -2725,14 +2725,14 @@
             // 
             this.Word2EPUBFileList_MoveUp.Location = new System.Drawing.Point(933, 6);
             this.Word2EPUBFileList_MoveUp.Name = "Word2EPUBFileList_MoveUp";
-            this.Word2EPUBFileList_MoveUp.Size = new System.Drawing.Size(34, 42);
+            this.Word2EPUBFileList_MoveUp.Size = new System.Drawing.Size(34, 66);
             this.Word2EPUBFileList_MoveUp.TabIndex = 5;
             this.Word2EPUBFileList_MoveUp.Text = "△";
             this.Word2EPUBFileList_MoveUp.UseVisualStyleBackColor = true;
             // 
             // ConvertWord2Epub
             // 
-            this.ConvertWord2Epub.Location = new System.Drawing.Point(746, 406);
+            this.ConvertWord2Epub.Location = new System.Drawing.Point(745, 456);
             this.ConvertWord2Epub.Name = "ConvertWord2Epub";
             this.ConvertWord2Epub.Size = new System.Drawing.Size(221, 55);
             this.ConvertWord2Epub.TabIndex = 2;
@@ -2742,7 +2742,7 @@
             // 
             // SelectWord2EpubFiles
             // 
-            this.SelectWord2EpubFiles.Location = new System.Drawing.Point(6, 406);
+            this.SelectWord2EpubFiles.Location = new System.Drawing.Point(5, 456);
             this.SelectWord2EpubFiles.Name = "SelectWord2EpubFiles";
             this.SelectWord2EpubFiles.Size = new System.Drawing.Size(221, 55);
             this.SelectWord2EpubFiles.TabIndex = 1;
@@ -2755,7 +2755,7 @@
             this.Word2EPUBFileList.HideSelection = false;
             this.Word2EPUBFileList.Location = new System.Drawing.Point(6, 6);
             this.Word2EPUBFileList.Name = "Word2EPUBFileList";
-            this.Word2EPUBFileList.Size = new System.Drawing.Size(921, 326);
+            this.Word2EPUBFileList.Size = new System.Drawing.Size(921, 381);
             this.Word2EPUBFileList.TabIndex = 0;
             this.Word2EPUBFileList.UseCompatibleStateImageBehavior = false;
             // 
@@ -2772,7 +2772,7 @@
             this.TabPage_28.Controls.Add(this.EPUB2WORDFileList);
             this.TabPage_28.Location = new System.Drawing.Point(4, 100);
             this.TabPage_28.Name = "TabPage_28";
-            this.TabPage_28.Size = new System.Drawing.Size(975, 474);
+            this.TabPage_28.Size = new System.Drawing.Size(982, 538);
             this.TabPage_28.TabIndex = 27;
             this.TabPage_28.Text = "EPUB转WORD";
             this.TabPage_28.UseVisualStyleBackColor = true;
@@ -2781,7 +2781,7 @@
             // 
             this.label60.AutoSize = true;
             this.label60.ForeColor = System.Drawing.Color.Tomato;
-            this.label60.Location = new System.Drawing.Point(8, 357);
+            this.label60.Location = new System.Drawing.Point(8, 405);
             this.label60.Name = "label60";
             this.label60.Size = new System.Drawing.Size(494, 18);
             this.label60.TabIndex = 30;
@@ -2789,9 +2789,9 @@
             // 
             // EPUB2WORDFileList_MoveDown
             // 
-            this.EPUB2WORDFileList_MoveDown.Location = new System.Drawing.Point(934, 294);
+            this.EPUB2WORDFileList_MoveDown.Location = new System.Drawing.Point(934, 325);
             this.EPUB2WORDFileList_MoveDown.Name = "EPUB2WORDFileList_MoveDown";
-            this.EPUB2WORDFileList_MoveDown.Size = new System.Drawing.Size(34, 42);
+            this.EPUB2WORDFileList_MoveDown.Size = new System.Drawing.Size(34, 66);
             this.EPUB2WORDFileList_MoveDown.TabIndex = 18;
             this.EPUB2WORDFileList_MoveDown.Text = "▽";
             this.EPUB2WORDFileList_MoveDown.UseVisualStyleBackColor = true;
@@ -2800,7 +2800,7 @@
             // 
             this.EPUB2WORDFileList_MoveUp.Location = new System.Drawing.Point(934, 10);
             this.EPUB2WORDFileList_MoveUp.Name = "EPUB2WORDFileList_MoveUp";
-            this.EPUB2WORDFileList_MoveUp.Size = new System.Drawing.Size(34, 42);
+            this.EPUB2WORDFileList_MoveUp.Size = new System.Drawing.Size(34, 66);
             this.EPUB2WORDFileList_MoveUp.TabIndex = 17;
             this.EPUB2WORDFileList_MoveUp.Text = "△";
             this.EPUB2WORDFileList_MoveUp.UseVisualStyleBackColor = true;
@@ -2809,9 +2809,9 @@
             // 
             this.epub2word_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
             this.epub2word_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.epub2word_clear.Location = new System.Drawing.Point(934, 188);
+            this.epub2word_clear.Location = new System.Drawing.Point(934, 234);
             this.epub2word_clear.Name = "epub2word_clear";
-            this.epub2word_clear.Size = new System.Drawing.Size(34, 73);
+            this.epub2word_clear.Size = new System.Drawing.Size(34, 85);
             this.epub2word_clear.TabIndex = 20;
             this.epub2word_clear.UseVisualStyleBackColor = true;
             // 
@@ -2821,7 +2821,7 @@
             this.epub2word_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.epub2word_remove.Location = new System.Drawing.Point(934, 78);
             this.epub2word_remove.Name = "epub2word_remove";
-            this.epub2word_remove.Size = new System.Drawing.Size(34, 73);
+            this.epub2word_remove.Size = new System.Drawing.Size(34, 85);
             this.epub2word_remove.TabIndex = 19;
             this.epub2word_remove.UseVisualStyleBackColor = true;
             // 
@@ -2829,7 +2829,7 @@
             // 
             this.ConvertEpub2WordStatusText.AutoSize = true;
             this.ConvertEpub2WordStatusText.ForeColor = System.Drawing.Color.ForestGreen;
-            this.ConvertEpub2WordStatusText.Location = new System.Drawing.Point(247, 428);
+            this.ConvertEpub2WordStatusText.Location = new System.Drawing.Point(247, 476);
             this.ConvertEpub2WordStatusText.Name = "ConvertEpub2WordStatusText";
             this.ConvertEpub2WordStatusText.Size = new System.Drawing.Size(143, 18);
             this.ConvertEpub2WordStatusText.TabIndex = 16;
@@ -2837,7 +2837,7 @@
             // 
             // ConvertEpub2Word
             // 
-            this.ConvertEpub2Word.Location = new System.Drawing.Point(747, 410);
+            this.ConvertEpub2Word.Location = new System.Drawing.Point(747, 458);
             this.ConvertEpub2Word.Name = "ConvertEpub2Word";
             this.ConvertEpub2Word.Size = new System.Drawing.Size(221, 55);
             this.ConvertEpub2Word.TabIndex = 15;
@@ -2847,7 +2847,7 @@
             // 
             // SelectEpub2WordFiles
             // 
-            this.SelectEpub2WordFiles.Location = new System.Drawing.Point(7, 410);
+            this.SelectEpub2WordFiles.Location = new System.Drawing.Point(7, 458);
             this.SelectEpub2WordFiles.Name = "SelectEpub2WordFiles";
             this.SelectEpub2WordFiles.Size = new System.Drawing.Size(221, 55);
             this.SelectEpub2WordFiles.TabIndex = 14;
@@ -2860,7 +2860,7 @@
             this.EPUB2WORDFileList.HideSelection = false;
             this.EPUB2WORDFileList.Location = new System.Drawing.Point(7, 10);
             this.EPUB2WORDFileList.Name = "EPUB2WORDFileList";
-            this.EPUB2WORDFileList.Size = new System.Drawing.Size(921, 326);
+            this.EPUB2WORDFileList.Size = new System.Drawing.Size(921, 381);
             this.EPUB2WORDFileList.TabIndex = 13;
             this.EPUB2WORDFileList.UseCompatibleStateImageBehavior = false;
             // 
@@ -2877,7 +2877,7 @@
             this.TabPage_29.Controls.Add(this.EPUB2PDFFileList);
             this.TabPage_29.Location = new System.Drawing.Point(4, 100);
             this.TabPage_29.Name = "TabPage_29";
-            this.TabPage_29.Size = new System.Drawing.Size(975, 474);
+            this.TabPage_29.Size = new System.Drawing.Size(982, 538);
             this.TabPage_29.TabIndex = 28;
             this.TabPage_29.Text = "EPUB转PDF";
             this.TabPage_29.UseVisualStyleBackColor = true;
@@ -2886,7 +2886,7 @@
             // 
             this.label59.AutoSize = true;
             this.label59.ForeColor = System.Drawing.Color.Tomato;
-            this.label59.Location = new System.Drawing.Point(4, 353);
+            this.label59.Location = new System.Drawing.Point(4, 408);
             this.label59.Name = "label59";
             this.label59.Size = new System.Drawing.Size(485, 18);
             this.label59.TabIndex = 29;
@@ -2894,9 +2894,9 @@
             // 
             // EPUB2PDFFileList_MoveDown
             // 
-            this.EPUB2PDFFileList_MoveDown.Location = new System.Drawing.Point(934, 294);
+            this.EPUB2PDFFileList_MoveDown.Location = new System.Drawing.Point(934, 325);
             this.EPUB2PDFFileList_MoveDown.Name = "EPUB2PDFFileList_MoveDown";
-            this.EPUB2PDFFileList_MoveDown.Size = new System.Drawing.Size(34, 42);
+            this.EPUB2PDFFileList_MoveDown.Size = new System.Drawing.Size(34, 66);
             this.EPUB2PDFFileList_MoveDown.TabIndex = 26;
             this.EPUB2PDFFileList_MoveDown.Text = "▽";
             this.EPUB2PDFFileList_MoveDown.UseVisualStyleBackColor = true;
@@ -2905,7 +2905,7 @@
             // 
             this.EPUB2PDFFileList_MoveUp.Location = new System.Drawing.Point(934, 10);
             this.EPUB2PDFFileList_MoveUp.Name = "EPUB2PDFFileList_MoveUp";
-            this.EPUB2PDFFileList_MoveUp.Size = new System.Drawing.Size(34, 42);
+            this.EPUB2PDFFileList_MoveUp.Size = new System.Drawing.Size(34, 66);
             this.EPUB2PDFFileList_MoveUp.TabIndex = 25;
             this.EPUB2PDFFileList_MoveUp.Text = "△";
             this.EPUB2PDFFileList_MoveUp.UseVisualStyleBackColor = true;
@@ -2914,9 +2914,9 @@
             // 
             this.epub2pdf_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
             this.epub2pdf_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.epub2pdf_clear.Location = new System.Drawing.Point(934, 188);
+            this.epub2pdf_clear.Location = new System.Drawing.Point(934, 234);
             this.epub2pdf_clear.Name = "epub2pdf_clear";
-            this.epub2pdf_clear.Size = new System.Drawing.Size(34, 73);
+            this.epub2pdf_clear.Size = new System.Drawing.Size(34, 85);
             this.epub2pdf_clear.TabIndex = 28;
             this.epub2pdf_clear.UseVisualStyleBackColor = true;
             // 
@@ -2926,7 +2926,7 @@
             this.epub2pdf_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.epub2pdf_remove.Location = new System.Drawing.Point(934, 78);
             this.epub2pdf_remove.Name = "epub2pdf_remove";
-            this.epub2pdf_remove.Size = new System.Drawing.Size(34, 73);
+            this.epub2pdf_remove.Size = new System.Drawing.Size(34, 85);
             this.epub2pdf_remove.TabIndex = 27;
             this.epub2pdf_remove.UseVisualStyleBackColor = true;
             // 
@@ -2934,7 +2934,7 @@
             // 
             this.ConvertEPUB2PDFStatusText.AutoSize = true;
             this.ConvertEPUB2PDFStatusText.ForeColor = System.Drawing.Color.ForestGreen;
-            this.ConvertEPUB2PDFStatusText.Location = new System.Drawing.Point(247, 428);
+            this.ConvertEPUB2PDFStatusText.Location = new System.Drawing.Point(247, 483);
             this.ConvertEPUB2PDFStatusText.Name = "ConvertEPUB2PDFStatusText";
             this.ConvertEPUB2PDFStatusText.Size = new System.Drawing.Size(143, 18);
             this.ConvertEPUB2PDFStatusText.TabIndex = 24;
@@ -2942,7 +2942,7 @@
             // 
             // ConvertEPUB2PDF
             // 
-            this.ConvertEPUB2PDF.Location = new System.Drawing.Point(747, 410);
+            this.ConvertEPUB2PDF.Location = new System.Drawing.Point(747, 465);
             this.ConvertEPUB2PDF.Name = "ConvertEPUB2PDF";
             this.ConvertEPUB2PDF.Size = new System.Drawing.Size(221, 55);
             this.ConvertEPUB2PDF.TabIndex = 23;
@@ -2952,7 +2952,7 @@
             // 
             // SelectEPUB2PDFFiles
             // 
-            this.SelectEPUB2PDFFiles.Location = new System.Drawing.Point(7, 410);
+            this.SelectEPUB2PDFFiles.Location = new System.Drawing.Point(7, 465);
             this.SelectEPUB2PDFFiles.Name = "SelectEPUB2PDFFiles";
             this.SelectEPUB2PDFFiles.Size = new System.Drawing.Size(221, 55);
             this.SelectEPUB2PDFFiles.TabIndex = 22;
@@ -2965,7 +2965,7 @@
             this.EPUB2PDFFileList.HideSelection = false;
             this.EPUB2PDFFileList.Location = new System.Drawing.Point(7, 10);
             this.EPUB2PDFFileList.Name = "EPUB2PDFFileList";
-            this.EPUB2PDFFileList.Size = new System.Drawing.Size(921, 326);
+            this.EPUB2PDFFileList.Size = new System.Drawing.Size(921, 381);
             this.EPUB2PDFFileList.TabIndex = 21;
             this.EPUB2PDFFileList.UseCompatibleStateImageBehavior = false;
             // 
@@ -2982,25 +2982,25 @@
             this.TabPage_23.Controls.Add(this.ConvertImage2PDFFileList);
             this.TabPage_23.Location = new System.Drawing.Point(4, 100);
             this.TabPage_23.Name = "TabPage_23";
-            this.TabPage_23.Size = new System.Drawing.Size(975, 474);
+            this.TabPage_23.Size = new System.Drawing.Size(982, 538);
             this.TabPage_23.TabIndex = 22;
             this.TabPage_23.Text = "图片转PDF";
             this.TabPage_23.UseVisualStyleBackColor = true;
             // 
             // ConvertImage2PDFFileList_MoveDown
             // 
-            this.ConvertImage2PDFFileList_MoveDown.Location = new System.Drawing.Point(933, 211);
+            this.ConvertImage2PDFFileList_MoveDown.Location = new System.Drawing.Point(933, 254);
             this.ConvertImage2PDFFileList_MoveDown.Name = "ConvertImage2PDFFileList_MoveDown";
-            this.ConvertImage2PDFFileList_MoveDown.Size = new System.Drawing.Size(34, 42);
+            this.ConvertImage2PDFFileList_MoveDown.Size = new System.Drawing.Size(34, 66);
             this.ConvertImage2PDFFileList_MoveDown.TabIndex = 6;
             this.ConvertImage2PDFFileList_MoveDown.Text = "▽";
             this.ConvertImage2PDFFileList_MoveDown.UseVisualStyleBackColor = true;
             // 
             // ConvertImage2PDFFileList_MoveUp
             // 
-            this.ConvertImage2PDFFileList_MoveUp.Location = new System.Drawing.Point(933, 6);
+            this.ConvertImage2PDFFileList_MoveUp.Location = new System.Drawing.Point(933, 0);
             this.ConvertImage2PDFFileList_MoveUp.Name = "ConvertImage2PDFFileList_MoveUp";
-            this.ConvertImage2PDFFileList_MoveUp.Size = new System.Drawing.Size(34, 42);
+            this.ConvertImage2PDFFileList_MoveUp.Size = new System.Drawing.Size(34, 66);
             this.ConvertImage2PDFFileList_MoveUp.TabIndex = 5;
             this.ConvertImage2PDFFileList_MoveUp.Text = "△";
             this.ConvertImage2PDFFileList_MoveUp.UseVisualStyleBackColor = true;
@@ -3009,9 +3009,9 @@
             // 
             this.image2pdf_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
             this.image2pdf_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.image2pdf_clear.Location = new System.Drawing.Point(933, 133);
+            this.image2pdf_clear.Location = new System.Drawing.Point(933, 163);
             this.image2pdf_clear.Name = "image2pdf_clear";
-            this.image2pdf_clear.Size = new System.Drawing.Size(34, 73);
+            this.image2pdf_clear.Size = new System.Drawing.Size(34, 85);
             this.image2pdf_clear.TabIndex = 12;
             this.image2pdf_clear.UseVisualStyleBackColor = true;
             // 
@@ -3019,9 +3019,9 @@
             // 
             this.image2pdf_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
             this.image2pdf_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.image2pdf_remove.Location = new System.Drawing.Point(933, 54);
+            this.image2pdf_remove.Location = new System.Drawing.Point(933, 72);
             this.image2pdf_remove.Name = "image2pdf_remove";
-            this.image2pdf_remove.Size = new System.Drawing.Size(34, 73);
+            this.image2pdf_remove.Size = new System.Drawing.Size(34, 85);
             this.image2pdf_remove.TabIndex = 11;
             this.image2pdf_remove.UseVisualStyleBackColor = true;
             // 
@@ -3029,7 +3029,7 @@
             // 
             this.COnvertImage2PDFStatusText.AutoSize = true;
             this.COnvertImage2PDFStatusText.ForeColor = System.Drawing.Color.ForestGreen;
-            this.COnvertImage2PDFStatusText.Location = new System.Drawing.Point(234, 423);
+            this.COnvertImage2PDFStatusText.Location = new System.Drawing.Point(234, 490);
             this.COnvertImage2PDFStatusText.Name = "COnvertImage2PDFStatusText";
             this.COnvertImage2PDFStatusText.Size = new System.Drawing.Size(143, 18);
             this.COnvertImage2PDFStatusText.TabIndex = 4;
@@ -3043,7 +3043,7 @@
             this.groupBox19.Controls.Add(this.Image2PDFCombox);
             this.groupBox19.Controls.Add(this.label38);
             this.groupBox19.Controls.Add(this.ExportSignlePDF);
-            this.groupBox19.Location = new System.Drawing.Point(6, 259);
+            this.groupBox19.Location = new System.Drawing.Point(6, 326);
             this.groupBox19.Name = "groupBox19";
             this.groupBox19.Size = new System.Drawing.Size(961, 141);
             this.groupBox19.TabIndex = 3;
@@ -3184,7 +3184,7 @@
             // 
             // ConvertImage2PDF
             // 
-            this.ConvertImage2PDF.Location = new System.Drawing.Point(746, 406);
+            this.ConvertImage2PDF.Location = new System.Drawing.Point(746, 473);
             this.ConvertImage2PDF.Name = "ConvertImage2PDF";
             this.ConvertImage2PDF.Size = new System.Drawing.Size(221, 55);
             this.ConvertImage2PDF.TabIndex = 2;
@@ -3194,7 +3194,7 @@
             // 
             // SelectConvertImage2PDF
             // 
-            this.SelectConvertImage2PDF.Location = new System.Drawing.Point(6, 406);
+            this.SelectConvertImage2PDF.Location = new System.Drawing.Point(6, 473);
             this.SelectConvertImage2PDF.Name = "SelectConvertImage2PDF";
             this.SelectConvertImage2PDF.Size = new System.Drawing.Size(221, 55);
             this.SelectConvertImage2PDF.TabIndex = 1;
@@ -3207,7 +3207,7 @@
             this.ConvertImage2PDFFileList.HideSelection = false;
             this.ConvertImage2PDFFileList.Location = new System.Drawing.Point(6, 6);
             this.ConvertImage2PDFFileList.Name = "ConvertImage2PDFFileList";
-            this.ConvertImage2PDFFileList.Size = new System.Drawing.Size(921, 247);
+            this.ConvertImage2PDFFileList.Size = new System.Drawing.Size(921, 314);
             this.ConvertImage2PDFFileList.TabIndex = 0;
             this.ConvertImage2PDFFileList.UseCompatibleStateImageBehavior = false;
             // 
@@ -3224,16 +3224,16 @@
             this.TabPage_24.Controls.Add(this.CompressPdfFileList);
             this.TabPage_24.Location = new System.Drawing.Point(4, 100);
             this.TabPage_24.Name = "TabPage_24";
-            this.TabPage_24.Size = new System.Drawing.Size(975, 474);
+            this.TabPage_24.Size = new System.Drawing.Size(982, 538);
             this.TabPage_24.TabIndex = 23;
             this.TabPage_24.Text = "压缩PDF";
             this.TabPage_24.UseVisualStyleBackColor = true;
             // 
             // CompressPdfFileList_MoveDown
             // 
-            this.CompressPdfFileList_MoveDown.Location = new System.Drawing.Point(935, 233);
+            this.CompressPdfFileList_MoveDown.Location = new System.Drawing.Point(935, 271);
             this.CompressPdfFileList_MoveDown.Name = "CompressPdfFileList_MoveDown";
-            this.CompressPdfFileList_MoveDown.Size = new System.Drawing.Size(34, 42);
+            this.CompressPdfFileList_MoveDown.Size = new System.Drawing.Size(34, 66);
             this.CompressPdfFileList_MoveDown.TabIndex = 6;
             this.CompressPdfFileList_MoveDown.Text = "▽";
             this.CompressPdfFileList_MoveDown.UseVisualStyleBackColor = true;
@@ -3242,7 +3242,7 @@
             // 
             this.CompressPdfFileList_MoveUp.Location = new System.Drawing.Point(935, 6);
             this.CompressPdfFileList_MoveUp.Name = "CompressPdfFileList_MoveUp";
-            this.CompressPdfFileList_MoveUp.Size = new System.Drawing.Size(34, 42);
+            this.CompressPdfFileList_MoveUp.Size = new System.Drawing.Size(34, 66);
             this.CompressPdfFileList_MoveUp.TabIndex = 5;
             this.CompressPdfFileList_MoveUp.Text = "△";
             this.CompressPdfFileList_MoveUp.UseVisualStyleBackColor = true;
@@ -3251,9 +3251,9 @@
             // 
             this.compresspdf_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
             this.compresspdf_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.compresspdf_clear.Location = new System.Drawing.Point(936, 149);
+            this.compresspdf_clear.Location = new System.Drawing.Point(935, 180);
             this.compresspdf_clear.Name = "compresspdf_clear";
-            this.compresspdf_clear.Size = new System.Drawing.Size(34, 73);
+            this.compresspdf_clear.Size = new System.Drawing.Size(34, 85);
             this.compresspdf_clear.TabIndex = 12;
             this.compresspdf_clear.UseVisualStyleBackColor = true;
             // 
@@ -3261,9 +3261,9 @@
             // 
             this.compresspdf_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
             this.compresspdf_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.compresspdf_remove.Location = new System.Drawing.Point(935, 54);
+            this.compresspdf_remove.Location = new System.Drawing.Point(935, 78);
             this.compresspdf_remove.Name = "compresspdf_remove";
-            this.compresspdf_remove.Size = new System.Drawing.Size(34, 73);
+            this.compresspdf_remove.Size = new System.Drawing.Size(34, 85);
             this.compresspdf_remove.TabIndex = 11;
             this.compresspdf_remove.UseVisualStyleBackColor = true;
             // 
@@ -3271,7 +3271,7 @@
             // 
             this.CompressPDFStatusText.AutoSize = true;
             this.CompressPDFStatusText.ForeColor = System.Drawing.Color.ForestGreen;
-            this.CompressPDFStatusText.Location = new System.Drawing.Point(236, 422);
+            this.CompressPDFStatusText.Location = new System.Drawing.Point(236, 482);
             this.CompressPDFStatusText.Name = "CompressPDFStatusText";
             this.CompressPDFStatusText.Size = new System.Drawing.Size(143, 18);
             this.CompressPDFStatusText.TabIndex = 4;
@@ -3293,7 +3293,7 @@
             this.groupBox21.Controls.Add(this.label44);
             this.groupBox21.Controls.Add(this.CompressPDF_CompressImage);
             this.groupBox21.Controls.Add(this.CompressPDF_WEB);
-            this.groupBox21.Location = new System.Drawing.Point(11, 283);
+            this.groupBox21.Location = new System.Drawing.Point(11, 343);
             this.groupBox21.Name = "groupBox21";
             this.groupBox21.Size = new System.Drawing.Size(958, 117);
             this.groupBox21.TabIndex = 3;
@@ -3433,7 +3433,7 @@
             // 
             // CompressPDF
             // 
-            this.CompressPDF.Location = new System.Drawing.Point(746, 406);
+            this.CompressPDF.Location = new System.Drawing.Point(746, 466);
             this.CompressPDF.Name = "CompressPDF";
             this.CompressPDF.Size = new System.Drawing.Size(221, 55);
             this.CompressPDF.TabIndex = 2;
@@ -3443,7 +3443,7 @@
             // 
             // SelectCompressPDFFiles
             // 
-            this.SelectCompressPDFFiles.Location = new System.Drawing.Point(8, 406);
+            this.SelectCompressPDFFiles.Location = new System.Drawing.Point(8, 466);
             this.SelectCompressPDFFiles.Name = "SelectCompressPDFFiles";
             this.SelectCompressPDFFiles.Size = new System.Drawing.Size(221, 55);
             this.SelectCompressPDFFiles.TabIndex = 1;
@@ -3456,7 +3456,7 @@
             this.CompressPdfFileList.HideSelection = false;
             this.CompressPdfFileList.Location = new System.Drawing.Point(11, 3);
             this.CompressPdfFileList.Name = "CompressPdfFileList";
-            this.CompressPdfFileList.Size = new System.Drawing.Size(921, 272);
+            this.CompressPdfFileList.Size = new System.Drawing.Size(921, 334);
             this.CompressPdfFileList.TabIndex = 0;
             this.CompressPdfFileList.UseCompatibleStateImageBehavior = false;
             // 
@@ -3476,16 +3476,16 @@
             this.TabPage_25.Controls.Add(this.CompressImageFileList);
             this.TabPage_25.Location = new System.Drawing.Point(4, 100);
             this.TabPage_25.Name = "TabPage_25";
-            this.TabPage_25.Size = new System.Drawing.Size(975, 474);
+            this.TabPage_25.Size = new System.Drawing.Size(982, 538);
             this.TabPage_25.TabIndex = 24;
             this.TabPage_25.Text = "压缩图片";
             this.TabPage_25.UseVisualStyleBackColor = true;
             // 
             // CompressImageFileList_MoveDown
             // 
-            this.CompressImageFileList_MoveDown.Location = new System.Drawing.Point(933, 213);
+            this.CompressImageFileList_MoveDown.Location = new System.Drawing.Point(933, 240);
             this.CompressImageFileList_MoveDown.Name = "CompressImageFileList_MoveDown";
-            this.CompressImageFileList_MoveDown.Size = new System.Drawing.Size(34, 42);
+            this.CompressImageFileList_MoveDown.Size = new System.Drawing.Size(34, 66);
             this.CompressImageFileList_MoveDown.TabIndex = 11;
             this.CompressImageFileList_MoveDown.Text = "▽";
             this.CompressImageFileList_MoveDown.UseVisualStyleBackColor = true;
@@ -3494,7 +3494,7 @@
             // 
             this.CompressImageFileList_MoveUp.Location = new System.Drawing.Point(933, 6);
             this.CompressImageFileList_MoveUp.Name = "CompressImageFileList_MoveUp";
-            this.CompressImageFileList_MoveUp.Size = new System.Drawing.Size(34, 42);
+            this.CompressImageFileList_MoveUp.Size = new System.Drawing.Size(34, 66);
             this.CompressImageFileList_MoveUp.TabIndex = 10;
             this.CompressImageFileList_MoveUp.Text = "△";
             this.CompressImageFileList_MoveUp.UseVisualStyleBackColor = true;
@@ -3503,9 +3503,9 @@
             // 
             this.compressimage_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
             this.compressimage_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.compressimage_clear.Location = new System.Drawing.Point(933, 134);
+            this.compressimage_clear.Location = new System.Drawing.Point(933, 169);
             this.compressimage_clear.Name = "compressimage_clear";
-            this.compressimage_clear.Size = new System.Drawing.Size(34, 73);
+            this.compressimage_clear.Size = new System.Drawing.Size(34, 65);
             this.compressimage_clear.TabIndex = 12;
             this.compressimage_clear.UseVisualStyleBackColor = true;
             // 
@@ -3513,9 +3513,9 @@
             // 
             this.compressimage_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
             this.compressimage_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.compressimage_remove.Location = new System.Drawing.Point(933, 54);
+            this.compressimage_remove.Location = new System.Drawing.Point(933, 78);
             this.compressimage_remove.Name = "compressimage_remove";
-            this.compressimage_remove.Size = new System.Drawing.Size(34, 73);
+            this.compressimage_remove.Size = new System.Drawing.Size(34, 65);
             this.compressimage_remove.TabIndex = 11;
             this.compressimage_remove.UseVisualStyleBackColor = true;
             // 
@@ -3523,7 +3523,7 @@
             // 
             this.CompressImageStatusText.AutoSize = true;
             this.CompressImageStatusText.ForeColor = System.Drawing.Color.ForestGreen;
-            this.CompressImageStatusText.Location = new System.Drawing.Point(236, 434);
+            this.CompressImageStatusText.Location = new System.Drawing.Point(236, 485);
             this.CompressImageStatusText.Name = "CompressImageStatusText";
             this.CompressImageStatusText.Size = new System.Drawing.Size(143, 18);
             this.CompressImageStatusText.TabIndex = 9;
@@ -3534,7 +3534,7 @@
             this.groupBox25.Controls.Add(this.CompressImage_NotUseSelfExt);
             this.groupBox25.Controls.Add(this.CompressImage_OutPutImageFormat);
             this.groupBox25.Controls.Add(this.label54);
-            this.groupBox25.Location = new System.Drawing.Point(746, 261);
+            this.groupBox25.Location = new System.Drawing.Point(746, 312);
             this.groupBox25.Name = "groupBox25";
             this.groupBox25.Size = new System.Drawing.Size(221, 149);
             this.groupBox25.TabIndex = 8;
@@ -3575,7 +3575,7 @@
             this.groupBox24.Controls.Add(this.CompressBmpMode_Combox);
             this.groupBox24.Controls.Add(this.label50);
             this.groupBox24.Controls.Add(this.label53);
-            this.groupBox24.Location = new System.Drawing.Point(502, 261);
+            this.groupBox24.Location = new System.Drawing.Point(502, 312);
             this.groupBox24.Name = "groupBox24";
             this.groupBox24.Size = new System.Drawing.Size(238, 149);
             this.groupBox24.TabIndex = 7;
@@ -3622,7 +3622,7 @@
             this.groupBox23.Controls.Add(this.CompressPngLevel_Combox);
             this.groupBox23.Controls.Add(this.label51);
             this.groupBox23.Controls.Add(this.label52);
-            this.groupBox23.Location = new System.Drawing.Point(252, 261);
+            this.groupBox23.Location = new System.Drawing.Point(252, 312);
             this.groupBox23.Name = "groupBox23";
             this.groupBox23.Size = new System.Drawing.Size(238, 149);
             this.groupBox23.TabIndex = 6;
@@ -3671,7 +3671,7 @@
             this.groupBox22.Controls.Add(this.CompressJpegMode_Combox);
             this.groupBox22.Controls.Add(this.label48);
             this.groupBox22.Controls.Add(this.label47);
-            this.groupBox22.Location = new System.Drawing.Point(8, 261);
+            this.groupBox22.Location = new System.Drawing.Point(8, 312);
             this.groupBox22.Name = "groupBox22";
             this.groupBox22.Size = new System.Drawing.Size(238, 149);
             this.groupBox22.TabIndex = 3;
@@ -3731,7 +3731,7 @@
             // 
             // CompressImage
             // 
-            this.CompressImage.Location = new System.Drawing.Point(746, 415);
+            this.CompressImage.Location = new System.Drawing.Point(746, 466);
             this.CompressImage.Name = "CompressImage";
             this.CompressImage.Size = new System.Drawing.Size(221, 55);
             this.CompressImage.TabIndex = 2;
@@ -3741,7 +3741,7 @@
             // 
             // SelectCompressImageFile
             // 
-            this.SelectCompressImageFile.Location = new System.Drawing.Point(8, 416);
+            this.SelectCompressImageFile.Location = new System.Drawing.Point(8, 467);
             this.SelectCompressImageFile.Name = "SelectCompressImageFile";
             this.SelectCompressImageFile.Size = new System.Drawing.Size(221, 55);
             this.SelectCompressImageFile.TabIndex = 1;
@@ -3754,7 +3754,7 @@
             this.CompressImageFileList.HideSelection = false;
             this.CompressImageFileList.Location = new System.Drawing.Point(6, 6);
             this.CompressImageFileList.Name = "CompressImageFileList";
-            this.CompressImageFileList.Size = new System.Drawing.Size(921, 249);
+            this.CompressImageFileList.Size = new System.Drawing.Size(921, 300);
             this.CompressImageFileList.TabIndex = 0;
             this.CompressImageFileList.UseCompatibleStateImageBehavior = false;
             // 
@@ -3776,16 +3776,16 @@
             this.TabPage_10.Controls.Add(this.ReplaceWordFileList);
             this.TabPage_10.Location = new System.Drawing.Point(4, 100);
             this.TabPage_10.Name = "TabPage_10";
-            this.TabPage_10.Size = new System.Drawing.Size(975, 474);
+            this.TabPage_10.Size = new System.Drawing.Size(982, 538);
             this.TabPage_10.TabIndex = 9;
             this.TabPage_10.Text = "WORD内容批量替换";
             this.TabPage_10.UseVisualStyleBackColor = true;
             // 
             // ReplaceWordFileList_MoveDown
             // 
-            this.ReplaceWordFileList_MoveDown.Location = new System.Drawing.Point(932, 271);
+            this.ReplaceWordFileList_MoveDown.Location = new System.Drawing.Point(933, 305);
             this.ReplaceWordFileList_MoveDown.Name = "ReplaceWordFileList_MoveDown";
-            this.ReplaceWordFileList_MoveDown.Size = new System.Drawing.Size(34, 42);
+            this.ReplaceWordFileList_MoveDown.Size = new System.Drawing.Size(34, 66);
             this.ReplaceWordFileList_MoveDown.TabIndex = 12;
             this.ReplaceWordFileList_MoveDown.Text = "▽";
             this.ReplaceWordFileList_MoveDown.UseVisualStyleBackColor = true;
@@ -3794,7 +3794,7 @@
             // 
             this.ReplaceWordFileList_MoveUp.Location = new System.Drawing.Point(933, 6);
             this.ReplaceWordFileList_MoveUp.Name = "ReplaceWordFileList_MoveUp";
-            this.ReplaceWordFileList_MoveUp.Size = new System.Drawing.Size(34, 42);
+            this.ReplaceWordFileList_MoveUp.Size = new System.Drawing.Size(34, 66);
             this.ReplaceWordFileList_MoveUp.TabIndex = 11;
             this.ReplaceWordFileList_MoveUp.Text = "△";
             this.ReplaceWordFileList_MoveUp.UseVisualStyleBackColor = true;
@@ -3803,7 +3803,7 @@
             // 
             this.wordreplace_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
             this.wordreplace_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.wordreplace_clear.Location = new System.Drawing.Point(932, 165);
+            this.wordreplace_clear.Location = new System.Drawing.Point(932, 199);
             this.wordreplace_clear.Name = "wordreplace_clear";
             this.wordreplace_clear.Size = new System.Drawing.Size(35, 100);
             this.wordreplace_clear.TabIndex = 12;
@@ -3813,7 +3813,7 @@
             // 
             this.wordreplace_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
             this.wordreplace_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.wordreplace_remove.Location = new System.Drawing.Point(932, 54);
+            this.wordreplace_remove.Location = new System.Drawing.Point(933, 78);
             this.wordreplace_remove.Name = "wordreplace_remove";
             this.wordreplace_remove.Size = new System.Drawing.Size(35, 87);
             this.wordreplace_remove.TabIndex = 11;
@@ -3822,7 +3822,7 @@
             // TurialRegex
             // 
             this.TurialRegex.AutoSize = true;
-            this.TurialRegex.Location = new System.Drawing.Point(632, 371);
+            this.TurialRegex.Location = new System.Drawing.Point(626, 429);
             this.TurialRegex.Name = "TurialRegex";
             this.TurialRegex.Size = new System.Drawing.Size(134, 18);
             this.TurialRegex.TabIndex = 10;
@@ -3833,7 +3833,7 @@
             // OnlineRegextTool
             // 
             this.OnlineRegextTool.AutoSize = true;
-            this.OnlineRegextTool.Location = new System.Drawing.Point(484, 371);
+            this.OnlineRegextTool.Location = new System.Drawing.Point(478, 429);
             this.OnlineRegextTool.Name = "OnlineRegextTool";
             this.OnlineRegextTool.Size = new System.Drawing.Size(116, 18);
             this.OnlineRegextTool.TabIndex = 9;
@@ -3844,7 +3844,7 @@
             // groupBox10
             // 
             this.groupBox10.Controls.Add(this.WordReplaceTextBox);
-            this.groupBox10.Location = new System.Drawing.Point(247, 319);
+            this.groupBox10.Location = new System.Drawing.Point(241, 377);
             this.groupBox10.Name = "groupBox10";
             this.groupBox10.Size = new System.Drawing.Size(211, 70);
             this.groupBox10.TabIndex = 8;
@@ -3861,7 +3861,7 @@
             // groupBox9
             // 
             this.groupBox9.Controls.Add(this.WordReplaceFindTextBox);
-            this.groupBox9.Location = new System.Drawing.Point(14, 319);
+            this.groupBox9.Location = new System.Drawing.Point(8, 377);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.Size = new System.Drawing.Size(211, 70);
             this.groupBox9.TabIndex = 7;
@@ -3878,7 +3878,7 @@
             // IgnoreFootContent
             // 
             this.IgnoreFootContent.AutoSize = true;
-            this.IgnoreFootContent.Location = new System.Drawing.Point(487, 319);
+            this.IgnoreFootContent.Location = new System.Drawing.Point(481, 377);
             this.IgnoreFootContent.Name = "IgnoreFootContent";
             this.IgnoreFootContent.Size = new System.Drawing.Size(142, 22);
             this.IgnoreFootContent.TabIndex = 6;
@@ -3888,7 +3888,7 @@
             // IgnoreCase
             // 
             this.IgnoreCase.AutoSize = true;
-            this.IgnoreCase.Location = new System.Drawing.Point(635, 319);
+            this.IgnoreCase.Location = new System.Drawing.Point(629, 377);
             this.IgnoreCase.Name = "IgnoreCase";
             this.IgnoreCase.Size = new System.Drawing.Size(124, 22);
             this.IgnoreCase.TabIndex = 5;
@@ -3899,7 +3899,7 @@
             // 
             this.ReplaceWordContentStatusText.AutoSize = true;
             this.ReplaceWordContentStatusText.ForeColor = System.Drawing.Color.ForestGreen;
-            this.ReplaceWordContentStatusText.Location = new System.Drawing.Point(246, 424);
+            this.ReplaceWordContentStatusText.Location = new System.Drawing.Point(240, 482);
             this.ReplaceWordContentStatusText.Name = "ReplaceWordContentStatusText";
             this.ReplaceWordContentStatusText.Size = new System.Drawing.Size(143, 18);
             this.ReplaceWordContentStatusText.TabIndex = 3;
@@ -3907,7 +3907,7 @@
             // 
             // ReplaceWordContentButton
             // 
-            this.ReplaceWordContentButton.Location = new System.Drawing.Point(746, 406);
+            this.ReplaceWordContentButton.Location = new System.Drawing.Point(740, 464);
             this.ReplaceWordContentButton.Name = "ReplaceWordContentButton";
             this.ReplaceWordContentButton.Size = new System.Drawing.Size(221, 55);
             this.ReplaceWordContentButton.TabIndex = 2;
@@ -3917,7 +3917,7 @@
             // 
             // SelectReplaceWordFilesButton
             // 
-            this.SelectReplaceWordFilesButton.Location = new System.Drawing.Point(14, 406);
+            this.SelectReplaceWordFilesButton.Location = new System.Drawing.Point(8, 464);
             this.SelectReplaceWordFilesButton.Name = "SelectReplaceWordFilesButton";
             this.SelectReplaceWordFilesButton.Size = new System.Drawing.Size(221, 55);
             this.SelectReplaceWordFilesButton.TabIndex = 1;
@@ -3930,7 +3930,7 @@
             this.ReplaceWordFileList.HideSelection = false;
             this.ReplaceWordFileList.Location = new System.Drawing.Point(5, 3);
             this.ReplaceWordFileList.Name = "ReplaceWordFileList";
-            this.ReplaceWordFileList.Size = new System.Drawing.Size(921, 310);
+            this.ReplaceWordFileList.Size = new System.Drawing.Size(921, 368);
             this.ReplaceWordFileList.TabIndex = 0;
             this.ReplaceWordFileList.UseCompatibleStateImageBehavior = false;
             // 
@@ -3954,16 +3954,16 @@
             this.TabPage_11.Controls.Add(this.ReplaceExcelFileView);
             this.TabPage_11.Location = new System.Drawing.Point(4, 100);
             this.TabPage_11.Name = "TabPage_11";
-            this.TabPage_11.Size = new System.Drawing.Size(975, 474);
+            this.TabPage_11.Size = new System.Drawing.Size(982, 538);
             this.TabPage_11.TabIndex = 10;
             this.TabPage_11.Text = "EXCEL内容批量替换";
             this.TabPage_11.UseVisualStyleBackColor = true;
             // 
             // ReplaceExcelFileView_MoveDown
             // 
-            this.ReplaceExcelFileView_MoveDown.Location = new System.Drawing.Point(933, 233);
+            this.ReplaceExcelFileView_MoveDown.Location = new System.Drawing.Point(933, 270);
             this.ReplaceExcelFileView_MoveDown.Name = "ReplaceExcelFileView_MoveDown";
-            this.ReplaceExcelFileView_MoveDown.Size = new System.Drawing.Size(34, 42);
+            this.ReplaceExcelFileView_MoveDown.Size = new System.Drawing.Size(34, 66);
             this.ReplaceExcelFileView_MoveDown.TabIndex = 11;
             this.ReplaceExcelFileView_MoveDown.Text = "▽";
             this.ReplaceExcelFileView_MoveDown.UseVisualStyleBackColor = true;
@@ -3972,7 +3972,7 @@
             // 
             this.ReplaceExcelFileView_MoveUp.Location = new System.Drawing.Point(933, 6);
             this.ReplaceExcelFileView_MoveUp.Name = "ReplaceExcelFileView_MoveUp";
-            this.ReplaceExcelFileView_MoveUp.Size = new System.Drawing.Size(34, 42);
+            this.ReplaceExcelFileView_MoveUp.Size = new System.Drawing.Size(34, 66);
             this.ReplaceExcelFileView_MoveUp.TabIndex = 10;
             this.ReplaceExcelFileView_MoveUp.Text = "△";
             this.ReplaceExcelFileView_MoveUp.UseVisualStyleBackColor = true;
@@ -3981,9 +3981,9 @@
             // 
             this.excelreplace_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
             this.excelreplace_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.excelreplace_clear.Location = new System.Drawing.Point(933, 154);
+            this.excelreplace_clear.Location = new System.Drawing.Point(933, 179);
             this.excelreplace_clear.Name = "excelreplace_clear";
-            this.excelreplace_clear.Size = new System.Drawing.Size(34, 73);
+            this.excelreplace_clear.Size = new System.Drawing.Size(34, 85);
             this.excelreplace_clear.TabIndex = 12;
             this.excelreplace_clear.UseVisualStyleBackColor = true;
             // 
@@ -3991,16 +3991,16 @@
             // 
             this.excelreplace_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
             this.excelreplace_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.excelreplace_remove.Location = new System.Drawing.Point(933, 54);
+            this.excelreplace_remove.Location = new System.Drawing.Point(933, 78);
             this.excelreplace_remove.Name = "excelreplace_remove";
-            this.excelreplace_remove.Size = new System.Drawing.Size(34, 73);
+            this.excelreplace_remove.Size = new System.Drawing.Size(34, 85);
             this.excelreplace_remove.TabIndex = 11;
             this.excelreplace_remove.UseVisualStyleBackColor = true;
             // 
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(417, 346);
+            this.linkLabel1.Location = new System.Drawing.Point(420, 407);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(116, 18);
             this.linkLabel1.TabIndex = 9;
@@ -4011,7 +4011,7 @@
             // ExcelRegexReadMe
             // 
             this.ExcelRegexReadMe.AutoSize = true;
-            this.ExcelRegexReadMe.Location = new System.Drawing.Point(417, 297);
+            this.ExcelRegexReadMe.Location = new System.Drawing.Point(420, 358);
             this.ExcelRegexReadMe.Name = "ExcelRegexReadMe";
             this.ExcelRegexReadMe.Size = new System.Drawing.Size(134, 18);
             this.ExcelRegexReadMe.TabIndex = 8;
@@ -4022,7 +4022,7 @@
             // UseRegex
             // 
             this.UseRegex.AutoSize = true;
-            this.UseRegex.Location = new System.Drawing.Point(141, 370);
+            this.UseRegex.Location = new System.Drawing.Point(144, 431);
             this.UseRegex.Name = "UseRegex";
             this.UseRegex.Size = new System.Drawing.Size(160, 22);
             this.UseRegex.TabIndex = 7;
@@ -4032,7 +4032,7 @@
             // ExcelNoIgnoreCase
             // 
             this.ExcelNoIgnoreCase.AutoSize = true;
-            this.ExcelNoIgnoreCase.Location = new System.Drawing.Point(11, 370);
+            this.ExcelNoIgnoreCase.Location = new System.Drawing.Point(14, 431);
             this.ExcelNoIgnoreCase.Name = "ExcelNoIgnoreCase";
             this.ExcelNoIgnoreCase.Size = new System.Drawing.Size(124, 22);
             this.ExcelNoIgnoreCase.TabIndex = 6;
@@ -4046,7 +4046,7 @@
             this.groupBox13.Controls.Add(this.label19);
             this.groupBox13.Controls.Add(this.label18);
             this.groupBox13.Controls.Add(this.RemoveRows);
-            this.groupBox13.Location = new System.Drawing.Point(615, 281);
+            this.groupBox13.Location = new System.Drawing.Point(618, 342);
             this.groupBox13.Name = "groupBox13";
             this.groupBox13.Size = new System.Drawing.Size(352, 83);
             this.groupBox13.TabIndex = 6;
@@ -4100,7 +4100,7 @@
             // groupBox12
             // 
             this.groupBox12.Controls.Add(this.ExcelReplaceBox);
-            this.groupBox12.Location = new System.Drawing.Point(211, 281);
+            this.groupBox12.Location = new System.Drawing.Point(214, 342);
             this.groupBox12.Name = "groupBox12";
             this.groupBox12.Size = new System.Drawing.Size(200, 83);
             this.groupBox12.TabIndex = 5;
@@ -4117,7 +4117,7 @@
             // groupBox11
             // 
             this.groupBox11.Controls.Add(this.ExcelFindTextBox);
-            this.groupBox11.Location = new System.Drawing.Point(5, 281);
+            this.groupBox11.Location = new System.Drawing.Point(8, 342);
             this.groupBox11.Name = "groupBox11";
             this.groupBox11.Size = new System.Drawing.Size(200, 83);
             this.groupBox11.TabIndex = 4;
@@ -4135,7 +4135,7 @@
             // 
             this.ReplaceExcelStatusText.AutoSize = true;
             this.ReplaceExcelStatusText.ForeColor = System.Drawing.Color.ForestGreen;
-            this.ReplaceExcelStatusText.Location = new System.Drawing.Point(246, 424);
+            this.ReplaceExcelStatusText.Location = new System.Drawing.Point(249, 485);
             this.ReplaceExcelStatusText.Name = "ReplaceExcelStatusText";
             this.ReplaceExcelStatusText.Size = new System.Drawing.Size(143, 18);
             this.ReplaceExcelStatusText.TabIndex = 3;
@@ -4143,7 +4143,7 @@
             // 
             // ReplaceExcelContentButton
             // 
-            this.ReplaceExcelContentButton.Location = new System.Drawing.Point(746, 406);
+            this.ReplaceExcelContentButton.Location = new System.Drawing.Point(749, 467);
             this.ReplaceExcelContentButton.Name = "ReplaceExcelContentButton";
             this.ReplaceExcelContentButton.Size = new System.Drawing.Size(221, 55);
             this.ReplaceExcelContentButton.TabIndex = 2;
@@ -4153,7 +4153,7 @@
             // 
             // SelectRelaceExcelButton
             // 
-            this.SelectRelaceExcelButton.Location = new System.Drawing.Point(5, 412);
+            this.SelectRelaceExcelButton.Location = new System.Drawing.Point(8, 473);
             this.SelectRelaceExcelButton.Name = "SelectRelaceExcelButton";
             this.SelectRelaceExcelButton.Size = new System.Drawing.Size(221, 55);
             this.SelectRelaceExcelButton.TabIndex = 1;
@@ -4166,7 +4166,7 @@
             this.ReplaceExcelFileView.HideSelection = false;
             this.ReplaceExcelFileView.Location = new System.Drawing.Point(6, 6);
             this.ReplaceExcelFileView.Name = "ReplaceExcelFileView";
-            this.ReplaceExcelFileView.Size = new System.Drawing.Size(921, 272);
+            this.ReplaceExcelFileView.Size = new System.Drawing.Size(921, 330);
             this.ReplaceExcelFileView.TabIndex = 0;
             this.ReplaceExcelFileView.UseCompatibleStateImageBehavior = false;
             // 
@@ -4183,7 +4183,7 @@
             this.TabPage_12.Controls.Add(this.DecodeMatrixWordListView);
             this.TabPage_12.Location = new System.Drawing.Point(4, 100);
             this.TabPage_12.Name = "TabPage_12";
-            this.TabPage_12.Size = new System.Drawing.Size(975, 474);
+            this.TabPage_12.Size = new System.Drawing.Size(982, 538);
             this.TabPage_12.TabIndex = 11;
             this.TabPage_12.Text = "特殊二维码校验";
             this.TabPage_12.UseVisualStyleBackColor = true;
@@ -4202,7 +4202,7 @@
             // 
             this.DecodeMatrixWordListView_MoveUp.Location = new System.Drawing.Point(933, 6);
             this.DecodeMatrixWordListView_MoveUp.Name = "DecodeMatrixWordListView_MoveUp";
-            this.DecodeMatrixWordListView_MoveUp.Size = new System.Drawing.Size(34, 42);
+            this.DecodeMatrixWordListView_MoveUp.Size = new System.Drawing.Size(34, 41);
             this.DecodeMatrixWordListView_MoveUp.TabIndex = 5;
             this.DecodeMatrixWordListView_MoveUp.Text = "△";
             this.DecodeMatrixWordListView_MoveUp.UseVisualStyleBackColor = true;
@@ -4231,7 +4231,7 @@
             // 
             this.DecodeDataMatixStatusText.AutoSize = true;
             this.DecodeDataMatixStatusText.ForeColor = System.Drawing.Color.ForestGreen;
-            this.DecodeDataMatixStatusText.Location = new System.Drawing.Point(319, 431);
+            this.DecodeDataMatixStatusText.Location = new System.Drawing.Point(319, 490);
             this.DecodeDataMatixStatusText.Name = "DecodeDataMatixStatusText";
             this.DecodeDataMatixStatusText.Size = new System.Drawing.Size(98, 18);
             this.DecodeDataMatixStatusText.TabIndex = 4;
@@ -4239,7 +4239,7 @@
             // 
             // DecodeDataMarix
             // 
-            this.DecodeDataMarix.Location = new System.Drawing.Point(746, 413);
+            this.DecodeDataMarix.Location = new System.Drawing.Point(746, 472);
             this.DecodeDataMarix.Name = "DecodeDataMarix";
             this.DecodeDataMarix.Size = new System.Drawing.Size(221, 55);
             this.DecodeDataMarix.TabIndex = 3;
@@ -4249,7 +4249,7 @@
             // 
             // SelectDataMatrixWord
             // 
-            this.SelectDataMatrixWord.Location = new System.Drawing.Point(16, 413);
+            this.SelectDataMatrixWord.Location = new System.Drawing.Point(16, 472);
             this.SelectDataMatrixWord.Name = "SelectDataMatrixWord";
             this.SelectDataMatrixWord.Size = new System.Drawing.Size(221, 55);
             this.SelectDataMatrixWord.TabIndex = 2;
@@ -4262,7 +4262,7 @@
             this.groupBox14.Controls.Add(this.DecodeDataMatrixView);
             this.groupBox14.Location = new System.Drawing.Point(10, 185);
             this.groupBox14.Name = "groupBox14";
-            this.groupBox14.Size = new System.Drawing.Size(957, 222);
+            this.groupBox14.Size = new System.Drawing.Size(957, 281);
             this.groupBox14.TabIndex = 1;
             this.groupBox14.TabStop = false;
             this.groupBox14.Text = "解析信息";
@@ -4271,7 +4271,7 @@
             // 
             this.DecodeDataMatrixView.Location = new System.Drawing.Point(6, 27);
             this.DecodeDataMatrixView.Name = "DecodeDataMatrixView";
-            this.DecodeDataMatrixView.Size = new System.Drawing.Size(945, 189);
+            this.DecodeDataMatrixView.Size = new System.Drawing.Size(945, 248);
             this.DecodeDataMatrixView.TabIndex = 0;
             // 
             // DecodeMatrixWordListView
@@ -4304,7 +4304,7 @@
             this.TabPage_05.Controls.Add(this.groupBox1);
             this.TabPage_05.Location = new System.Drawing.Point(4, 100);
             this.TabPage_05.Name = "TabPage_05";
-            this.TabPage_05.Size = new System.Drawing.Size(975, 474);
+            this.TabPage_05.Size = new System.Drawing.Size(982, 567);
             this.TabPage_05.TabIndex = 4;
             this.TabPage_05.Text = "姓名横转竖列";
             this.TabPage_05.UseVisualStyleBackColor = true;
@@ -4459,7 +4459,7 @@
             this.groupBox2.Controls.Add(this.TargetTextBox);
             this.groupBox2.Location = new System.Drawing.Point(686, 16);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(281, 474);
+            this.groupBox2.Size = new System.Drawing.Size(281, 516);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "处理后姓名";
@@ -4468,7 +4468,7 @@
             // 
             this.TargetTextBox.Location = new System.Drawing.Point(6, 23);
             this.TargetTextBox.Name = "TargetTextBox";
-            this.TargetTextBox.Size = new System.Drawing.Size(269, 445);
+            this.TargetTextBox.Size = new System.Drawing.Size(269, 488);
             this.TargetTextBox.TabIndex = 3;
             this.TargetTextBox.Text = "";
             this.TargetTextBox.TextChanged += new System.EventHandler(this.TargetTextBox_TextChanged);
@@ -4478,7 +4478,7 @@
             this.groupBox1.Controls.Add(this.SourceTextBox);
             this.groupBox1.Location = new System.Drawing.Point(5, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(281, 487);
+            this.groupBox1.Size = new System.Drawing.Size(281, 529);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "处理前姓名";
@@ -4487,7 +4487,7 @@
             // 
             this.SourceTextBox.Location = new System.Drawing.Point(4, 24);
             this.SourceTextBox.Name = "SourceTextBox";
-            this.SourceTextBox.Size = new System.Drawing.Size(269, 457);
+            this.SourceTextBox.Size = new System.Drawing.Size(269, 500);
             this.SourceTextBox.TabIndex = 2;
             this.SourceTextBox.Text = "";
             this.SourceTextBox.TextChanged += new System.EventHandler(this.SourceTextBox_TextChanged);
@@ -4501,7 +4501,7 @@
             this.TabPage_09.Controls.Add(this.groupBox5);
             this.TabPage_09.Location = new System.Drawing.Point(4, 100);
             this.TabPage_09.Name = "TabPage_09";
-            this.TabPage_09.Size = new System.Drawing.Size(975, 474);
+            this.TabPage_09.Size = new System.Drawing.Size(982, 538);
             this.TabPage_09.TabIndex = 8;
             this.TabPage_09.Text = "Twain扫描仪调试";
             this.TabPage_09.UseVisualStyleBackColor = true;
@@ -4511,9 +4511,9 @@
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MemoryStatusLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 443);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 507);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(975, 31);
+            this.statusStrip1.Size = new System.Drawing.Size(982, 31);
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -4533,14 +4533,14 @@
             this.groupBox8.Controls.Add(this.ScannTotalNumber);
             this.groupBox8.Location = new System.Drawing.Point(278, 186);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(689, 278);
+            this.groupBox8.Size = new System.Drawing.Size(689, 315);
             this.groupBox8.TabIndex = 4;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "数据信息";
             // 
             // ResetTotalScanNumber
             // 
-            this.ResetTotalScanNumber.Location = new System.Drawing.Point(285, 209);
+            this.ResetTotalScanNumber.Location = new System.Drawing.Point(483, 269);
             this.ResetTotalScanNumber.Name = "ResetTotalScanNumber";
             this.ResetTotalScanNumber.Size = new System.Drawing.Size(200, 40);
             this.ResetTotalScanNumber.TabIndex = 5;
@@ -4550,7 +4550,7 @@
             // 
             // RemoveAllFiles
             // 
-            this.RemoveAllFiles.Location = new System.Drawing.Point(9, 209);
+            this.RemoveAllFiles.Location = new System.Drawing.Point(6, 269);
             this.RemoveAllFiles.Name = "RemoveAllFiles";
             this.RemoveAllFiles.Size = new System.Drawing.Size(185, 40);
             this.RemoveAllFiles.TabIndex = 4;
@@ -4600,7 +4600,7 @@
             this.groupBox7.Controls.Add(this.PreviewPictureBox);
             this.groupBox7.Location = new System.Drawing.Point(8, 186);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(264, 278);
+            this.groupBox7.Size = new System.Drawing.Size(264, 309);
             this.groupBox7.TabIndex = 3;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "扫描图片预览";
@@ -4619,7 +4619,7 @@
             this.PreviewPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PreviewPictureBox.Location = new System.Drawing.Point(6, 59);
             this.PreviewPictureBox.Name = "PreviewPictureBox";
-            this.PreviewPictureBox.Size = new System.Drawing.Size(252, 213);
+            this.PreviewPictureBox.Size = new System.Drawing.Size(252, 244);
             this.PreviewPictureBox.TabIndex = 2;
             this.PreviewPictureBox.TabStop = false;
             // 
@@ -4652,7 +4652,7 @@
             // ExportCaps
             // 
             this.ExportCaps.AutoSize = true;
-            this.ExportCaps.Location = new System.Drawing.Point(520, 145);
+            this.ExportCaps.Location = new System.Drawing.Point(670, 148);
             this.ExportCaps.Name = "ExportCaps";
             this.ExportCaps.Size = new System.Drawing.Size(115, 22);
             this.ExportCaps.TabIndex = 15;
@@ -4661,7 +4661,7 @@
             // 
             // TwainScanNumberSet
             // 
-            this.TwainScanNumberSet.Location = new System.Drawing.Point(358, 143);
+            this.TwainScanNumberSet.Location = new System.Drawing.Point(508, 146);
             this.TwainScanNumberSet.Name = "TwainScanNumberSet";
             this.TwainScanNumberSet.Size = new System.Drawing.Size(156, 28);
             this.TwainScanNumberSet.TabIndex = 14;
@@ -4669,7 +4669,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(268, 150);
+            this.label21.Location = new System.Drawing.Point(418, 153);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(80, 18);
             this.label21.TabIndex = 0;
@@ -4678,7 +4678,7 @@
             // UseInterfaceUi
             // 
             this.UseInterfaceUi.AutoSize = true;
-            this.UseInterfaceUi.Location = new System.Drawing.Point(521, 109);
+            this.UseInterfaceUi.Location = new System.Drawing.Point(671, 112);
             this.UseInterfaceUi.Name = "UseInterfaceUi";
             this.UseInterfaceUi.Size = new System.Drawing.Size(124, 22);
             this.UseInterfaceUi.TabIndex = 13;
@@ -4688,7 +4688,7 @@
             // TwainPaperSizeBox
             // 
             this.TwainPaperSizeBox.FormattingEnabled = true;
-            this.TwainPaperSizeBox.Location = new System.Drawing.Point(358, 111);
+            this.TwainPaperSizeBox.Location = new System.Drawing.Point(508, 114);
             this.TwainPaperSizeBox.Name = "TwainPaperSizeBox";
             this.TwainPaperSizeBox.Size = new System.Drawing.Size(156, 26);
             this.TwainPaperSizeBox.TabIndex = 12;
@@ -4696,7 +4696,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(268, 114);
+            this.label17.Location = new System.Drawing.Point(418, 117);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(80, 18);
             this.label17.TabIndex = 11;
@@ -4734,7 +4734,7 @@
             // TwainDpi
             // 
             this.TwainDpi.FormattingEnabled = true;
-            this.TwainDpi.Location = new System.Drawing.Point(358, 72);
+            this.TwainDpi.Location = new System.Drawing.Point(508, 75);
             this.TwainDpi.Name = "TwainDpi";
             this.TwainDpi.Size = new System.Drawing.Size(156, 26);
             this.TwainDpi.TabIndex = 7;
@@ -4742,7 +4742,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(286, 75);
+            this.label16.Location = new System.Drawing.Point(436, 78);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(62, 18);
             this.label16.TabIndex = 6;
@@ -4767,7 +4767,7 @@
             // 
             // SelectScanPath
             // 
-            this.SelectScanPath.Location = new System.Drawing.Point(520, 28);
+            this.SelectScanPath.Location = new System.Drawing.Point(714, 29);
             this.SelectScanPath.Name = "SelectScanPath";
             this.SelectScanPath.Size = new System.Drawing.Size(123, 32);
             this.SelectScanPath.TabIndex = 3;
@@ -4777,7 +4777,7 @@
             // 
             // StartScanButton
             // 
-            this.StartScanButton.Location = new System.Drawing.Point(520, 69);
+            this.StartScanButton.Location = new System.Drawing.Point(670, 72);
             this.StartScanButton.Name = "StartScanButton";
             this.StartScanButton.Size = new System.Drawing.Size(119, 32);
             this.StartScanButton.TabIndex = 2;
@@ -4789,7 +4789,7 @@
             // 
             this.ScanPictureSavePathBox.Location = new System.Drawing.Point(129, 28);
             this.ScanPictureSavePathBox.Name = "ScanPictureSavePathBox";
-            this.ScanPictureSavePathBox.Size = new System.Drawing.Size(385, 28);
+            this.ScanPictureSavePathBox.Size = new System.Drawing.Size(579, 28);
             this.ScanPictureSavePathBox.TabIndex = 1;
             // 
             // label14
@@ -4842,7 +4842,7 @@
             this.TabPage_13.Controls.Add(this.groupBox15);
             this.TabPage_13.Location = new System.Drawing.Point(4, 100);
             this.TabPage_13.Name = "TabPage_13";
-            this.TabPage_13.Size = new System.Drawing.Size(975, 474);
+            this.TabPage_13.Size = new System.Drawing.Size(982, 538);
             this.TabPage_13.TabIndex = 12;
             this.TabPage_13.Text = "其他功能";
             this.TabPage_13.UseVisualStyleBackColor = true;
@@ -4861,7 +4861,7 @@
             this.groupBox17.Controls.Add(this.IcoFileView);
             this.groupBox17.Location = new System.Drawing.Point(11, 126);
             this.groupBox17.Name = "groupBox17";
-            this.groupBox17.Size = new System.Drawing.Size(956, 309);
+            this.groupBox17.Size = new System.Drawing.Size(956, 371);
             this.groupBox17.TabIndex = 3;
             this.groupBox17.TabStop = false;
             this.groupBox17.Text = "ICO图标转换";
@@ -4870,16 +4870,16 @@
             // 
             this.image2ico_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
             this.image2ico_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.image2ico_remove.Location = new System.Drawing.Point(916, 75);
+            this.image2ico_remove.Location = new System.Drawing.Point(916, 99);
             this.image2ico_remove.Name = "image2ico_remove";
             this.image2ico_remove.Size = new System.Drawing.Size(34, 40);
             this.image2ico_remove.TabIndex = 13;
             // 
             // IcoFileView_MoveDown
             // 
-            this.IcoFileView_MoveDown.Location = new System.Drawing.Point(916, 170);
+            this.IcoFileView_MoveDown.Location = new System.Drawing.Point(916, 211);
             this.IcoFileView_MoveDown.Name = "IcoFileView_MoveDown";
-            this.IcoFileView_MoveDown.Size = new System.Drawing.Size(34, 42);
+            this.IcoFileView_MoveDown.Size = new System.Drawing.Size(34, 66);
             this.IcoFileView_MoveDown.TabIndex = 7;
             this.IcoFileView_MoveDown.Text = "▽";
             this.IcoFileView_MoveDown.UseVisualStyleBackColor = true;
@@ -4888,7 +4888,7 @@
             // 
             this.IcoFileView_MoveUp.Location = new System.Drawing.Point(916, 27);
             this.IcoFileView_MoveUp.Name = "IcoFileView_MoveUp";
-            this.IcoFileView_MoveUp.Size = new System.Drawing.Size(34, 42);
+            this.IcoFileView_MoveUp.Size = new System.Drawing.Size(34, 66);
             this.IcoFileView_MoveUp.TabIndex = 6;
             this.IcoFileView_MoveUp.Text = "△";
             this.IcoFileView_MoveUp.UseVisualStyleBackColor = true;
@@ -4897,7 +4897,7 @@
             // 
             this.image2ico_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
             this.image2ico_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.image2ico_clear.Location = new System.Drawing.Point(916, 121);
+            this.image2ico_clear.Location = new System.Drawing.Point(916, 162);
             this.image2ico_clear.Name = "image2ico_clear";
             this.image2ico_clear.Size = new System.Drawing.Size(34, 43);
             this.image2ico_clear.TabIndex = 12;
@@ -4906,7 +4906,7 @@
             // IcoSizeDrop
             // 
             this.IcoSizeDrop.FormattingEnabled = true;
-            this.IcoSizeDrop.Location = new System.Drawing.Point(662, 223);
+            this.IcoSizeDrop.Location = new System.Drawing.Point(659, 283);
             this.IcoSizeDrop.Name = "IcoSizeDrop";
             this.IcoSizeDrop.Size = new System.Drawing.Size(136, 26);
             this.IcoSizeDrop.TabIndex = 5;
@@ -4914,7 +4914,7 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(513, 226);
+            this.label22.Location = new System.Drawing.Point(510, 286);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(143, 18);
             this.label22.TabIndex = 4;
@@ -4924,7 +4924,7 @@
             // 
             this.Image2IcoStatusText.AutoSize = true;
             this.Image2IcoStatusText.ForeColor = System.Drawing.Color.ForestGreen;
-            this.Image2IcoStatusText.Location = new System.Drawing.Point(302, 261);
+            this.Image2IcoStatusText.Location = new System.Drawing.Point(299, 321);
             this.Image2IcoStatusText.Name = "Image2IcoStatusText";
             this.Image2IcoStatusText.Size = new System.Drawing.Size(125, 18);
             this.Image2IcoStatusText.TabIndex = 3;
@@ -4932,7 +4932,7 @@
             // 
             // ConvertImage2Ico
             // 
-            this.ConvertImage2Ico.Location = new System.Drawing.Point(814, 249);
+            this.ConvertImage2Ico.Location = new System.Drawing.Point(811, 309);
             this.ConvertImage2Ico.Name = "ConvertImage2Ico";
             this.ConvertImage2Ico.Size = new System.Drawing.Size(136, 43);
             this.ConvertImage2Ico.TabIndex = 2;
@@ -4942,7 +4942,7 @@
             // 
             // SelectFilesIco
             // 
-            this.SelectFilesIco.Location = new System.Drawing.Point(6, 249);
+            this.SelectFilesIco.Location = new System.Drawing.Point(3, 309);
             this.SelectFilesIco.Name = "SelectFilesIco";
             this.SelectFilesIco.Size = new System.Drawing.Size(136, 43);
             this.SelectFilesIco.TabIndex = 1;
@@ -4955,7 +4955,7 @@
             this.IcoFileView.HideSelection = false;
             this.IcoFileView.Location = new System.Drawing.Point(6, 27);
             this.IcoFileView.Name = "IcoFileView";
-            this.IcoFileView.Size = new System.Drawing.Size(904, 185);
+            this.IcoFileView.Size = new System.Drawing.Size(904, 250);
             this.IcoFileView.TabIndex = 0;
             this.IcoFileView.UseCompatibleStateImageBehavior = false;
             // 
@@ -4963,7 +4963,7 @@
             // 
             this.label20.AutoSize = true;
             this.label20.ForeColor = System.Drawing.Color.Tomato;
-            this.label20.Location = new System.Drawing.Point(9, 450);
+            this.label20.Location = new System.Drawing.Point(8, 500);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(440, 18);
             this.label20.TabIndex = 2;
@@ -5046,7 +5046,7 @@
             this.TabPage_26.Controls.Add(this.groupBox26);
             this.TabPage_26.Location = new System.Drawing.Point(4, 100);
             this.TabPage_26.Name = "TabPage_26";
-            this.TabPage_26.Size = new System.Drawing.Size(975, 474);
+            this.TabPage_26.Size = new System.Drawing.Size(982, 538);
             this.TabPage_26.TabIndex = 25;
             this.TabPage_26.Text = "系统工具";
             this.TabPage_26.UseVisualStyleBackColor = true;
@@ -5057,7 +5057,7 @@
             this.groupBox28.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox28.Location = new System.Drawing.Point(8, 227);
             this.groupBox28.Name = "groupBox28";
-            this.groupBox28.Size = new System.Drawing.Size(959, 263);
+            this.groupBox28.Size = new System.Drawing.Size(959, 300);
             this.groupBox28.TabIndex = 4;
             this.groupBox28.TabStop = false;
             this.groupBox28.Text = "说明";
@@ -5184,7 +5184,7 @@
             this.TabPage_08.Controls.Add(this.groupBox3);
             this.TabPage_08.Location = new System.Drawing.Point(4, 100);
             this.TabPage_08.Name = "TabPage_08";
-            this.TabPage_08.Size = new System.Drawing.Size(975, 474);
+            this.TabPage_08.Size = new System.Drawing.Size(982, 538);
             this.TabPage_08.TabIndex = 7;
             this.TabPage_08.Text = "关于软件";
             this.TabPage_08.UseVisualStyleBackColor = true;
@@ -5193,7 +5193,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.ForeColor = System.Drawing.Color.Tomato;
-            this.label12.Location = new System.Drawing.Point(11, 455);
+            this.label12.Location = new System.Drawing.Point(9, 497);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(962, 18);
             this.label12.TabIndex = 2;
@@ -5211,16 +5211,16 @@
             this.groupBox4.Controls.Add(this.label9);
             this.groupBox4.Location = new System.Drawing.Point(5, 190);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(962, 230);
+            this.groupBox4.Size = new System.Drawing.Size(962, 288);
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "软件说明";
             // 
             // PlayCXKMusic
             // 
-            this.PlayCXKMusic.Location = new System.Drawing.Point(808, 27);
+            this.PlayCXKMusic.Location = new System.Drawing.Point(687, 56);
             this.PlayCXKMusic.Name = "PlayCXKMusic";
-            this.PlayCXKMusic.Size = new System.Drawing.Size(148, 36);
+            this.PlayCXKMusic.Size = new System.Drawing.Size(269, 33);
             this.PlayCXKMusic.TabIndex = 8;
             this.PlayCXKMusic.Text = "点一下";
             this.PlayCXKMusic.UseVisualStyleBackColor = true;
@@ -5229,9 +5229,9 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(808, 95);
+            this.pictureBox1.Location = new System.Drawing.Point(687, 95);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(148, 129);
+            this.pictureBox1.Size = new System.Drawing.Size(269, 187);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
@@ -5508,7 +5508,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(990, 639);
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
+            this.ClientSize = new System.Drawing.Size(990, 671);
             this.Controls.Add(this.MainTabPage);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

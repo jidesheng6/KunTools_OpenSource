@@ -34,6 +34,7 @@ namespace DocumentTools
         private readonly IKeyboardEvents GlobalHook = Hook.GlobalEvents();//全局钩子事件
         private readonly ImageList TempImageList = new ImageList() { ImageSize = new Size(1, 25) };
         private string ListviewShowGridLines = "on";
+        private string ShowTabPageIcon = "on";
 
         public bool NameReplaceMode = false;
         public string ShowOpenTargetDialog = "on";//是否启用完成后显示打开转换目录弹窗
@@ -106,16 +107,22 @@ namespace DocumentTools
 
         private void SetTabCardHeighLight()
         {
-            string OpenTabPageHeight = ConfigurationManager.AppSettings["TabPageHeight"];
+            string OpenTabPageHeight = ConfigurationManager.AppSettings["TabPageHeighLight"];
 
-            if(OpenTabPageHeight=="on")
+            SetTabPageShowIco();//先对tabpage进行设置
+
+            if (OpenTabPageHeight=="on")
             {
                 this.MainTabPage.DrawMode = TabDrawMode.OwnerDrawFixed;
             }
             else
             {
                 this.MainTabPage.DrawMode = TabDrawMode.Normal;
-                MainTabPage.ImageList = TabPageIcoList;
+
+                if(ShowTabPageIcon=="on")
+                {
+                    MainTabPage.ImageList = TabPageIcoList;
+                }
             }
 
         }
@@ -159,17 +166,22 @@ namespace DocumentTools
             ListviewShowGridLines = ConfigurationManager.AppSettings["ListViewShowGridLines"];
         }
 
+        private void SetTabPageShowIco()
+        {
+            ShowTabPageIcon = ConfigurationManager.AppSettings["ShowTabPageIco"];
+        }
+
         private void InitConfigSettings()
         {
             //如果配置文件存在就按照配置文件中的参数来设置
             if (File.Exists(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile))
             {
                 SetInitTabPage();//设置起始页面
-                SetTabCardHeighLight();//设置标签卡高亮
                 SetConfirmDialogShow();//设置是否显示转换后弹窗
                 SetTabPageVisable();//设置标签卡隐藏
                 SetListViewLineHeight();//设置文件列表行距
                 SetListViewShowGridLines();//设置是否开启网格线
+                SetTabCardHeighLight();//设置标签卡高亮
             }
 
         }
@@ -190,13 +202,13 @@ namespace DocumentTools
         private void BodyForm_Load(object sender, EventArgs e)
         {
             this.Text = $"坤_Tools【软件完全离线|更新请看关于软件|版本：{NowVersion}】";
-            InitConfigSettings();
             InitListView();
             InitComboxValue();
             InitMoveItemButtonHandler();
             InitRemoveItemHandler();
             InitToolTipHandler();
             InitTabPageIcon();
+            InitConfigSettings();
             OutPutListViewIndex();
             this.AllowDrop = true;
             this.PageExportCheck.Checked = true;
