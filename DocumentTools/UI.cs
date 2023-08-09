@@ -359,7 +359,7 @@ namespace DocumentTools
                 IEnumerable<string> ISelectSavePathstring = Util.ShwoSelectDialog(false, true, "", "");
                 string SelectSavePathstring = ISelectSavePathstring.FirstOrDefault();
 
-                if (SelectSavePathstring != default || SelectSavePathstring != string.Empty)
+                if (SelectSavePathstring != default && SelectSavePathstring != string.Empty && SelectSavePathstring!=null)
                 {
                     for (int TempIndex = 0; TempIndex < ListViewControl.Items.Count; TempIndex++)
                     {
@@ -377,7 +377,7 @@ namespace DocumentTools
 
                                 object SelectedPdfCompliance = Enum.Parse(typeof(Aspose.Words.Saving.PdfCompliance), BodyForm.MainForm.PDFComplianceBox.SelectedItem.ToString());
 
-                                Util.ConvertWord2Pdf(ListViewFirstColumnText, ConvertedFileName, TempSaveDocxPathString, (Aspose.Words.Saving.PdfCompliance)SelectedPdfCompliance);
+                                Util.ConvertWord2Pdf(ListViewFirstColumnText, ConvertedFileName, TempSaveDocxPathString, (Aspose.Words.Saving.PdfCompliance)SelectedPdfCompliance,(Aspose.Words.Settings.MsWordVersion)Enum.Parse(typeof(Aspose.Words.Settings.MsWordVersion),BodyForm.MainForm.Word2PDFOptimizCombox.SelectedItem.ToString()));
                                 break;
                             //pdf转word
                             case ConvertFileType.Pdf2Word:
