@@ -102,7 +102,11 @@ namespace DocumentTools
 
         private void SetInitTabPage()
         {
-            MainTabPage.SelectedIndex = int.Parse(ConfigurationManager.AppSettings["StartPageIndex"]);
+            if(int.TryParse(ConfigurationManager.AppSettings["StartPageIndex"],out int StartIndex))
+            {
+                MainTabPage.SelectedIndex = StartIndex;
+            }    
+            
         }
 
         private void SetTabCardHeighLight()
@@ -202,19 +206,17 @@ namespace DocumentTools
         private void BodyForm_Load(object sender, EventArgs e)
         {
             this.Text = $"坤_Tools【软件完全离线|更新请看关于软件|版本：{NowVersion}】";
+            InitConfigSettings();
             InitListView();
             InitComboxValue();
             InitMoveItemButtonHandler();
             InitRemoveItemHandler();
             InitToolTipHandler();
             InitTabPageIcon();
-            InitConfigSettings();
             OutPutListViewIndex();
             this.AllowDrop = true;
             this.PageExportCheck.Checked = true;
             this.PageExportCheck.Enabled = false;
-
-            this.MergePdfButton.Enabled = false;
 
             this.PreviewPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
 
@@ -262,6 +264,16 @@ namespace DocumentTools
 
             this.ImagePdfPageSIze_RIGHT.Validating += ValidTextBoxContent;
             this.ImagePdfPageSIze_RIGHT.Validated += ValidedTextBoxContent;
+
+            this.DecodeDataMatrixView.MouseClick += (s1, s2) =>
+            {
+                if(s2.Button == MouseButtons.Right) {
+                    if(s1 is TreeView TempTreeView)
+                    {
+                        TreeViewContentMenu.Show(TempTreeView, s2.Location);
+                    }
+                }
+            };
 
 
 
@@ -494,6 +506,9 @@ namespace DocumentTools
             this.PDF2WORD_Mode.DisplayMember = "DisplayValue";
             this.PDF2WORD_Mode.ValueMember = "RealValue";
 
+            this.Word2PDFOptimizCombox.DataSource = Enum.GetNames(typeof(Aspose.Words.Settings.MsWordVersion));
+            this.Word2PDFOptimizCombox.SelectedIndex = 4; //默认为ms2010
+            
             //修改下拉样式
             GetFormMembers(typeof(ComboBox)).ForEach(x =>
             {
@@ -2605,30 +2620,57 @@ namespace DocumentTools
 
         private void 获取PDF文件版本信息ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
             if (ListViewRightMenu.SourceControl.GetType() == typeof(ListView))
             {
                 ListView TempListView = ListViewRightMenu.SourceControl as ListView;
 
-                string PdfFileName = TempListView.FocusedItem.Text;
-
-                if (File.Exists(PdfFileName) && Path.GetExtension(PdfFileName) == ".pdf")
+                Task.Run(() =>
                 {
-                    Task.Run(() =>
-                    {
+                    string FileName = TempListView.FocusedItem.Text;
 
-                        string Version = Util.GetPdfVersion(PdfFileName);
+                    string Information = string.Empty;
+
+                    if (File.Exists(FileName))
+                    {
+                        switch (Path.GetExtension(FileName))
+                        {
+                            case ".pdf":
+                                Information = Util.GetPdfVersion(FileName);
+                                break;
+                            case ".doc":
+                                Information = Util.GetWordInfomation(FileName);
+                                break;
+                            case ".docx":
+                                Information = Util.GetWordInfomation(FileName);
+                                break;
+                            case ".xls":
+                                Information = Util.GetExcelInfomation(FileName);
+                                break;
+                            case ".xlsx":
+                                Information = Util.GetExcelInfomation(FileName);
+                                break;
+                            case ".ppt":
+                                Information = Util.GetPPtInformation(FileName);
+                                break;
+                            case ".pptx":
+                                Information = Util.GetPPtInformation(FileName);
+                                break;
+                            default:
+                                Information = "暂不支持获取该文件信息";
+                                break;
+                        }
 
                         this.BeginInvoke(new Action(() =>
                         {
-                            MessageBox.Show(Version, "信息", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                            MessageBox.Show(Information, "信息", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                         }));
-
-                    });
-                }
-                else
-                {
-                    MessageBox.Show("所选文件不存在或不是PDF文件", "信息", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                }
+                    }
+                    else
+                    {
+                        MessageBox.Show("所选文件不存在", "信息", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
+                });
             }
         }
     }

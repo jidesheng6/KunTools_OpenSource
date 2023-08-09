@@ -3,6 +3,8 @@ using Aspose.Cells;
 using Aspose.Cells.Rendering;
 using Aspose.Html.Net;
 using Aspose.Imaging;
+using Aspose.Imaging.FileFormats.Jpeg;
+using Aspose.Imaging.FileFormats.Png;
 using Aspose.Pdf;
 using Aspose.Pdf.Annotations;
 using Aspose.Pdf.Text;
@@ -128,7 +130,7 @@ namespace DocumentTools
         /// <param name="documentFileName">doc/docx文档路径</param>
         /// <param name="SavePdfName">导出pdf的路径</param>
         /// <param name="tempSaveDocxPath">临时存放转换的docx目录</param>
-        public static void ConvertWord2Pdf(string documentFileName, string SavePdfName, string tempSaveDocxPath, Aspose.Words.Saving.PdfCompliance PdfComplanceOption)
+        public static void ConvertWord2Pdf(string documentFileName, string SavePdfName, string tempSaveDocxPath, Aspose.Words.Saving.PdfCompliance PdfComplanceOption,Aspose.Words.Settings.MsWordVersion OptiMizMswVersion)
         {
             Aspose.Hook.HookManager.StartHook();
             string DocumentName, SaveDocxName;
@@ -137,7 +139,7 @@ namespace DocumentTools
             Aspose.Words.Loading.LoadOptions TempDocuemntLoadOption = new Aspose.Words.Loading.LoadOptions()
             {
                 ConvertMetafilesToPng = false,
-                MswVersion = Aspose.Words.Settings.MsWordVersion.Word2010,
+                MswVersion = OptiMizMswVersion,
             };
 
             //设置PDF保存参数
@@ -169,14 +171,10 @@ namespace DocumentTools
             //设置Docx保存参数
             Aspose.Words.Saving.OoxmlSaveOptions TempDocxSaveOption = new Aspose.Words.Saving.OoxmlSaveOptions()
             {
-                //Compliance = Aspose.Words.Saving.OoxmlCompliance.Iso29500_2008_Strict,
+                Compliance = Aspose.Words.Saving.OoxmlCompliance.Iso29500_2008_Transitional,
                 SaveFormat = Aspose.Words.SaveFormat.Docx,
                 KeepLegacyControlChars = true,
-
-
             };
-
-
 
             Aspose.Words.Document TempDocument = new Aspose.Words.Document(documentFileName,
                                                                            TempDocuemntLoadOption)
@@ -184,7 +182,9 @@ namespace DocumentTools
                 RemovePersonalInformation = true
             };
 
-            //TempDocument.JustificationMode = Aspose.Words.Settings.JustificationMode.CompressKana;
+            TempDocument.CompatibilityOptions.OptimizeFor(OptiMizMswVersion);
+            TempDocument.CompatibilityOptions.BalanceSingleByteDoubleByteWidth = true;//区分全角和半角字符
+
 
             DocumentName = System.IO.Path.GetFileNameWithoutExtension(documentFileName);
 
@@ -196,10 +196,7 @@ namespace DocumentTools
 
             Aspose.Words.Document TempDocxDocument = new Aspose.Words.Document(SaveDocxName, TempDocuemntLoadOption);
 
-            //TempDocxDocument.JustificationMode = Aspose.Words.Settings.JustificationMode.CompressKana;
-
             TempDocxDocument.UpdateFields();
-
 
             TempDocxDocument.Save(SavePdfName, TempPdfaveOption);
         }
@@ -1661,7 +1658,7 @@ namespace DocumentTools
         {
             Aspose.Hook.HookManager.StartHook();
 
-            Aspose.Pdf.Document TempDocument = new Aspose.Pdf.Document(DocumentFileName);
+            using Aspose.Pdf.Document TempDocument = new Aspose.Pdf.Document(DocumentFileName);
 
             StringBuilder stringBuilder = new StringBuilder();
 
@@ -1685,6 +1682,88 @@ namespace DocumentTools
 
             return stringBuilder.ToString();
         }
+
+        public static string GetWordInfomation(string DocumentFileName)
+        {
+            Aspose.Hook.HookManager.StartHook();
+
+            Aspose.Words.Document TempLoadDocument = new Aspose.Words.Document(DocumentFileName);
+
+            StringBuilder stringBuilder = new StringBuilder();
+
+            stringBuilder.AppendLine($"Word文档作者：{(TempLoadDocument.BuiltInDocumentProperties.Author==string.Empty ? "无": TempLoadDocument.BuiltInDocumentProperties.Author)}");
+            stringBuilder.AppendLine();
+            stringBuilder.AppendLine($"Word文档提供者：{(TempLoadDocument.BuiltInDocumentProperties.Company == string.Empty ? "无" : TempLoadDocument.BuiltInDocumentProperties.Company)}");
+            stringBuilder.AppendLine();
+            stringBuilder.AppendLine($"Word文档最后保存作者：{(TempLoadDocument.BuiltInDocumentProperties.LastSavedBy==string.Empty?"无": TempLoadDocument.BuiltInDocumentProperties.LastSavedBy)}");
+            stringBuilder.AppendLine();
+            stringBuilder.AppendLine($"Word文档版本：{TempLoadDocument.BuiltInDocumentProperties.Version}");
+            stringBuilder.AppendLine();
+            stringBuilder.AppendLine($"Word文档创建日期：{TempLoadDocument.BuiltInDocumentProperties.CreatedTime}");
+            stringBuilder.AppendLine();
+            stringBuilder.AppendLine($"Word文档最后一次保存日期：{TempLoadDocument.BuiltInDocumentProperties.LastSavedTime}");
+
+            return stringBuilder.ToString();
+        }
+
+        public static string GetExcelInfomation(string DocumentFileName)
+        {
+            Aspose.Hook.HookManager.StartHook();
+
+            StringBuilder stringBuilder = new StringBuilder();
+
+            using Aspose.Cells.Workbook TempLoadWorkBook = new Aspose.Cells.Workbook(DocumentFileName);
+
+            stringBuilder.AppendLine($"Excel文档作者：{(TempLoadWorkBook.BuiltInDocumentProperties.Author==string.Empty?"无": TempLoadWorkBook.BuiltInDocumentProperties.Author)}");
+            stringBuilder.AppendLine();
+            stringBuilder.AppendLine($"Excel文档提供者：{(TempLoadWorkBook.BuiltInDocumentProperties.Company==string.Empty?"无": TempLoadWorkBook.BuiltInDocumentProperties.Company)}");
+            stringBuilder.AppendLine();
+            stringBuilder.AppendLine($"Excel文档最后保存作者：{(TempLoadWorkBook.BuiltInDocumentProperties.LastSavedBy==string.Empty?"无": TempLoadWorkBook.BuiltInDocumentProperties.LastSavedBy)}");
+            stringBuilder.AppendLine();
+            stringBuilder.AppendLine($"Excel文档版本：{(TempLoadWorkBook.BuiltInDocumentProperties.DocumentVersion)}");
+            stringBuilder.AppendLine();
+            stringBuilder.AppendLine($"Excel文档创建日期：{(TempLoadWorkBook.BuiltInDocumentProperties.CreatedTime)}");
+            stringBuilder.AppendLine();
+            stringBuilder.AppendLine($"Excel文档最后保存：{(TempLoadWorkBook.BuiltInDocumentProperties.LastSavedTime)}");
+
+            return stringBuilder.ToString();
+        }
+
+        public static string GetPPtInformation(string DocumentFileName)
+        {
+            Aspose.Hook.HookManager.StartHook();
+
+            StringBuilder stringBuilder = new StringBuilder();
+
+            using Aspose.Slides.Presentation TemoLoadPPT = new Aspose.Slides.Presentation(DocumentFileName);
+
+            stringBuilder.AppendLine($"PPT文档作者：{(TemoLoadPPT.DocumentProperties.Author == string.Empty ? "无" : TemoLoadPPT.DocumentProperties.Author)}");
+            stringBuilder.AppendLine();
+            stringBuilder.AppendLine($"PPT文档提供者：{(TemoLoadPPT.DocumentProperties.Company == string.Empty ? "无" : TemoLoadPPT.DocumentProperties.Company)}");
+            stringBuilder.AppendLine();
+            stringBuilder.AppendLine($"PPT文档最后保存作者：{(TemoLoadPPT.DocumentProperties.LastSavedBy == string.Empty ? "无" : TemoLoadPPT.DocumentProperties.LastSavedBy)}");
+            stringBuilder.AppendLine();
+            stringBuilder.AppendLine($"PPT文档版本：{(TemoLoadPPT.DocumentProperties.AppVersion)}");
+            stringBuilder.AppendLine();
+            stringBuilder.AppendLine($"PPT文档创建日期：{(TemoLoadPPT.DocumentProperties.CreatedTime)}");
+            stringBuilder.AppendLine();
+            stringBuilder.AppendLine($"PPT文档最后保存：{(TemoLoadPPT.DocumentProperties.LastSavedTime)}");
+
+            return stringBuilder.ToString();
+        }
+
+        //public static string GetImageInfomation(string ImageFileName)
+        //{
+        //    Aspose.Hook.HookManager.StartHook();
+
+        //    StringBuilder stringBuilder= new StringBuilder();
+
+        //    using Aspose.Imaging.Image TempImage =  Aspose.Imaging.Image.Load(ImageFileName);
+
+        //    PngImage tempjpeg = TempImage as Aspose.Imaging.FileFormats.Png;
+
+        //    tempjpeg
+        //}
 
         public static string GetFileSizeDisplayString(long fileSizeBytes)
         {
