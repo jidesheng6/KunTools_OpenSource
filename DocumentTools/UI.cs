@@ -344,6 +344,11 @@ namespace DocumentTools
             AddFilesToListView("EPUB文件", "*.epub", BodyForm.MainForm.EPUB2PDFFileList);
         }
 
+        public static void AddHtml2PdfFiles()
+        {
+            AddFilesToListView("HTML文档", "*.html", BodyForm.MainForm.HTML2PDFFileList);
+        }
+
         /// <summary>
         /// 转换文件通用方法
         /// </summary>
@@ -485,7 +490,12 @@ namespace DocumentTools
                                 Util.ConvertHtml2PDF(ListViewFirstColumnText, ConvertedFileName);
                                 break;
                             case ConvertFileType.Word2Epub:
-                                Util.ConvertWord2EPUB(ListViewFirstColumnText, ConvertedFileName, BodyForm.MainForm.Word2EpubAuthorName.Text);
+                                int TempImageDpiValue = 100;
+                                if(BodyForm.MainForm.CoverImageDpi.Text!=string.Empty)
+                                {
+                                    TempImageDpiValue = int.Parse(BodyForm.MainForm.CoverImageDpi.Text);
+                                }
+                                Util.ConvertWord2EPUB(ListViewFirstColumnText, ConvertedFileName, BodyForm.MainForm.Word2EpubAuthorName.Text,BodyForm.MainForm.Word2EpubConverImage.Text,TempImageDpiValue);
                                 break;
                             case ConvertFileType.Epub2Word:
                                 Util.ConvertEPUB2Word(ListViewFirstColumnText, ConvertedFileName);

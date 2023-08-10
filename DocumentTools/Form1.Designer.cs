@@ -228,6 +228,11 @@
             this.ConvertImageList = new System.Windows.Forms.ComboBox();
             this.DocumentsListView = new System.Windows.Forms.ListView();
             this.TabPage_27 = new System.Windows.Forms.TabPage();
+            this.CoverImageDpi = new System.Windows.Forms.TextBox();
+            this.label64 = new System.Windows.Forms.Label();
+            this.SetWord2EpubCoverImage = new System.Windows.Forms.Button();
+            this.Word2EpubConverImage = new System.Windows.Forms.TextBox();
+            this.label63 = new System.Windows.Forms.Label();
             this.Word2EpubAuthorName = new System.Windows.Forms.TextBox();
             this.label61 = new System.Windows.Forms.Label();
             this.ConvertWord2EpubStatusText = new System.Windows.Forms.Label();
@@ -282,6 +287,15 @@
             this.ConvertImage2PDF = new System.Windows.Forms.Button();
             this.SelectConvertImage2PDF = new System.Windows.Forms.Button();
             this.ConvertImage2PDFFileList = new System.Windows.Forms.ListView();
+            this.TabPage_30 = new System.Windows.Forms.TabPage();
+            this.HTML2PDFFileList_MoveDown = new System.Windows.Forms.Button();
+            this.HTML2PDFFileList_MoveUp = new System.Windows.Forms.Button();
+            this.html2pdf_clear = new System.Windows.Forms.Button();
+            this.html2pdf_remove = new System.Windows.Forms.Button();
+            this.ConvertHtml2PdfStatusText = new System.Windows.Forms.Label();
+            this.ConvertHtml2Pdf = new System.Windows.Forms.Button();
+            this.SelectHtml2PDFFiles = new System.Windows.Forms.Button();
+            this.HTML2PDFFileList = new System.Windows.Forms.ListView();
             this.TabPage_24 = new System.Windows.Forms.TabPage();
             this.CompressPdfFileList_MoveDown = new System.Windows.Forms.Button();
             this.CompressPdfFileList_MoveUp = new System.Windows.Forms.Button();
@@ -510,6 +524,7 @@
             this.MainFormError = new System.Windows.Forms.ErrorProvider(this.components);
             this.MainToolsTip = new System.Windows.Forms.ToolTip(this.components);
             this.TabPageIcoList = new System.Windows.Forms.ImageList(this.components);
+            this.label65 = new System.Windows.Forms.Label();
             this.MainTabPage.SuspendLayout();
             this.TabPage_01.SuspendLayout();
             this.TabPage_02.SuspendLayout();
@@ -534,6 +549,7 @@
             this.TabPage_23.SuspendLayout();
             this.groupBox19.SuspendLayout();
             this.groupBox20.SuspendLayout();
+            this.TabPage_30.SuspendLayout();
             this.TabPage_24.SuspendLayout();
             this.groupBox21.SuspendLayout();
             this.TabPage_25.SuspendLayout();
@@ -598,6 +614,7 @@
             this.MainTabPage.Controls.Add(this.TabPage_28);
             this.MainTabPage.Controls.Add(this.TabPage_29);
             this.MainTabPage.Controls.Add(this.TabPage_23);
+            this.MainTabPage.Controls.Add(this.TabPage_30);
             this.MainTabPage.Controls.Add(this.TabPage_24);
             this.MainTabPage.Controls.Add(this.TabPage_25);
             this.MainTabPage.Controls.Add(this.TabPage_10);
@@ -2657,6 +2674,12 @@
             // 
             // TabPage_27
             // 
+            this.TabPage_27.Controls.Add(this.label65);
+            this.TabPage_27.Controls.Add(this.CoverImageDpi);
+            this.TabPage_27.Controls.Add(this.label64);
+            this.TabPage_27.Controls.Add(this.SetWord2EpubCoverImage);
+            this.TabPage_27.Controls.Add(this.Word2EpubConverImage);
+            this.TabPage_27.Controls.Add(this.label63);
             this.TabPage_27.Controls.Add(this.Word2EpubAuthorName);
             this.TabPage_27.Controls.Add(this.label61);
             this.TabPage_27.Controls.Add(this.ConvertWord2EpubStatusText);
@@ -2673,6 +2696,50 @@
             this.TabPage_27.TabIndex = 26;
             this.TabPage_27.Text = "WORD转EPUB";
             this.TabPage_27.UseVisualStyleBackColor = true;
+            // 
+            // CoverImageDpi
+            // 
+            this.CoverImageDpi.Location = new System.Drawing.Point(735, 408);
+            this.CoverImageDpi.Name = "CoverImageDpi";
+            this.CoverImageDpi.Size = new System.Drawing.Size(84, 28);
+            this.CoverImageDpi.TabIndex = 23;
+            // 
+            // label64
+            // 
+            this.label64.AutoSize = true;
+            this.label64.Location = new System.Drawing.Point(667, 413);
+            this.label64.Name = "label64";
+            this.label64.Size = new System.Drawing.Size(62, 18);
+            this.label64.TabIndex = 22;
+            this.label64.Text = "分辨率";
+            // 
+            // SetWord2EpubCoverImage
+            // 
+            this.SetWord2EpubCoverImage.AutoSize = true;
+            this.SetWord2EpubCoverImage.Location = new System.Drawing.Point(825, 409);
+            this.SetWord2EpubCoverImage.Name = "SetWord2EpubCoverImage";
+            this.SetWord2EpubCoverImage.Size = new System.Drawing.Size(142, 28);
+            this.SetWord2EpubCoverImage.TabIndex = 21;
+            this.SetWord2EpubCoverImage.Text = "选择图片...";
+            this.SetWord2EpubCoverImage.UseVisualStyleBackColor = true;
+            this.SetWord2EpubCoverImage.Click += new System.EventHandler(this.SetWord2EpubCoverImage_Click);
+            // 
+            // Word2EpubConverImage
+            // 
+            this.Word2EpubConverImage.Enabled = false;
+            this.Word2EpubConverImage.Location = new System.Drawing.Point(387, 407);
+            this.Word2EpubConverImage.Name = "Word2EpubConverImage";
+            this.Word2EpubConverImage.Size = new System.Drawing.Size(274, 28);
+            this.Word2EpubConverImage.TabIndex = 20;
+            // 
+            // label63
+            // 
+            this.label63.AutoSize = true;
+            this.label63.Location = new System.Drawing.Point(265, 412);
+            this.label63.Name = "label63";
+            this.label63.Size = new System.Drawing.Size(116, 18);
+            this.label63.TabIndex = 19;
+            this.label63.Text = "封面图片路径";
             // 
             // Word2EpubAuthorName
             // 
@@ -3219,6 +3286,100 @@
             this.ConvertImage2PDFFileList.Size = new System.Drawing.Size(921, 314);
             this.ConvertImage2PDFFileList.TabIndex = 0;
             this.ConvertImage2PDFFileList.UseCompatibleStateImageBehavior = false;
+            // 
+            // TabPage_30
+            // 
+            this.TabPage_30.Controls.Add(this.HTML2PDFFileList_MoveDown);
+            this.TabPage_30.Controls.Add(this.HTML2PDFFileList_MoveUp);
+            this.TabPage_30.Controls.Add(this.html2pdf_clear);
+            this.TabPage_30.Controls.Add(this.html2pdf_remove);
+            this.TabPage_30.Controls.Add(this.ConvertHtml2PdfStatusText);
+            this.TabPage_30.Controls.Add(this.ConvertHtml2Pdf);
+            this.TabPage_30.Controls.Add(this.SelectHtml2PDFFiles);
+            this.TabPage_30.Controls.Add(this.HTML2PDFFileList);
+            this.TabPage_30.Location = new System.Drawing.Point(4, 100);
+            this.TabPage_30.Name = "TabPage_30";
+            this.TabPage_30.Size = new System.Drawing.Size(982, 567);
+            this.TabPage_30.TabIndex = 29;
+            this.TabPage_30.Text = "HTML转PDF";
+            this.TabPage_30.UseVisualStyleBackColor = true;
+            // 
+            // HTML2PDFFileList_MoveDown
+            // 
+            this.HTML2PDFFileList_MoveDown.Location = new System.Drawing.Point(937, 343);
+            this.HTML2PDFFileList_MoveDown.Name = "HTML2PDFFileList_MoveDown";
+            this.HTML2PDFFileList_MoveDown.Size = new System.Drawing.Size(34, 66);
+            this.HTML2PDFFileList_MoveDown.TabIndex = 18;
+            this.HTML2PDFFileList_MoveDown.Text = "▽";
+            this.HTML2PDFFileList_MoveDown.UseVisualStyleBackColor = true;
+            // 
+            // HTML2PDFFileList_MoveUp
+            // 
+            this.HTML2PDFFileList_MoveUp.Location = new System.Drawing.Point(937, 28);
+            this.HTML2PDFFileList_MoveUp.Name = "HTML2PDFFileList_MoveUp";
+            this.HTML2PDFFileList_MoveUp.Size = new System.Drawing.Size(34, 66);
+            this.HTML2PDFFileList_MoveUp.TabIndex = 17;
+            this.HTML2PDFFileList_MoveUp.Text = "△";
+            this.HTML2PDFFileList_MoveUp.UseVisualStyleBackColor = true;
+            // 
+            // html2pdf_clear
+            // 
+            this.html2pdf_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            this.html2pdf_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.html2pdf_clear.Location = new System.Drawing.Point(937, 252);
+            this.html2pdf_clear.Name = "html2pdf_clear";
+            this.html2pdf_clear.Size = new System.Drawing.Size(34, 85);
+            this.html2pdf_clear.TabIndex = 20;
+            this.html2pdf_clear.UseVisualStyleBackColor = true;
+            // 
+            // html2pdf_remove
+            // 
+            this.html2pdf_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            this.html2pdf_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.html2pdf_remove.Location = new System.Drawing.Point(937, 100);
+            this.html2pdf_remove.Name = "html2pdf_remove";
+            this.html2pdf_remove.Size = new System.Drawing.Size(34, 85);
+            this.html2pdf_remove.TabIndex = 19;
+            this.html2pdf_remove.UseVisualStyleBackColor = true;
+            // 
+            // ConvertHtml2PdfStatusText
+            // 
+            this.ConvertHtml2PdfStatusText.AutoSize = true;
+            this.ConvertHtml2PdfStatusText.ForeColor = System.Drawing.Color.ForestGreen;
+            this.ConvertHtml2PdfStatusText.Location = new System.Drawing.Point(239, 501);
+            this.ConvertHtml2PdfStatusText.Name = "ConvertHtml2PdfStatusText";
+            this.ConvertHtml2PdfStatusText.Size = new System.Drawing.Size(143, 18);
+            this.ConvertHtml2PdfStatusText.TabIndex = 16;
+            this.ConvertHtml2PdfStatusText.Text = "正在处理X个文件";
+            // 
+            // ConvertHtml2Pdf
+            // 
+            this.ConvertHtml2Pdf.Location = new System.Drawing.Point(752, 483);
+            this.ConvertHtml2Pdf.Name = "ConvertHtml2Pdf";
+            this.ConvertHtml2Pdf.Size = new System.Drawing.Size(221, 55);
+            this.ConvertHtml2Pdf.TabIndex = 15;
+            this.ConvertHtml2Pdf.Text = "开始处理";
+            this.ConvertHtml2Pdf.UseVisualStyleBackColor = true;
+            this.ConvertHtml2Pdf.Click += new System.EventHandler(this.ConvertHtml2Pdf_Click_1);
+            // 
+            // SelectHtml2PDFFiles
+            // 
+            this.SelectHtml2PDFFiles.Location = new System.Drawing.Point(12, 483);
+            this.SelectHtml2PDFFiles.Name = "SelectHtml2PDFFiles";
+            this.SelectHtml2PDFFiles.Size = new System.Drawing.Size(221, 55);
+            this.SelectHtml2PDFFiles.TabIndex = 14;
+            this.SelectHtml2PDFFiles.Text = "选择文件";
+            this.SelectHtml2PDFFiles.UseVisualStyleBackColor = true;
+            this.SelectHtml2PDFFiles.Click += new System.EventHandler(this.SelectHtml2PDFFiles_Click_1);
+            // 
+            // HTML2PDFFileList
+            // 
+            this.HTML2PDFFileList.HideSelection = false;
+            this.HTML2PDFFileList.Location = new System.Drawing.Point(10, 28);
+            this.HTML2PDFFileList.Name = "HTML2PDFFileList";
+            this.HTML2PDFFileList.Size = new System.Drawing.Size(921, 381);
+            this.HTML2PDFFileList.TabIndex = 13;
+            this.HTML2PDFFileList.UseCompatibleStateImageBehavior = false;
             // 
             // TabPage_24
             // 
@@ -5364,7 +5525,7 @@
             this.文件操作ToolStripMenuItem,
             this.获取PDF文件版本信息ToolStripMenuItem});
             this.ListViewRightMenu.Name = "contextMenuStrip1";
-            this.ListViewRightMenu.Size = new System.Drawing.Size(249, 133);
+            this.ListViewRightMenu.Size = new System.Drawing.Size(197, 100);
             // 
             // 列表操作ToolStripMenuItem
             // 
@@ -5373,7 +5534,7 @@
             this.清空列表ToolStripMenuItem});
             this.列表操作ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("列表操作ToolStripMenuItem.Image")));
             this.列表操作ToolStripMenuItem.Name = "列表操作ToolStripMenuItem";
-            this.列表操作ToolStripMenuItem.Size = new System.Drawing.Size(248, 32);
+            this.列表操作ToolStripMenuItem.Size = new System.Drawing.Size(196, 32);
             this.列表操作ToolStripMenuItem.Text = "列表操作";
             // 
             // 删除本项ToolStripMenuItem
@@ -5401,7 +5562,7 @@
             this.打开转换后文件ToolStripMenuItem});
             this.文件操作ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("文件操作ToolStripMenuItem.Image")));
             this.文件操作ToolStripMenuItem.Name = "文件操作ToolStripMenuItem";
-            this.文件操作ToolStripMenuItem.Size = new System.Drawing.Size(248, 32);
+            this.文件操作ToolStripMenuItem.Size = new System.Drawing.Size(196, 32);
             this.文件操作ToolStripMenuItem.Text = "文件操作";
             // 
             // 打开源文件目录ToolStripMenuItem
@@ -5440,7 +5601,7 @@
             // 
             this.获取PDF文件版本信息ToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("获取PDF文件版本信息ToolStripMenuItem.Image")));
             this.获取PDF文件版本信息ToolStripMenuItem.Name = "获取PDF文件版本信息ToolStripMenuItem";
-            this.获取PDF文件版本信息ToolStripMenuItem.Size = new System.Drawing.Size(248, 32);
+            this.获取PDF文件版本信息ToolStripMenuItem.Size = new System.Drawing.Size(196, 32);
             this.获取PDF文件版本信息ToolStripMenuItem.Text = "获取文件信息";
             this.获取PDF文件版本信息ToolStripMenuItem.Click += new System.EventHandler(this.获取PDF文件版本信息ToolStripMenuItem_Click);
             // 
@@ -5511,6 +5672,16 @@
             this.TabPageIcoList.Images.SetKeyName(13, "水印.png");
             this.TabPageIcoList.Images.SetKeyName(14, "姓名.png");
             // 
+            // label65
+            // 
+            this.label65.AutoSize = true;
+            this.label65.ForeColor = System.Drawing.Color.Red;
+            this.label65.Location = new System.Drawing.Point(383, 461);
+            this.label65.Name = "label65";
+            this.label65.Size = new System.Drawing.Size(359, 54);
+            this.label65.TabIndex = 24;
+            this.label65.Text = "1、不选择封面图片，将会用第一页作为封面\r\n\r\n2、分辨率不填默认为100";
+            // 
             // BodyForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
@@ -5575,6 +5746,8 @@
             this.groupBox19.PerformLayout();
             this.groupBox20.ResumeLayout(false);
             this.groupBox20.PerformLayout();
+            this.TabPage_30.ResumeLayout(false);
+            this.TabPage_30.PerformLayout();
             this.TabPage_24.ResumeLayout(false);
             this.TabPage_24.PerformLayout();
             this.groupBox21.ResumeLayout(false);
@@ -6133,6 +6306,21 @@
         private System.Windows.Forms.ImageList TabPageIcoList;
         private System.Windows.Forms.Label label62;
         internal System.Windows.Forms.ComboBox Word2PDFOptimizCombox;
+        private System.Windows.Forms.TabPage TabPage_30;
+        private System.Windows.Forms.Button HTML2PDFFileList_MoveDown;
+        private System.Windows.Forms.Button HTML2PDFFileList_MoveUp;
+        private System.Windows.Forms.Button html2pdf_clear;
+        private System.Windows.Forms.Button html2pdf_remove;
+        private System.Windows.Forms.Label ConvertHtml2PdfStatusText;
+        private System.Windows.Forms.Button ConvertHtml2Pdf;
+        private System.Windows.Forms.Button SelectHtml2PDFFiles;
+        internal System.Windows.Forms.ListView HTML2PDFFileList;
+        private System.Windows.Forms.Label label63;
+        private System.Windows.Forms.Button SetWord2EpubCoverImage;
+        internal System.Windows.Forms.TextBox Word2EpubConverImage;
+        private System.Windows.Forms.Label label64;
+        internal System.Windows.Forms.TextBox CoverImageDpi;
+        private System.Windows.Forms.Label label65;
     }
 }
 

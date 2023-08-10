@@ -2,6 +2,7 @@
 using Aspose.Cells;
 using Aspose.Cells.Rendering;
 using Aspose.Html.Net;
+using Aspose.Html.Services;
 using Aspose.Imaging;
 using Aspose.Imaging.FileFormats.Jpeg;
 using Aspose.Imaging.FileFormats.Png;
@@ -1551,30 +1552,30 @@ namespace DocumentTools
         public static void ConvertHtml2PDF(string DocumentFileName, string SavedFileName)
         {
             Aspose.Hook.HookManager.StartHook();
-            _ = new Aspose.Html.Configuration();
+            Aspose.Html.Configuration TempConfig= new Aspose.Html.Configuration();
             Aspose.Html.Rendering.Pdf.PdfRenderingOptions TempPdfRenderOption = new Aspose.Html.Rendering.Pdf.PdfRenderingOptions();
             TempPdfRenderOption.Css.MediaType = Aspose.Html.Rendering.MediaType.Screen;
             TempPdfRenderOption.PageSetup.AdjustToWidestPage = true;
 
-            using (Aspose.Html.HTMLDocument TempDocument = new Aspose.Html.HTMLDocument(DocumentFileName))
-            {
+            //using (Aspose.Html.HTMLDocument TempDocument = new Aspose.Html.HTMLDocument(DocumentFileName))
+            //{
 
-                using Aspose.Html.Rendering.Pdf.PdfDevice TempPdfDevice = new Aspose.Html.Rendering.Pdf.PdfDevice(TempPdfRenderOption, SavedFileName);
-                TempDocument.RenderTo(TempPdfDevice);
+            //    using Aspose.Html.Rendering.Pdf.PdfDevice TempPdfDevice = new Aspose.Html.Rendering.Pdf.PdfDevice(TempPdfRenderOption, SavedFileName);
+            //    TempDocument.RenderTo(TempPdfDevice);
+            //};
+
+            INetworkService networkService = TempConfig.GetService<INetworkService>();
+
+            networkService.MessageHandlers.Insert(0, new TimeoutMessageHandler());
+
+            Aspose.Html.Saving.PdfSaveOptions TempOption = new Aspose.Html.Saving.PdfSaveOptions()
+            {
+                JpegQuality = 100,
             };
 
-            //INetworkService networkService =  TempConfig.GetService<INetworkService>();
+            TempOption.PageSetup.AdjustToWidestPage = true;
 
-            // networkService.MessageHandlers.Insert(0, new TimeoutMessageHandler());
-
-            //    Aspose.Html.Saving.PdfSaveOptions TempOption = new Aspose.Html.Saving.PdfSaveOptions()
-            //         {
-            //             JpegQuality = 100,
-            //         };
-
-            //    TempOption.PageSetup.AdjustToWidestPage = true;
-
-            //     Aspose.Html.Converters.Converter.ConvertHTML(DocumentFileName, TempConfig,TempOption,SavedFileName);
+            Aspose.Html.Converters.Converter.ConvertHTML(DocumentFileName, TempConfig, TempOption, SavedFileName);
         }
 
         /// <summary>
@@ -1582,11 +1583,36 @@ namespace DocumentTools
         /// </summary>
         /// <param name="DocumentFileName"></param>
         /// <param name="SavedFileName"></param>
-        public static void ConvertWord2EPUB(string DocumentFileName, string SavedFileName, string AuthorName)
+        public static void ConvertWord2EPUB(string DocumentFileName, string SavedFileName, string AuthorName,string CoverImageFileName,int CoverImageDpi)
         {
             Aspose.Hook.HookManager.StartHook();
 
+            byte[] ConverImageBytes;
+
             Aspose.Words.Document TempLoadDocument = new Aspose.Words.Document(DocumentFileName);
+
+            Aspose.Words.Saving.ImageSaveOptions TempImageOption = new Aspose.Words.Saving.ImageSaveOptions(Aspose.Words.SaveFormat.Jpeg)
+            {
+                PageSet = new Aspose.Words.Saving.PageSet(0),
+                Resolution = CoverImageDpi
+            };
+            if(!string.IsNullOrEmpty(CoverImageFileName) && File.Exists(CoverImageFileName)) {
+
+                ConverImageBytes = File.ReadAllBytes(CoverImageFileName);
+            }
+            else
+            {
+                MemoryStream TempMemoryStream = new MemoryStream();
+
+                TempLoadDocument.Save(TempMemoryStream, TempImageOption);
+
+                ConverImageBytes = TempMemoryStream.ToArray();
+
+                TempMemoryStream.Close();
+            }
+
+            TempLoadDocument.BuiltInDocumentProperties.Thumbnail = ConverImageBytes;
+
 
             TempLoadDocument.BuiltInDocumentProperties.Title = Path.GetFileNameWithoutExtension(DocumentFileName);
             TempLoadDocument.BuiltInDocumentProperties.Author = AuthorName == string.Empty ? "DocumentTools" : AuthorName;
@@ -1612,6 +1638,7 @@ namespace DocumentTools
             };
 
             TempLoadDocument.Save(SavedFileName, TempHtmlSaveOption);
+            
 
         }
         /// <summary>

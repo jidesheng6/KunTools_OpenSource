@@ -265,6 +265,10 @@ namespace DocumentTools
             this.ImagePdfPageSIze_RIGHT.Validating += ValidTextBoxContent;
             this.ImagePdfPageSIze_RIGHT.Validated += ValidedTextBoxContent;
 
+            this.CoverImageDpi.Validating += ValidTextBoxContent;
+            this.CoverImageDpi.Validated += ValidedTextBoxContent;
+            
+
             this.DecodeDataMatrixView.MouseClick += (s1, s2) =>
             {
                 if(s2.Button == MouseButtons.Right) {
@@ -2484,84 +2488,6 @@ namespace DocumentTools
             });
         }
 
-
-        //private void ConvertHTML2PDF_Click(object sender, EventArgs e)
-        //{
-        //    Task.Run(() =>
-        //    {
-        //        try
-        //        {
-        //            UI.ConvertStart(this.Word2EPUBFileList, this.ConvertWord2EpubStatusText, ConvertFileType.Word2Epub, ".epub");
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        }
-
-        //    });
-        //}
-
-        //private void SelectEpub2WordFiles_Click(object sender, EventArgs e)
-        //{
-        //    UI.AddEPUB2WORDFiles();
-        //}
-
-        //private void ConvertEpub2Word_Click(object sender, EventArgs e)
-        //{
-        //    Task.Run(() =>
-        //    {
-        //        try
-        //        {
-        //            UI.ConvertStart(this.EPUB2WORDFileList, this.ConvertEpub2WordStatusText, ConvertFileType.Epub2Word, ".docx");
-        //        }
-        //        catch (NullReferenceException)
-        //        {
-        //            MessageBox.Show($"EPUB格式不正确，请移除错误文件后重试", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        }
-        //        catch (IndexOutOfRangeException)
-        //        {
-        //            MessageBox.Show($"EPUB格式不正确，请移除错误文件后重试", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        }
-        //        catch (Exception ex)
-        //        {
-
-        //            MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        }
-
-        //    });
-        //}
-
-        //private void SelectEPUB2PDFFiles_Click(object sender, EventArgs e)
-        //{
-        //    UI.AddEPUB2PDFFiles();
-        //}
-
-        //private void ConvertEPUB2PDF_Click(object sender, EventArgs e)
-        //{
-        //    Task.Run(() =>
-        //    {
-        //        try
-        //        {
-        //            UI.ConvertStart(this.EPUB2PDFFileList, this.ConvertEPUB2PDFStatusText, ConvertFileType.Epub2Pdf, ".pdf");
-        //        }
-        //        catch (NullReferenceException)
-        //        {
-        //            MessageBox.Show($"EPUB格式不正确，请移除错误文件后重试", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        }
-        //        catch (IndexOutOfRangeException)
-        //        {
-        //            MessageBox.Show($"EPUB格式不正确，请移除错误文件后重试", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-        //        }
-        //        catch (Exception ex)
-        //        {
-
-        //            MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        }
-
-        //    });
-        //}
-
         private void 打开源文件目录ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (ListViewRightMenu.SourceControl.GetType() == typeof(ListView))
@@ -2658,6 +2584,37 @@ namespace DocumentTools
                         MessageBox.Show("所选文件不存在", "信息", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
                 });
+            }
+        }
+
+        private void SelectHtml2PDFFiles_Click_1(object sender, EventArgs e)
+        {
+            UI.AddHtml2PdfFiles();
+        }
+
+        private void ConvertHtml2Pdf_Click_1(object sender, EventArgs e)
+        {
+            Task.Run(() =>
+            {
+                try
+                {
+                    UI.ConvertStart(this.HTML2PDFFileList, this.ConvertHtml2PdfStatusText, ConvertFileType.Html2PDF, ".pdf");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            });
+        }
+
+        private void SetWord2EpubCoverImage_Click(object sender, EventArgs e)
+        {
+           string SelectImageFileName =  Util.ShwoSelectDialog(false,false,"图片文件","*.jpg;*.jpeg;*.png;*.bmp").FirstOrDefault();
+
+            if(SelectImageFileName!=default && !string.IsNullOrEmpty(SelectImageFileName))
+            {
+                this.Word2EpubConverImage.Text = SelectImageFileName;
             }
         }
     }
