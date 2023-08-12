@@ -35,13 +35,14 @@ namespace DocumentTools
         private readonly ImageList TempImageList = new ImageList() { ImageSize = new Size(1, 25) };
         private string ListviewShowGridLines = "on";
         private string ShowTabPageIcon = "on";
+        private string ChromeDriverPath = "";
 
         public bool NameReplaceMode = false;
         public string ShowOpenTargetDialog = "on";//是否启用完成后显示打开转换目录弹窗
         public string AddWaterMarkBackGroudImageFileName = string.Empty;
 
 
-        readonly string NowVersion = "23.8.9";
+        readonly string NowVersion = "23.8.12";
 
         #region 控件大小随窗体大小等比例缩放
 
@@ -175,6 +176,13 @@ namespace DocumentTools
             ShowTabPageIcon = ConfigurationManager.AppSettings["ShowTabPageIco"];
         }
 
+        private void SetChromeDriverPath()
+        {
+            ChromeDriverPath = ConfigurationManager.AppSettings["ChromeDriverPath"];
+
+            html2pdf_textbox_chromepath.Text = ChromeDriverPath;
+        }
+
         private void InitConfigSettings()
         {
             //如果配置文件存在就按照配置文件中的参数来设置
@@ -186,6 +194,7 @@ namespace DocumentTools
                 SetListViewLineHeight();//设置文件列表行距
                 SetListViewShowGridLines();//设置是否开启网格线
                 SetTabCardHeighLight();//设置标签卡高亮
+                SetChromeDriverPath();//读取chrome的驱动地址
             }
 
         }
@@ -267,7 +276,16 @@ namespace DocumentTools
 
             this.CoverImageDpi.Validating += ValidTextBoxContent;
             this.CoverImageDpi.Validated += ValidedTextBoxContent;
-            
+
+            this.html2pdf_textbox_margin_top.Validating += ValidTextBoxContent;
+            this.html2pdf_textbox_margin_top.Validated += ValidedTextBoxContent;
+            this.html2pdf_textbox_margin_left.Validating += ValidTextBoxContent;
+            this.html2pdf_textbox_margin_left.Validated += ValidedTextBoxContent;
+            this.html2pdf_textbox_margin_bottom.Validating += ValidTextBoxContent;
+            this.html2pdf_textbox_margin_bottom.Validated += ValidedTextBoxContent;
+            this.html2pdf_textbox_margin_right.Validating += ValidTextBoxContent;
+            this.html2pdf_textbox_margin_right.Validated += ValidedTextBoxContent;
+
 
             this.DecodeDataMatrixView.MouseClick += (s1, s2) =>
             {
@@ -512,7 +530,43 @@ namespace DocumentTools
 
             this.Word2PDFOptimizCombox.DataSource = Enum.GetNames(typeof(Aspose.Words.Settings.MsWordVersion));
             this.Word2PDFOptimizCombox.SelectedIndex = 4; //默认为ms2010
-            
+
+
+            DataTable htm2pdf_page_size_table = new DataTable();
+            htm2pdf_page_size_table.Columns.Add("DisplayValue");
+            htm2pdf_page_size_table.Columns.Add("RealValue");
+            htm2pdf_page_size_table.Rows.Add("A0", PuppeteerSharp.Media.PaperFormat.A0);
+            htm2pdf_page_size_table.Rows.Add("A1",PuppeteerSharp.Media.PaperFormat.A1);
+            htm2pdf_page_size_table.Rows.Add("A2",PuppeteerSharp.Media.PaperFormat.A2);
+            htm2pdf_page_size_table.Rows.Add("A3",PuppeteerSharp.Media.PaperFormat.A3);
+            htm2pdf_page_size_table.Rows.Add("A4",PuppeteerSharp.Media.PaperFormat.A4);
+            htm2pdf_page_size_table.Rows.Add("A5",PuppeteerSharp.Media.PaperFormat.A5);
+            htm2pdf_page_size_table.Rows.Add("A6",PuppeteerSharp.Media.PaperFormat.A6);
+            htm2pdf_page_size_table.Rows.Add("Ledger", PuppeteerSharp.Media.PaperFormat.Ledger);
+            htm2pdf_page_size_table.Rows.Add("Legal", PuppeteerSharp.Media.PaperFormat.Legal);
+            htm2pdf_page_size_table.Rows.Add("Letter", PuppeteerSharp.Media.PaperFormat.Letter);
+            htm2pdf_page_size_table.Rows.Add("Tabloid", PuppeteerSharp.Media.PaperFormat.Tabloid);
+
+            this.html2pdf_combox_pagesize.DataSource = htm2pdf_page_size_table;
+
+            this.html2pdf_combox_pagesize.DataSource = htm2pdf_page_size_table;
+            this.html2pdf_combox_pagesize.DisplayMember = "DisplayValue";
+            this.html2pdf_combox_pagesize.ValueMember = "RealValue";
+            this.html2pdf_combox_pagesize.SelectedIndex = 4;
+
+            DataTable html2pdf_pagedirect = new DataTable();
+            html2pdf_pagedirect.Columns.Add("DisplayValue");
+            html2pdf_pagedirect.Columns.Add("RealValue");
+            html2pdf_pagedirect.Rows.Add("竖向",false);
+            html2pdf_pagedirect.Rows.Add("横向",true);
+
+            this.html2pdf_combox_pagedirect.DataSource = html2pdf_pagedirect;
+            this.html2pdf_combox_pagedirect.DisplayMember = "DisplayValue";
+            this.html2pdf_combox_pagedirect.ValueMember = "RealValue";
+
+
+
+
             //修改下拉样式
             GetFormMembers(typeof(ComboBox)).ForEach(x =>
             {
@@ -709,6 +763,15 @@ namespace DocumentTools
             {
                 UI.RemoveListViewItem(true, this.EPUB2PDFFileList);
             };
+            html2pdf_clear.Click += (s1, s2) =>
+            {
+                UI.RemoveListViewItem(true, this.HTML2PDFFileList);
+            };
+            splitword_clear.Click += (s1, s2) =>
+            {
+                UI.RemoveListViewItem(true, this.SplitWordFileList);
+            };
+
 
             //remove
             word2pdf_remove.Click += (s1, s2) =>
@@ -835,6 +898,14 @@ namespace DocumentTools
                 UI.RemoveListViewItem(false, this.EPUB2PDFFileList);
             };
 
+            html2pdf_remove.Click += (s1, s2) =>
+            {
+                UI.RemoveListViewItem(false, this.HTML2PDFFileList);
+            };
+            splitword_remove.Click += (s1, s2) =>
+            {
+                UI.RemoveListViewItem(false, this.SplitWordFileList);
+            };
 
         }
 
@@ -1332,6 +1403,12 @@ namespace DocumentTools
                     break;
                 case "EPUB2PDFFileList":
                     UI.AddFilesToListviewWithNotDialog(DropFiles, this.EPUB2PDFFileList, new string[] { ".epub" });
+                    break;
+                case "HTML2PDFFileList":
+                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.HTML2PDFFileList, new string[] { ".html" });
+                    break;
+                case "SplitWordFileList":
+                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.SplitWordFileList, new string[] { ".doc", ".docx" });
                     break;
                 default: break;
             }
@@ -1910,7 +1987,7 @@ namespace DocumentTools
             {
                 try
                 {
-                    UI.ConvertStart(this.SplitPdfFileList, this.SplitPdfStatusText, ConvertFileType.SplitPdf, "");
+                    UI.ConvertStart(this.SplitPdfFileList, this.SplitPdfStatusText, ConvertFileType.SplitPdf, ".pdf");
                 }
                 catch (Exception ex)
                 {
@@ -2602,7 +2679,7 @@ namespace DocumentTools
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.ToString(), "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
             });
@@ -2616,6 +2693,49 @@ namespace DocumentTools
             {
                 this.Word2EpubConverImage.Text = SelectImageFileName;
             }
+        }
+
+        private void SelectSplitWordFiles_Click(object sender, EventArgs e)
+        {
+            UI.AddSplitWordFiles();
+        }
+
+        private void StartSplitWord_Click(object sender, EventArgs e)
+        {
+            Task.Run(() =>
+            {
+                try
+                {
+                    UI.ConvertStart(this.SplitWordFileList, this.StartSplitWordStatusText, ConvertFileType.SplitWord, ".docx");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            });
+        }
+
+        private void LinkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://commondatastorage.googleapis.com/chromium-browser-snapshots/index.html?prefix=Win_x64/999988/");
+        }
+
+        private void Html2pdf_button_set_chrome_path_Click(object sender, EventArgs e)
+        {
+           IEnumerable<string> chrome_path =  Util.ShwoSelectDialog(false, false, "chrome浏览器", "*.exe");
+
+            string chrome_path_string = chrome_path.FirstOrDefault();
+
+            if(chrome_path_string!=string.Empty&&chrome_path_string!=default&&chrome_path_string!=null)
+            {
+                this.html2pdf_textbox_chromepath.Text = chrome_path_string;
+            }
+        }
+
+        private void Html2pdf_textbox_chromepath_MouseHover(object sender, EventArgs e)
+        {
+            MainToolsTip.SetToolTip(this.html2pdf_textbox_chromepath, this.html2pdf_textbox_chromepath.Text);
         }
     }
 }

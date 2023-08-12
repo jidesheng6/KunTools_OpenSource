@@ -119,6 +119,15 @@
             this.MergeWordFile = new System.Windows.Forms.Button();
             this.SelectMergeWordFiles = new System.Windows.Forms.Button();
             this.MergeWordFileList = new System.Windows.Forms.ListView();
+            this.TabPage_31 = new System.Windows.Forms.TabPage();
+            this.SplitWordFileList_MoveDown = new System.Windows.Forms.Button();
+            this.SplitWordFileList_MoveUp = new System.Windows.Forms.Button();
+            this.splitword_clear = new System.Windows.Forms.Button();
+            this.splitword_remove = new System.Windows.Forms.Button();
+            this.StartSplitWordStatusText = new System.Windows.Forms.Label();
+            this.StartSplitWord = new System.Windows.Forms.Button();
+            this.SelectSplitWordFiles = new System.Windows.Forms.Button();
+            this.SplitWordFileList = new System.Windows.Forms.ListView();
             this.TabPage_06 = new System.Windows.Forms.TabPage();
             this.MergePdfFileView_MoveDown = new System.Windows.Forms.Button();
             this.MergePdfFileView_MoveUp = new System.Windows.Forms.Button();
@@ -228,6 +237,7 @@
             this.ConvertImageList = new System.Windows.Forms.ComboBox();
             this.DocumentsListView = new System.Windows.Forms.ListView();
             this.TabPage_27 = new System.Windows.Forms.TabPage();
+            this.label65 = new System.Windows.Forms.Label();
             this.CoverImageDpi = new System.Windows.Forms.TextBox();
             this.label64 = new System.Windows.Forms.Label();
             this.SetWord2EpubCoverImage = new System.Windows.Forms.Button();
@@ -288,6 +298,28 @@
             this.SelectConvertImage2PDF = new System.Windows.Forms.Button();
             this.ConvertImage2PDFFileList = new System.Windows.Forms.ListView();
             this.TabPage_30 = new System.Windows.Forms.TabPage();
+            this.label74 = new System.Windows.Forms.Label();
+            this.groupBox31 = new System.Windows.Forms.GroupBox();
+            this.html2pdf_button_set_chrome_path = new System.Windows.Forms.Button();
+            this.linkLabel3 = new System.Windows.Forms.LinkLabel();
+            this.html2pdf_textbox_chromepath = new System.Windows.Forms.TextBox();
+            this.label73 = new System.Windows.Forms.Label();
+            this.groupBox30 = new System.Windows.Forms.GroupBox();
+            this.html2pdf_textbox_margin_bottom = new System.Windows.Forms.TextBox();
+            this.html2pdf_textbox_margin_top = new System.Windows.Forms.TextBox();
+            this.html2pdf_textbox_margin_right = new System.Windows.Forms.TextBox();
+            this.html2pdf_textbox_margin_left = new System.Windows.Forms.TextBox();
+            this.label72 = new System.Windows.Forms.Label();
+            this.label71 = new System.Windows.Forms.Label();
+            this.label70 = new System.Windows.Forms.Label();
+            this.label69 = new System.Windows.Forms.Label();
+            this.groupBox29 = new System.Windows.Forms.GroupBox();
+            this.html2pdf_combox_pagedirect = new System.Windows.Forms.ComboBox();
+            this.html2pdf_combox_pagesize = new System.Windows.Forms.ComboBox();
+            this.html2pdf_checkbox_usecss = new System.Windows.Forms.CheckBox();
+            this.label68 = new System.Windows.Forms.Label();
+            this.label67 = new System.Windows.Forms.Label();
+            this.label66 = new System.Windows.Forms.Label();
             this.HTML2PDFFileList_MoveDown = new System.Windows.Forms.Button();
             this.HTML2PDFFileList_MoveUp = new System.Windows.Forms.Button();
             this.html2pdf_clear = new System.Windows.Forms.Button();
@@ -524,7 +556,6 @@
             this.MainFormError = new System.Windows.Forms.ErrorProvider(this.components);
             this.MainToolsTip = new System.Windows.Forms.ToolTip(this.components);
             this.TabPageIcoList = new System.Windows.Forms.ImageList(this.components);
-            this.label65 = new System.Windows.Forms.Label();
             this.MainTabPage.SuspendLayout();
             this.TabPage_01.SuspendLayout();
             this.TabPage_02.SuspendLayout();
@@ -533,6 +564,7 @@
             this.TabPage_20.SuspendLayout();
             this.TabPage_21.SuspendLayout();
             this.TabPage_14.SuspendLayout();
+            this.TabPage_31.SuspendLayout();
             this.TabPage_06.SuspendLayout();
             this.TabPage_17.SuspendLayout();
             this.TabPage_18.SuspendLayout();
@@ -550,6 +582,9 @@
             this.groupBox19.SuspendLayout();
             this.groupBox20.SuspendLayout();
             this.TabPage_30.SuspendLayout();
+            this.groupBox31.SuspendLayout();
+            this.groupBox30.SuspendLayout();
+            this.groupBox29.SuspendLayout();
             this.TabPage_24.SuspendLayout();
             this.groupBox21.SuspendLayout();
             this.TabPage_25.SuspendLayout();
@@ -602,6 +637,7 @@
             this.MainTabPage.Controls.Add(this.TabPage_20);
             this.MainTabPage.Controls.Add(this.TabPage_21);
             this.MainTabPage.Controls.Add(this.TabPage_14);
+            this.MainTabPage.Controls.Add(this.TabPage_31);
             this.MainTabPage.Controls.Add(this.TabPage_06);
             this.MainTabPage.Controls.Add(this.TabPage_17);
             this.MainTabPage.Controls.Add(this.TabPage_18);
@@ -630,7 +666,7 @@
             this.MainTabPage.Multiline = true;
             this.MainTabPage.Name = "MainTabPage";
             this.MainTabPage.SelectedIndex = 0;
-            this.MainTabPage.Size = new System.Drawing.Size(990, 671);
+            this.MainTabPage.Size = new System.Drawing.Size(990, 704);
             this.MainTabPage.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.MainTabPage.TabIndex = 0;
             this.MainTabPage.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.MainTabPage_DrawItem);
@@ -655,7 +691,7 @@
             this.TabPage_01.Location = new System.Drawing.Point(4, 100);
             this.TabPage_01.Name = "TabPage_01";
             this.TabPage_01.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage_01.Size = new System.Drawing.Size(982, 567);
+            this.TabPage_01.Size = new System.Drawing.Size(982, 600);
             this.TabPage_01.TabIndex = 0;
             this.TabPage_01.Text = "WORD转PDF";
             this.TabPage_01.UseVisualStyleBackColor = true;
@@ -812,7 +848,7 @@
             this.TabPage_02.Location = new System.Drawing.Point(4, 100);
             this.TabPage_02.Name = "TabPage_02";
             this.TabPage_02.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage_02.Size = new System.Drawing.Size(982, 567);
+            this.TabPage_02.Size = new System.Drawing.Size(982, 600);
             this.TabPage_02.TabIndex = 1;
             this.TabPage_02.Text = "PDF转WORD";
             this.TabPage_02.UseVisualStyleBackColor = true;
@@ -964,7 +1000,7 @@
             this.TabPage_03.Controls.Add(this.ExcelFileListView);
             this.TabPage_03.Location = new System.Drawing.Point(4, 100);
             this.TabPage_03.Name = "TabPage_03";
-            this.TabPage_03.Size = new System.Drawing.Size(982, 567);
+            this.TabPage_03.Size = new System.Drawing.Size(982, 600);
             this.TabPage_03.TabIndex = 2;
             this.TabPage_03.Text = "EXCEL转PDF";
             this.TabPage_03.UseVisualStyleBackColor = true;
@@ -1069,7 +1105,7 @@
             this.TabPage_07.Controls.Add(this.PDF2ExcelFileView);
             this.TabPage_07.Location = new System.Drawing.Point(4, 100);
             this.TabPage_07.Name = "TabPage_07";
-            this.TabPage_07.Size = new System.Drawing.Size(982, 567);
+            this.TabPage_07.Size = new System.Drawing.Size(982, 600);
             this.TabPage_07.TabIndex = 6;
             this.TabPage_07.Text = "PDF转EXCEL";
             this.TabPage_07.UseVisualStyleBackColor = true;
@@ -1181,7 +1217,7 @@
             this.TabPage_20.Location = new System.Drawing.Point(4, 100);
             this.TabPage_20.Name = "TabPage_20";
             this.TabPage_20.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage_20.Size = new System.Drawing.Size(982, 567);
+            this.TabPage_20.Size = new System.Drawing.Size(982, 600);
             this.TabPage_20.TabIndex = 19;
             this.TabPage_20.Text = "PPT转PDF";
             this.TabPage_20.UseVisualStyleBackColor = true;
@@ -1341,7 +1377,7 @@
             this.TabPage_21.Controls.Add(this.PDF2PPTFileList);
             this.TabPage_21.Location = new System.Drawing.Point(4, 100);
             this.TabPage_21.Name = "TabPage_21";
-            this.TabPage_21.Size = new System.Drawing.Size(982, 567);
+            this.TabPage_21.Size = new System.Drawing.Size(982, 600);
             this.TabPage_21.TabIndex = 20;
             this.TabPage_21.Text = "PDF转PPT";
             this.TabPage_21.UseVisualStyleBackColor = true;
@@ -1468,7 +1504,7 @@
             this.TabPage_14.Location = new System.Drawing.Point(4, 100);
             this.TabPage_14.Name = "TabPage_14";
             this.TabPage_14.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage_14.Size = new System.Drawing.Size(982, 567);
+            this.TabPage_14.Size = new System.Drawing.Size(982, 600);
             this.TabPage_14.TabIndex = 13;
             this.TabPage_14.Text = "合并WORD";
             this.TabPage_14.UseVisualStyleBackColor = true;
@@ -1560,6 +1596,100 @@
             this.MergeWordFileList.TabIndex = 0;
             this.MergeWordFileList.UseCompatibleStateImageBehavior = false;
             // 
+            // TabPage_31
+            // 
+            this.TabPage_31.Controls.Add(this.SplitWordFileList_MoveDown);
+            this.TabPage_31.Controls.Add(this.SplitWordFileList_MoveUp);
+            this.TabPage_31.Controls.Add(this.splitword_clear);
+            this.TabPage_31.Controls.Add(this.splitword_remove);
+            this.TabPage_31.Controls.Add(this.StartSplitWordStatusText);
+            this.TabPage_31.Controls.Add(this.StartSplitWord);
+            this.TabPage_31.Controls.Add(this.SelectSplitWordFiles);
+            this.TabPage_31.Controls.Add(this.SplitWordFileList);
+            this.TabPage_31.Location = new System.Drawing.Point(4, 100);
+            this.TabPage_31.Name = "TabPage_31";
+            this.TabPage_31.Size = new System.Drawing.Size(982, 600);
+            this.TabPage_31.TabIndex = 30;
+            this.TabPage_31.Text = "拆分WORD";
+            this.TabPage_31.UseVisualStyleBackColor = true;
+            // 
+            // SplitWordFileList_MoveDown
+            // 
+            this.SplitWordFileList_MoveDown.Location = new System.Drawing.Point(933, 321);
+            this.SplitWordFileList_MoveDown.Name = "SplitWordFileList_MoveDown";
+            this.SplitWordFileList_MoveDown.Size = new System.Drawing.Size(34, 66);
+            this.SplitWordFileList_MoveDown.TabIndex = 18;
+            this.SplitWordFileList_MoveDown.Text = "▽";
+            this.SplitWordFileList_MoveDown.UseVisualStyleBackColor = true;
+            // 
+            // SplitWordFileList_MoveUp
+            // 
+            this.SplitWordFileList_MoveUp.Location = new System.Drawing.Point(933, 6);
+            this.SplitWordFileList_MoveUp.Name = "SplitWordFileList_MoveUp";
+            this.SplitWordFileList_MoveUp.Size = new System.Drawing.Size(34, 66);
+            this.SplitWordFileList_MoveUp.TabIndex = 17;
+            this.SplitWordFileList_MoveUp.Text = "△";
+            this.SplitWordFileList_MoveUp.UseVisualStyleBackColor = true;
+            // 
+            // splitword_clear
+            // 
+            this.splitword_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            this.splitword_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.splitword_clear.Location = new System.Drawing.Point(933, 230);
+            this.splitword_clear.Name = "splitword_clear";
+            this.splitword_clear.Size = new System.Drawing.Size(34, 85);
+            this.splitword_clear.TabIndex = 20;
+            this.splitword_clear.UseVisualStyleBackColor = true;
+            // 
+            // splitword_remove
+            // 
+            this.splitword_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            this.splitword_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.splitword_remove.Location = new System.Drawing.Point(933, 78);
+            this.splitword_remove.Name = "splitword_remove";
+            this.splitword_remove.Size = new System.Drawing.Size(34, 85);
+            this.splitword_remove.TabIndex = 19;
+            this.splitword_remove.UseVisualStyleBackColor = true;
+            // 
+            // StartSplitWordStatusText
+            // 
+            this.StartSplitWordStatusText.AutoSize = true;
+            this.StartSplitWordStatusText.ForeColor = System.Drawing.Color.ForestGreen;
+            this.StartSplitWordStatusText.Location = new System.Drawing.Point(237, 478);
+            this.StartSplitWordStatusText.Name = "StartSplitWordStatusText";
+            this.StartSplitWordStatusText.Size = new System.Drawing.Size(143, 18);
+            this.StartSplitWordStatusText.TabIndex = 16;
+            this.StartSplitWordStatusText.Text = "正在处理X个文件";
+            // 
+            // StartSplitWord
+            // 
+            this.StartSplitWord.Location = new System.Drawing.Point(748, 461);
+            this.StartSplitWord.Name = "StartSplitWord";
+            this.StartSplitWord.Size = new System.Drawing.Size(221, 55);
+            this.StartSplitWord.TabIndex = 15;
+            this.StartSplitWord.Text = "开始处理";
+            this.StartSplitWord.UseVisualStyleBackColor = true;
+            this.StartSplitWord.Click += new System.EventHandler(this.StartSplitWord_Click);
+            // 
+            // SelectSplitWordFiles
+            // 
+            this.SelectSplitWordFiles.Location = new System.Drawing.Point(8, 461);
+            this.SelectSplitWordFiles.Name = "SelectSplitWordFiles";
+            this.SelectSplitWordFiles.Size = new System.Drawing.Size(221, 55);
+            this.SelectSplitWordFiles.TabIndex = 14;
+            this.SelectSplitWordFiles.Text = "选择文件";
+            this.SelectSplitWordFiles.UseVisualStyleBackColor = true;
+            this.SelectSplitWordFiles.Click += new System.EventHandler(this.SelectSplitWordFiles_Click);
+            // 
+            // SplitWordFileList
+            // 
+            this.SplitWordFileList.HideSelection = false;
+            this.SplitWordFileList.Location = new System.Drawing.Point(6, 6);
+            this.SplitWordFileList.Name = "SplitWordFileList";
+            this.SplitWordFileList.Size = new System.Drawing.Size(921, 381);
+            this.SplitWordFileList.TabIndex = 13;
+            this.SplitWordFileList.UseCompatibleStateImageBehavior = false;
+            // 
             // TabPage_06
             // 
             this.TabPage_06.Controls.Add(this.MergePdfFileView_MoveDown);
@@ -1576,7 +1706,7 @@
             this.TabPage_06.Controls.Add(this.MergePdfFileView);
             this.TabPage_06.Location = new System.Drawing.Point(4, 100);
             this.TabPage_06.Name = "TabPage_06";
-            this.TabPage_06.Size = new System.Drawing.Size(982, 567);
+            this.TabPage_06.Size = new System.Drawing.Size(982, 600);
             this.TabPage_06.TabIndex = 5;
             this.TabPage_06.Text = "合并PDF";
             this.TabPage_06.UseVisualStyleBackColor = true;
@@ -1708,7 +1838,7 @@
             this.TabPage_17.Location = new System.Drawing.Point(4, 100);
             this.TabPage_17.Name = "TabPage_17";
             this.TabPage_17.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage_17.Size = new System.Drawing.Size(982, 567);
+            this.TabPage_17.Size = new System.Drawing.Size(982, 600);
             this.TabPage_17.TabIndex = 16;
             this.TabPage_17.Text = "拆分PDF";
             this.TabPage_17.UseVisualStyleBackColor = true;
@@ -1804,7 +1934,7 @@
             this.TabPage_18.Controls.Add(this.PdfWaterMarkFileList);
             this.TabPage_18.Location = new System.Drawing.Point(4, 100);
             this.TabPage_18.Name = "TabPage_18";
-            this.TabPage_18.Size = new System.Drawing.Size(982, 567);
+            this.TabPage_18.Size = new System.Drawing.Size(982, 600);
             this.TabPage_18.TabIndex = 17;
             this.TabPage_18.Text = "添加PDF水印";
             this.TabPage_18.UseVisualStyleBackColor = true;
@@ -2111,7 +2241,7 @@
             this.TabPage_19.Controls.Add(this.RemovePdfWaterMarkFileList);
             this.TabPage_19.Location = new System.Drawing.Point(4, 100);
             this.TabPage_19.Name = "TabPage_19";
-            this.TabPage_19.Size = new System.Drawing.Size(982, 567);
+            this.TabPage_19.Size = new System.Drawing.Size(982, 600);
             this.TabPage_19.TabIndex = 18;
             this.TabPage_19.Text = "移除PDF水印";
             this.TabPage_19.UseVisualStyleBackColor = true;
@@ -2207,7 +2337,7 @@
             this.TabPage_22.Controls.Add(this.ConvertPdfComplianceFileList);
             this.TabPage_22.Location = new System.Drawing.Point(4, 100);
             this.TabPage_22.Name = "TabPage_22";
-            this.TabPage_22.Size = new System.Drawing.Size(982, 567);
+            this.TabPage_22.Size = new System.Drawing.Size(982, 600);
             this.TabPage_22.TabIndex = 21;
             this.TabPage_22.Text = "PDF版本转换";
             this.TabPage_22.UseVisualStyleBackColor = true;
@@ -2318,7 +2448,7 @@
             this.TabPage_15.Controls.Add(this.Word2ExcelFileList);
             this.TabPage_15.Location = new System.Drawing.Point(4, 100);
             this.TabPage_15.Name = "TabPage_15";
-            this.TabPage_15.Size = new System.Drawing.Size(982, 567);
+            this.TabPage_15.Size = new System.Drawing.Size(982, 600);
             this.TabPage_15.TabIndex = 14;
             this.TabPage_15.Text = "WORD转EXCEL";
             this.TabPage_15.UseVisualStyleBackColor = true;
@@ -2413,7 +2543,7 @@
             this.TabPage_16.Controls.Add(this.Excel2WordFileList);
             this.TabPage_16.Location = new System.Drawing.Point(4, 100);
             this.TabPage_16.Name = "TabPage_16";
-            this.TabPage_16.Size = new System.Drawing.Size(982, 567);
+            this.TabPage_16.Size = new System.Drawing.Size(982, 600);
             this.TabPage_16.TabIndex = 15;
             this.TabPage_16.Text = "EXCEL转WORD";
             this.TabPage_16.UseVisualStyleBackColor = true;
@@ -2524,7 +2654,7 @@
             this.TabPage_04.Controls.Add(this.DocumentsListView);
             this.TabPage_04.Location = new System.Drawing.Point(4, 100);
             this.TabPage_04.Name = "TabPage_04";
-            this.TabPage_04.Size = new System.Drawing.Size(982, 567);
+            this.TabPage_04.Size = new System.Drawing.Size(982, 600);
             this.TabPage_04.TabIndex = 3;
             this.TabPage_04.Text = "WORD/PDF/EXCEL转图片";
             this.TabPage_04.UseVisualStyleBackColor = true;
@@ -2692,10 +2822,20 @@
             this.TabPage_27.Controls.Add(this.Word2EPUBFileList);
             this.TabPage_27.Location = new System.Drawing.Point(4, 100);
             this.TabPage_27.Name = "TabPage_27";
-            this.TabPage_27.Size = new System.Drawing.Size(982, 567);
+            this.TabPage_27.Size = new System.Drawing.Size(982, 600);
             this.TabPage_27.TabIndex = 26;
             this.TabPage_27.Text = "WORD转EPUB";
             this.TabPage_27.UseVisualStyleBackColor = true;
+            // 
+            // label65
+            // 
+            this.label65.AutoSize = true;
+            this.label65.ForeColor = System.Drawing.Color.Red;
+            this.label65.Location = new System.Drawing.Point(383, 461);
+            this.label65.Name = "label65";
+            this.label65.Size = new System.Drawing.Size(359, 54);
+            this.label65.TabIndex = 24;
+            this.label65.Text = "1、不选择封面图片，将会用第一页作为封面\r\n\r\n2、分辨率不填默认为100";
             // 
             // CoverImageDpi
             // 
@@ -2848,7 +2988,7 @@
             this.TabPage_28.Controls.Add(this.EPUB2WORDFileList);
             this.TabPage_28.Location = new System.Drawing.Point(4, 100);
             this.TabPage_28.Name = "TabPage_28";
-            this.TabPage_28.Size = new System.Drawing.Size(982, 567);
+            this.TabPage_28.Size = new System.Drawing.Size(982, 600);
             this.TabPage_28.TabIndex = 27;
             this.TabPage_28.Text = "EPUB转WORD";
             this.TabPage_28.UseVisualStyleBackColor = true;
@@ -2953,7 +3093,7 @@
             this.TabPage_29.Controls.Add(this.EPUB2PDFFileList);
             this.TabPage_29.Location = new System.Drawing.Point(4, 100);
             this.TabPage_29.Name = "TabPage_29";
-            this.TabPage_29.Size = new System.Drawing.Size(982, 567);
+            this.TabPage_29.Size = new System.Drawing.Size(982, 600);
             this.TabPage_29.TabIndex = 28;
             this.TabPage_29.Text = "EPUB转PDF";
             this.TabPage_29.UseVisualStyleBackColor = true;
@@ -3058,7 +3198,7 @@
             this.TabPage_23.Controls.Add(this.ConvertImage2PDFFileList);
             this.TabPage_23.Location = new System.Drawing.Point(4, 100);
             this.TabPage_23.Name = "TabPage_23";
-            this.TabPage_23.Size = new System.Drawing.Size(982, 567);
+            this.TabPage_23.Size = new System.Drawing.Size(982, 600);
             this.TabPage_23.TabIndex = 22;
             this.TabPage_23.Text = "图片转PDF";
             this.TabPage_23.UseVisualStyleBackColor = true;
@@ -3289,6 +3429,11 @@
             // 
             // TabPage_30
             // 
+            this.TabPage_30.Controls.Add(this.label74);
+            this.TabPage_30.Controls.Add(this.groupBox31);
+            this.TabPage_30.Controls.Add(this.groupBox30);
+            this.TabPage_30.Controls.Add(this.groupBox29);
+            this.TabPage_30.Controls.Add(this.label66);
             this.TabPage_30.Controls.Add(this.HTML2PDFFileList_MoveDown);
             this.TabPage_30.Controls.Add(this.HTML2PDFFileList_MoveUp);
             this.TabPage_30.Controls.Add(this.html2pdf_clear);
@@ -3299,25 +3444,240 @@
             this.TabPage_30.Controls.Add(this.HTML2PDFFileList);
             this.TabPage_30.Location = new System.Drawing.Point(4, 100);
             this.TabPage_30.Name = "TabPage_30";
-            this.TabPage_30.Size = new System.Drawing.Size(982, 567);
+            this.TabPage_30.Size = new System.Drawing.Size(982, 600);
             this.TabPage_30.TabIndex = 29;
             this.TabPage_30.Text = "HTML转PDF";
             this.TabPage_30.UseVisualStyleBackColor = true;
             // 
+            // label74
+            // 
+            this.label74.AutoSize = true;
+            this.label74.ForeColor = System.Drawing.Color.DarkGreen;
+            this.label74.Location = new System.Drawing.Point(5, 284);
+            this.label74.Name = "label74";
+            this.label74.Size = new System.Drawing.Size(485, 18);
+            this.label74.TabIndex = 24;
+            this.label74.Text = "提示：如果使用内部CSS样式设置页面，页面设置将会不生效";
+            // 
+            // groupBox31
+            // 
+            this.groupBox31.Controls.Add(this.html2pdf_button_set_chrome_path);
+            this.groupBox31.Controls.Add(this.linkLabel3);
+            this.groupBox31.Controls.Add(this.html2pdf_textbox_chromepath);
+            this.groupBox31.Controls.Add(this.label73);
+            this.groupBox31.Location = new System.Drawing.Point(8, 323);
+            this.groupBox31.Name = "groupBox31";
+            this.groupBox31.Size = new System.Drawing.Size(358, 136);
+            this.groupBox31.TabIndex = 23;
+            this.groupBox31.TabStop = false;
+            this.groupBox31.Text = "设置chromium路径";
+            // 
+            // html2pdf_button_set_chrome_path
+            // 
+            this.html2pdf_button_set_chrome_path.Location = new System.Drawing.Point(231, 84);
+            this.html2pdf_button_set_chrome_path.Name = "html2pdf_button_set_chrome_path";
+            this.html2pdf_button_set_chrome_path.Size = new System.Drawing.Size(120, 32);
+            this.html2pdf_button_set_chrome_path.TabIndex = 24;
+            this.html2pdf_button_set_chrome_path.Text = "设置路径...";
+            this.html2pdf_button_set_chrome_path.UseVisualStyleBackColor = true;
+            this.html2pdf_button_set_chrome_path.Click += new System.EventHandler(this.Html2pdf_button_set_chrome_path_Click);
+            // 
+            // linkLabel3
+            // 
+            this.linkLabel3.AutoSize = true;
+            this.linkLabel3.Location = new System.Drawing.Point(12, 90);
+            this.linkLabel3.Name = "linkLabel3";
+            this.linkLabel3.Size = new System.Drawing.Size(188, 18);
+            this.linkLabel3.TabIndex = 2;
+            this.linkLabel3.TabStop = true;
+            this.linkLabel3.Text = "点击前往下载chromium";
+            this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel3_LinkClicked);
+            // 
+            // html2pdf_textbox_chromepath
+            // 
+            this.html2pdf_textbox_chromepath.Location = new System.Drawing.Point(58, 28);
+            this.html2pdf_textbox_chromepath.Name = "html2pdf_textbox_chromepath";
+            this.html2pdf_textbox_chromepath.ReadOnly = true;
+            this.html2pdf_textbox_chromepath.Size = new System.Drawing.Size(293, 28);
+            this.html2pdf_textbox_chromepath.TabIndex = 1;
+            this.html2pdf_textbox_chromepath.MouseHover += new System.EventHandler(this.Html2pdf_textbox_chromepath_MouseHover);
+            // 
+            // label73
+            // 
+            this.label73.AutoSize = true;
+            this.label73.Location = new System.Drawing.Point(7, 34);
+            this.label73.Name = "label73";
+            this.label73.Size = new System.Drawing.Size(44, 18);
+            this.label73.TabIndex = 0;
+            this.label73.Text = "路径";
+            // 
+            // groupBox30
+            // 
+            this.groupBox30.Controls.Add(this.html2pdf_textbox_margin_bottom);
+            this.groupBox30.Controls.Add(this.html2pdf_textbox_margin_top);
+            this.groupBox30.Controls.Add(this.html2pdf_textbox_margin_right);
+            this.groupBox30.Controls.Add(this.html2pdf_textbox_margin_left);
+            this.groupBox30.Controls.Add(this.label72);
+            this.groupBox30.Controls.Add(this.label71);
+            this.groupBox30.Controls.Add(this.label70);
+            this.groupBox30.Controls.Add(this.label69);
+            this.groupBox30.Location = new System.Drawing.Point(640, 323);
+            this.groupBox30.Name = "groupBox30";
+            this.groupBox30.Size = new System.Drawing.Size(334, 136);
+            this.groupBox30.TabIndex = 5;
+            this.groupBox30.TabStop = false;
+            this.groupBox30.Text = "页面边距设置";
+            // 
+            // html2pdf_textbox_margin_bottom
+            // 
+            this.html2pdf_textbox_margin_bottom.Location = new System.Drawing.Point(87, 93);
+            this.html2pdf_textbox_margin_bottom.Name = "html2pdf_textbox_margin_bottom";
+            this.html2pdf_textbox_margin_bottom.Size = new System.Drawing.Size(65, 28);
+            this.html2pdf_textbox_margin_bottom.TabIndex = 22;
+            this.html2pdf_textbox_margin_bottom.Text = "50";
+            // 
+            // html2pdf_textbox_margin_top
+            // 
+            this.html2pdf_textbox_margin_top.Location = new System.Drawing.Point(87, 38);
+            this.html2pdf_textbox_margin_top.Name = "html2pdf_textbox_margin_top";
+            this.html2pdf_textbox_margin_top.Size = new System.Drawing.Size(65, 28);
+            this.html2pdf_textbox_margin_top.TabIndex = 21;
+            this.html2pdf_textbox_margin_top.Text = "50";
+            // 
+            // html2pdf_textbox_margin_right
+            // 
+            this.html2pdf_textbox_margin_right.Location = new System.Drawing.Point(260, 90);
+            this.html2pdf_textbox_margin_right.Name = "html2pdf_textbox_margin_right";
+            this.html2pdf_textbox_margin_right.Size = new System.Drawing.Size(65, 28);
+            this.html2pdf_textbox_margin_right.TabIndex = 20;
+            this.html2pdf_textbox_margin_right.Text = "50";
+            // 
+            // html2pdf_textbox_margin_left
+            // 
+            this.html2pdf_textbox_margin_left.Location = new System.Drawing.Point(260, 32);
+            this.html2pdf_textbox_margin_left.Name = "html2pdf_textbox_margin_left";
+            this.html2pdf_textbox_margin_left.Size = new System.Drawing.Size(65, 28);
+            this.html2pdf_textbox_margin_left.TabIndex = 19;
+            this.html2pdf_textbox_margin_left.Text = "50";
+            // 
+            // label72
+            // 
+            this.label72.AutoSize = true;
+            this.label72.Location = new System.Drawing.Point(192, 96);
+            this.label72.Name = "label72";
+            this.label72.Size = new System.Drawing.Size(62, 18);
+            this.label72.TabIndex = 16;
+            this.label72.Text = "右边距";
+            // 
+            // label71
+            // 
+            this.label71.AutoSize = true;
+            this.label71.Location = new System.Drawing.Point(192, 38);
+            this.label71.Name = "label71";
+            this.label71.Size = new System.Drawing.Size(62, 18);
+            this.label71.TabIndex = 15;
+            this.label71.Text = "左边距";
+            // 
+            // label70
+            // 
+            this.label70.AutoSize = true;
+            this.label70.Location = new System.Drawing.Point(19, 100);
+            this.label70.Name = "label70";
+            this.label70.Size = new System.Drawing.Size(62, 18);
+            this.label70.TabIndex = 14;
+            this.label70.Text = "下边距";
+            // 
+            // label69
+            // 
+            this.label69.AutoSize = true;
+            this.label69.Location = new System.Drawing.Point(19, 44);
+            this.label69.Name = "label69";
+            this.label69.Size = new System.Drawing.Size(62, 18);
+            this.label69.TabIndex = 13;
+            this.label69.Text = "上边距";
+            // 
+            // groupBox29
+            // 
+            this.groupBox29.Controls.Add(this.html2pdf_combox_pagedirect);
+            this.groupBox29.Controls.Add(this.html2pdf_combox_pagesize);
+            this.groupBox29.Controls.Add(this.html2pdf_checkbox_usecss);
+            this.groupBox29.Controls.Add(this.label68);
+            this.groupBox29.Controls.Add(this.label67);
+            this.groupBox29.Location = new System.Drawing.Point(372, 323);
+            this.groupBox29.Name = "groupBox29";
+            this.groupBox29.Size = new System.Drawing.Size(262, 136);
+            this.groupBox29.TabIndex = 22;
+            this.groupBox29.TabStop = false;
+            this.groupBox29.Text = "生成PDF参数设置";
+            // 
+            // html2pdf_combox_pagedirect
+            // 
+            this.html2pdf_combox_pagedirect.FormattingEnabled = true;
+            this.html2pdf_combox_pagedirect.Location = new System.Drawing.Point(103, 62);
+            this.html2pdf_combox_pagedirect.Name = "html2pdf_combox_pagedirect";
+            this.html2pdf_combox_pagedirect.Size = new System.Drawing.Size(121, 26);
+            this.html2pdf_combox_pagedirect.TabIndex = 4;
+            // 
+            // html2pdf_combox_pagesize
+            // 
+            this.html2pdf_combox_pagesize.FormattingEnabled = true;
+            this.html2pdf_combox_pagesize.Location = new System.Drawing.Point(103, 28);
+            this.html2pdf_combox_pagesize.Name = "html2pdf_combox_pagesize";
+            this.html2pdf_combox_pagesize.Size = new System.Drawing.Size(121, 26);
+            this.html2pdf_combox_pagesize.TabIndex = 3;
+            // 
+            // html2pdf_checkbox_usecss
+            // 
+            this.html2pdf_checkbox_usecss.AutoSize = true;
+            this.html2pdf_checkbox_usecss.Location = new System.Drawing.Point(19, 100);
+            this.html2pdf_checkbox_usecss.Name = "html2pdf_checkbox_usecss";
+            this.html2pdf_checkbox_usecss.Size = new System.Drawing.Size(241, 22);
+            this.html2pdf_checkbox_usecss.TabIndex = 2;
+            this.html2pdf_checkbox_usecss.Text = "使用内部CSS样式设置页面";
+            this.html2pdf_checkbox_usecss.UseVisualStyleBackColor = true;
+            // 
+            // label68
+            // 
+            this.label68.AutoSize = true;
+            this.label68.Location = new System.Drawing.Point(16, 66);
+            this.label68.Name = "label68";
+            this.label68.Size = new System.Drawing.Size(80, 18);
+            this.label68.TabIndex = 1;
+            this.label68.Text = "页面方向";
+            // 
+            // label67
+            // 
+            this.label67.AutoSize = true;
+            this.label67.Location = new System.Drawing.Point(16, 32);
+            this.label67.Name = "label67";
+            this.label67.Size = new System.Drawing.Size(80, 18);
+            this.label67.TabIndex = 0;
+            this.label67.Text = "页面大小";
+            // 
+            // label66
+            // 
+            this.label66.AutoSize = true;
+            this.label66.ForeColor = System.Drawing.Color.Red;
+            this.label66.Location = new System.Drawing.Point(5, 248);
+            this.label66.Name = "label66";
+            this.label66.Size = new System.Drawing.Size(935, 18);
+            this.label66.TabIndex = 21;
+            this.label66.Text = "提示：本功能使用浏览器渲染方式进行转换，生成完毕后，需等待PDF生成，需要一定时间；且右键菜单部分功能失效";
+            // 
             // HTML2PDFFileList_MoveDown
             // 
-            this.HTML2PDFFileList_MoveDown.Location = new System.Drawing.Point(937, 343);
+            this.HTML2PDFFileList_MoveDown.Location = new System.Drawing.Point(933, 176);
             this.HTML2PDFFileList_MoveDown.Name = "HTML2PDFFileList_MoveDown";
-            this.HTML2PDFFileList_MoveDown.Size = new System.Drawing.Size(34, 66);
+            this.HTML2PDFFileList_MoveDown.Size = new System.Drawing.Size(34, 58);
             this.HTML2PDFFileList_MoveDown.TabIndex = 18;
             this.HTML2PDFFileList_MoveDown.Text = "▽";
             this.HTML2PDFFileList_MoveDown.UseVisualStyleBackColor = true;
             // 
             // HTML2PDFFileList_MoveUp
             // 
-            this.HTML2PDFFileList_MoveUp.Location = new System.Drawing.Point(937, 28);
+            this.HTML2PDFFileList_MoveUp.Location = new System.Drawing.Point(933, 4);
             this.HTML2PDFFileList_MoveUp.Name = "HTML2PDFFileList_MoveUp";
-            this.HTML2PDFFileList_MoveUp.Size = new System.Drawing.Size(34, 66);
+            this.HTML2PDFFileList_MoveUp.Size = new System.Drawing.Size(34, 58);
             this.HTML2PDFFileList_MoveUp.TabIndex = 17;
             this.HTML2PDFFileList_MoveUp.Text = "△";
             this.HTML2PDFFileList_MoveUp.UseVisualStyleBackColor = true;
@@ -3326,9 +3686,9 @@
             // 
             this.html2pdf_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
             this.html2pdf_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.html2pdf_clear.Location = new System.Drawing.Point(937, 252);
+            this.html2pdf_clear.Location = new System.Drawing.Point(933, 128);
             this.html2pdf_clear.Name = "html2pdf_clear";
-            this.html2pdf_clear.Size = new System.Drawing.Size(34, 85);
+            this.html2pdf_clear.Size = new System.Drawing.Size(34, 42);
             this.html2pdf_clear.TabIndex = 20;
             this.html2pdf_clear.UseVisualStyleBackColor = true;
             // 
@@ -3336,9 +3696,9 @@
             // 
             this.html2pdf_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
             this.html2pdf_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.html2pdf_remove.Location = new System.Drawing.Point(937, 100);
+            this.html2pdf_remove.Location = new System.Drawing.Point(933, 68);
             this.html2pdf_remove.Name = "html2pdf_remove";
-            this.html2pdf_remove.Size = new System.Drawing.Size(34, 85);
+            this.html2pdf_remove.Size = new System.Drawing.Size(34, 42);
             this.html2pdf_remove.TabIndex = 19;
             this.html2pdf_remove.UseVisualStyleBackColor = true;
             // 
@@ -3346,7 +3706,7 @@
             // 
             this.ConvertHtml2PdfStatusText.AutoSize = true;
             this.ConvertHtml2PdfStatusText.ForeColor = System.Drawing.Color.ForestGreen;
-            this.ConvertHtml2PdfStatusText.Location = new System.Drawing.Point(239, 501);
+            this.ConvertHtml2PdfStatusText.Location = new System.Drawing.Point(237, 496);
             this.ConvertHtml2PdfStatusText.Name = "ConvertHtml2PdfStatusText";
             this.ConvertHtml2PdfStatusText.Size = new System.Drawing.Size(143, 18);
             this.ConvertHtml2PdfStatusText.TabIndex = 16;
@@ -3354,7 +3714,7 @@
             // 
             // ConvertHtml2Pdf
             // 
-            this.ConvertHtml2Pdf.Location = new System.Drawing.Point(752, 483);
+            this.ConvertHtml2Pdf.Location = new System.Drawing.Point(748, 480);
             this.ConvertHtml2Pdf.Name = "ConvertHtml2Pdf";
             this.ConvertHtml2Pdf.Size = new System.Drawing.Size(221, 55);
             this.ConvertHtml2Pdf.TabIndex = 15;
@@ -3364,7 +3724,7 @@
             // 
             // SelectHtml2PDFFiles
             // 
-            this.SelectHtml2PDFFiles.Location = new System.Drawing.Point(12, 483);
+            this.SelectHtml2PDFFiles.Location = new System.Drawing.Point(8, 480);
             this.SelectHtml2PDFFiles.Name = "SelectHtml2PDFFiles";
             this.SelectHtml2PDFFiles.Size = new System.Drawing.Size(221, 55);
             this.SelectHtml2PDFFiles.TabIndex = 14;
@@ -3375,9 +3735,9 @@
             // HTML2PDFFileList
             // 
             this.HTML2PDFFileList.HideSelection = false;
-            this.HTML2PDFFileList.Location = new System.Drawing.Point(10, 28);
+            this.HTML2PDFFileList.Location = new System.Drawing.Point(6, 6);
             this.HTML2PDFFileList.Name = "HTML2PDFFileList";
-            this.HTML2PDFFileList.Size = new System.Drawing.Size(921, 381);
+            this.HTML2PDFFileList.Size = new System.Drawing.Size(921, 228);
             this.HTML2PDFFileList.TabIndex = 13;
             this.HTML2PDFFileList.UseCompatibleStateImageBehavior = false;
             // 
@@ -3394,7 +3754,7 @@
             this.TabPage_24.Controls.Add(this.CompressPdfFileList);
             this.TabPage_24.Location = new System.Drawing.Point(4, 100);
             this.TabPage_24.Name = "TabPage_24";
-            this.TabPage_24.Size = new System.Drawing.Size(982, 567);
+            this.TabPage_24.Size = new System.Drawing.Size(982, 600);
             this.TabPage_24.TabIndex = 23;
             this.TabPage_24.Text = "压缩PDF";
             this.TabPage_24.UseVisualStyleBackColor = true;
@@ -3646,7 +4006,7 @@
             this.TabPage_25.Controls.Add(this.CompressImageFileList);
             this.TabPage_25.Location = new System.Drawing.Point(4, 100);
             this.TabPage_25.Name = "TabPage_25";
-            this.TabPage_25.Size = new System.Drawing.Size(982, 567);
+            this.TabPage_25.Size = new System.Drawing.Size(982, 600);
             this.TabPage_25.TabIndex = 24;
             this.TabPage_25.Text = "压缩图片";
             this.TabPage_25.UseVisualStyleBackColor = true;
@@ -3946,7 +4306,7 @@
             this.TabPage_10.Controls.Add(this.ReplaceWordFileList);
             this.TabPage_10.Location = new System.Drawing.Point(4, 100);
             this.TabPage_10.Name = "TabPage_10";
-            this.TabPage_10.Size = new System.Drawing.Size(982, 567);
+            this.TabPage_10.Size = new System.Drawing.Size(982, 600);
             this.TabPage_10.TabIndex = 9;
             this.TabPage_10.Text = "WORD内容批量替换";
             this.TabPage_10.UseVisualStyleBackColor = true;
@@ -4124,7 +4484,7 @@
             this.TabPage_11.Controls.Add(this.ReplaceExcelFileView);
             this.TabPage_11.Location = new System.Drawing.Point(4, 100);
             this.TabPage_11.Name = "TabPage_11";
-            this.TabPage_11.Size = new System.Drawing.Size(982, 567);
+            this.TabPage_11.Size = new System.Drawing.Size(982, 600);
             this.TabPage_11.TabIndex = 10;
             this.TabPage_11.Text = "EXCEL内容批量替换";
             this.TabPage_11.UseVisualStyleBackColor = true;
@@ -4353,7 +4713,7 @@
             this.TabPage_12.Controls.Add(this.DecodeMatrixWordListView);
             this.TabPage_12.Location = new System.Drawing.Point(4, 100);
             this.TabPage_12.Name = "TabPage_12";
-            this.TabPage_12.Size = new System.Drawing.Size(982, 567);
+            this.TabPage_12.Size = new System.Drawing.Size(982, 600);
             this.TabPage_12.TabIndex = 11;
             this.TabPage_12.Text = "特殊二维码校验";
             this.TabPage_12.UseVisualStyleBackColor = true;
@@ -4474,7 +4834,7 @@
             this.TabPage_05.Controls.Add(this.groupBox1);
             this.TabPage_05.Location = new System.Drawing.Point(4, 100);
             this.TabPage_05.Name = "TabPage_05";
-            this.TabPage_05.Size = new System.Drawing.Size(982, 567);
+            this.TabPage_05.Size = new System.Drawing.Size(982, 600);
             this.TabPage_05.TabIndex = 4;
             this.TabPage_05.Text = "姓名横转竖列";
             this.TabPage_05.UseVisualStyleBackColor = true;
@@ -4671,7 +5031,7 @@
             this.TabPage_09.Controls.Add(this.groupBox5);
             this.TabPage_09.Location = new System.Drawing.Point(4, 100);
             this.TabPage_09.Name = "TabPage_09";
-            this.TabPage_09.Size = new System.Drawing.Size(982, 567);
+            this.TabPage_09.Size = new System.Drawing.Size(982, 600);
             this.TabPage_09.TabIndex = 8;
             this.TabPage_09.Text = "Twain扫描仪调试";
             this.TabPage_09.UseVisualStyleBackColor = true;
@@ -4681,7 +5041,7 @@
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MemoryStatusLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 536);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 569);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(982, 31);
             this.statusStrip1.TabIndex = 5;
@@ -5012,7 +5372,7 @@
             this.TabPage_13.Controls.Add(this.groupBox15);
             this.TabPage_13.Location = new System.Drawing.Point(4, 100);
             this.TabPage_13.Name = "TabPage_13";
-            this.TabPage_13.Size = new System.Drawing.Size(982, 567);
+            this.TabPage_13.Size = new System.Drawing.Size(982, 600);
             this.TabPage_13.TabIndex = 12;
             this.TabPage_13.Text = "其他功能";
             this.TabPage_13.UseVisualStyleBackColor = true;
@@ -5216,7 +5576,7 @@
             this.TabPage_26.Controls.Add(this.groupBox26);
             this.TabPage_26.Location = new System.Drawing.Point(4, 100);
             this.TabPage_26.Name = "TabPage_26";
-            this.TabPage_26.Size = new System.Drawing.Size(982, 567);
+            this.TabPage_26.Size = new System.Drawing.Size(982, 600);
             this.TabPage_26.TabIndex = 25;
             this.TabPage_26.Text = "系统工具";
             this.TabPage_26.UseVisualStyleBackColor = true;
@@ -5354,7 +5714,7 @@
             this.TabPage_08.Controls.Add(this.groupBox3);
             this.TabPage_08.Location = new System.Drawing.Point(4, 100);
             this.TabPage_08.Name = "TabPage_08";
-            this.TabPage_08.Size = new System.Drawing.Size(982, 567);
+            this.TabPage_08.Size = new System.Drawing.Size(982, 600);
             this.TabPage_08.TabIndex = 7;
             this.TabPage_08.Text = "关于软件";
             this.TabPage_08.UseVisualStyleBackColor = true;
@@ -5672,16 +6032,6 @@
             this.TabPageIcoList.Images.SetKeyName(13, "水印.png");
             this.TabPageIcoList.Images.SetKeyName(14, "姓名.png");
             // 
-            // label65
-            // 
-            this.label65.AutoSize = true;
-            this.label65.ForeColor = System.Drawing.Color.Red;
-            this.label65.Location = new System.Drawing.Point(383, 461);
-            this.label65.Name = "label65";
-            this.label65.Size = new System.Drawing.Size(359, 54);
-            this.label65.TabIndex = 24;
-            this.label65.Text = "1、不选择封面图片，将会用第一页作为封面\r\n\r\n2、分辨率不填默认为100";
-            // 
             // BodyForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
@@ -5689,7 +6039,7 @@
             this.AutoScroll = true;
             this.AutoSize = true;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
-            this.ClientSize = new System.Drawing.Size(990, 671);
+            this.ClientSize = new System.Drawing.Size(990, 704);
             this.Controls.Add(this.MainTabPage);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -5715,6 +6065,8 @@
             this.TabPage_21.PerformLayout();
             this.TabPage_14.ResumeLayout(false);
             this.TabPage_14.PerformLayout();
+            this.TabPage_31.ResumeLayout(false);
+            this.TabPage_31.PerformLayout();
             this.TabPage_06.ResumeLayout(false);
             this.TabPage_06.PerformLayout();
             this.TabPage_17.ResumeLayout(false);
@@ -5748,6 +6100,12 @@
             this.groupBox20.PerformLayout();
             this.TabPage_30.ResumeLayout(false);
             this.TabPage_30.PerformLayout();
+            this.groupBox31.ResumeLayout(false);
+            this.groupBox31.PerformLayout();
+            this.groupBox30.ResumeLayout(false);
+            this.groupBox30.PerformLayout();
+            this.groupBox29.ResumeLayout(false);
+            this.groupBox29.PerformLayout();
             this.TabPage_24.ResumeLayout(false);
             this.TabPage_24.PerformLayout();
             this.groupBox21.ResumeLayout(false);
@@ -6321,6 +6679,37 @@
         private System.Windows.Forms.Label label64;
         internal System.Windows.Forms.TextBox CoverImageDpi;
         private System.Windows.Forms.Label label65;
+        private System.Windows.Forms.TabPage TabPage_31;
+        private System.Windows.Forms.Button SplitWordFileList_MoveDown;
+        private System.Windows.Forms.Button SplitWordFileList_MoveUp;
+        private System.Windows.Forms.Button splitword_clear;
+        private System.Windows.Forms.Button splitword_remove;
+        private System.Windows.Forms.Label StartSplitWordStatusText;
+        private System.Windows.Forms.Button StartSplitWord;
+        private System.Windows.Forms.Button SelectSplitWordFiles;
+        internal System.Windows.Forms.ListView SplitWordFileList;
+        private System.Windows.Forms.Label label66;
+        private System.Windows.Forms.GroupBox groupBox29;
+        private System.Windows.Forms.Label label67;
+        private System.Windows.Forms.Label label68;
+        private System.Windows.Forms.GroupBox groupBox30;
+        private System.Windows.Forms.Label label72;
+        private System.Windows.Forms.Label label71;
+        private System.Windows.Forms.Label label70;
+        private System.Windows.Forms.Label label69;
+        private System.Windows.Forms.GroupBox groupBox31;
+        private System.Windows.Forms.Label label73;
+        private System.Windows.Forms.Button html2pdf_button_set_chrome_path;
+        private System.Windows.Forms.LinkLabel linkLabel3;
+        internal System.Windows.Forms.ComboBox html2pdf_combox_pagesize;
+        internal System.Windows.Forms.ComboBox html2pdf_combox_pagedirect;
+        internal System.Windows.Forms.CheckBox html2pdf_checkbox_usecss;
+        internal System.Windows.Forms.TextBox html2pdf_textbox_margin_top;
+        internal System.Windows.Forms.TextBox html2pdf_textbox_margin_bottom;
+        internal System.Windows.Forms.TextBox html2pdf_textbox_margin_left;
+        internal System.Windows.Forms.TextBox html2pdf_textbox_margin_right;
+        internal System.Windows.Forms.TextBox html2pdf_textbox_chromepath;
+        private System.Windows.Forms.Label label74;
     }
 }
 

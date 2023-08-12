@@ -14,6 +14,7 @@ using Microsoft.VisualBasic.Devices;
 using Microsoft.Win32;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using NAudio.Wave;
+using PuppeteerSharp.Media;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -26,7 +27,9 @@ using System.Resources;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+
 
 namespace DocumentTools
 {
@@ -758,6 +761,27 @@ namespace DocumentTools
                 ExportTempDocument.Pages.Add(TempPage);
                 ExportTempDocument.Save(SavedFileName);
                 PdfPageNumber++;
+            }
+        }
+
+        public static void SplitWord(string DocumentFileName, string SavedPath)
+        {
+            Aspose.Hook.HookManager.StartHook();
+
+            Aspose.Words.Document TempDocument = new Aspose.Words.Document(DocumentFileName);
+
+            Aspose.Words.Saving.OoxmlSaveOptions TempSaveOption = new Aspose.Words.Saving.OoxmlSaveOptions
+            {
+                Compliance = Aspose.Words.Saving.OoxmlCompliance.Iso29500_2008_Transitional,
+            };
+
+            for(int pageIndex=0;pageIndex<TempDocument.PageCount;pageIndex++)
+            {
+                string SavedFileName = $"{Path.Combine(SavedPath,Path.GetFileNameWithoutExtension(DocumentFileName))}_第{pageIndex+1}页.docx";
+                Aspose.Words.Document TempSplitDocument = TempDocument.ExtractPages(pageIndex, 1);
+                TempSplitDocument.CompatibilityOptions.OptimizeFor(Aspose.Words.Settings.MsWordVersion.Word2010);
+                TempSplitDocument.CompatibilityOptions.BalanceSingleByteDoubleByteWidth = true;
+                TempSplitDocument.Save(SavedFileName, TempSaveOption);
             }
         }
 
@@ -1544,38 +1568,84 @@ namespace DocumentTools
             TempLoadImage.Save(SaveFileName, TempIcoOption);
         }
 
-        /// <summary>
-        /// HTML转PDF，暂且搁置
-        /// </summary>
-        /// <param name="DocumentFileName"></param>
-        /// <param name="SavedFileName"></param>
-        public static void ConvertHtml2PDF(string DocumentFileName, string SavedFileName)
+
+/// <summary>
+/// html转PDF，浏览器渲染
+/// </summary>
+/// <param name="DocumentFileName"></param>
+/// <param name="SavedFileName"></param>
+/// <param name="ChromeDriverPath">chrome驱动路径</param>
+/// <param name="PdfPaperSize">纸张尺寸</param>
+/// <param name="isLand">是否横向</param>
+/// <param name="isUseCss">是否使用css尺寸设置</param>
+/// <param name="TopPx">上边距</param>
+/// <param name="LeftPx">左边距</param>
+/// <param name="BottomPx">下边距</param>
+/// <param name="RightPx">右边距</param>
+        public static async void ConvertHtml2PDFAsync(string DocumentFileName, string SavedFileName,string ChromeDriverPath,int PdfPaperSizeIndex,bool isLand,bool isUseCss,string TopPx, string LeftPx, string BottomPx, string RightPx)
         {
-            Aspose.Hook.HookManager.StartHook();
-            Aspose.Html.Configuration TempConfig= new Aspose.Html.Configuration();
-            Aspose.Html.Rendering.Pdf.PdfRenderingOptions TempPdfRenderOption = new Aspose.Html.Rendering.Pdf.PdfRenderingOptions();
-            TempPdfRenderOption.Css.MediaType = Aspose.Html.Rendering.MediaType.Screen;
-            TempPdfRenderOption.PageSetup.AdjustToWidestPage = true;
 
-            //using (Aspose.Html.HTMLDocument TempDocument = new Aspose.Html.HTMLDocument(DocumentFileName))
-            //{
-
-            //    using Aspose.Html.Rendering.Pdf.PdfDevice TempPdfDevice = new Aspose.Html.Rendering.Pdf.PdfDevice(TempPdfRenderOption, SavedFileName);
-            //    TempDocument.RenderTo(TempPdfDevice);
-            //};
-
-            INetworkService networkService = TempConfig.GetService<INetworkService>();
-
-            networkService.MessageHandlers.Insert(0, new TimeoutMessageHandler());
-
-            Aspose.Html.Saving.PdfSaveOptions TempOption = new Aspose.Html.Saving.PdfSaveOptions()
+            if(ChromeDriverPath!=string.Empty&&ChromeDriverPath!=null&&File.Exists(ChromeDriverPath))
             {
-                JpegQuality = 100,
-            };
+                PuppeteerSharp.LaunchOptions LanuachOption = new PuppeteerSharp.LaunchOptions
+                {
+                    Headless = true,
+                    IgnoreHTTPSErrors = true,
+                    ExecutablePath = ChromeDriverPath
+                };
 
-            TempOption.PageSetup.AdjustToWidestPage = true;
 
-            Aspose.Html.Converters.Converter.ConvertHTML(DocumentFileName, TempConfig, TempOption, SavedFileName);
+                PuppeteerSharp.PdfOptions TempPdfOption = new PuppeteerSharp.PdfOptions();
+
+
+                using PuppeteerSharp.IBrowser TempBroswer = await PuppeteerSharp.Puppeteer.LaunchAsync(LanuachOption);
+
+
+                using PuppeteerSharp.IPage TempPage = await TempBroswer.NewPageAsync();
+
+                await TempPage.GoToAsync(DocumentFileName);
+
+
+                //根据索引选择纸张大小
+                TempPdfOption.Format = PdfPaperSizeIndex switch
+                {
+                    0 => PuppeteerSharp.Media.PaperFormat.A0,
+                    1 => PuppeteerSharp.Media.PaperFormat.A1,
+                    2 => PuppeteerSharp.Media.PaperFormat.A2,
+                    3 => PuppeteerSharp.Media.PaperFormat.A3,
+                    4 => PuppeteerSharp.Media.PaperFormat.A4,
+                    5 => PuppeteerSharp.Media.PaperFormat.A5,
+                    6 => PuppeteerSharp.Media.PaperFormat.A6,
+                    7 => PuppeteerSharp.Media.PaperFormat.Ledger,
+                    8 => PuppeteerSharp.Media.PaperFormat.Legal,
+                    9 => PuppeteerSharp.Media.PaperFormat.Letter,
+                    10 => PuppeteerSharp.Media.PaperFormat.Tabloid,
+                    _ => PuppeteerSharp.Media.PaperFormat.A4,
+                };
+
+                TempPdfOption.DisplayHeaderFooter = false;
+                TempPdfOption.Landscape = isLand;
+
+                if (isUseCss)
+                {
+                    TempPdfOption.PreferCSSPageSize = true;
+                }
+                else
+                {
+                    TempPdfOption.PreferCSSPageSize = false;
+
+                    PuppeteerSharp.Media.MarginOptions TempMarginOption = new MarginOptions
+                    {
+                        Top = TopPx + "px",
+                        Left = LeftPx + "px",
+                        Bottom = BottomPx + "px",
+                        Right = RightPx + "px"
+                    };
+                }
+
+                await TempPage.PdfAsync(SavedFileName, TempPdfOption);
+            }
+
         }
 
         /// <summary>

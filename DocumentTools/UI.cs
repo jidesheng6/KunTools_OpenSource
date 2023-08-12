@@ -22,6 +22,7 @@ namespace DocumentTools
         Word2Excel,
         Excel2Word,
         SplitPdf,
+        SplitWord,
         AddWaterMarkPdf,
         RemovePdfWaterMark,
         PPT2PDF,
@@ -349,6 +350,11 @@ namespace DocumentTools
             AddFilesToListView("HTML文档", "*.html", BodyForm.MainForm.HTML2PDFFileList);
         }
 
+        public static void AddSplitWordFiles()
+        {
+            AddFilesToListView("WORD文档", "*.doc;*.docx", BodyForm.MainForm.SplitWordFileList);
+        }
+
         /// <summary>
         /// 转换文件通用方法
         /// </summary>
@@ -487,7 +493,7 @@ namespace DocumentTools
                                                    );
                                 break;
                             case ConvertFileType.Html2PDF:
-                                Util.ConvertHtml2PDF(ListViewFirstColumnText, ConvertedFileName);
+                                Util.ConvertHtml2PDFAsync(ListViewFirstColumnText, ConvertedFileName,BodyForm.MainForm.html2pdf_textbox_chromepath.Text,BodyForm.MainForm.html2pdf_combox_pagesize.SelectedIndex,bool.Parse(BodyForm.MainForm.html2pdf_combox_pagedirect.SelectedValue.ToString()),BodyForm.MainForm.html2pdf_checkbox_usecss.Checked,BodyForm.MainForm.html2pdf_textbox_margin_top.Text,BodyForm.MainForm.html2pdf_textbox_margin_left.Text,BodyForm.MainForm.html2pdf_textbox_margin_bottom.Text,BodyForm.MainForm.html2pdf_textbox_margin_right.Text);
                                 break;
                             case ConvertFileType.Word2Epub:
                                 int TempImageDpiValue = 100;
@@ -503,17 +509,23 @@ namespace DocumentTools
                             case ConvertFileType.Epub2Pdf:
                                 Util.ConvertEPUB2Pdf(ListViewFirstColumnText, ConvertedFileName);
                                 break;
+                            case ConvertFileType.SplitWord:
+                                Util.SplitWord(ListViewFirstColumnText, SelectSavePathstring);
+                                break;
                             default: break;
                         }
                         ListViewControl.Items[TempIndex].SubItems.Add(ConvertedFileName);
                         ListViewControl.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
 
-                        FileInfo ConverdFileInfo = new FileInfo(ConvertedFileName);
+                        if(File.Exists(ConvertedFileName))
+                        {
+                            FileInfo ConverdFileInfo = new FileInfo(ConvertedFileName);
 
-                        //获取转换后的文件大小
-                        ListViewControl.Items[TempIndex].SubItems.Add(Util.GetFileSizeDisplayString(ConverdFileInfo.Length));
-                        ListViewControl.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+                            //获取转换后的文件大小
+                            ListViewControl.Items[TempIndex].SubItems.Add(Util.GetFileSizeDisplayString(ConverdFileInfo.Length));
+                            ListViewControl.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
 
+                        }
 
                         ListViewControl.BeginInvoke(new Action(() =>
                         {
