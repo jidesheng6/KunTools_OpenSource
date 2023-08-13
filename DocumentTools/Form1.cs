@@ -221,6 +221,7 @@ namespace DocumentTools
             InitMoveItemButtonHandler();
             InitRemoveItemHandler();
             InitToolTipHandler();
+            InitConfigSettings();
             InitTabPageIcon();
             OutPutListViewIndex();
             this.AllowDrop = true;
