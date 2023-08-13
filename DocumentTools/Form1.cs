@@ -215,12 +215,12 @@ namespace DocumentTools
         private void BodyForm_Load(object sender, EventArgs e)
         {
             this.Text = $"坤_Tools【软件完全离线|更新请看关于软件|版本：{NowVersion}】";
-            InitConfigSettings();
             InitListView();
             InitComboxValue();
             InitMoveItemButtonHandler();
             InitRemoveItemHandler();
             InitToolTipHandler();
+            InitConfigSettings();
             InitTabPageIcon();
             OutPutListViewIndex();
             this.AllowDrop = true;
