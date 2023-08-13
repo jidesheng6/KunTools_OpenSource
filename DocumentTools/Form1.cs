@@ -42,7 +42,7 @@ namespace DocumentTools
         public string AddWaterMarkBackGroudImageFileName = string.Empty;
 
 
-        readonly string NowVersion = "23.8.12";
+        readonly string NowVersion = "23.8.12.1";
 
         #region 控件大小随窗体大小等比例缩放
 
@@ -215,9 +215,9 @@ namespace DocumentTools
         private void BodyForm_Load(object sender, EventArgs e)
         {
             this.Text = $"坤_Tools【软件完全离线|更新请看关于软件|版本：{NowVersion}】";
+            InitComboxValue();
             InitConfigSettings();
             InitListView();
-            InitComboxValue();
             InitMoveItemButtonHandler();
             InitRemoveItemHandler();
             InitToolTipHandler();
