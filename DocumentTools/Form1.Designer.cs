@@ -4901,14 +4901,18 @@
             // 
             // NameReplaceWord_Target
             // 
+            this.NameReplaceWord_Target.AcceptsReturn = true;
             this.NameReplaceWord_Target.Location = new System.Drawing.Point(486, 194);
+            this.NameReplaceWord_Target.Multiline = true;
             this.NameReplaceWord_Target.Name = "NameReplaceWord_Target";
             this.NameReplaceWord_Target.Size = new System.Drawing.Size(50, 28);
             this.NameReplaceWord_Target.TabIndex = 11;
             // 
             // NameReplaceWord_Search
             // 
+            this.NameReplaceWord_Search.AcceptsReturn = true;
             this.NameReplaceWord_Search.Location = new System.Drawing.Point(404, 193);
+            this.NameReplaceWord_Search.Multiline = true;
             this.NameReplaceWord_Search.Name = "NameReplaceWord_Search";
             this.NameReplaceWord_Search.Size = new System.Drawing.Size(44, 28);
             this.NameReplaceWord_Search.TabIndex = 10;
