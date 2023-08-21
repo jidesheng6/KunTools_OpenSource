@@ -377,6 +377,11 @@ namespace DocumentTools
                         string ListViewFirstColumnText = ListViewControl.Items[TempIndex].Text;
                         string FileNameWithOutExtension = Path.GetFileNameWithoutExtension(ListViewFirstColumnText);//不带后缀的文件名
                         DirectoryInfo directoryInfo = new DirectoryInfo(ListViewFirstColumnText);
+<<<<<<< HEAD
+=======
+
+                        Debug.WriteLine(directoryInfo.Parent);
+>>>>>>> 500f98b81164c9ab427663be75414fd3f5b50011
                         string ConvertedFileName = Path.Combine(SelectSavePathstring, FileNameWithOutExtension + ExtensionString);
                         StatusLabelControl.Text = $"正在处理第{TempIndex + 1}个文件";
                         //根据不同类型调用不同的函数
