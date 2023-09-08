@@ -411,7 +411,7 @@ namespace DocumentTools
                             case ConvertFileType.WordReplace:
                                 if (BodyForm.MainForm.WordReplaceFindTextBox.Text != string.Empty)
                                 {
-                                    Util.RelaceDocumentContent(ListViewFirstColumnText, ConvertedFileName, "WORD", BodyForm.MainForm.WordReplaceFindTextBox.Text, BodyForm.MainForm.WordReplaceTextBox.Text, BodyForm.MainForm.IgnoreFootContent.Checked, BodyForm.MainForm.IgnoreCase.Checked);
+                                    Util.RelaceDocumentContent(ListViewFirstColumnText, ConvertedFileName, "WORD", BodyForm.MainForm.WordReplaceFindTextBox.Text, BodyForm.MainForm.WordReplaceTextBox.Text, BodyForm.MainForm.IgnoreFootContent.Checked, BodyForm.MainForm.IgnoreCase.Checked,false,-1,-1,false,ReplaceWordFontSetting.FontName,ReplaceWordFontSetting.FontSize,BodyForm.MainForm.UseNewStyle.Checked);
                                 }
                                 break;
                             //批量替换Excel内容

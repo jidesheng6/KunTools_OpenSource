@@ -1,7 +1,9 @@
-﻿using Gma.System.MouseKeyHook;
+﻿using Aspose.Pdf.Operators;
+using Gma.System.MouseKeyHook;
 using NTwain;
 using NTwain.Data;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -13,6 +15,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -33,6 +36,7 @@ namespace DocumentTools
         private readonly List<Bitmap> TempScannedImageBmpList = new List<Bitmap>();
         private readonly IKeyboardEvents GlobalHook = Hook.GlobalEvents();//全局钩子事件
         private readonly ImageList TempImageList = new ImageList() { ImageSize = new Size(1, 25) };
+
         private string ListviewShowGridLines = "on";
         private string ShowTabPageIcon = "on";
         private string ChromeDriverPath = "";
@@ -42,7 +46,7 @@ namespace DocumentTools
         public string AddWaterMarkBackGroudImageFileName = string.Empty;
 
 
-        readonly string NowVersion = "23.8.12.1";
+        readonly string NowVersion = "23.9.7";
 
         #region 控件大小随窗体大小等比例缩放
 
@@ -106,6 +110,7 @@ namespace DocumentTools
             if(int.TryParse(ConfigurationManager.AppSettings["StartPageIndex"],out int StartIndex))
             {
                 MainTabPage.SelectedIndex = StartIndex;
+                menu_start_page_index_combox.SelectedIndex = StartIndex;
             }    
             
         }
@@ -119,12 +124,14 @@ namespace DocumentTools
             if (OpenTabPageHeight=="on")
             {
                 this.MainTabPage.DrawMode = TabDrawMode.OwnerDrawFixed;
+                menu_tabpage_heigh_light_combox.SelectedIndex = 0;
             }
             else
             {
                 this.MainTabPage.DrawMode = TabDrawMode.Normal;
+                menu_tabpage_heigh_light_combox.SelectedIndex = 1;
 
-                if(ShowTabPageIcon=="on")
+                if (ShowTabPageIcon=="on")
                 {
                     MainTabPage.ImageList = TabPageIcoList;
                 }
@@ -135,6 +142,8 @@ namespace DocumentTools
         private void SetConfirmDialogShow()
         {
             ShowOpenTargetDialog = ConfigurationManager.AppSettings["ShowOpenTargetDialog"];
+
+            menu_finshined_messbox_combox.SelectedIndex = ShowOpenTargetDialog == "on" ? 0 : 1;
         }
 
         private void SetTabPageVisable()
@@ -163,17 +172,21 @@ namespace DocumentTools
             if (int.TryParse(ListViewLineHeight, out int LineHeight) && LineHeight > 0 && LineHeight <= 256)
             {
                 TempImageList.ImageSize = new Size(1, LineHeight);
+                menu_listview_line_heigh_combox.SelectedIndex = LineHeight - 1;
             }
         }
 
         private void SetListViewShowGridLines()
         {
             ListviewShowGridLines = ConfigurationManager.AppSettings["ListViewShowGridLines"];
+            menu_listview_gridline_combox.SelectedIndex = ListviewShowGridLines == "on" ? 0 : 1;
         }
 
         private void SetTabPageShowIco()
         {
             ShowTabPageIcon = ConfigurationManager.AppSettings["ShowTabPageIco"];
+            menu_tabpage_icon_combox.SelectedIndex = ShowTabPageIcon == "on" ? 0 : 1;
+
         }
 
         private void SetChromeDriverPath()
@@ -221,7 +234,7 @@ namespace DocumentTools
             InitMoveItemButtonHandler();
             InitRemoveItemHandler();
             InitToolTipHandler();
-            InitConfigSettings();
+            //InitConfigSettings();
             InitTabPageIcon();
             OutPutListViewIndex();
             this.AllowDrop = true;
@@ -286,6 +299,12 @@ namespace DocumentTools
             this.html2pdf_textbox_margin_bottom.Validated += ValidedTextBoxContent;
             this.html2pdf_textbox_margin_right.Validating += ValidTextBoxContent;
             this.html2pdf_textbox_margin_right.Validated += ValidedTextBoxContent;
+
+            this.voteid.Validating += ValidTextBoxContent;
+            this.voteid.Validated += ValidedTextBoxContent;
+
+            this.voteindex.Validating += ValidTextBoxContent;
+            this.voteindex.Validated += ValidedTextBoxContent;
 
 
             this.DecodeDataMatrixView.MouseClick += (s1, s2) =>
@@ -474,6 +493,7 @@ namespace DocumentTools
             this.Image2PDFCombox.ValueMember = "RealValue";
 
             this.CompressPDF_ImageQuailty.DataSource = Enumerable.Range(0, 101).ToList();
+            this.CompressPDF_ImageQuailty.SelectedIndex = 80;
 
             DataTable CompressImageVersion = new DataTable();
             CompressImageVersion.Columns.Add("DisplayValue");
@@ -488,15 +508,18 @@ namespace DocumentTools
 
             this.CompressPDF_ImageResoution.DataSource = Enumerable.Range(0, 600).Where(x => x % 50 == 0).ToList();
 
+            this.CompressPDF_ImageResoution.SelectedIndex = 4;
+
             this.CompressJpegMode_Combox.DataSource = Enum.GetNames(typeof(Aspose.Imaging.FileFormats.Jpeg.JpegCompressionMode));
 
             this.CompressJpegColorMode_Combox.DataSource = Enum.GetNames(typeof(Aspose.Imaging.FileFormats.Jpeg.JpegCompressionColorMode));
             this.CompressJpegColorMode_Combox.SelectedIndex = 4;
 
             this.CompressJpegQuailty_Combox.DataSource = Enumerable.Range(1, 100).ToList();
-            this.CompressJpegQuailty_Combox.SelectedIndex = 99;
+            this.CompressJpegQuailty_Combox.SelectedIndex = 79;
 
             this.CompressPngLevel_Combox.DataSource = Enumerable.Range(0, 10).ToList();
+            this.CompressPngLevel_Combox.SelectedIndex = 3;
 
             this.CompressPngColorMode_Combox.DataSource = Enum.GetNames(typeof(Aspose.Imaging.FileFormats.Png.PngColorType));
             this.CompressPngColorMode_Combox.SelectedIndex = 1;
@@ -565,6 +588,26 @@ namespace DocumentTools
             this.html2pdf_combox_pagedirect.DisplayMember = "DisplayValue";
             this.html2pdf_combox_pagedirect.ValueMember = "RealValue";
 
+            foreach(TabPage tempPage in MainTabPage.TabPages)
+            {
+                this.menu_start_page_index_combox.Items.Add(MainTabPage.TabPages.IndexOf(tempPage));
+            }
+
+            List<string> On_Off_Source = new List<string> { "开启", "关闭" };
+
+            ArrayList TempHeightArray = new ArrayList();
+
+            Enumerable.Range(1, 256).ToList().ForEach(x =>
+            {
+                TempHeightArray.Add(x);
+            });
+
+
+            this.menu_tabpage_heigh_light_combox.Items.AddRange(On_Off_Source.ToArray());
+            this.menu_tabpage_icon_combox.Items.AddRange(On_Off_Source.ToArray());
+            this.menu_listview_gridline_combox.Items.AddRange(On_Off_Source.ToArray());
+            this.menu_finshined_messbox_combox.Items.AddRange(On_Off_Source.ToArray());
+            this.menu_listview_line_heigh_combox.Items.AddRange(TempHeightArray.ToArray());
 
 
 
@@ -572,6 +615,12 @@ namespace DocumentTools
             GetFormMembers(typeof(ComboBox)).ForEach(x =>
             {
                 ComboBox TempCombox = x as ComboBox;
+                TempCombox.DropDownStyle = ComboBoxStyle.DropDownList;
+            });
+
+            GetFormMembers(typeof(ToolStripComboBox)).ForEach(x =>
+            {
+                ToolStripComboBox TempCombox = x as ToolStripComboBox;
                 TempCombox.DropDownStyle = ComboBoxStyle.DropDownList;
             });
         }
@@ -1016,9 +1065,16 @@ namespace DocumentTools
                     {
                         TempPage.ImageIndex = 14;
                     }
+                    else if (TabPageCaption.StartsWith("MSS"))
+                    {
+                        TempPage.ImageIndex = 11;
+                    }
                 }
             });
         }
+
+
+
 
         private void ChooseDocButton_Click(object sender, EventArgs e)
         {
@@ -2165,18 +2221,7 @@ namespace DocumentTools
                 client.DefaultRequestHeaders.Add("User-Agent", UserAgentName);
                 string RemoteVersion = await client.GetStringAsync(CheckVersionUrl);
 
-                if (int.Parse(NowVersion.Replace(".", "")) < int.Parse(RemoteVersion.Replace(".", "")))
-                {
-                    MessageBox.Show($"当前版本为：{NowVersion}，最新版本为：{RemoteVersion}，建议及时更新", "检查更新", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                }
-                else if (int.Parse(NowVersion.Replace(".", "")) == int.Parse(RemoteVersion.Replace(".", "")))
-                {
-                    MessageBox.Show($"当前版本为最新版本：{NowVersion}", "检查更新", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                }
-                else if (int.Parse(NowVersion.Replace(".", "")) > int.Parse(RemoteVersion.Replace(".", "")))
-                {
-                    MessageBox.Show($"当前版本为预发布版本：{NowVersion}", "检查更新", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                }
+                MessageBox.Show($"{RemoteVersion} 当前使用的版本为: {NowVersion}", "检查更新", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
             catch (Exception)
             {
@@ -2450,38 +2495,55 @@ namespace DocumentTools
 
         private void RemoveShort_Click(object sender, EventArgs e)
         {
-            Util.RemoveShort();
-            ShortStatus.Text = "已移除";
-            ShortStatus.ForeColor = Color.Red;
-            if (AutoRestartExplorer.Checked)
+
+            try
             {
-                Process.GetProcesses().ToList().ForEach(p =>
+                Util.RemoveShort();
+                ShortStatus.Text = "已移除";
+                ShortStatus.ForeColor = Color.Red;
+                if (AutoRestartExplorer.Checked)
                 {
-                    if (p.ProcessName == "explorer")
+                    Process.GetProcesses().ToList().ForEach(p =>
                     {
-                        p.Kill();
-                    }
-                });
-                Process.Start("explorer.exe");
+                        if (p.ProcessName == "explorer")
+                        {
+                            p.Kill();
+                        }
+                    });
+                    Process.Start("explorer.exe");
+                }
             }
+            catch(Exception ex) 
+            {
+                MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         private void RestoreShort_Click(object sender, EventArgs e)
         {
-            Util.RestoreShort();
-            ShortStatus.Text = "已恢复";
-            ShortStatus.ForeColor = Color.Green;
-            if (AutoRestartExplorer.Checked)
+            try
             {
-                Process.GetProcesses().ToList().ForEach(p =>
+                Util.RestoreShort();
+                ShortStatus.Text = "已恢复";
+                ShortStatus.ForeColor = Color.Green;
+                if (AutoRestartExplorer.Checked)
                 {
-                    if (p.ProcessName == "explorer")
+                    Process.GetProcesses().ToList().ForEach(p =>
                     {
-                        p.Kill();
-                    }
-                });
-                Process.Start("explorer.exe");
+                        if (p.ProcessName == "explorer")
+                        {
+                            p.Kill();
+                        }
+                    });
+                    Process.Start("explorer.exe");
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         private void SelectHtml2PdfFiles_Click(object sender, EventArgs e)
@@ -2738,6 +2800,266 @@ namespace DocumentTools
         {
             MainToolsTip.SetToolTip(this.html2pdf_textbox_chromepath, this.html2pdf_textbox_chromepath.Text);
         }
+
+        private void SelectMss3_Click(object sender, EventArgs e)
+        {
+           string Mss3Path =  Util.ShwoSelectDialog(false, false, "MSS3文件", "*.mss3").FirstOrDefault();
+
+            if(Mss3Path!=string.Empty&&Mss3Path!=default&&Mss3Path!=null)
+            {
+                this.Mss3Path.Text = Mss3Path;
+            }
+        }
+
+        private void StartInsert_Click(object sender, EventArgs e)
+        {
+            Task.Run(() =>
+            {
+                try
+                {
+                    Util.InsertVotePicContent(this.Mss3Path.Text, VotePicture.ImageLocation,this.votestatustext,this.voteid.Text,this.votename.Text,this.voteindex.Text);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            });
+        }
+
+        private void SelectVotePic_Click(object sender, EventArgs e)
+        {
+            string VoteImagePath = Util.ShwoSelectDialog(false, false, "图片文件", "*.jpg;*.bmp;*.png;*.tif;*.tiff").FirstOrDefault();
+            if (VoteImagePath != string.Empty && VoteImagePath != default && VoteImagePath != null)
+            {
+                VotePicture.ImageLocation = VoteImagePath;
+            }
+        }
+
+        private void WordReplaceFontSeeting_Click(object sender, EventArgs e)
+        {
+            FontSelectDialog.ShowEffects = false;
+            FontSelectDialog.AllowScriptChange = false;
+            FontSelectDialog.AllowSimulations = false;
+            FontSelectDialog.AllowVerticalFonts = false;
+            DialogResult FontSelectDialogResult = FontSelectDialog.ShowDialog();
+
+            if (FontSelectDialogResult == DialogResult.OK)
+            {
+                ReplaceWordFontSetting.FontName = FontSelectDialog.Font.FontFamily.GetName(1033);
+                ReplaceWordFontSetting.FontSize = FontSelectDialog.Font.Size;
+            }
+        }
+
+        private void wORD转PDFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.MainTabPage.SelectedIndex = 0;
+        }
+
+        private void wORD转EXCELToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.MainTabPage.SelectedIndex = 13;
+        }
+
+        private void wORDToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.MainTabPage.SelectedIndex = 16;
+        }
+
+        private void wORD内容批量替换ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.MainTabPage.SelectedIndex = 23;
+
+        }
+
+        private void eXCEL转PDFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.MainTabPage.SelectedIndex = 2;
+
+        }
+
+        private void eXCEL转WORDToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.MainTabPage.SelectedIndex = 14;
+
+        }
+
+        private void eXCEL内容批量替换ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.MainTabPage.SelectedIndex = 24;
+
+        }
+
+        private void pPT转PDFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.MainTabPage.SelectedIndex = 4;
+
+        }
+
+        private void pDF转EXCELToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.MainTabPage.SelectedIndex = 1;
+
+        }
+
+        private void pDFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.MainTabPage.SelectedIndex = 3;
+
+        }
+
+        private void pDF转PPTToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.MainTabPage.SelectedIndex = 5;
+
+        }
+
+        private void ePUB转WORDToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.MainTabPage.SelectedIndex = 17;
+
+        }
+
+        private void ePUB转PDFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.MainTabPage.SelectedIndex = 18;
+
+        }
+
+        private void hTML转PDFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.MainTabPage.SelectedIndex = 20;
+
+        }
+
+        private void 拆分WORDToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.MainTabPage.SelectedIndex = 7;
+
+        }
+
+        private void 拆分PDFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.MainTabPage.SelectedIndex = 9;
+
+        }
+
+        private void 合并WORDToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.MainTabPage.SelectedIndex = 6;
+
+        }
+
+        private void 合并PDFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.MainTabPage.SelectedIndex = 8;
+
+        }
+
+        private void 压缩PDFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.MainTabPage.SelectedIndex = 21;
+
+        }
+
+        private void 压缩图片ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.MainTabPage.SelectedIndex = 22;
+
+        }
+
+        private void wORDEXCELPDF转图片ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.MainTabPage.SelectedIndex = 15;
+
+        }
+
+        private void 图片转PDFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.MainTabPage.SelectedIndex = 19;
+
+        }
+
+        private void 姓名横转竖列ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.MainTabPage.SelectedIndex = 26;
+
+        }
+
+        private void 特殊二维码校验ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.MainTabPage.SelectedIndex = 25;
+
+        }
+
+        private void twain扫描仪调试ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.MainTabPage.SelectedIndex = 27;
+
+        }
+
+        private void mSS3模板修改ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.MainTabPage.SelectedIndex = 30;
+
+        }
+
+        private void 其他功能ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.MainTabPage.SelectedIndex = 28;
+
+        }
+
+        private void 系统工具ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.MainTabPage.SelectedIndex = 29;
+
+        }
+
+        private void 关于软件ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.MainTabPage.SelectedIndex = 31;
+
+        }
+
+        private void 保存设置并重启软件ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (File.Exists(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile))
+            {
+                Configuration TempConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                TempConfig.AppSettings.Settings["StartPageIndex"].Value = menu_start_page_index_combox.Text;
+                TempConfig.AppSettings.Settings["TabPageHeighLight"].Value = menu_tabpage_heigh_light_combox.SelectedIndex == 0 ? "on" : "off";
+                TempConfig.AppSettings.Settings["ShowTabPageIco"].Value = menu_tabpage_icon_combox.SelectedIndex == 0 ? "on" : "off";
+                TempConfig.AppSettings.Settings["ShowOpenTargetDialog"].Value = menu_finshined_messbox_combox.SelectedIndex == 0 ? "on" : "off";
+                TempConfig.AppSettings.Settings["ListViewLineHeight"].Value = menu_listview_line_heigh_combox.Text;
+                TempConfig.AppSettings.Settings["ListViewShowGridLines"].Value = menu_listview_gridline_combox.SelectedIndex == 0 ? "on" : "off";
+                
+                TempConfig.Save(ConfigurationSaveMode.Modified);
+
+                DialogResult ExitResult = MessageBox.Show("配置保存完毕，是否需要重启软件？","提示",MessageBoxButtons.OKCancel,MessageBoxIcon.Asterisk);
+                if(ExitResult == DialogResult.OK)
+                {
+                    string AppExcuteFile = Application.ExecutablePath;
+                    Process.Start(AppExcuteFile);
+
+                    Environment.Exit(0);
+                }
+            }
+            else
+            {
+                MessageBox.Show("无法保存配置，没有找到配置文件，可能是配置文件被更名或者不存在","提示",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+            }
+        }
+
+        private void 查看标签索引对照表ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StringBuilder TempIndexTable = new StringBuilder();
+            foreach (TabPage TempPage in this.MainTabPage.TabPages)
+            {
+                TempIndexTable.AppendLine($"{TempPage.Text}：{MainTabPage.TabPages.IndexOf(TempPage)}");
+            }
+            MessageBox.Show(TempIndexTable.ToString(),"提示",MessageBoxButtons.OK,MessageBoxIcon.Asterisk);
+        }
     }
 }
 
@@ -2750,4 +3072,13 @@ internal class PrivateFontSetting
     public static float FontSize { get; set; } = 12;
 
     public static Color FontColor { get; set; } = Color.Red;
+}
+
+internal class ReplaceWordFontSetting
+{
+    public static string FontName { get; set; } = "SimSun";
+
+    public static float FontSize { get; set; } = 22;
+
+    public static FontStyle FontStyle { get; set; }  = FontStyle.Regular;
 }

@@ -6,6 +6,7 @@ using Aspose.Html.Services;
 using Aspose.Imaging;
 using Aspose.Imaging.FileFormats.Jpeg;
 using Aspose.Imaging.FileFormats.Png;
+using Aspose.Imaging.ImageOptions;
 using Aspose.Pdf;
 using Aspose.Pdf.Annotations;
 using Aspose.Pdf.Text;
@@ -17,7 +18,10 @@ using NAudio.Wave;
 using PuppeteerSharp.Media;
 using System;
 using System.Collections.Generic;
+using System.Data.OleDb;
 using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -29,7 +33,8 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Windows.Media.Imaging;
+using Color = System.Drawing.Color;
 
 namespace DocumentTools
 {
@@ -619,7 +624,7 @@ namespace DocumentTools
         /// <param name="ReplaceContent">要替换的内容</param>
         /// <param name="IgnoreFootText">是否忽略脚注内容</param>
         /// <param name="IgnoreCase">是否忽略大小写</param>
-        public static void RelaceDocumentContent(string DocumentsFileName, string SavedDoucmentFileName, string RelaceDocumentType, string InputRegexRule, string ReplaceContent, bool IgnoreFootText, bool NoIgnoreCase, bool RemoveRowMode = false, int ExcelStartRow = -1, int ExcelEndRow = -1, bool UseRegex = false)
+        public static void RelaceDocumentContent(string DocumentsFileName, string SavedDoucmentFileName, string RelaceDocumentType, string InputRegexRule, string ReplaceContent, bool IgnoreFootText, bool NoIgnoreCase, bool RemoveRowMode = false, int ExcelStartRow = -1, int ExcelEndRow = -1, bool UseRegex = false,string replace_word_fontName="SimSun",float replace_word_fontSize=12,bool UseNewStyle=false)
         {
             Aspose.Hook.HookManager.StartHook();
 
@@ -642,6 +647,11 @@ namespace DocumentTools
                 TempWordFindReplaceOption.IgnoreFootnotes = IgnoreFootText;
                 TempWordFindReplaceOption.MatchCase = NoIgnoreCase;
                 TempWordFindReplaceOption.UseSubstitutions = true;
+                if(UseNewStyle)
+                {
+                    TempWordFindReplaceOption.ApplyFont.Name = replace_word_fontName;
+                    TempWordFindReplaceOption.ApplyFont.Size = Convert.ToDouble(replace_word_fontSize);
+                }
                 TempWordDocument.Range.Replace(DocuemntRegex, ReplaceContent, TempWordFindReplaceOption);
                 TempWordDocument.Save(SavedDoucmentFileName, DocumentSaveOption);
             }
@@ -1685,7 +1695,7 @@ namespace DocumentTools
             TempLoadDocument.BuiltInDocumentProperties.Thumbnail = ConverImageBytes;
 
 
-            TempLoadDocument.BuiltInDocumentProperties.Title = Path.GetFileNameWithoutExtension(DocumentFileName);
+            TempLoadDocument.BuiltInDocumentProperties.Title = "Title";
             TempLoadDocument.BuiltInDocumentProperties.Author = AuthorName == string.Empty ? "DocumentTools" : AuthorName;
             TempLoadDocument.BuiltInDocumentProperties.Company = "DocumentTools";
             Aspose.Words.Saving.HtmlSaveOptions TempHtmlSaveOption = new Aspose.Words.Saving.HtmlSaveOptions
@@ -2037,19 +2047,120 @@ namespace DocumentTools
             }
             TempRootRegistryKey.Dispose();
         }
-    }
 
-    public class TimeoutMessageHandler : MessageHandler
-    {
-        // Override the Invoke() method
-        public override void Invoke(INetworkOperationContext context)
+        public static void InsertVotePicContent(string DataBaseFile,string ImageFileName,Label statusLabel,string VoteId,
+                                                string VoteName,string VoteIndex)
         {
-            context.Request.Timeout = TimeSpan.FromSeconds(1);
-            Next(context);
+            if(DataBaseFile!=string.Empty&& DataBaseFile!=null && ImageFileName!=string.Empty && ImageFileName!=null && VoteId!=string.Empty && VoteId!=null)
+            {
+                //打开数据库连接
+                string ConnectString = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={DataBaseFile};Persist Security Info=False;";
+                string InsertCommand = $"INSERT INTO Vote_PageInfo (VoteID,PageIndex,MatrixCode,PicContent) VALUES(?,?,?,?)";
+                string DeleteCommand = $"DELETE FROM Vote_PageInfo WHERE VoteID={VoteId}";
+                string CheckCommand = $"SELECT COUNT(*) FROM Vote_PageInfo";
+                string CheckEssInfoCommand = $"SELECT COUNT(*) FROM Vote_EssInfo WHERE VoteID={VoteId}";
+                string InsertTempCommand = $"INSERT INTO Vote_EssInfo (VoteID,VoteName,Threshold,HxrScore,LxrScore,OutsideThreshold,SelName,HxrWidth,HxrHeight,LxrWidth,LxrHeight) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+
+                using Bitmap TempBmp = new Bitmap(ImageFileName);
+                Bitmap outBmp = ConvertTo256Color(TempBmp);
+                outBmp.Save("Vote_Gray.bmp", ImageFormat.Bmp);
+                byte[] PictureBytes = File.ReadAllBytes("Vote_Gray.bmp");
+                using OleDbConnection TempConnection = new OleDbConnection(ConnectString);
+                TempConnection.Open();
+
+                //开始插入图片
+                using OleDbCommand checkComand = new OleDbCommand(CheckCommand, TempConnection);
+                int row_count = Convert.ToInt32(checkComand.ExecuteScalar());
+                if (row_count > 0)
+                {
+                    using OleDbCommand deleteComand = new OleDbCommand(DeleteCommand, TempConnection);
+                    deleteComand.ExecuteNonQuery();
+                }
+
+                using OleDbCommand checkEssComand = new OleDbCommand(CheckEssInfoCommand, TempConnection);
+                
+                int ess_count = Convert.ToInt32(checkEssComand.ExecuteScalar());
+
+                if(ess_count ==0)
+                {
+                    using OleDbCommand insertEssComand = new OleDbCommand(InsertTempCommand, TempConnection);
+                    insertEssComand.Parameters.AddWithValue("@VoteID",VoteId);
+                    insertEssComand.Parameters.AddWithValue("@VoteName", VoteName);
+                    insertEssComand.Parameters.AddWithValue("@Threshold", 45);
+                    insertEssComand.Parameters.AddWithValue("@HxrScore", 15);
+                    insertEssComand.Parameters.AddWithValue("@LxrScore", 20);
+                    insertEssComand.Parameters.AddWithValue("@OutsideThreshold", 1);
+                    insertEssComand.Parameters.AddWithValue("@SelName", "赞成（票面直接有）|不赞成（票面直接有）|弃权（规则运算出）");
+                    insertEssComand.Parameters.AddWithValue("@HxrWidth", 42);
+                    insertEssComand.Parameters.AddWithValue("@HxrHeight", 42);
+                    insertEssComand.Parameters.AddWithValue("@LxrWidth", 150);
+                    insertEssComand.Parameters.AddWithValue("@LxrHeight", 45);
+                    insertEssComand.ExecuteNonQuery();
+                }
+
+                using OleDbCommand insertPicComand = new OleDbCommand(InsertCommand, TempConnection);
+                insertPicComand.Parameters.AddWithValue("@VoteID", VoteId);
+                insertPicComand.Parameters.AddWithValue("@PageIndex", 0);
+                insertPicComand.Parameters.AddWithValue("@MatrixCode", VoteIndex);
+                insertPicComand.Parameters.AddWithValue("@PicContent", PictureBytes);
+                insertPicComand.ExecuteNonQuery();
+                File.Delete("Vote_Gray.bmp");
+                BodyForm.MainForm.BeginInvoke(new Action(() =>
+                {
+                    MessageBox.Show("插入完毕", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                }));
+            }
+
         }
-    }
 
+        /// <summary>
+        /// bmp转为256色
+        /// </summary>
+        /// <param name="inputBitmap"></param>
+        /// <returns></returns>
+        static Bitmap ConvertTo256Color(Bitmap inputBitmap)
+        {
+            Bitmap outputBitmap = new Bitmap(inputBitmap.Width, inputBitmap.Height, System.Drawing.Imaging.PixelFormat.Format8bppIndexed);
 
+            System.Drawing.Imaging.ColorPalette palette = outputBitmap.Palette;
+            for (int i = 0; i < 256; i++)
+            {
+                palette.Entries[i] = Color.FromArgb(i, i, i);
+            }
+            outputBitmap.Palette = palette;
 
+            BitmapData inputData = inputBitmap.LockBits(new System.Drawing.Rectangle(0, 0, inputBitmap.Width, inputBitmap.Height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+            BitmapData outputData = outputBitmap.LockBits(new System.Drawing.Rectangle(0, 0, outputBitmap.Width, outputBitmap.Height), ImageLockMode.WriteOnly, System.Drawing.Imaging.PixelFormat.Format8bppIndexed);
 
+            unsafe
+            {
+                byte* inputPointer = (byte*)inputData.Scan0;
+                byte* outputPointer = (byte*)outputData.Scan0;
+
+                for (int y = 0; y < inputBitmap.Height; y++)
+                {
+                    for (int x = 0; x < inputBitmap.Width; x++)
+                    {
+                        byte r = inputPointer[2];
+                        byte g = inputPointer[1];
+                        byte b = inputPointer[0];
+                        byte grayValue = (byte)(0.299 * r + 0.587 * g + 0.114 * b);
+
+                        outputPointer[0] = grayValue;
+
+                        inputPointer += 3;
+                        outputPointer++;
+                    }
+
+                    inputPointer += inputData.Stride - inputBitmap.Width * 3;
+                    outputPointer += outputData.Stride - outputBitmap.Width;
+                }
+            }
+
+            inputBitmap.UnlockBits(inputData);
+            outputBitmap.UnlockBits(outputData);
+
+            return outputBitmap;
+        }
+}
 }
