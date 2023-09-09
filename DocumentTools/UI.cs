@@ -222,7 +222,7 @@ namespace DocumentTools
 
         public static Task<int> AddWordFiles()
         {
-            return AddFilesToListView("WORD文档", "*.doc;*.docx", BodyForm.MainForm.WordFileListView);
+            return AddFilesToListView("WORD文档", "*.doc;*.docx;*.wps", BodyForm.MainForm.WordFileListView);
         }
 
         public static void AddPdfFiles()
@@ -232,7 +232,7 @@ namespace DocumentTools
 
         public static void AddExcelFiles()
         {
-            AddFilesToListView("EXCEL文档", "*.xls;*.xlsx", BodyForm.MainForm.ExcelFileListView);
+            AddFilesToListView("EXCEL文档", "*.xls;*.xlsx;*.et", BodyForm.MainForm.ExcelFileListView);
         }
 
         public static void AddWord2ImageFiles()
@@ -252,7 +252,7 @@ namespace DocumentTools
 
         public static void AddWordRelaceFiles()
         {
-            AddFilesToListView("WORD文档", "*.docx;*.doc", BodyForm.MainForm.ReplaceWordFileList);
+            AddFilesToListView("WORD文档", "*.docx;*.doc;*.wps", BodyForm.MainForm.ReplaceWordFileList);
         }
 
         public static void AddExcelRelaceFiles()
@@ -272,12 +272,12 @@ namespace DocumentTools
 
         public static void AddMergeWordFiles()
         {
-            AddFilesToListView("WORD文档", "*.doc;*.docx", BodyForm.MainForm.MergeWordFileList);
+            AddFilesToListView("WORD文档", "*.doc;*.docx;*.wps", BodyForm.MainForm.MergeWordFileList);
         }
 
         public static void AddWord2ExcelFiles()
         {
-            AddFilesToListView("WORD文档", "*.doc;*.docx", BodyForm.MainForm.Word2ExcelFileList);
+            AddFilesToListView("WORD文档", "*.doc;*.docx;*.wps", BodyForm.MainForm.Word2ExcelFileList);
         }
 
         public static void AddExcel2WordFiles()
@@ -332,7 +332,7 @@ namespace DocumentTools
 
         public static void AddWord2EPUBFiles()
         {
-            AddFilesToListView("WORD文档", "*.doc;*.docx", BodyForm.MainForm.Word2EPUBFileList);
+            AddFilesToListView("WORD文档", "*.doc;*.docx;*.wps", BodyForm.MainForm.Word2EPUBFileList);
         }
 
         public static void AddEPUB2WORDFiles()
@@ -352,7 +352,7 @@ namespace DocumentTools
 
         public static void AddSplitWordFiles()
         {
-            AddFilesToListView("WORD文档", "*.doc;*.docx", BodyForm.MainForm.SplitWordFileList);
+            AddFilesToListView("WORD文档", "*.doc;*.docx;*.wps", BodyForm.MainForm.SplitWordFileList);
         }
 
         /// <summary>

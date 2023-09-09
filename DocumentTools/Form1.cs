@@ -1387,13 +1387,13 @@ namespace DocumentTools
             switch (DragedListview.Name)
             {
                 case "WordFileListView":
-                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.WordFileListView, new string[] { ".doc", ".docx" });
+                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.WordFileListView, new string[] { ".doc", ".docx",".wps" });
                     break;
                 case "PdfFileListView":
                     UI.AddFilesToListviewWithNotDialog(DropFiles, this.PdfFileListView, new string[] { ".pdf" });
                     break;
                 case "ExcelFileListView":
-                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.ExcelFileListView, new string[] { ".xls", ".xlsx" });
+                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.ExcelFileListView, new string[] { ".xls", ".xlsx" ,".et"});
                     break;
                 case "DocumentsListView":
                     UI.AddFilesToListviewWithNotDialog(DropFiles, this.DocumentsListView, new string[] { ".doc", ".docx", ".pdf", ".xls", ".xlsx" });
@@ -1405,7 +1405,7 @@ namespace DocumentTools
                     UI.AddFilesToListviewWithNotDialog(DropFiles, this.MergePdfFileView, new string[] { ".pdf", ".jpg", ".png", ".bmp", ".tif" });
                     break;
                 case "ReplaceWordFileList":
-                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.ReplaceWordFileList, new string[] { ".doc", ".docx" });
+                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.ReplaceWordFileList, new string[] { ".doc", ".docx" ,".wps"});
                     break;
                 case "ReplaceExcelFileView":
                     UI.AddFilesToListviewWithNotDialog(DropFiles, this.ReplaceExcelFileView, new string[] { ".xls", ".xlsx" });
@@ -1417,10 +1417,10 @@ namespace DocumentTools
                     UI.AddFilesToListviewWithNotDialog(DropFiles, this.IcoFileView, new string[] { ".jpg", ".png", ".bmp" });
                     break;
                 case "MergeWordFileList":
-                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.MergeWordFileList, new string[] { ".doc", ".docx" });
+                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.MergeWordFileList, new string[] { ".doc", ".docx",".wps" });
                     break;
                 case "Word2ExcelFileList":
-                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.Word2ExcelFileList, new string[] { ".doc", ".docx" });
+                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.Word2ExcelFileList, new string[] { ".doc", ".docx" , ".wps" });
                     break;
                 case "Excel2WordFileList":
                     UI.AddFilesToListviewWithNotDialog(DropFiles, this.Excel2WordFileList, new string[] { ".xls", ".xlsx" });
@@ -1453,7 +1453,7 @@ namespace DocumentTools
                     UI.AddFilesToListviewWithNotDialog(DropFiles, this.CompressImageFileList, new string[] { ".jpg", ".jpeg", ".png", ".bmp" });
                     break;
                 case "Word2EPUBFileList":
-                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.Word2EPUBFileList, new string[] { ".doc", ".docx" });
+                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.Word2EPUBFileList, new string[] { ".doc", ".docx" , ".wps" });
                     break;
                 case "EPUB2WORDFileList":
                     UI.AddFilesToListviewWithNotDialog(DropFiles, this.EPUB2WORDFileList, new string[] { ".epub" });
@@ -1465,7 +1465,7 @@ namespace DocumentTools
                     UI.AddFilesToListviewWithNotDialog(DropFiles, this.HTML2PDFFileList, new string[] { ".html" });
                     break;
                 case "SplitWordFileList":
-                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.SplitWordFileList, new string[] { ".doc", ".docx" });
+                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.SplitWordFileList, new string[] { ".doc", ".docx" , ".wps" });
                     break;
                 default: break;
             }
