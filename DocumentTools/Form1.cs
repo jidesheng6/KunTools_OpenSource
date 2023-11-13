@@ -1,5 +1,6 @@
 ﻿using Aspose.Pdf.Operators;
 using Gma.System.MouseKeyHook;
+using Newtonsoft.Json.Linq;
 using NTwain;
 using NTwain.Data;
 using System;
@@ -18,6 +19,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Web.UI.WebControls;
 using System.Windows.Forms;
 
 namespace DocumentTools
@@ -28,6 +30,7 @@ namespace DocumentTools
         public static BodyForm MainForm;
         private TwainSession twainSession;
         private DataSource dataSource;
+        private bool private_version = false;//是否为内部版本
         private int ImageIndex = 0;
         private int TempImageCount = 0;
         private int TotalTempImageCount = 0;
@@ -37,6 +40,8 @@ namespace DocumentTools
         private readonly IKeyboardEvents GlobalHook = Hook.GlobalEvents();//全局钩子事件
         private readonly ImageList TempImageList = new ImageList() { ImageSize = new Size(1, 25) };
 
+        public FileDropHandler FileDroper; //全局的
+
         private string ListviewShowGridLines = "on";
         private string ShowTabPageIcon = "on";
         private string ChromeDriverPath = "";
@@ -45,57 +50,10 @@ namespace DocumentTools
         public string ShowOpenTargetDialog = "on";//是否启用完成后显示打开转换目录弹窗
         public string AddWaterMarkBackGroudImageFileName = string.Empty;
 
-
-        readonly string NowVersion = "23.9.7";
-
-        #region 控件大小随窗体大小等比例缩放
-
-        private readonly float x; //定义当前窗体的宽度
-        private readonly float y; //定义当前窗体的高度
-
-        private void SetTag(Control cons)
-        {
-            foreach (Control con in cons.Controls)
-            {
-                con.Tag = con.Width + ";" + con.Height + ";" + con.Left + ";" + con.Top + ";" + con.Font.Size;
-                if (con.Controls.Count > 0) SetTag(con);
-            }
-        }
-
-        private void SetControls(float newx, float newy, Control cons)
-        {
-            //遍历窗体中的控件，重新设置控件的值
-            foreach (Control con in cons.Controls)
-                //获取控件的Tag属性值，并分割后存储字符串数组
-                if (con.Tag != null)
-                {
-                    var mytag = con.Tag.ToString().Split(';');
-                    //根据窗体缩放的比例确定控件的值
-                    con.Width = Convert.ToInt32(Convert.ToSingle(mytag[0]) * newx); //宽度
-                    con.Height = Convert.ToInt32(Convert.ToSingle(mytag[1]) * newy); //高度
-                    con.Left = Convert.ToInt32(Convert.ToSingle(mytag[2]) * newx); //左边距
-                    con.Top = Convert.ToInt32(Convert.ToSingle(mytag[3]) * newy); //顶边距
-                    var currentSize = Convert.ToSingle(mytag[4]) * newy; //字体大小                   
-                    if (currentSize > 0) con.Font = new Font(con.Font.Name, currentSize, con.Font.Style, con.Font.Unit);
-                    con.Focus();
-                    if (con.Controls.Count > 0) SetControls(newx, newy, con);
-                }
-        }
+        public JArray City_Json;//城市的json字符串数据
 
 
-        /// <summary>
-        /// 重置窗体布局
-        /// </summary>
-        private void ReWinformLayout()
-        {
-            var newx = Width / x;
-            var newy = Height / y;
-            SetControls(newx, newy, this);
-
-        }
-
-        #endregion
-
+        string NowVersion = "正式版 V0.3.1";
 
         private void OutPutListViewIndex()
         {
@@ -105,14 +63,27 @@ namespace DocumentTools
             }
         }
 
+        private void GetAdministratorBehaviorStatus()
+        {
+            string BehaviorStatus = Util.GetAdministratorBehavior();
+            if (BehaviorStatus == "1")
+            {
+                DisableAdminBehavior.Text = "禁用管理员批准模式";
+            }
+            else if(BehaviorStatus=="0")
+            {
+                DisableAdminBehavior.Text = "启用管理员批准模式";
+            }
+        }
+
         private void SetInitTabPage()
         {
-            if(int.TryParse(ConfigurationManager.AppSettings["StartPageIndex"],out int StartIndex))
+            if (int.TryParse(ConfigurationManager.AppSettings["StartPageIndex"], out int StartIndex))
             {
                 MainTabPage.SelectedIndex = StartIndex;
                 menu_start_page_index_combox.SelectedIndex = StartIndex;
-            }    
-            
+            }
+
         }
 
         private void SetTabCardHeighLight()
@@ -121,7 +92,7 @@ namespace DocumentTools
 
             SetTabPageShowIco();//先对tabpage进行设置
 
-            if (OpenTabPageHeight=="on")
+            if (OpenTabPageHeight == "on")
             {
                 this.MainTabPage.DrawMode = TabDrawMode.OwnerDrawFixed;
                 menu_tabpage_heigh_light_combox.SelectedIndex = 0;
@@ -131,7 +102,7 @@ namespace DocumentTools
                 this.MainTabPage.DrawMode = TabDrawMode.Normal;
                 menu_tabpage_heigh_light_combox.SelectedIndex = 1;
 
-                if (ShowTabPageIcon=="on")
+                if (ShowTabPageIcon == "on")
                 {
                     MainTabPage.ImageList = TabPageIcoList;
                 }
@@ -193,6 +164,7 @@ namespace DocumentTools
         {
             ChromeDriverPath = ConfigurationManager.AppSettings["ChromeDriverPath"];
 
+            menu_chrome_path.Text = ChromeDriverPath;
             html2pdf_textbox_chromepath.Text = ChromeDriverPath;
         }
 
@@ -212,22 +184,62 @@ namespace DocumentTools
 
         }
 
+        private void InitDataGridView()
+        {
+
+            barcodeMutilList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
+            barcodeMutilList.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            barcodeMutilList.RowsDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            barcodeMutilList.AllowUserToDeleteRows = true;
+            barcodeMutilList.Font = new Font("宋体", 12);
+            barcodeMutilList.BackgroundColor = Color.AliceBlue;
+
+
+            votedataview.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            votedataview.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            votedataview.RowsDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            votedataview.AllowUserToDeleteRows = false;
+            votedataview.AllowUserToAddRows = false;
+            votedataview.AllowUserToOrderColumns = false;
+            votedataview.RowHeadersVisible = true;
+            votedataview.ReadOnly = true;
+            votedataview.Font = new Font("宋体", 10);
+            votedataview.BackgroundColor = Color.AliceBlue;
+        }
+
         public BodyForm()
         {
             InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
             MainForm = this;
 
-            x = Width;
-            y = Height;
-            SetTag(this);
+
+            //this.AutoScaleMode = AutoScaleMode.Font;
 
 
 
         }
         private void BodyForm_Load(object sender, EventArgs e)
         {
+            //判断内部版本
+
+            if (private_version)
+            {
+                this.gen_card_id_group.Enabled = true;
+                this.gen_card_result_group.Enabled = true;
+                NowVersion += "_内部版本";
+            }
+            else//不是内部版本，需要输入sfz解锁
+            {
+                this.gen_card_id_group.Enabled = false;
+                this.gen_card_result_group.Enabled = false;
+            }
+
+            //初始化
             this.Text = $"坤_Tools【软件完全离线|更新请看关于软件|版本：{NowVersion}】";
+            City_Json = Newtonsoft.Json.Linq.JArray.Parse((string)Util.GetEmbedResourceObj("china_level"));
+            InitDataGridView();
             InitComboxValue();
             InitConfigSettings();
             InitListView();
@@ -237,9 +249,10 @@ namespace DocumentTools
             //InitConfigSettings();
             InitTabPageIcon();
             OutPutListViewIndex();
+            GetAdministratorBehaviorStatus();
             this.AllowDrop = true;
             this.PageExportCheck.Checked = true;
-            this.PageExportCheck.Enabled = false;
+            this.PageExportCheck.Enabled = true;
 
             this.PreviewPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
 
@@ -248,14 +261,21 @@ namespace DocumentTools
             this.DecodeDataMatrixView.ShowRootLines = true;
             this.DecodeDataMatrixView.FullRowSelect = true;
             this.CompressImage_OutPutImageFormat.Enabled = false;
-            this.IcoSizeDrop.Enabled = false;
+            this.IcoSizeDrop.Enabled = true;
             //ReleaseRegistry.Enabled = false;
             this.Image2PDFCOmpressImage.Enabled = false;
+
+
+
+
+
 
             //Util.PlayMp3WithStream();
 
             ShortStatus.Text = Util.GetShortStatus();
             ShortStatus.ForeColor = ShortStatus.Text == "已移除" ? Color.Red : Color.Green;
+
+
 
             try
             {
@@ -306,11 +326,46 @@ namespace DocumentTools
             this.voteindex.Validating += ValidTextBoxContent;
             this.voteindex.Validated += ValidedTextBoxContent;
 
+            this.barcodeDmiBox.Validating += ValidTextBoxContent;
+            this.barcodeDmiBox.Validated += ValidedTextBoxContent;
+
+            this.barcodeImageHeight.Validating += ValidTextBoxContent;
+            this.barcodeImageHeight.Validated += ValidedTextBoxContent;
+
+            this.barcodePaddingBox.Validating += ValidTextBoxContent;
+            this.barcodePaddingBox.Validated += ValidedTextBoxContent;
+
+            this.barcodeRotateBox.Validating += ValidTextBoxContent;
+            this.barcodeRotateBox.Validated += ValidedTextBoxContent;
+
+            this.barcodeTextFontSizeBox.Validating += ValidTextBoxContent;
+            this.barcodeTextFontSizeBox.Validated += ValidedTextBoxContent;
+
+            this.barcodeTextContentSpaceCombox.Validating += ValidTextBoxContent;
+            this.barcodeTextContentSpaceCombox.Validated += ValidedTextBoxContent;
+
+            this.barcodeCaptionFontSizeBox.Validating += ValidTextBoxContent;
+            this.barcodeCaptionFontSizeBox.Validated += ValidedTextBoxContent;
+
+
+            this.barcodeImageHeight.Validating += ValidTextBoxContent;
+            this.barcodeImageHeight.Validated += ValidedTextBoxContent;
+
+
+            this.barcodeImageWidth.Validating += ValidTextBoxContent;
+            this.barcodeImageWidth.Validated += ValidedTextBoxContent;
+
+            this.copied_number_prefix_count.Validating += ValidTextBoxContent;
+            this.copied_number_prefix_count.Validated += ValidedTextBoxContent;
+
+
+
 
             this.DecodeDataMatrixView.MouseClick += (s1, s2) =>
             {
-                if(s2.Button == MouseButtons.Right) {
-                    if(s1 is TreeView TempTreeView)
+                if (s2.Button == MouseButtons.Right)
+                {
+                    if (s1 is System.Windows.Forms.TreeView TempTreeView)
                     {
                         TreeViewContentMenu.Show(TempTreeView, s2.Location);
                     }
@@ -328,10 +383,10 @@ namespace DocumentTools
 
             //初始化所有listview
 
-            GetFormMembers(typeof(ListView)).ForEach(x =>
+            GetFormMembers(typeof(System.Windows.Forms.ListView)).ForEach(x =>
             {
-                ListView TempListView = x as ListView;
-                TempListView.View = View.Details;
+                System.Windows.Forms.ListView TempListView = x as System.Windows.Forms.ListView;
+                TempListView.View = System.Windows.Forms.View.Details;
                 TempListView.FullRowSelect = true;
                 TempListView.AllowDrop = true;
                 TempListView.ShowItemToolTips = true;
@@ -340,14 +395,14 @@ namespace DocumentTools
                 TempListView.Columns.Add("文件名称", 300, HorizontalAlignment.Left);
                 TempListView.Columns.Add("添加时间", 300, HorizontalAlignment.Left);
                 TempListView.Columns.Add("转换后文件名称", 300, HorizontalAlignment.Left);
-                TempListView.Columns.Add("文件大小", 300, HorizontalAlignment.Left);
+                TempListView.Columns.Add("转换后文件大小", 300, HorizontalAlignment.Left);
                 TempListView.SmallImageList = TempImageList;
-                TempListView.Sorting = SortOrder.Ascending;
                 TempListView.Name = TempListView.Name.ToString();
 
                 TempListView.DragEnter += ListViewDragEnter;
                 TempListView.DragDrop += ListviewDragDrop;
                 TempListView.ColumnClick += ListviewSortHandler;
+
 
                 TempListView.MouseClick += (MouseSender, MouseEvent) =>
                 {
@@ -485,6 +540,7 @@ namespace DocumentTools
             DataTable Image2PDFPageStyle = new DataTable();
             Image2PDFPageStyle.Columns.Add("DisplayValue");
             Image2PDFPageStyle.Columns.Add("RealValue");
+            Image2PDFPageStyle.Rows.Add("自动", false);
             Image2PDFPageStyle.Rows.Add("横排", true);
             Image2PDFPageStyle.Rows.Add("竖排", false);
 
@@ -560,12 +616,12 @@ namespace DocumentTools
             htm2pdf_page_size_table.Columns.Add("DisplayValue");
             htm2pdf_page_size_table.Columns.Add("RealValue");
             htm2pdf_page_size_table.Rows.Add("A0", PuppeteerSharp.Media.PaperFormat.A0);
-            htm2pdf_page_size_table.Rows.Add("A1",PuppeteerSharp.Media.PaperFormat.A1);
-            htm2pdf_page_size_table.Rows.Add("A2",PuppeteerSharp.Media.PaperFormat.A2);
-            htm2pdf_page_size_table.Rows.Add("A3",PuppeteerSharp.Media.PaperFormat.A3);
-            htm2pdf_page_size_table.Rows.Add("A4",PuppeteerSharp.Media.PaperFormat.A4);
-            htm2pdf_page_size_table.Rows.Add("A5",PuppeteerSharp.Media.PaperFormat.A5);
-            htm2pdf_page_size_table.Rows.Add("A6",PuppeteerSharp.Media.PaperFormat.A6);
+            htm2pdf_page_size_table.Rows.Add("A1", PuppeteerSharp.Media.PaperFormat.A1);
+            htm2pdf_page_size_table.Rows.Add("A2", PuppeteerSharp.Media.PaperFormat.A2);
+            htm2pdf_page_size_table.Rows.Add("A3", PuppeteerSharp.Media.PaperFormat.A3);
+            htm2pdf_page_size_table.Rows.Add("A4", PuppeteerSharp.Media.PaperFormat.A4);
+            htm2pdf_page_size_table.Rows.Add("A5", PuppeteerSharp.Media.PaperFormat.A5);
+            htm2pdf_page_size_table.Rows.Add("A6", PuppeteerSharp.Media.PaperFormat.A6);
             htm2pdf_page_size_table.Rows.Add("Ledger", PuppeteerSharp.Media.PaperFormat.Ledger);
             htm2pdf_page_size_table.Rows.Add("Legal", PuppeteerSharp.Media.PaperFormat.Legal);
             htm2pdf_page_size_table.Rows.Add("Letter", PuppeteerSharp.Media.PaperFormat.Letter);
@@ -581,14 +637,14 @@ namespace DocumentTools
             DataTable html2pdf_pagedirect = new DataTable();
             html2pdf_pagedirect.Columns.Add("DisplayValue");
             html2pdf_pagedirect.Columns.Add("RealValue");
-            html2pdf_pagedirect.Rows.Add("竖向",false);
-            html2pdf_pagedirect.Rows.Add("横向",true);
+            html2pdf_pagedirect.Rows.Add("竖向", false);
+            html2pdf_pagedirect.Rows.Add("横向", true);
 
             this.html2pdf_combox_pagedirect.DataSource = html2pdf_pagedirect;
             this.html2pdf_combox_pagedirect.DisplayMember = "DisplayValue";
             this.html2pdf_combox_pagedirect.ValueMember = "RealValue";
 
-            foreach(TabPage tempPage in MainTabPage.TabPages)
+            foreach (TabPage tempPage in MainTabPage.TabPages)
             {
                 this.menu_start_page_index_combox.Items.Add(MainTabPage.TabPages.IndexOf(tempPage));
             }
@@ -609,12 +665,142 @@ namespace DocumentTools
             this.menu_finshined_messbox_combox.Items.AddRange(On_Off_Source.ToArray());
             this.menu_listview_line_heigh_combox.Items.AddRange(TempHeightArray.ToArray());
 
+            DataTable barcodeType = new DataTable();
+            barcodeType.Columns.Add("DisplayValue");
+            barcodeType.Columns.Add("RealValue");
+            barcodeType.Rows.Add("QR二维码", Aspose.BarCode.Generation.EncodeTypes.QR);
+            barcodeType.Rows.Add("DataMatrix二维码", Aspose.BarCode.Generation.EncodeTypes.DataMatrix);
+            barcodeType.Rows.Add("PDF417条码", Aspose.BarCode.Generation.EncodeTypes.Pdf417);
+            barcodeType.Rows.Add("Atzec二维码", Aspose.BarCode.Generation.EncodeTypes.Aztec);
+            barcodeType.Rows.Add("汉信二维码", Aspose.BarCode.Generation.EncodeTypes.HanXin);
+
+
+
+            this.barcodeTypeCombox.DataSource = barcodeType;
+            this.barcodeTypeCombox.DisplayMember = "DisplayValue";
+            this.barcodeTypeCombox.ValueMember = "RealValue";
+
+
+
+            DataTable barcodeAutoSizeMode = new DataTable();
+            barcodeAutoSizeMode.Columns.Add("DisplayValue");
+            barcodeAutoSizeMode.Columns.Add("RealValue");
+            barcodeAutoSizeMode.Rows.Add("无", Aspose.BarCode.Generation.AutoSizeMode.None);
+            barcodeAutoSizeMode.Rows.Add("自动", Aspose.BarCode.Generation.AutoSizeMode.Nearest);
+            barcodeAutoSizeMode.Rows.Add("手动调整", Aspose.BarCode.Generation.AutoSizeMode.Interpolation);
+
+            this.barcodeAutoSizeCombox.DataSource = barcodeAutoSizeMode;
+            this.barcodeAutoSizeCombox.DisplayMember = "DisplayValue";
+            this.barcodeAutoSizeCombox.ValueMember = "RealValue";
+            this.barcodeAutoSizeCombox.SelectedIndex = 1;
+
+            this.barcodeDpiCombox.DataSource = Enumerable.Range(50, 300).Where(x => x % 50 == 0).ToList();
+            this.barcodeDpiCombox.SelectedIndex = 2;
+
+
+            DataTable barcodeTextLocation = new DataTable();
+            barcodeTextLocation.Columns.Add("DisplayValue");
+            barcodeTextLocation.Columns.Add("RealValue");
+            barcodeTextLocation.Rows.Add("不显示", Aspose.BarCode.Generation.CodeLocation.None);
+            barcodeTextLocation.Rows.Add("条码上方", Aspose.BarCode.Generation.CodeLocation.Above);
+            barcodeTextLocation.Rows.Add("条码下方", Aspose.BarCode.Generation.CodeLocation.Below);
+
+            this.barcodeTextLocationCombox.DataSource = barcodeTextLocation;
+            this.barcodeTextLocationCombox.DisplayMember = "DisplayValue";
+            this.barcodeTextLocationCombox.ValueMember = "RealValue";
+
+            DataTable barcodeTextAlign = new DataTable();
+            barcodeTextAlign.Columns.Add("DisplayValue");
+            barcodeTextAlign.Columns.Add("RealValue");
+            barcodeTextAlign.Rows.Add("左对齐", Aspose.BarCode.Generation.TextAlignment.Left);
+            barcodeTextAlign.Rows.Add("右对齐", Aspose.BarCode.Generation.TextAlignment.Right);
+            barcodeTextAlign.Rows.Add("居中对齐", Aspose.BarCode.Generation.TextAlignment.Center);
+
+            this.barcodeTextAlignCombox.DataSource = barcodeTextAlign;
+            this.barcodeTextAlignCombox.DisplayMember = "DisplayValue";
+            this.barcodeTextAlignCombox.ValueMember = "RealValue";
+            this.barcodeTextAlignCombox.SelectedIndex = 2;
+
+            this.barcodeCaptionLocationCombox.DataSource = new string[] { "不显示", "条码上方", "条码下方" };
+
+            this.barcodeScanTypeCombox.DataSource = new string[] { "普通文本", "网址" };
+
+            DataTable webp2image_format = new DataTable();
+            webp2image_format.Columns.Add("DisplayValue");
+            webp2image_format.Columns.Add("RealValue");
+            webp2image_format.Rows.Add("JPG", ".jpg");
+            webp2image_format.Rows.Add("JPEG", ".jpeg");
+            webp2image_format.Rows.Add("PNG", ".png");
+            webp2image_format.Rows.Add("BMP", ".bmp");
+            webp2image_format.Rows.Add("GIF", ".gif");
+
+
+            this.webp2image_combox.DataSource = webp2image_format;
+            this.webp2image_combox.DisplayMember = "DisplayValue";
+            this.webp2image_combox.ValueMember = "RealValue";
+
+
+            DataTable VoteSquareType = new DataTable();
+            VoteSquareType.Columns.Add("DisplayValue");
+            VoteSquareType.Columns.Add("RealValue");
+            VoteSquareType.Rows.Add("赞成不赞成(正选)", "赞成（票面直接有）|不赞成（票面直接有）|弃权（规则运算出）");
+            VoteSquareType.Rows.Add("赞成不赞成(反选)", "赞成（规则运算出）|不赞成（票面直接有）|弃权（票面直接有）");
+            VoteSquareType.Rows.Add("赞成反对(正选)", "赞成（票面直接有）|反对（票面直接有）|弃权（规则运算出）");
+            VoteSquareType.Rows.Add("赞成反对(反选)", "赞成（规则运算出）|反对（票面直接有）|弃权（票面直接有）");
+            VoteSquareType.Rows.Add("同意反对(正选)", "同意（票面直接有）|反对（票面直接有）|弃权（规则运算出）");
+            VoteSquareType.Rows.Add("同意反对(反选)", "同意（规则运算出）|反对（票面直接有）|弃权（票面直接有）");
+            VoteSquareType.Rows.Add("同意不赞成(正选)", "同意（票面直接有）|不赞成（票面直接有）|弃权（规则运算出）");
+            VoteSquareType.Rows.Add("同意不赞成(反选)", "同意（规则运算出）|不赞成（票面直接有）|弃权（票面直接有）");
+
+
+            this.votepage_type_combox.DataSource = VoteSquareType;
+            this.votepage_type_combox.DisplayMember = "DisplayValue";
+            this.votepage_type_combox.ValueMember = "RealValue";
+
+            DataTable VotepageIndexTable = new DataTable();
+            VotepageIndexTable.Columns.Add("DisplayValue");
+            VotepageIndexTable.Columns.Add("RealValue");
+            VotepageIndexTable.Rows.Add("第1页", 0);
+            VotepageIndexTable.Rows.Add("第2页", 1);
+
+            this.votepageIndexCombox.DataSource = VoteSquareType;
+            this.votepageIndexCombox.DisplayMember = "DisplayValue";
+            this.votepageIndexCombox.ValueMember = "RealValue";
+
+
+            this.votepageIndexCombox.DataSource = VotepageIndexTable;
+
+            UpdateNetworkList();
+
+            DataTable Word2Pdf_ColorMode = new DataTable();
+            Word2Pdf_ColorMode.Columns.Add("DisplayValue");
+            Word2Pdf_ColorMode.Columns.Add("RealValue");
+            Word2Pdf_ColorMode.Rows.Add("彩色", Aspose.Words.Saving.ColorMode.Normal);
+            Word2Pdf_ColorMode.Rows.Add("黑白", Aspose.Words.Saving.ColorMode.Grayscale);
+
+            this.word2pdf_colorMode.DataSource = Word2Pdf_ColorMode;
+            this.word2pdf_colorMode.DisplayMember = "DisplayValue";
+            this.word2pdf_colorMode.ValueMember = "RealValue";
+
+
+
+            //加载城市数据到combox中
+            this.city_level_1_combox.Items.Clear();//先清空数据
+            if (City_Json != null)
+            {
+                foreach (JToken City_1_Name in City_Json)
+                {
+                    city_level_1_combox.Items.Add(City_1_Name["name"]);//添加省级信息
+                }
+                city_level_1_combox.SelectedIndex = 0;
+            }
+
 
 
             //修改下拉样式
-            GetFormMembers(typeof(ComboBox)).ForEach(x =>
+            GetFormMembers(typeof(System.Windows.Forms.ComboBox)).ForEach(x =>
             {
-                ComboBox TempCombox = x as ComboBox;
+                System.Windows.Forms.ComboBox TempCombox = x as System.Windows.Forms.ComboBox;
                 TempCombox.DropDownStyle = ComboBoxStyle.DropDownList;
             });
 
@@ -652,17 +838,17 @@ namespace DocumentTools
         private void InitMoveItemButtonHandler()
         {
             #region 上下移动项目位置按钮注册点击事件
-            GetFormMembers(typeof(Button)).ForEach(x =>
+            GetFormMembers(typeof(System.Windows.Forms.Button)).ForEach(x =>
             {
 
-                Button TempButton = x as Button;
+                System.Windows.Forms.Button TempButton = x as System.Windows.Forms.Button;
                 string[] SplitButtonName = TempButton.Name.Split('_');
 
                 if (SplitButtonName.Length == 2)//只有确实分割了才处理
                 {
-                    GetFormMembers(typeof(ListView)).ForEach(listview =>
+                    GetFormMembers(typeof(System.Windows.Forms.ListView)).ForEach(listview =>
                     {
-                        ListView TempListView = listview as ListView;
+                        System.Windows.Forms.ListView TempListView = listview as System.Windows.Forms.ListView;
                         if (SplitButtonName[1].Contains("MoveUp") && TempListView.Name == SplitButtonName[0])
                         {
                             TempButton.Click += (s1, s2) =>
@@ -706,12 +892,12 @@ namespace DocumentTools
 
             pdf2excel_clear.Click += (s1, s2) =>
             {
-                UI.RemoveListViewItem(true, this.PdfFileListView);
+                UI.RemoveListViewItem(true, this.PDF2ExcelFileView);
             };
 
             ppt2pdf_clear.Click += (s1, s2) =>
             {
-                UI.RemoveListViewItem(true, this.PdfFileListView);
+                UI.RemoveListViewItem(true, this.PPT2PdfFileList);
             };
 
             pdf2ppt_clear.Click += (s1, s2) =>
@@ -721,7 +907,7 @@ namespace DocumentTools
 
             meregeword_clear.Click += (s1, s2) =>
             {
-                UI.RemoveListViewItem(true, this.PdfFileListView);
+                UI.RemoveListViewItem(true, this.MergeWordFileList);
             };
 
             meregepdf_clear.Click += (s1, s2) =>
@@ -820,6 +1006,10 @@ namespace DocumentTools
             splitword_clear.Click += (s1, s2) =>
             {
                 UI.RemoveListViewItem(true, this.SplitWordFileList);
+            };
+            webp2image_clear.Click += (s1, s2) =>
+            {
+                UI.RemoveListViewItem(true, this.WebpFileList);
             };
 
 
@@ -956,15 +1146,19 @@ namespace DocumentTools
             {
                 UI.RemoveListViewItem(false, this.SplitWordFileList);
             };
+            webp2image_remove.Click += (s1, s2) =>
+            {
+                UI.RemoveListViewItem(false, this.WebpFileList);
+            };
 
         }
 
         //注册TooTip到符号按钮上
         private void InitToolTipHandler()
         {
-            GetFormMembers(typeof(Button)).ForEach(member =>
+            GetFormMembers(typeof(System.Windows.Forms.Button)).ForEach(member =>
             {
-                Button TempButton = member as Button;
+                System.Windows.Forms.Button TempButton = member as System.Windows.Forms.Button;
 
                 if (TempButton.Name.Contains("_clear"))
                 {
@@ -989,7 +1183,8 @@ namespace DocumentTools
         //为tabpage添加图标
         private void InitTabPageIcon()
         {
-            GetFormMembers(typeof(TabPage)).ForEach(member => {
+            GetFormMembers(typeof(TabPage)).ForEach(member =>
+            {
                 if (member is TabPage TempPage)
                 {
                     string TabPageCaption = TempPage.Text;
@@ -997,15 +1192,15 @@ namespace DocumentTools
                     {
                         TempPage.ImageIndex = 0;
                     }
-                    else if(TabPageCaption.StartsWith("PDF"))
+                    else if (TabPageCaption.StartsWith("PDF"))
                     {
                         TempPage.ImageIndex = 1;
                     }
-                    else if(TabPageCaption.StartsWith("EXCEL转"))
+                    else if (TabPageCaption.StartsWith("EXCEL转"))
                     {
                         TempPage.ImageIndex = 2;
                     }
-                    else if(TabPageCaption.StartsWith("PPT转"))
+                    else if (TabPageCaption.StartsWith("PPT转"))
                     {
                         TempPage.ImageIndex = 3;
                     }
@@ -1069,6 +1264,22 @@ namespace DocumentTools
                     {
                         TempPage.ImageIndex = 11;
                     }
+                    else if (TabPageCaption.StartsWith("简易"))
+                    {
+                        TempPage.ImageIndex = 15;
+                    }
+                    else if (TabPageCaption.Contains("身份证"))
+                    {
+                        TempPage.ImageIndex = 16;
+                    }
+                    else if (TabPageCaption.Contains("文件副本"))
+                    {
+                        TempPage.ImageIndex = 17;
+                    }
+                    else if (TabPageCaption.Contains("网卡设置"))
+                    {
+                        TempPage.ImageIndex = 18;
+                    }
                 }
             });
         }
@@ -1088,12 +1299,15 @@ namespace DocumentTools
             {
                 try
                 {
-                    UI.ConvertStart(this.WordFileListView, this.StatusText, ConvertFileType.Word2Pdf, ".pdf");
+                    UI.ConvertStart(this.WordFileListView, this.StatusText, ConvertFileType.Word2Pdf, ".pdf", word2pdf_save_source.Checked, sender as System.Windows.Forms.Button);
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine(ex);
-                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        (sender as System.Windows.Forms.Button).Enabled = true;
+                    }));
                 }
 
             });
@@ -1112,11 +1326,15 @@ namespace DocumentTools
             {
                 try
                 {
-                    UI.ConvertStart(this.PdfFileListView, this.PdfStatusText, ConvertFileType.Pdf2Word, ".docx");
+                    UI.ConvertStart(this.PdfFileListView, this.PdfStatusText, ConvertFileType.Pdf2Word, ".docx", pdf2word_save_source.Checked, sender as System.Windows.Forms.Button);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        (sender as System.Windows.Forms.Button).Enabled = true;
+                    }));
                 }
 
             });
@@ -1151,11 +1369,15 @@ namespace DocumentTools
             {
                 try
                 {
-                    UI.ConvertStart(this.ExcelFileListView, this.Excel2PdfStatusText, ConvertFileType.Excel2Pdf, ".pdf");
+                    UI.ConvertStart(this.ExcelFileListView, this.Excel2PdfStatusText, ConvertFileType.Excel2Pdf, ".pdf", CallButton: sender as System.Windows.Forms.Button);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        (sender as System.Windows.Forms.Button).Enabled = true;
+                    }));
                 }
 
             });
@@ -1171,11 +1393,15 @@ namespace DocumentTools
             {
                 try
                 {
-                    UI.ConvertStart(this.DocumentsListView, this.ConvertWord2ImageStatus, ConvertFileType.Word2Image, this.ConvertImageList.SelectedValue.ToString());
+                    UI.ConvertStart(this.DocumentsListView, this.ConvertWord2ImageStatus, ConvertFileType.Word2Image, this.ConvertImageList.SelectedValue.ToString(), word2image_save_source.Checked, CallButton: sender as System.Windows.Forms.Button);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        (sender as System.Windows.Forms.Button).Enabled = true;
+                    }));
                 }
 
             });
@@ -1220,9 +1446,9 @@ namespace DocumentTools
                     }
 
 
-                    if (NameAutoCopy.Checked)
+                    if (NameAutoCopy.Checked && TargetTextBox.Text != string.Empty)
                     {
-                        Clipboard.SetText(TargetTextBox.Text);
+                        Clipboard.SetText(TargetTextBox.Text.Replace("\n", "\r\n"));//替换换行
                         NameAutoCopyStatusText.Text = "[已复制到剪贴板]";
                         NameAutoCopyStatusText.ForeColor = Color.ForestGreen;
                     }
@@ -1230,6 +1456,8 @@ namespace DocumentTools
                     {
                         NameAutoCopyStatusText.Text = "";
                     }
+
+                    Debug.Write(TargetTextBox.Text.Contains("\n"));
                 }
             }
             catch (Exception ex)
@@ -1269,11 +1497,15 @@ namespace DocumentTools
             {
                 try
                 {
-                    UI.ConvertStart(this.PDF2ExcelFileView, this.ConvertPDF2ExcelStatusText, ConvertFileType.Pdf2Excel, ".xlsx");
+                    UI.ConvertStart(this.PDF2ExcelFileView, this.ConvertPDF2ExcelStatusText, ConvertFileType.Pdf2Excel, ".xlsx", CallButton: sender as System.Windows.Forms.Button);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        (sender as System.Windows.Forms.Button).Enabled = true;
+                    }));
                 }
 
             });
@@ -1292,10 +1524,12 @@ namespace DocumentTools
                     {
                         try
                         {
+                            (sender as System.Windows.Forms.Button).Enabled = false;
                             string MeregeDirectory = System.IO.Path.GetDirectoryName(MeregePdfFileName);
                             this.MeregePdfFileStatusText.Text = "正在合并中...";
                             Util.MergrePdfFIle(MeregePdfFiles.Result, MeregePdfFileName, PictureMergeMode.Checked, MeregeFilePage.SelectedValue.ToString());
                             this.MeregePdfFileStatusText.Text = "合并完毕，右键名称可移除文件";
+                            (sender as System.Windows.Forms.Button).Enabled = true;
                             if (OpenMeregePdfFile.Checked)
                             {
                                 Process.Start(MeregePdfFileName);
@@ -1311,8 +1545,11 @@ namespace DocumentTools
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                            this.BeginInvoke(new Action(() =>
+                            {
+                                MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                (sender as System.Windows.Forms.Button).Enabled = true;
+                            }));
                         }
 
                     });
@@ -1334,9 +1571,9 @@ namespace DocumentTools
         /// <param name="e"></param>
         private void 删除本项ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (ListViewRightMenu.SourceControl.GetType() == typeof(ListView))
+            if (ListViewRightMenu.SourceControl.GetType() == typeof(System.Windows.Forms.ListView))
             {
-                ListView TempListView = ListViewRightMenu.SourceControl as ListView;
+                System.Windows.Forms.ListView TempListView = ListViewRightMenu.SourceControl as System.Windows.Forms.ListView;
                 UI.RemoveListViewItem(false, TempListView);
             }
         }
@@ -1349,9 +1586,9 @@ namespace DocumentTools
 
         private void 清空列表ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (ListViewRightMenu.SourceControl.GetType() == typeof(ListView))
+            if (ListViewRightMenu.SourceControl.GetType() == typeof(System.Windows.Forms.ListView))
             {
-                ListView TempListView = ListViewRightMenu.SourceControl as ListView;
+                System.Windows.Forms.ListView TempListView = ListViewRightMenu.SourceControl as System.Windows.Forms.ListView;
                 UI.RemoveListViewItem(true, TempListView);
             }
 
@@ -1382,18 +1619,18 @@ namespace DocumentTools
         /// <param name="e"></param>
         private void ListviewDragDrop(object sender, DragEventArgs e)
         {
-            ListView DragedListview = sender as ListView;
+            System.Windows.Forms.ListView DragedListview = sender as System.Windows.Forms.ListView;
             string[] DropFiles = e.Data.GetData(DataFormats.FileDrop, false) as string[];
             switch (DragedListview.Name)
             {
                 case "WordFileListView":
-                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.WordFileListView, new string[] { ".doc", ".docx",".wps" });
+                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.WordFileListView, new string[] { ".doc", ".docx", ".wps" });
                     break;
                 case "PdfFileListView":
                     UI.AddFilesToListviewWithNotDialog(DropFiles, this.PdfFileListView, new string[] { ".pdf" });
                     break;
                 case "ExcelFileListView":
-                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.ExcelFileListView, new string[] { ".xls", ".xlsx" ,".et"});
+                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.ExcelFileListView, new string[] { ".xls", ".xlsx", ".et" });
                     break;
                 case "DocumentsListView":
                     UI.AddFilesToListviewWithNotDialog(DropFiles, this.DocumentsListView, new string[] { ".doc", ".docx", ".pdf", ".xls", ".xlsx" });
@@ -1405,7 +1642,7 @@ namespace DocumentTools
                     UI.AddFilesToListviewWithNotDialog(DropFiles, this.MergePdfFileView, new string[] { ".pdf", ".jpg", ".png", ".bmp", ".tif" });
                     break;
                 case "ReplaceWordFileList":
-                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.ReplaceWordFileList, new string[] { ".doc", ".docx" ,".wps"});
+                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.ReplaceWordFileList, new string[] { ".doc", ".docx", ".wps" });
                     break;
                 case "ReplaceExcelFileView":
                     UI.AddFilesToListviewWithNotDialog(DropFiles, this.ReplaceExcelFileView, new string[] { ".xls", ".xlsx" });
@@ -1417,10 +1654,10 @@ namespace DocumentTools
                     UI.AddFilesToListviewWithNotDialog(DropFiles, this.IcoFileView, new string[] { ".jpg", ".png", ".bmp" });
                     break;
                 case "MergeWordFileList":
-                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.MergeWordFileList, new string[] { ".doc", ".docx",".wps" });
+                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.MergeWordFileList, new string[] { ".doc", ".docx", ".wps" });
                     break;
                 case "Word2ExcelFileList":
-                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.Word2ExcelFileList, new string[] { ".doc", ".docx" , ".wps" });
+                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.Word2ExcelFileList, new string[] { ".doc", ".docx", ".wps" });
                     break;
                 case "Excel2WordFileList":
                     UI.AddFilesToListviewWithNotDialog(DropFiles, this.Excel2WordFileList, new string[] { ".xls", ".xlsx" });
@@ -1453,7 +1690,7 @@ namespace DocumentTools
                     UI.AddFilesToListviewWithNotDialog(DropFiles, this.CompressImageFileList, new string[] { ".jpg", ".jpeg", ".png", ".bmp" });
                     break;
                 case "Word2EPUBFileList":
-                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.Word2EPUBFileList, new string[] { ".doc", ".docx" , ".wps" });
+                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.Word2EPUBFileList, new string[] { ".doc", ".docx", ".wps" });
                     break;
                 case "EPUB2WORDFileList":
                     UI.AddFilesToListviewWithNotDialog(DropFiles, this.EPUB2WORDFileList, new string[] { ".epub" });
@@ -1462,10 +1699,13 @@ namespace DocumentTools
                     UI.AddFilesToListviewWithNotDialog(DropFiles, this.EPUB2PDFFileList, new string[] { ".epub" });
                     break;
                 case "HTML2PDFFileList":
-                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.HTML2PDFFileList, new string[] { ".html" });
+                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.HTML2PDFFileList, new string[] { ".html", ".htm", ".mhtml", ".mht" });
                     break;
                 case "SplitWordFileList":
-                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.SplitWordFileList, new string[] { ".doc", ".docx" , ".wps" });
+                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.SplitWordFileList, new string[] { ".doc", ".docx", ".wps" });
+                    break;
+                case "WebpFileList":
+                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.WebpFileList, new string[] { ".webp" });
                     break;
                 default: break;
             }
@@ -1666,7 +1906,7 @@ namespace DocumentTools
         private void Twain_Scanning(object sender, DataTransferredEventArgs e)
         {
 
-            using Image TempScannedImage = Image.FromStream(e.GetNativeImageStream());
+            using System.Drawing.Image TempScannedImage = System.Drawing.Image.FromStream(e.GetNativeImageStream());
             if (this.ScanPictureSavePathBox.Text != string.Empty)
             {
                 Stopwatch sw = new Stopwatch();//监视器开始
@@ -1751,11 +1991,15 @@ namespace DocumentTools
             {
                 try
                 {
-                    UI.ConvertStart(ReplaceWordFileList, ReplaceWordContentStatusText, ConvertFileType.WordReplace, ".docx");
+                    UI.ConvertStart(ReplaceWordFileList, ReplaceWordContentStatusText, ConvertFileType.WordReplace, ".docx", CallButton: sender as System.Windows.Forms.Button);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        (sender as System.Windows.Forms.Button).Enabled = true;
+                    }));
                 }
 
             });
@@ -1782,11 +2026,15 @@ namespace DocumentTools
             {
                 try
                 {
-                    UI.ConvertStart(ReplaceExcelFileView, ReplaceExcelStatusText, ConvertFileType.ExcelReplace, ".xlsx");
+                    UI.ConvertStart(ReplaceExcelFileView, ReplaceExcelStatusText, ConvertFileType.ExcelReplace, ".xlsx", CallButton: sender as System.Windows.Forms.Button);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        (sender as System.Windows.Forms.Button).Enabled = true;
+                    }));
                 }
 
             });
@@ -1831,7 +2079,7 @@ namespace DocumentTools
 
         private void 展开折叠本节点全部ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TreeNode CurrentSelectNode = this.DecodeDataMatrixView.SelectedNode;
+            System.Windows.Forms.TreeNode CurrentSelectNode = this.DecodeDataMatrixView.SelectedNode;
             if (CurrentSelectNode.IsExpanded)
             {
                 CurrentSelectNode.Collapse();
@@ -1844,7 +2092,7 @@ namespace DocumentTools
 
         private void 展开折叠全部节点ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            foreach (TreeNode TempNode in DecodeDataMatrixView.Nodes)
+            foreach (System.Windows.Forms.TreeNode TempNode in DecodeDataMatrixView.Nodes)
             {
                 if (TempNode.IsExpanded)
                 {
@@ -1908,11 +2156,15 @@ namespace DocumentTools
             {
                 try
                 {
-                    UI.ConvertStart(this.IcoFileView, this.Image2IcoStatusText, ConvertFileType.Image2Ico, ".ico");
+                    UI.ConvertStart(this.IcoFileView, this.Image2IcoStatusText, ConvertFileType.Image2Ico, ".ico", CallButton: sender as System.Windows.Forms.Button);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        (sender as System.Windows.Forms.Button).Enabled = true;
+                    }));
                 }
 
             });
@@ -1964,10 +2216,12 @@ namespace DocumentTools
                     {
                         try
                         {
+                            (sender as System.Windows.Forms.Button).Enabled = false;
                             string MeregeDirectory = System.IO.Path.GetDirectoryName(MergeWordFileName);
                             this.MeregeWordStatusText.Text = "正在合并中...";
                             Util.MergeWordFile(MergeWordFiles.Result, MergeWordFileName);
                             this.MeregeWordStatusText.Text = "合并完毕，右键名称可移除文件";
+                            (sender as System.Windows.Forms.Button).Enabled = true;
                             this.BeginInvoke(new Action(() =>
                             {
                                 DialogResult OpenResult = MessageBox.Show("合并完毕，是否需要打开合并文件所在目录？", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
@@ -1979,8 +2233,11 @@ namespace DocumentTools
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                            this.BeginInvoke(new Action(() =>
+                            {
+                                MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                (sender as System.Windows.Forms.Button).Enabled = true;
+                            }));
                         }
 
                     });
@@ -2001,11 +2258,15 @@ namespace DocumentTools
             {
                 try
                 {
-                    UI.ConvertStart(this.Word2ExcelFileList, this.ConverWord2ExcelStatusText, ConvertFileType.Word2Excel, ".xlsx");
+                    UI.ConvertStart(this.Word2ExcelFileList, this.ConverWord2ExcelStatusText, ConvertFileType.Word2Excel, ".xlsx", word2excel_save_source.Checked, sender as System.Windows.Forms.Button);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        (sender as System.Windows.Forms.Button).Enabled = true;
+                    }));
                 }
 
             });
@@ -2023,11 +2284,15 @@ namespace DocumentTools
             {
                 try
                 {
-                    UI.ConvertStart(this.Excel2WordFileList, this.ConvertExcel2WordStatusText, ConvertFileType.Excel2Word, ".docx");
+                    UI.ConvertStart(this.Excel2WordFileList, this.ConvertExcel2WordStatusText, ConvertFileType.Excel2Word, ".docx", excel2word_save_source.Checked, CallButton: sender as System.Windows.Forms.Button);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        (sender as System.Windows.Forms.Button).Enabled = true;
+                    }));
                 }
 
             });
@@ -2044,11 +2309,15 @@ namespace DocumentTools
             {
                 try
                 {
-                    UI.ConvertStart(this.SplitPdfFileList, this.SplitPdfStatusText, ConvertFileType.SplitPdf, ".pdf");
+                    UI.ConvertStart(this.SplitPdfFileList, this.SplitPdfStatusText, ConvertFileType.SplitPdf, ".pdf", CallButton: sender as System.Windows.Forms.Button);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        (sender as System.Windows.Forms.Button).Enabled = true;
+                    }));
                 }
 
             });
@@ -2087,11 +2356,15 @@ namespace DocumentTools
             {
                 try
                 {
-                    UI.ConvertStart(this.PdfWaterMarkFileList, this.AddWaterMark2PdfStatusText, ConvertFileType.AddWaterMarkPdf, ".pdf");
+                    UI.ConvertStart(this.PdfWaterMarkFileList, this.AddWaterMark2PdfStatusText, ConvertFileType.AddWaterMarkPdf, ".pdf", CallButton: sender as System.Windows.Forms.Button);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        (sender as System.Windows.Forms.Button).Enabled = true;
+                    }));
                 }
 
             });
@@ -2110,19 +2383,18 @@ namespace DocumentTools
             {
                 try
                 {
-                    UI.ConvertStart(this.RemovePdfWaterMarkFileList, this.RemovePdfWaterMarkStatusText, ConvertFileType.RemovePdfWaterMark, ".pdf");
+                    UI.ConvertStart(this.RemovePdfWaterMarkFileList, this.RemovePdfWaterMarkStatusText, ConvertFileType.RemovePdfWaterMark, ".pdf", CallButton: sender as System.Windows.Forms.Button);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        (sender as System.Windows.Forms.Button).Enabled = true;
+                    }));
                 }
 
             });
-        }
-
-        private void BodyForm_Resize(object sender, EventArgs e)
-        {
-            ReWinformLayout();
         }
 
         private void AddBackGroudImage_Click(object sender, EventArgs e)
@@ -2133,7 +2405,7 @@ namespace DocumentTools
             {
                 AddWaterMarkBackGroudImageFileName = BackGroundImageFileNames.FirstOrDefault();
 
-                Image TempLoadImage = Image.FromFile(AddWaterMarkBackGroudImageFileName);
+                System.Drawing.Image TempLoadImage = System.Drawing.Image.FromFile(AddWaterMarkBackGroudImageFileName);
 
                 WaterMarkImage.Image = TempLoadImage;
 
@@ -2145,7 +2417,7 @@ namespace DocumentTools
 
         private void ValidTextBoxContent(object sender, CancelEventArgs e)
         {
-            TextBox TempTextBox = (TextBox)sender;
+            System.Windows.Forms.TextBox TempTextBox = (System.Windows.Forms.TextBox)sender;
 
             string TempText = TempTextBox.Text;
 
@@ -2241,11 +2513,15 @@ namespace DocumentTools
             {
                 try
                 {
-                    UI.ConvertStart(this.PPT2PdfFileList, this.ConvertPPT2PDFStatusText, ConvertFileType.PPT2PDF, ".pdf");
+                    UI.ConvertStart(this.PPT2PdfFileList, this.ConvertPPT2PDFStatusText, ConvertFileType.PPT2PDF, ".pdf", ppt2pdf_save_source.Checked, CallButton: sender as System.Windows.Forms.Button);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        (sender as System.Windows.Forms.Button).Enabled = true;
+                    }));
                 }
 
             });
@@ -2253,22 +2529,22 @@ namespace DocumentTools
 
         private void ListviewSortHandler(object sender, ColumnClickEventArgs e)
         {
-            ListView TempListview = sender as ListView;
+            //自定义比较器进行排序
 
             if (e.Column == 0)
             {
-                if (TempListview.Sorting == SortOrder.Descending)
-                {
-                    TempListview.Sorting = SortOrder.Ascending;
-                }
-                else if (TempListview.Sorting == SortOrder.Ascending)
-                {
-                    TempListview.Sorting = SortOrder.Descending;
-                }
+                System.Windows.Forms.ListView TempListview = sender as System.Windows.Forms.ListView;
 
-                TempListview.Sort();
+                //默认加载进来都是顺序，所以第一次点击先排为逆序
+                if (TempListview.ListViewItemSorter == null || TempListview.ListViewItemSorter is ListViewItemComparer_ASC)
+                {
+                    TempListview.ListViewItemSorter = new ListViewItemComparer_DSC();
+                }
+                else
+                {
+                    TempListview.ListViewItemSorter = new ListViewItemComparer_ASC();
+                }
             }
-
 
         }
 
@@ -2278,11 +2554,15 @@ namespace DocumentTools
             {
                 try
                 {
-                    UI.ConvertStart(this.PDF2PPTFileList, this.Pdf2PPTStatusText, ConvertFileType.PDF2PPT, ".pptx");
+                    UI.ConvertStart(this.PDF2PPTFileList, this.Pdf2PPTStatusText, ConvertFileType.PDF2PPT, ".pptx", pdf2ppt_save_source.Checked, CallButton: sender as System.Windows.Forms.Button);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        (sender as System.Windows.Forms.Button).Enabled = true;
+                    }));
                 }
 
             });
@@ -2304,11 +2584,15 @@ namespace DocumentTools
             {
                 try
                 {
-                    UI.ConvertStart(this.ConvertPdfComplianceFileList, this.ConvertPdfComplianceStatusText, ConvertFileType.ConvertPdfCompliance, ".pdf");
+                    UI.ConvertStart(this.ConvertPdfComplianceFileList, this.ConvertPdfComplianceStatusText, ConvertFileType.ConvertPdfCompliance, ".pdf", CallButton: sender as System.Windows.Forms.Button);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        (sender as System.Windows.Forms.Button).Enabled = true;
+                    }));
                 }
 
             });
@@ -2324,31 +2608,33 @@ namespace DocumentTools
             Task<List<string>> ImageFiles = UI.GetListViewFirstItemContent(this.ConvertImage2PDFFileList);
             if (ImageFiles.Result.Count > 0)
             {
-                try
+                if (ExportSignlePDF.Checked)
                 {
-                    if (ExportSignlePDF.Checked)
+                    IEnumerable<string> SavePaths = Util.ShwoSelectDialog(true, true, "", "");
+                    Task.Run(() =>
                     {
-                        IEnumerable<string> SavePaths = Util.ShwoSelectDialog(true, true, "", "");
-                        Task.Run(() =>
+                        try
                         {
                             string SavePath = SavePaths.FirstOrDefault();
                             if (SavePath != string.Empty || SavePath != default)
                             {
                                 if (SavePath != null)
                                 {
+                                    (sender as System.Windows.Forms.Button).Enabled = false;
                                     int ImageCount = 0;
                                     ImageFiles.Result.ForEach(TempFile =>
                                     {
                                         ImageCount++;
                                         this.COnvertImage2PDFStatusText.Text = $"正在转换第{ImageCount}个文件";
                                         string SavePdfName = $"{Path.Combine(SavePath, Path.GetFileNameWithoutExtension(TempFile) + ".pdf")}";
-                                        Util.ConvertImage2PDF(TempFile, SavePdfName, false, ImageFiles.Result, bool.Parse(this.Image2PDFCombox.SelectedValue.ToString()), this.Image2PDFOptiomize.Checked, this.Image2PDFCOmpressImage.Checked, double.Parse(this.ImagePdfPageSIze_UP.Text), double.Parse(this.ImagePdfPageSIze_LEFT.Text), double.Parse(this.ImagePdfPageSIze_BOTTOM.Text), double.Parse(this.ImagePdfPageSIze_RIGHT.Text));
+                                        Util.ConvertImage2PDF(TempFile, SavePdfName, false, ImageFiles.Result, this.Image2PDFCombox.SelectedIndex, this.Image2PDFOptiomize.Checked, this.Image2PDFCOmpressImage.Checked, double.Parse(this.ImagePdfPageSIze_UP.Text), double.Parse(this.ImagePdfPageSIze_LEFT.Text), double.Parse(this.ImagePdfPageSIze_BOTTOM.Text), double.Parse(this.ImagePdfPageSIze_RIGHT.Text));
 
                                         this.COnvertImage2PDFStatusText.Text = $"转换完毕";
                                     });
                                     this.BeginInvoke(new Action(() =>
                                     {
-                                        DialogResult OpenResult = MessageBox.Show("合并完毕，是否需要打开合并文件所在目录？", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
+                                        DialogResult OpenResult = MessageBox.Show("转换完毕，是否需要打开文件所在目录？", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
+                                        (sender as System.Windows.Forms.Button).Enabled = true;
                                         if (OpenResult == DialogResult.Yes)
                                         {
                                             Process.Start(SavePath);
@@ -2356,20 +2642,34 @@ namespace DocumentTools
                                     }));
                                 }
                             }
-                        });
-                    }
-                    else
+                        }
+                        catch (Exception ex)
+                        {
+                            this.BeginInvoke(new Action(() =>
+                            {
+                                MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                (sender as System.Windows.Forms.Button).Enabled = true;
+                            }));
+                        }
+
+                    });
+                }
+                else
+                {
+                    string MeregePdfFileName = Util.ShowSaveFileDialog("PDF文档|.pdf", "设置文件名称");
+                    Task.Run(() =>
                     {
-                        string MeregePdfFileName = Util.ShowSaveFileDialog("PDF文档|.pdf", "设置文件名称");
-                        Task.Run(() =>
+                        try
                         {
                             if (MeregePdfFileName != string.Empty)
                             {
+                                (sender as System.Windows.Forms.Button).Enabled = false;
                                 this.COnvertImage2PDFStatusText.Text = "正在合并中...";
-                                Util.ConvertImage2PDF("", MeregePdfFileName, true, ImageFiles.Result, bool.Parse(this.Image2PDFCombox.SelectedValue.ToString()), this.Image2PDFOptiomize.Checked, this.Image2PDFCOmpressImage.Checked, double.Parse(this.ImagePdfPageSIze_UP.Text), double.Parse(this.ImagePdfPageSIze_LEFT.Text), double.Parse(this.ImagePdfPageSIze_BOTTOM.Text), double.Parse(this.ImagePdfPageSIze_RIGHT.Text));
+                                Util.ConvertImage2PDF("", MeregePdfFileName, true, ImageFiles.Result, this.Image2PDFCombox.SelectedIndex, this.Image2PDFOptiomize.Checked, this.Image2PDFCOmpressImage.Checked, double.Parse(this.ImagePdfPageSIze_UP.Text), double.Parse(this.ImagePdfPageSIze_LEFT.Text), double.Parse(this.ImagePdfPageSIze_BOTTOM.Text), double.Parse(this.ImagePdfPageSIze_RIGHT.Text));
                                 this.COnvertImage2PDFStatusText.Text = "合并完毕";
                                 this.BeginInvoke(new Action(() =>
                                 {
+                                    (sender as System.Windows.Forms.Button).Enabled = true;
                                     DialogResult OpenResult = MessageBox.Show("合并完毕，是否需要打开合并文件所在目录？", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
                                     if (OpenResult == DialogResult.Yes)
                                     {
@@ -2377,12 +2677,17 @@ namespace DocumentTools
                                     }
                                 }));
                             }
-                        });
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        catch (Exception ex)
+                        {
+                            this.BeginInvoke(new Action(() =>
+                            {
+                                MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                (sender as System.Windows.Forms.Button).Enabled = true;
+                            }));
+
+                        }
+                    });
                 }
             }
         }
@@ -2397,11 +2702,15 @@ namespace DocumentTools
             {
                 try
                 {
-                    UI.ConvertStart(this.CompressPdfFileList, this.CompressPDFStatusText, ConvertFileType.CompressPDF, ".pdf");
+                    UI.ConvertStart(this.CompressPdfFileList, this.CompressPDFStatusText, ConvertFileType.CompressPDF, ".pdf", CallButton: sender as System.Windows.Forms.Button);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        (sender as System.Windows.Forms.Button).Enabled = true;
+                    }));
                 }
 
             });
@@ -2420,11 +2729,15 @@ namespace DocumentTools
             {
                 try
                 {
-                    UI.ConvertStart(this.CompressImageFileList, this.CompressImageStatusText, ConvertFileType.CompressImage, this.CompressImage_OutPutImageFormat.SelectedValue.ToString());
+                    UI.ConvertStart(this.CompressImageFileList, this.CompressImageStatusText, ConvertFileType.CompressImage, this.CompressImage_OutPutImageFormat.SelectedValue.ToString(), CallButton: sender as System.Windows.Forms.Button);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        (sender as System.Windows.Forms.Button).Enabled = true;
+                    }));
                 }
 
             });
@@ -2444,7 +2757,7 @@ namespace DocumentTools
 
         private void PlayCXKMusic_Click(object sender, EventArgs e)
         {
-            Util.PlayMp3WithStream();
+            Util.PlayMp3WithStream("zdsny");
         }
 
         private void NameReplaceRegexMode_Click(object sender, EventArgs e)
@@ -2471,6 +2784,7 @@ namespace DocumentTools
             GlobalHook.KeyUp += HookKeyboard_KeyUp;
             KeyBoardLockStatus.Text = $"已锁定";
             KeyBoardLockStatus.ForeColor = Color.Red;
+            LockKeyBoard.Enabled = false;//锁定按钮不可用
         }
 
         private void UnlockKeyBoard_Click(object sender, EventArgs e)
@@ -2480,6 +2794,7 @@ namespace DocumentTools
 
             KeyBoardLockStatus.Text = "已解锁";
             KeyBoardLockStatus.ForeColor = Color.Green;
+            LockKeyBoard.Enabled = true;
         }
 
         private void HookKeyboard_KeyDown(object sender, KeyEventArgs e)
@@ -2498,22 +2813,30 @@ namespace DocumentTools
 
             try
             {
-                Util.RemoveShort();
-                ShortStatus.Text = "已移除";
-                ShortStatus.ForeColor = Color.Red;
-                if (AutoRestartExplorer.Checked)
+                if (Util.IsAdministrator())
                 {
-                    Process.GetProcesses().ToList().ForEach(p =>
+                    Util.RemoveShort();
+                    ShortStatus.Text = "已移除";
+                    ShortStatus.ForeColor = Color.Red;
+                    if (AutoRestartExplorer.Checked)
                     {
-                        if (p.ProcessName == "explorer")
+                        Process.GetProcesses().ToList().ForEach(p =>
                         {
-                            p.Kill();
-                        }
-                    });
-                    Process.Start("explorer.exe");
+                            if (p.ProcessName == "explorer")
+                            {
+                                p.Kill();
+                            }
+                        });
+                        Process.Start("explorer.exe");
+                    }
                 }
+                else
+                {
+                    MessageBox.Show("请使用管理员身份证重新运行软件后执行本操作", "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -2524,20 +2847,29 @@ namespace DocumentTools
         {
             try
             {
-                Util.RestoreShort();
-                ShortStatus.Text = "已恢复";
-                ShortStatus.ForeColor = Color.Green;
-                if (AutoRestartExplorer.Checked)
+                if (Util.IsAdministrator())
                 {
-                    Process.GetProcesses().ToList().ForEach(p =>
+                    Util.RestoreShort();
+                    ShortStatus.Text = "已恢复";
+                    ShortStatus.ForeColor = Color.Green;
+                    if (AutoRestartExplorer.Checked)
                     {
-                        if (p.ProcessName == "explorer")
+                        Process.GetProcesses().ToList().ForEach(p =>
                         {
-                            p.Kill();
-                        }
-                    });
-                    Process.Start("explorer.exe");
+                            if (p.ProcessName == "explorer")
+                            {
+                                p.Kill();
+                            }
+                        });
+                        Process.Start("explorer.exe");
+                    }
                 }
+                else
+                {
+                    MessageBox.Show("请使用管理员身份证重新运行软件后执行本操作", "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                }
+
             }
             catch (Exception ex)
             {
@@ -2557,11 +2889,15 @@ namespace DocumentTools
             {
                 try
                 {
-                    UI.ConvertStart(this.Word2EPUBFileList, this.ConvertWord2EpubStatusText, ConvertFileType.Word2Epub, ".epub");
+                    UI.ConvertStart(this.Word2EPUBFileList, this.ConvertWord2EpubStatusText, ConvertFileType.Word2Epub, ".epub", CallButton: sender as System.Windows.Forms.Button);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        (sender as System.Windows.Forms.Button).Enabled = true;
+                    }));
                 }
 
             });
@@ -2578,20 +2914,26 @@ namespace DocumentTools
             {
                 try
                 {
-                    UI.ConvertStart(this.EPUB2WORDFileList, this.ConvertEpub2WordStatusText, ConvertFileType.Epub2Word, ".docx");
+                    UI.ConvertStart(this.EPUB2WORDFileList, this.ConvertEpub2WordStatusText, ConvertFileType.Epub2Word, ".docx", CallButton: sender as System.Windows.Forms.Button);
                 }
                 catch (NullReferenceException)
                 {
                     MessageBox.Show($"EPUB格式不正确，请移除错误文件后重试", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    (sender as System.Windows.Forms.Button).Enabled = true;
                 }
                 catch (IndexOutOfRangeException)
                 {
                     MessageBox.Show($"EPUB格式不正确，请移除错误文件后重试", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    (sender as System.Windows.Forms.Button).Enabled = true;
                 }
                 catch (Exception ex)
                 {
 
-                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        (sender as System.Windows.Forms.Button).Enabled = true;
+                    }));
                 }
 
             });
@@ -2608,21 +2950,26 @@ namespace DocumentTools
             {
                 try
                 {
-                    UI.ConvertStart(this.EPUB2PDFFileList, this.ConvertEPUB2PDFStatusText, ConvertFileType.Epub2Pdf, ".pdf");
+                    UI.ConvertStart(this.EPUB2PDFFileList, this.ConvertEPUB2PDFStatusText, ConvertFileType.Epub2Pdf, ".pdf", CallButton: sender as System.Windows.Forms.Button);
                 }
                 catch (NullReferenceException)
                 {
                     MessageBox.Show($"EPUB格式不正确，请移除错误文件后重试", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    (sender as System.Windows.Forms.Button).Enabled = true;
                 }
                 catch (IndexOutOfRangeException)
                 {
                     MessageBox.Show($"EPUB格式不正确，请移除错误文件后重试", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    (sender as System.Windows.Forms.Button).Enabled = true;
 
                 }
                 catch (Exception ex)
                 {
-
-                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        (sender as System.Windows.Forms.Button).Enabled = true;
+                    }));
                 }
 
             });
@@ -2630,9 +2977,9 @@ namespace DocumentTools
 
         private void 打开源文件目录ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (ListViewRightMenu.SourceControl.GetType() == typeof(ListView))
+            if (ListViewRightMenu.SourceControl.GetType() == typeof(System.Windows.Forms.ListView))
             {
-                ListView TempListView = ListViewRightMenu.SourceControl as ListView;
+                System.Windows.Forms.ListView TempListView = ListViewRightMenu.SourceControl as System.Windows.Forms.ListView;
 
                 if (File.Exists(TempListView.FocusedItem.Text))
                 {
@@ -2644,9 +2991,9 @@ namespace DocumentTools
 
         private void 打开源文件ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (ListViewRightMenu.SourceControl.GetType() == typeof(ListView))
+            if (ListViewRightMenu.SourceControl.GetType() == typeof(System.Windows.Forms.ListView))
             {
-                ListView TempListView = ListViewRightMenu.SourceControl as ListView;
+                System.Windows.Forms.ListView TempListView = ListViewRightMenu.SourceControl as System.Windows.Forms.ListView;
 
                 if (File.Exists(TempListView.FocusedItem.Text))
                 {
@@ -2658,9 +3005,9 @@ namespace DocumentTools
 
         private void 打开转换后目录ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (ListViewRightMenu.SourceControl.GetType() == typeof(ListView))
+            if (ListViewRightMenu.SourceControl.GetType() == typeof(System.Windows.Forms.ListView))
             {
-                ListView TempListView = ListViewRightMenu.SourceControl as ListView;
+                System.Windows.Forms.ListView TempListView = ListViewRightMenu.SourceControl as System.Windows.Forms.ListView;
 
                 if (TempListView.FocusedItem.SubItems.Count >= 4)
                 {
@@ -2674,9 +3021,9 @@ namespace DocumentTools
 
         private void 打开转换后文件ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (ListViewRightMenu.SourceControl.GetType() == typeof(ListView))
+            if (ListViewRightMenu.SourceControl.GetType() == typeof(System.Windows.Forms.ListView))
             {
-                ListView TempListView = ListViewRightMenu.SourceControl as ListView;
+                System.Windows.Forms.ListView TempListView = ListViewRightMenu.SourceControl as System.Windows.Forms.ListView;
 
                 if (TempListView.FocusedItem.SubItems.Count >= 4)
                 {
@@ -2691,9 +3038,9 @@ namespace DocumentTools
         private void 获取PDF文件版本信息ToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            if (ListViewRightMenu.SourceControl.GetType() == typeof(ListView))
+            if (ListViewRightMenu.SourceControl.GetType() == typeof(System.Windows.Forms.ListView))
             {
-                ListView TempListView = ListViewRightMenu.SourceControl as ListView;
+                System.Windows.Forms.ListView TempListView = ListViewRightMenu.SourceControl as System.Windows.Forms.ListView;
 
                 Task.Run(() =>
                 {
@@ -2738,11 +3085,18 @@ namespace DocumentTools
             {
                 try
                 {
-                    UI.ConvertStart(this.HTML2PDFFileList, this.ConvertHtml2PdfStatusText, ConvertFileType.Html2PDF, ".pdf");
+                    if (this.html2pdf_textbox_chromepath.Text != string.Empty)
+                    {
+                        UI.ConvertStart(this.HTML2PDFFileList, this.ConvertHtml2PdfStatusText, ConvertFileType.Html2PDF, ".pdf", CallButton: sender as System.Windows.Forms.Button);
+                    }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.ToString(), "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        (sender as System.Windows.Forms.Button).Enabled = true;
+                    }));
                 }
 
             });
@@ -2750,9 +3104,9 @@ namespace DocumentTools
 
         private void SetWord2EpubCoverImage_Click(object sender, EventArgs e)
         {
-           string SelectImageFileName =  Util.ShwoSelectDialog(false,false,"图片文件","*.jpg;*.jpeg;*.png;*.bmp").FirstOrDefault();
+            string SelectImageFileName = Util.ShwoSelectDialog(false, false, "图片文件", "*.jpg;*.jpeg;*.png;*.bmp").FirstOrDefault();
 
-            if(SelectImageFileName!=default && !string.IsNullOrEmpty(SelectImageFileName))
+            if (SelectImageFileName != default && !string.IsNullOrEmpty(SelectImageFileName))
             {
                 this.Word2EpubConverImage.Text = SelectImageFileName;
             }
@@ -2769,11 +3123,15 @@ namespace DocumentTools
             {
                 try
                 {
-                    UI.ConvertStart(this.SplitWordFileList, this.StartSplitWordStatusText, ConvertFileType.SplitWord, ".docx");
+                    UI.ConvertStart(this.SplitWordFileList, this.StartSplitWordStatusText, ConvertFileType.SplitWord, ".docx", CallButton: sender as System.Windows.Forms.Button);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        (sender as System.Windows.Forms.Button).Enabled = true;
+                    }));
                 }
 
             });
@@ -2786,11 +3144,11 @@ namespace DocumentTools
 
         private void Html2pdf_button_set_chrome_path_Click(object sender, EventArgs e)
         {
-           IEnumerable<string> chrome_path =  Util.ShwoSelectDialog(false, false, "chrome浏览器", "*.exe");
+            IEnumerable<string> chrome_path = Util.ShwoSelectDialog(false, false, "chrome浏览器", "*.exe");
 
             string chrome_path_string = chrome_path.FirstOrDefault();
 
-            if(chrome_path_string!=string.Empty&&chrome_path_string!=default&&chrome_path_string!=null)
+            if (chrome_path_string != string.Empty && chrome_path_string != default && chrome_path_string != null)
             {
                 this.html2pdf_textbox_chromepath.Text = chrome_path_string;
             }
@@ -2803,12 +3161,40 @@ namespace DocumentTools
 
         private void SelectMss3_Click(object sender, EventArgs e)
         {
-           string Mss3Path =  Util.ShwoSelectDialog(false, false, "MSS3文件", "*.mss3").FirstOrDefault();
+            string Mss3Path = Util.ShwoSelectDialog(false, false, "MSS3文件", "*.mss3").FirstOrDefault();
 
-            if(Mss3Path!=string.Empty&&Mss3Path!=default&&Mss3Path!=null)
+            Task.Run(new Action(() =>
             {
-                this.Mss3Path.Text = Mss3Path;
-            }
+
+                try
+                {
+                    if (Mss3Path != string.Empty && Mss3Path != default && Mss3Path != null)
+                    {
+                        this.Mss3Path.Text = Mss3Path;
+
+                        this.BeginInvoke(new Action(() =>
+                        {
+                            DataTable TempVoteDataTable = Util.GetMss3VoteInfo(Mss3Path);
+
+                            if (TempVoteDataTable != null && TempVoteDataTable.Rows.Count > 0)
+                            {
+                                this.votedataview.DataSource = TempVoteDataTable;
+                            }
+                        }));
+
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }));
+                }
+
+            }));
+
         }
 
         private void StartInsert_Click(object sender, EventArgs e)
@@ -2817,11 +3203,17 @@ namespace DocumentTools
             {
                 try
                 {
-                    Util.InsertVotePicContent(this.Mss3Path.Text, VotePicture.ImageLocation,this.votestatustext,this.voteid.Text,this.votename.Text,this.voteindex.Text);
+                    (sender as System.Windows.Forms.Button).Enabled = false;
+                    Util.InsertVotePicContent(this.Mss3Path.Text, VotePicture.ImageLocation, this.votestatustext, this.voteid.Text, this.votename.Text, this.voteindex.Text, this.votepageIndexCombox.SelectedValue.ToString(), this.votepage_type_combox.SelectedValue.ToString());
+                    (sender as System.Windows.Forms.Button).Enabled = true;
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        (sender as System.Windows.Forms.Button).Enabled = true;
+                    }));
                 }
 
             });
@@ -2982,7 +3374,7 @@ namespace DocumentTools
 
         private void 姓名横转竖列ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.MainTabPage.SelectedIndex = 26;
+            this.MainTabPage.SelectedIndex = 28;
 
         }
 
@@ -2994,31 +3386,31 @@ namespace DocumentTools
 
         private void twain扫描仪调试ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.MainTabPage.SelectedIndex = 27;
+            this.MainTabPage.SelectedIndex = 30;
 
         }
 
         private void mSS3模板修改ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.MainTabPage.SelectedIndex = 30;
+            this.MainTabPage.SelectedIndex = 33;
 
         }
 
         private void 其他功能ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.MainTabPage.SelectedIndex = 28;
+            this.MainTabPage.SelectedIndex = 31;
 
         }
 
         private void 系统工具ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.MainTabPage.SelectedIndex = 29;
+            this.MainTabPage.SelectedIndex = 32;
 
         }
 
         private void 关于软件ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.MainTabPage.SelectedIndex = 31;
+            this.MainTabPage.SelectedIndex = 36;
 
         }
 
@@ -3033,11 +3425,12 @@ namespace DocumentTools
                 TempConfig.AppSettings.Settings["ShowOpenTargetDialog"].Value = menu_finshined_messbox_combox.SelectedIndex == 0 ? "on" : "off";
                 TempConfig.AppSettings.Settings["ListViewLineHeight"].Value = menu_listview_line_heigh_combox.Text;
                 TempConfig.AppSettings.Settings["ListViewShowGridLines"].Value = menu_listview_gridline_combox.SelectedIndex == 0 ? "on" : "off";
-                
+                TempConfig.AppSettings.Settings["ChromeDriverPath"].Value = menu_chrome_path.Text;
+
                 TempConfig.Save(ConfigurationSaveMode.Modified);
 
-                DialogResult ExitResult = MessageBox.Show("配置保存完毕，是否需要重启软件？","提示",MessageBoxButtons.OKCancel,MessageBoxIcon.Asterisk);
-                if(ExitResult == DialogResult.OK)
+                DialogResult ExitResult = MessageBox.Show("配置保存完毕，是否需要重启软件？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+                if (ExitResult == DialogResult.OK)
                 {
                     string AppExcuteFile = Application.ExecutablePath;
                     Process.Start(AppExcuteFile);
@@ -3047,7 +3440,7 @@ namespace DocumentTools
             }
             else
             {
-                MessageBox.Show("无法保存配置，没有找到配置文件，可能是配置文件被更名或者不存在","提示",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                MessageBox.Show("无法保存配置，没有找到配置文件，可能是配置文件被更名或者不存在", "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
@@ -3058,14 +3451,896 @@ namespace DocumentTools
             {
                 TempIndexTable.AppendLine($"{TempPage.Text}：{MainTabPage.TabPages.IndexOf(TempPage)}");
             }
-            MessageBox.Show(TempIndexTable.ToString(),"提示",MessageBoxButtons.OK,MessageBoxIcon.Asterisk);
+            MessageBox.Show(TempIndexTable.ToString(), "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+        }
+
+        private void UseLibList_Click(object sender, EventArgs e)
+        {
+            Assembly TempAssmbly = Assembly.GetExecutingAssembly();
+            AssemblyName[] LibNames = TempAssmbly.GetReferencedAssemblies();
+            StringBuilder LibNameShow = new StringBuilder();
+
+            foreach (AssemblyName LibName in LibNames)
+            {
+                if (LibName.Name != "Aspose.Hook")
+                {
+                    LibNameShow.AppendLine($"· {LibName.Name}\tV{LibName.Version}");
+
+                }
+            }
+            MessageBox.Show(LibNameShow.ToString(), "使用库列表");
+        }
+
+        private void GenerateBarCode_Click(object sender, EventArgs e)
+        {
+            Task.Run(() =>
+            {
+                try
+                {
+                    Util.PlayMp3WithStream("amagi");
+                    if (barcodeTextContentBox.Text != string.Empty)
+                    {
+                        MemoryStream tempstream = Util.GenerateBarCode(barcodeTypeCombox.SelectedIndex, (Aspose.BarCode.Generation.AutoSizeMode)Enum.Parse(typeof(Aspose.BarCode.Generation.AutoSizeMode), barcodeAutoSizeCombox.SelectedValue.ToString()),
+         float.Parse(barcodeDmiBox.Text), float.Parse(barcodeRotateBox.Text), float.Parse(barcodeImageWidth.Text), float.Parse(barcodeImageHeight.Text), float.Parse(barcodeDpiCombox.Text)
+         , barcodeTextContentBox.Text, (Aspose.BarCode.Generation.CodeLocation)Enum.Parse(typeof(Aspose.BarCode.Generation.CodeLocation), barcodeTextLocationCombox.SelectedValue.ToString()), (Aspose.BarCode.Generation.TextAlignment)Enum.Parse(typeof(Aspose.BarCode.Generation.TextAlignment), barcodeTextAlignCombox.SelectedValue.ToString()), float.Parse(barcodeTextContentSpaceCombox.Text)
+         , int.Parse(barcodePaddingBox.Text), float.Parse(barcodeTextFontSizeBox.Text), "barcode_preview", ""
+         , barcodeCaptionBox.Text, barcodeCaptionLocationCombox.SelectedIndex, float.Parse(barcodeCaptionFontSizeBox.Text)
+         , barcodeScanTypeCombox.SelectedIndex);
+                        barcodePreviewBox.Image = new Bitmap(tempstream);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        MessageBox.Show(ex.ToString(), "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    }));
+
+                }
+
+            });
+
+
+        }
+
+        private void barcodeTemplateUpload_Click(object sender, EventArgs e)
+        {
+            Task.Run(() =>
+            {
+
+                try
+                {
+                    IEnumerable<string> barcodeTemplateName = Util.ShwoSelectDialog(false, false, "Excel文件", "*.xls;*.xlsx");
+                    string barcodeTemplateFile = barcodeTemplateName.FirstOrDefault();
+                    if (!string.IsNullOrEmpty(barcodeTemplateFile))
+                    {
+                        this.Invoke((Action)(() =>
+                        {
+                            this.barcodeMutilList.DataSource = Util.ReadBarCodeTemplate(barcodeTemplateFile);
+                        }));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        MessageBox.Show(ex.ToString(), "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    }));
+                }
+
+            });
+
+        }
+
+        private void barcodeMutilGenerate_Click(object sender, EventArgs e)
+        {
+            Task.Run(() =>
+            {
+                try
+                {
+                    if (this.barcodeMutilList.DataSource != null && this.barcodeMutilList.Rows.Count > 1)
+                    {
+                        IEnumerable<string> TempMutilSavePath = Util.ShwoSelectDialog(false, true, "", "");
+                        string MutilSavePath = TempMutilSavePath.FirstOrDefault();
+
+                        if (MutilSavePath != string.Empty && MutilSavePath != default)
+                        {
+                            (sender as System.Windows.Forms.Button).Enabled = false;
+                            foreach (DataGridViewRow TempRow in barcodeMutilList.Rows)
+                            {
+                                if (!TempRow.IsNewRow)
+                                {
+                                    string barcodeParam_FileName = TempRow.Cells[0].Value.ToString();
+                                    string barcodeParam_Caption = TempRow.Cells[1].Value.ToString();
+                                    string barcodeParam_Content = TempRow.Cells[2].Value.ToString();
+
+                                    string SaveFileName = Path.Combine(MutilSavePath, barcodeParam_FileName + ".bmp");
+                                    Util.GenerateBarCode(barcodeTypeCombox.SelectedIndex, (Aspose.BarCode.Generation.AutoSizeMode)Enum.Parse(typeof(Aspose.BarCode.Generation.AutoSizeMode), barcodeAutoSizeCombox.SelectedValue.ToString()),
+                 float.Parse(barcodeDmiBox.Text), float.Parse(barcodeRotateBox.Text), float.Parse(barcodeImageHeight.Text), float.Parse(barcodeImageHeight.Text), float.Parse(barcodeDpiCombox.Text)
+                 , barcodeParam_Content, (Aspose.BarCode.Generation.CodeLocation)Enum.Parse(typeof(Aspose.BarCode.Generation.CodeLocation), barcodeTextLocationCombox.SelectedValue.ToString()), (Aspose.BarCode.Generation.TextAlignment)Enum.Parse(typeof(Aspose.BarCode.Generation.TextAlignment), barcodeTextAlignCombox.SelectedValue.ToString()), float.Parse(barcodeTextContentSpaceCombox.Text)
+                 , int.Parse(barcodePaddingBox.Text), float.Parse(barcodeTextFontSizeBox.Text), "barcode_mutil_save", SaveFileName
+                 , barcodeParam_Caption, barcodeCaptionLocationCombox.SelectedIndex, float.Parse(barcodeCaptionFontSizeBox.Text)
+                 , barcodeScanTypeCombox.SelectedIndex);
+                                }
+                            }
+
+                            this.BeginInvoke(new Action(() =>
+                            {
+                                (sender as System.Windows.Forms.Button).Enabled = true;
+                                if (MessageBox.Show("生成完毕，是否打开生成目录？", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.Yes)
+                                {
+                                    Process.Start(MutilSavePath);
+                                }
+                            }));
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        MessageBox.Show(ex.ToString(), "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        (sender as System.Windows.Forms.Button).Enabled = true;
+                    }));
+                }
+
+            });
+        }
+
+        private void ExportBarCodeTempLate_Click(object sender, EventArgs e)
+        {
+            object BarcodeTemplateUpload = Util.GetEmbedResourceObj("BarCodeTemplate");
+
+            string SaveTemplateFile = Util.ShowSaveFileDialog("Excel文件|*.xlsx");
+
+            File.WriteAllBytes(SaveTemplateFile, (byte[])BarcodeTemplateUpload);
+
+            if (File.Exists(SaveTemplateFile))
+            {
+                MessageBox.Show("导出完毕", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
+        }
+
+        private void SaveBarCodePreview_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (barcodePreviewBox.Image != null)
+                {
+                    string SaveFileName = Util.ShowSaveFileDialog("PNG图片|*.png");
+                    Bitmap TempBitMap = new Bitmap(barcodePreviewBox.Image);
+
+                    if (SaveFileName != string.Empty)
+                    {
+                        TempBitMap.Save(SaveFileName);
+
+                        if (MessageBox.Show("生成完毕，是否打开生成目录？", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.Yes)
+                        {
+                            Process.Start(Path.GetDirectoryName(SaveFileName));
+                        }
+                    }
+                }
+            }
+            catch (ExternalException)
+            {
+                MessageBox.Show("请不要覆盖保存已被加载到软件中的图片文件", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+        private void 简易二维码生成ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.MainTabPage.SelectedIndex = 26;
+        }
+
+        private void barcodeCopyImage_Click(object sender, EventArgs e)
+        {
+            if (barcodePreviewBox.Image != null)
+            {
+                Clipboard.SetImage(barcodePreviewBox.Image);
+                MessageBox.Show("已复制图像", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
+        }
+
+        private void city_level_1_combox_TextChanged(object sender, EventArgs e)
+        {
+            city_level_2_combox.Items.Clear();
+            foreach (JToken City_2_Name in City_Json[city_level_1_combox.SelectedIndex]["children"])
+            {
+                city_level_2_combox.Items.Add(City_2_Name["name"]);//添加对应的二级城市
+            }
+            city_level_2_combox.SelectedIndex = 0;
+
+        }
+
+        private void city_level_2_combox_TextChanged(object sender, EventArgs e)
+        {
+            city_level_3_combox.Items.Clear();
+            foreach (JToken City_3_Name in City_Json[city_level_1_combox.SelectedIndex]["children"][city_level_2_combox.SelectedIndex]["children"])
+            {
+                city_level_3_combox.Items.Add(City_3_Name["name"]);//添加对应的三级城市
+            }
+            city_level_3_combox.SelectedIndex = 0;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Task.Run(() =>
+                {
+                    //获取对应的行政区域代码
+                    JToken Pac_Code = City_Json[city_level_1_combox.SelectedIndex]["children"][city_level_2_combox.SelectedIndex]["children"][city_level_3_combox.SelectedIndex]["code"];
+                    List<string> gen_card_ids = new List<string>();
+                    List<string> gen_card_names = new List<string>();
+                    Random random = new Random();
+                    for (int i = 0; i < gen_card_number.Value; i++)
+                    {
+                        if (gen_card_id_name_check_box.Checked)
+                        {
+                            string gen_card_name = Util.GenRandomName(random, random);
+                            gen_card_names.Add(gen_card_name);
+                            gen_card_id_name_text.Text = $"[已勾选，已生成{i + 1}个姓名]";
+                        }
+                        string gen_card_id = Util.GenChinaCard(Pac_Code.ToString(), Util.GenRandomBirthday(random, ony_gen_18_year.Checked), Util.GenRandomIndex(random));
+                        gen_card_ids.Add(gen_card_id);
+                        gen_card_num_text.Text = $"正在生成第{i + 1}个号码";
+                    }
+                    gen_card_id_box.Lines = gen_card_ids.ToArray();
+                    gen_card_id_name_box.Lines = gen_card_names.ToArray();
+                });
+            }
+            catch (Exception ex)
+            {
+
+                this.BeginInvoke(new Action(() =>
+                {
+                    MessageBox.Show(ex.ToString(), "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }));
+            }
+        }
+
+        private void gen_card_id_box_TextChanged(object sender, EventArgs e)
+        {
+            gen_card_num_text.Text = $"共生成{gen_card_id_box.Lines.Length.ToString()}个号码";
+        }
+
+        private void copy_gen_card_cliboard_Click(object sender, EventArgs e)
+        {
+            if (gen_card_id_box.Text != string.Empty)
+            {
+                Clipboard.SetText(gen_card_id_box.Text.Replace("\n", "\r\n"));
+                MessageBox.Show("已复制到剪贴板", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
+        }
+
+        private void 随机身份证号码生成ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.MainTabPage.SelectedIndex = 27;
+        }
+
+        private void ver_card_id_text_box_TextChanged(object sender, EventArgs e)
+        {
+            var vaildate_tuple = Util.VaildateChinaCard(ver_card_id_text_box.Text.Trim());
+
+            ver_card_id_birthday.Text = vaildate_tuple.Item1;
+            ver_card_id_sex.Text = vaildate_tuple.Item2;
+            ver_card_id_index.Text = vaildate_tuple.Item3;
+            if (vaildate_tuple.Item4)
+            {
+                ver_card_id_sign_tips.ForeColor = Color.ForestGreen;
+                ver_card_id_sign_tips.Text = "正确";
+            }
+            else
+            {
+                ver_card_id_sign_tips.ForeColor = Color.Tomato;
+                ver_card_id_sign_tips.Text = $"校验码不正确，应为 {vaildate_tuple.Item5}";
+            }
+
+            if (ver_card_id_text_box.Text == "sfz")
+            {
+                gen_card_id_group.Enabled = true;
+                gen_card_result_group.Enabled = true;
+                Util.PlayMp3WithStream("amagi");
+            }
+
+            if (ver_card_id_birthday.Text == "日期不正确")
+            {
+                ver_card_id_birthday.ForeColor = Color.Tomato;
+            }
+            else
+            {
+                ver_card_id_birthday.ForeColor = Color.ForestGreen;
+            }
+
+        }
+
+        private void gen_card_id_name_copy_Click(object sender, EventArgs e)
+        {
+            if (gen_card_id_name_box.Text != string.Empty)
+            {
+                Clipboard.SetText(gen_card_id_name_box.Text.Replace("\n", "\r\n"));
+                MessageBox.Show("已复制到剪贴板", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
+        }
+
+        private void gen_card_id_name_check_box_CheckedChanged(object sender, EventArgs e)
+        {
+            if (gen_card_id_name_check_box.Checked)
+            {
+                gen_card_id_name_text.ForeColor = Color.Green;
+                gen_card_id_name_text.Text = $"[已勾选]";
+            }
+            else
+            {
+                gen_card_id_name_text.ForeColor = Color.Red;
+                gen_card_id_name_text.Text = "[未勾选]";
+            }
+        }
+
+        private void barcodeSelectRegionPicture_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Task.Run(() =>
+                {
+
+                    string BarcodeImageFile = Util.ShwoSelectDialog(false, false, "支持的图片", "*.jpg;*.jpeg;*.png;*.bmp").FirstOrDefault();
+                    if (BarcodeImageFile != default && BarcodeImageFile != string.Empty)
+                    {
+                        barcodeRegionPicture.Image = System.Drawing.Image.FromFile(BarcodeImageFile);
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+
+                this.BeginInvoke(new Action(() =>
+                {
+                    MessageBox.Show(ex.ToString(), "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }));
+            }
+
+        }
+
+        private void barcodeReadStart_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Task.Run(() =>
+                {
+                    if (barcodeRegionPicture.Image != null)
+                    {
+                        (sender as System.Windows.Forms.Button).Enabled = false;
+                        barcodeReaderResultbox.Text = Util.ReadBarCodeContent((Bitmap)barcodeRegionPicture.Image);
+                        (sender as System.Windows.Forms.Button).Enabled = true;
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+
+                this.BeginInvoke(new Action(() =>
+                {
+                    MessageBox.Show(ex.ToString(), "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    (sender as System.Windows.Forms.Button).Enabled = true;
+                }));
+            }
+        }
+
+        private void CopyBarcodeReadResult_Click(object sender, EventArgs e)
+        {
+            if (barcodeReaderResultbox.Text != string.Empty)
+            {
+                Clipboard.SetText(barcodeReaderResultbox.Text.Replace("\n", "\r\n"));
+                MessageBox.Show("已复制到剪贴板", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
+        }
+
+        private void webpPictureSelect_Click(object sender, EventArgs e)
+        {
+            UI.AddWebpFiles();
+        }
+
+        private void webpPictureStartConvert_Click(object sender, EventArgs e)
+        {
+            Task.Run(() =>
+            {
+                try
+                {
+                    UI.ConvertStart(this.WebpFileList, this.webpconvert_statusText, ConvertFileType.Webp2Image, this.webp2image_combox.SelectedValue.ToString(), CallButton: sender as System.Windows.Forms.Button);
+                }
+                catch (Exception ex)
+                {
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        (sender as System.Windows.Forms.Button).Enabled = true;
+                    }));
+                }
+
+            });
+        }
+
+        private void wEBP图片格式转换ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.MainTabPage.SelectedIndex = 29;
+
+        }
+
+        private void ExportNameTxt_Click(object sender, EventArgs e)
+        {
+            if (TargetTextBox.Text != string.Empty)
+            {
+                string TempExportTxtFile = Util.ShowSaveFileDialog("文本文件|*.txt");
+
+                Task.Run(() =>
+                {
+                    try
+                    {
+                        if (TempExportTxtFile != string.Empty && TempExportTxtFile != null)
+                        {
+                            (sender as System.Windows.Forms.Button).Enabled = false;
+                            File.WriteAllText(TempExportTxtFile, TargetTextBox.Text);
+                            this.BeginInvoke(new Action(() =>
+                            {
+                                MessageBox.Show("导出完毕", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                                (sender as System.Windows.Forms.Button).Enabled = true;
+                            }));
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+
+                        this.BeginInvoke(new Action(() =>
+                        {
+                            MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            (sender as System.Windows.Forms.Button).Enabled = true;
+                        }));
+                    }
+
+                });
+
+            }
+        }
+
+        private void Gen_Copied_File_Click(object sender, EventArgs e)
+        {
+            string TempFileName = Util.ShwoSelectDialog(false, false, "所有文件", "*.*").FirstOrDefault();
+
+            if (TempFileName != null && TempFileName != string.Empty && TempFileName != default)
+            {
+
+                Gen_Copied_SourceFileBox.Text = TempFileName;
+            }
+        }
+
+        private void Gen_Copied_Path_Click(object sender, EventArgs e)
+        {
+            string TempPath = Util.ShwoSelectDialog(false, true, "所有文件", "*.*").FirstOrDefault();
+
+            if (TempPath != null && TempPath != string.Empty && TempPath != default)
+            {
+
+                Gen_Copied_TargetPath.Text = TempPath;
+            }
+        }
+
+        private void CopiedGen_Click(object sender, EventArgs e)
+        {
+            if (Gen_Copied_SourceFileBox.Text != string.Empty && Gen_Copied_TargetPath.Text != string.Empty)
+            {
+                Task.Run(() =>
+                {
+                    try
+                    {
+                        (sender as System.Windows.Forms.Button).Enabled = false;
+                        Util.GenCopySameFile(Gen_Copied_SourceFileBox.Text, int.Parse(Gen_Copied_Number.Value.ToString()), Gen_Copied_StatusText, Gen_Copied_Namer.Text = Gen_Copied_Namer.Text == string.Empty ? "副本" : Gen_Copied_Namer.Text,
+                            copied_number_prefix_count.Text,
+                            Gen_Copied_TargetPath.Text);
+                        this.BeginInvoke(new Action(() =>
+                        {
+                            (sender as System.Windows.Forms.Button).Enabled = true;
+                            MessageBox.Show("生成完毕", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        }));
+                    }
+                    catch (Exception ex)
+                    {
+                        this.BeginInvoke(new Action(() =>
+                        {
+                            MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            (sender as System.Windows.Forms.Button).Enabled = true;
+                        }));
+                    }
+
+                });
+            }
+
+        }
+
+        private void Gen_Copied_Namer_TextChanged(object sender, EventArgs e)
+        {
+            if (Gen_Copied_Namer.Text != string.Empty && Gen_Copied_SourceFileBox.Text != string.Empty)
+            {
+                string Number = 1.ToString($"D{copied_number_prefix_count.Text}");
+                CopiedNamerText.Text = $"最终生成名称为：{Path.GetFileNameWithoutExtension(Gen_Copied_SourceFileBox.Text)}- {Gen_Copied_Namer.Text}（{Number}）{Path.GetExtension(Gen_Copied_SourceFileBox.Text)}";
+            }
+        }
+
+        private void 文件副本生成ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.MainTabPage.SelectedIndex = 34;
+        }
+
+        private void network_info_card_list_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateNetworkInfo();
+        }
+
+        private void UpdateNetworkInfo()
+        {
+            Task.Run(() =>
+            {
+                var (ipv4_address_source, default_mask_source, default_gateway_source, dns1_address, dns2_address, mac_address, is_dhcp_enabled) = Util.GetCard_Information(network_info_card_list.Text);
+
+                network_info_ipv4.DataSource = ipv4_address_source.Count == 0 ? new List<string> { "未获取到" } : ipv4_address_source;
+                network_info_mask.DataSource = default_mask_source.Count == 0 ? new List<string> { "未获取到" } : default_mask_source;
+                network_info_gateway.DataSource = default_gateway_source.Count == 0 ? new List<string> { "未获取到" } : default_gateway_source;
+                network_info_dns1.DataSource = new string[] { dns1_address == string.Empty ? "未获取到" : dns1_address };
+                network_info_dns2.DataSource = new string[] { dns2_address == string.Empty ? "未获取到" : dns2_address };
+                network_info_mac_address.DataSource = new string[] { mac_address == string.Empty ? "未获取到" : mac_address };
+                if (is_dhcp_enabled)
+                {
+                    set_interface_mode_auto.Checked = true;
+
+                }
+                else
+                {
+                    set_interface_mode_static.Checked = true;
+                }
+            });
+        }
+
+        private void UpdateSetNetWorkInfo()
+        {
+            Task.Run(() =>
+            {
+                var (ipv4_address_source, default_mask_source, default_gateway_source, dns1_address, dns2_address, mac_address, is_dhcp_enabled) = Util.GetCard_Information(network_info_card_list.Text);
+
+                set_interface_ipaddress.Text = ipv4_address_source.Count == 0 ? "0.0.0.0" : ipv4_address_source[0];
+                set_interface_mask.Text = default_mask_source.Count == 0 ? "0.0.0.0" : default_mask_source[0];
+                set_interface_gateway.Text = default_gateway_source.Count == 0 ? "0.0.0.0" : default_gateway_source[0];
+                set_interface_dns1.Text = dns1_address == string.Empty ? "0.0.0.0" : dns1_address;
+                set_interface_dns2.Text = dns2_address == string.Empty ? "0.0.0.0" : dns2_address;
+            });
+        }
+
+        private void UpdateNetworkList()
+        {
+            Task.Run(() =>
+            {
+                this.network_info_card_list.DataSource = Util.GetNetWorkCardList(network_info_show_normal.Checked);
+
+                this.set_interface_name_list.DataSource = this.network_info_card_list.DataSource;
+            });
+        }
+        private void set_interface_start_Click(object sender, EventArgs e)
+        {
+            Task.Run(() =>
+            {
+                try
+                {
+                    if (Util.IsAdministrator())
+                    {
+                        (sender as System.Windows.Forms.Button).Enabled = false;
+                        Util.SetInterfaceInformation(set_interface_name_list.SelectedItem.ToString(), set_interface_ipaddress.Text, set_interface_mask.Text,
+    set_interface_gateway.Text, set_interface_dns1.Text, set_interface_dns2.Text, set_interface_mode_static.Checked);
+                        this.BeginInvoke(new Action(() =>
+                        {
+                            (sender as System.Windows.Forms.Button).Enabled = true;
+                            MessageBox.Show("修改成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                            UpdateNetworkInfo();//更新基础网络信息
+                            UpdateSetNetWorkInfo();//更新设置部分网络信息
+                        }));
+                    }
+                    else
+                    {
+                        this.BeginInvoke(new Action(() =>
+                        {
+                            MessageBox.Show("请使用管理员身份重新运行软件修改", "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        }));
+
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        (sender as System.Windows.Forms.Button).Enabled = true;
+                        MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }));
+                }
+
+            });
+        }
+
+        private void set_interface_name_list_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateSetNetWorkInfo();
+        }
+
+        private void set_interface_mode_auto_CheckedChanged(object sender, EventArgs e)
+        {
+            if (set_interface_mode_auto.Checked)
+            {
+                set_interface_ipaddress.Enabled = false;
+                set_interface_mask.Enabled = false;
+                set_interface_gateway.Enabled = false;
+                set_interface_dns1.Enabled = false;
+                set_interface_dns2.Enabled = false;
+            }
+            else
+            {
+                set_interface_ipaddress.Enabled = true;
+                set_interface_mask.Enabled = true;
+                set_interface_gateway.Enabled = true;
+                set_interface_dns1.Enabled = true;
+                set_interface_dns2.Enabled = true;
+            }
+        }
+
+        private void set_interface_clear_Click(object sender, EventArgs e)
+        {
+            if (set_interface_mode_static.Checked)
+            {
+                set_interface_ipaddress.Text = "0.0.0.0";
+                set_interface_mask.Text = "0.0.0.0";
+                set_interface_gateway.Text = "0.0.0.0";
+                set_interface_dns1.Text = "0.0.0.0";
+                set_interface_dns2.Text = "0.0.0.0";
+            }
+        }
+
+        private void Enable_NetworkCard_Click(object sender, EventArgs e)
+        {
+            Task.Run(() =>
+            {
+                try
+                {
+                    Util.SetInterfaceStatus(network_info_card_list.SelectedItem.ToString(),
+"Enable");
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        MessageBox.Show("启用成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    }));
+                }
+                catch (Exception ex)
+                {
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }));
+
+                }
+
+            });
+        }
+
+        private void Disable_NetworkCard_Click(object sender, EventArgs e)
+        {
+            Task.Run(() =>
+            {
+                try
+                {
+                    Util.SetInterfaceStatus(network_info_card_list.SelectedItem.ToString(),
+"Disable");
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        MessageBox.Show("禁用成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    }));
+                }
+                catch (Exception ex)
+                {
+
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }));
+                }
+
+            });
+        }
+
+        private void network_info_show_normal_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateNetworkList();
+        }
+
+        private void update_network_info_Click(object sender, EventArgs e)
+        {
+            UpdateNetworkInfo();
+            UpdateSetNetWorkInfo();
+        }
+
+        private void copy_network_info_mac_address_Click(object sender, EventArgs e)
+        {
+            if (network_info_mac_address.Text != string.Empty && network_info_mac_address.Text != "未获取到")
+            {
+                Clipboard.SetText(network_info_mac_address.Text);
+                MessageBox.Show("复制成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
+        }
+
+        private void network_open_ncap_Click(object sender, EventArgs e)
+        {
+            Process.Start("ncpa.cpl");
+        }
+
+        private void 网卡设置ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.MainTabPage.SelectedIndex = 35;
+        }
+
+        private void Gen_Copied_SourceFileBox_TextChanged(object sender, EventArgs e)
+        {
+            if (Gen_Copied_Namer.Text != string.Empty && Gen_Copied_SourceFileBox.Text != string.Empty)
+            {
+                string Number = 1.ToString($"D{copied_number_prefix_count.Text}");
+                CopiedNamerText.Text = $"最终生成名称为：{Path.GetFileNameWithoutExtension(Gen_Copied_SourceFileBox.Text)}- {Gen_Copied_Namer.Text}（{Number}）{Path.GetExtension(Gen_Copied_SourceFileBox.Text)}";
+            }
+        }
+
+        private void copy_network_info_ip_address_Click(object sender, EventArgs e)
+        {
+            if (network_info_ipv4.Text != string.Empty && network_info_ipv4.Text != "未获取到")
+            {
+                Clipboard.SetText(network_info_ipv4.Text);
+                MessageBox.Show("复制成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
+        }
+
+        private void copied_number_prefix_count_TextChanged(object sender, EventArgs e)
+        {
+            if (Gen_Copied_Namer.Text != string.Empty && Gen_Copied_SourceFileBox.Text != string.Empty)
+            {
+                string Number = 1.ToString($"D{copied_number_prefix_count.Text}");
+                CopiedNamerText.Text = $"最终生成名称为：{Path.GetFileNameWithoutExtension(Gen_Copied_SourceFileBox.Text)}- {Gen_Copied_Namer.Text}（{Number}）{Path.GetExtension(Gen_Copied_SourceFileBox.Text)}";
+            }
+        }
+
+        private void set_interface_export_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string JSON_IPCONFIG = @$"{{IPADDRESS:'{set_interface_ipaddress.Text}',
+IPMASK:'{set_interface_mask.Text}',
+IPGATEWAY:'{set_interface_gateway.Text}',
+'DNS1':'{set_interface_dns1.Text}',
+'DNS2':'{set_interface_dns2.Text}'}}";
+
+                string TempSaveFileName = Util.ShowSaveFileDialog("坤Tools网卡配置(*.KUNNET)|*.KUNNET");
+
+                if (TempSaveFileName != string.Empty)
+                {
+                    File.WriteAllText(TempSaveFileName, JObject.Parse(JSON_IPCONFIG).ToString());
+                    MessageBox.Show("导出完毕", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+        private void set_interface_load_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string TempLoadConfigFileName = Util.ShwoSelectDialog(false, false, "坤Tools网卡配置", "*.KUNNET").FirstOrDefault();
+
+                if (TempLoadConfigFileName != string.Empty && TempLoadConfigFileName != default)
+                {
+                    string JsonContent = File.ReadAllText(TempLoadConfigFileName);
+
+                    if (JsonContent != string.Empty)
+                    {
+                        JObject TempObj = JObject.Parse(JsonContent);
+
+                        set_interface_ipaddress.Text = TempObj.TryGetValue("IPADDRESS", out JToken ipaddressToken) ? ipaddressToken.ToString() : "0.0.0.0";
+                        set_interface_mask.Text = TempObj.TryGetValue("IPMASK", out JToken ipmaskToken) ? ipmaskToken.ToString() : "0.0.0.0";
+                        set_interface_gateway.Text = TempObj.TryGetValue("IPGATEWAY", out JToken ipgatewayToken) ? ipgatewayToken.ToString() : "0.0.0.0";
+                        set_interface_dns1.Text = TempObj.TryGetValue("DNS1", out JToken dns1Token) ? dns1Token.ToString() : "0.0.0.0";
+                        set_interface_dns2.Text = TempObj.TryGetValue("DNS2", out JToken dns2Token) ? dns2Token.ToString() : "0.0.0.0";
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("配置文件内无内容，配置未加载", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+        private void linkLabel4_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://microsoftedge.microsoft.com/addons/detail/save-as-mhtml-mime-html/mlicehneaeopekphfhnfcbkdnelhldmo");
+
+        }
+
+        private void money_small_TextChanged(object sender, EventArgs e)
+        {
+            if (money_small.Text != string.Empty && Decimal.TryParse(money_small.Text, out decimal Money) && Money > 0)
+            {
+                money_big.Text = Util.ConvertMoney2ChineseYuan(Decimal.Parse(money_small.Text));
+            }
+            else
+            {
+                money_big.Text = "";
+            }
+        }
+
+        private void copy_money_big_result_Click(object sender, EventArgs e)
+        {
+            if (money_big.Text != string.Empty)
+            {
+                Clipboard.SetText(money_big.Text);
+                MessageBox.Show("复制成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
+        }
+
+        private void DontateMe_Click(object sender, EventArgs e)
+        {
+            DonateMeFrm DMF = new DonateMeFrm();
+
+            DMF.ShowDialog();
+        }
+
+        private void DisableAdminBehavior_Click(object sender, EventArgs e)
+        {
+            if (Util.IsAdministrator())
+            {
+                if(DisableAdminBehavior.Text.StartsWith("启用"))
+                {
+                    Util.SetAdministratorBehavior(true);
+                }
+                else if (DisableAdminBehavior.Text.StartsWith("禁用"))
+                {
+                    Util.SetAdministratorBehavior(false);
+
+                }
+
+                MessageBox.Show("修改成功，重启电脑后设置生效", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                GetAdministratorBehaviorStatus();
+            }
+            else
+            {
+                MessageBox.Show("请使用管理员身份重新运行软件执行修改", "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+            }
         }
     }
 }
 
 internal class PrivateFontSetting
 {
-    //public fontfam
 
     public static string FontName { get; set; } = "SimSun";
 
@@ -3080,5 +4355,5 @@ internal class ReplaceWordFontSetting
 
     public static float FontSize { get; set; } = 22;
 
-    public static FontStyle FontStyle { get; set; }  = FontStyle.Regular;
+    public static FontStyle FontStyle { get; set; } = FontStyle.Regular;
 }

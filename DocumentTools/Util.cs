@@ -1,11 +1,8 @@
 ﻿using Aspose.BarCode.BarCodeRecognition;
+using Aspose.BarCode.Generation;
 using Aspose.Cells;
 using Aspose.Cells.Rendering;
-using Aspose.Html.Net;
-using Aspose.Html.Services;
 using Aspose.Imaging;
-using Aspose.Imaging.FileFormats.Jpeg;
-using Aspose.Imaging.FileFormats.Png;
 using Aspose.Imaging.ImageOptions;
 using Aspose.Pdf;
 using Aspose.Pdf.Annotations;
@@ -18,6 +15,7 @@ using NAudio.Wave;
 using PuppeteerSharp.Media;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.OleDb;
 using System.Diagnostics;
 using System.Drawing;
@@ -26,15 +24,17 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Reflection;
 using System.Resources;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Media.Imaging;
 using Color = System.Drawing.Color;
+using System.Management;
+using System.Security.AccessControl;
+using System.Security.Principal;
 
 namespace DocumentTools
 {
@@ -122,15 +122,55 @@ namespace DocumentTools
         /// <summary>
         /// 播放MP3流
         /// </summary>
-        public static void PlayMp3WithStream()
+        public static void PlayMp3WithStream(string MusicName)
         {
             //这里必须这样写，不要用using语句来自动执行dispose，否则声音还没播放的时候就已经被dispose了
-            MemoryStream EmbedResouceObj = new MemoryStream((byte[])GetEmbedResourceObj("zdsny"));
+            MemoryStream EmbedResouceObj = new MemoryStream((byte[])GetEmbedResourceObj(MusicName));
             StreamMediaFoundationReader TempStream = new StreamMediaFoundationReader(EmbedResouceObj);
             IWavePlayer Player = new WaveOut();
             Player.Init(TempStream);
             Player.Play();
 
+        }
+        /// <summary>
+        /// 获取文件页数，暂时不用了，影响加载性能
+        /// </summary>
+        /// <param name="FileName"></param>
+        /// <returns></returns>
+        public static string GetDocumentPages(string FileName)
+        {
+            Aspose.Hook.HookManager.StartHook();
+            string Extension = Path.GetExtension(FileName);
+
+            int FilePages = 0;
+
+            switch (Extension)
+            {
+                case ".doc":
+                    FilePages = new Aspose.Words.Document(FileName).PageCount;
+                    break;
+                case ".docx":
+                    FilePages = new Aspose.Words.Document(FileName).PageCount;
+                    break;
+                case ".wps":
+                    FilePages = new Aspose.Words.Document(FileName).PageCount;
+                    break;
+                case ".xls":
+                    FilePages = new Aspose.Cells.Workbook(FileName).Worksheets.Count;
+                    break;
+                case ".xlsx":
+                    FilePages = new Aspose.Cells.Workbook(FileName).Worksheets.Count;
+                    break;
+                case ".pdf":
+                    FilePages = new Aspose.Pdf.Document(FileName).Pages.Count;
+                    break;
+                case ".ppt":
+                    FilePages = new Aspose.Slides.Presentation(FileName).Slides.Count;
+                    break;
+                default:
+                    break;
+            }
+            return FilePages.ToString();
         }
 
         /// <summary>
@@ -139,7 +179,8 @@ namespace DocumentTools
         /// <param name="documentFileName">doc/docx文档路径</param>
         /// <param name="SavePdfName">导出pdf的路径</param>
         /// <param name="tempSaveDocxPath">临时存放转换的docx目录</param>
-        public static void ConvertWord2Pdf(string documentFileName, string SavePdfName, string tempSaveDocxPath, Aspose.Words.Saving.PdfCompliance PdfComplanceOption,Aspose.Words.Settings.MsWordVersion OptiMizMswVersion)
+        public static void ConvertWord2Pdf(string documentFileName, string SavePdfName, string tempSaveDocxPath, Aspose.Words.Saving.PdfCompliance PdfComplanceOption, Aspose.Words.Settings.MsWordVersion OptiMizMswVersion, bool UpdateField,
+            Aspose.Words.Saving.ColorMode SavePdfColorMode)
         {
             Aspose.Hook.HookManager.StartHook();
             string DocumentName, SaveDocxName;
@@ -155,7 +196,7 @@ namespace DocumentTools
             Aspose.Words.Saving.PdfSaveOptions TempPdfaveOption = new Aspose.Words.Saving.PdfSaveOptions()
             {
                 FontEmbeddingMode = Aspose.Words.Saving.PdfFontEmbeddingMode.EmbedAll,
-                ColorMode = Aspose.Words.Saving.ColorMode.Normal,
+                ColorMode = SavePdfColorMode,
                 ImageColorSpaceExportMode = Aspose.Words.Saving.PdfImageColorSpaceExportMode.Auto,
                 ImageCompression = Aspose.Words.Saving.PdfImageCompression.Auto,
                 PageMode = Aspose.Words.Saving.PdfPageMode.UseOutlines,
@@ -167,6 +208,7 @@ namespace DocumentTools
                 JpegQuality = 100,
                 Compliance = PdfComplanceOption,
                 ExportGeneratorName = false,
+                UpdateFields = UpdateField,
             };
 
             //设置PDF保存带word中的目录
@@ -183,12 +225,13 @@ namespace DocumentTools
                 Compliance = Aspose.Words.Saving.OoxmlCompliance.Iso29500_2008_Transitional,
                 SaveFormat = Aspose.Words.SaveFormat.Docx,
                 KeepLegacyControlChars = true,
+                UpdateFields = UpdateField,
             };
 
             Aspose.Words.Document TempDocument = new Aspose.Words.Document(documentFileName,
                                                                            TempDocuemntLoadOption)
             {
-                RemovePersonalInformation = true
+                RemovePersonalInformation = true,
             };
 
             TempDocument.CompatibilityOptions.OptimizeFor(OptiMizMswVersion);
@@ -199,13 +242,10 @@ namespace DocumentTools
 
             SaveDocxName = System.IO.Path.Combine(tempSaveDocxPath, DocumentName + ".docx");
 
-            TempDocument.UpdateFields();
 
             TempDocument.Save(SaveDocxName, TempDocxSaveOption);
 
             Aspose.Words.Document TempDocxDocument = new Aspose.Words.Document(SaveDocxName, TempDocuemntLoadOption);
-
-            TempDocxDocument.UpdateFields();
 
             TempDocxDocument.Save(SavePdfName, TempPdfaveOption);
         }
@@ -233,6 +273,8 @@ namespace DocumentTools
             TempPdfFileDocument.Info.Author = "DocumentTools";
             TempPdfFileDocument.Info.Producer = "DocumentTools";
             TempPdfFileDocument.Info.Creator = "DocumentTools";
+
+            //TempPdfFileDocument.Decrypt();
 
             TempPdfFileDocument.Save(SavePdfName, TempDocxSaveOption);
         }
@@ -332,7 +374,7 @@ namespace DocumentTools
         /// <param name="Margin_LEFT"></param>
         /// <param name="Margin_Bottom"></param>
         /// <param name="Margin_RIGHT"></param>
-        public static void ConvertImage2PDF(string ImageFileName, string SavedDocumentFileName, bool IsNeedMerge, List<string> ImageFilesList, bool LandStyle, bool AutoOptiomizePdf, bool CompressPdfImage, double Margin_TOP = 0, double Margin_LEFT = 0, double Margin_Bottom = 0, double Margin_RIGHT = 0)
+        public static void ConvertImage2PDF(string ImageFileName, string SavedDocumentFileName, bool IsNeedMerge, List<string> ImageFilesList, int LandStyleIndex, bool AutoOptiomizePdf, bool CompressPdfImage, double Margin_TOP = 0, double Margin_LEFT = 0, double Margin_Bottom = 0, double Margin_RIGHT = 0)
         {
             Aspose.Hook.HookManager.StartHook();
 
@@ -357,7 +399,21 @@ namespace DocumentTools
                 {
                     Page TempPage = BuilderDocument.Pages.Add();
                     Aspose.Pdf.Image TempLoadImage = new Aspose.Pdf.Image { File = file };
-                    TempPage.PageInfo.IsLandscape = LandStyle;
+                    switch (LandStyleIndex)
+                    {
+                        case 0:
+                            TempPage.PageInfo.Height = System.Drawing.Image.FromFile(file).Height;
+                            TempPage.PageInfo.Width = System.Drawing.Image.FromFile(file).Height;
+                            break;
+                        case 1:
+                            TempPage.PageInfo.IsLandscape = true;
+                            break;
+                        case 2:
+                            TempPage.PageInfo.IsLandscape = false;
+                            break;
+                        default:
+                            break;
+                    }
                     TempPage.PageInfo.Margin.Top = Margin_TOP;
                     TempPage.PageInfo.Margin.Left = Margin_LEFT;
                     TempPage.PageInfo.Margin.Right = Margin_RIGHT;
@@ -375,7 +431,21 @@ namespace DocumentTools
             {
                 Page TempPage = BuilderDocument.Pages.Add();
                 Aspose.Pdf.Image TempLoadImage = new Aspose.Pdf.Image { File = ImageFileName };
-                TempPage.PageInfo.IsLandscape = LandStyle;
+                switch (LandStyleIndex)
+                {
+                    case 0:
+                        TempPage.PageInfo.Height = System.Drawing.Image.FromFile(ImageFileName).Height;
+                        TempPage.PageInfo.Width = System.Drawing.Image.FromFile(ImageFileName).Height;
+                        break;
+                    case 1:
+                        TempPage.PageInfo.IsLandscape = true;
+                        break;
+                    case 2:
+                        TempPage.PageInfo.IsLandscape = false;
+                        break;
+                    default:
+                        break;
+                }
                 TempPage.PageInfo.Margin.Top = Margin_TOP;
                 TempPage.PageInfo.Margin.Left = Margin_LEFT;
                 TempPage.PageInfo.Margin.Right = Margin_RIGHT;
@@ -406,7 +476,7 @@ namespace DocumentTools
                 {
                     OnePagePerSheet = true,
                     CalculateFormula = true,
-                    
+
                 };
 
                 //将Excel中的每一个Sheet保存为单个PDF文件
@@ -484,6 +554,12 @@ namespace DocumentTools
             Aspose.Pdf.Devices.ImageDevice TempPdfImageDevice = null;
             Aspose.Pdf.Devices.TiffDevice TempPdfTifDevice = null;
             Aspose.Pdf.Devices.Resolution TempPdfImageResolution = new Aspose.Pdf.Devices.Resolution(DpiValue);
+            Aspose.Imaging.ImageOptions.JpegOptions TempConvertJpegOption = new JpegOptions();
+            Aspose.Imaging.ImageOptions.PngOptions TempConvertPngOption = new PngOptions();
+            Aspose.Imaging.ImageOptions.BmpOptions TempConvertBmpOption = new BmpOptions();
+
+
+
             switch (FileType)
             {
                 case ".doc":
@@ -534,7 +610,6 @@ namespace DocumentTools
                     break;
                 case ".tif":
                     TempWordImageSaveOption = new Aspose.Words.Saving.ImageSaveOptions(Aspose.Words.SaveFormat.Tiff);
-                    //单独处理tif的转换
                     TempPdfTifDevice = new Aspose.Pdf.Devices.TiffDevice(TempPdfImageResolution);
                     TempExcelImageOPtion.ImageType = Aspose.Cells.Drawing.ImageType.Tiff;
                     break;
@@ -545,24 +620,19 @@ namespace DocumentTools
             TempWordImageSaveOption.UseHighQualityRendering = true;
             TempWordImageSaveOption.Resolution = DpiValue;
             TempWordImageSaveOption.ColorMode = Aspose.Words.Saving.ColorMode.Normal;
-            TempWordImageSaveOption.PixelFormat = Aspose.Words.Saving.ImagePixelFormat.Format24BppRgb;
             TempWordImageSaveOption.UseAntiAliasing = true;
+            TempWordImageSaveOption.AllowEmbeddingPostScriptFonts = true;
+
+            //pdf转图片设置
+            TempPdfImageDevice.RenderingOptions.DefaultFontName = "SimSun";
 
             //excel转图片的设置
             TempExcelImageOPtion.CheckWorkbookDefaultFont = true;
             TempExcelImageOPtion.HorizontalResolution = DpiValue;
             TempExcelImageOPtion.VerticalResolution = DpiValue;
             TempExcelImageOPtion.PixelFormat = System.Drawing.Imaging.PixelFormat.Format24bppRgb;
-            TempWordImageSaveOption.UseAntiAliasing = true;
-
-
-
-            if (SetGrayMode)
-            {
-                //对图像进行灰度处理（只有word转图片才可以设置）
-                TempWordImageSaveOption.ImageColorMode = Aspose.Words.Saving.ImageColorMode.Grayscale;
-                TempWordImageSaveOption.ColorMode = Aspose.Words.Saving.ColorMode.Grayscale;
-            }
+            TempExcelImageOPtion.CheckWorkbookDefaultFont = true;
+            TempExcelImageOPtion.DefaultFont = "SimSun";
 
             if (PageExport)
             {
@@ -574,6 +644,16 @@ namespace DocumentTools
                         string MutilPageFileName = SavedImageFileName.Replace(ConvertImageType, $"_第{pageIndex + 1}页{ConvertImageType}");
                         TempWordImageSaveOption.PageSet = new Aspose.Words.Saving.PageSet(pageIndex);
                         TempWordDocument.Save(MutilPageFileName, TempWordImageSaveOption);
+                        if (SetGrayMode)
+                        {
+                            string SavedPath = Path.GetDirectoryName(SavedImageFileName);
+                            string BMP_8BitPath = Path.Combine(SavedPath, "8_bmp_image");
+                            Directory.CreateDirectory(BMP_8BitPath);
+                            string ConvertedBmpFileName = BMP_8BitPath + "\\" + Path.GetFileName(MutilPageFileName).Replace(ConvertImageType, ".bmp");
+                            using Bitmap TempBitMap = new Bitmap(MutilPageFileName);
+                            using Bitmap ConvertedBitMap = ConvertTo256Color(TempBitMap);
+                            ConvertedBitMap.Save(ConvertedBmpFileName, ImageFormat.Bmp);
+                        }
                     }
                 }
                 else if (FileType == ".pdf")
@@ -599,15 +679,54 @@ namespace DocumentTools
                     {
                         Worksheet TempWorkSheet = TempExcelDocument.Worksheets[ExcelSheetIndex];
                         string TempSavedImageileWithSheetName = SavedImageFileName.Replace(ConvertImageType, $"_{TempWorkSheet.Name}{ConvertImageType}");
-                        Debug.WriteLine(TempSavedImageileWithSheetName);
                         SheetRender TempSheetRender = new SheetRender(TempWorkSheet, TempExcelImageOPtion);
                         TempSheetRender.ToImage(0, TempSavedImageileWithSheetName);
                     }
                 }
             }
-            else//合并一页导出，暂时不做
+            else//合并一页导出，只支持word文档
             {
-                TempWordDocument.Save(SavedImageFileName, TempWordImageSaveOption);
+                string TempSvgFile = SavedImageFileName.Replace(ConvertImageType, ".svg");
+                if (FileType == ".doc" || FileType == ".docx")
+                {
+                    TempWordImageSaveOption = new Aspose.Words.Saving.ImageSaveOptions(Aspose.Words.SaveFormat.Svg)
+                    {
+                        HorizontalResolution = DpiValue,
+                        VerticalResolution = DpiValue
+                    };
+                    TempWordDocument.Save(TempSvgFile, TempWordImageSaveOption);
+                    using Aspose.Imaging.Image TempLoadImage = Aspose.Imaging.Image.Load(TempSvgFile);
+                    using SvgRasterizationOptions TempSvgOption = new SvgRasterizationOptions();
+                    TempSvgOption.PageHeight = TempLoadImage.Height;
+                    TempSvgOption.PageWidth = TempLoadImage.Width;
+                    TempSvgOption.ResolutionSettings = new ResolutionSetting(DpiValue, DpiValue);
+                    TempSvgOption.TextRenderingHint = TextRenderingHint.AntiAlias;
+                    //using Aspose.Imaging.ImageOptions.VectorRasterizationOptions TempRasterOption = new VectorRasterizationOptions();
+                    //TempRasterOption.PageWidth = TempLoadImage.Width;
+                    //TempRasterOption.PageHeight = TempLoadImage.Height;
+                    switch (ConvertImageType)
+                    {
+                        case ".jpg":
+                            TempConvertJpegOption.Quality = 100;
+                            TempConvertJpegOption.VectorRasterizationOptions = TempSvgOption;
+                            TempConvertJpegOption.ResolutionSettings = new ResolutionSetting(DpiValue, DpiValue);
+                            TempLoadImage.Save(SavedImageFileName, TempConvertJpegOption);
+                            break;
+                        case ".png":
+                            TempConvertPngOption.VectorRasterizationOptions = TempSvgOption;
+                            TempConvertPngOption.ResolutionSettings = new ResolutionSetting(DpiValue, DpiValue);
+                            TempLoadImage.Save(SavedImageFileName, TempConvertPngOption);
+                            break;
+                        case ".bmp":
+                            TempConvertBmpOption.VectorRasterizationOptions = TempSvgOption;
+                            TempConvertBmpOption.ResolutionSettings = new ResolutionSetting(DpiValue, DpiValue);
+                            TempLoadImage.Save(SavedImageFileName, TempConvertBmpOption);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
             }
 
 
@@ -624,11 +743,11 @@ namespace DocumentTools
         /// <param name="ReplaceContent">要替换的内容</param>
         /// <param name="IgnoreFootText">是否忽略脚注内容</param>
         /// <param name="IgnoreCase">是否忽略大小写</param>
-        public static void RelaceDocumentContent(string DocumentsFileName, string SavedDoucmentFileName, string RelaceDocumentType, string InputRegexRule, string ReplaceContent, bool IgnoreFootText, bool NoIgnoreCase, bool RemoveRowMode = false, int ExcelStartRow = -1, int ExcelEndRow = -1, bool UseRegex = false,string replace_word_fontName="SimSun",float replace_word_fontSize=12,bool UseNewStyle=false)
+        public static void RelaceDocumentContent(string DocumentsFileName, string SavedDoucmentFileName, string RelaceDocumentType, string InputRegexRule, string ReplaceContent, bool IgnoreFootText, bool NoIgnoreCase, bool RemoveRowMode = false, int ExcelStartRow = -1, int ExcelEndRow = -1, bool UseRegex = false, string replace_word_fontName = "SimSun", float replace_word_fontSize = 12, bool UseNewStyle = false)
         {
             Aspose.Hook.HookManager.StartHook();
 
-            Regex DocuemntRegex = new Regex(InputRegexRule);
+            Regex DocuemntRegex = new Regex(InputRegexRule, RegexOptions.Multiline);
             if (RelaceDocumentType == "WORD")
             {
                 Aspose.Words.Loading.LoadOptions DocuemntLoadOption = new Aspose.Words.Loading.LoadOptions()
@@ -647,7 +766,7 @@ namespace DocumentTools
                 TempWordFindReplaceOption.IgnoreFootnotes = IgnoreFootText;
                 TempWordFindReplaceOption.MatchCase = NoIgnoreCase;
                 TempWordFindReplaceOption.UseSubstitutions = true;
-                if(UseNewStyle)
+                if (UseNewStyle)
                 {
                     TempWordFindReplaceOption.ApplyFont.Name = replace_word_fontName;
                     TempWordFindReplaceOption.ApplyFont.Size = Convert.ToDouble(replace_word_fontSize);
@@ -785,10 +904,9 @@ namespace DocumentTools
             {
                 Compliance = Aspose.Words.Saving.OoxmlCompliance.Iso29500_2008_Transitional,
             };
-
-            for(int pageIndex=0;pageIndex<TempDocument.PageCount;pageIndex++)
+            for (int pageIndex = 0; pageIndex < TempDocument.PageCount; pageIndex++)
             {
-                string SavedFileName = $"{Path.Combine(SavedPath,Path.GetFileNameWithoutExtension(DocumentFileName))}_第{pageIndex+1}页.docx";
+                string SavedFileName = $"{Path.Combine(SavedPath, Path.GetFileNameWithoutExtension(DocumentFileName))}_第{pageIndex + 1}页.docx";
                 Aspose.Words.Document TempSplitDocument = TempDocument.ExtractPages(pageIndex, 1);
                 TempSplitDocument.CompatibilityOptions.OptimizeFor(Aspose.Words.Settings.MsWordVersion.Word2010);
                 TempSplitDocument.CompatibilityOptions.BalanceSingleByteDoubleByteWidth = true;
@@ -1224,11 +1342,14 @@ namespace DocumentTools
                     TempJpgOption.CompressionType = Compress_Jpeg_Mode;
                     TempJpgOption.ColorType = Compress_Jpeg_ColorMode;
                     TempJpgOption.Quality = Compress_Jpeg_Quailty;
+                    //TempJpgOption.BitsPerChannel = 8;
+                    //TempJpgOption.Palette = Aspose.Imaging.ColorPaletteHelper.GetCloseImagePalette((Aspose.Imaging.RasterImage)TempLoadImage, 256, Aspose.Imaging.PaletteMiningMethod.Histogram);
                     break;
                 case ".jpeg":
                     TempJpgOption.CompressionType = Compress_Jpeg_Mode;
                     TempJpgOption.ColorType = Compress_Jpeg_ColorMode;
                     TempJpgOption.Quality = Compress_Jpeg_Quailty;
+                    //TempJpgOption.BitsPerChannel = 8;
                     break;
                 case ".png":
                     TempPngOption.CompressionLevel = Compress_Png_Level;
@@ -1580,40 +1701,49 @@ namespace DocumentTools
         }
 
 
-/// <summary>
-/// html转PDF，浏览器渲染
-/// </summary>
-/// <param name="DocumentFileName"></param>
-/// <param name="SavedFileName"></param>
-/// <param name="ChromeDriverPath">chrome驱动路径</param>
-/// <param name="PdfPaperSize">纸张尺寸</param>
-/// <param name="isLand">是否横向</param>
-/// <param name="isUseCss">是否使用css尺寸设置</param>
-/// <param name="TopPx">上边距</param>
-/// <param name="LeftPx">左边距</param>
-/// <param name="BottomPx">下边距</param>
-/// <param name="RightPx">右边距</param>
-        public static async void ConvertHtml2PDFAsync(string DocumentFileName, string SavedFileName,string ChromeDriverPath,int PdfPaperSizeIndex,bool isLand,bool isUseCss,string TopPx, string LeftPx, string BottomPx, string RightPx)
+        /// <summary>
+        /// html转PDF，浏览器渲染
+        /// </summary>
+        /// <param name="DocumentFileName"></param>
+        /// <param name="SavedFileName"></param>
+        /// <param name="ChromeDriverPath">chrome驱动路径</param>
+        /// <param name="PdfPaperSize">纸张尺寸</param>
+        /// <param name="isLand">是否横向</param>
+        /// <param name="isUseCss">是否使用css尺寸设置</param>
+        /// <param name="TopPx">上边距</param>
+        /// <param name="LeftPx">左边距</param>
+        /// <param name="BottomPx">下边距</param>
+        /// <param name="RightPx">右边距</param>
+        public static async void ConvertHtml2PDFAsync(string DocumentFileName, string SavedFileName, string ChromeDriverPath, int PdfPaperSizeIndex, bool isLand, bool isUseCss, string TopPx, string LeftPx, string BottomPx, string RightPx,
+            decimal DefaultTimeOut, decimal WaitTimeOut,bool WaitAllResouce)
         {
 
-            if(ChromeDriverPath!=string.Empty&&ChromeDriverPath!=null&&File.Exists(ChromeDriverPath))
+            if (ChromeDriverPath != string.Empty && ChromeDriverPath != null && File.Exists(ChromeDriverPath))
             {
                 PuppeteerSharp.LaunchOptions LanuachOption = new PuppeteerSharp.LaunchOptions
                 {
                     Headless = true,
                     IgnoreHTTPSErrors = true,
-                    ExecutablePath = ChromeDriverPath
+                    ExecutablePath = ChromeDriverPath,
                 };
 
 
                 PuppeteerSharp.PdfOptions TempPdfOption = new PuppeteerSharp.PdfOptions();
 
-
                 using PuppeteerSharp.IBrowser TempBroswer = await PuppeteerSharp.Puppeteer.LaunchAsync(LanuachOption);
-
+                
 
                 using PuppeteerSharp.IPage TempPage = await TempBroswer.NewPageAsync();
 
+                if (WaitAllResouce)
+                {
+                    await TempPage.WaitForFrameAsync(TempPage.Url);
+                }
+                else
+                {
+                    TempPage.DefaultTimeout = (int)DefaultTimeOut * 1000;
+                    TempPage.DefaultNavigationTimeout = (int)WaitTimeOut * 1000;
+                }
                 await TempPage.GoToAsync(DocumentFileName);
 
 
@@ -1636,6 +1766,7 @@ namespace DocumentTools
 
                 TempPdfOption.DisplayHeaderFooter = false;
                 TempPdfOption.Landscape = isLand;
+                TempPdfOption.PrintBackground = true;
 
                 if (isUseCss)
                 {
@@ -1655,16 +1786,26 @@ namespace DocumentTools
                 }
 
                 await TempPage.PdfAsync(SavedFileName, TempPdfOption);
+                await TempPage.CloseAsync();
             }
 
         }
 
+        public static void ConvertHtml2Pdf(string DocumentFileName,string SavedFileName)
+        {
+            Aspose.Hook.HookManager.StartHook();
+            using Aspose.Html.HTMLDocument TempLoadDocument = new Aspose.Html.HTMLDocument(DocumentFileName);
+            Aspose.Html.Saving.PdfSaveOptions TempPdfOption = new Aspose.Html.Saving.PdfSaveOptions();
+
+            Aspose.Html.Converters.Converter.ConvertHTML(TempLoadDocument,TempPdfOption,SavedFileName);
+
+        }
         /// <summary>
         /// 将word文档转换为EPUB电子书
         /// </summary>
         /// <param name="DocumentFileName"></param>
         /// <param name="SavedFileName"></param>
-        public static void ConvertWord2EPUB(string DocumentFileName, string SavedFileName, string AuthorName,string CoverImageFileName,int CoverImageDpi)
+        public static void ConvertWord2EPUB(string DocumentFileName, string SavedFileName, string AuthorName, string CoverImageFileName, int CoverImageDpi)
         {
             Aspose.Hook.HookManager.StartHook();
 
@@ -1677,7 +1818,8 @@ namespace DocumentTools
                 PageSet = new Aspose.Words.Saving.PageSet(0),
                 Resolution = CoverImageDpi
             };
-            if(!string.IsNullOrEmpty(CoverImageFileName) && File.Exists(CoverImageFileName)) {
+            if (!string.IsNullOrEmpty(CoverImageFileName) && File.Exists(CoverImageFileName))
+            {
 
                 ConverImageBytes = File.ReadAllBytes(CoverImageFileName);
             }
@@ -1719,7 +1861,7 @@ namespace DocumentTools
             };
 
             TempLoadDocument.Save(SavedFileName, TempHtmlSaveOption);
-            
+
 
         }
         /// <summary>
@@ -1762,6 +1904,47 @@ namespace DocumentTools
 
         }
 
+        public static void ConvertWebp2Image(string ImageFileName, string SavedFileName)
+        {
+            Aspose.Hook.HookManager.StartHook();
+
+            Aspose.Imaging.Image TempWebpImage = Aspose.Imaging.Image.Load(ImageFileName);
+
+            Aspose.Imaging.ImageOptionsBase TempImageOption = null;
+
+            string SavedFileExt = Path.GetExtension(SavedFileName);
+
+
+            switch (SavedFileExt)
+            {
+                case ".jpg":
+                    TempImageOption = new Aspose.Imaging.ImageOptions.JpegOptions()
+                    {
+                        Quality = 100,
+                    };
+                    break;
+                case ".jpeg":
+                    TempImageOption = new Aspose.Imaging.ImageOptions.JpegOptions()
+                    {
+                        Quality = 100,
+                    };
+                    break;
+                case ".png":
+                    TempImageOption = new Aspose.Imaging.ImageOptions.PngOptions();
+                    break;
+                case ".bmp":
+                    TempImageOption = new Aspose.Imaging.ImageOptions.BmpOptions();
+                    break;
+                case ".gif":
+                    TempImageOption = new Aspose.Imaging.ImageOptions.GifOptions();
+                    break;
+                default:
+                    break;
+            }
+            TempWebpImage.Save(SavedFileName, TempImageOption);
+
+        }
+
         public static string GetPdfVersion(string DocumentFileName)
         {
             Aspose.Hook.HookManager.StartHook();
@@ -1799,11 +1982,11 @@ namespace DocumentTools
 
             StringBuilder stringBuilder = new StringBuilder();
 
-            stringBuilder.AppendLine($"Word文档作者：{(TempLoadDocument.BuiltInDocumentProperties.Author==string.Empty ? "无": TempLoadDocument.BuiltInDocumentProperties.Author)}");
+            stringBuilder.AppendLine($"Word文档作者：{(TempLoadDocument.BuiltInDocumentProperties.Author == string.Empty ? "无" : TempLoadDocument.BuiltInDocumentProperties.Author)}");
             stringBuilder.AppendLine();
             stringBuilder.AppendLine($"Word文档提供者：{(TempLoadDocument.BuiltInDocumentProperties.Company == string.Empty ? "无" : TempLoadDocument.BuiltInDocumentProperties.Company)}");
             stringBuilder.AppendLine();
-            stringBuilder.AppendLine($"Word文档最后保存作者：{(TempLoadDocument.BuiltInDocumentProperties.LastSavedBy==string.Empty?"无": TempLoadDocument.BuiltInDocumentProperties.LastSavedBy)}");
+            stringBuilder.AppendLine($"Word文档最后保存作者：{(TempLoadDocument.BuiltInDocumentProperties.LastSavedBy == string.Empty ? "无" : TempLoadDocument.BuiltInDocumentProperties.LastSavedBy)}");
             stringBuilder.AppendLine();
             stringBuilder.AppendLine($"Word文档版本：{TempLoadDocument.BuiltInDocumentProperties.Version}");
             stringBuilder.AppendLine();
@@ -1822,11 +2005,11 @@ namespace DocumentTools
 
             using Aspose.Cells.Workbook TempLoadWorkBook = new Aspose.Cells.Workbook(DocumentFileName);
 
-            stringBuilder.AppendLine($"Excel文档作者：{(TempLoadWorkBook.BuiltInDocumentProperties.Author==string.Empty?"无": TempLoadWorkBook.BuiltInDocumentProperties.Author)}");
+            stringBuilder.AppendLine($"Excel文档作者：{(TempLoadWorkBook.BuiltInDocumentProperties.Author == string.Empty ? "无" : TempLoadWorkBook.BuiltInDocumentProperties.Author)}");
             stringBuilder.AppendLine();
-            stringBuilder.AppendLine($"Excel文档提供者：{(TempLoadWorkBook.BuiltInDocumentProperties.Company==string.Empty?"无": TempLoadWorkBook.BuiltInDocumentProperties.Company)}");
+            stringBuilder.AppendLine($"Excel文档提供者：{(TempLoadWorkBook.BuiltInDocumentProperties.Company == string.Empty ? "无" : TempLoadWorkBook.BuiltInDocumentProperties.Company)}");
             stringBuilder.AppendLine();
-            stringBuilder.AppendLine($"Excel文档最后保存作者：{(TempLoadWorkBook.BuiltInDocumentProperties.LastSavedBy==string.Empty?"无": TempLoadWorkBook.BuiltInDocumentProperties.LastSavedBy)}");
+            stringBuilder.AppendLine($"Excel文档最后保存作者：{(TempLoadWorkBook.BuiltInDocumentProperties.LastSavedBy == string.Empty ? "无" : TempLoadWorkBook.BuiltInDocumentProperties.LastSavedBy)}");
             stringBuilder.AppendLine();
             stringBuilder.AppendLine($"Excel文档版本：{(TempLoadWorkBook.BuiltInDocumentProperties.DocumentVersion)}");
             stringBuilder.AppendLine();
@@ -2048,16 +2231,50 @@ namespace DocumentTools
             TempRootRegistryKey.Dispose();
         }
 
-        public static void InsertVotePicContent(string DataBaseFile,string ImageFileName,Label statusLabel,string VoteId,
-                                                string VoteName,string VoteIndex)
+
+        public static DataTable GetMss3VoteInfo(string DataBaseFile)
         {
-            if(DataBaseFile!=string.Empty&& DataBaseFile!=null && ImageFileName!=string.Empty && ImageFileName!=null && VoteId!=string.Empty && VoteId!=null)
+            DataTable VoteEssInfoTable = new DataTable();
+
+
+            if (DataBaseFile != string.Empty && DataBaseFile != null)
+            {
+                string ConnectString = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={DataBaseFile};Persist Security Info=False;";
+                string QueryVoteInfoCommand = $"SELECT VoteId AS 选票序号,VoteName AS 选票名称,Threshold AS 色差校准值,HxrScore AS 候选人填涂值（pixel）,LxrScore AS 另选人填涂值（pixel）,OutsideThreshold AS 纸张级别,SelName AS 选框类型 FROM Vote_EssInfo";
+
+                using OleDbConnection TempConnection = new OleDbConnection(ConnectString);
+                TempConnection.Open();
+
+                using OleDbCommand queryVoteInfoCommand = new OleDbCommand(QueryVoteInfoCommand, TempConnection);
+
+                using OleDbDataAdapter TempDataAdapter = new OleDbDataAdapter(queryVoteInfoCommand);
+
+                TempDataAdapter.Fill(VoteEssInfoTable);//填充到DataTable里面
+            }
+
+            return VoteEssInfoTable;
+        }
+
+        /// <summary>
+        /// 修改MSS3模板图片
+        /// </summary>
+        /// <param name="DataBaseFile"></param>
+        /// <param name="ImageFileName"></param>
+        /// <param name="statusLabel"></param>
+        /// <param name="VoteId"></param>
+        /// <param name="VoteName"></param>
+        /// <param name="VoteIndex"></param>
+        /// <param name="pageIndex"></param>
+        public static void InsertVotePicContent(string DataBaseFile, string ImageFileName, Label statusLabel, string VoteId,
+                                                string VoteName, string VoteIndex, string pageIndex, string pageSquareType)
+        {
+            if (DataBaseFile != string.Empty && DataBaseFile != null && ImageFileName != string.Empty && ImageFileName != null && VoteId != string.Empty && VoteId != null && VoteName != string.Empty && VoteName != null)
             {
                 //打开数据库连接
                 string ConnectString = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={DataBaseFile};Persist Security Info=False;";
                 string InsertCommand = $"INSERT INTO Vote_PageInfo (VoteID,PageIndex,MatrixCode,PicContent) VALUES(?,?,?,?)";
-                string DeleteCommand = $"DELETE FROM Vote_PageInfo WHERE VoteID={VoteId}";
-                string CheckCommand = $"SELECT COUNT(*) FROM Vote_PageInfo";
+                string DeleteCommand = $"DELETE FROM Vote_PageInfo WHERE VoteID={VoteId} AND PageIndex={int.Parse(pageIndex)}";
+                string CheckCommand = $"SELECT COUNT(*) FROM Vote_PageInfo WHERE VoteID={VoteId} AND PageIndex={int.Parse(pageIndex)}";
                 string CheckEssInfoCommand = $"SELECT COUNT(*) FROM Vote_EssInfo WHERE VoteID={VoteId}";
                 string InsertTempCommand = $"INSERT INTO Vote_EssInfo (VoteID,VoteName,Threshold,HxrScore,LxrScore,OutsideThreshold,SelName,HxrWidth,HxrHeight,LxrWidth,LxrHeight) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
@@ -2071,6 +2288,8 @@ namespace DocumentTools
                 //开始插入图片
                 using OleDbCommand checkComand = new OleDbCommand(CheckCommand, TempConnection);
                 int row_count = Convert.ToInt32(checkComand.ExecuteScalar());
+
+                //根据输入的内容，对数据库进行查询，如果找到记录，就对记录进行删除
                 if (row_count > 0)
                 {
                     using OleDbCommand deleteComand = new OleDbCommand(DeleteCommand, TempConnection);
@@ -2078,19 +2297,20 @@ namespace DocumentTools
                 }
 
                 using OleDbCommand checkEssComand = new OleDbCommand(CheckEssInfoCommand, TempConnection);
-                
+
                 int ess_count = Convert.ToInt32(checkEssComand.ExecuteScalar());
 
-                if(ess_count ==0)
+                //正常情况是允许有两条记录存在的
+                if (ess_count == 0)
                 {
                     using OleDbCommand insertEssComand = new OleDbCommand(InsertTempCommand, TempConnection);
-                    insertEssComand.Parameters.AddWithValue("@VoteID",VoteId);
+                    insertEssComand.Parameters.AddWithValue("@VoteID", VoteId);
                     insertEssComand.Parameters.AddWithValue("@VoteName", VoteName);
                     insertEssComand.Parameters.AddWithValue("@Threshold", 45);
                     insertEssComand.Parameters.AddWithValue("@HxrScore", 15);
                     insertEssComand.Parameters.AddWithValue("@LxrScore", 20);
                     insertEssComand.Parameters.AddWithValue("@OutsideThreshold", 1);
-                    insertEssComand.Parameters.AddWithValue("@SelName", "赞成（票面直接有）|不赞成（票面直接有）|弃权（规则运算出）");
+                    insertEssComand.Parameters.AddWithValue("@SelName", pageSquareType);
                     insertEssComand.Parameters.AddWithValue("@HxrWidth", 42);
                     insertEssComand.Parameters.AddWithValue("@HxrHeight", 42);
                     insertEssComand.Parameters.AddWithValue("@LxrWidth", 150);
@@ -2100,7 +2320,7 @@ namespace DocumentTools
 
                 using OleDbCommand insertPicComand = new OleDbCommand(InsertCommand, TempConnection);
                 insertPicComand.Parameters.AddWithValue("@VoteID", VoteId);
-                insertPicComand.Parameters.AddWithValue("@PageIndex", 0);
+                insertPicComand.Parameters.AddWithValue("@PageIndex", int.Parse(pageIndex));
                 insertPicComand.Parameters.AddWithValue("@MatrixCode", VoteIndex);
                 insertPicComand.Parameters.AddWithValue("@PicContent", PictureBytes);
                 insertPicComand.ExecuteNonQuery();
@@ -2108,10 +2328,926 @@ namespace DocumentTools
                 BodyForm.MainForm.BeginInvoke(new Action(() =>
                 {
                     MessageBox.Show("插入完毕", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    BodyForm.MainForm.votedataview.DataSource = GetMss3VoteInfo(DataBaseFile);
+                    BodyForm.MainForm.votedataview.FirstDisplayedScrollingRowIndex = BodyForm.MainForm.votedataview.RowCount - 1;
                 }));
             }
 
         }
+        /// <summary>
+        /// 简易生成二维码
+        /// </summary>
+        /// <param name="barcodeTypeIndex">条码类型</param>
+        /// <param name="barcodeAutoSizeMode">条码尺寸模式</param>
+        /// <param name="barcodeDmiValue">条码密度</param>
+        /// <param name="barcodeRotateValue">旋转角度</param>
+        /// <param name="barcodeImageWidth">图片宽度</param>
+        /// <param name="barcodeImageHeight">图片高度</param>
+        /// <param name="barcodeDpi">分辨率</param>
+        /// <param name="barcodeTextContent">文本内容</param>
+        /// <param name="barcodeTextLocation">文本位置</param>
+        /// <param name="barcodeTextAlign">对齐方式</param>
+        /// <param name="barcodeTextSpace">间距</param>
+        /// <param name="barcodePaddingSize">内填充间距</param>
+        /// <param name="barcodeTextFontSize">字体大小</param>
+        /// <param name="useState">使用模式</param>
+        /// <param name="savedFileName">保存的路径文件名称</param>
+        /// <param name="barcodeCaptionContent">标题内容</param>
+        /// <param name="barcodeCaptionLocationIndex">标题位置</param>
+        /// <param name="barcodeCaptionFontSize">标题字体大小</param>
+        /// <param name="barcodeGenTypeIndex">条码生成类型</param>
+        /// <returns></returns>
+        public static MemoryStream GenerateBarCode(int barcodeTypeIndex, Aspose.BarCode.Generation.AutoSizeMode barcodeAutoSizeMode, float barcodeDmiValue, float barcodeRotateValue, float barcodeImageWidth,
+            float barcodeImageHeight, float barcodeDpi, string barcodeTextContent, Aspose.BarCode.Generation.CodeLocation barcodeTextLocation, Aspose.BarCode.Generation.TextAlignment barcodeTextAlign, float barcodeTextSpace, int barcodePaddingSize,
+            float barcodeTextFontSize, string useState, string savedFileName, string barcodeCaptionContent, int barcodeCaptionLocationIndex, float barcodeCaptionFontSize, int barcodeGenTypeIndex)
+        {
+            Aspose.Hook.HookManager.StartHook();
+
+            Aspose.BarCode.Generation.BarcodeGenerator TempGenerate = null;
+            MemoryStream TempStream = new MemoryStream();
+
+            switch (barcodeTypeIndex)
+            {
+                case 0:
+                    TempGenerate = new Aspose.BarCode.Generation.BarcodeGenerator(Aspose.BarCode.Generation.EncodeTypes.QR);
+                    break;
+                case 1:
+                    TempGenerate = new Aspose.BarCode.Generation.BarcodeGenerator(Aspose.BarCode.Generation.EncodeTypes.DataMatrix);
+                    break;
+                case 2:
+                    TempGenerate = new Aspose.BarCode.Generation.BarcodeGenerator(Aspose.BarCode.Generation.EncodeTypes.Pdf417);
+                    TempGenerate.Parameters.Barcode.Pdf417.Rows = 6;
+                    break;
+                case 3:
+                    TempGenerate = new Aspose.BarCode.Generation.BarcodeGenerator(Aspose.BarCode.Generation.EncodeTypes.Aztec);
+                    break;
+                case 4:
+                    TempGenerate = new Aspose.BarCode.Generation.BarcodeGenerator(Aspose.BarCode.Generation.EncodeTypes.HanXin);
+                    break;
+                default:
+                    break;
+            }
+
+            if (barcodeGenTypeIndex == 0)
+            {
+                TempGenerate.Parameters.Barcode.QR.QrEncodeMode = QREncodeMode.ECIEncoding;
+                TempGenerate.Parameters.Barcode.QR.QrECIEncoding = ECIEncodings.UTF8;
+            }
+            else if (barcodeGenTypeIndex == 1)
+            {
+                TempGenerate.Parameters.Barcode.QR.QrEncodeMode = QREncodeMode.Bytes;
+            }
+
+
+
+
+            TempGenerate.CodeText = barcodeTextContent;
+            TempGenerate.Parameters.AutoSizeMode = barcodeAutoSizeMode;
+
+            TempGenerate.Parameters.Barcode.XDimension.Pixels = barcodeDmiValue;
+            TempGenerate.Parameters.RotationAngle = barcodeRotateValue;
+            TempGenerate.Parameters.Resolution = barcodeDpi;//条码分辨率，但是这个值设置不好容易报错
+
+            TempGenerate.Parameters.Barcode.Padding.Left.Pixels = barcodePaddingSize;
+            TempGenerate.Parameters.Barcode.Padding.Top.Pixels = barcodePaddingSize;
+            TempGenerate.Parameters.Barcode.Padding.Right.Pixels = barcodePaddingSize;
+            TempGenerate.Parameters.Barcode.Padding.Bottom.Pixels = barcodePaddingSize;
+
+
+
+            TempGenerate.Parameters.Barcode.CodeTextParameters.Location = barcodeTextLocation;
+            TempGenerate.Parameters.Barcode.CodeTextParameters.Alignment = barcodeTextAlign;
+            TempGenerate.Parameters.Barcode.CodeTextParameters.Space.Pixels = barcodeTextSpace;
+            TempGenerate.Parameters.Barcode.CodeTextParameters.NoWrap = false;
+            TempGenerate.Parameters.Barcode.CodeTextParameters.FontMode = Aspose.BarCode.Generation.FontMode.Manual;
+            TempGenerate.Parameters.Barcode.CodeTextParameters.Font.Size.Point = barcodeTextFontSize;
+
+            TempGenerate.Parameters.CaptionAbove.Font.Size.Point = barcodeCaptionFontSize;
+            TempGenerate.Parameters.CaptionBelow.Font.Size.Point = barcodeCaptionFontSize;
+            TempGenerate.Parameters.CaptionAbove.NoWrap = false;
+            TempGenerate.Parameters.CaptionBelow.NoWrap = false;
+            TempGenerate.Parameters.CaptionAbove.Alignment = Aspose.BarCode.Generation.TextAlignment.Center;
+            TempGenerate.Parameters.CaptionBelow.Alignment = Aspose.BarCode.Generation.TextAlignment.Center;
+
+            if (barcodeAutoSizeMode == Aspose.BarCode.Generation.AutoSizeMode.Interpolation)
+            {
+                //当设置为插值的时候才生效
+                TempGenerate.Parameters.ImageWidth.Pixels = barcodeImageWidth;
+                TempGenerate.Parameters.ImageHeight.Pixels = barcodeImageHeight;
+            }
+
+
+            if (barcodeCaptionContent != string.Empty)
+            {
+                switch (barcodeCaptionLocationIndex)
+                {
+                    case 0:
+                        TempGenerate.Parameters.CaptionBelow.Visible = false;
+                        TempGenerate.Parameters.CaptionAbove.Visible = false;
+                        break;
+                    case 1:
+                        TempGenerate.Parameters.CaptionAbove.Visible = true;
+                        TempGenerate.Parameters.CaptionAbove.Text = barcodeCaptionContent;
+                        break;
+                    case 2:
+                        TempGenerate.Parameters.CaptionBelow.Visible = true;
+                        TempGenerate.Parameters.CaptionBelow.Text = barcodeCaptionContent;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            switch (useState)
+            {
+                case "barcode_preview":
+                    TempGenerate.Save(TempStream, Aspose.BarCode.Generation.BarCodeImageFormat.Png);
+                    break;
+                case "barcode_mutil_save":
+                    TempGenerate.Save(savedFileName, Aspose.BarCode.Generation.BarCodeImageFormat.Bmp);
+                    break;
+                default:
+                    break;
+            }
+
+
+            return TempStream;
+
+        }
+
+        /// <summary>
+        /// 识别条码图片返回结果
+        /// </summary>
+        /// <param name="barcodeImage">条码图片</param>
+        /// <returns></returns>
+        public static string ReadBarCodeContent(System.Drawing.Bitmap barcodeImage)
+        {
+            Aspose.Hook.HookManager.StartHook();
+            string ReaderResult = string.Empty;
+            using BarCodeReader TempReader = new BarCodeReader(barcodeImage, DecodeType.AllSupportedTypes.Exclude(DecodeType.MicrE13B));
+            foreach (BarCodeResult TempResult in TempReader.ReadBarCodes())
+            {
+                ReaderResult += TempResult.CodeText;
+            }
+            if (ReaderResult == string.Empty)
+            {
+                ReaderResult = "识别失败，可能是以下原因：\r\n1、条码不完整\r\n2、图片内无条码内容\r\n3、不支持的条码类型";
+            }
+
+            return ReaderResult;
+        }
+        /// <summary>
+        /// 读取条码模板内容
+        /// </summary>
+        /// <param name="FileName"></param>
+        /// <returns></returns>
+        public static DataTable ReadBarCodeTemplate(string FileName)
+        {
+            Aspose.Hook.HookManager.StartHook();
+            Workbook TempLoadBook = new Workbook(FileName);
+            Worksheet TempWorkSheet = TempLoadBook.Worksheets[0];
+            DataTable TempBarCodeGenTable = new DataTable();
+            TempBarCodeGenTable.Columns.Add("编号");
+            TempBarCodeGenTable.Columns.Add("标题");
+            TempBarCodeGenTable.Columns.Add("内容");
+            for (int row = 1; row <= TempWorkSheet.Cells.MaxDataRow; row++)
+            {
+                Aspose.Cells.Cell TempCell_GenNumber = TempWorkSheet.Cells.GetCell(row, 0);
+                Aspose.Cells.Cell TempCell_GenCaption = TempWorkSheet.Cells.GetCell(row, 1);
+                Aspose.Cells.Cell TempCell_GenContent = TempWorkSheet.Cells.GetCell(row, 2);
+
+                if (TempCell_GenNumber != null && TempCell_GenContent != null)
+                {
+                    if (TempCell_GenNumber.StringValue != string.Empty && TempCell_GenContent.StringValue != string.Empty)
+                    {
+                        TempBarCodeGenTable.Rows.Add(TempCell_GenNumber.StringValue, TempCell_GenCaption?.StringValue, TempCell_GenContent.StringValue);
+                    }
+                }
+                else
+                {
+                    TempBarCodeGenTable.Rows.Add("模板错误_编号列无内容", "模板错误_标题列无内容", "模板错误_内容列无内容");
+
+                }
+
+            }
+            return TempBarCodeGenTable;
+        }
+
+        /// <summary>
+        /// 生成身份证信息，带有计算校验位
+        /// </summary>
+        /// <param name="card_pac_code">地区编码</param>
+        /// <param name="card_birthday">出生日期</param>
+        /// <param name="card_end_code">出生顺序编码</param>
+        public static string GenChinaCard(string card_pac_code, string card_birthday, string card_end_code)
+        {
+            string result_card_id = card_pac_code + card_birthday + card_end_code;
+
+            int result_card_id_0 = int.Parse(result_card_id[0].ToString());
+            int result_card_id_1 = int.Parse(result_card_id[1].ToString());
+            int result_card_id_2 = int.Parse(result_card_id[2].ToString());
+            int result_card_id_3 = int.Parse(result_card_id[3].ToString());
+            int result_card_id_4 = int.Parse(result_card_id[4].ToString());
+            int result_card_id_5 = int.Parse(result_card_id[5].ToString());
+            int result_card_id_6 = int.Parse(result_card_id[6].ToString());
+            int result_card_id_7 = int.Parse(result_card_id[7].ToString());
+            int result_card_id_8 = int.Parse(result_card_id[8].ToString());
+            int result_card_id_9 = int.Parse(result_card_id[9].ToString());
+            int result_card_id_10 = int.Parse(result_card_id[10].ToString());
+            int result_card_id_11 = int.Parse(result_card_id[11].ToString());
+            int result_card_id_12 = int.Parse(result_card_id[12].ToString());
+            int result_card_id_13 = int.Parse(result_card_id[13].ToString());
+            int result_card_id_14 = int.Parse(result_card_id[14].ToString());
+            int result_card_id_15 = int.Parse(result_card_id[15].ToString());
+            int result_card_id_16 = int.Parse(result_card_id[16].ToString());
+
+            //计算校验位算法
+            int result_sign_code = ((result_card_id_0 * 7) + (result_card_id_1 * 9) + (result_card_id_2 * 10) + (result_card_id_3 * 5) + (result_card_id_4 * 8) +
+                (result_card_id_5 * 4) + (result_card_id_6 * 2) + (result_card_id_7 * 1) + (result_card_id_8 * 6) + (result_card_id_9 * 3) +
+                (result_card_id_10 * 7) + (result_card_id_11 * 9) + (result_card_id_12 * 10) + (result_card_id_13 * 5) + (result_card_id_14 * 8) + (result_card_id_15 * 4) + (result_card_id_16 * 2)) % 11;
+
+
+            switch (result_sign_code)
+            {
+                case 0:
+                    result_card_id += "1";
+                    break;
+                case 1:
+                    result_card_id += "0";
+                    break;
+                case 2:
+                    result_card_id += "X";
+                    break;
+                case 3:
+                    result_card_id += "9";
+                    break;
+                case 4:
+                    result_card_id += "8";
+                    break;
+                case 5:
+                    result_card_id += "7";
+                    break;
+                case 6:
+                    result_card_id += "6";
+                    break;
+                case 7:
+                    result_card_id += "5";
+                    break;
+                case 8:
+                    result_card_id += "4";
+                    break;
+                case 9:
+                    result_card_id += "3";
+                    break;
+                case 10:
+                    result_card_id += "2";
+                    break;
+                default:
+                    break;
+            }
+
+            return result_card_id;
+
+
+
+        }
+
+        public static Tuple<string, string, string, bool, string> VaildateChinaCard(string card_id)
+        {
+            Tuple<string, string, string, bool, string> card_id_ver_result = new Tuple<string, string, string, bool, string>("", "", "", false, "");
+            if (card_id.Length == 18)
+            {
+                //提取前6位的信息
+
+                string card_id_01 = card_id[0].ToString();
+                string card_id_02 = card_id[1].ToString();
+                string card_id_03 = card_id[2].ToString();
+                string card_id_04 = card_id[3].ToString();
+                string card_id_05 = card_id[4].ToString();
+                string card_id_06 = card_id[5].ToString();
+
+                bool card_id_01_ver = int.TryParse(card_id_01, out int card_id_01_int);
+                bool card_id_02_ver = int.TryParse(card_id_02, out int card_id_02_int);
+                bool card_id_03_ver = int.TryParse(card_id_03, out int card_id_03_int);
+                bool card_id_04_ver = int.TryParse(card_id_04, out int card_id_04_int);
+                bool card_id_05_ver = int.TryParse(card_id_05, out int card_id_05_int);
+                bool card_id_06_ver = int.TryParse(card_id_06, out int card_id_06_int);
+
+
+                int now_year = DateTime.Now.Year;
+                string card_id_year = card_id.Substring(6, 4);
+                string card_id_month = card_id.Substring(10, 2);
+                string card_id_day = card_id.Substring(12, 2);
+
+
+
+                //提取顺序码和性别信息
+
+                string card_id_index_number = card_id.Substring(14, 3);
+                char card_id_sex_sign = card_id_index_number[2];
+
+
+
+                bool card_id_year_number_ver = int.TryParse(card_id_year, out int card_id_year_int);
+                bool card_id_month_number_ver = int.TryParse(card_id_month, out int card_id_month_int);
+                bool card_id_day_number_ver = int.TryParse(card_id_day, out int card_id_day_int);
+
+                bool card_id_index_number_ver = int.TryParse(card_id_index_number, out int card_id_index_number_int);
+                bool card_id_sex_sign_number_ver = int.TryParse(card_id_sex_sign.ToString(), out int card_id_sex_sign_int);
+
+
+                string ver_pass_date = "";//出生日期
+                string ver_pass_index = "";//出生顺序
+                string ver_pass_sex = "";//性别
+                bool sign_ver_status = false;//校验状态
+
+                //日期校验
+                if (card_id_year_number_ver && card_id_month_number_ver && card_id_day_number_ver)
+                {
+                    if (card_id_year_int >= 1900 && card_id_year_int <= now_year &&
+                        card_id_month_int <= 12 && card_id_day_int <= 31)
+                    {
+                        ver_pass_date = new DateTime(card_id_year_int, card_id_month_int, card_id_day_int).ToString("yyyy年MM月dd日");
+                    }
+                    else
+                    {
+                        ver_pass_date = "日期不正确";
+                    }
+                }
+
+                //提取顺序
+                if (card_id_index_number_ver)
+                {
+                    ver_pass_index = card_id_index_number_int.ToString();
+                }
+                //计算性别
+                if (card_id_sex_sign_number_ver)
+                {
+                    if (card_id_sex_sign_int % 2 == 0)
+                    {
+                        ver_pass_sex = "女";
+                    }
+                    else
+                    {
+                        ver_pass_sex = "男";
+                    }
+                }
+
+
+                //计算校验码，确保全是数字以后再进行计算
+                if (card_id_01_ver && card_id_02_ver && card_id_03_ver && card_id_04_ver
+                    && card_id_05_ver && card_id_06_ver && card_id_year_number_ver && card_id_day_number_ver
+                    && card_id_day_number_ver && card_id_index_number_ver && card_id_sex_sign_number_ver)
+                {
+                    int result_card_id_0 = int.Parse(card_id[0].ToString());
+                    int result_card_id_1 = int.Parse(card_id[1].ToString());
+                    int result_card_id_2 = int.Parse(card_id[2].ToString());
+                    int result_card_id_3 = int.Parse(card_id[3].ToString());
+                    int result_card_id_4 = int.Parse(card_id[4].ToString());
+                    int result_card_id_5 = int.Parse(card_id[5].ToString());
+                    int result_card_id_6 = int.Parse(card_id[6].ToString());
+                    int result_card_id_7 = int.Parse(card_id[7].ToString());
+                    int result_card_id_8 = int.Parse(card_id[8].ToString());
+                    int result_card_id_9 = int.Parse(card_id[9].ToString());
+                    int result_card_id_10 = int.Parse(card_id[10].ToString());
+                    int result_card_id_11 = int.Parse(card_id[11].ToString());
+                    int result_card_id_12 = int.Parse(card_id[12].ToString());
+                    int result_card_id_13 = int.Parse(card_id[13].ToString());
+                    int result_card_id_14 = int.Parse(card_id[14].ToString());
+                    int result_card_id_15 = int.Parse(card_id[15].ToString());
+                    int result_card_id_16 = int.Parse(card_id[16].ToString());
+                    string result_card_id_17 = card_id[17].ToString();
+
+                    //计算校验位算法
+                    int result_sign_code = ((result_card_id_0 * 7) + (result_card_id_1 * 9) + (result_card_id_2 * 10) + (result_card_id_3 * 5) + (result_card_id_4 * 8) +
+                        (result_card_id_5 * 4) + (result_card_id_6 * 2) + (result_card_id_7 * 1) + (result_card_id_8 * 6) + (result_card_id_9 * 3) +
+                        (result_card_id_10 * 7) + (result_card_id_11 * 9) + (result_card_id_12 * 10) + (result_card_id_13 * 5) + (result_card_id_14 * 8) + (result_card_id_15 * 4) + (result_card_id_16 * 2)) % 11;
+
+                    string curren_sign_code = "";
+
+                    switch (result_sign_code)
+                    {
+                        case 0:
+                            curren_sign_code = "1";
+                            sign_ver_status = result_card_id_17.ToString() == curren_sign_code;
+                            break;
+                        case 1:
+                            curren_sign_code = "0";
+                            sign_ver_status = result_card_id_17.ToString() == curren_sign_code;
+                            break;
+                        case 2:
+                            curren_sign_code = "X";
+                            sign_ver_status = result_card_id_17.ToString() == curren_sign_code;
+                            break;
+                        case 3:
+                            curren_sign_code = "9";
+                            sign_ver_status = result_card_id_17.ToString() == curren_sign_code;
+                            break;
+                        case 4:
+                            curren_sign_code = "8";
+                            sign_ver_status = result_card_id_17.ToString() == curren_sign_code;
+                            break;
+                        case 5:
+                            curren_sign_code = "7";
+                            sign_ver_status = result_card_id_17.ToString() == curren_sign_code;
+                            break;
+                        case 6:
+                            curren_sign_code = "6";
+                            sign_ver_status = result_card_id_17.ToString() == curren_sign_code;
+                            break;
+                        case 7:
+                            curren_sign_code = "5";
+                            sign_ver_status = result_card_id_17.ToString() == curren_sign_code;
+                            break;
+                        case 8:
+                            curren_sign_code = "4";
+                            sign_ver_status = result_card_id_17.ToString() == curren_sign_code;
+                            break;
+                        case 9:
+                            curren_sign_code = "3";
+                            sign_ver_status = result_card_id_17.ToString() == curren_sign_code;
+                            break;
+                        case 10:
+                            curren_sign_code = "2";
+                            sign_ver_status = result_card_id_17.ToString() == curren_sign_code;
+                            break;
+                        default:
+                            break;
+                    }
+
+
+                    card_id_ver_result = new Tuple<string, string, string, bool, string>(ver_pass_date, ver_pass_sex, ver_pass_index, sign_ver_status, curren_sign_code.ToString());
+                }
+            }
+            return card_id_ver_result;
+        }
+
+        /// <summary>
+        /// 生成随机日期
+        /// </summary>
+        /// <param name="random_obj">随机实例</param>
+        /// <param name="only_gen_18_year">是否大于18岁</param>
+        /// <returns></returns>
+        public static string GenRandomBirthday(Random random_obj, bool only_gen_18_year)
+        {
+            int random_year = random_obj.Next(1900, DateTime.Now.Year);
+            if (only_gen_18_year)
+            {
+                random_year = random_obj.Next(1900, DateTime.Now.Year - 18);
+            }
+            int random_month = random_obj.Next(1, 13);
+            int max_day = DateTime.DaysInMonth(random_year, random_month);
+            int random_day = random_obj.Next(1, max_day + 1);
+
+            string result_random_birthday = new DateTime(random_year, random_month, random_day).ToString("yyyyMMdd");
+
+            return result_random_birthday;
+        }
+        /// <summary>
+        /// 生成随机序号，三位数字
+        /// </summary>
+        /// <param name="random_obj">随机实例</param>
+        /// <returns></returns>
+        public static string GenRandomIndex(Random random_obj)
+        {
+
+            return random_obj.Next(001, 1000).ToString("D3");//格式化字符串，不足三位前导0补足
+        }
+
+        /// <summary>
+        /// 生成随机姓名
+        /// </summary>
+        /// <param name="random_obj_first"></param>
+        /// <param name="random_obj_name"></param>
+        /// <returns></returns>
+        public static string GenRandomName(Random random_obj_first, Random random_obj_name)
+        {
+
+            string[] Name_First_List = (string[])GetEmbedResourceObj("chinse_first").ToString().Split('\r');
+            string[] Name_Text_List = (string[])GetEmbedResourceObj("chinese_han").ToString().Split('\r');
+            string gen_random_result = "";
+
+            int random_first_index = random_obj_first.Next(0, Name_First_List.Length);
+            int random_name_index = random_obj_name.Next(0, Name_Text_List.Length);
+
+            int random_name_len = random_obj_name.Next(2, 4);
+
+
+            string random_first = Name_First_List[random_first_index];
+
+            string random_name_1 = Name_Text_List[random_name_index];
+
+            string random_name_2 = Name_Text_List[random_name_index + 1];
+
+            if (random_name_len == 2)
+            {
+                gen_random_result = random_first + "  " + random_name_1;
+            }
+            else
+            {
+                gen_random_result = random_first + random_name_1 + random_name_2;
+
+            }
+
+            return gen_random_result;
+        }
+
+
+        /// <summary>
+        /// 批量生成文件副本（GPT写的，我根本看不懂）
+        /// </summary>
+        /// <param name="SourceFile"></param>
+        /// <param name="GenNumber"></param>
+        /// <param name="StatusLabel"></param>
+        /// <param name="ReNameStr"></param>
+        /// <param name="OutPutPath"></param>
+        public static void GenCopySameFile(string SourceFile, int GenNumber, Label StatusLabel, string ReNameStr, string PrefixNumberCount, string OutPutPath)
+        {
+            if (SourceFile != string.Empty && File.Exists(SourceFile))
+            {
+                string SourceFileName = Path.GetFileNameWithoutExtension(SourceFile);
+                string SourceFileNameExt = Path.GetExtension(SourceFile);
+
+                // 获取目标目录中已存在的副本文件
+                string[] existingCopies = Directory.GetFiles(OutPutPath)
+                    .Where(file => Path.GetFileName(file).StartsWith($"{SourceFileName}- {ReNameStr}"))
+                    .ToArray();
+
+                Dictionary<string, int> fileCounts = new Dictionary<string, int>();
+
+                foreach (string existingCopy in existingCopies)
+                {
+                    string existingFileName = Path.GetFileNameWithoutExtension(existingCopy);
+                    if (existingFileName.StartsWith($"{SourceFileName}- {ReNameStr} （"))
+                    {
+                        int countStartIndex = existingFileName.LastIndexOf('（') + 1;
+                        int countEndIndex = existingFileName.LastIndexOf('）');
+                        if (countStartIndex >= 0 && countEndIndex >= 0)
+                        {
+                            string countStr = existingFileName.Substring(countStartIndex, countEndIndex - countStartIndex);
+                            if (int.TryParse(countStr, out int count))
+                            {
+                                fileCounts[existingCopy] = count;
+                            }
+                        }
+                    }
+                }
+
+                int maxCount = 0;
+                if (fileCounts.Count > 0)
+                {
+                    maxCount = fileCounts.Values.Max();
+                }
+
+                for (int i = 1; i <= GenNumber; i++)
+                {
+                    string TempCopiedName = $"{SourceFileName}- {ReNameStr} （{(maxCount + i).ToString($"D{PrefixNumberCount}")}）{SourceFileNameExt}";
+                    string GenFileName = Path.Combine(OutPutPath, TempCopiedName);
+                    File.Copy(SourceFile, GenFileName);
+                    StatusLabel.Text = $"目录内共有{maxCount + i}个该文件";
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// 获取网卡名称列表，wmi方式
+        /// </summary>
+        /// <param name="OnlyShowNormal"></param>
+        /// <returns></returns>
+        public static List<string> GetNetWorkCardList(bool OnlyShowNormal)
+        {
+            List<string> NetworkLists = new List<string>();
+            string QueryNetwork = "SELECT * FROM Win32_NetworkAdapter";
+
+            if (OnlyShowNormal)
+            {
+                QueryNetwork += " WHERE NetConnectionStatus = 2";
+            }
+
+            using ManagementObjectSearcher TempSearcher = new ManagementObjectSearcher(QueryNetwork);
+            using ManagementObjectCollection TempNetworkList = TempSearcher.Get();
+            foreach (ManagementObject TempNetwork in TempNetworkList)
+            {
+                string NetworkCardName = TempNetwork.GetPropertyValue("Description") as string;
+                NetworkLists.Add(NetworkCardName);
+            }
+
+            return NetworkLists;
+        }
+
+        /// <summary>
+        /// 根据网卡名称获取基础的网络信息
+        /// </summary>
+        /// <param name="NetworkCardName"></param>
+        /// <returns></returns>
+        public static (List<string>, List<string>, List<string>, string, string, string,bool) GetCard_Information(string NetworkCardName)
+        {
+            List<string> IPV4_ADDRESSES = new List<string>();
+            List<string> SUBNET_MASKS = new List<string>();
+            List<string> DEFAULT_GATEWAYS = new List<string>();
+            List<string> DnsLists = new List<string>();
+            string DNS_1 = "";
+            string DNS_2 = "";
+            string MAC_ADDRESS = "";
+            bool IS_ENABLE_DHCP = false;
+
+            NetworkInterface TempInterface = NetworkInterface.GetAllNetworkInterfaces().FirstOrDefault(n => n.Description == NetworkCardName);
+
+            if (TempInterface != null && TempInterface != default)
+            {
+                foreach (UnicastIPAddressInformation TempIp in TempInterface.GetIPProperties().UnicastAddresses)
+                {
+                    if (TempIp.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                    {
+                        IPV4_ADDRESSES.Add(TempIp.Address.ToString());
+                        SUBNET_MASKS.Add(TempIp.IPv4Mask.ToString());
+
+                        foreach (GatewayIPAddressInformation TempGateway in TempInterface.GetIPProperties().GatewayAddresses)
+                        {
+                            if (TempGateway.Address.AddressFamily==System.Net.Sockets.AddressFamily.InterNetwork)
+                            {
+                                DEFAULT_GATEWAYS.Add(TempGateway.Address.ToString());
+                            }
+                        }
+                    }
+                }
+
+                IPInterfaceProperties TempInterfacePro = TempInterface.GetIPProperties();
+                IPAddressCollection DNSAddresses = TempInterfacePro.DnsAddresses;
+                IS_ENABLE_DHCP = TempInterfacePro.GetIPv4Properties().IsDhcpEnabled;
+                foreach (IPAddress DnsAddress in DNSAddresses)
+                {
+                    if(DnsAddress.AddressFamily==System.Net.Sockets.AddressFamily.InterNetwork)
+                    {
+                        DnsLists.Add(DnsAddress.ToString());
+                    }
+                }
+                DNS_1 = DnsLists.Count > 0 ? DnsLists[0] : "未获取到";
+                DNS_2 = DnsLists.Count > 1 ? DnsLists[1] : "未获取到";
+
+                MAC_ADDRESS = BitConverter.ToString(TempInterface.GetPhysicalAddress().GetAddressBytes());
+
+                return (IPV4_ADDRESSES, SUBNET_MASKS, DEFAULT_GATEWAYS, DNS_1, DNS_2, MAC_ADDRESS, IS_ENABLE_DHCP);
+            }
+            return (new List<string>() { "未获取到" }, new List<string>() { "未获取到" }, new List<string>() { "未获取到" }, "未获取到", "未获取到", "未获取到",false);
+        }
+
+
+        /// <summary>
+        /// 根据网卡名称设置ip地址等信息
+        /// </summary>
+        /// <param name="NetworkCardName"></param>
+        /// <param name="ipaddress"></param>
+        /// <param name="mask"></param>
+        /// <param name="gateway"></param>
+        /// <param name="dns1"></param>
+        /// <param name="dns2"></param>
+        /// <param name="UseStatic"></param>
+        public static void SetInterfaceInformation(string NetworkCardName,
+            string ipaddress, string mask, string gateway, string dns1, string dns2, bool UseStatic)
+        {
+            ManagementBaseObject InputParama = null;
+            ManagementBaseObject OutputResult = null;
+
+            using ManagementClass TempClass = new ManagementClass("Win32_NetworkAdapterConfiguration");
+
+            using ManagementObjectCollection TempObjects = TempClass.GetInstances();
+
+            foreach (ManagementObject TempObject in TempObjects)
+            {
+                //网卡必须已启用且有效
+                if ((bool)TempObject.GetPropertyValue("IPEnabled"))
+                {
+                    //根据网卡描述匹配进行地址设置
+                    if (TempObject.GetPropertyValue("Description").ToString() == NetworkCardName)
+                    {
+
+                        if (UseStatic)
+                        {
+                            //使用静态IP
+                            InputParama = TempObject.GetMethodParameters("EnableStatic");
+                            InputParama["IPAddress"] = new string[] { ipaddress };
+                            InputParama["SubnetMask"] = new string[] { mask };
+                            OutputResult = TempObject.InvokeMethod("EnableStatic", InputParama, null);
+
+                            InputParama = TempObject.GetMethodParameters("SetGateways");
+                            InputParama["DefaultIPGateway"] = new string[] { gateway };
+                            OutputResult = TempObject.InvokeMethod("SetGateways", InputParama, null);
+
+                            InputParama = TempObject.GetMethodParameters("SetDNSServerSearchOrder");
+                            if(dns1=="0.0.0.0" || dns1==string.Empty)
+                            {
+                                InputParama["DNSServerSearchOrder"] = new string[] { dns2 };
+                            }
+                            else if(dns2=="0.0.0.0" || dns1 == string.Empty)
+                            {
+                                InputParama["DNSServerSearchOrder"] = new string[] { dns1 };
+                            }
+                            else
+                            {
+                                InputParama["DNSServerSearchOrder"] = new string[] { dns1,dns2 };
+                            }
+
+                            OutputResult = TempObject.InvokeMethod("SetDNSServerSearchOrder", InputParama, null);
+
+                        }
+                        else//设置DHCP
+                        {
+                            InputParama = TempObject.GetMethodParameters("EnableDHCP");
+                            OutputResult = TempObject.InvokeMethod("EnableDHCP", InputParama, null);
+
+                            //设置自动DNS
+                            InputParama = TempObject.GetMethodParameters("SetDNSServerSearchOrder");
+                            InputParama["DNSServerSearchOrder"] = null;
+                            OutputResult = TempObject.InvokeMethod("SetDNSServerSearchOrder", InputParama, null);
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 根据网卡名称来启用或禁用网卡
+        /// </summary>
+        /// <param name="NetworkCardName"></param>
+        /// <param name="StatusMethodText"></param>
+        public static void SetInterfaceStatus(string NetworkCardName, string StatusMethodText)
+        {
+            using ManagementObjectSearcher TempSearcher = new ManagementObjectSearcher($"SELECT * FROM Win32_NetworkAdapter WHERE Description='" + NetworkCardName + "'");
+            using ManagementObjectCollection TempList = TempSearcher.Get();
+
+            foreach (ManagementObject TempObject in TempList)
+            {
+                TempObject.InvokeMethod(StatusMethodText, null);
+            }
+        }
+
+
+        public static DataTable GetSharePaths()
+        {
+            DataTable TempTable = new DataTable();
+            TempTable.Columns.Add("DisplayValue");
+            TempTable.Columns.Add("RealValue");
+            using ManagementObjectSearcher TempSearcher = new ManagementObjectSearcher("SELECT * FROM Win32_Share");
+            foreach(ManagementObject TempShare in TempSearcher.Get())
+            {
+                string ShareName = TempShare.GetPropertyValue("Name").ToString();
+                string SharePath = TempShare.GetPropertyValue("Path").ToString();
+                if(SharePath!=string.Empty)
+                {
+                    TempTable.Rows.Add(ShareName, SharePath);
+                }
+            }
+            return TempTable;
+
+        }
+
+        public static string ConvertMoney2ChineseYuan(decimal num)
+        {
+            string str1 = "零壹贰叁肆伍陆柒捌玖";            //0-9所对应的汉字 
+            string str2 = "万仟佰拾亿仟佰拾万仟佰拾元角分"; //数字位所对应的汉字 
+            string str3 = "";    //从原num值中取出的值 
+            string str4 = "";    //数字的字符串形式 
+            string str5 = "";  //人民币大写金额形式 
+            int i;    //循环变量 
+            int j;    //num的值乘以100的字符串长度 
+            string ch1 = "";    //数字的汉语读法 
+            string ch2 = "";    //数字位的汉字读法 
+            int nzero = 0;  //用来计算连续的零值是几个 
+            int temp;            //从原num值中取出的值 
+
+            num = Math.Round(Math.Abs(num), 2);    //将num取绝对值并四舍五入取2位小数 
+            str4 = ((long)(num * 100)).ToString();        //将num乘100并转换成字符串形式 
+            j = str4.Length;      //找出最高位 
+            if (j > 15) { return "溢出"; }
+            str2 = str2.Substring(15 - j);   //取出对应位数的str2的值。如：200.55,j为5所以str2=佰拾元角分 
+
+            //循环取出每一位需要转换的值 
+            for (i = 0; i < j; i++)
+            {
+                str3 = str4.Substring(i, 1);          //取出需转换的某一位的值 
+                temp = Convert.ToInt32(str3);      //转换为数字 
+                if (i != (j - 3) && i != (j - 7) && i != (j - 11) && i != (j - 15))
+                {
+                    //当所取位数不为元、万、亿、万亿上的数字时 
+                    if (str3 == "0")
+                    {
+                        ch1 = "";
+                        ch2 = "";
+                        nzero = nzero + 1;
+                    }
+                    else
+                    {
+                        if (str3 != "0" && nzero != 0)
+                        {
+                            ch1 = "零" + str1.Substring(temp * 1, 1);
+                            ch2 = str2.Substring(i, 1);
+                            nzero = 0;
+                        }
+                        else
+                        {
+                            ch1 = str1.Substring(temp * 1, 1);
+                            ch2 = str2.Substring(i, 1);
+                            nzero = 0;
+                        }
+                    }
+                }
+                else
+                {
+                    //该位是万亿，亿，万，元位等关键位 
+                    if (str3 != "0" && nzero != 0)
+                    {
+                        ch1 = "零" + str1.Substring(temp * 1, 1);
+                        ch2 = str2.Substring(i, 1);
+                        nzero = 0;
+                    }
+                    else
+                    {
+                        if (str3 != "0" && nzero == 0)
+                        {
+                            ch1 = str1.Substring(temp * 1, 1);
+                            ch2 = str2.Substring(i, 1);
+                            nzero = 0;
+                        }
+                        else
+                        {
+                            if (str3 == "0" && nzero >= 3)
+                            {
+                                ch1 = "";
+                                ch2 = "";
+                                nzero = nzero + 1;
+                            }
+                            else
+                            {
+                                if (j >= 11)
+                                {
+                                    ch1 = "";
+                                    nzero = nzero + 1;
+                                }
+                                else
+                                {
+                                    ch1 = "";
+                                    ch2 = str2.Substring(i, 1);
+                                    nzero = nzero + 1;
+                                }
+                            }
+                        }
+                    }
+                }
+                if (i == (j - 11) || i == (j - 3))
+                {
+                    //如果该位是亿位或元位，则必须写上 
+                    ch2 = str2.Substring(i, 1);
+                }
+                str5 = str5 + ch1 + ch2;
+
+                if (i == j - 1 && str3 == "0")
+                {
+                    //最后一位（分）为0时，加上“整” 
+                    str5 = str5 + '整';
+                }
+            }
+            if (num == 0)
+            {
+                str5 = "零元整";
+            }
+            return str5;
+        }
+
+        public static bool IsAdministrator()
+        {
+            WindowsIdentity WI = WindowsIdentity.GetCurrent();
+            WindowsPrincipal WP = new WindowsPrincipal(WI);
+
+            return WP.IsInRole(WindowsBuiltInRole.Administrator);
+        }
+
+        public static string GetAdministratorBehavior()
+        {
+            string BehaviorStatus =  GetRegistryValue(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "EnableLUA").ToString();
+
+            return BehaviorStatus;
+
+        }
+
+        public static void SetAdministratorBehavior(bool Enbale)
+        {
+            if(Enbale)
+            {
+                SetRegistryValue(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "EnableLUA", 1,RegistryValueKind.DWord);
+
+            }
+            else
+            {
+                SetRegistryValue(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "EnableLUA", 0,RegistryValueKind.DWord);
+
+            }
+        }
+
+
+
+
 
         /// <summary>
         /// bmp转为256色
@@ -2162,5 +3298,5 @@ namespace DocumentTools
 
             return outputBitmap;
         }
-}
+    }
 }

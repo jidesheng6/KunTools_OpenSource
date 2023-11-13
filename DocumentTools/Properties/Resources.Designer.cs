@@ -63,10 +63,99 @@ namespace DocumentTools.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap _1351 {
+            get {
+                object obj = ResourceManager.GetObject("1351", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap _6f258af2c19c9c3cdb97517573506c11ce48ff98 {
+            get {
+                object obj = ResourceManager.GetObject("6f258af2c19c9c3cdb97517573506c11ce48ff98", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap access {
             get {
                 object obj = ResourceManager.GetObject("access", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] amagi {
+            get {
+                object obj = ResourceManager.GetObject("amagi", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] BarCodeTemplate {
+            get {
+                object obj = ResourceManager.GetObject("BarCodeTemplate", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 [{
+        ///    &quot;code&quot;: &quot;11&quot;,
+        ///    &quot;name&quot;: &quot;北京市&quot;,
+        ///    &quot;children&quot;: [{
+        ///        &quot;code&quot;: &quot;1101&quot;,
+        ///        &quot;name&quot;: &quot;市辖区&quot;,
+        ///        &quot;children&quot;: [{
+        ///            &quot;code&quot;: &quot;110101&quot;,
+        ///            &quot;name&quot;: &quot;东城区&quot;
+        ///        }, {
+        ///            &quot;code&quot;: &quot;110102&quot;,
+        ///            &quot;name&quot;: &quot;西城区&quot;
+        ///        }, {
+        ///            &quot;code&quot;: &quot;110105&quot;,
+        ///            &quot;name&quot;: &quot;朝阳区&quot;
+        ///        }, {
+        ///            &quot;code&quot;: &quot;110106&quot;,
+        ///            &quot;name&quot;: &quot;丰台区&quot;
+        ///        }, {
+        ///            &quot;code&quot;: &quot;110107&quot;,
+        ///            &quot;name&quot;: &quot;石景山区&quot;
+        ///        }, {
+        ///            &quot;co [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string china_level {
+            get {
+                return ResourceManager.GetString("china_level", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 一        ///乙        ///二        ///十        ///丁        ///厂        ///七        ///卜        ///八        ///人        ///入        ///儿        ///匕        ///几        ///九        ///刁        ///了        ///刀        ///力        ///乃        ///又        ///三        ///干        ///于        ///亏        ///工        ///土        ///士        ///才        ///下        ///寸        ///大        ///丈        ///与        ///万        ///上        ///小        ///口        ///山        ///巾        ///千        ///乞        ///川        ///亿        ///个        ///夕        ///久        ///么        ///勺        ///凡        ///丸        ///及        ///广        ///亡        ///门        ///丫        ///义        ///之        ///尸        ///己        ///已        ///巳        ///弓        ///子        ///卫        ///也        ///女        ///刃        ///飞        ///习        ///叉        ///马        ///乡        ///丰        ///王        ///开        ///井        ///天        ///夫        ///元        ///无        ///云        ///专        ///丐        ///扎        ///艺        ///木        ///五        ///支        ///厅        ///不        ///犬        ///太        ///区        ///历        ///歹        ///友        ///尤        ///匹        ///车        ///巨        ///牙        ///屯        ///戈        ///比        ///互        ///切        ///瓦        ///止        ///少        ///曰        ///日        ///中        ///贝        ///冈        ///内        ///水        ///见        ///午        ///牛        ///手        ///气        ///毛        ///壬        ///升        ///夭        ///长        ///仁        ///什        ///片        ///仆        ///化        ///仇        ///币        ///仍        ///仅        ///斤        ///爪        ///反        ///介        ///父        ///从        ///仑        ///今        ///凶        ///分        ///乏        ///公        ///仓        ///月        ///氏        ///勿        ///欠        ///风        ///丹        ///匀        ///乌        ///勾        ///凤        ///六        ///文        ///亢        ///方        ///火        ///为        ///斗        ///忆        ///计        ///订        ///户        ///认        ///冗        ///讥        ///心        ///尺        ///引        ///丑        ///巴        ///孔        ///队        ///办        ///以        ///允        ///予        ///邓        ///劝        ///双        ///书        ///幻        ///玉        ///刊        ///未        ///末        ///示        ///击        ///打        ///巧        ///正        ///扑        ///卉        ///扒        ///功        ///扔        ///去        ///甘        ///世        ///艾        ///古        ///节        ///本        ///术        ///可        ///丙        ///左        ///厉        ///石        ///右        ///布        ///夯        ///戊        ///龙        ///平        ///灭        ///轧        ///东        ///卡        ///北        ///占        ///凸        ///卢        ///业        ///旧        ///帅        ///归        ///旦        ///目        ///且        ///叶        ///甲        ///申        ///叮        ///电        ///号        ///田        ///由        ///只        ///叭        ///史        ///央        ///兄        ///叽        ///叼        ///叫        ///叩        ///叨        ///另        /// [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string chinese_han {
+            get {
+                return ResourceManager.GetString("chinese_han", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 赵        ///钱        ///孙        ///李        ///周        ///吴        ///郑        ///王        ///冯        ///陈        ///褚        ///卫        ///蒋        ///沈        ///韩        ///杨        ///朱        ///秦        ///尤        ///许        ///何        ///吕        ///施        ///张        ///孔        ///曹        ///严        ///华        ///金        ///魏        ///陶        ///姜        ///戚        ///谢        ///邹        ///喻        ///柏        ///水        ///窦        ///章        ///云        ///苏        ///潘        ///葛        ///奚        ///范        ///彭        ///郎        ///鲁        ///韦        ///昌        ///马        ///苗        ///凤        ///花        ///方        ///俞        ///任        ///袁        ///柳        ///酆        ///鲍        ///史        ///唐        ///费        ///廉        ///岑        ///薛        ///雷        ///贺        ///倪        ///汤        ///滕        ///殷        ///罗        ///毕        ///郝        ///邬        ///安        ///常        ///乐        ///于        ///时        ///傅        ///皮        ///卞        ///齐        ///康        ///伍        ///余        ///元        ///卜        ///顾        ///孟        ///平        ///黄        ///和        ///穆        ///萧        ///尹        ///姚        ///邵        ///湛        ///汪        ///祁        ///毛        ///禹        ///狄        ///米        ///贝        ///明        ///臧        ///计        ///伏        ///成        ///戴        ///谈        ///宋        ///茅        ///庞        ///熊        ///纪        ///舒        ///屈        ///项        ///祝        ///董        ///梁        ///杜        ///阮        ///蓝        ///闽        ///席        ///季        ///麻        ///强        ///贾        ///路        ///娄        ///危        ///江        ///童        ///颜        ///郭        ///梅        ///盛        ///林        ///刁        ///钟        ///徐        ///丘        ///骆        ///高        ///夏        ///蔡        ///田        ///樊        ///胡        ///凌        ///霍        ///虞        ///万        ///支        ///柯        ///昝        ///管        ///卢        ///莫        ///经        ///房        ///裘        ///缪        ///干        ///解        ///应        ///宗        ///丁        ///宣        ///贲        ///邓        ///郁        ///单        ///杭        ///洪        ///包        ///诸        ///左        ///石        ///崔        ///吉        ///钮        ///龚        ///程        ///嵇        ///邢        ///滑        ///裴        ///陆        ///荣        ///翁        ///荀        ///羊        ///於        ///惠        ///甄        ///麹        ///家        ///封        ///芮        ///羿        ///储        ///靳        ///汲        ///邴        ///糜        ///松        ///井        ///段        ///富        ///巫        ///乌        ///焦        ///巴        ///弓        ///牧        ///隗        ///山        ///谷        ///车        ///侯        ///宓        ///蓬        ///全        ///郗        ///班        ///仰        ///秋        ///仲        ///伊        ///宫        ///宁        ///仇        ///栾        ///暴        ///甘        ///斜        ///厉        ///戎        ///祖        ///武        ///符        ///刘        ///景        ///詹        ///束        ///龙        /// [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string chinse_first {
+            get {
+                return ResourceManager.GetString("chinse_first", resourceCulture);
             }
         }
         
@@ -96,6 +185,16 @@ namespace DocumentTools.Properties {
         internal static System.Drawing.Bitmap excel {
             get {
                 object obj = ResourceManager.GetObject("excel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap F6D781F44F41AAEE77BEA2A8E2F55510 {
+            get {
+                object obj = ResourceManager.GetObject("F6D781F44F41AAEE77BEA2A8E2F55510", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -176,6 +275,16 @@ namespace DocumentTools.Properties {
         internal static System.Drawing.Bitmap 二维码 {
             get {
                 object obj = ResourceManager.GetObject("二维码", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 二维码__1_ {
+            get {
+                object obj = ResourceManager.GetObject("二维码 (1)", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -313,6 +422,26 @@ namespace DocumentTools.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap 接口数据 {
+            get {
+                object obj = ResourceManager.GetObject("接口数据", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 文件 {
+            get {
+                object obj = ResourceManager.GetObject("文件", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap 查找替换_replace_线 {
             get {
                 object obj = ResourceManager.GetObject("查找替换-replace-线", resourceCulture);
@@ -377,6 +506,26 @@ namespace DocumentTools.Properties {
         internal static System.Drawing.Bitmap 红旗_高亮 {
             get {
                 object obj = ResourceManager.GetObject("红旗_高亮", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 谷歌浏览器 {
+            get {
+                object obj = ResourceManager.GetObject("谷歌浏览器", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 身份证 {
+            get {
+                object obj = ResourceManager.GetObject("身份证", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
