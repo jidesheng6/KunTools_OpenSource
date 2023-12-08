@@ -1,4 +1,6 @@
 ﻿using Aspose.Pdf.Operators;
+using Aspose.Words;
+using Aspose.Words.Tables;
 using Gma.System.MouseKeyHook;
 using Newtonsoft.Json.Linq;
 using NTwain;
@@ -20,6 +22,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web.UI.WebControls;
+using System.Windows.Controls;
 using System.Windows.Forms;
 
 namespace DocumentTools
@@ -30,12 +33,12 @@ namespace DocumentTools
         public static BodyForm MainForm;
         private TwainSession twainSession;
         private DataSource dataSource;
-        private bool private_version = false;//是否为内部版本
+        private bool private_version = true;//是否为内部版本
         private int ImageIndex = 0;
         private int TempImageCount = 0;
         private int TotalTempImageCount = 0;
         private double ScanSeconds = 0;
-        private Bitmap PictureBoxPreviewImage;
+        //private Bitmap PictureBoxPreviewImage;
         private readonly List<Bitmap> TempScannedImageBmpList = new List<Bitmap>();
         private readonly IKeyboardEvents GlobalHook = Hook.GlobalEvents();//全局钩子事件
         private readonly ImageList TempImageList = new ImageList() { ImageSize = new Size(1, 25) };
@@ -50,10 +53,13 @@ namespace DocumentTools
         public string ShowOpenTargetDialog = "on";//是否启用完成后显示打开转换目录弹窗
         public string AddWaterMarkBackGroudImageFileName = string.Empty;
 
+        public int FormWidth = 1374;
+        public int FormHeight = 1073;
+
         public JArray City_Json;//城市的json字符串数据
 
 
-        string NowVersion = "正式版 V0.3.1";
+        string NowVersion = "正式版 V0.3.3";
 
         private void OutPutListViewIndex()
         {
@@ -168,6 +174,21 @@ namespace DocumentTools
             html2pdf_textbox_chromepath.Text = ChromeDriverPath;
         }
 
+        private void SetFormSize()
+        {
+            if(int.TryParse(ConfigurationManager.AppSettings["FormWidth"],out int width)&&int.TryParse(ConfigurationManager.AppSettings["FormHeight"],out int hieght))
+            {
+                FormWidth = width;
+                FormHeight = hieght;
+            }
+
+            this.Width = FormWidth;
+            this.Height = FormHeight;
+
+            bodyform_width.Text = this.Width.ToString();
+            bodyform_height.Text = this.Height.ToString();
+        }
+
         private void InitConfigSettings()
         {
             //如果配置文件存在就按照配置文件中的参数来设置
@@ -180,6 +201,7 @@ namespace DocumentTools
                 SetListViewShowGridLines();//设置是否开启网格线
                 SetTabCardHeighLight();//设置标签卡高亮
                 SetChromeDriverPath();//读取chrome的驱动地址
+                SetFormSize();//设置窗体大小
             }
 
         }
@@ -192,7 +214,7 @@ namespace DocumentTools
             barcodeMutilList.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             barcodeMutilList.RowsDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             barcodeMutilList.AllowUserToDeleteRows = true;
-            barcodeMutilList.Font = new Font("宋体", 12);
+            barcodeMutilList.Font = new System.Drawing.Font("宋体", 12);
             barcodeMutilList.BackgroundColor = Color.AliceBlue;
 
 
@@ -204,7 +226,7 @@ namespace DocumentTools
             votedataview.AllowUserToOrderColumns = false;
             votedataview.RowHeadersVisible = true;
             votedataview.ReadOnly = true;
-            votedataview.Font = new Font("宋体", 10);
+            votedataview.Font = new System.Drawing.Font("宋体", 10);
             votedataview.BackgroundColor = Color.AliceBlue;
         }
 
@@ -357,6 +379,12 @@ namespace DocumentTools
 
             this.copied_number_prefix_count.Validating += ValidTextBoxContent;
             this.copied_number_prefix_count.Validated += ValidedTextBoxContent;
+
+            this.SplitPdfRange_Start.Validating += ValidTextBoxContent;
+            this.SplitPdfRange_End.Validated += ValidedTextBoxContent;
+
+            this.SplitWord_Range_Start.Validating += ValidTextBoxContent;
+            this.SplitWord_Range_End.Validated += ValidedTextBoxContent;
 
 
 
@@ -770,7 +798,6 @@ namespace DocumentTools
 
             this.votepageIndexCombox.DataSource = VotepageIndexTable;
 
-            UpdateNetworkList();
 
             DataTable Word2Pdf_ColorMode = new DataTable();
             Word2Pdf_ColorMode.Columns.Add("DisplayValue");
@@ -782,6 +809,21 @@ namespace DocumentTools
             this.word2pdf_colorMode.DisplayMember = "DisplayValue";
             this.word2pdf_colorMode.ValueMember = "RealValue";
 
+            DataTable NameMarkColor = new DataTable();
+            NameMarkColor.Columns.Add("DisplayValue");
+            NameMarkColor.Columns.Add("RealValue");
+            NameMarkColor.Rows.Add("黄色", System.Drawing.Color.Yellow.Name);
+            NameMarkColor.Rows.Add("森林绿", System.Drawing.Color.ForestGreen.Name);
+            NameMarkColor.Rows.Add("红色", System.Drawing.Color.Red.Name);
+            NameMarkColor.Rows.Add("爱丽丝蓝", System.Drawing.Color.AliceBlue.Name);
+            NameMarkColor.Rows.Add("古董白", System.Drawing.Color.AntiqueWhite.Name);
+            NameMarkColor.Rows.Add("湖绿色", System.Drawing.Color.Aqua.Name);
+            NameMarkColor.Rows.Add("海蓝宝石色", System.Drawing.Color.Aquamarine.Name);
+            NameMarkColor.Rows.Add("白杏色", System.Drawing.Color.BlanchedAlmond.Name);
+
+            this.NameMarkColor.DataSource = NameMarkColor;
+            this.NameMarkColor.DisplayMember = "DisplayValue";
+            this.NameMarkColor.ValueMember = "RealValue";
 
 
             //加载城市数据到combox中
@@ -1280,6 +1322,10 @@ namespace DocumentTools
                     {
                         TempPage.ImageIndex = 18;
                     }
+                    else if (TabPageCaption.Contains("选举结果报告单样式生成"))
+                    {
+                        TempPage.ImageIndex = 19;
+                    }
                 }
             });
         }
@@ -1457,7 +1503,46 @@ namespace DocumentTools
                         NameAutoCopyStatusText.Text = "";
                     }
 
-                    Debug.Write(TargetTextBox.Text.Contains("\n"));
+                    if(MarkDupName.Checked)
+                    {
+                        // 清除之前的高亮显示
+                        TargetTextBox.SelectAll();
+                        TargetTextBox.SelectionBackColor = TargetTextBox.BackColor;
+
+                        // 用于存储重复的文本行索引
+                        var duplicateLineIndices = new HashSet<int>();
+
+                        // 遍历富文本框中的文本行
+                        for (int i = 0; i < TargetTextBox.Lines.Length; i++)
+                        {
+                            string currentLine = TargetTextBox.Lines[i];
+
+                            // 在当前行之后的行中查找是否存在相同的文本行
+                            for (int j = i + 1; j < TargetTextBox.Lines.Length; j++)
+                            {
+                                if (currentLine.Equals(TargetTextBox.Lines[j]))
+                                {
+                                    // 记录重复行的索引
+                                    duplicateLineIndices.Add(i);
+                                    duplicateLineIndices.Add(j);
+                                }
+                            }
+                        }
+
+                        if(duplicateLineIndices.Count>0)
+                        {
+                            // 高亮显示所有重复的文本行
+                            foreach (int index in duplicateLineIndices)
+                            {
+                                TargetTextBox.Select(TargetTextBox.GetFirstCharIndexFromLine(index), TargetTextBox.Lines[index].Length);
+                                TargetTextBox.SelectionBackColor = System.Drawing.Color.FromName(NameMarkColor.SelectedValue.ToString());
+                            }
+                            // 将焦点设置回富文本框，以便用户可以看到高亮显示的文本行
+                            TargetTextBox.Focus();
+                            TargetTextBox.Refresh();
+                        }
+                    }
+
                 }
             }
             catch (Exception ex)
@@ -1648,7 +1733,7 @@ namespace DocumentTools
                     UI.AddFilesToListviewWithNotDialog(DropFiles, this.ReplaceExcelFileView, new string[] { ".xls", ".xlsx" });
                     break;
                 case "DecodeMatrixWordListView":
-                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.DecodeMatrixWordListView, new string[] { ".doc", ".docx" });
+                    UI.AddFilesToListviewWithNotDialog(DropFiles, this.DecodeMatrixWordListView, new string[] { ".doc", ".docx" ,".pdf"});
                     break;
                 case "IcoFileView":
                     UI.AddFilesToListviewWithNotDialog(DropFiles, this.IcoFileView, new string[] { ".jpg", ".png", ".bmp" });
@@ -1922,9 +2007,9 @@ namespace DocumentTools
                 this.SavedPathFileCount.Text = $"扫描路径内文件数量：{Directory.GetFiles(this.ScanPictureSavePathBox.Text).Length}";
                 sw.Stop();
                 ScanSeconds += sw.Elapsed.TotalSeconds;//一个扫描过程中花费的时间值，值将会在开始扫描按钮中重置为0
-                PictureBoxPreviewImage = new Bitmap(SaveImageName);
-                this.PreviewPictureBox.Image = PictureBoxPreviewImage;
-                TempScannedImageBmpList.Add(PictureBoxPreviewImage);//添加bitmap对象到列表中
+                //PictureBoxPreviewImage = new Bitmap(SaveImageName);
+                //this.PreviewPictureBox.Image = PictureBoxPreviewImage;
+                //TempScannedImageBmpList.Add(PictureBoxPreviewImage);//添加bitmap对象到列表中
             }
 
         }
@@ -2115,12 +2200,13 @@ namespace DocumentTools
         private void DownloadNetfx35_Click(object sender, EventArgs e)
         {
             string Netfx35_Private = "http://jdsnmsl.tpddns.cn:3002/directlink/default/Windows%E8%BD%AF%E4%BB%B6/GorunTime%E8%BF%90%E8%A1%8C%E5%BA%93%E5%90%88%E9%9B%86/GoRuntime_DotNetFramework_3.x.zip";
-            Util.DwonloadFile(Netfx35_Private, "Net35.zip", Downloadfx35Progress, ProcessLabel);
+            //string Netfx35_Private = "https://i-920.lanzouc.com:446/11271300149682909bb/2023/11/27/5404769fd0f075f33072184f6765a12b.zip?st=tf2aLH7S1zIferEFhUiCfA&e=1701063569&b=UkddMlACVCRYY1NxBj9UPQMzCAsNSAFoBiEISwVnVyFSRgh6BmcDawIyU3IGOQZwBDoKCVBiACgFLlx_aUSxSOVJw&fi=149682909&pid=117-81-188-214&up=2&mp=0&co=0";
+            Util.DownloadFile(Netfx35_Private, "Net35.zip", Downloadfx35Progress, ProcessLabel);
         }
 
         private void LanzouNetfx_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("https://wwqb.lanzout.com/iVac90srv67a");
+            Process.Start("https://wwqb.lanzout.com/i2VL61g371kj");
         }
 
         private void ReleaseRegistry_Click(object sender, EventArgs e)
@@ -2449,7 +2535,7 @@ namespace DocumentTools
         #region 重绘tabpage的标签颜色
         private void MainTabPage_DrawItem(object sender, DrawItemEventArgs e)
         {
-            Font PageFont;
+            System.Drawing.Font PageFont;
             Brush BackBrush, ForeBrush;
 
             Rectangle TabRec = e.Bounds;
@@ -2460,7 +2546,7 @@ namespace DocumentTools
             if (e.Index == this.MainTabPage.SelectedIndex)
             {
 
-                PageFont = new Font(e.Font, FontStyle.Regular);
+                PageFont = new System.Drawing.Font(e.Font, FontStyle.Regular);
                 BackBrush = new System.Drawing.Drawing2D.LinearGradientBrush(e.Bounds, SystemColors.Control, SystemColors.Control, System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal);
 
                 ForeBrush = Brushes.Red;
@@ -3245,172 +3331,172 @@ namespace DocumentTools
 
         private void wORD转PDFToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.MainTabPage.SelectedIndex = 0;
+            this.MainTabPage.SelectedIndex = GetTabPageIndex("WORD转PDF");
         }
 
         private void wORD转EXCELToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.MainTabPage.SelectedIndex = 13;
+            this.MainTabPage.SelectedIndex = GetTabPageIndex("WORD转EXCEL");
         }
 
         private void wORDToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.MainTabPage.SelectedIndex = 16;
+            this.MainTabPage.SelectedIndex = GetTabPageIndex("WORD转EPUB");
         }
 
         private void wORD内容批量替换ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.MainTabPage.SelectedIndex = 23;
+            this.MainTabPage.SelectedIndex = GetTabPageIndex("WORD内容批量替换");
 
         }
 
         private void eXCEL转PDFToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.MainTabPage.SelectedIndex = 2;
+            this.MainTabPage.SelectedIndex = GetTabPageIndex("EXCEL转PDF");
 
         }
 
         private void eXCEL转WORDToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.MainTabPage.SelectedIndex = 14;
+            this.MainTabPage.SelectedIndex = GetTabPageIndex("EXCEL转WORD");
 
         }
 
         private void eXCEL内容批量替换ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.MainTabPage.SelectedIndex = 24;
+            this.MainTabPage.SelectedIndex = GetTabPageIndex("EXCEL内容批量替换");
 
         }
 
         private void pPT转PDFToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.MainTabPage.SelectedIndex = 4;
+            this.MainTabPage.SelectedIndex = GetTabPageIndex("PPT转PDF");
 
         }
 
         private void pDF转EXCELToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.MainTabPage.SelectedIndex = 1;
+            this.MainTabPage.SelectedIndex = GetTabPageIndex("PDF转WORD");
 
         }
 
         private void pDFToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.MainTabPage.SelectedIndex = 3;
+            this.MainTabPage.SelectedIndex = GetTabPageIndex("PDF转EXCEL");
 
         }
 
         private void pDF转PPTToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.MainTabPage.SelectedIndex = 5;
+            this.MainTabPage.SelectedIndex = GetTabPageIndex("PDF转PPT");
 
         }
 
         private void ePUB转WORDToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.MainTabPage.SelectedIndex = 17;
+            this.MainTabPage.SelectedIndex = GetTabPageIndex("EPUB转WORD");
 
         }
 
         private void ePUB转PDFToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.MainTabPage.SelectedIndex = 18;
+            this.MainTabPage.SelectedIndex = GetTabPageIndex("EPUB转PDF");
 
         }
 
         private void hTML转PDFToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.MainTabPage.SelectedIndex = 20;
+            this.MainTabPage.SelectedIndex = GetTabPageIndex("HTML转PDF");
 
         }
 
         private void 拆分WORDToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.MainTabPage.SelectedIndex = 7;
+            this.MainTabPage.SelectedIndex = GetTabPageIndex("拆分WORD");
 
         }
 
         private void 拆分PDFToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.MainTabPage.SelectedIndex = 9;
+            this.MainTabPage.SelectedIndex = GetTabPageIndex("拆分PDF");
 
         }
 
         private void 合并WORDToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.MainTabPage.SelectedIndex = 6;
+            this.MainTabPage.SelectedIndex = GetTabPageIndex("合并WORD");
 
         }
 
         private void 合并PDFToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.MainTabPage.SelectedIndex = 8;
+            this.MainTabPage.SelectedIndex = GetTabPageIndex("合并PDF");
 
         }
 
         private void 压缩PDFToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.MainTabPage.SelectedIndex = 21;
+            this.MainTabPage.SelectedIndex = GetTabPageIndex("压缩PDF");
 
         }
 
         private void 压缩图片ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.MainTabPage.SelectedIndex = 22;
+            this.MainTabPage.SelectedIndex = GetTabPageIndex("压缩图片");
 
         }
 
         private void wORDEXCELPDF转图片ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.MainTabPage.SelectedIndex = 15;
+            this.MainTabPage.SelectedIndex = GetTabPageIndex("WORD/PDF/EXCEL转图片");
 
         }
 
         private void 图片转PDFToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.MainTabPage.SelectedIndex = 19;
+            this.MainTabPage.SelectedIndex = GetTabPageIndex("图片转PDF");
 
         }
 
         private void 姓名横转竖列ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.MainTabPage.SelectedIndex = 28;
+            this.MainTabPage.SelectedIndex = GetTabPageIndex("姓名横转竖列");
 
         }
 
         private void 特殊二维码校验ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.MainTabPage.SelectedIndex = 25;
+            this.MainTabPage.SelectedIndex = GetTabPageIndex("特殊二维码校验");
 
         }
 
         private void twain扫描仪调试ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.MainTabPage.SelectedIndex = 30;
+            this.MainTabPage.SelectedIndex = GetTabPageIndex("Twain扫描仪调试");
 
         }
 
         private void mSS3模板修改ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.MainTabPage.SelectedIndex = 33;
+            this.MainTabPage.SelectedIndex = GetTabPageIndex("MSS3模板修改");
 
         }
 
         private void 其他功能ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.MainTabPage.SelectedIndex = 31;
+            this.MainTabPage.SelectedIndex = GetTabPageIndex("其他功能");
 
         }
 
         private void 系统工具ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.MainTabPage.SelectedIndex = 32;
+            this.MainTabPage.SelectedIndex = GetTabPageIndex("系统工具");
 
         }
 
         private void 关于软件ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.MainTabPage.SelectedIndex = 36;
+            this.MainTabPage.SelectedIndex = GetTabPageIndex("关于软件");
 
         }
 
@@ -3426,6 +3512,8 @@ namespace DocumentTools
                 TempConfig.AppSettings.Settings["ListViewLineHeight"].Value = menu_listview_line_heigh_combox.Text;
                 TempConfig.AppSettings.Settings["ListViewShowGridLines"].Value = menu_listview_gridline_combox.SelectedIndex == 0 ? "on" : "off";
                 TempConfig.AppSettings.Settings["ChromeDriverPath"].Value = menu_chrome_path.Text;
+                TempConfig.AppSettings.Settings["FormWidth"].Value = bodyform_width.Text;
+                TempConfig.AppSettings.Settings["FormHeight"].Value = bodyform_height.Text;
 
                 TempConfig.Save(ConfigurationSaveMode.Modified);
 
@@ -3440,7 +3528,15 @@ namespace DocumentTools
             }
             else
             {
-                MessageBox.Show("无法保存配置，没有找到配置文件，可能是配置文件被更名或者不存在", "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                string ProgramFileName = Process.GetCurrentProcess().ProcessName;
+
+                string ApplicationConfigFile = $"{ProgramFileName}.exe.config";
+
+                string AppConfigContent = Util.GetEmbedResourceObj("ConfigTemplate").ToString();
+
+                File.WriteAllText(ApplicationConfigFile, AppConfigContent);
+
+                MessageBox.Show("没有找到配置文件,已经初始化配置文件到软件目录", "无法保存配置", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
@@ -3637,7 +3733,7 @@ namespace DocumentTools
 
         private void 简易二维码生成ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.MainTabPage.SelectedIndex = 26;
+            this.MainTabPage.SelectedIndex = GetTabPageIndex("简易二维码生成");
         }
 
         private void barcodeCopyImage_Click(object sender, EventArgs e)
@@ -3724,7 +3820,7 @@ namespace DocumentTools
 
         private void 随机身份证号码生成ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.MainTabPage.SelectedIndex = 27;
+            this.MainTabPage.SelectedIndex = GetTabPageIndex("身份证号码校验");
         }
 
         private void ver_card_id_text_box_TextChanged(object sender, EventArgs e)
@@ -3978,7 +4074,7 @@ namespace DocumentTools
 
         private void 文件副本生成ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.MainTabPage.SelectedIndex = 34;
+            this.MainTabPage.SelectedIndex = GetTabPageIndex("文件副本生成");
         }
 
         private void network_info_card_list_SelectedIndexChanged(object sender, EventArgs e)
@@ -3991,13 +4087,18 @@ namespace DocumentTools
             Task.Run(() =>
             {
                 var (ipv4_address_source, default_mask_source, default_gateway_source, dns1_address, dns2_address, mac_address, is_dhcp_enabled) = Util.GetCard_Information(network_info_card_list.Text);
+                if(network_info_ipv4!=null&& network_info_mask!=null
+                && network_info_gateway!=null&& network_info_dns1!=null
+                && network_info_dns2!=null&& network_info_mac_address!=null)
+                {
+                    network_info_ipv4.DataSource = ipv4_address_source.Count == 0 ? new List<string> { "未获取到" } : ipv4_address_source;
+                    network_info_mask.DataSource = default_mask_source.Count == 0 ? new List<string> { "未获取到" } : default_mask_source;
+                    network_info_gateway.DataSource = default_gateway_source.Count == 0 ? new List<string> { "未获取到" } : default_gateway_source;
+                    network_info_dns1.DataSource = new string[] { dns1_address == string.Empty ? "未获取到" : dns1_address };
+                    network_info_dns2.DataSource = new string[] { dns2_address == string.Empty ? "未获取到" : dns2_address };
+                    network_info_mac_address.DataSource = new string[] { mac_address == string.Empty ? "未获取到" : mac_address };
 
-                network_info_ipv4.DataSource = ipv4_address_source.Count == 0 ? new List<string> { "未获取到" } : ipv4_address_source;
-                network_info_mask.DataSource = default_mask_source.Count == 0 ? new List<string> { "未获取到" } : default_mask_source;
-                network_info_gateway.DataSource = default_gateway_source.Count == 0 ? new List<string> { "未获取到" } : default_gateway_source;
-                network_info_dns1.DataSource = new string[] { dns1_address == string.Empty ? "未获取到" : dns1_address };
-                network_info_dns2.DataSource = new string[] { dns2_address == string.Empty ? "未获取到" : dns2_address };
-                network_info_mac_address.DataSource = new string[] { mac_address == string.Empty ? "未获取到" : mac_address };
+                }
                 if (is_dhcp_enabled)
                 {
                     set_interface_mode_auto.Checked = true;
@@ -4028,11 +4129,16 @@ namespace DocumentTools
         {
             Task.Run(() =>
             {
-                this.network_info_card_list.DataSource = Util.GetNetWorkCardList(network_info_show_normal.Checked);
+                if(network_info_card_list!=null && set_interface_name_list!=null)
+                {
+                    this.network_info_card_list.DataSource = Util.GetNetWorkCardList(network_info_show_normal.Checked);
 
-                this.set_interface_name_list.DataSource = this.network_info_card_list.DataSource;
+                    this.set_interface_name_list.DataSource = this.network_info_card_list.DataSource;
+
+                }
+
             });
-        }
+       }
         private void set_interface_start_Click(object sender, EventArgs e)
         {
             Task.Run(() =>
@@ -4188,7 +4294,7 @@ namespace DocumentTools
 
         private void 网卡设置ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.MainTabPage.SelectedIndex = 35;
+            this.MainTabPage.SelectedIndex = GetTabPageIndex("网卡设置");
         }
 
         private void Gen_Copied_SourceFileBox_TextChanged(object sender, EventArgs e)
@@ -4335,6 +4441,136 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                 MessageBox.Show("请使用管理员身份重新运行软件执行修改", "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
             }
+        }
+
+        private void 添加PDF水印ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.MainTabPage.SelectedIndex = GetTabPageIndex("添加PDF水印");
+        }
+
+        private void 移除PDF水印ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.MainTabPage.SelectedIndex = GetTabPageIndex("移除PDF水印");
+
+        }
+
+        private void pDF版本转换ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.MainTabPage.SelectedIndex = GetTabPageIndex("PDF版本转换");
+
+        }
+
+
+        private  int GetTabPageIndex(string TabPageName)
+        {
+            int PageIndex = -1;
+            foreach (TabPage TempPage in MainTabPage.TabPages)
+            {
+                if (TempPage.Text == TabPageName)
+                {
+                    PageIndex = MainTabPage.TabPages.IndexOf(TempPage);
+                }
+            }
+            return PageIndex;
+        }
+
+        private void BodyForm_Resize(object sender, EventArgs e)
+        {
+            bodyform_width.Text = this.Width.ToString();
+            bodyform_height.Text = this.Height.ToString();
+        }
+
+        private void MainTabPage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(MainTabPage.SelectedIndex==GetTabPageIndex("网卡设置"))
+            {
+                UpdateNetworkList();
+            }
+        }
+
+        private void 初始化配置文件ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string ProgramFileName = Process.GetCurrentProcess().ProcessName;
+
+            string ApplicationConfigFile = $"{ProgramFileName}.exe.config";
+
+            string AppConfigContent = Util.GetEmbedResourceObj("ConfigTemplate").ToString();
+
+            File.WriteAllText(ApplicationConfigFile, AppConfigContent);
+
+            DialogResult ExitResult = MessageBox.Show("已经初始化配置文件，是否需要重启软件？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+            if (ExitResult == DialogResult.OK)
+            {
+                string AppExcuteFile = Application.ExecutablePath;
+                Process.Start(AppExcuteFile);
+                Environment.Exit(0);
+            }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void VoteTableHelpDate_Click(object sender, EventArgs e)
+        {
+            DateTime NowDateTime = DateTime.Now;
+
+            string GetNowDateString =  NowDateTime.ToString("yyyy年MM月dd日");
+
+            VoteTable_GenDate.Text = GetNowDateString;
+        }
+
+        private void VoteTable_Render_Click(object sender, EventArgs e)
+        {
+            string SaveVoteFileName = Util.ShowSaveFileDialog("WORD文档|*.docx");
+
+            Task.Run(() =>
+            {
+                try
+                {
+                    if (SaveVoteFileName != string.Empty)
+                    {
+                        (sender as System.Windows.Forms.Button).Enabled = false;
+                        using MemoryStream TempDocumentMemoryStream = new MemoryStream((byte[])Util.GetEmbedResourceObj("VoteReportDoc"));
+                        Util.GenerateVoteReportDocx(TempDocumentMemoryStream,
+            VoteTable_Title.Text, VoteTable_Start.Text, VoteTable_Name.Text, VoteTable_Agree.Text, VoteTable_UnAgree.Text,
+            VoteTable_Abdon.Text, VoteTable_End.Text, VoteTable_GenDate.Text
+            , VoteTable_Names.Lines, SaveVoteFileName,VoteTable_Random_PageCounts.Checked,
+            (double)VoteTableHeight.Value,(int)VoteTableFontSize.Value, VoteTable_KeepPageFooter.Checked,
+            VoteTable_NumberIndex_Keep.Checked);
+                        this.BeginInvoke(new Action(() =>
+                        {
+                            (sender as System.Windows.Forms.Button).Enabled = true;
+                            if (MessageBox.Show("已生成选举报告单，是否打开文件？", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk)==DialogResult.Yes)
+                            {
+                                Process.Start(SaveVoteFileName);
+                            }
+                        }));
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    this.BeginInvoke(new Action(() =>
+                    {
+                        (sender as System.Windows.Forms.Button).Enabled = true;
+                        MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }));
+                }
+            });
+
+
+        }
+
+        private void 选举报告单样式生成ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.MainTabPage.SelectedIndex = GetTabPageIndex("选举结果报告单样式生成");
+        }
+
+        private void VoteTable_Names_TextChanged(object sender, EventArgs e)
+        {
+            VoteTableName_CountText.Text = $"共有{VoteTable_Names.Lines.Count()}个名字";
         }
     }
 }

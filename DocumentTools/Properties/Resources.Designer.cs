@@ -170,6 +170,28 @@ namespace DocumentTools.Properties {
         }
         
         /// <summary>
+        ///   查找类似 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;configuration&gt;
+        ///  &lt;appSettings&gt;
+        ///    &lt;!--配置初始页面索引，根据对照表，修改Value中的数字为对照表中的数字，重新打开软件即可--&gt;
+        ///    &lt;add key=&quot;StartPageIndex&quot; value=&quot;0&quot; /&gt;
+        ///	  
+        ///    &lt;!--配置是否开启高亮标签卡，修改Value为on表示开启，修改Value为off表示关闭，修改完毕后，重新打开软件即可--&gt;
+        ///    &lt;add key=&quot;TabPageHeighLight&quot; value=&quot;off&quot; /&gt;
+        ///	  
+        ///	 &lt;!--设置是否开启标签卡的图标，默认为on，修改为off关闭，只在TabPageHeight值为off时生效--&gt;
+        ///	 &lt;add key=&quot;ShowTabPageIco&quot; value=&quot;on&quot; /&gt;
+        ///
+        ///    &lt;!--配置是否开启转换完成后，显示打开转换目录弹窗的选项，修改Value为on表示开启，修改Value为off表示关闭，修改完毕后，重新打开软件即可--&gt;
+        ///    &lt;add key=&quot;Show [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string ConfigTemplate {
+            get {
+                return ResourceManager.GetString("ConfigTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
         internal static System.Drawing.Bitmap Epub_Local_default {
@@ -195,6 +217,16 @@ namespace DocumentTools.Properties {
         internal static System.Drawing.Bitmap F6D781F44F41AAEE77BEA2A8E2F55510 {
             get {
                 object obj = ResourceManager.GetObject("F6D781F44F41AAEE77BEA2A8E2F55510", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap ＧＵＩ界面设计 {
+            get {
+                object obj = ResourceManager.GetObject("ＧＵＩ界面设计", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -246,6 +278,16 @@ namespace DocumentTools.Properties {
             get {
                 object obj = ResourceManager.GetObject("Remove", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] VoteReportDoc {
+            get {
+                object obj = ResourceManager.GetObject("VoteReportDoc", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
@@ -342,6 +384,16 @@ namespace DocumentTools.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap 初始化__1_ {
+            get {
+                object obj = ResourceManager.GetObject("初始化 (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap 功能 {
             get {
                 object obj = ResourceManager.GetObject("功能", resourceCulture);
@@ -355,6 +407,16 @@ namespace DocumentTools.Properties {
         internal static System.Drawing.Bitmap 压缩 {
             get {
                 object obj = ResourceManager.GetObject("压缩", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 去水印 {
+            get {
+                object obj = ResourceManager.GetObject("去水印", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -392,6 +454,16 @@ namespace DocumentTools.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap 宽度 {
+            get {
+                object obj = ResourceManager.GetObject("宽度", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap 弹窗消息 {
             get {
                 object obj = ResourceManager.GetObject("弹窗消息", resourceCulture);
@@ -405,6 +477,16 @@ namespace DocumentTools.Properties {
         internal static System.Drawing.Bitmap 扫描仪 {
             get {
                 object obj = ResourceManager.GetObject("扫描仪", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 报告单 {
+            get {
+                object obj = ResourceManager.GetObject("报告单", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -470,6 +552,16 @@ namespace DocumentTools.Properties {
         }
         
         /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 水印 {
+            get {
+                object obj = ResourceManager.GetObject("水印", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Windows Registry Editor Version 5.00
         ///
         ///[HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Pegasus Imaging]
@@ -503,6 +595,16 @@ namespace DocumentTools.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap 系统初始化 {
+            get {
+                object obj = ResourceManager.GetObject("系统初始化", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap 红旗_高亮 {
             get {
                 object obj = ResourceManager.GetObject("红旗_高亮", resourceCulture);
@@ -526,6 +628,16 @@ namespace DocumentTools.Properties {
         internal static System.Drawing.Bitmap 身份证 {
             get {
                 object obj = ResourceManager.GetObject("身份证", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 高度 {
+            get {
+                object obj = ResourceManager.GetObject("高度", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

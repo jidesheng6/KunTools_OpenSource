@@ -35,6 +35,10 @@ using Color = System.Drawing.Color;
 using System.Management;
 using System.Security.AccessControl;
 using System.Security.Principal;
+using Aspose.Words.Fonts;
+using Aspose.Pdf.Facades;
+using Aspose.Words.Tables;
+using Aspose.Words;
 
 namespace DocumentTools
 {
@@ -180,7 +184,8 @@ namespace DocumentTools
         /// <param name="SavePdfName">导出pdf的路径</param>
         /// <param name="tempSaveDocxPath">临时存放转换的docx目录</param>
         public static void ConvertWord2Pdf(string documentFileName, string SavePdfName, string tempSaveDocxPath, Aspose.Words.Saving.PdfCompliance PdfComplanceOption, Aspose.Words.Settings.MsWordVersion OptiMizMswVersion, bool UpdateField,
-            Aspose.Words.Saving.ColorMode SavePdfColorMode)
+            Aspose.Words.Saving.ColorMode SavePdfColorMode, bool EmbedFonts,
+            string DocumentPassword)
         {
             Aspose.Hook.HookManager.StartHook();
             string DocumentName, SaveDocxName;
@@ -190,11 +195,30 @@ namespace DocumentTools
             {
                 ConvertMetafilesToPng = false,
                 MswVersion = OptiMizMswVersion,
+                Password  = DocumentPassword,
             };
+
+            TempDocuemntLoadOption.LanguagePreferences.AddEditingLanguage(Aspose.Words.Loading.EditingLanguage.ChinesePRC);
+
+            AspWordsWarningCallBack AspCallBack = new AspWordsWarningCallBack();
+
+            //Aspose.Words.Fonts.FontSettings TempFontSettings = new Aspose.Words.Fonts.FontSettings();
+            //TempFontSettings.SubstitutionSettings.DefaultFontSubstitution.Enabled = true;
+            //TempFontSettings.SubstitutionSettings.TableSubstitution.Enabled = false;
+            //TempFontSettings.SubstitutionSettings.FontInfoSubstitution.Enabled = false;
+            //TempFontSettings.SubstitutionSettings.FontConfigSubstitution.Enabled = false;
+            //TempFontSettings.SubstitutionSettings.FontNameSubstitution.Enabled = false;
+            //TempFontSettings.SubstitutionSettings.DefaultFontSubstitution.DefaultFontName = "SimSun";
+
+
+            //TempDocuemntLoadOption.FontSettings = TempFontSettings;
+
 
             //设置PDF保存参数
             Aspose.Words.Saving.PdfSaveOptions TempPdfaveOption = new Aspose.Words.Saving.PdfSaveOptions()
             {
+                AllowEmbeddingPostScriptFonts = true,
+                EmbedFullFonts = EmbedFonts,
                 FontEmbeddingMode = Aspose.Words.Saving.PdfFontEmbeddingMode.EmbedAll,
                 ColorMode = SavePdfColorMode,
                 ImageColorSpaceExportMode = Aspose.Words.Saving.PdfImageColorSpaceExportMode.Auto,
@@ -237,7 +261,6 @@ namespace DocumentTools
             TempDocument.CompatibilityOptions.OptimizeFor(OptiMizMswVersion);
             TempDocument.CompatibilityOptions.BalanceSingleByteDoubleByteWidth = true;//区分全角和半角字符
 
-
             DocumentName = System.IO.Path.GetFileNameWithoutExtension(documentFileName);
 
             SaveDocxName = System.IO.Path.Combine(tempSaveDocxPath, DocumentName + ".docx");
@@ -247,7 +270,37 @@ namespace DocumentTools
 
             Aspose.Words.Document TempDocxDocument = new Aspose.Words.Document(SaveDocxName, TempDocuemntLoadOption);
 
+            TempDocxDocument.WarningCallback = AspCallBack;
+            //TempDocxDocument.FontSettings = TempFontSettings;
+            //TempDocxDocument.LayoutOptions.KeepOriginalFontMetrics = true;
             TempDocxDocument.Save(SavePdfName, TempPdfaveOption);
+
+
+            //将渲染警告输出到日志文件中
+
+            string OutPutLogFileName = Path.Combine(Path.GetDirectoryName(SavePdfName), "告警日志_WORD转PDF.log");
+
+            if (File.Exists(OutPutLogFileName))
+            {
+                File.Delete(OutPutLogFileName);
+            }
+
+            using IEnumerator<Aspose.Words.WarningInfo> RenderWarnings = AspCallBack.Warnings.GetEnumerator();
+            while (RenderWarnings.MoveNext())
+            {
+                StringBuilder TempWaringsInfo = new StringBuilder();
+                TempWaringsInfo.Append($"[{GetNowDateTime()}]:\t\t");
+                TempWaringsInfo.Append($"[告警文件：{SaveDocxName}]");
+                TempWaringsInfo.AppendLine($"");
+                TempWaringsInfo.AppendLine($"");
+                TempWaringsInfo.AppendLine($"[告警类型：{RenderWarnings.Current.WarningType}]");
+                TempWaringsInfo.AppendLine($"");
+                TempWaringsInfo.AppendLine($"[告警内容：{RenderWarnings.Current.Description}]");
+                using StreamWriter TempWarningsWriter = File.AppendText(OutPutLogFileName);
+                TempWarningsWriter.WriteLine(TempWaringsInfo.ToString());
+            }
+            AspCallBack.Warnings.Clear();
+
         }
 
         /// <summary>
@@ -255,7 +308,8 @@ namespace DocumentTools
         /// </summary>
         /// <param name="pdfFileName">pdf文件名</param>
         /// <param name="SavePdfName">导出docx</param>
-        public static void ConvertPdf2Word(string pdfFileName, string SavePdfName, bool UseBullet, bool UseSubOcr, Aspose.Pdf.DocSaveOptions.RecognitionMode UseMode)
+        public static void ConvertPdf2Word(string pdfFileName, string SavePdfName, bool UseBullet, bool UseSubOcr, Aspose.Pdf.DocSaveOptions.RecognitionMode UseMode,
+            string pdfLoadPassword)
         {
             Aspose.Hook.HookManager.StartHook();
 
@@ -268,13 +322,13 @@ namespace DocumentTools
                 CustomProgressHandler = new Aspose.Pdf.UnifiedSaveOptions.ConversionProgressEventHandler(WritePdf2WordDebugInfo)
             };
 
-            using Aspose.Pdf.Document TempPdfFileDocument = new Aspose.Pdf.Document(pdfFileName);
+            using Aspose.Pdf.Document TempPdfFileDocument = new Aspose.Pdf.Document(pdfFileName, pdfLoadPassword);
 
             TempPdfFileDocument.Info.Author = "DocumentTools";
             TempPdfFileDocument.Info.Producer = "DocumentTools";
             TempPdfFileDocument.Info.Creator = "DocumentTools";
 
-            //TempPdfFileDocument.Decrypt();
+            TempPdfFileDocument.Decrypt();
 
             TempPdfFileDocument.Save(SavePdfName, TempDocxSaveOption);
         }
@@ -542,6 +596,8 @@ namespace DocumentTools
         {
             Aspose.Hook.HookManager.StartHook();
 
+            AspWordsWarningCallBack AspCallBack = new AspWordsWarningCallBack();
+
             string FileType = System.IO.Path.GetExtension(DocumentsFileName);
 
             //初始化一个临时参数，到时候重新初始化
@@ -558,18 +614,31 @@ namespace DocumentTools
             Aspose.Imaging.ImageOptions.PngOptions TempConvertPngOption = new PngOptions();
             Aspose.Imaging.ImageOptions.BmpOptions TempConvertBmpOption = new BmpOptions();
 
-
+            //设置加载word文档的时候参数
+            Aspose.Words.Loading.LoadOptions TempDocuemntLoadOption = new Aspose.Words.Loading.LoadOptions()
+            {
+                ConvertMetafilesToPng = false,
+                MswVersion = Aspose.Words.Settings.MsWordVersion.Word2010,
+            };
+            TempDocuemntLoadOption.LanguagePreferences.AddEditingLanguage(Aspose.Words.Loading.EditingLanguage.ChinesePRC);
 
             switch (FileType)
             {
                 case ".doc":
-                    TempWordDocument = new Aspose.Words.Document(DocumentsFileName);
+                    TempWordDocument = new Aspose.Words.Document(DocumentsFileName, TempDocuemntLoadOption);
+                    TempWordDocument.WarningCallback = AspCallBack;
+                    TempWordDocument.CompatibilityOptions.OptimizeFor(Aspose.Words.Settings.MsWordVersion.Word2010);
+                    TempWordDocument.CompatibilityOptions.BalanceSingleByteDoubleByteWidth = true;//区分全角和半角字符
                     break;
                 case ".docx":
-                    TempWordDocument = new Aspose.Words.Document(DocumentsFileName);
+                    TempWordDocument = new Aspose.Words.Document(DocumentsFileName, TempDocuemntLoadOption);
+                    TempWordDocument.WarningCallback = AspCallBack;
+                    TempWordDocument.CompatibilityOptions.OptimizeFor(Aspose.Words.Settings.MsWordVersion.Word2010);
+                    TempWordDocument.CompatibilityOptions.BalanceSingleByteDoubleByteWidth = true;//区分全角和半角字符
                     break;
                 case ".pdf":
                     TempPdfDocument = new Aspose.Pdf.Document(DocumentsFileName);
+
                     break;
                 case ".xls":
                     TempExcelDocument = new Aspose.Cells.Workbook(DocumentsFileName);
@@ -592,7 +661,8 @@ namespace DocumentTools
                 case ".jpg":
                     TempWordImageSaveOption = new Aspose.Words.Saving.ImageSaveOptions(Aspose.Words.SaveFormat.Jpeg)
                     {
-                        JpegQuality = 100
+                        JpegQuality = 100,
+                        PrettyFormat = true,
                     };
                     TempPdfImageDevice = new Aspose.Pdf.Devices.JpegDevice(TempPdfImageResolution, 100);
                     TempExcelImageOPtion.ImageType = Aspose.Cells.Drawing.ImageType.Jpeg;
@@ -730,6 +800,28 @@ namespace DocumentTools
             }
 
 
+            string OutPutLogFileName = Path.Combine(Path.GetDirectoryName(SavedImageFileName), "告警日志_WORD转图片.log");
+
+            if (File.Exists(OutPutLogFileName))
+            {
+                File.Delete(OutPutLogFileName);
+            }
+
+            using IEnumerator<Aspose.Words.WarningInfo> RenderWarnings = AspCallBack.Warnings.GetEnumerator();
+            while (RenderWarnings.MoveNext())
+            {
+                StringBuilder TempWaringsInfo = new StringBuilder();
+                TempWaringsInfo.Append($"[{GetNowDateTime()}]:\t\t");
+                TempWaringsInfo.Append($"[告警文件：{DocumentsFileName}]");
+                TempWaringsInfo.AppendLine($"");
+                TempWaringsInfo.AppendLine($"");
+                TempWaringsInfo.AppendLine($"[告警类型：{RenderWarnings.Current.WarningType}]");
+                TempWaringsInfo.AppendLine($"");
+                TempWaringsInfo.AppendLine($"[告警内容：{RenderWarnings.Current.Description}]");
+                using StreamWriter TempWarningsWriter = File.AppendText(OutPutLogFileName);
+                TempWarningsWriter.WriteLine(TempWaringsInfo.ToString());
+            }
+            AspCallBack.Warnings.Clear();
 
         }
 
@@ -876,25 +968,47 @@ namespace DocumentTools
         /// </summary>
         /// <param name="DocumentFileName">文档名称</param>
         /// <param name="SavedPath">保存目录</param>
-        public static void SplitPdf(string DocumentFileName, string SavedPath)
+        public static void SplitPdf(string DocumentFileName, string SavedPath, bool SplitRange, string Range_Start, string Range_End
+            ,int SplitPageCount)
         {
             Aspose.Hook.HookManager.StartHook();
 
             using Aspose.Pdf.Document TempLoadDocument = new Aspose.Pdf.Document(DocumentFileName);
+            PdfFileEditor TempPdfEditor = new PdfFileEditor();
 
-            int PdfPageNumber = 1;
-
-            foreach (Aspose.Pdf.Page TempPage in TempLoadDocument.Pages)
+            if (!SplitRange)
             {
-                string SavedFileName = $"{Path.Combine(SavedPath, Path.GetFileNameWithoutExtension(DocumentFileName) + $"_第{PdfPageNumber}页.pdf")}";
-                Aspose.Pdf.Document ExportTempDocument = new Aspose.Pdf.Document();
-                ExportTempDocument.Pages.Add(TempPage);
-                ExportTempDocument.Save(SavedFileName);
-                PdfPageNumber++;
+                int OutPageCount = 0;
+                int TotalPages = TempLoadDocument.Pages.Count;
+                for(int PageIndex = 1; PageIndex <= TotalPages; PageIndex += SplitPageCount)
+                {
+                    OutPageCount++;
+                    int SplitEndPage = PageIndex + SplitPageCount - 1;
+                    if(SplitEndPage>TotalPages)
+                    {
+                        SplitEndPage = TotalPages;
+                    }
+
+                    Aspose.Pdf.Document PerDocument = new Aspose.Pdf.Document();
+                    for(int j= PageIndex; j<=SplitEndPage;j++)
+                    {
+                        PerDocument.Pages.Add(TempLoadDocument.Pages[j]);
+                    }
+                    string ExportPerPdfFileName = $"{Path.Combine(SavedPath,Path.GetFileNameWithoutExtension(DocumentFileName))}_第{OutPageCount}页.pdf";
+                    PerDocument.Save(ExportPerPdfFileName);
+                }
+            }
+            else
+            {
+                if (int.TryParse(Range_Start, out int start_index) && int.TryParse(Range_End, out int end_index))
+                {
+                    string SavedExtractName = $"{Path.Combine(SavedPath, Path.GetFileNameWithoutExtension(DocumentFileName) + $"_第{start_index}到{end_index}页.pdf")}";
+                    TempPdfEditor.Extract(DocumentFileName, start_index, end_index, SavedExtractName);
+                }
             }
         }
 
-        public static void SplitWord(string DocumentFileName, string SavedPath)
+        public static void SplitWord(string DocumentFileName, string SavedPath, bool SplitSignle, string Range_Start, string Range_End,int SplitPerCount)
         {
             Aspose.Hook.HookManager.StartHook();
 
@@ -904,14 +1018,38 @@ namespace DocumentTools
             {
                 Compliance = Aspose.Words.Saving.OoxmlCompliance.Iso29500_2008_Transitional,
             };
-            for (int pageIndex = 0; pageIndex < TempDocument.PageCount; pageIndex++)
+            if (SplitSignle)
             {
-                string SavedFileName = $"{Path.Combine(SavedPath, Path.GetFileNameWithoutExtension(DocumentFileName))}_第{pageIndex + 1}页.docx";
-                Aspose.Words.Document TempSplitDocument = TempDocument.ExtractPages(pageIndex, 1);
-                TempSplitDocument.CompatibilityOptions.OptimizeFor(Aspose.Words.Settings.MsWordVersion.Word2010);
-                TempSplitDocument.CompatibilityOptions.BalanceSingleByteDoubleByteWidth = true;
-                TempSplitDocument.Save(SavedFileName, TempSaveOption);
+                int OutPageCount = 0;
+                int TotalPages = TempDocument.PageCount;
+                for (int pageIndex = 0; pageIndex < TempDocument.PageCount; pageIndex+= SplitPerCount)
+                {
+                    OutPageCount++;
+
+                    int LeftPage = TotalPages - pageIndex;
+                    int PageExtra = Math.Min(SplitPerCount,LeftPage);
+                    if (PageExtra>0)
+                    {
+                        string SavedFileName = $"{Path.Combine(SavedPath, Path.GetFileNameWithoutExtension(DocumentFileName))}_第{OutPageCount}页.docx";
+                        Aspose.Words.Document TempSplitDocument = TempDocument.ExtractPages(pageIndex, PageExtra);
+                        TempSplitDocument.CompatibilityOptions.OptimizeFor(Aspose.Words.Settings.MsWordVersion.Word2010);
+                        TempSplitDocument.CompatibilityOptions.BalanceSingleByteDoubleByteWidth = true;
+                        TempSplitDocument.Save(SavedFileName, TempSaveOption);
+                    }
+                }
             }
+            else
+            {
+                string SavedFileName = $"{Path.Combine(SavedPath, Path.GetFileNameWithoutExtension(DocumentFileName))}_第{Range_Start}到{Range_End}页.docx";
+                if (int.TryParse(Range_Start, out int range_start) && int.TryParse(Range_End, out int range_end))
+                {
+                    Aspose.Words.Document TempSplitDocument = TempDocument.ExtractPages(range_start - 1, range_end);
+                    TempSplitDocument.CompatibilityOptions.OptimizeFor(Aspose.Words.Settings.MsWordVersion.Word2010);
+                    TempSplitDocument.CompatibilityOptions.BalanceSingleByteDoubleByteWidth = true;
+                    TempSplitDocument.Save(SavedFileName, TempSaveOption);
+                }
+            }
+
         }
 
         /// <summary>
@@ -1074,7 +1212,7 @@ namespace DocumentTools
         public static void AddWaterMark2Pdf(string DocuementFileName, string SaveFileName, float WaterMarkOpactiyNum, string WaterMarkRotateDegNum, int WaterMarkHorAlignIndex, int WaterMarkVerAlignIndex, string AddBackGroundImageFileName)
         {
             Aspose.Hook.HookManager.StartHook();
-            using Document TempLoadDocument = new Aspose.Pdf.Document(DocuementFileName);
+            using Aspose.Pdf.Document TempLoadDocument = new Aspose.Pdf.Document(DocuementFileName);
             foreach (Aspose.Pdf.Page TempPage in TempLoadDocument.Pages)
             {
                 BackgroundArtifact TempAddArtifact = new BackgroundArtifact
@@ -1254,7 +1392,7 @@ namespace DocumentTools
         {
 
             Aspose.Hook.HookManager.StartHook();
-            using Aspose.Pdf.Document TempLoadDocument = new Document(DocumentFileName);
+            using Aspose.Pdf.Document TempLoadDocument = new Aspose.Pdf.Document(DocumentFileName);
             Aspose.Pdf.Optimization.OptimizationOptions TempComressOption = new Aspose.Pdf.Optimization.OptimizationOptions();
 
             if (CompressPDF_WEB)//如果勾选了WEB优化，就执行自动优化
@@ -1406,19 +1544,43 @@ namespace DocumentTools
             Aspose.Hook.HookManager.StartHook();
             TreeNode TempTreeNode = new TreeNode();
             TreeNode TempDocumentNameRootNode = TempTreeNode.Nodes.Add(DocumentFileName);//添加文件节点信息
-            Aspose.Words.Document TempDocuemnt = new Aspose.Words.Document(DocumentFileName);
-            for (int PageIndex = 0; PageIndex < TempDocuemnt.PageCount; PageIndex++)
+            string DocumentExtension = Path.GetExtension(DocumentFileName);
+            int PagesCount = 0;
+            Aspose.Words.Document TempDocxDocument = null;
+            Aspose.Pdf.Document TempPdfDocument = null;
+            if (DocumentExtension == ".doc" || DocumentExtension == ".docx")
+            {
+                TempDocxDocument = new Aspose.Words.Document(DocumentFileName);
+                PagesCount = TempDocxDocument.PageCount;
+
+            }
+            else if (DocumentExtension == ".pdf")
+            {
+                TempPdfDocument = new Aspose.Pdf.Document(DocumentFileName);
+                PagesCount = TempPdfDocument.Pages.Count;
+            }
+;
+            for (int PageIndex = 0; PageIndex < PagesCount; PageIndex++)
             {
                 TreeNode PageIndexNode = TempDocumentNameRootNode.Nodes.Add($"第{PageIndex + 1}页");//在文件节点信息基础上添加页面信息
-                PageIndexNode.ForeColor = System.Drawing.Color.ForestGreen;
-                Aspose.Words.Saving.ImageSaveOptions TempImageSaveOption = new Aspose.Words.Saving.ImageSaveOptions(Aspose.Words.SaveFormat.Png)
-                {
-                    PageSet = new Aspose.Words.Saving.PageSet(PageIndex),
-                    Resolution = 300
-                };
                 using MemoryStream TempMemoryStream = new MemoryStream();
-                TempDocuemnt.Save(TempMemoryStream, TempImageSaveOption);
-                TempMemoryStream.Position = 0;
+                PageIndexNode.ForeColor = System.Drawing.Color.ForestGreen;
+                if (DocumentExtension == ".doc" || DocumentExtension == ".docx")
+                {
+                    Aspose.Words.Saving.ImageSaveOptions TempImageSaveOption = new Aspose.Words.Saving.ImageSaveOptions(Aspose.Words.SaveFormat.Png)
+                    {
+                        PageSet = new Aspose.Words.Saving.PageSet(PageIndex),
+                        Resolution = 300
+                    };
+                    TempDocxDocument.Save(TempMemoryStream, TempImageSaveOption);
+                    TempMemoryStream.Position = 0;
+                }
+                else if (DocumentExtension == ".pdf")
+                {
+                    Aspose.Pdf.Devices.Resolution TempPdfResoultion = new Aspose.Pdf.Devices.Resolution(300);
+                    Aspose.Pdf.Devices.JpegDevice TempPdfJepegDevices = new Aspose.Pdf.Devices.JpegDevice(TempPdfResoultion, 100);
+                    TempPdfJepegDevices.Process(TempPdfDocument.Pages[PageIndex + 1], TempMemoryStream);
+                }
 
                 using BarCodeReader TempCodeReader = new BarCodeReader(TempMemoryStream, DecodeType.DataMatrix);
                 foreach (BarCodeResult TempResult in TempCodeReader.ReadBarCodes())
@@ -1652,7 +1814,7 @@ namespace DocumentTools
         /// <param name="SavedFileName">保存的文件名称</param>
         /// <param name="DownloadProgressBar">使用的进度条</param>
         /// <param name="DownloadStatusLabel">使用的提示文本标签</param>
-        public static void DwonloadFile(string FileUrl, string SavedFileName, ProgressBar DownloadProgressBar, Label DownloadStatusLabel)
+        public static void DownloadFile(string FileUrl, string SavedFileName, ProgressBar DownloadProgressBar, Label DownloadStatusLabel)
         {
             DownloadProgressBar.Maximum = 100;
             WebClient TempDownloadClient = new WebClient();
@@ -1666,12 +1828,18 @@ namespace DocumentTools
             };
             TempDownloadClient.DownloadFileCompleted += (download_sender, download_event) =>
             {
-                DownloadStatusLabel.Text = $"下载完毕，文件名称为：{SavedFileName}";
+                if (download_event.Error != null) // Check if there was an error during download
+                {
+                    MessageBox.Show($"下载失败：{download_event.Error.Message}", "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                else // Download completed successfully
+                {
+                    DownloadStatusLabel.Text = $"下载完毕，文件名称为：{SavedFileName}";
+                    MessageBox.Show($"下载完毕，文件在软件同目录下：{SavedFileName}", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                }
                 DownloadProgressBar.Value = 0;
-                MessageBox.Show($"下载完毕，文件在软件同目录下：{SavedFileName}", "下载文件", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 DownloadStatusLabel.Text = "下载进度：0%";
             };
-
         }
 
         /// <summary>
@@ -1715,7 +1883,7 @@ namespace DocumentTools
         /// <param name="BottomPx">下边距</param>
         /// <param name="RightPx">右边距</param>
         public static async void ConvertHtml2PDFAsync(string DocumentFileName, string SavedFileName, string ChromeDriverPath, int PdfPaperSizeIndex, bool isLand, bool isUseCss, string TopPx, string LeftPx, string BottomPx, string RightPx,
-            decimal DefaultTimeOut, decimal WaitTimeOut,bool WaitAllResouce)
+            decimal DefaultTimeOut, decimal WaitTimeOut, bool WaitAllResouce)
         {
 
             if (ChromeDriverPath != string.Empty && ChromeDriverPath != null && File.Exists(ChromeDriverPath))
@@ -1731,7 +1899,7 @@ namespace DocumentTools
                 PuppeteerSharp.PdfOptions TempPdfOption = new PuppeteerSharp.PdfOptions();
 
                 using PuppeteerSharp.IBrowser TempBroswer = await PuppeteerSharp.Puppeteer.LaunchAsync(LanuachOption);
-                
+
 
                 using PuppeteerSharp.IPage TempPage = await TempBroswer.NewPageAsync();
 
@@ -1791,13 +1959,13 @@ namespace DocumentTools
 
         }
 
-        public static void ConvertHtml2Pdf(string DocumentFileName,string SavedFileName)
+        public static void ConvertHtml2Pdf(string DocumentFileName, string SavedFileName)
         {
             Aspose.Hook.HookManager.StartHook();
             using Aspose.Html.HTMLDocument TempLoadDocument = new Aspose.Html.HTMLDocument(DocumentFileName);
             Aspose.Html.Saving.PdfSaveOptions TempPdfOption = new Aspose.Html.Saving.PdfSaveOptions();
 
-            Aspose.Html.Converters.Converter.ConvertHTML(TempLoadDocument,TempPdfOption,SavedFileName);
+            Aspose.Html.Converters.Converter.ConvertHTML(TempLoadDocument, TempPdfOption, SavedFileName);
 
         }
         /// <summary>
@@ -2929,7 +3097,7 @@ namespace DocumentTools
             using ManagementObjectCollection TempNetworkList = TempSearcher.Get();
             foreach (ManagementObject TempNetwork in TempNetworkList)
             {
-                string NetworkCardName = TempNetwork.GetPropertyValue("Description") as string;
+                string NetworkCardName = TempNetwork.GetPropertyValue("Description") as string ?? "无法加载网卡";
                 NetworkLists.Add(NetworkCardName);
             }
 
@@ -2941,7 +3109,7 @@ namespace DocumentTools
         /// </summary>
         /// <param name="NetworkCardName"></param>
         /// <returns></returns>
-        public static (List<string>, List<string>, List<string>, string, string, string,bool) GetCard_Information(string NetworkCardName)
+        public static (List<string>, List<string>, List<string>, string, string, string, bool) GetCard_Information(string NetworkCardName)
         {
             List<string> IPV4_ADDRESSES = new List<string>();
             List<string> SUBNET_MASKS = new List<string>();
@@ -2965,7 +3133,7 @@ namespace DocumentTools
 
                         foreach (GatewayIPAddressInformation TempGateway in TempInterface.GetIPProperties().GatewayAddresses)
                         {
-                            if (TempGateway.Address.AddressFamily==System.Net.Sockets.AddressFamily.InterNetwork)
+                            if (TempGateway.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
                             {
                                 DEFAULT_GATEWAYS.Add(TempGateway.Address.ToString());
                             }
@@ -2978,7 +3146,7 @@ namespace DocumentTools
                 IS_ENABLE_DHCP = TempInterfacePro.GetIPv4Properties().IsDhcpEnabled;
                 foreach (IPAddress DnsAddress in DNSAddresses)
                 {
-                    if(DnsAddress.AddressFamily==System.Net.Sockets.AddressFamily.InterNetwork)
+                    if (DnsAddress.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
                     {
                         DnsLists.Add(DnsAddress.ToString());
                     }
@@ -2990,7 +3158,7 @@ namespace DocumentTools
 
                 return (IPV4_ADDRESSES, SUBNET_MASKS, DEFAULT_GATEWAYS, DNS_1, DNS_2, MAC_ADDRESS, IS_ENABLE_DHCP);
             }
-            return (new List<string>() { "未获取到" }, new List<string>() { "未获取到" }, new List<string>() { "未获取到" }, "未获取到", "未获取到", "未获取到",false);
+            return (new List<string>() { "未获取到" }, new List<string>() { "未获取到" }, new List<string>() { "未获取到" }, "未获取到", "未获取到", "未获取到", false);
         }
 
 
@@ -3036,17 +3204,17 @@ namespace DocumentTools
                             OutputResult = TempObject.InvokeMethod("SetGateways", InputParama, null);
 
                             InputParama = TempObject.GetMethodParameters("SetDNSServerSearchOrder");
-                            if(dns1=="0.0.0.0" || dns1==string.Empty)
+                            if (dns1 == "0.0.0.0" || dns1 == string.Empty)
                             {
                                 InputParama["DNSServerSearchOrder"] = new string[] { dns2 };
                             }
-                            else if(dns2=="0.0.0.0" || dns1 == string.Empty)
+                            else if (dns2 == "0.0.0.0" || dns1 == string.Empty)
                             {
                                 InputParama["DNSServerSearchOrder"] = new string[] { dns1 };
                             }
                             else
                             {
-                                InputParama["DNSServerSearchOrder"] = new string[] { dns1,dns2 };
+                                InputParama["DNSServerSearchOrder"] = new string[] { dns1, dns2 };
                             }
 
                             OutputResult = TempObject.InvokeMethod("SetDNSServerSearchOrder", InputParama, null);
@@ -3090,11 +3258,11 @@ namespace DocumentTools
             TempTable.Columns.Add("DisplayValue");
             TempTable.Columns.Add("RealValue");
             using ManagementObjectSearcher TempSearcher = new ManagementObjectSearcher("SELECT * FROM Win32_Share");
-            foreach(ManagementObject TempShare in TempSearcher.Get())
+            foreach (ManagementObject TempShare in TempSearcher.Get())
             {
                 string ShareName = TempShare.GetPropertyValue("Name").ToString();
                 string SharePath = TempShare.GetPropertyValue("Path").ToString();
-                if(SharePath!=string.Empty)
+                if (SharePath != string.Empty)
                 {
                     TempTable.Rows.Add(ShareName, SharePath);
                 }
@@ -3225,7 +3393,7 @@ namespace DocumentTools
 
         public static string GetAdministratorBehavior()
         {
-            string BehaviorStatus =  GetRegistryValue(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "EnableLUA").ToString();
+            string BehaviorStatus = GetRegistryValue(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "EnableLUA").ToString();
 
             return BehaviorStatus;
 
@@ -3233,18 +3401,145 @@ namespace DocumentTools
 
         public static void SetAdministratorBehavior(bool Enbale)
         {
-            if(Enbale)
+            if (Enbale)
             {
-                SetRegistryValue(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "EnableLUA", 1,RegistryValueKind.DWord);
+                SetRegistryValue(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "EnableLUA", 1, RegistryValueKind.DWord);
 
             }
             else
             {
-                SetRegistryValue(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "EnableLUA", 0,RegistryValueKind.DWord);
+                SetRegistryValue(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "EnableLUA", 0, RegistryValueKind.DWord);
 
             }
         }
 
+
+        public static void GenerateVoteReportDocx(Stream DocumentStream,
+            string Report_Title, string Report_Start_Text,
+            string Report_Table_Name_Desc, string Report_Table_Agree_Desc,
+            string Report_Table_UnAgree_Desc, string Report_Table_Abdon_Desc,
+            string Report_End_Text, string Report_GenDate_Text,
+            string[] Report_FillNames, string SavedFileName, bool Report_Random_VoteCounts,
+            double Report_Table_Height,int Report_Table_FontSize,bool Report_Footer_Keep,
+            bool Report_NumberIndex_Keep)
+        {
+            Aspose.Hook.HookManager.StartHook();
+            Aspose.Words.Document TempLoadDocument = new Aspose.Words.Document(DocumentStream);
+            Aspose.Words.DocumentBuilder TempVoteDocumentBuilder = new Aspose.Words.DocumentBuilder(TempLoadDocument);
+
+            List<string> VoteTableHeaderItems = new List<string>();
+            VoteTableHeaderItems.Add("序号");
+            VoteTableHeaderItems.Add(Report_Table_Name_Desc);
+            VoteTableHeaderItems.Add(Report_Table_Agree_Desc);
+            VoteTableHeaderItems.Add(Report_Table_UnAgree_Desc);
+            VoteTableHeaderItems.Add(Report_Table_Abdon_Desc);
+
+
+            //string[] VoteTableHeaderItems = new string[] { "序号",
+            //Report_Table_Name_Desc,Report_Table_Agree_Desc,
+            //Report_Table_UnAgree_Desc,Report_Table_Abdon_Desc};
+
+            TempLoadDocument.Range.Replace("%Report_Title%", Report_Title);
+            TempLoadDocument.Range.Replace("%Report_Start%", Report_Start_Text);
+            TempLoadDocument.Range.Replace("%Report_End%", Report_End_Text);
+            TempLoadDocument.Range.Replace("%Report_Date%", Report_GenDate_Text);
+
+
+
+            TempVoteDocumentBuilder.MoveToParagraph(4, 0);
+
+            Aspose.Words.Tables.Table TempVoteTable = TempVoteDocumentBuilder.StartTable();
+
+            //如果不勾选保留序号列，直接移除序号元素
+            if(!Report_NumberIndex_Keep)
+            {
+                VoteTableHeaderItems.RemoveAt(0);
+            }
+
+            //添加基础表头信息
+            foreach (string VoteTableHeaderItem in VoteTableHeaderItems)
+            {
+                TempVoteDocumentBuilder.InsertCell();
+                TempVoteTable.RelativeHorizontalAlignment = Aspose.Words.Drawing.HorizontalAlignment.Center;
+                TempVoteTable.TextWrapping = Aspose.Words.Tables.TextWrapping.None;
+                TempVoteTable.AllowAutoFit = false;
+                TempVoteDocumentBuilder.RowFormat.Height = Report_Table_Height * 28.4;
+                TempVoteDocumentBuilder.RowFormat.HeightRule = HeightRule.Exactly;
+                TempVoteDocumentBuilder.RowFormat.HeadingFormat = true;
+                TempVoteDocumentBuilder.ParagraphFormat.Alignment = ParagraphAlignment.Center;
+                TempVoteDocumentBuilder.CellFormat.VerticalAlignment = CellVerticalAlignment.Center;
+                TempVoteDocumentBuilder.CellFormat.Shading.BackgroundPatternColor = Color.LightYellow;
+                TempVoteDocumentBuilder.CellFormat.WrapText = false;
+                TempVoteDocumentBuilder.Font.Size = Report_Table_FontSize;
+                TempVoteDocumentBuilder.Font.Name = "SimSun";
+                TempVoteDocumentBuilder.Write(VoteTableHeaderItem);
+            }
+            TempVoteDocumentBuilder.EndRow();
+
+            int Report_Index = 1;
+            Random TempRandom = new Random();
+            foreach (string Report_FillName in Report_FillNames)
+            {
+                if (Report_FillName != string.Empty)
+                {
+                    TempVoteDocumentBuilder.InsertCell();
+                    TempVoteDocumentBuilder.RowFormat.HeadingFormat = false;
+                    TempVoteDocumentBuilder.CellFormat.Shading.BackgroundPatternColor = Color.White;
+                    TempVoteDocumentBuilder.Font.Name = "SimSun";
+                    //如果没有保留序号列，第一列就直接写名字，不写序号
+                    if(Report_NumberIndex_Keep)
+                    {
+                        TempVoteDocumentBuilder.Write(Report_Index.ToString());
+                    }
+                    else
+                    {
+                        TempVoteDocumentBuilder.Write(Report_FillName);
+
+                    }
+                    for (int ColumnIndex = 1; ColumnIndex < VoteTableHeaderItems.Count; ColumnIndex++)
+                    {
+                        TempVoteDocumentBuilder.InsertCell();
+                        //只有写入序号列才往第一列写名字
+                        if (ColumnIndex == 1 && Report_NumberIndex_Keep)
+                        {
+                            TempVoteDocumentBuilder.Write(Report_FillName);
+                        }
+                        else
+                        {
+                            if (Report_Random_VoteCounts)
+                            {
+                                int RandomCount = TempRandom.Next(Report_Index, Report_Index * 10);
+                                TempVoteDocumentBuilder.Write(RandomCount.ToString());
+                            }
+                            else
+                            {
+                                TempVoteDocumentBuilder.Write("0");
+                            }
+                        }
+                    }
+                    TempVoteDocumentBuilder.EndRow();
+                    Report_Index++;
+
+                }
+            }
+            TempVoteDocumentBuilder.EndTable();
+            if(!Report_Footer_Keep)
+            {
+                foreach(Section TempSec in TempLoadDocument.Sections)
+                {
+                    Aspose.Words.HeaderFooter TempFooter = TempSec.HeadersFooters[HeaderFooterType.FooterEven];
+                    TempFooter?.Remove();
+
+                    TempFooter = TempSec.HeadersFooters[HeaderFooterType.FooterPrimary];
+                    TempFooter?.Remove();
+
+                    TempFooter = TempSec.HeadersFooters[HeaderFooterType.FooterFirst];
+                    TempFooter?.Remove();
+                }
+            }
+            TempLoadDocument.Save(SavedFileName, Aspose.Words.SaveFormat.Docx);
+
+        }
 
 
 

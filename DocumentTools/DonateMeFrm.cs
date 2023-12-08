@@ -27,7 +27,7 @@ namespace DocumentTools
 
             ShowWechatQR.MouseEnter += (s1, s2) =>
             {
-                RandomButtonPoint(s1);
+                RandomButtonPoint(s1,s2);
             };
         }
 
@@ -43,20 +43,24 @@ namespace DocumentTools
             }
         }
 
-        private void RandomButtonPoint(object sender)
+        private void RandomButtonPoint(object sender,EventArgs e)
         {
             Random TempRandom = new Random();
 
-            int RandomX = TempRandom.Next(200, Width-100);
-            int RandomY = TempRandom.Next(200, Height-100);
+            int ButtonWidth = (sender as Button).Width;
+            int ButtonHeight = (sender as Button).Height;
 
-            (sender as Button).Location = new Point(RandomX, RandomY);
-
+            int RandomX = TempRandom.Next(0, Width- ButtonWidth);
+            int RandomY = TempRandom.Next(0, Height- ButtonHeight);
 
             MoveCount++;
 
+            (sender as Button).Location = new Point(RandomX, RandomY);
+
             if (MoveCount == 6)
             {
+                (sender as Button).MouseEnter -= RandomButtonPoint;
+                (sender as Button).Location = QR_Wechat_Button_Point;
                 MessageBox.Show("不玩了，现在可点击加载赞赏二维码了，谢谢老板！","提示",MessageBoxButtons.OK,MessageBoxIcon.Asterisk);
                 (sender as Button).MouseEnter += (s1, s2) =>
                 {

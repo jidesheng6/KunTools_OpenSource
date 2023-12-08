@@ -32,6 +32,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BodyForm));
             this.MainTabPage = new System.Windows.Forms.TabControl();
             this.TabPage_01 = new System.Windows.Forms.TabPage();
+            this.WORD2PDF_LoadPassword = new System.Windows.Forms.TextBox();
+            this.label147 = new System.Windows.Forms.Label();
+            this.EmbedFonts = new System.Windows.Forms.CheckBox();
             this.word2pdf_colorMode = new System.Windows.Forms.ComboBox();
             this.label125 = new System.Windows.Forms.Label();
             this.word2pdf_need_update_fields = new System.Windows.Forms.CheckBox();
@@ -51,6 +54,8 @@
             this.ChooseDocButton = new System.Windows.Forms.Button();
             this.WordFileListView = new System.Windows.Forms.ListView();
             this.TabPage_02 = new System.Windows.Forms.TabPage();
+            this.PDF2WORD_LoadPassword = new System.Windows.Forms.TextBox();
+            this.label148 = new System.Windows.Forms.Label();
             this.pdf2word_save_source = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.PDF2WORD_Mode = new System.Windows.Forms.ComboBox();
@@ -127,6 +132,17 @@
             this.SelectMergeWordFiles = new System.Windows.Forms.Button();
             this.MergeWordFileList = new System.Windows.Forms.ListView();
             this.TabPage_31 = new System.Windows.Forms.TabPage();
+            this.groupBox48 = new System.Windows.Forms.GroupBox();
+            this.label145 = new System.Windows.Forms.Label();
+            this.label146 = new System.Windows.Forms.Label();
+            this.SplitWord_PageCount = new System.Windows.Forms.NumericUpDown();
+            this.SplitWord_Single = new System.Windows.Forms.RadioButton();
+            this.label135 = new System.Windows.Forms.Label();
+            this.SplitWord_Range_End = new System.Windows.Forms.TextBox();
+            this.label136 = new System.Windows.Forms.Label();
+            this.SplitWord_Range_Start = new System.Windows.Forms.TextBox();
+            this.label137 = new System.Windows.Forms.Label();
+            this.SplitWord_Range = new System.Windows.Forms.RadioButton();
             this.SplitWordFileList_MoveDown = new System.Windows.Forms.Button();
             this.SplitWordFileList_MoveUp = new System.Windows.Forms.Button();
             this.splitword_clear = new System.Windows.Forms.Button();
@@ -149,6 +165,17 @@
             this.MergePdfFileSelectButton = new System.Windows.Forms.Button();
             this.MergePdfFileView = new System.Windows.Forms.ListView();
             this.TabPage_17 = new System.Windows.Forms.TabPage();
+            this.groupBox47 = new System.Windows.Forms.GroupBox();
+            this.label144 = new System.Windows.Forms.Label();
+            this.label143 = new System.Windows.Forms.Label();
+            this.SplitPdf_PerPageCount = new System.Windows.Forms.NumericUpDown();
+            this.SplitPdf_Single = new System.Windows.Forms.RadioButton();
+            this.label134 = new System.Windows.Forms.Label();
+            this.SplitPdfRange_End = new System.Windows.Forms.TextBox();
+            this.label133 = new System.Windows.Forms.Label();
+            this.SplitPdfRange_Start = new System.Windows.Forms.TextBox();
+            this.label132 = new System.Windows.Forms.Label();
+            this.SplitPdf_Range = new System.Windows.Forms.RadioButton();
             this.SplitPdfFileList_MoveDown = new System.Windows.Forms.Button();
             this.SplitPdfFileList_MoveUp = new System.Windows.Forms.Button();
             this.sqplitpdf_clear = new System.Windows.Forms.Button();
@@ -538,6 +565,8 @@
             this.city_level_3_combox = new System.Windows.Forms.ComboBox();
             this.city_level_2_combox = new System.Windows.Forms.ComboBox();
             this.TabPage_05 = new System.Windows.Forms.TabPage();
+            this.NameMarkColor = new System.Windows.Forms.ComboBox();
+            this.MarkDupName = new System.Windows.Forms.CheckBox();
             this.ExportNameTxt = new System.Windows.Forms.Button();
             this.label57 = new System.Windows.Forms.Label();
             this.NameReplaceRegexMode = new System.Windows.Forms.Label();
@@ -658,6 +687,39 @@
             this.SelectMss3 = new System.Windows.Forms.Button();
             this.Mss3Path = new System.Windows.Forms.TextBox();
             this.label75 = new System.Windows.Forms.Label();
+            this.TabPage_38 = new System.Windows.Forms.TabPage();
+            this.groupBox53 = new System.Windows.Forms.GroupBox();
+            this.VoteTable_NumberIndex_Keep = new System.Windows.Forms.CheckBox();
+            this.VoteTable_KeepPageFooter = new System.Windows.Forms.CheckBox();
+            this.VoteTableFontSize = new System.Windows.Forms.NumericUpDown();
+            this.label151 = new System.Windows.Forms.Label();
+            this.label150 = new System.Windows.Forms.Label();
+            this.VoteTableHeight = new System.Windows.Forms.NumericUpDown();
+            this.label149 = new System.Windows.Forms.Label();
+            this.VoteTable_Random_PageCounts = new System.Windows.Forms.CheckBox();
+            this.label142 = new System.Windows.Forms.Label();
+            this.VoteTable_Render = new System.Windows.Forms.Button();
+            this.报告单生成日期 = new System.Windows.Forms.GroupBox();
+            this.VoteTableHelpDate = new System.Windows.Forms.Button();
+            this.VoteTable_GenDate = new System.Windows.Forms.TextBox();
+            this.报告单结束语 = new System.Windows.Forms.GroupBox();
+            this.VoteTable_End = new System.Windows.Forms.TextBox();
+            this.groupBox52 = new System.Windows.Forms.GroupBox();
+            this.VoteTable_Start = new System.Windows.Forms.TextBox();
+            this.groupBox51 = new System.Windows.Forms.GroupBox();
+            this.VoteTable_Title = new System.Windows.Forms.TextBox();
+            this.groupBox50 = new System.Windows.Forms.GroupBox();
+            this.VoteTableName_CountText = new System.Windows.Forms.Label();
+            this.VoteTable_Names = new System.Windows.Forms.RichTextBox();
+            this.groupBox49 = new System.Windows.Forms.GroupBox();
+            this.VoteTable_Abdon = new System.Windows.Forms.TextBox();
+            this.label141 = new System.Windows.Forms.Label();
+            this.VoteTable_UnAgree = new System.Windows.Forms.TextBox();
+            this.label140 = new System.Windows.Forms.Label();
+            this.VoteTable_Agree = new System.Windows.Forms.TextBox();
+            this.label139 = new System.Windows.Forms.Label();
+            this.VoteTable_Name = new System.Windows.Forms.TextBox();
+            this.label138 = new System.Windows.Forms.Label();
             this.TabPage_36 = new System.Windows.Forms.TabPage();
             this.groupBox46 = new System.Windows.Forms.GroupBox();
             this.money_big = new System.Windows.Forms.TextBox();
@@ -783,6 +845,9 @@
             this.pDF转EXCELToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pDFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pDF转PPTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.添加PDF水印ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.移除PDF水印ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pDF版本转换ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ePUB功能ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ePUB转WORDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ePUB转PDFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -809,6 +874,7 @@
             this.随机身份证号码生成ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.文件副本生成ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.网卡设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.选举报告单样式生成ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.其他功能ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.系统工具ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.关于软件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -827,7 +893,13 @@
             this.menu_listview_gridline_combox = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_chrome_path = new System.Windows.Forms.ToolStripTextBox();
+            this.界面大小设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.设置界面宽度ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bodyform_width = new System.Windows.Forms.ToolStripTextBox();
+            this.设置界面高度ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bodyform_height = new System.Windows.Forms.ToolStripTextBox();
             this.查看标签索引对照表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.初始化配置文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.保存设置并重启软件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainToolsTip = new System.Windows.Forms.ToolTip(this.components);
             this.TabPageIcoList = new System.Windows.Forms.ImageList(this.components);
@@ -840,8 +912,12 @@
             this.TabPage_21.SuspendLayout();
             this.TabPage_14.SuspendLayout();
             this.TabPage_31.SuspendLayout();
+            this.groupBox48.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SplitWord_PageCount)).BeginInit();
             this.TabPage_06.SuspendLayout();
             this.TabPage_17.SuspendLayout();
+            this.groupBox47.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SplitPdf_PerPageCount)).BeginInit();
             this.TabPage_18.SuspendLayout();
             this.groupBox18.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WaterMarkImage)).BeginInit();
@@ -919,6 +995,16 @@
             this.groupBox40.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.votedataview)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.VotePicture)).BeginInit();
+            this.TabPage_38.SuspendLayout();
+            this.groupBox53.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.VoteTableFontSize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.VoteTableHeight)).BeginInit();
+            this.报告单生成日期.SuspendLayout();
+            this.报告单结束语.SuspendLayout();
+            this.groupBox52.SuspendLayout();
+            this.groupBox51.SuspendLayout();
+            this.groupBox50.SuspendLayout();
+            this.groupBox49.SuspendLayout();
             this.TabPage_36.SuspendLayout();
             this.groupBox46.SuspendLayout();
             this.groupBox43.SuspendLayout();
@@ -978,6 +1064,7 @@
             this.MainTabPage.Controls.Add(this.TabPage_13);
             this.MainTabPage.Controls.Add(this.TabPage_26);
             this.MainTabPage.Controls.Add(this.TabPage_32);
+            this.MainTabPage.Controls.Add(this.TabPage_38);
             this.MainTabPage.Controls.Add(this.TabPage_36);
             this.MainTabPage.Controls.Add(this.TabPage_37);
             this.MainTabPage.Controls.Add(this.TabPage_08);
@@ -986,10 +1073,14 @@
             this.MainTabPage.SelectedIndex = 0;
             this.MainTabPage.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.MainTabPage.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.MainTabPage_DrawItem);
+            this.MainTabPage.SelectedIndexChanged += new System.EventHandler(this.MainTabPage_SelectedIndexChanged);
             this.MainTabPage.DoubleClick += new System.EventHandler(this.MainTabPage_DoubleClick);
             // 
             // TabPage_01
             // 
+            this.TabPage_01.Controls.Add(this.WORD2PDF_LoadPassword);
+            this.TabPage_01.Controls.Add(this.label147);
+            this.TabPage_01.Controls.Add(this.EmbedFonts);
             this.TabPage_01.Controls.Add(this.word2pdf_colorMode);
             this.TabPage_01.Controls.Add(this.label125);
             this.TabPage_01.Controls.Add(this.word2pdf_need_update_fields);
@@ -1011,6 +1102,22 @@
             resources.ApplyResources(this.TabPage_01, "TabPage_01");
             this.TabPage_01.Name = "TabPage_01";
             this.TabPage_01.UseVisualStyleBackColor = true;
+            // 
+            // WORD2PDF_LoadPassword
+            // 
+            resources.ApplyResources(this.WORD2PDF_LoadPassword, "WORD2PDF_LoadPassword");
+            this.WORD2PDF_LoadPassword.Name = "WORD2PDF_LoadPassword";
+            // 
+            // label147
+            // 
+            resources.ApplyResources(this.label147, "label147");
+            this.label147.Name = "label147";
+            // 
+            // EmbedFonts
+            // 
+            resources.ApplyResources(this.EmbedFonts, "EmbedFonts");
+            this.EmbedFonts.Name = "EmbedFonts";
+            this.EmbedFonts.UseVisualStyleBackColor = true;
             // 
             // word2pdf_colorMode
             // 
@@ -1125,6 +1232,8 @@
             // 
             // TabPage_02
             // 
+            this.TabPage_02.Controls.Add(this.PDF2WORD_LoadPassword);
+            this.TabPage_02.Controls.Add(this.label148);
             this.TabPage_02.Controls.Add(this.pdf2word_save_source);
             this.TabPage_02.Controls.Add(this.label1);
             this.TabPage_02.Controls.Add(this.PDF2WORD_Mode);
@@ -1143,6 +1252,16 @@
             resources.ApplyResources(this.TabPage_02, "TabPage_02");
             this.TabPage_02.Name = "TabPage_02";
             this.TabPage_02.UseVisualStyleBackColor = true;
+            // 
+            // PDF2WORD_LoadPassword
+            // 
+            resources.ApplyResources(this.PDF2WORD_LoadPassword, "PDF2WORD_LoadPassword");
+            this.PDF2WORD_LoadPassword.Name = "PDF2WORD_LoadPassword";
+            // 
+            // label148
+            // 
+            resources.ApplyResources(this.label148, "label148");
+            this.label148.Name = "label148";
             // 
             // pdf2word_save_source
             // 
@@ -1678,6 +1797,7 @@
             // 
             // TabPage_31
             // 
+            this.TabPage_31.Controls.Add(this.groupBox48);
             this.TabPage_31.Controls.Add(this.SplitWordFileList_MoveDown);
             this.TabPage_31.Controls.Add(this.SplitWordFileList_MoveUp);
             this.TabPage_31.Controls.Add(this.splitword_clear);
@@ -1689,6 +1809,91 @@
             resources.ApplyResources(this.TabPage_31, "TabPage_31");
             this.TabPage_31.Name = "TabPage_31";
             this.TabPage_31.UseVisualStyleBackColor = true;
+            // 
+            // groupBox48
+            // 
+            resources.ApplyResources(this.groupBox48, "groupBox48");
+            this.groupBox48.Controls.Add(this.label145);
+            this.groupBox48.Controls.Add(this.label146);
+            this.groupBox48.Controls.Add(this.SplitWord_PageCount);
+            this.groupBox48.Controls.Add(this.SplitWord_Single);
+            this.groupBox48.Controls.Add(this.label135);
+            this.groupBox48.Controls.Add(this.SplitWord_Range_End);
+            this.groupBox48.Controls.Add(this.label136);
+            this.groupBox48.Controls.Add(this.SplitWord_Range_Start);
+            this.groupBox48.Controls.Add(this.label137);
+            this.groupBox48.Controls.Add(this.SplitWord_Range);
+            this.groupBox48.Name = "groupBox48";
+            this.groupBox48.TabStop = false;
+            // 
+            // label145
+            // 
+            resources.ApplyResources(this.label145, "label145");
+            this.label145.Name = "label145";
+            // 
+            // label146
+            // 
+            resources.ApplyResources(this.label146, "label146");
+            this.label146.Name = "label146";
+            // 
+            // SplitWord_PageCount
+            // 
+            resources.ApplyResources(this.SplitWord_PageCount, "SplitWord_PageCount");
+            this.SplitWord_PageCount.Maximum = new decimal(new int[] {
+            999999999,
+            0,
+            0,
+            0});
+            this.SplitWord_PageCount.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.SplitWord_PageCount.Name = "SplitWord_PageCount";
+            this.SplitWord_PageCount.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // SplitWord_Single
+            // 
+            resources.ApplyResources(this.SplitWord_Single, "SplitWord_Single");
+            this.SplitWord_Single.Checked = true;
+            this.SplitWord_Single.Name = "SplitWord_Single";
+            this.SplitWord_Single.TabStop = true;
+            this.SplitWord_Single.UseVisualStyleBackColor = true;
+            // 
+            // label135
+            // 
+            resources.ApplyResources(this.label135, "label135");
+            this.label135.Name = "label135";
+            // 
+            // SplitWord_Range_End
+            // 
+            resources.ApplyResources(this.SplitWord_Range_End, "SplitWord_Range_End");
+            this.SplitWord_Range_End.Name = "SplitWord_Range_End";
+            // 
+            // label136
+            // 
+            resources.ApplyResources(this.label136, "label136");
+            this.label136.Name = "label136";
+            // 
+            // SplitWord_Range_Start
+            // 
+            resources.ApplyResources(this.SplitWord_Range_Start, "SplitWord_Range_Start");
+            this.SplitWord_Range_Start.Name = "SplitWord_Range_Start";
+            // 
+            // label137
+            // 
+            resources.ApplyResources(this.label137, "label137");
+            this.label137.Name = "label137";
+            // 
+            // SplitWord_Range
+            // 
+            resources.ApplyResources(this.SplitWord_Range, "SplitWord_Range");
+            this.SplitWord_Range.Name = "SplitWord_Range";
+            this.SplitWord_Range.UseVisualStyleBackColor = true;
             // 
             // SplitWordFileList_MoveDown
             // 
@@ -1839,6 +2044,7 @@
             // 
             // TabPage_17
             // 
+            this.TabPage_17.Controls.Add(this.groupBox47);
             this.TabPage_17.Controls.Add(this.SplitPdfFileList_MoveDown);
             this.TabPage_17.Controls.Add(this.SplitPdfFileList_MoveUp);
             this.TabPage_17.Controls.Add(this.sqplitpdf_clear);
@@ -1850,6 +2056,91 @@
             resources.ApplyResources(this.TabPage_17, "TabPage_17");
             this.TabPage_17.Name = "TabPage_17";
             this.TabPage_17.UseVisualStyleBackColor = true;
+            // 
+            // groupBox47
+            // 
+            resources.ApplyResources(this.groupBox47, "groupBox47");
+            this.groupBox47.Controls.Add(this.label144);
+            this.groupBox47.Controls.Add(this.label143);
+            this.groupBox47.Controls.Add(this.SplitPdf_PerPageCount);
+            this.groupBox47.Controls.Add(this.SplitPdf_Single);
+            this.groupBox47.Controls.Add(this.label134);
+            this.groupBox47.Controls.Add(this.SplitPdfRange_End);
+            this.groupBox47.Controls.Add(this.label133);
+            this.groupBox47.Controls.Add(this.SplitPdfRange_Start);
+            this.groupBox47.Controls.Add(this.label132);
+            this.groupBox47.Controls.Add(this.SplitPdf_Range);
+            this.groupBox47.Name = "groupBox47";
+            this.groupBox47.TabStop = false;
+            // 
+            // label144
+            // 
+            resources.ApplyResources(this.label144, "label144");
+            this.label144.Name = "label144";
+            // 
+            // label143
+            // 
+            resources.ApplyResources(this.label143, "label143");
+            this.label143.Name = "label143";
+            // 
+            // SplitPdf_PerPageCount
+            // 
+            resources.ApplyResources(this.SplitPdf_PerPageCount, "SplitPdf_PerPageCount");
+            this.SplitPdf_PerPageCount.Maximum = new decimal(new int[] {
+            999999999,
+            0,
+            0,
+            0});
+            this.SplitPdf_PerPageCount.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.SplitPdf_PerPageCount.Name = "SplitPdf_PerPageCount";
+            this.SplitPdf_PerPageCount.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // SplitPdf_Single
+            // 
+            resources.ApplyResources(this.SplitPdf_Single, "SplitPdf_Single");
+            this.SplitPdf_Single.Checked = true;
+            this.SplitPdf_Single.Name = "SplitPdf_Single";
+            this.SplitPdf_Single.TabStop = true;
+            this.SplitPdf_Single.UseVisualStyleBackColor = true;
+            // 
+            // label134
+            // 
+            resources.ApplyResources(this.label134, "label134");
+            this.label134.Name = "label134";
+            // 
+            // SplitPdfRange_End
+            // 
+            resources.ApplyResources(this.SplitPdfRange_End, "SplitPdfRange_End");
+            this.SplitPdfRange_End.Name = "SplitPdfRange_End";
+            // 
+            // label133
+            // 
+            resources.ApplyResources(this.label133, "label133");
+            this.label133.Name = "label133";
+            // 
+            // SplitPdfRange_Start
+            // 
+            resources.ApplyResources(this.SplitPdfRange_Start, "SplitPdfRange_Start");
+            this.SplitPdfRange_Start.Name = "SplitPdfRange_Start";
+            // 
+            // label132
+            // 
+            resources.ApplyResources(this.label132, "label132");
+            this.label132.Name = "label132";
+            // 
+            // SplitPdf_Range
+            // 
+            resources.ApplyResources(this.SplitPdf_Range, "SplitPdf_Range");
+            this.SplitPdf_Range.Name = "SplitPdf_Range";
+            this.SplitPdf_Range.UseVisualStyleBackColor = true;
             // 
             // SplitPdfFileList_MoveDown
             // 
@@ -4604,6 +4895,8 @@
             // 
             // TabPage_05
             // 
+            this.TabPage_05.Controls.Add(this.NameMarkColor);
+            this.TabPage_05.Controls.Add(this.MarkDupName);
             this.TabPage_05.Controls.Add(this.ExportNameTxt);
             this.TabPage_05.Controls.Add(this.label57);
             this.TabPage_05.Controls.Add(this.NameReplaceRegexMode);
@@ -4625,6 +4918,18 @@
             resources.ApplyResources(this.TabPage_05, "TabPage_05");
             this.TabPage_05.Name = "TabPage_05";
             this.TabPage_05.UseVisualStyleBackColor = true;
+            // 
+            // NameMarkColor
+            // 
+            resources.ApplyResources(this.NameMarkColor, "NameMarkColor");
+            this.NameMarkColor.FormattingEnabled = true;
+            this.NameMarkColor.Name = "NameMarkColor";
+            // 
+            // MarkDupName
+            // 
+            resources.ApplyResources(this.MarkDupName, "MarkDupName");
+            this.MarkDupName.Name = "MarkDupName";
+            this.MarkDupName.UseVisualStyleBackColor = true;
             // 
             // ExportNameTxt
             // 
@@ -5451,6 +5756,269 @@
             // 
             resources.ApplyResources(this.label75, "label75");
             this.label75.Name = "label75";
+            // 
+            // TabPage_38
+            // 
+            this.TabPage_38.Controls.Add(this.groupBox53);
+            this.TabPage_38.Controls.Add(this.label142);
+            this.TabPage_38.Controls.Add(this.VoteTable_Render);
+            this.TabPage_38.Controls.Add(this.报告单生成日期);
+            this.TabPage_38.Controls.Add(this.报告单结束语);
+            this.TabPage_38.Controls.Add(this.groupBox52);
+            this.TabPage_38.Controls.Add(this.groupBox51);
+            this.TabPage_38.Controls.Add(this.groupBox50);
+            this.TabPage_38.Controls.Add(this.groupBox49);
+            resources.ApplyResources(this.TabPage_38, "TabPage_38");
+            this.TabPage_38.Name = "TabPage_38";
+            this.TabPage_38.UseVisualStyleBackColor = true;
+            // 
+            // groupBox53
+            // 
+            resources.ApplyResources(this.groupBox53, "groupBox53");
+            this.groupBox53.Controls.Add(this.VoteTable_NumberIndex_Keep);
+            this.groupBox53.Controls.Add(this.VoteTable_KeepPageFooter);
+            this.groupBox53.Controls.Add(this.VoteTableFontSize);
+            this.groupBox53.Controls.Add(this.label151);
+            this.groupBox53.Controls.Add(this.label150);
+            this.groupBox53.Controls.Add(this.VoteTableHeight);
+            this.groupBox53.Controls.Add(this.label149);
+            this.groupBox53.Controls.Add(this.VoteTable_Random_PageCounts);
+            this.groupBox53.Name = "groupBox53";
+            this.groupBox53.TabStop = false;
+            // 
+            // VoteTable_NumberIndex_Keep
+            // 
+            resources.ApplyResources(this.VoteTable_NumberIndex_Keep, "VoteTable_NumberIndex_Keep");
+            this.VoteTable_NumberIndex_Keep.Checked = true;
+            this.VoteTable_NumberIndex_Keep.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.VoteTable_NumberIndex_Keep.Name = "VoteTable_NumberIndex_Keep";
+            this.VoteTable_NumberIndex_Keep.UseVisualStyleBackColor = true;
+            // 
+            // VoteTable_KeepPageFooter
+            // 
+            resources.ApplyResources(this.VoteTable_KeepPageFooter, "VoteTable_KeepPageFooter");
+            this.VoteTable_KeepPageFooter.Checked = true;
+            this.VoteTable_KeepPageFooter.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.VoteTable_KeepPageFooter.Name = "VoteTable_KeepPageFooter";
+            this.VoteTable_KeepPageFooter.UseVisualStyleBackColor = true;
+            // 
+            // VoteTableFontSize
+            // 
+            resources.ApplyResources(this.VoteTableFontSize, "VoteTableFontSize");
+            this.VoteTableFontSize.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
+            this.VoteTableFontSize.Minimum = new decimal(new int[] {
+            12,
+            0,
+            0,
+            0});
+            this.VoteTableFontSize.Name = "VoteTableFontSize";
+            this.VoteTableFontSize.Value = new decimal(new int[] {
+            14,
+            0,
+            0,
+            0});
+            // 
+            // label151
+            // 
+            resources.ApplyResources(this.label151, "label151");
+            this.label151.Name = "label151";
+            // 
+            // label150
+            // 
+            resources.ApplyResources(this.label150, "label150");
+            this.label150.Name = "label150";
+            // 
+            // VoteTableHeight
+            // 
+            this.VoteTableHeight.DecimalPlaces = 2;
+            this.VoteTableHeight.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
+            resources.ApplyResources(this.VoteTableHeight, "VoteTableHeight");
+            this.VoteTableHeight.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
+            this.VoteTableHeight.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.VoteTableHeight.Name = "VoteTableHeight";
+            this.VoteTableHeight.Value = new decimal(new int[] {
+            120,
+            0,
+            0,
+            131072});
+            // 
+            // label149
+            // 
+            resources.ApplyResources(this.label149, "label149");
+            this.label149.Name = "label149";
+            // 
+            // VoteTable_Random_PageCounts
+            // 
+            resources.ApplyResources(this.VoteTable_Random_PageCounts, "VoteTable_Random_PageCounts");
+            this.VoteTable_Random_PageCounts.Name = "VoteTable_Random_PageCounts";
+            this.VoteTable_Random_PageCounts.UseVisualStyleBackColor = true;
+            // 
+            // label142
+            // 
+            resources.ApplyResources(this.label142, "label142");
+            this.label142.ForeColor = System.Drawing.Color.Tomato;
+            this.label142.Name = "label142";
+            // 
+            // VoteTable_Render
+            // 
+            resources.ApplyResources(this.VoteTable_Render, "VoteTable_Render");
+            this.VoteTable_Render.Name = "VoteTable_Render";
+            this.VoteTable_Render.UseVisualStyleBackColor = true;
+            this.VoteTable_Render.Click += new System.EventHandler(this.VoteTable_Render_Click);
+            // 
+            // 报告单生成日期
+            // 
+            this.报告单生成日期.Controls.Add(this.VoteTableHelpDate);
+            this.报告单生成日期.Controls.Add(this.VoteTable_GenDate);
+            resources.ApplyResources(this.报告单生成日期, "报告单生成日期");
+            this.报告单生成日期.Name = "报告单生成日期";
+            this.报告单生成日期.TabStop = false;
+            // 
+            // VoteTableHelpDate
+            // 
+            resources.ApplyResources(this.VoteTableHelpDate, "VoteTableHelpDate");
+            this.VoteTableHelpDate.Name = "VoteTableHelpDate";
+            this.VoteTableHelpDate.UseVisualStyleBackColor = true;
+            this.VoteTableHelpDate.Click += new System.EventHandler(this.VoteTableHelpDate_Click);
+            // 
+            // VoteTable_GenDate
+            // 
+            this.VoteTable_GenDate.AcceptsReturn = true;
+            this.VoteTable_GenDate.AcceptsTab = true;
+            resources.ApplyResources(this.VoteTable_GenDate, "VoteTable_GenDate");
+            this.VoteTable_GenDate.Name = "VoteTable_GenDate";
+            // 
+            // 报告单结束语
+            // 
+            this.报告单结束语.Controls.Add(this.VoteTable_End);
+            resources.ApplyResources(this.报告单结束语, "报告单结束语");
+            this.报告单结束语.Name = "报告单结束语";
+            this.报告单结束语.TabStop = false;
+            // 
+            // VoteTable_End
+            // 
+            this.VoteTable_End.AcceptsReturn = true;
+            this.VoteTable_End.AcceptsTab = true;
+            resources.ApplyResources(this.VoteTable_End, "VoteTable_End");
+            this.VoteTable_End.Name = "VoteTable_End";
+            // 
+            // groupBox52
+            // 
+            resources.ApplyResources(this.groupBox52, "groupBox52");
+            this.groupBox52.Controls.Add(this.VoteTable_Start);
+            this.groupBox52.Name = "groupBox52";
+            this.groupBox52.TabStop = false;
+            // 
+            // VoteTable_Start
+            // 
+            this.VoteTable_Start.AcceptsReturn = true;
+            this.VoteTable_Start.AcceptsTab = true;
+            resources.ApplyResources(this.VoteTable_Start, "VoteTable_Start");
+            this.VoteTable_Start.Name = "VoteTable_Start";
+            // 
+            // groupBox51
+            // 
+            this.groupBox51.Controls.Add(this.VoteTable_Title);
+            resources.ApplyResources(this.groupBox51, "groupBox51");
+            this.groupBox51.Name = "groupBox51";
+            this.groupBox51.TabStop = false;
+            // 
+            // VoteTable_Title
+            // 
+            this.VoteTable_Title.AcceptsReturn = true;
+            this.VoteTable_Title.AcceptsTab = true;
+            resources.ApplyResources(this.VoteTable_Title, "VoteTable_Title");
+            this.VoteTable_Title.Name = "VoteTable_Title";
+            // 
+            // groupBox50
+            // 
+            resources.ApplyResources(this.groupBox50, "groupBox50");
+            this.groupBox50.Controls.Add(this.VoteTableName_CountText);
+            this.groupBox50.Controls.Add(this.VoteTable_Names);
+            this.groupBox50.Name = "groupBox50";
+            this.groupBox50.TabStop = false;
+            // 
+            // VoteTableName_CountText
+            // 
+            resources.ApplyResources(this.VoteTableName_CountText, "VoteTableName_CountText");
+            this.VoteTableName_CountText.ForeColor = System.Drawing.Color.ForestGreen;
+            this.VoteTableName_CountText.Name = "VoteTableName_CountText";
+            // 
+            // VoteTable_Names
+            // 
+            resources.ApplyResources(this.VoteTable_Names, "VoteTable_Names");
+            this.VoteTable_Names.Name = "VoteTable_Names";
+            this.VoteTable_Names.TextChanged += new System.EventHandler(this.VoteTable_Names_TextChanged);
+            // 
+            // groupBox49
+            // 
+            this.groupBox49.Controls.Add(this.VoteTable_Abdon);
+            this.groupBox49.Controls.Add(this.label141);
+            this.groupBox49.Controls.Add(this.VoteTable_UnAgree);
+            this.groupBox49.Controls.Add(this.label140);
+            this.groupBox49.Controls.Add(this.VoteTable_Agree);
+            this.groupBox49.Controls.Add(this.label139);
+            this.groupBox49.Controls.Add(this.VoteTable_Name);
+            this.groupBox49.Controls.Add(this.label138);
+            resources.ApplyResources(this.groupBox49, "groupBox49");
+            this.groupBox49.Name = "groupBox49";
+            this.groupBox49.TabStop = false;
+            // 
+            // VoteTable_Abdon
+            // 
+            resources.ApplyResources(this.VoteTable_Abdon, "VoteTable_Abdon");
+            this.VoteTable_Abdon.Name = "VoteTable_Abdon";
+            // 
+            // label141
+            // 
+            resources.ApplyResources(this.label141, "label141");
+            this.label141.Name = "label141";
+            // 
+            // VoteTable_UnAgree
+            // 
+            resources.ApplyResources(this.VoteTable_UnAgree, "VoteTable_UnAgree");
+            this.VoteTable_UnAgree.Name = "VoteTable_UnAgree";
+            // 
+            // label140
+            // 
+            resources.ApplyResources(this.label140, "label140");
+            this.label140.Name = "label140";
+            // 
+            // VoteTable_Agree
+            // 
+            resources.ApplyResources(this.VoteTable_Agree, "VoteTable_Agree");
+            this.VoteTable_Agree.Name = "VoteTable_Agree";
+            // 
+            // label139
+            // 
+            resources.ApplyResources(this.label139, "label139");
+            this.label139.Name = "label139";
+            // 
+            // VoteTable_Name
+            // 
+            resources.ApplyResources(this.VoteTable_Name, "VoteTable_Name");
+            this.VoteTable_Name.Name = "VoteTable_Name";
+            // 
+            // label138
+            // 
+            resources.ApplyResources(this.label138, "label138");
+            this.label138.Name = "label138";
             // 
             // TabPage_36
             // 
@@ -6323,7 +6891,10 @@
             this.pDF功能ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.pDF转EXCELToolStripMenuItem,
             this.pDFToolStripMenuItem,
-            this.pDF转PPTToolStripMenuItem});
+            this.pDF转PPTToolStripMenuItem,
+            this.添加PDF水印ToolStripMenuItem,
+            this.移除PDF水印ToolStripMenuItem,
+            this.pDF版本转换ToolStripMenuItem});
             this.pDF功能ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.pdf;
             this.pDF功能ToolStripMenuItem.Name = "pDF功能ToolStripMenuItem";
             resources.ApplyResources(this.pDF功能ToolStripMenuItem, "pDF功能ToolStripMenuItem");
@@ -6348,6 +6919,27 @@
             this.pDF转PPTToolStripMenuItem.Name = "pDF转PPTToolStripMenuItem";
             resources.ApplyResources(this.pDF转PPTToolStripMenuItem, "pDF转PPTToolStripMenuItem");
             this.pDF转PPTToolStripMenuItem.Click += new System.EventHandler(this.pDF转PPTToolStripMenuItem_Click);
+            // 
+            // 添加PDF水印ToolStripMenuItem
+            // 
+            this.添加PDF水印ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.水印;
+            this.添加PDF水印ToolStripMenuItem.Name = "添加PDF水印ToolStripMenuItem";
+            resources.ApplyResources(this.添加PDF水印ToolStripMenuItem, "添加PDF水印ToolStripMenuItem");
+            this.添加PDF水印ToolStripMenuItem.Click += new System.EventHandler(this.添加PDF水印ToolStripMenuItem_Click);
+            // 
+            // 移除PDF水印ToolStripMenuItem
+            // 
+            this.移除PDF水印ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.去水印;
+            this.移除PDF水印ToolStripMenuItem.Name = "移除PDF水印ToolStripMenuItem";
+            resources.ApplyResources(this.移除PDF水印ToolStripMenuItem, "移除PDF水印ToolStripMenuItem");
+            this.移除PDF水印ToolStripMenuItem.Click += new System.EventHandler(this.移除PDF水印ToolStripMenuItem_Click);
+            // 
+            // pDF版本转换ToolStripMenuItem
+            // 
+            this.pDF版本转换ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.pdf;
+            this.pDF版本转换ToolStripMenuItem.Name = "pDF版本转换ToolStripMenuItem";
+            resources.ApplyResources(this.pDF版本转换ToolStripMenuItem, "pDF版本转换ToolStripMenuItem");
+            this.pDF版本转换ToolStripMenuItem.Click += new System.EventHandler(this.pDF版本转换ToolStripMenuItem_Click);
             // 
             // ePUB功能ToolStripMenuItem
             // 
@@ -6490,7 +7082,8 @@
             this.简易二维码生成ToolStripMenuItem,
             this.随机身份证号码生成ToolStripMenuItem,
             this.文件副本生成ToolStripMenuItem,
-            this.网卡设置ToolStripMenuItem});
+            this.网卡设置ToolStripMenuItem,
+            this.选举报告单样式生成ToolStripMenuItem});
             this.sYX功能ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.云;
             this.sYX功能ToolStripMenuItem.Name = "sYX功能ToolStripMenuItem";
             resources.ApplyResources(this.sYX功能ToolStripMenuItem, "sYX功能ToolStripMenuItem");
@@ -6551,6 +7144,13 @@
             resources.ApplyResources(this.网卡设置ToolStripMenuItem, "网卡设置ToolStripMenuItem");
             this.网卡设置ToolStripMenuItem.Click += new System.EventHandler(this.网卡设置ToolStripMenuItem_Click);
             // 
+            // 选举报告单样式生成ToolStripMenuItem
+            // 
+            this.选举报告单样式生成ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.报告单;
+            this.选举报告单样式生成ToolStripMenuItem.Name = "选举报告单样式生成ToolStripMenuItem";
+            resources.ApplyResources(this.选举报告单样式生成ToolStripMenuItem, "选举报告单样式生成ToolStripMenuItem");
+            this.选举报告单样式生成ToolStripMenuItem.Click += new System.EventHandler(this.选举报告单样式生成ToolStripMenuItem_Click);
+            // 
             // 其他功能ToolStripMenuItem
             // 
             this.其他功能ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.其他单据;
@@ -6582,7 +7182,9 @@
             this.menu_listview_height,
             this.menu_listview_gridline,
             this.toolStripMenuItem1,
+            this.界面大小设置ToolStripMenuItem,
             this.查看标签索引对照表ToolStripMenuItem,
+            this.初始化配置文件ToolStripMenuItem,
             this.保存设置并重启软件ToolStripMenuItem});
             this.软件设置ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.系统;
             this.软件设置ToolStripMenuItem.Name = "软件设置ToolStripMenuItem";
@@ -6679,12 +7281,54 @@
             resources.ApplyResources(this.menu_chrome_path, "menu_chrome_path");
             this.menu_chrome_path.Name = "menu_chrome_path";
             // 
+            // 界面大小设置ToolStripMenuItem
+            // 
+            this.界面大小设置ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.设置界面宽度ToolStripMenuItem,
+            this.设置界面高度ToolStripMenuItem});
+            this.界面大小设置ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.ＧＵＩ界面设计;
+            this.界面大小设置ToolStripMenuItem.Name = "界面大小设置ToolStripMenuItem";
+            resources.ApplyResources(this.界面大小设置ToolStripMenuItem, "界面大小设置ToolStripMenuItem");
+            // 
+            // 设置界面宽度ToolStripMenuItem
+            // 
+            this.设置界面宽度ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bodyform_width});
+            this.设置界面宽度ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.宽度;
+            this.设置界面宽度ToolStripMenuItem.Name = "设置界面宽度ToolStripMenuItem";
+            resources.ApplyResources(this.设置界面宽度ToolStripMenuItem, "设置界面宽度ToolStripMenuItem");
+            // 
+            // bodyform_width
+            // 
+            resources.ApplyResources(this.bodyform_width, "bodyform_width");
+            this.bodyform_width.Name = "bodyform_width";
+            // 
+            // 设置界面高度ToolStripMenuItem
+            // 
+            this.设置界面高度ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bodyform_height});
+            this.设置界面高度ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.高度;
+            this.设置界面高度ToolStripMenuItem.Name = "设置界面高度ToolStripMenuItem";
+            resources.ApplyResources(this.设置界面高度ToolStripMenuItem, "设置界面高度ToolStripMenuItem");
+            // 
+            // bodyform_height
+            // 
+            resources.ApplyResources(this.bodyform_height, "bodyform_height");
+            this.bodyform_height.Name = "bodyform_height";
+            // 
             // 查看标签索引对照表ToolStripMenuItem
             // 
             this.查看标签索引对照表ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.查看;
             this.查看标签索引对照表ToolStripMenuItem.Name = "查看标签索引对照表ToolStripMenuItem";
             resources.ApplyResources(this.查看标签索引对照表ToolStripMenuItem, "查看标签索引对照表ToolStripMenuItem");
             this.查看标签索引对照表ToolStripMenuItem.Click += new System.EventHandler(this.查看标签索引对照表ToolStripMenuItem_Click);
+            // 
+            // 初始化配置文件ToolStripMenuItem
+            // 
+            this.初始化配置文件ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.系统初始化;
+            this.初始化配置文件ToolStripMenuItem.Name = "初始化配置文件ToolStripMenuItem";
+            resources.ApplyResources(this.初始化配置文件ToolStripMenuItem, "初始化配置文件ToolStripMenuItem");
+            this.初始化配置文件ToolStripMenuItem.Click += new System.EventHandler(this.初始化配置文件ToolStripMenuItem_Click);
             // 
             // 保存设置并重启软件ToolStripMenuItem
             // 
@@ -6722,6 +7366,7 @@
             this.TabPageIcoList.Images.SetKeyName(16, "身份证.png");
             this.TabPageIcoList.Images.SetKeyName(17, "文件.png");
             this.TabPageIcoList.Images.SetKeyName(18, "接口数据.png");
+            this.TabPageIcoList.Images.SetKeyName(19, "报告单.png");
             // 
             // BodyForm
             // 
@@ -6735,6 +7380,7 @@
             this.Name = "BodyForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BodyForm_FormClosing);
             this.Load += new System.EventHandler(this.BodyForm_Load);
+            this.Resize += new System.EventHandler(this.BodyForm_Resize);
             this.MainTabPage.ResumeLayout(false);
             this.TabPage_01.ResumeLayout(false);
             this.TabPage_01.PerformLayout();
@@ -6752,10 +7398,16 @@
             this.TabPage_14.PerformLayout();
             this.TabPage_31.ResumeLayout(false);
             this.TabPage_31.PerformLayout();
+            this.groupBox48.ResumeLayout(false);
+            this.groupBox48.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SplitWord_PageCount)).EndInit();
             this.TabPage_06.ResumeLayout(false);
             this.TabPage_06.PerformLayout();
             this.TabPage_17.ResumeLayout(false);
             this.TabPage_17.PerformLayout();
+            this.groupBox47.ResumeLayout(false);
+            this.groupBox47.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SplitPdf_PerPageCount)).EndInit();
             this.TabPage_18.ResumeLayout(false);
             this.TabPage_18.PerformLayout();
             this.groupBox18.ResumeLayout(false);
@@ -6889,6 +7541,23 @@
             this.groupBox40.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.votedataview)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.VotePicture)).EndInit();
+            this.TabPage_38.ResumeLayout(false);
+            this.groupBox53.ResumeLayout(false);
+            this.groupBox53.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.VoteTableFontSize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.VoteTableHeight)).EndInit();
+            this.报告单生成日期.ResumeLayout(false);
+            this.报告单生成日期.PerformLayout();
+            this.报告单结束语.ResumeLayout(false);
+            this.报告单结束语.PerformLayout();
+            this.groupBox52.ResumeLayout(false);
+            this.groupBox52.PerformLayout();
+            this.groupBox51.ResumeLayout(false);
+            this.groupBox51.PerformLayout();
+            this.groupBox50.ResumeLayout(false);
+            this.groupBox50.PerformLayout();
+            this.groupBox49.ResumeLayout(false);
+            this.groupBox49.PerformLayout();
             this.TabPage_36.ResumeLayout(false);
             this.groupBox46.ResumeLayout(false);
             this.groupBox46.PerformLayout();
@@ -7725,6 +8394,78 @@
         private System.Windows.Forms.TextBox money_big;
         private System.Windows.Forms.Button DontateMe;
         private System.Windows.Forms.Button DisableAdminBehavior;
+        private System.Windows.Forms.ToolStripMenuItem 移除PDF水印ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 添加PDF水印ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pDF版本转换ToolStripMenuItem;
+        internal System.Windows.Forms.CheckBox EmbedFonts;
+        private System.Windows.Forms.ToolStripMenuItem 界面大小设置ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 设置界面宽度ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripTextBox bodyform_width;
+        private System.Windows.Forms.ToolStripMenuItem 设置界面高度ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripTextBox bodyform_height;
+        private System.Windows.Forms.GroupBox groupBox47;
+        private System.Windows.Forms.Label label132;
+        private System.Windows.Forms.Label label133;
+        private System.Windows.Forms.Label label134;
+        internal System.Windows.Forms.TextBox SplitPdfRange_Start;
+        internal System.Windows.Forms.TextBox SplitPdfRange_End;
+        internal System.Windows.Forms.RadioButton SplitPdf_Single;
+        internal System.Windows.Forms.RadioButton SplitPdf_Range;
+        private System.Windows.Forms.CheckBox MarkDupName;
+        private System.Windows.Forms.ComboBox NameMarkColor;
+        private System.Windows.Forms.ToolStripMenuItem 初始化配置文件ToolStripMenuItem;
+        private System.Windows.Forms.GroupBox groupBox48;
+        internal System.Windows.Forms.RadioButton SplitWord_Single;
+        private System.Windows.Forms.Label label135;
+        internal System.Windows.Forms.TextBox SplitWord_Range_End;
+        private System.Windows.Forms.Label label136;
+        internal System.Windows.Forms.TextBox SplitWord_Range_Start;
+        private System.Windows.Forms.Label label137;
+        internal System.Windows.Forms.RadioButton SplitWord_Range;
+        private System.Windows.Forms.TabPage TabPage_38;
+        private System.Windows.Forms.Button VoteTable_Render;
+        private System.Windows.Forms.GroupBox groupBox49;
+        private System.Windows.Forms.TextBox VoteTable_Name;
+        private System.Windows.Forms.Label label138;
+        private System.Windows.Forms.TextBox VoteTable_UnAgree;
+        private System.Windows.Forms.Label label140;
+        private System.Windows.Forms.TextBox VoteTable_Agree;
+        private System.Windows.Forms.Label label139;
+        private System.Windows.Forms.TextBox VoteTable_Abdon;
+        private System.Windows.Forms.Label label141;
+        private System.Windows.Forms.GroupBox groupBox50;
+        private System.Windows.Forms.RichTextBox VoteTable_Names;
+        private System.Windows.Forms.GroupBox groupBox51;
+        private System.Windows.Forms.TextBox VoteTable_Title;
+        private System.Windows.Forms.GroupBox groupBox52;
+        private System.Windows.Forms.TextBox VoteTable_Start;
+        private System.Windows.Forms.GroupBox 报告单结束语;
+        private System.Windows.Forms.TextBox VoteTable_End;
+        private System.Windows.Forms.GroupBox 报告单生成日期;
+        private System.Windows.Forms.TextBox VoteTable_GenDate;
+        private System.Windows.Forms.Button VoteTableHelpDate;
+        private System.Windows.Forms.Label label142;
+        private System.Windows.Forms.ToolStripMenuItem 选举报告单样式生成ToolStripMenuItem;
+        private System.Windows.Forms.CheckBox VoteTable_Random_PageCounts;
+        private System.Windows.Forms.GroupBox groupBox53;
+        private System.Windows.Forms.Label label143;
+        private System.Windows.Forms.Label label144;
+        internal System.Windows.Forms.NumericUpDown SplitPdf_PerPageCount;
+        private System.Windows.Forms.Label label145;
+        private System.Windows.Forms.Label label146;
+        internal System.Windows.Forms.NumericUpDown SplitWord_PageCount;
+        private System.Windows.Forms.Label VoteTableName_CountText;
+        private System.Windows.Forms.Label label147;
+        internal System.Windows.Forms.TextBox WORD2PDF_LoadPassword;
+        private System.Windows.Forms.Label label148;
+        internal System.Windows.Forms.TextBox PDF2WORD_LoadPassword;
+        private System.Windows.Forms.Label label149;
+        private System.Windows.Forms.NumericUpDown VoteTableHeight;
+        private System.Windows.Forms.Label label150;
+        private System.Windows.Forms.Label label151;
+        private System.Windows.Forms.NumericUpDown VoteTableFontSize;
+        private System.Windows.Forms.CheckBox VoteTable_KeepPageFooter;
+        private System.Windows.Forms.CheckBox VoteTable_NumberIndex_Keep;
     }
 }
 

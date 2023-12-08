@@ -295,7 +295,7 @@ namespace DocumentTools
 
         public static void AddDataMattixWordFiles()
         {
-            AddFilesToListView("WORD文档", "*.doc;*.docx", BodyForm.MainForm.DecodeMatrixWordListView);
+            AddFilesToListView("WORD文档|PDF文档", "*.doc;*.docx;*.pdf", BodyForm.MainForm.DecodeMatrixWordListView);
         }
 
         public static void AddIcoConvertFiles()
@@ -433,11 +433,14 @@ namespace DocumentTools
 
                                 object SelectedPdfCompliance = Enum.Parse(typeof(Aspose.Words.Saving.PdfCompliance), BodyForm.MainForm.PDFComplianceBox.SelectedItem.ToString());
 
-                                Util.ConvertWord2Pdf(ListViewFirstColumnText, ConvertedFileName, TempSaveDocxPathString, (Aspose.Words.Saving.PdfCompliance)SelectedPdfCompliance, (Aspose.Words.Settings.MsWordVersion)Enum.Parse(typeof(Aspose.Words.Settings.MsWordVersion), BodyForm.MainForm.Word2PDFOptimizCombox.SelectedItem.ToString()), BodyForm.MainForm.word2pdf_need_update_fields.Checked,(Aspose.Words.Saving.ColorMode)Enum.Parse(typeof(Aspose.Words.Saving.ColorMode),BodyForm.MainForm.word2pdf_colorMode.SelectedValue.ToString()));
+                                Util.ConvertWord2Pdf(ListViewFirstColumnText, ConvertedFileName, TempSaveDocxPathString, (Aspose.Words.Saving.PdfCompliance)SelectedPdfCompliance, (Aspose.Words.Settings.MsWordVersion)Enum.Parse(typeof(Aspose.Words.Settings.MsWordVersion), BodyForm.MainForm.Word2PDFOptimizCombox.SelectedItem.ToString()), BodyForm.MainForm.word2pdf_need_update_fields.Checked,(Aspose.Words.Saving.ColorMode)Enum.Parse(typeof(Aspose.Words.Saving.ColorMode),BodyForm.MainForm.word2pdf_colorMode.SelectedValue.ToString()),
+                                    BodyForm.MainForm.EmbedFonts.Checked
+                                    ,BodyForm.MainForm.WORD2PDF_LoadPassword.Text);
                                 break;
                             //pdf转word
                             case ConvertFileType.Pdf2Word:
-                                Util.ConvertPdf2Word(ListViewFirstColumnText, ConvertedFileName, BodyForm.MainForm.PDF2WORD_UseBullet.Checked, BodyForm.MainForm.PDF2WORD_UseSUbOcr.Checked, (Aspose.Pdf.DocSaveOptions.RecognitionMode)Enum.Parse(typeof(Aspose.Pdf.DocSaveOptions.RecognitionMode), BodyForm.MainForm.PDF2WORD_Mode.SelectedValue.ToString()));
+                                Util.ConvertPdf2Word(ListViewFirstColumnText, ConvertedFileName, BodyForm.MainForm.PDF2WORD_UseBullet.Checked, BodyForm.MainForm.PDF2WORD_UseSUbOcr.Checked, (Aspose.Pdf.DocSaveOptions.RecognitionMode)Enum.Parse(typeof(Aspose.Pdf.DocSaveOptions.RecognitionMode), BodyForm.MainForm.PDF2WORD_Mode.SelectedValue.ToString()),
+                                    BodyForm.MainForm.PDF2WORD_LoadPassword.Text);
                                 break;
                             //excel转pdf
                             case ConvertFileType.Excel2Pdf:
@@ -477,7 +480,9 @@ namespace DocumentTools
                                 break;
                             // pdf拆分
                             case ConvertFileType.SplitPdf:
-                                Util.SplitPdf(ListViewFirstColumnText, SelectSavePathstring);
+                                Util.SplitPdf(ListViewFirstColumnText, SelectSavePathstring,BodyForm.MainForm.SplitPdf_Range.Checked,
+                                    BodyForm.MainForm.SplitPdfRange_Start.Text.Trim(),BodyForm.MainForm.SplitPdfRange_End.Text.Trim()
+                                    ,int.Parse(BodyForm.MainForm.SplitPdf_PerPageCount.Value.ToString()));
                                 break;
                             // pdf添加水印
                             case ConvertFileType.AddWaterMarkPdf:
@@ -557,7 +562,8 @@ namespace DocumentTools
                                 Util.ConvertEPUB2Pdf(ListViewFirstColumnText, ConvertedFileName);
                                 break;
                             case ConvertFileType.SplitWord:
-                                Util.SplitWord(ListViewFirstColumnText, SelectSavePathstring);
+                                Util.SplitWord(ListViewFirstColumnText, SelectSavePathstring,BodyForm.MainForm.SplitWord_Single.Checked,BodyForm.MainForm.SplitWord_Range_Start.Text.Trim()
+                                    ,BodyForm.MainForm.SplitWord_Range_End.Text.Trim(),int.Parse(BodyForm.MainForm.SplitWord_PageCount.Value.ToString()));
                                 break;
                             case ConvertFileType.Webp2Image:
                                 Util.ConvertWebp2Image(ListViewFirstColumnText, ConvertedFileName);
@@ -701,7 +707,5 @@ namespace DocumentTools
         {
             return GetListViewLastItemContent(BodyForm.MainForm.PdfFileListView);
         }
-
-
     }
 }
