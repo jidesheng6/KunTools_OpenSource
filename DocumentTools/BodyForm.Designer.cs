@@ -1,4 +1,5 @@
-﻿namespace DocumentTools
+﻿using System.Windows.Forms;
+namespace DocumentTools
 {
     partial class BodyForm
     {
@@ -18,6 +19,16 @@
                 components.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000;
+                return cp;
+            }
         }
 
         #region Windows 窗体设计器生成的代码
@@ -132,6 +143,7 @@
             this.SelectMergeWordFiles = new System.Windows.Forms.Button();
             this.MergeWordFileList = new System.Windows.Forms.ListView();
             this.TabPage_31 = new System.Windows.Forms.TabPage();
+            this.SplitWordReUpdatePageNumber = new System.Windows.Forms.CheckBox();
             this.groupBox48 = new System.Windows.Forms.GroupBox();
             this.label145 = new System.Windows.Forms.Label();
             this.label146 = new System.Windows.Forms.Label();
@@ -152,20 +164,18 @@
             this.SelectSplitWordFiles = new System.Windows.Forms.Button();
             this.SplitWordFileList = new System.Windows.Forms.ListView();
             this.TabPage_06 = new System.Windows.Forms.TabPage();
-            this.MergePdfFileView_MoveDown = new System.Windows.Forms.Button();
-            this.MergePdfFileView_MoveUp = new System.Windows.Forms.Button();
-            this.meregepdf_clear = new System.Windows.Forms.Button();
-            this.meregepdf_remove = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.MeregeFilePage = new System.Windows.Forms.ComboBox();
-            this.PictureMergeMode = new System.Windows.Forms.CheckBox();
             this.OpenMeregePdfFile = new System.Windows.Forms.CheckBox();
             this.MeregePdfFileStatusText = new System.Windows.Forms.Label();
             this.MeregePdfFileButtonConvert = new System.Windows.Forms.Button();
             this.MergePdfFileSelectButton = new System.Windows.Forms.Button();
+            this.MergePdfFileView_MoveDown = new System.Windows.Forms.Button();
+            this.MergePdfFileView_MoveUp = new System.Windows.Forms.Button();
+            this.meregepdf_clear = new System.Windows.Forms.Button();
+            this.meregepdf_remove = new System.Windows.Forms.Button();
             this.MergePdfFileView = new System.Windows.Forms.ListView();
             this.TabPage_17 = new System.Windows.Forms.TabPage();
             this.groupBox47 = new System.Windows.Forms.GroupBox();
+            this.SplitPdf_ByBookMark = new System.Windows.Forms.RadioButton();
             this.label144 = new System.Windows.Forms.Label();
             this.label143 = new System.Windows.Forms.Label();
             this.SplitPdf_PerPageCount = new System.Windows.Forms.NumericUpDown();
@@ -654,8 +664,11 @@
             this.Downloadfx35Progress = new System.Windows.Forms.ProgressBar();
             this.DownloadNetfx35 = new System.Windows.Forms.Button();
             this.TabPage_26 = new System.Windows.Forms.TabPage();
-            this.groupBox28 = new System.Windows.Forms.GroupBox();
-            this.label58 = new System.Windows.Forms.Label();
+            this.blockgroup = new System.Windows.Forms.GroupBox();
+            this.OpenSystemUpdate = new System.Windows.Forms.Button();
+            this.SetPauseTime = new System.Windows.Forms.Button();
+            this.PauseUpdateYears = new System.Windows.Forms.ComboBox();
+            this.label153 = new System.Windows.Forms.Label();
             this.groupBox27 = new System.Windows.Forms.GroupBox();
             this.AutoRestartExplorer = new System.Windows.Forms.CheckBox();
             this.ShortStatus = new System.Windows.Forms.Label();
@@ -667,6 +680,7 @@
             this.LockKeyBoard = new System.Windows.Forms.Button();
             this.TabPage_32 = new System.Windows.Forms.TabPage();
             this.groupBox32 = new System.Windows.Forms.GroupBox();
+            this.linkLabel6 = new System.Windows.Forms.LinkLabel();
             this.groupBox33 = new System.Windows.Forms.GroupBox();
             this.votepageIndexCombox = new System.Windows.Forms.ComboBox();
             this.votepage_type_combox = new System.Windows.Forms.ComboBox();
@@ -687,6 +701,74 @@
             this.SelectMss3 = new System.Windows.Forms.Button();
             this.Mss3Path = new System.Windows.Forms.TextBox();
             this.label75 = new System.Windows.Forms.Label();
+            this.TabPage_39 = new System.Windows.Forms.TabPage();
+            this.pictureBox8 = new System.Windows.Forms.PictureBox();
+            this.label167 = new System.Windows.Forms.Label();
+            this.label166 = new System.Windows.Forms.Label();
+            this.pictureBox7 = new System.Windows.Forms.PictureBox();
+            this.groupx = new System.Windows.Forms.GroupBox();
+            this.SignDocumentProgress = new System.Windows.Forms.ProgressBar();
+            this.groupBox55 = new System.Windows.Forms.GroupBox();
+            this.label163 = new System.Windows.Forms.Label();
+            this.label164 = new System.Windows.Forms.Label();
+            this.SignDocumentFileEndName = new System.Windows.Forms.TextBox();
+            this.label162 = new System.Windows.Forms.Label();
+            this.SignDocumentOnlyUseOnlyImageButton = new System.Windows.Forms.Button();
+            this.SignDocumentOnlyUseOnlyImageTextBox = new System.Windows.Forms.TextBox();
+            this.SignDocumentOnlyUseOnlyImage = new System.Windows.Forms.RadioButton();
+            this.SignDocumentUseOutPersonPathButton = new System.Windows.Forms.Button();
+            this.SignDocumentUseOutPersonPathTextBox = new System.Windows.Forms.TextBox();
+            this.SignDocumentUseOutPersonPath = new System.Windows.Forms.RadioButton();
+            this.SignDocumentUseEmbedImage = new System.Windows.Forms.RadioButton();
+            this.label160 = new System.Windows.Forms.Label();
+            this.SignDocumentNeedCount = new System.Windows.Forms.NumericUpDown();
+            this.SignDocumentReplaceStart = new System.Windows.Forms.Button();
+            this.groupBox58 = new System.Windows.Forms.GroupBox();
+            this.label161 = new System.Windows.Forms.Label();
+            this.SignDocumentFileSaveBox = new System.Windows.Forms.TextBox();
+            this.SignDocumentFileSaveButton = new System.Windows.Forms.Button();
+            this.groupBox54 = new System.Windows.Forms.GroupBox();
+            this.label165 = new System.Windows.Forms.Label();
+            this.SingPersonImageAlt = new System.Windows.Forms.TextBox();
+            this.label159 = new System.Windows.Forms.Label();
+            this.SignPersionDocumentChooseFile = new System.Windows.Forms.Button();
+            this.SignPersionDocument = new System.Windows.Forms.TextBox();
+            this.label152 = new System.Windows.Forms.Label();
+            this.TabPage_40 = new System.Windows.Forms.TabPage();
+            this.linkLabel5 = new System.Windows.Forms.LinkLabel();
+            this.label173 = new System.Windows.Forms.Label();
+            this.groupBox59 = new System.Windows.Forms.GroupBox();
+            this.ExamReportChangeItemDataFormat = new System.Windows.Forms.RadioButton();
+            this.ExamReportChangeItemName = new System.Windows.Forms.RadioButton();
+            this.ExamReportChangeItemDataRaid = new System.Windows.Forms.RadioButton();
+            this.ExamReportChangeProgress = new System.Windows.Forms.ProgressBar();
+            this.ExamReplaceRaids = new System.Windows.Forms.TextBox();
+            this.ExamReplaceDataFormat = new System.Windows.Forms.ComboBox();
+            this.ExamReplaceItemName = new System.Windows.Forms.TextBox();
+            this.label172 = new System.Windows.Forms.Label();
+            this.label171 = new System.Windows.Forms.Label();
+            this.label170 = new System.Windows.Forms.Label();
+            this.ExamReportRaids = new System.Windows.Forms.ComboBox();
+            this.label169 = new System.Windows.Forms.Label();
+            this.label168 = new System.Windows.Forms.Label();
+            this.ExamReportItems = new System.Windows.Forms.ComboBox();
+            this.label158 = new System.Windows.Forms.Label();
+            this.ExamReportDataFormat = new System.Windows.Forms.ComboBox();
+            this.ExamReportChange = new System.Windows.Forms.Button();
+            this.groupBox56 = new System.Windows.Forms.GroupBox();
+            this.ExamRaidsCopy = new System.Windows.Forms.Button();
+            this.ExamRaidInfoCombox = new System.Windows.Forms.ComboBox();
+            this.label157 = new System.Windows.Forms.Label();
+            this.label156 = new System.Windows.Forms.Label();
+            this.label155 = new System.Windows.Forms.Label();
+            this.ExamItemsCombox = new System.Windows.Forms.ComboBox();
+            this.ExamItemsSelectorsCombox = new System.Windows.Forms.ComboBox();
+            this.SelectExamFile = new System.Windows.Forms.Button();
+            this.ExamFileText = new System.Windows.Forms.TextBox();
+            this.label154 = new System.Windows.Forms.Label();
+            this.RefreshVFSOFTREPORT = new System.Windows.Forms.Button();
+            this.groupBox57 = new System.Windows.Forms.GroupBox();
+            this.VFSOFT_Report_ListView = new System.Windows.Forms.ListView();
             this.TabPage_38 = new System.Windows.Forms.TabPage();
             this.groupBox53 = new System.Windows.Forms.GroupBox();
             this.VoteTable_NumberIndex_Keep = new System.Windows.Forms.CheckBox();
@@ -721,6 +803,19 @@
             this.VoteTable_Name = new System.Windows.Forms.TextBox();
             this.label138 = new System.Windows.Forms.Label();
             this.TabPage_36 = new System.Windows.Forms.TabPage();
+            this.groupBox28 = new System.Windows.Forms.GroupBox();
+            this.label176 = new System.Windows.Forms.Label();
+            this.label175 = new System.Windows.Forms.Label();
+            this.GetRandomComputerNameRandLength = new System.Windows.Forms.NumericUpDown();
+            this.GetRandomComputerNameButton = new System.Windows.Forms.Button();
+            this.ExamComputerNameChange = new System.Windows.Forms.Button();
+            this.ExamComputerChangeName = new System.Windows.Forms.TextBox();
+            this.label174 = new System.Windows.Forms.Label();
+            this.ExamComputerNames = new System.Windows.Forms.ComboBox();
+            this.label58 = new System.Windows.Forms.Label();
+            this.ChooseExamFileButton = new System.Windows.Forms.Button();
+            this.ChooseExamFileTextBox = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.groupBox46 = new System.Windows.Forms.GroupBox();
             this.money_big = new System.Windows.Forms.TextBox();
             this.money_small = new System.Windows.Forms.TextBox();
@@ -787,11 +882,6 @@
             this.label111 = new System.Windows.Forms.Label();
             this.label110 = new System.Windows.Forms.Label();
             this.TabPage_08 = new System.Windows.Forms.TabPage();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.PlayCXKMusic = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -875,6 +965,8 @@
             this.文件副本生成ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.网卡设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.选举报告单样式生成ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.单人表生成ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.考评报表修改ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.其他功能ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.系统工具ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.关于软件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -903,6 +995,10 @@
             this.保存设置并重启软件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainToolsTip = new System.Windows.Forms.ToolTip(this.components);
             this.TabPageIcoList = new System.Windows.Forms.ImageList(this.components);
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.pictureBox9 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.MainTabPage.SuspendLayout();
             this.TabPage_01.SuspendLayout();
             this.TabPage_02.SuspendLayout();
@@ -986,7 +1082,7 @@
             this.groupBox16.SuspendLayout();
             this.groupBox15.SuspendLayout();
             this.TabPage_26.SuspendLayout();
-            this.groupBox28.SuspendLayout();
+            this.blockgroup.SuspendLayout();
             this.groupBox27.SuspendLayout();
             this.groupBox26.SuspendLayout();
             this.TabPage_32.SuspendLayout();
@@ -995,6 +1091,18 @@
             this.groupBox40.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.votedataview)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.VotePicture)).BeginInit();
+            this.TabPage_39.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
+            this.groupx.SuspendLayout();
+            this.groupBox55.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SignDocumentNeedCount)).BeginInit();
+            this.groupBox58.SuspendLayout();
+            this.groupBox54.SuspendLayout();
+            this.TabPage_40.SuspendLayout();
+            this.groupBox59.SuspendLayout();
+            this.groupBox56.SuspendLayout();
+            this.groupBox57.SuspendLayout();
             this.TabPage_38.SuspendLayout();
             this.groupBox53.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.VoteTableFontSize)).BeginInit();
@@ -1006,6 +1114,8 @@
             this.groupBox50.SuspendLayout();
             this.groupBox49.SuspendLayout();
             this.TabPage_36.SuspendLayout();
+            this.groupBox28.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.GetRandomComputerNameRandLength)).BeginInit();
             this.groupBox46.SuspendLayout();
             this.groupBox43.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Gen_Copied_Number)).BeginInit();
@@ -1013,11 +1123,6 @@
             this.groupBox45.SuspendLayout();
             this.groupBox44.SuspendLayout();
             this.TabPage_08.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox3.SuspendLayout();
@@ -1025,11 +1130,14 @@
             this.TreeViewContentMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainFormError)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
             // MainTabPage
             // 
-            resources.ApplyResources(this.MainTabPage, "MainTabPage");
             this.MainTabPage.Controls.Add(this.TabPage_01);
             this.MainTabPage.Controls.Add(this.TabPage_02);
             this.MainTabPage.Controls.Add(this.TabPage_03);
@@ -1064,10 +1172,13 @@
             this.MainTabPage.Controls.Add(this.TabPage_13);
             this.MainTabPage.Controls.Add(this.TabPage_26);
             this.MainTabPage.Controls.Add(this.TabPage_32);
+            this.MainTabPage.Controls.Add(this.TabPage_39);
+            this.MainTabPage.Controls.Add(this.TabPage_40);
             this.MainTabPage.Controls.Add(this.TabPage_38);
             this.MainTabPage.Controls.Add(this.TabPage_36);
             this.MainTabPage.Controls.Add(this.TabPage_37);
             this.MainTabPage.Controls.Add(this.TabPage_08);
+            resources.ApplyResources(this.MainTabPage, "MainTabPage");
             this.MainTabPage.Multiline = true;
             this.MainTabPage.Name = "MainTabPage";
             this.MainTabPage.SelectedIndex = 0;
@@ -1121,8 +1232,8 @@
             // 
             // word2pdf_colorMode
             // 
-            resources.ApplyResources(this.word2pdf_colorMode, "word2pdf_colorMode");
             this.word2pdf_colorMode.FormattingEnabled = true;
+            resources.ApplyResources(this.word2pdf_colorMode, "word2pdf_colorMode");
             this.word2pdf_colorMode.Name = "word2pdf_colorMode";
             // 
             // label125
@@ -1144,8 +1255,8 @@
             // 
             // Word2PDFOptimizCombox
             // 
-            resources.ApplyResources(this.Word2PDFOptimizCombox, "Word2PDFOptimizCombox");
             this.Word2PDFOptimizCombox.FormattingEnabled = true;
+            resources.ApplyResources(this.Word2PDFOptimizCombox, "Word2PDFOptimizCombox");
             this.Word2PDFOptimizCombox.Name = "Word2PDFOptimizCombox";
             // 
             // label62
@@ -1155,15 +1266,15 @@
             // 
             // word2pdf_clear
             // 
-            resources.ApplyResources(this.word2pdf_clear, "word2pdf_clear");
             this.word2pdf_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            resources.ApplyResources(this.word2pdf_clear, "word2pdf_clear");
             this.word2pdf_clear.Name = "word2pdf_clear";
             this.word2pdf_clear.UseVisualStyleBackColor = true;
             // 
             // word2pdf_remove
             // 
-            resources.ApplyResources(this.word2pdf_remove, "word2pdf_remove");
             this.word2pdf_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            resources.ApplyResources(this.word2pdf_remove, "word2pdf_remove");
             this.word2pdf_remove.Name = "word2pdf_remove";
             this.word2pdf_remove.UseVisualStyleBackColor = true;
             // 
@@ -1186,8 +1297,8 @@
             // 
             // PDFComplianceBox
             // 
-            resources.ApplyResources(this.PDFComplianceBox, "PDFComplianceBox");
             this.PDFComplianceBox.FormattingEnabled = true;
+            resources.ApplyResources(this.PDFComplianceBox, "PDFComplianceBox");
             this.PDFComplianceBox.Name = "PDFComplianceBox";
             // 
             // RemoveTempDocx
@@ -1224,8 +1335,8 @@
             // 
             // WordFileListView
             // 
-            resources.ApplyResources(this.WordFileListView, "WordFileListView");
             this.WordFileListView.HideSelection = false;
+            resources.ApplyResources(this.WordFileListView, "WordFileListView");
             this.WordFileListView.Name = "WordFileListView";
             this.WordFileListView.UseCompatibleStateImageBehavior = false;
             this.WordFileListView.View = System.Windows.Forms.View.List;
@@ -1277,21 +1388,21 @@
             // 
             // PDF2WORD_Mode
             // 
-            resources.ApplyResources(this.PDF2WORD_Mode, "PDF2WORD_Mode");
             this.PDF2WORD_Mode.FormattingEnabled = true;
+            resources.ApplyResources(this.PDF2WORD_Mode, "PDF2WORD_Mode");
             this.PDF2WORD_Mode.Name = "PDF2WORD_Mode";
             // 
             // pdf2word_clear
             // 
-            resources.ApplyResources(this.pdf2word_clear, "pdf2word_clear");
             this.pdf2word_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            resources.ApplyResources(this.pdf2word_clear, "pdf2word_clear");
             this.pdf2word_clear.Name = "pdf2word_clear";
             this.pdf2word_clear.UseVisualStyleBackColor = true;
             // 
             // pdf2word_remove
             // 
-            resources.ApplyResources(this.pdf2word_remove, "pdf2word_remove");
             this.pdf2word_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            resources.ApplyResources(this.pdf2word_remove, "pdf2word_remove");
             this.pdf2word_remove.Name = "pdf2word_remove";
             this.pdf2word_remove.UseVisualStyleBackColor = true;
             // 
@@ -1352,8 +1463,8 @@
             // 
             // PdfFileListView
             // 
-            resources.ApplyResources(this.PdfFileListView, "PdfFileListView");
             this.PdfFileListView.HideSelection = false;
+            resources.ApplyResources(this.PdfFileListView, "PdfFileListView");
             this.PdfFileListView.Name = "PdfFileListView";
             this.PdfFileListView.UseCompatibleStateImageBehavior = false;
             // 
@@ -1386,15 +1497,15 @@
             // 
             // excel2pdf_clear
             // 
-            resources.ApplyResources(this.excel2pdf_clear, "excel2pdf_clear");
             this.excel2pdf_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            resources.ApplyResources(this.excel2pdf_clear, "excel2pdf_clear");
             this.excel2pdf_clear.Name = "excel2pdf_clear";
             this.excel2pdf_clear.UseVisualStyleBackColor = true;
             // 
             // excel2pdf_remove
             // 
-            resources.ApplyResources(this.excel2pdf_remove, "excel2pdf_remove");
             this.excel2pdf_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            resources.ApplyResources(this.excel2pdf_remove, "excel2pdf_remove");
             this.excel2pdf_remove.Name = "excel2pdf_remove";
             this.excel2pdf_remove.UseVisualStyleBackColor = true;
             // 
@@ -1426,8 +1537,8 @@
             // 
             // ExcelFileListView
             // 
-            resources.ApplyResources(this.ExcelFileListView, "ExcelFileListView");
             this.ExcelFileListView.HideSelection = false;
+            resources.ApplyResources(this.ExcelFileListView, "ExcelFileListView");
             this.ExcelFileListView.Name = "ExcelFileListView";
             this.ExcelFileListView.UseCompatibleStateImageBehavior = false;
             // 
@@ -1460,15 +1571,15 @@
             // 
             // pdf2excel_clear
             // 
-            resources.ApplyResources(this.pdf2excel_clear, "pdf2excel_clear");
             this.pdf2excel_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            resources.ApplyResources(this.pdf2excel_clear, "pdf2excel_clear");
             this.pdf2excel_clear.Name = "pdf2excel_clear";
             this.pdf2excel_clear.UseVisualStyleBackColor = true;
             // 
             // pdf2excel_remove
             // 
-            resources.ApplyResources(this.pdf2excel_remove, "pdf2excel_remove");
             this.pdf2excel_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            resources.ApplyResources(this.pdf2excel_remove, "pdf2excel_remove");
             this.pdf2excel_remove.Name = "pdf2excel_remove";
             this.pdf2excel_remove.UseVisualStyleBackColor = true;
             // 
@@ -1500,8 +1611,8 @@
             // 
             // PDF2ExcelFileView
             // 
-            resources.ApplyResources(this.PDF2ExcelFileView, "PDF2ExcelFileView");
             this.PDF2ExcelFileView.HideSelection = false;
+            resources.ApplyResources(this.PDF2ExcelFileView, "PDF2ExcelFileView");
             this.PDF2ExcelFileView.Name = "PDF2ExcelFileView";
             this.PDF2ExcelFileView.UseCompatibleStateImageBehavior = false;
             // 
@@ -1547,15 +1658,15 @@
             // 
             // ppt2pdf_clear
             // 
-            resources.ApplyResources(this.ppt2pdf_clear, "ppt2pdf_clear");
             this.ppt2pdf_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            resources.ApplyResources(this.ppt2pdf_clear, "ppt2pdf_clear");
             this.ppt2pdf_clear.Name = "ppt2pdf_clear";
             this.ppt2pdf_clear.UseVisualStyleBackColor = true;
             // 
             // ppt2pdf_remove
             // 
-            resources.ApplyResources(this.ppt2pdf_remove, "ppt2pdf_remove");
             this.ppt2pdf_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            resources.ApplyResources(this.ppt2pdf_remove, "ppt2pdf_remove");
             this.ppt2pdf_remove.Name = "ppt2pdf_remove";
             this.ppt2pdf_remove.UseVisualStyleBackColor = true;
             // 
@@ -1582,8 +1693,8 @@
             // 
             // ExportNotePageCombox
             // 
-            resources.ApplyResources(this.ExportNotePageCombox, "ExportNotePageCombox");
             this.ExportNotePageCombox.FormattingEnabled = true;
+            resources.ApplyResources(this.ExportNotePageCombox, "ExportNotePageCombox");
             this.ExportNotePageCombox.Name = "ExportNotePageCombox";
             // 
             // DrawBlackLine
@@ -1620,8 +1731,8 @@
             // 
             // PPT2PdfFileList
             // 
-            resources.ApplyResources(this.PPT2PdfFileList, "PPT2PdfFileList");
             this.PPT2PdfFileList.HideSelection = false;
+            resources.ApplyResources(this.PPT2PdfFileList, "PPT2PdfFileList");
             this.PPT2PdfFileList.Name = "PPT2PdfFileList";
             this.PPT2PdfFileList.UseCompatibleStateImageBehavior = false;
             // 
@@ -1663,15 +1774,15 @@
             // 
             // pdf2ppt_clear
             // 
-            resources.ApplyResources(this.pdf2ppt_clear, "pdf2ppt_clear");
             this.pdf2ppt_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            resources.ApplyResources(this.pdf2ppt_clear, "pdf2ppt_clear");
             this.pdf2ppt_clear.Name = "pdf2ppt_clear";
             this.pdf2ppt_clear.UseVisualStyleBackColor = true;
             // 
             // pdf2ppt_remove
             // 
-            resources.ApplyResources(this.pdf2ppt_remove, "pdf2ppt_remove");
             this.pdf2ppt_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            resources.ApplyResources(this.pdf2ppt_remove, "pdf2ppt_remove");
             this.pdf2ppt_remove.Name = "pdf2ppt_remove";
             this.pdf2ppt_remove.UseVisualStyleBackColor = true;
             // 
@@ -1716,8 +1827,8 @@
             // 
             // PDF2PPTFileList
             // 
-            resources.ApplyResources(this.PDF2PPTFileList, "PDF2PPTFileList");
             this.PDF2PPTFileList.HideSelection = false;
+            resources.ApplyResources(this.PDF2PPTFileList, "PDF2PPTFileList");
             this.PDF2PPTFileList.Name = "PDF2PPTFileList";
             this.PDF2PPTFileList.UseCompatibleStateImageBehavior = false;
             // 
@@ -1750,15 +1861,15 @@
             // 
             // meregeword_clear
             // 
-            resources.ApplyResources(this.meregeword_clear, "meregeword_clear");
             this.meregeword_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            resources.ApplyResources(this.meregeword_clear, "meregeword_clear");
             this.meregeword_clear.Name = "meregeword_clear";
             this.meregeword_clear.UseVisualStyleBackColor = true;
             // 
             // meregeword_remove
             // 
-            resources.ApplyResources(this.meregeword_remove, "meregeword_remove");
             this.meregeword_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            resources.ApplyResources(this.meregeword_remove, "meregeword_remove");
             this.meregeword_remove.Name = "meregeword_remove";
             this.meregeword_remove.UseVisualStyleBackColor = true;
             // 
@@ -1790,13 +1901,14 @@
             // 
             // MergeWordFileList
             // 
-            resources.ApplyResources(this.MergeWordFileList, "MergeWordFileList");
             this.MergeWordFileList.HideSelection = false;
+            resources.ApplyResources(this.MergeWordFileList, "MergeWordFileList");
             this.MergeWordFileList.Name = "MergeWordFileList";
             this.MergeWordFileList.UseCompatibleStateImageBehavior = false;
             // 
             // TabPage_31
             // 
+            this.TabPage_31.Controls.Add(this.SplitWordReUpdatePageNumber);
             this.TabPage_31.Controls.Add(this.groupBox48);
             this.TabPage_31.Controls.Add(this.SplitWordFileList_MoveDown);
             this.TabPage_31.Controls.Add(this.SplitWordFileList_MoveUp);
@@ -1810,9 +1922,14 @@
             this.TabPage_31.Name = "TabPage_31";
             this.TabPage_31.UseVisualStyleBackColor = true;
             // 
+            // SplitWordReUpdatePageNumber
+            // 
+            resources.ApplyResources(this.SplitWordReUpdatePageNumber, "SplitWordReUpdatePageNumber");
+            this.SplitWordReUpdatePageNumber.Name = "SplitWordReUpdatePageNumber";
+            this.SplitWordReUpdatePageNumber.UseVisualStyleBackColor = true;
+            // 
             // groupBox48
             // 
-            resources.ApplyResources(this.groupBox48, "groupBox48");
             this.groupBox48.Controls.Add(this.label145);
             this.groupBox48.Controls.Add(this.label146);
             this.groupBox48.Controls.Add(this.SplitWord_PageCount);
@@ -1823,6 +1940,7 @@
             this.groupBox48.Controls.Add(this.SplitWord_Range_Start);
             this.groupBox48.Controls.Add(this.label137);
             this.groupBox48.Controls.Add(this.SplitWord_Range);
+            resources.ApplyResources(this.groupBox48, "groupBox48");
             this.groupBox48.Name = "groupBox48";
             this.groupBox48.TabStop = false;
             // 
@@ -1909,15 +2027,15 @@
             // 
             // splitword_clear
             // 
-            resources.ApplyResources(this.splitword_clear, "splitword_clear");
             this.splitword_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            resources.ApplyResources(this.splitword_clear, "splitword_clear");
             this.splitword_clear.Name = "splitword_clear";
             this.splitword_clear.UseVisualStyleBackColor = true;
             // 
             // splitword_remove
             // 
-            resources.ApplyResources(this.splitword_remove, "splitword_remove");
             this.splitword_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            resources.ApplyResources(this.splitword_remove, "splitword_remove");
             this.splitword_remove.Name = "splitword_remove";
             this.splitword_remove.UseVisualStyleBackColor = true;
             // 
@@ -1943,71 +2061,25 @@
             // 
             // SplitWordFileList
             // 
-            resources.ApplyResources(this.SplitWordFileList, "SplitWordFileList");
             this.SplitWordFileList.HideSelection = false;
+            resources.ApplyResources(this.SplitWordFileList, "SplitWordFileList");
             this.SplitWordFileList.Name = "SplitWordFileList";
             this.SplitWordFileList.UseCompatibleStateImageBehavior = false;
             // 
             // TabPage_06
             // 
-            this.TabPage_06.Controls.Add(this.MergePdfFileView_MoveDown);
-            this.TabPage_06.Controls.Add(this.MergePdfFileView_MoveUp);
-            this.TabPage_06.Controls.Add(this.meregepdf_clear);
-            this.TabPage_06.Controls.Add(this.meregepdf_remove);
-            this.TabPage_06.Controls.Add(this.label5);
-            this.TabPage_06.Controls.Add(this.MeregeFilePage);
-            this.TabPage_06.Controls.Add(this.PictureMergeMode);
             this.TabPage_06.Controls.Add(this.OpenMeregePdfFile);
             this.TabPage_06.Controls.Add(this.MeregePdfFileStatusText);
             this.TabPage_06.Controls.Add(this.MeregePdfFileButtonConvert);
             this.TabPage_06.Controls.Add(this.MergePdfFileSelectButton);
+            this.TabPage_06.Controls.Add(this.MergePdfFileView_MoveDown);
+            this.TabPage_06.Controls.Add(this.MergePdfFileView_MoveUp);
+            this.TabPage_06.Controls.Add(this.meregepdf_clear);
+            this.TabPage_06.Controls.Add(this.meregepdf_remove);
             this.TabPage_06.Controls.Add(this.MergePdfFileView);
             resources.ApplyResources(this.TabPage_06, "TabPage_06");
             this.TabPage_06.Name = "TabPage_06";
             this.TabPage_06.UseVisualStyleBackColor = true;
-            // 
-            // MergePdfFileView_MoveDown
-            // 
-            resources.ApplyResources(this.MergePdfFileView_MoveDown, "MergePdfFileView_MoveDown");
-            this.MergePdfFileView_MoveDown.Name = "MergePdfFileView_MoveDown";
-            this.MergePdfFileView_MoveDown.UseVisualStyleBackColor = true;
-            // 
-            // MergePdfFileView_MoveUp
-            // 
-            resources.ApplyResources(this.MergePdfFileView_MoveUp, "MergePdfFileView_MoveUp");
-            this.MergePdfFileView_MoveUp.Name = "MergePdfFileView_MoveUp";
-            this.MergePdfFileView_MoveUp.UseVisualStyleBackColor = true;
-            // 
-            // meregepdf_clear
-            // 
-            resources.ApplyResources(this.meregepdf_clear, "meregepdf_clear");
-            this.meregepdf_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
-            this.meregepdf_clear.Name = "meregepdf_clear";
-            this.meregepdf_clear.UseVisualStyleBackColor = true;
-            // 
-            // meregepdf_remove
-            // 
-            resources.ApplyResources(this.meregepdf_remove, "meregepdf_remove");
-            this.meregepdf_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
-            this.meregepdf_remove.Name = "meregepdf_remove";
-            this.meregepdf_remove.UseVisualStyleBackColor = true;
-            // 
-            // label5
-            // 
-            resources.ApplyResources(this.label5, "label5");
-            this.label5.Name = "label5";
-            // 
-            // MeregeFilePage
-            // 
-            resources.ApplyResources(this.MeregeFilePage, "MeregeFilePage");
-            this.MeregeFilePage.FormattingEnabled = true;
-            this.MeregeFilePage.Name = "MeregeFilePage";
-            // 
-            // PictureMergeMode
-            // 
-            resources.ApplyResources(this.PictureMergeMode, "PictureMergeMode");
-            this.PictureMergeMode.Name = "PictureMergeMode";
-            this.PictureMergeMode.UseVisualStyleBackColor = true;
             // 
             // OpenMeregePdfFile
             // 
@@ -2035,10 +2107,36 @@
             this.MergePdfFileSelectButton.UseVisualStyleBackColor = true;
             this.MergePdfFileSelectButton.Click += new System.EventHandler(this.MergePdfFileSelectButton_Click);
             // 
+            // MergePdfFileView_MoveDown
+            // 
+            resources.ApplyResources(this.MergePdfFileView_MoveDown, "MergePdfFileView_MoveDown");
+            this.MergePdfFileView_MoveDown.Name = "MergePdfFileView_MoveDown";
+            this.MergePdfFileView_MoveDown.UseVisualStyleBackColor = true;
+            // 
+            // MergePdfFileView_MoveUp
+            // 
+            resources.ApplyResources(this.MergePdfFileView_MoveUp, "MergePdfFileView_MoveUp");
+            this.MergePdfFileView_MoveUp.Name = "MergePdfFileView_MoveUp";
+            this.MergePdfFileView_MoveUp.UseVisualStyleBackColor = true;
+            // 
+            // meregepdf_clear
+            // 
+            this.meregepdf_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            resources.ApplyResources(this.meregepdf_clear, "meregepdf_clear");
+            this.meregepdf_clear.Name = "meregepdf_clear";
+            this.meregepdf_clear.UseVisualStyleBackColor = true;
+            // 
+            // meregepdf_remove
+            // 
+            this.meregepdf_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            resources.ApplyResources(this.meregepdf_remove, "meregepdf_remove");
+            this.meregepdf_remove.Name = "meregepdf_remove";
+            this.meregepdf_remove.UseVisualStyleBackColor = true;
+            // 
             // MergePdfFileView
             // 
-            resources.ApplyResources(this.MergePdfFileView, "MergePdfFileView");
             this.MergePdfFileView.HideSelection = false;
+            resources.ApplyResources(this.MergePdfFileView, "MergePdfFileView");
             this.MergePdfFileView.Name = "MergePdfFileView";
             this.MergePdfFileView.UseCompatibleStateImageBehavior = false;
             // 
@@ -2059,7 +2157,7 @@
             // 
             // groupBox47
             // 
-            resources.ApplyResources(this.groupBox47, "groupBox47");
+            this.groupBox47.Controls.Add(this.SplitPdf_ByBookMark);
             this.groupBox47.Controls.Add(this.label144);
             this.groupBox47.Controls.Add(this.label143);
             this.groupBox47.Controls.Add(this.SplitPdf_PerPageCount);
@@ -2070,8 +2168,15 @@
             this.groupBox47.Controls.Add(this.SplitPdfRange_Start);
             this.groupBox47.Controls.Add(this.label132);
             this.groupBox47.Controls.Add(this.SplitPdf_Range);
+            resources.ApplyResources(this.groupBox47, "groupBox47");
             this.groupBox47.Name = "groupBox47";
             this.groupBox47.TabStop = false;
+            // 
+            // SplitPdf_ByBookMark
+            // 
+            resources.ApplyResources(this.SplitPdf_ByBookMark, "SplitPdf_ByBookMark");
+            this.SplitPdf_ByBookMark.Name = "SplitPdf_ByBookMark";
+            this.SplitPdf_ByBookMark.UseVisualStyleBackColor = true;
             // 
             // label144
             // 
@@ -2156,15 +2261,15 @@
             // 
             // sqplitpdf_clear
             // 
-            resources.ApplyResources(this.sqplitpdf_clear, "sqplitpdf_clear");
             this.sqplitpdf_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            resources.ApplyResources(this.sqplitpdf_clear, "sqplitpdf_clear");
             this.sqplitpdf_clear.Name = "sqplitpdf_clear";
             this.sqplitpdf_clear.UseVisualStyleBackColor = true;
             // 
             // sqplitpdf_remove
             // 
-            resources.ApplyResources(this.sqplitpdf_remove, "sqplitpdf_remove");
             this.sqplitpdf_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            resources.ApplyResources(this.sqplitpdf_remove, "sqplitpdf_remove");
             this.sqplitpdf_remove.Name = "sqplitpdf_remove";
             this.sqplitpdf_remove.UseVisualStyleBackColor = true;
             // 
@@ -2190,8 +2295,8 @@
             // 
             // SplitPdfFileList
             // 
-            resources.ApplyResources(this.SplitPdfFileList, "SplitPdfFileList");
             this.SplitPdfFileList.HideSelection = false;
+            resources.ApplyResources(this.SplitPdfFileList, "SplitPdfFileList");
             this.SplitPdfFileList.Name = "SplitPdfFileList";
             this.SplitPdfFileList.UseCompatibleStateImageBehavior = false;
             // 
@@ -2225,15 +2330,15 @@
             // 
             // addpdfwater_clear
             // 
-            resources.ApplyResources(this.addpdfwater_clear, "addpdfwater_clear");
             this.addpdfwater_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            resources.ApplyResources(this.addpdfwater_clear, "addpdfwater_clear");
             this.addpdfwater_clear.Name = "addpdfwater_clear";
             this.addpdfwater_clear.UseVisualStyleBackColor = true;
             // 
             // addpdfwater_remove
             // 
-            resources.ApplyResources(this.addpdfwater_remove, "addpdfwater_remove");
             this.addpdfwater_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            resources.ApplyResources(this.addpdfwater_remove, "addpdfwater_remove");
             this.addpdfwater_remove.Name = "addpdfwater_remove";
             this.addpdfwater_remove.UseVisualStyleBackColor = true;
             // 
@@ -2265,7 +2370,6 @@
             // 
             // groupBox18
             // 
-            resources.ApplyResources(this.groupBox18, "groupBox18");
             this.groupBox18.Controls.Add(this.label33);
             this.groupBox18.Controls.Add(this.label32);
             this.groupBox18.Controls.Add(this.WaterMarkImageWidth);
@@ -2286,6 +2390,7 @@
             this.groupBox18.Controls.Add(this.label26);
             this.groupBox18.Controls.Add(this.label25);
             this.groupBox18.Controls.Add(this.PdfWaterMarkText);
+            resources.ApplyResources(this.groupBox18, "groupBox18");
             this.groupBox18.Name = "groupBox18";
             this.groupBox18.TabStop = false;
             // 
@@ -2402,8 +2507,8 @@
             // 
             // PdfWaterMarkFileList
             // 
-            resources.ApplyResources(this.PdfWaterMarkFileList, "PdfWaterMarkFileList");
             this.PdfWaterMarkFileList.HideSelection = false;
+            resources.ApplyResources(this.PdfWaterMarkFileList, "PdfWaterMarkFileList");
             this.PdfWaterMarkFileList.Name = "PdfWaterMarkFileList";
             this.PdfWaterMarkFileList.UseCompatibleStateImageBehavior = false;
             // 
@@ -2435,15 +2540,15 @@
             // 
             // removepdfwater_clear
             // 
-            resources.ApplyResources(this.removepdfwater_clear, "removepdfwater_clear");
             this.removepdfwater_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            resources.ApplyResources(this.removepdfwater_clear, "removepdfwater_clear");
             this.removepdfwater_clear.Name = "removepdfwater_clear";
             this.removepdfwater_clear.UseVisualStyleBackColor = true;
             // 
             // removepdfwater_remove
             // 
-            resources.ApplyResources(this.removepdfwater_remove, "removepdfwater_remove");
             this.removepdfwater_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            resources.ApplyResources(this.removepdfwater_remove, "removepdfwater_remove");
             this.removepdfwater_remove.Name = "removepdfwater_remove";
             this.removepdfwater_remove.UseVisualStyleBackColor = true;
             // 
@@ -2469,8 +2574,8 @@
             // 
             // RemovePdfWaterMarkFileList
             // 
-            resources.ApplyResources(this.RemovePdfWaterMarkFileList, "RemovePdfWaterMarkFileList");
             this.RemovePdfWaterMarkFileList.HideSelection = false;
+            resources.ApplyResources(this.RemovePdfWaterMarkFileList, "RemovePdfWaterMarkFileList");
             this.RemovePdfWaterMarkFileList.Name = "RemovePdfWaterMarkFileList";
             this.RemovePdfWaterMarkFileList.UseCompatibleStateImageBehavior = false;
             // 
@@ -2504,22 +2609,22 @@
             // 
             // pdfversion_clear
             // 
-            resources.ApplyResources(this.pdfversion_clear, "pdfversion_clear");
             this.pdfversion_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            resources.ApplyResources(this.pdfversion_clear, "pdfversion_clear");
             this.pdfversion_clear.Name = "pdfversion_clear";
             this.pdfversion_clear.UseVisualStyleBackColor = true;
             // 
             // pdfversion_remove
             // 
-            resources.ApplyResources(this.pdfversion_remove, "pdfversion_remove");
             this.pdfversion_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            resources.ApplyResources(this.pdfversion_remove, "pdfversion_remove");
             this.pdfversion_remove.Name = "pdfversion_remove";
             this.pdfversion_remove.UseVisualStyleBackColor = true;
             // 
             // ConvertPdfComplianceVersion
             // 
-            resources.ApplyResources(this.ConvertPdfComplianceVersion, "ConvertPdfComplianceVersion");
             this.ConvertPdfComplianceVersion.FormattingEnabled = true;
+            resources.ApplyResources(this.ConvertPdfComplianceVersion, "ConvertPdfComplianceVersion");
             this.ConvertPdfComplianceVersion.Name = "ConvertPdfComplianceVersion";
             // 
             // label39
@@ -2549,8 +2654,8 @@
             // 
             // ConvertPdfComplianceFileList
             // 
-            resources.ApplyResources(this.ConvertPdfComplianceFileList, "ConvertPdfComplianceFileList");
             this.ConvertPdfComplianceFileList.HideSelection = false;
+            resources.ApplyResources(this.ConvertPdfComplianceFileList, "ConvertPdfComplianceFileList");
             this.ConvertPdfComplianceFileList.Name = "ConvertPdfComplianceFileList";
             this.ConvertPdfComplianceFileList.UseCompatibleStateImageBehavior = false;
             // 
@@ -2589,15 +2694,15 @@
             // 
             // word2excel_clear
             // 
-            resources.ApplyResources(this.word2excel_clear, "word2excel_clear");
             this.word2excel_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            resources.ApplyResources(this.word2excel_clear, "word2excel_clear");
             this.word2excel_clear.Name = "word2excel_clear";
             this.word2excel_clear.UseVisualStyleBackColor = true;
             // 
             // word2excel_remove
             // 
-            resources.ApplyResources(this.word2excel_remove, "word2excel_remove");
             this.word2excel_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            resources.ApplyResources(this.word2excel_remove, "word2excel_remove");
             this.word2excel_remove.Name = "word2excel_remove";
             this.word2excel_remove.UseVisualStyleBackColor = true;
             // 
@@ -2623,8 +2728,8 @@
             // 
             // Word2ExcelFileList
             // 
-            resources.ApplyResources(this.Word2ExcelFileList, "Word2ExcelFileList");
             this.Word2ExcelFileList.HideSelection = false;
+            resources.ApplyResources(this.Word2ExcelFileList, "Word2ExcelFileList");
             this.Word2ExcelFileList.Name = "Word2ExcelFileList";
             this.Word2ExcelFileList.UseCompatibleStateImageBehavior = false;
             // 
@@ -2664,15 +2769,15 @@
             // 
             // excel2word_clear
             // 
-            resources.ApplyResources(this.excel2word_clear, "excel2word_clear");
             this.excel2word_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            resources.ApplyResources(this.excel2word_clear, "excel2word_clear");
             this.excel2word_clear.Name = "excel2word_clear";
             this.excel2word_clear.UseVisualStyleBackColor = true;
             // 
             // excel2word_remove
             // 
-            resources.ApplyResources(this.excel2word_remove, "excel2word_remove");
             this.excel2word_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            resources.ApplyResources(this.excel2word_remove, "excel2word_remove");
             this.excel2word_remove.Name = "excel2word_remove";
             this.excel2word_remove.UseVisualStyleBackColor = true;
             // 
@@ -2704,8 +2809,8 @@
             // 
             // Excel2WordFileList
             // 
-            resources.ApplyResources(this.Excel2WordFileList, "Excel2WordFileList");
             this.Excel2WordFileList.HideSelection = false;
+            resources.ApplyResources(this.Excel2WordFileList, "Excel2WordFileList");
             this.Excel2WordFileList.Name = "Excel2WordFileList";
             this.Excel2WordFileList.UseCompatibleStateImageBehavior = false;
             // 
@@ -2751,15 +2856,15 @@
             // 
             // document2image_clear
             // 
-            resources.ApplyResources(this.document2image_clear, "document2image_clear");
             this.document2image_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            resources.ApplyResources(this.document2image_clear, "document2image_clear");
             this.document2image_clear.Name = "document2image_clear";
             this.document2image_clear.UseVisualStyleBackColor = true;
             // 
             // document2image_remove
             // 
-            resources.ApplyResources(this.document2image_remove, "document2image_remove");
             this.document2image_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            resources.ApplyResources(this.document2image_remove, "document2image_remove");
             this.document2image_remove.Name = "document2image_remove";
             this.document2image_remove.UseVisualStyleBackColor = true;
             // 
@@ -2782,8 +2887,8 @@
             // 
             // DpiItemList
             // 
-            resources.ApplyResources(this.DpiItemList, "DpiItemList");
             this.DpiItemList.FormattingEnabled = true;
+            resources.ApplyResources(this.DpiItemList, "DpiItemList");
             this.DpiItemList.Name = "DpiItemList";
             this.DpiItemList.SelectedIndexChanged += new System.EventHandler(this.DpiItemList_SelectedIndexChanged);
             // 
@@ -2820,15 +2925,15 @@
             // 
             // ConvertImageList
             // 
-            resources.ApplyResources(this.ConvertImageList, "ConvertImageList");
             this.ConvertImageList.FormattingEnabled = true;
+            resources.ApplyResources(this.ConvertImageList, "ConvertImageList");
             this.ConvertImageList.Name = "ConvertImageList";
             this.ConvertImageList.SelectedIndexChanged += new System.EventHandler(this.ConvertImageList_SelectedIndexChanged);
             // 
             // DocumentsListView
             // 
-            resources.ApplyResources(this.DocumentsListView, "DocumentsListView");
             this.DocumentsListView.HideSelection = false;
+            resources.ApplyResources(this.DocumentsListView, "DocumentsListView");
             this.DocumentsListView.Name = "DocumentsListView";
             this.DocumentsListView.UseCompatibleStateImageBehavior = false;
             // 
@@ -2905,15 +3010,15 @@
             // 
             // word2epub_clear
             // 
-            resources.ApplyResources(this.word2epub_clear, "word2epub_clear");
             this.word2epub_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            resources.ApplyResources(this.word2epub_clear, "word2epub_clear");
             this.word2epub_clear.Name = "word2epub_clear";
             this.word2epub_clear.UseVisualStyleBackColor = true;
             // 
             // word2epub_remove
             // 
-            resources.ApplyResources(this.word2epub_remove, "word2epub_remove");
             this.word2epub_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            resources.ApplyResources(this.word2epub_remove, "word2epub_remove");
             this.word2epub_remove.Name = "word2epub_remove";
             this.word2epub_remove.UseVisualStyleBackColor = true;
             // 
@@ -2945,8 +3050,8 @@
             // 
             // Word2EPUBFileList
             // 
-            resources.ApplyResources(this.Word2EPUBFileList, "Word2EPUBFileList");
             this.Word2EPUBFileList.HideSelection = false;
+            resources.ApplyResources(this.Word2EPUBFileList, "Word2EPUBFileList");
             this.Word2EPUBFileList.Name = "Word2EPUBFileList";
             this.Word2EPUBFileList.UseCompatibleStateImageBehavior = false;
             // 
@@ -2985,15 +3090,15 @@
             // 
             // epub2word_clear
             // 
-            resources.ApplyResources(this.epub2word_clear, "epub2word_clear");
             this.epub2word_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            resources.ApplyResources(this.epub2word_clear, "epub2word_clear");
             this.epub2word_clear.Name = "epub2word_clear";
             this.epub2word_clear.UseVisualStyleBackColor = true;
             // 
             // epub2word_remove
             // 
-            resources.ApplyResources(this.epub2word_remove, "epub2word_remove");
             this.epub2word_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            resources.ApplyResources(this.epub2word_remove, "epub2word_remove");
             this.epub2word_remove.Name = "epub2word_remove";
             this.epub2word_remove.UseVisualStyleBackColor = true;
             // 
@@ -3019,8 +3124,8 @@
             // 
             // EPUB2WORDFileList
             // 
-            resources.ApplyResources(this.EPUB2WORDFileList, "EPUB2WORDFileList");
             this.EPUB2WORDFileList.HideSelection = false;
+            resources.ApplyResources(this.EPUB2WORDFileList, "EPUB2WORDFileList");
             this.EPUB2WORDFileList.Name = "EPUB2WORDFileList";
             this.EPUB2WORDFileList.UseCompatibleStateImageBehavior = false;
             // 
@@ -3059,15 +3164,15 @@
             // 
             // epub2pdf_clear
             // 
-            resources.ApplyResources(this.epub2pdf_clear, "epub2pdf_clear");
             this.epub2pdf_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            resources.ApplyResources(this.epub2pdf_clear, "epub2pdf_clear");
             this.epub2pdf_clear.Name = "epub2pdf_clear";
             this.epub2pdf_clear.UseVisualStyleBackColor = true;
             // 
             // epub2pdf_remove
             // 
-            resources.ApplyResources(this.epub2pdf_remove, "epub2pdf_remove");
             this.epub2pdf_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            resources.ApplyResources(this.epub2pdf_remove, "epub2pdf_remove");
             this.epub2pdf_remove.Name = "epub2pdf_remove";
             this.epub2pdf_remove.UseVisualStyleBackColor = true;
             // 
@@ -3093,8 +3198,8 @@
             // 
             // EPUB2PDFFileList
             // 
-            resources.ApplyResources(this.EPUB2PDFFileList, "EPUB2PDFFileList");
             this.EPUB2PDFFileList.HideSelection = false;
+            resources.ApplyResources(this.EPUB2PDFFileList, "EPUB2PDFFileList");
             this.EPUB2PDFFileList.Name = "EPUB2PDFFileList";
             this.EPUB2PDFFileList.UseCompatibleStateImageBehavior = false;
             // 
@@ -3127,15 +3232,15 @@
             // 
             // image2pdf_clear
             // 
-            resources.ApplyResources(this.image2pdf_clear, "image2pdf_clear");
             this.image2pdf_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            resources.ApplyResources(this.image2pdf_clear, "image2pdf_clear");
             this.image2pdf_clear.Name = "image2pdf_clear";
             this.image2pdf_clear.UseVisualStyleBackColor = true;
             // 
             // image2pdf_remove
             // 
-            resources.ApplyResources(this.image2pdf_remove, "image2pdf_remove");
             this.image2pdf_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            resources.ApplyResources(this.image2pdf_remove, "image2pdf_remove");
             this.image2pdf_remove.Name = "image2pdf_remove";
             this.image2pdf_remove.UseVisualStyleBackColor = true;
             // 
@@ -3147,13 +3252,13 @@
             // 
             // groupBox19
             // 
-            resources.ApplyResources(this.groupBox19, "groupBox19");
             this.groupBox19.Controls.Add(this.Image2PDFCOmpressImage);
             this.groupBox19.Controls.Add(this.Image2PDFOptiomize);
             this.groupBox19.Controls.Add(this.groupBox20);
             this.groupBox19.Controls.Add(this.Image2PDFCombox);
             this.groupBox19.Controls.Add(this.label38);
             this.groupBox19.Controls.Add(this.ExportSignlePDF);
+            resources.ApplyResources(this.groupBox19, "groupBox19");
             this.groupBox19.Name = "groupBox19";
             this.groupBox19.TabStop = false;
             // 
@@ -3256,8 +3361,8 @@
             // 
             // ConvertImage2PDFFileList
             // 
-            resources.ApplyResources(this.ConvertImage2PDFFileList, "ConvertImage2PDFFileList");
             this.ConvertImage2PDFFileList.HideSelection = false;
+            resources.ApplyResources(this.ConvertImage2PDFFileList, "ConvertImage2PDFFileList");
             this.ConvertImage2PDFFileList.Name = "ConvertImage2PDFFileList";
             this.ConvertImage2PDFFileList.UseCompatibleStateImageBehavior = false;
             // 
@@ -3296,7 +3401,6 @@
             // 
             // groupBox31
             // 
-            resources.ApplyResources(this.groupBox31, "groupBox31");
             this.groupBox31.Controls.Add(this.label129);
             this.groupBox31.Controls.Add(this.label128);
             this.groupBox31.Controls.Add(this.html2pdf_wait_timeout);
@@ -3307,6 +3411,7 @@
             this.groupBox31.Controls.Add(this.linkLabel3);
             this.groupBox31.Controls.Add(this.html2pdf_textbox_chromepath);
             this.groupBox31.Controls.Add(this.label73);
+            resources.ApplyResources(this.groupBox31, "groupBox31");
             this.groupBox31.Name = "groupBox31";
             this.groupBox31.TabStop = false;
             // 
@@ -3398,7 +3503,6 @@
             // 
             // groupBox30
             // 
-            resources.ApplyResources(this.groupBox30, "groupBox30");
             this.groupBox30.Controls.Add(this.html2pdf_textbox_margin_bottom);
             this.groupBox30.Controls.Add(this.html2pdf_textbox_margin_top);
             this.groupBox30.Controls.Add(this.html2pdf_textbox_margin_right);
@@ -3407,6 +3511,7 @@
             this.groupBox30.Controls.Add(this.label71);
             this.groupBox30.Controls.Add(this.label70);
             this.groupBox30.Controls.Add(this.label69);
+            resources.ApplyResources(this.groupBox30, "groupBox30");
             this.groupBox30.Name = "groupBox30";
             this.groupBox30.TabStop = false;
             // 
@@ -3452,13 +3557,13 @@
             // 
             // groupBox29
             // 
-            resources.ApplyResources(this.groupBox29, "groupBox29");
             this.groupBox29.Controls.Add(this.html2pdf_wait_all_resource);
             this.groupBox29.Controls.Add(this.html2pdf_combox_pagedirect);
             this.groupBox29.Controls.Add(this.html2pdf_combox_pagesize);
             this.groupBox29.Controls.Add(this.html2pdf_checkbox_usecss);
             this.groupBox29.Controls.Add(this.label68);
             this.groupBox29.Controls.Add(this.label67);
+            resources.ApplyResources(this.groupBox29, "groupBox29");
             this.groupBox29.Name = "groupBox29";
             this.groupBox29.TabStop = false;
             // 
@@ -3516,15 +3621,15 @@
             // 
             // html2pdf_clear
             // 
-            resources.ApplyResources(this.html2pdf_clear, "html2pdf_clear");
             this.html2pdf_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            resources.ApplyResources(this.html2pdf_clear, "html2pdf_clear");
             this.html2pdf_clear.Name = "html2pdf_clear";
             this.html2pdf_clear.UseVisualStyleBackColor = true;
             // 
             // html2pdf_remove
             // 
-            resources.ApplyResources(this.html2pdf_remove, "html2pdf_remove");
             this.html2pdf_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            resources.ApplyResources(this.html2pdf_remove, "html2pdf_remove");
             this.html2pdf_remove.Name = "html2pdf_remove";
             this.html2pdf_remove.UseVisualStyleBackColor = true;
             // 
@@ -3550,8 +3655,8 @@
             // 
             // HTML2PDFFileList
             // 
-            resources.ApplyResources(this.HTML2PDFFileList, "HTML2PDFFileList");
             this.HTML2PDFFileList.HideSelection = false;
+            resources.ApplyResources(this.HTML2PDFFileList, "HTML2PDFFileList");
             this.HTML2PDFFileList.Name = "HTML2PDFFileList";
             this.HTML2PDFFileList.UseCompatibleStateImageBehavior = false;
             // 
@@ -3584,15 +3689,15 @@
             // 
             // compresspdf_clear
             // 
-            resources.ApplyResources(this.compresspdf_clear, "compresspdf_clear");
             this.compresspdf_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            resources.ApplyResources(this.compresspdf_clear, "compresspdf_clear");
             this.compresspdf_clear.Name = "compresspdf_clear";
             this.compresspdf_clear.UseVisualStyleBackColor = true;
             // 
             // compresspdf_remove
             // 
-            resources.ApplyResources(this.compresspdf_remove, "compresspdf_remove");
             this.compresspdf_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            resources.ApplyResources(this.compresspdf_remove, "compresspdf_remove");
             this.compresspdf_remove.Name = "compresspdf_remove";
             this.compresspdf_remove.UseVisualStyleBackColor = true;
             // 
@@ -3604,7 +3709,6 @@
             // 
             // groupBox21
             // 
-            resources.ApplyResources(this.groupBox21, "groupBox21");
             this.groupBox21.Controls.Add(this.CompressPDF_CompressImageFlate);
             this.groupBox21.Controls.Add(this.CompressPDF_RemoveForms);
             this.groupBox21.Controls.Add(this.CompressPDF_CancelEmbedFont);
@@ -3619,6 +3723,7 @@
             this.groupBox21.Controls.Add(this.label44);
             this.groupBox21.Controls.Add(this.CompressPDF_CompressImage);
             this.groupBox21.Controls.Add(this.CompressPDF_WEB);
+            resources.ApplyResources(this.groupBox21, "groupBox21");
             this.groupBox21.Name = "groupBox21";
             this.groupBox21.TabStop = false;
             // 
@@ -3719,8 +3824,8 @@
             // 
             // CompressPdfFileList
             // 
-            resources.ApplyResources(this.CompressPdfFileList, "CompressPdfFileList");
             this.CompressPdfFileList.HideSelection = false;
+            resources.ApplyResources(this.CompressPdfFileList, "CompressPdfFileList");
             this.CompressPdfFileList.Name = "CompressPdfFileList";
             this.CompressPdfFileList.UseCompatibleStateImageBehavior = false;
             // 
@@ -3756,15 +3861,15 @@
             // 
             // compressimage_clear
             // 
-            resources.ApplyResources(this.compressimage_clear, "compressimage_clear");
             this.compressimage_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            resources.ApplyResources(this.compressimage_clear, "compressimage_clear");
             this.compressimage_clear.Name = "compressimage_clear";
             this.compressimage_clear.UseVisualStyleBackColor = true;
             // 
             // compressimage_remove
             // 
-            resources.ApplyResources(this.compressimage_remove, "compressimage_remove");
             this.compressimage_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            resources.ApplyResources(this.compressimage_remove, "compressimage_remove");
             this.compressimage_remove.Name = "compressimage_remove";
             this.compressimage_remove.UseVisualStyleBackColor = true;
             // 
@@ -3776,10 +3881,10 @@
             // 
             // groupBox25
             // 
-            resources.ApplyResources(this.groupBox25, "groupBox25");
             this.groupBox25.Controls.Add(this.CompressImage_NotUseSelfExt);
             this.groupBox25.Controls.Add(this.CompressImage_OutPutImageFormat);
             this.groupBox25.Controls.Add(this.label54);
+            resources.ApplyResources(this.groupBox25, "groupBox25");
             this.groupBox25.Name = "groupBox25";
             this.groupBox25.TabStop = false;
             // 
@@ -3803,11 +3908,11 @@
             // 
             // groupBox24
             // 
-            resources.ApplyResources(this.groupBox24, "groupBox24");
             this.groupBox24.Controls.Add(this.CompressBmpPixeBits_Combox);
             this.groupBox24.Controls.Add(this.CompressBmpMode_Combox);
             this.groupBox24.Controls.Add(this.label50);
             this.groupBox24.Controls.Add(this.label53);
+            resources.ApplyResources(this.groupBox24, "groupBox24");
             this.groupBox24.Name = "groupBox24";
             this.groupBox24.TabStop = false;
             // 
@@ -3835,11 +3940,11 @@
             // 
             // groupBox23
             // 
-            resources.ApplyResources(this.groupBox23, "groupBox23");
             this.groupBox23.Controls.Add(this.CompressPngColorMode_Combox);
             this.groupBox23.Controls.Add(this.CompressPngLevel_Combox);
             this.groupBox23.Controls.Add(this.label51);
             this.groupBox23.Controls.Add(this.label52);
+            resources.ApplyResources(this.groupBox23, "groupBox23");
             this.groupBox23.Name = "groupBox23";
             this.groupBox23.TabStop = false;
             // 
@@ -3867,13 +3972,13 @@
             // 
             // groupBox22
             // 
-            resources.ApplyResources(this.groupBox22, "groupBox22");
             this.groupBox22.Controls.Add(this.CompressJpegQuailty_Combox);
             this.groupBox22.Controls.Add(this.label49);
             this.groupBox22.Controls.Add(this.CompressJpegColorMode_Combox);
             this.groupBox22.Controls.Add(this.CompressJpegMode_Combox);
             this.groupBox22.Controls.Add(this.label48);
             this.groupBox22.Controls.Add(this.label47);
+            resources.ApplyResources(this.groupBox22, "groupBox22");
             this.groupBox22.Name = "groupBox22";
             this.groupBox22.TabStop = false;
             // 
@@ -3926,8 +4031,8 @@
             // 
             // CompressImageFileList
             // 
-            resources.ApplyResources(this.CompressImageFileList, "CompressImageFileList");
             this.CompressImageFileList.HideSelection = false;
+            resources.ApplyResources(this.CompressImageFileList, "CompressImageFileList");
             this.CompressImageFileList.Name = "CompressImageFileList";
             this.CompressImageFileList.UseCompatibleStateImageBehavior = false;
             // 
@@ -3980,15 +4085,15 @@
             // 
             // wordreplace_clear
             // 
-            resources.ApplyResources(this.wordreplace_clear, "wordreplace_clear");
             this.wordreplace_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            resources.ApplyResources(this.wordreplace_clear, "wordreplace_clear");
             this.wordreplace_clear.Name = "wordreplace_clear";
             this.wordreplace_clear.UseVisualStyleBackColor = true;
             // 
             // wordreplace_remove
             // 
-            resources.ApplyResources(this.wordreplace_remove, "wordreplace_remove");
             this.wordreplace_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            resources.ApplyResources(this.wordreplace_remove, "wordreplace_remove");
             this.wordreplace_remove.Name = "wordreplace_remove";
             this.wordreplace_remove.UseVisualStyleBackColor = true;
             // 
@@ -4008,8 +4113,8 @@
             // 
             // groupBox10
             // 
-            resources.ApplyResources(this.groupBox10, "groupBox10");
             this.groupBox10.Controls.Add(this.WordReplaceTextBox);
+            resources.ApplyResources(this.groupBox10, "groupBox10");
             this.groupBox10.Name = "groupBox10";
             this.groupBox10.TabStop = false;
             // 
@@ -4020,8 +4125,8 @@
             // 
             // groupBox9
             // 
-            resources.ApplyResources(this.groupBox9, "groupBox9");
             this.groupBox9.Controls.Add(this.WordReplaceFindTextBox);
+            resources.ApplyResources(this.groupBox9, "groupBox9");
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.TabStop = false;
             // 
@@ -4064,8 +4169,8 @@
             // 
             // ReplaceWordFileList
             // 
-            resources.ApplyResources(this.ReplaceWordFileList, "ReplaceWordFileList");
             this.ReplaceWordFileList.HideSelection = false;
+            resources.ApplyResources(this.ReplaceWordFileList, "ReplaceWordFileList");
             this.ReplaceWordFileList.Name = "ReplaceWordFileList";
             this.ReplaceWordFileList.UseCompatibleStateImageBehavior = false;
             // 
@@ -4105,15 +4210,15 @@
             // 
             // excelreplace_clear
             // 
-            resources.ApplyResources(this.excelreplace_clear, "excelreplace_clear");
             this.excelreplace_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            resources.ApplyResources(this.excelreplace_clear, "excelreplace_clear");
             this.excelreplace_clear.Name = "excelreplace_clear";
             this.excelreplace_clear.UseVisualStyleBackColor = true;
             // 
             // excelreplace_remove
             // 
-            resources.ApplyResources(this.excelreplace_remove, "excelreplace_remove");
             this.excelreplace_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            resources.ApplyResources(this.excelreplace_remove, "excelreplace_remove");
             this.excelreplace_remove.Name = "excelreplace_remove";
             this.excelreplace_remove.UseVisualStyleBackColor = true;
             // 
@@ -4145,12 +4250,12 @@
             // 
             // groupBox13
             // 
-            resources.ApplyResources(this.groupBox13, "groupBox13");
             this.groupBox13.Controls.Add(this.ExcelStartRow);
             this.groupBox13.Controls.Add(this.ExcelEndRow);
             this.groupBox13.Controls.Add(this.label19);
             this.groupBox13.Controls.Add(this.label18);
             this.groupBox13.Controls.Add(this.RemoveRows);
+            resources.ApplyResources(this.groupBox13, "groupBox13");
             this.groupBox13.Name = "groupBox13";
             this.groupBox13.TabStop = false;
             // 
@@ -4182,8 +4287,8 @@
             // 
             // groupBox12
             // 
-            resources.ApplyResources(this.groupBox12, "groupBox12");
             this.groupBox12.Controls.Add(this.ExcelReplaceBox);
+            resources.ApplyResources(this.groupBox12, "groupBox12");
             this.groupBox12.Name = "groupBox12";
             this.groupBox12.TabStop = false;
             // 
@@ -4194,8 +4299,8 @@
             // 
             // groupBox11
             // 
-            resources.ApplyResources(this.groupBox11, "groupBox11");
             this.groupBox11.Controls.Add(this.ExcelFindTextBox);
+            resources.ApplyResources(this.groupBox11, "groupBox11");
             this.groupBox11.Name = "groupBox11";
             this.groupBox11.TabStop = false;
             // 
@@ -4226,8 +4331,8 @@
             // 
             // ReplaceExcelFileView
             // 
-            resources.ApplyResources(this.ReplaceExcelFileView, "ReplaceExcelFileView");
             this.ReplaceExcelFileView.HideSelection = false;
+            resources.ApplyResources(this.ReplaceExcelFileView, "ReplaceExcelFileView");
             this.ReplaceExcelFileView.Name = "ReplaceExcelFileView";
             this.ReplaceExcelFileView.UseCompatibleStateImageBehavior = false;
             // 
@@ -4261,15 +4366,15 @@
             // 
             // datamatrix_clear
             // 
-            resources.ApplyResources(this.datamatrix_clear, "datamatrix_clear");
             this.datamatrix_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            resources.ApplyResources(this.datamatrix_clear, "datamatrix_clear");
             this.datamatrix_clear.Name = "datamatrix_clear";
             this.datamatrix_clear.UseVisualStyleBackColor = true;
             // 
             // datamatrix_remove
             // 
-            resources.ApplyResources(this.datamatrix_remove, "datamatrix_remove");
             this.datamatrix_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            resources.ApplyResources(this.datamatrix_remove, "datamatrix_remove");
             this.datamatrix_remove.Name = "datamatrix_remove";
             this.datamatrix_remove.UseVisualStyleBackColor = true;
             // 
@@ -4295,8 +4400,8 @@
             // 
             // groupBox14
             // 
-            resources.ApplyResources(this.groupBox14, "groupBox14");
             this.groupBox14.Controls.Add(this.DecodeDataMatrixView);
+            resources.ApplyResources(this.groupBox14, "groupBox14");
             this.groupBox14.Name = "groupBox14";
             this.groupBox14.TabStop = false;
             // 
@@ -4307,8 +4412,8 @@
             // 
             // DecodeMatrixWordListView
             // 
-            resources.ApplyResources(this.DecodeMatrixWordListView, "DecodeMatrixWordListView");
             this.DecodeMatrixWordListView.HideSelection = false;
+            resources.ApplyResources(this.DecodeMatrixWordListView, "DecodeMatrixWordListView");
             this.DecodeMatrixWordListView.Name = "DecodeMatrixWordListView";
             this.DecodeMatrixWordListView.UseCompatibleStateImageBehavior = false;
             // 
@@ -4395,8 +4500,8 @@
             // 
             // barcodePreviewBox
             // 
-            resources.ApplyResources(this.barcodePreviewBox, "barcodePreviewBox");
             this.barcodePreviewBox.Image = global::DocumentTools.Properties.Resources._1351;
+            resources.ApplyResources(this.barcodePreviewBox, "barcodePreviewBox");
             this.barcodePreviewBox.Name = "barcodePreviewBox";
             this.barcodePreviewBox.TabStop = false;
             // 
@@ -4446,11 +4551,11 @@
             // 
             // groupBox37
             // 
-            resources.ApplyResources(this.groupBox37, "groupBox37");
             this.groupBox37.Controls.Add(this.ExportBarCodeTempLate);
             this.groupBox37.Controls.Add(this.barcodeMutilGenerate);
             this.groupBox37.Controls.Add(this.barcodeTemplateUpload);
             this.groupBox37.Controls.Add(this.barcodeMutilList);
+            resources.ApplyResources(this.groupBox37, "groupBox37");
             this.groupBox37.Name = "groupBox37";
             this.groupBox37.TabStop = false;
             // 
@@ -4477,14 +4582,13 @@
             // 
             // barcodeMutilList
             // 
-            resources.ApplyResources(this.barcodeMutilList, "barcodeMutilList");
             this.barcodeMutilList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            resources.ApplyResources(this.barcodeMutilList, "barcodeMutilList");
             this.barcodeMutilList.Name = "barcodeMutilList";
             this.barcodeMutilList.RowTemplate.Height = 30;
             // 
             // groupBox35
             // 
-            resources.ApplyResources(this.groupBox35, "groupBox35");
             this.groupBox35.Controls.Add(this.barcodeImageWidth);
             this.groupBox35.Controls.Add(this.barcodePaddingBox);
             this.groupBox35.Controls.Add(this.label89);
@@ -4501,6 +4605,7 @@
             this.groupBox35.Controls.Add(this.barcodeAutoSizeCombox);
             this.groupBox35.Controls.Add(this.label79);
             this.groupBox35.Controls.Add(this.barcodeImageHeight);
+            resources.ApplyResources(this.groupBox35, "groupBox35");
             this.groupBox35.Name = "groupBox35";
             this.groupBox35.TabStop = false;
             // 
@@ -4680,10 +4785,10 @@
             // 
             // groupBox41
             // 
-            resources.ApplyResources(this.groupBox41, "groupBox41");
             this.groupBox41.Controls.Add(this.groupBox42);
             this.groupBox41.Controls.Add(this.ver_card_id_text_box);
             this.groupBox41.Controls.Add(this.label99);
+            resources.ApplyResources(this.groupBox41, "groupBox41");
             this.groupBox41.Name = "groupBox41";
             this.groupBox41.TabStop = false;
             // 
@@ -4754,12 +4859,12 @@
             // 
             // gen_card_result_group
             // 
-            resources.ApplyResources(this.gen_card_result_group, "gen_card_result_group");
             this.gen_card_result_group.Controls.Add(this.gen_card_id_name_copy);
             this.gen_card_result_group.Controls.Add(this.gen_card_id_name_box);
             this.gen_card_result_group.Controls.Add(this.copy_gen_card_cliboard);
             this.gen_card_result_group.Controls.Add(this.gen_card_num_text);
             this.gen_card_result_group.Controls.Add(this.gen_card_id_box);
+            resources.ApplyResources(this.gen_card_result_group, "gen_card_result_group");
             this.gen_card_result_group.Name = "gen_card_result_group";
             this.gen_card_result_group.TabStop = false;
             // 
@@ -4796,7 +4901,6 @@
             // 
             // gen_card_id_group
             // 
-            resources.ApplyResources(this.gen_card_id_group, "gen_card_id_group");
             this.gen_card_id_group.Controls.Add(this.gen_card_id_name_text);
             this.gen_card_id_group.Controls.Add(this.label104);
             this.gen_card_id_group.Controls.Add(this.gen_card_id_name_check_box);
@@ -4808,6 +4912,7 @@
             this.gen_card_id_group.Controls.Add(this.city_level_1_combox);
             this.gen_card_id_group.Controls.Add(this.city_level_3_combox);
             this.gen_card_id_group.Controls.Add(this.city_level_2_combox);
+            resources.ApplyResources(this.gen_card_id_group, "gen_card_id_group");
             this.gen_card_id_group.Name = "gen_card_id_group";
             this.gen_card_id_group.TabStop = false;
             // 
@@ -4882,8 +4987,8 @@
             // 
             // city_level_3_combox
             // 
-            resources.ApplyResources(this.city_level_3_combox, "city_level_3_combox");
             this.city_level_3_combox.FormattingEnabled = true;
+            resources.ApplyResources(this.city_level_3_combox, "city_level_3_combox");
             this.city_level_3_combox.Name = "city_level_3_combox";
             // 
             // city_level_2_combox
@@ -4921,8 +5026,8 @@
             // 
             // NameMarkColor
             // 
-            resources.ApplyResources(this.NameMarkColor, "NameMarkColor");
             this.NameMarkColor.FormattingEnabled = true;
+            resources.ApplyResources(this.NameMarkColor, "NameMarkColor");
             this.NameMarkColor.Name = "NameMarkColor";
             // 
             // MarkDupName
@@ -5036,8 +5141,8 @@
             // 
             // groupBox2
             // 
-            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Controls.Add(this.TargetTextBox);
+            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             // 
@@ -5049,8 +5154,8 @@
             // 
             // groupBox1
             // 
-            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Controls.Add(this.SourceTextBox);
+            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
@@ -5077,9 +5182,9 @@
             // 
             // groupBox39
             // 
-            resources.ApplyResources(this.groupBox39, "groupBox39");
             this.groupBox39.Controls.Add(this.webp2image_combox);
             this.groupBox39.Controls.Add(this.label98);
+            resources.ApplyResources(this.groupBox39, "groupBox39");
             this.groupBox39.Name = "groupBox39";
             this.groupBox39.TabStop = false;
             // 
@@ -5108,15 +5213,15 @@
             // 
             // webp2image_clear
             // 
-            resources.ApplyResources(this.webp2image_clear, "webp2image_clear");
             this.webp2image_clear.BackgroundImage = global::DocumentTools.Properties.Resources.Clear;
+            resources.ApplyResources(this.webp2image_clear, "webp2image_clear");
             this.webp2image_clear.Name = "webp2image_clear";
             this.webp2image_clear.UseVisualStyleBackColor = true;
             // 
             // webp2image_remove
             // 
-            resources.ApplyResources(this.webp2image_remove, "webp2image_remove");
             this.webp2image_remove.BackgroundImage = global::DocumentTools.Properties.Resources.Remove;
+            resources.ApplyResources(this.webp2image_remove, "webp2image_remove");
             this.webp2image_remove.Name = "webp2image_remove";
             this.webp2image_remove.UseVisualStyleBackColor = true;
             // 
@@ -5142,8 +5247,8 @@
             // 
             // WebpFileList
             // 
-            resources.ApplyResources(this.WebpFileList, "WebpFileList");
             this.WebpFileList.HideSelection = false;
+            resources.ApplyResources(this.WebpFileList, "WebpFileList");
             this.WebpFileList.Name = "WebpFileList";
             this.WebpFileList.UseCompatibleStateImageBehavior = false;
             // 
@@ -5173,13 +5278,13 @@
             // 
             // groupBox8
             // 
-            resources.ApplyResources(this.groupBox8, "groupBox8");
             this.groupBox8.Controls.Add(this.ResetTotalScanNumber);
             this.groupBox8.Controls.Add(this.RemoveAllFiles);
             this.groupBox8.Controls.Add(this.SavedPathFileCount);
             this.groupBox8.Controls.Add(this.ScanSpendTime);
             this.groupBox8.Controls.Add(this.NowScanNumber);
             this.groupBox8.Controls.Add(this.ScannTotalNumber);
+            resources.ApplyResources(this.groupBox8, "groupBox8");
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.TabStop = false;
             // 
@@ -5219,9 +5324,9 @@
             // 
             // groupBox7
             // 
-            resources.ApplyResources(this.groupBox7, "groupBox7");
             this.groupBox7.Controls.Add(this.PreviewPictureName);
             this.groupBox7.Controls.Add(this.PreviewPictureBox);
+            resources.ApplyResources(this.groupBox7, "groupBox7");
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.TabStop = false;
             // 
@@ -5239,7 +5344,6 @@
             // 
             // groupBox6
             // 
-            resources.ApplyResources(this.groupBox6, "groupBox6");
             this.groupBox6.Controls.Add(this.ExportCaps);
             this.groupBox6.Controls.Add(this.TwainScanNumberSet);
             this.groupBox6.Controls.Add(this.label21);
@@ -5257,6 +5361,7 @@
             this.groupBox6.Controls.Add(this.StartScanButton);
             this.groupBox6.Controls.Add(this.ScanPictureSavePathBox);
             this.groupBox6.Controls.Add(this.label14);
+            resources.ApplyResources(this.groupBox6, "groupBox6");
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.TabStop = false;
             // 
@@ -5270,6 +5375,7 @@
             // 
             resources.ApplyResources(this.TwainScanNumberSet, "TwainScanNumberSet");
             this.TwainScanNumberSet.Name = "TwainScanNumberSet";
+            this.TwainScanNumberSet.TextChanged += new System.EventHandler(this.TwainScanNumberSet_TextChanged);
             // 
             // label21
             // 
@@ -5390,7 +5496,6 @@
             // 
             // groupBox17
             // 
-            resources.ApplyResources(this.groupBox17, "groupBox17");
             this.groupBox17.Controls.Add(this.image2ico_remove);
             this.groupBox17.Controls.Add(this.IcoFileView_MoveDown);
             this.groupBox17.Controls.Add(this.IcoFileView_MoveUp);
@@ -5401,6 +5506,7 @@
             this.groupBox17.Controls.Add(this.ConvertImage2Ico);
             this.groupBox17.Controls.Add(this.SelectFilesIco);
             this.groupBox17.Controls.Add(this.IcoFileView);
+            resources.ApplyResources(this.groupBox17, "groupBox17");
             this.groupBox17.Name = "groupBox17";
             this.groupBox17.TabStop = false;
             // 
@@ -5523,33 +5629,55 @@
             // 
             // TabPage_26
             // 
-            this.TabPage_26.Controls.Add(this.groupBox28);
+            this.TabPage_26.Controls.Add(this.blockgroup);
             this.TabPage_26.Controls.Add(this.groupBox27);
             this.TabPage_26.Controls.Add(this.groupBox26);
             resources.ApplyResources(this.TabPage_26, "TabPage_26");
             this.TabPage_26.Name = "TabPage_26";
             this.TabPage_26.UseVisualStyleBackColor = true;
             // 
-            // groupBox28
+            // blockgroup
             // 
-            resources.ApplyResources(this.groupBox28, "groupBox28");
-            this.groupBox28.Controls.Add(this.label58);
-            this.groupBox28.Name = "groupBox28";
-            this.groupBox28.TabStop = false;
+            this.blockgroup.Controls.Add(this.OpenSystemUpdate);
+            this.blockgroup.Controls.Add(this.SetPauseTime);
+            this.blockgroup.Controls.Add(this.PauseUpdateYears);
+            this.blockgroup.Controls.Add(this.label153);
+            resources.ApplyResources(this.blockgroup, "blockgroup");
+            this.blockgroup.Name = "blockgroup";
+            this.blockgroup.TabStop = false;
             // 
-            // label58
+            // OpenSystemUpdate
             // 
-            resources.ApplyResources(this.label58, "label58");
-            this.label58.ForeColor = System.Drawing.Color.OrangeRed;
-            this.label58.Name = "label58";
+            resources.ApplyResources(this.OpenSystemUpdate, "OpenSystemUpdate");
+            this.OpenSystemUpdate.Name = "OpenSystemUpdate";
+            this.OpenSystemUpdate.UseVisualStyleBackColor = true;
+            this.OpenSystemUpdate.Click += new System.EventHandler(this.OpenSystemUpdate_Click);
+            // 
+            // SetPauseTime
+            // 
+            resources.ApplyResources(this.SetPauseTime, "SetPauseTime");
+            this.SetPauseTime.Name = "SetPauseTime";
+            this.SetPauseTime.UseVisualStyleBackColor = true;
+            this.SetPauseTime.Click += new System.EventHandler(this.SetPauseTime_Click);
+            // 
+            // PauseUpdateYears
+            // 
+            this.PauseUpdateYears.FormattingEnabled = true;
+            resources.ApplyResources(this.PauseUpdateYears, "PauseUpdateYears");
+            this.PauseUpdateYears.Name = "PauseUpdateYears";
+            // 
+            // label153
+            // 
+            resources.ApplyResources(this.label153, "label153");
+            this.label153.Name = "label153";
             // 
             // groupBox27
             // 
-            resources.ApplyResources(this.groupBox27, "groupBox27");
             this.groupBox27.Controls.Add(this.AutoRestartExplorer);
             this.groupBox27.Controls.Add(this.ShortStatus);
             this.groupBox27.Controls.Add(this.RestoreShort);
             this.groupBox27.Controls.Add(this.RemoveShort);
+            resources.ApplyResources(this.groupBox27, "groupBox27");
             this.groupBox27.Name = "groupBox27";
             this.groupBox27.TabStop = false;
             // 
@@ -5617,7 +5745,7 @@
             // 
             // groupBox32
             // 
-            resources.ApplyResources(this.groupBox32, "groupBox32");
+            this.groupBox32.Controls.Add(this.linkLabel6);
             this.groupBox32.Controls.Add(this.groupBox33);
             this.groupBox32.Controls.Add(this.groupBox40);
             this.groupBox32.Controls.Add(this.votestatustext);
@@ -5627,8 +5755,16 @@
             this.groupBox32.Controls.Add(this.SelectMss3);
             this.groupBox32.Controls.Add(this.Mss3Path);
             this.groupBox32.Controls.Add(this.label75);
+            resources.ApplyResources(this.groupBox32, "groupBox32");
             this.groupBox32.Name = "groupBox32";
             this.groupBox32.TabStop = false;
+            // 
+            // linkLabel6
+            // 
+            resources.ApplyResources(this.linkLabel6, "linkLabel6");
+            this.linkLabel6.Name = "linkLabel6";
+            this.linkLabel6.TabStop = true;
+            this.linkLabel6.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel6_LinkClicked);
             // 
             // groupBox33
             // 
@@ -5700,15 +5836,15 @@
             // 
             // groupBox40
             // 
-            resources.ApplyResources(this.groupBox40, "groupBox40");
             this.groupBox40.Controls.Add(this.votedataview);
+            resources.ApplyResources(this.groupBox40, "groupBox40");
             this.groupBox40.Name = "groupBox40";
             this.groupBox40.TabStop = false;
             // 
             // votedataview
             // 
-            resources.ApplyResources(this.votedataview, "votedataview");
             this.votedataview.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            resources.ApplyResources(this.votedataview, "votedataview");
             this.votedataview.Name = "votedataview";
             this.votedataview.RowTemplate.Height = 30;
             // 
@@ -5734,8 +5870,8 @@
             // 
             // VotePicture
             // 
-            resources.ApplyResources(this.VotePicture, "VotePicture");
             this.VotePicture.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            resources.ApplyResources(this.VotePicture, "VotePicture");
             this.VotePicture.Name = "VotePicture";
             this.VotePicture.TabStop = false;
             // 
@@ -5757,6 +5893,501 @@
             resources.ApplyResources(this.label75, "label75");
             this.label75.Name = "label75";
             // 
+            // TabPage_39
+            // 
+            this.TabPage_39.Controls.Add(this.pictureBox8);
+            this.TabPage_39.Controls.Add(this.label167);
+            this.TabPage_39.Controls.Add(this.label166);
+            this.TabPage_39.Controls.Add(this.pictureBox7);
+            this.TabPage_39.Controls.Add(this.groupx);
+            this.TabPage_39.Controls.Add(this.groupBox54);
+            resources.ApplyResources(this.TabPage_39, "TabPage_39");
+            this.TabPage_39.Name = "TabPage_39";
+            this.TabPage_39.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox8
+            // 
+            this.pictureBox8.Image = global::DocumentTools.Properties.Resources.B;
+            resources.ApplyResources(this.pictureBox8, "pictureBox8");
+            this.pictureBox8.Name = "pictureBox8";
+            this.pictureBox8.TabStop = false;
+            // 
+            // label167
+            // 
+            resources.ApplyResources(this.label167, "label167");
+            this.label167.ForeColor = System.Drawing.Color.DarkMagenta;
+            this.label167.Name = "label167";
+            // 
+            // label166
+            // 
+            resources.ApplyResources(this.label166, "label166");
+            this.label166.ForeColor = System.Drawing.Color.Tomato;
+            this.label166.Name = "label166";
+            // 
+            // pictureBox7
+            // 
+            this.pictureBox7.Image = global::DocumentTools.Properties.Resources.A;
+            resources.ApplyResources(this.pictureBox7, "pictureBox7");
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.TabStop = false;
+            // 
+            // groupx
+            // 
+            this.groupx.Controls.Add(this.SignDocumentProgress);
+            this.groupx.Controls.Add(this.groupBox55);
+            this.groupx.Controls.Add(this.SignDocumentReplaceStart);
+            this.groupx.Controls.Add(this.groupBox58);
+            resources.ApplyResources(this.groupx, "groupx");
+            this.groupx.Name = "groupx";
+            this.groupx.TabStop = false;
+            // 
+            // SignDocumentProgress
+            // 
+            resources.ApplyResources(this.SignDocumentProgress, "SignDocumentProgress");
+            this.SignDocumentProgress.Name = "SignDocumentProgress";
+            // 
+            // groupBox55
+            // 
+            this.groupBox55.Controls.Add(this.label163);
+            this.groupBox55.Controls.Add(this.label164);
+            this.groupBox55.Controls.Add(this.SignDocumentFileEndName);
+            this.groupBox55.Controls.Add(this.label162);
+            this.groupBox55.Controls.Add(this.SignDocumentOnlyUseOnlyImageButton);
+            this.groupBox55.Controls.Add(this.SignDocumentOnlyUseOnlyImageTextBox);
+            this.groupBox55.Controls.Add(this.SignDocumentOnlyUseOnlyImage);
+            this.groupBox55.Controls.Add(this.SignDocumentUseOutPersonPathButton);
+            this.groupBox55.Controls.Add(this.SignDocumentUseOutPersonPathTextBox);
+            this.groupBox55.Controls.Add(this.SignDocumentUseOutPersonPath);
+            this.groupBox55.Controls.Add(this.SignDocumentUseEmbedImage);
+            this.groupBox55.Controls.Add(this.label160);
+            this.groupBox55.Controls.Add(this.SignDocumentNeedCount);
+            resources.ApplyResources(this.groupBox55, "groupBox55");
+            this.groupBox55.Name = "groupBox55";
+            this.groupBox55.TabStop = false;
+            // 
+            // label163
+            // 
+            resources.ApplyResources(this.label163, "label163");
+            this.label163.ForeColor = System.Drawing.Color.ForestGreen;
+            this.label163.Name = "label163";
+            // 
+            // label164
+            // 
+            resources.ApplyResources(this.label164, "label164");
+            this.label164.ForeColor = System.Drawing.Color.Crimson;
+            this.label164.Name = "label164";
+            // 
+            // SignDocumentFileEndName
+            // 
+            resources.ApplyResources(this.SignDocumentFileEndName, "SignDocumentFileEndName");
+            this.SignDocumentFileEndName.Name = "SignDocumentFileEndName";
+            // 
+            // label162
+            // 
+            resources.ApplyResources(this.label162, "label162");
+            this.label162.Name = "label162";
+            // 
+            // SignDocumentOnlyUseOnlyImageButton
+            // 
+            resources.ApplyResources(this.SignDocumentOnlyUseOnlyImageButton, "SignDocumentOnlyUseOnlyImageButton");
+            this.SignDocumentOnlyUseOnlyImageButton.Name = "SignDocumentOnlyUseOnlyImageButton";
+            this.SignDocumentOnlyUseOnlyImageButton.UseVisualStyleBackColor = true;
+            this.SignDocumentOnlyUseOnlyImageButton.Click += new System.EventHandler(this.SignDocumentOnlyUseOnlyImageButton_Click);
+            // 
+            // SignDocumentOnlyUseOnlyImageTextBox
+            // 
+            resources.ApplyResources(this.SignDocumentOnlyUseOnlyImageTextBox, "SignDocumentOnlyUseOnlyImageTextBox");
+            this.SignDocumentOnlyUseOnlyImageTextBox.Name = "SignDocumentOnlyUseOnlyImageTextBox";
+            this.SignDocumentOnlyUseOnlyImageTextBox.ReadOnly = true;
+            // 
+            // SignDocumentOnlyUseOnlyImage
+            // 
+            resources.ApplyResources(this.SignDocumentOnlyUseOnlyImage, "SignDocumentOnlyUseOnlyImage");
+            this.SignDocumentOnlyUseOnlyImage.Name = "SignDocumentOnlyUseOnlyImage";
+            this.SignDocumentOnlyUseOnlyImage.UseVisualStyleBackColor = true;
+            this.SignDocumentOnlyUseOnlyImage.CheckedChanged += new System.EventHandler(this.SignDocumentOnlyUseOnlyImage_CheckedChanged);
+            // 
+            // SignDocumentUseOutPersonPathButton
+            // 
+            resources.ApplyResources(this.SignDocumentUseOutPersonPathButton, "SignDocumentUseOutPersonPathButton");
+            this.SignDocumentUseOutPersonPathButton.Name = "SignDocumentUseOutPersonPathButton";
+            this.SignDocumentUseOutPersonPathButton.UseVisualStyleBackColor = true;
+            this.SignDocumentUseOutPersonPathButton.Click += new System.EventHandler(this.SignDocumentUseOutPersonPathButton_Click);
+            // 
+            // SignDocumentUseOutPersonPathTextBox
+            // 
+            resources.ApplyResources(this.SignDocumentUseOutPersonPathTextBox, "SignDocumentUseOutPersonPathTextBox");
+            this.SignDocumentUseOutPersonPathTextBox.Name = "SignDocumentUseOutPersonPathTextBox";
+            this.SignDocumentUseOutPersonPathTextBox.ReadOnly = true;
+            // 
+            // SignDocumentUseOutPersonPath
+            // 
+            resources.ApplyResources(this.SignDocumentUseOutPersonPath, "SignDocumentUseOutPersonPath");
+            this.SignDocumentUseOutPersonPath.Name = "SignDocumentUseOutPersonPath";
+            this.SignDocumentUseOutPersonPath.UseVisualStyleBackColor = true;
+            this.SignDocumentUseOutPersonPath.CheckedChanged += new System.EventHandler(this.SignDocumentUseOutPersonPath_CheckedChanged);
+            // 
+            // SignDocumentUseEmbedImage
+            // 
+            resources.ApplyResources(this.SignDocumentUseEmbedImage, "SignDocumentUseEmbedImage");
+            this.SignDocumentUseEmbedImage.Checked = true;
+            this.SignDocumentUseEmbedImage.Name = "SignDocumentUseEmbedImage";
+            this.SignDocumentUseEmbedImage.TabStop = true;
+            this.SignDocumentUseEmbedImage.UseVisualStyleBackColor = true;
+            // 
+            // label160
+            // 
+            resources.ApplyResources(this.label160, "label160");
+            this.label160.Name = "label160";
+            // 
+            // SignDocumentNeedCount
+            // 
+            resources.ApplyResources(this.SignDocumentNeedCount, "SignDocumentNeedCount");
+            this.SignDocumentNeedCount.Maximum = new decimal(new int[] {
+            999,
+            0,
+            0,
+            0});
+            this.SignDocumentNeedCount.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.SignDocumentNeedCount.Name = "SignDocumentNeedCount";
+            this.SignDocumentNeedCount.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
+            // SignDocumentReplaceStart
+            // 
+            resources.ApplyResources(this.SignDocumentReplaceStart, "SignDocumentReplaceStart");
+            this.SignDocumentReplaceStart.Name = "SignDocumentReplaceStart";
+            this.SignDocumentReplaceStart.UseVisualStyleBackColor = true;
+            this.SignDocumentReplaceStart.Click += new System.EventHandler(this.SignDocumentReplaceStart_Click);
+            // 
+            // groupBox58
+            // 
+            this.groupBox58.Controls.Add(this.label161);
+            this.groupBox58.Controls.Add(this.SignDocumentFileSaveBox);
+            this.groupBox58.Controls.Add(this.SignDocumentFileSaveButton);
+            resources.ApplyResources(this.groupBox58, "groupBox58");
+            this.groupBox58.Name = "groupBox58";
+            this.groupBox58.TabStop = false;
+            // 
+            // label161
+            // 
+            resources.ApplyResources(this.label161, "label161");
+            this.label161.Name = "label161";
+            // 
+            // SignDocumentFileSaveBox
+            // 
+            resources.ApplyResources(this.SignDocumentFileSaveBox, "SignDocumentFileSaveBox");
+            this.SignDocumentFileSaveBox.Name = "SignDocumentFileSaveBox";
+            this.SignDocumentFileSaveBox.ReadOnly = true;
+            // 
+            // SignDocumentFileSaveButton
+            // 
+            resources.ApplyResources(this.SignDocumentFileSaveButton, "SignDocumentFileSaveButton");
+            this.SignDocumentFileSaveButton.Name = "SignDocumentFileSaveButton";
+            this.SignDocumentFileSaveButton.UseVisualStyleBackColor = true;
+            this.SignDocumentFileSaveButton.Click += new System.EventHandler(this.SignDocumentFileSaveButton_Click);
+            // 
+            // groupBox54
+            // 
+            this.groupBox54.Controls.Add(this.label165);
+            this.groupBox54.Controls.Add(this.SingPersonImageAlt);
+            this.groupBox54.Controls.Add(this.label159);
+            this.groupBox54.Controls.Add(this.SignPersionDocumentChooseFile);
+            this.groupBox54.Controls.Add(this.SignPersionDocument);
+            this.groupBox54.Controls.Add(this.label152);
+            resources.ApplyResources(this.groupBox54, "groupBox54");
+            this.groupBox54.Name = "groupBox54";
+            this.groupBox54.TabStop = false;
+            // 
+            // label165
+            // 
+            resources.ApplyResources(this.label165, "label165");
+            this.label165.ForeColor = System.Drawing.Color.Crimson;
+            this.label165.Name = "label165";
+            // 
+            // SingPersonImageAlt
+            // 
+            resources.ApplyResources(this.SingPersonImageAlt, "SingPersonImageAlt");
+            this.SingPersonImageAlt.Name = "SingPersonImageAlt";
+            // 
+            // label159
+            // 
+            resources.ApplyResources(this.label159, "label159");
+            this.label159.Name = "label159";
+            // 
+            // SignPersionDocumentChooseFile
+            // 
+            resources.ApplyResources(this.SignPersionDocumentChooseFile, "SignPersionDocumentChooseFile");
+            this.SignPersionDocumentChooseFile.Name = "SignPersionDocumentChooseFile";
+            this.SignPersionDocumentChooseFile.UseVisualStyleBackColor = true;
+            this.SignPersionDocumentChooseFile.Click += new System.EventHandler(this.SignPersionDocumentChooseFile_Click);
+            // 
+            // SignPersionDocument
+            // 
+            resources.ApplyResources(this.SignPersionDocument, "SignPersionDocument");
+            this.SignPersionDocument.Name = "SignPersionDocument";
+            this.SignPersionDocument.ReadOnly = true;
+            // 
+            // label152
+            // 
+            resources.ApplyResources(this.label152, "label152");
+            this.label152.Name = "label152";
+            // 
+            // TabPage_40
+            // 
+            this.TabPage_40.Controls.Add(this.linkLabel5);
+            this.TabPage_40.Controls.Add(this.label173);
+            this.TabPage_40.Controls.Add(this.groupBox59);
+            this.TabPage_40.Controls.Add(this.ExamReportChange);
+            this.TabPage_40.Controls.Add(this.groupBox56);
+            this.TabPage_40.Controls.Add(this.SelectExamFile);
+            this.TabPage_40.Controls.Add(this.ExamFileText);
+            this.TabPage_40.Controls.Add(this.label154);
+            this.TabPage_40.Controls.Add(this.RefreshVFSOFTREPORT);
+            this.TabPage_40.Controls.Add(this.groupBox57);
+            resources.ApplyResources(this.TabPage_40, "TabPage_40");
+            this.TabPage_40.Name = "TabPage_40";
+            this.TabPage_40.UseVisualStyleBackColor = true;
+            // 
+            // linkLabel5
+            // 
+            resources.ApplyResources(this.linkLabel5, "linkLabel5");
+            this.linkLabel5.Name = "linkLabel5";
+            this.linkLabel5.TabStop = true;
+            this.linkLabel5.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel5_LinkClicked);
+            // 
+            // label173
+            // 
+            resources.ApplyResources(this.label173, "label173");
+            this.label173.ForeColor = System.Drawing.Color.Crimson;
+            this.label173.Name = "label173";
+            // 
+            // groupBox59
+            // 
+            this.groupBox59.Controls.Add(this.ExamReportChangeItemDataFormat);
+            this.groupBox59.Controls.Add(this.ExamReportChangeItemName);
+            this.groupBox59.Controls.Add(this.ExamReportChangeItemDataRaid);
+            this.groupBox59.Controls.Add(this.ExamReportChangeProgress);
+            this.groupBox59.Controls.Add(this.ExamReplaceRaids);
+            this.groupBox59.Controls.Add(this.ExamReplaceDataFormat);
+            this.groupBox59.Controls.Add(this.ExamReplaceItemName);
+            this.groupBox59.Controls.Add(this.label172);
+            this.groupBox59.Controls.Add(this.label171);
+            this.groupBox59.Controls.Add(this.label170);
+            this.groupBox59.Controls.Add(this.ExamReportRaids);
+            this.groupBox59.Controls.Add(this.label169);
+            this.groupBox59.Controls.Add(this.label168);
+            this.groupBox59.Controls.Add(this.ExamReportItems);
+            this.groupBox59.Controls.Add(this.label158);
+            this.groupBox59.Controls.Add(this.ExamReportDataFormat);
+            resources.ApplyResources(this.groupBox59, "groupBox59");
+            this.groupBox59.Name = "groupBox59";
+            this.groupBox59.TabStop = false;
+            // 
+            // ExamReportChangeItemDataFormat
+            // 
+            resources.ApplyResources(this.ExamReportChangeItemDataFormat, "ExamReportChangeItemDataFormat");
+            this.ExamReportChangeItemDataFormat.Name = "ExamReportChangeItemDataFormat";
+            this.ExamReportChangeItemDataFormat.TabStop = true;
+            this.ExamReportChangeItemDataFormat.UseVisualStyleBackColor = true;
+            // 
+            // ExamReportChangeItemName
+            // 
+            resources.ApplyResources(this.ExamReportChangeItemName, "ExamReportChangeItemName");
+            this.ExamReportChangeItemName.Name = "ExamReportChangeItemName";
+            this.ExamReportChangeItemName.TabStop = true;
+            this.ExamReportChangeItemName.UseVisualStyleBackColor = true;
+            // 
+            // ExamReportChangeItemDataRaid
+            // 
+            resources.ApplyResources(this.ExamReportChangeItemDataRaid, "ExamReportChangeItemDataRaid");
+            this.ExamReportChangeItemDataRaid.Name = "ExamReportChangeItemDataRaid";
+            this.ExamReportChangeItemDataRaid.TabStop = true;
+            this.ExamReportChangeItemDataRaid.UseVisualStyleBackColor = true;
+            // 
+            // ExamReportChangeProgress
+            // 
+            resources.ApplyResources(this.ExamReportChangeProgress, "ExamReportChangeProgress");
+            this.ExamReportChangeProgress.Name = "ExamReportChangeProgress";
+            // 
+            // ExamReplaceRaids
+            // 
+            resources.ApplyResources(this.ExamReplaceRaids, "ExamReplaceRaids");
+            this.ExamReplaceRaids.Name = "ExamReplaceRaids";
+            // 
+            // ExamReplaceDataFormat
+            // 
+            this.ExamReplaceDataFormat.FormattingEnabled = true;
+            resources.ApplyResources(this.ExamReplaceDataFormat, "ExamReplaceDataFormat");
+            this.ExamReplaceDataFormat.Name = "ExamReplaceDataFormat";
+            // 
+            // ExamReplaceItemName
+            // 
+            resources.ApplyResources(this.ExamReplaceItemName, "ExamReplaceItemName");
+            this.ExamReplaceItemName.Name = "ExamReplaceItemName";
+            // 
+            // label172
+            // 
+            resources.ApplyResources(this.label172, "label172");
+            this.label172.Name = "label172";
+            // 
+            // label171
+            // 
+            resources.ApplyResources(this.label171, "label171");
+            this.label171.Name = "label171";
+            // 
+            // label170
+            // 
+            resources.ApplyResources(this.label170, "label170");
+            this.label170.Name = "label170";
+            // 
+            // ExamReportRaids
+            // 
+            this.ExamReportRaids.FormattingEnabled = true;
+            resources.ApplyResources(this.ExamReportRaids, "ExamReportRaids");
+            this.ExamReportRaids.Name = "ExamReportRaids";
+            this.ExamReportRaids.SelectedIndexChanged += new System.EventHandler(this.ExamReportRaids_SelectedIndexChanged);
+            // 
+            // label169
+            // 
+            resources.ApplyResources(this.label169, "label169");
+            this.label169.Name = "label169";
+            // 
+            // label168
+            // 
+            resources.ApplyResources(this.label168, "label168");
+            this.label168.Name = "label168";
+            // 
+            // ExamReportItems
+            // 
+            this.ExamReportItems.FormattingEnabled = true;
+            resources.ApplyResources(this.ExamReportItems, "ExamReportItems");
+            this.ExamReportItems.Name = "ExamReportItems";
+            this.ExamReportItems.SelectedIndexChanged += new System.EventHandler(this.ExamReportItems_SelectedIndexChanged);
+            this.ExamReportItems.MouseHover += new System.EventHandler(this.ExamReportItems_MouseHover);
+            // 
+            // label158
+            // 
+            resources.ApplyResources(this.label158, "label158");
+            this.label158.Name = "label158";
+            // 
+            // ExamReportDataFormat
+            // 
+            this.ExamReportDataFormat.FormattingEnabled = true;
+            resources.ApplyResources(this.ExamReportDataFormat, "ExamReportDataFormat");
+            this.ExamReportDataFormat.Name = "ExamReportDataFormat";
+            // 
+            // ExamReportChange
+            // 
+            resources.ApplyResources(this.ExamReportChange, "ExamReportChange");
+            this.ExamReportChange.Name = "ExamReportChange";
+            this.ExamReportChange.UseVisualStyleBackColor = true;
+            this.ExamReportChange.Click += new System.EventHandler(this.ExamReportChange_Click);
+            // 
+            // groupBox56
+            // 
+            this.groupBox56.Controls.Add(this.ExamRaidsCopy);
+            this.groupBox56.Controls.Add(this.ExamRaidInfoCombox);
+            this.groupBox56.Controls.Add(this.label157);
+            this.groupBox56.Controls.Add(this.label156);
+            this.groupBox56.Controls.Add(this.label155);
+            this.groupBox56.Controls.Add(this.ExamItemsCombox);
+            this.groupBox56.Controls.Add(this.ExamItemsSelectorsCombox);
+            resources.ApplyResources(this.groupBox56, "groupBox56");
+            this.groupBox56.Name = "groupBox56";
+            this.groupBox56.TabStop = false;
+            // 
+            // ExamRaidsCopy
+            // 
+            resources.ApplyResources(this.ExamRaidsCopy, "ExamRaidsCopy");
+            this.ExamRaidsCopy.Name = "ExamRaidsCopy";
+            this.ExamRaidsCopy.UseVisualStyleBackColor = true;
+            this.ExamRaidsCopy.Click += new System.EventHandler(this.ExamRaidsCopy_Click);
+            // 
+            // ExamRaidInfoCombox
+            // 
+            this.ExamRaidInfoCombox.FormattingEnabled = true;
+            resources.ApplyResources(this.ExamRaidInfoCombox, "ExamRaidInfoCombox");
+            this.ExamRaidInfoCombox.Name = "ExamRaidInfoCombox";
+            this.ExamRaidInfoCombox.MouseHover += new System.EventHandler(this.ExamRaidInfoCombox_MouseHover);
+            // 
+            // label157
+            // 
+            resources.ApplyResources(this.label157, "label157");
+            this.label157.Name = "label157";
+            // 
+            // label156
+            // 
+            resources.ApplyResources(this.label156, "label156");
+            this.label156.Name = "label156";
+            // 
+            // label155
+            // 
+            resources.ApplyResources(this.label155, "label155");
+            this.label155.Name = "label155";
+            // 
+            // ExamItemsCombox
+            // 
+            this.ExamItemsCombox.FormattingEnabled = true;
+            resources.ApplyResources(this.ExamItemsCombox, "ExamItemsCombox");
+            this.ExamItemsCombox.Name = "ExamItemsCombox";
+            this.ExamItemsCombox.SelectedIndexChanged += new System.EventHandler(this.ExamItemsCombox_SelectedIndexChanged);
+            this.ExamItemsCombox.MouseHover += new System.EventHandler(this.ExamItemsCombox_MouseHover);
+            // 
+            // ExamItemsSelectorsCombox
+            // 
+            this.ExamItemsSelectorsCombox.FormattingEnabled = true;
+            resources.ApplyResources(this.ExamItemsSelectorsCombox, "ExamItemsSelectorsCombox");
+            this.ExamItemsSelectorsCombox.Name = "ExamItemsSelectorsCombox";
+            this.ExamItemsSelectorsCombox.MouseHover += new System.EventHandler(this.ExamItemsSelectorsCombox_MouseHover);
+            // 
+            // SelectExamFile
+            // 
+            resources.ApplyResources(this.SelectExamFile, "SelectExamFile");
+            this.SelectExamFile.Name = "SelectExamFile";
+            this.SelectExamFile.UseVisualStyleBackColor = true;
+            this.SelectExamFile.Click += new System.EventHandler(this.SelectExamFile_Click);
+            // 
+            // ExamFileText
+            // 
+            resources.ApplyResources(this.ExamFileText, "ExamFileText");
+            this.ExamFileText.Name = "ExamFileText";
+            this.ExamFileText.ReadOnly = true;
+            // 
+            // label154
+            // 
+            resources.ApplyResources(this.label154, "label154");
+            this.label154.Name = "label154";
+            // 
+            // RefreshVFSOFTREPORT
+            // 
+            resources.ApplyResources(this.RefreshVFSOFTREPORT, "RefreshVFSOFTREPORT");
+            this.RefreshVFSOFTREPORT.Name = "RefreshVFSOFTREPORT";
+            this.RefreshVFSOFTREPORT.UseVisualStyleBackColor = true;
+            this.RefreshVFSOFTREPORT.Click += new System.EventHandler(this.RefreshVFSOFTREPORT_Click);
+            // 
+            // groupBox57
+            // 
+            this.groupBox57.Controls.Add(this.VFSOFT_Report_ListView);
+            resources.ApplyResources(this.groupBox57, "groupBox57");
+            this.groupBox57.Name = "groupBox57";
+            this.groupBox57.TabStop = false;
+            // 
+            // VFSOFT_Report_ListView
+            // 
+            this.VFSOFT_Report_ListView.HideSelection = false;
+            resources.ApplyResources(this.VFSOFT_Report_ListView, "VFSOFT_Report_ListView");
+            this.VFSOFT_Report_ListView.Name = "VFSOFT_Report_ListView";
+            this.VFSOFT_Report_ListView.UseCompatibleStateImageBehavior = false;
+            this.VFSOFT_Report_ListView.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.VFSOFT_Report_ListView_ItemSelectionChanged);
+            // 
             // TabPage_38
             // 
             this.TabPage_38.Controls.Add(this.groupBox53);
@@ -5774,7 +6405,6 @@
             // 
             // groupBox53
             // 
-            resources.ApplyResources(this.groupBox53, "groupBox53");
             this.groupBox53.Controls.Add(this.VoteTable_NumberIndex_Keep);
             this.groupBox53.Controls.Add(this.VoteTable_KeepPageFooter);
             this.groupBox53.Controls.Add(this.VoteTableFontSize);
@@ -5783,6 +6413,7 @@
             this.groupBox53.Controls.Add(this.VoteTableHeight);
             this.groupBox53.Controls.Add(this.label149);
             this.groupBox53.Controls.Add(this.VoteTable_Random_PageCounts);
+            resources.ApplyResources(this.groupBox53, "groupBox53");
             this.groupBox53.Name = "groupBox53";
             this.groupBox53.TabStop = false;
             // 
@@ -5871,8 +6502,8 @@
             // 
             // label142
             // 
-            resources.ApplyResources(this.label142, "label142");
             this.label142.ForeColor = System.Drawing.Color.Tomato;
+            resources.ApplyResources(this.label142, "label142");
             this.label142.Name = "label142";
             // 
             // VoteTable_Render
@@ -5920,8 +6551,8 @@
             // 
             // groupBox52
             // 
-            resources.ApplyResources(this.groupBox52, "groupBox52");
             this.groupBox52.Controls.Add(this.VoteTable_Start);
+            resources.ApplyResources(this.groupBox52, "groupBox52");
             this.groupBox52.Name = "groupBox52";
             this.groupBox52.TabStop = false;
             // 
@@ -5948,9 +6579,9 @@
             // 
             // groupBox50
             // 
-            resources.ApplyResources(this.groupBox50, "groupBox50");
             this.groupBox50.Controls.Add(this.VoteTableName_CountText);
             this.groupBox50.Controls.Add(this.VoteTable_Names);
+            resources.ApplyResources(this.groupBox50, "groupBox50");
             this.groupBox50.Name = "groupBox50";
             this.groupBox50.TabStop = false;
             // 
@@ -6022,20 +6653,124 @@
             // 
             // TabPage_36
             // 
+            this.TabPage_36.Controls.Add(this.groupBox28);
             this.TabPage_36.Controls.Add(this.groupBox46);
             this.TabPage_36.Controls.Add(this.groupBox43);
             resources.ApplyResources(this.TabPage_36, "TabPage_36");
             this.TabPage_36.Name = "TabPage_36";
             this.TabPage_36.UseVisualStyleBackColor = true;
             // 
+            // groupBox28
+            // 
+            this.groupBox28.Controls.Add(this.label176);
+            this.groupBox28.Controls.Add(this.label175);
+            this.groupBox28.Controls.Add(this.GetRandomComputerNameRandLength);
+            this.groupBox28.Controls.Add(this.GetRandomComputerNameButton);
+            this.groupBox28.Controls.Add(this.ExamComputerNameChange);
+            this.groupBox28.Controls.Add(this.ExamComputerChangeName);
+            this.groupBox28.Controls.Add(this.label174);
+            this.groupBox28.Controls.Add(this.ExamComputerNames);
+            this.groupBox28.Controls.Add(this.label58);
+            this.groupBox28.Controls.Add(this.ChooseExamFileButton);
+            this.groupBox28.Controls.Add(this.ChooseExamFileTextBox);
+            this.groupBox28.Controls.Add(this.label5);
+            resources.ApplyResources(this.groupBox28, "groupBox28");
+            this.groupBox28.Name = "groupBox28";
+            this.groupBox28.TabStop = false;
+            // 
+            // label176
+            // 
+            this.label176.AutoEllipsis = true;
+            resources.ApplyResources(this.label176, "label176");
+            this.label176.ForeColor = System.Drawing.Color.Crimson;
+            this.label176.Name = "label176";
+            // 
+            // label175
+            // 
+            resources.ApplyResources(this.label175, "label175");
+            this.label175.Name = "label175";
+            // 
+            // GetRandomComputerNameRandLength
+            // 
+            resources.ApplyResources(this.GetRandomComputerNameRandLength, "GetRandomComputerNameRandLength");
+            this.GetRandomComputerNameRandLength.Maximum = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.GetRandomComputerNameRandLength.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.GetRandomComputerNameRandLength.Name = "GetRandomComputerNameRandLength";
+            this.GetRandomComputerNameRandLength.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            // 
+            // GetRandomComputerNameButton
+            // 
+            resources.ApplyResources(this.GetRandomComputerNameButton, "GetRandomComputerNameButton");
+            this.GetRandomComputerNameButton.Name = "GetRandomComputerNameButton";
+            this.GetRandomComputerNameButton.UseVisualStyleBackColor = true;
+            this.GetRandomComputerNameButton.Click += new System.EventHandler(this.GetRandomComputerNameButton_Click);
+            // 
+            // ExamComputerNameChange
+            // 
+            resources.ApplyResources(this.ExamComputerNameChange, "ExamComputerNameChange");
+            this.ExamComputerNameChange.Name = "ExamComputerNameChange";
+            this.ExamComputerNameChange.UseVisualStyleBackColor = true;
+            this.ExamComputerNameChange.Click += new System.EventHandler(this.ExamComputerNameChange_Click);
+            // 
+            // ExamComputerChangeName
+            // 
+            resources.ApplyResources(this.ExamComputerChangeName, "ExamComputerChangeName");
+            this.ExamComputerChangeName.Name = "ExamComputerChangeName";
+            // 
+            // label174
+            // 
+            resources.ApplyResources(this.label174, "label174");
+            this.label174.Name = "label174";
+            // 
+            // ExamComputerNames
+            // 
+            this.ExamComputerNames.FormattingEnabled = true;
+            resources.ApplyResources(this.ExamComputerNames, "ExamComputerNames");
+            this.ExamComputerNames.Name = "ExamComputerNames";
+            // 
+            // label58
+            // 
+            resources.ApplyResources(this.label58, "label58");
+            this.label58.Name = "label58";
+            // 
+            // ChooseExamFileButton
+            // 
+            resources.ApplyResources(this.ChooseExamFileButton, "ChooseExamFileButton");
+            this.ChooseExamFileButton.Name = "ChooseExamFileButton";
+            this.ChooseExamFileButton.UseVisualStyleBackColor = true;
+            this.ChooseExamFileButton.Click += new System.EventHandler(this.ChooseExamFileButton_Click);
+            // 
+            // ChooseExamFileTextBox
+            // 
+            resources.ApplyResources(this.ChooseExamFileTextBox, "ChooseExamFileTextBox");
+            this.ChooseExamFileTextBox.Name = "ChooseExamFileTextBox";
+            this.ChooseExamFileTextBox.ReadOnly = true;
+            // 
+            // label5
+            // 
+            resources.ApplyResources(this.label5, "label5");
+            this.label5.Name = "label5";
+            // 
             // groupBox46
             // 
-            resources.ApplyResources(this.groupBox46, "groupBox46");
             this.groupBox46.Controls.Add(this.money_big);
             this.groupBox46.Controls.Add(this.money_small);
             this.groupBox46.Controls.Add(this.label131);
             this.groupBox46.Controls.Add(this.label130);
             this.groupBox46.Controls.Add(this.copy_money_big_result);
+            resources.ApplyResources(this.groupBox46, "groupBox46");
             this.groupBox46.Name = "groupBox46";
             this.groupBox46.TabStop = false;
             // 
@@ -6378,8 +7113,8 @@
             // 
             // network_info_mac_address
             // 
-            resources.ApplyResources(this.network_info_mac_address, "network_info_mac_address");
             this.network_info_mac_address.FormattingEnabled = true;
+            resources.ApplyResources(this.network_info_mac_address, "network_info_mac_address");
             this.network_info_mac_address.Name = "network_info_mac_address";
             // 
             // label122
@@ -6426,38 +7161,38 @@
             // 
             // network_info_dns2
             // 
-            resources.ApplyResources(this.network_info_dns2, "network_info_dns2");
             this.network_info_dns2.FormattingEnabled = true;
+            resources.ApplyResources(this.network_info_dns2, "network_info_dns2");
             this.network_info_dns2.Name = "network_info_dns2";
             // 
             // network_info_dns1
             // 
-            resources.ApplyResources(this.network_info_dns1, "network_info_dns1");
             this.network_info_dns1.FormattingEnabled = true;
+            resources.ApplyResources(this.network_info_dns1, "network_info_dns1");
             this.network_info_dns1.Name = "network_info_dns1";
             // 
             // network_info_gateway
             // 
-            resources.ApplyResources(this.network_info_gateway, "network_info_gateway");
             this.network_info_gateway.FormattingEnabled = true;
+            resources.ApplyResources(this.network_info_gateway, "network_info_gateway");
             this.network_info_gateway.Name = "network_info_gateway";
             // 
             // network_info_mask
             // 
-            resources.ApplyResources(this.network_info_mask, "network_info_mask");
             this.network_info_mask.FormattingEnabled = true;
+            resources.ApplyResources(this.network_info_mask, "network_info_mask");
             this.network_info_mask.Name = "network_info_mask";
             // 
             // network_info_ipv4
             // 
-            resources.ApplyResources(this.network_info_ipv4, "network_info_ipv4");
             this.network_info_ipv4.FormattingEnabled = true;
+            resources.ApplyResources(this.network_info_ipv4, "network_info_ipv4");
             this.network_info_ipv4.Name = "network_info_ipv4";
             // 
             // network_info_card_list
             // 
-            resources.ApplyResources(this.network_info_card_list, "network_info_card_list");
             this.network_info_card_list.FormattingEnabled = true;
+            resources.ApplyResources(this.network_info_card_list, "network_info_card_list");
             this.network_info_card_list.Name = "network_info_card_list";
             this.network_info_card_list.SelectedIndexChanged += new System.EventHandler(this.network_info_card_list_SelectedIndexChanged);
             // 
@@ -6493,55 +7228,18 @@
             // 
             // TabPage_08
             // 
-            this.TabPage_08.Controls.Add(this.pictureBox6);
-            this.TabPage_08.Controls.Add(this.pictureBox5);
             this.TabPage_08.Controls.Add(this.pictureBox4);
             this.TabPage_08.Controls.Add(this.pictureBox3);
             this.TabPage_08.Controls.Add(this.pictureBox2);
+            this.TabPage_08.Controls.Add(this.pictureBox9);
             this.TabPage_08.Controls.Add(this.groupBox4);
             this.TabPage_08.Controls.Add(this.groupBox3);
             resources.ApplyResources(this.TabPage_08, "TabPage_08");
             this.TabPage_08.Name = "TabPage_08";
             this.TabPage_08.UseVisualStyleBackColor = true;
             // 
-            // pictureBox6
-            // 
-            resources.ApplyResources(this.pictureBox6, "pictureBox6");
-            this.pictureBox6.Image = global::DocumentTools.Properties.Resources._6f258af2c19c9c3cdb97517573506c11ce48ff98;
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.TabStop = false;
-            // 
-            // pictureBox5
-            // 
-            resources.ApplyResources(this.pictureBox5, "pictureBox5");
-            this.pictureBox5.Image = global::DocumentTools.Properties.Resources._6f258af2c19c9c3cdb97517573506c11ce48ff98;
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.TabStop = false;
-            // 
-            // pictureBox4
-            // 
-            resources.ApplyResources(this.pictureBox4, "pictureBox4");
-            this.pictureBox4.Image = global::DocumentTools.Properties.Resources._6f258af2c19c9c3cdb97517573506c11ce48ff98;
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            resources.ApplyResources(this.pictureBox3, "pictureBox3");
-            this.pictureBox3.Image = global::DocumentTools.Properties.Resources._6f258af2c19c9c3cdb97517573506c11ce48ff98;
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            resources.ApplyResources(this.pictureBox2, "pictureBox2");
-            this.pictureBox2.Image = global::DocumentTools.Properties.Resources._6f258af2c19c9c3cdb97517573506c11ce48ff98;
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.TabStop = false;
-            // 
             // groupBox4
             // 
-            resources.ApplyResources(this.groupBox4, "groupBox4");
             this.groupBox4.Controls.Add(this.PlayCXKMusic);
             this.groupBox4.Controls.Add(this.pictureBox1);
             this.groupBox4.Controls.Add(this.ChceckVersion);
@@ -6550,6 +7248,7 @@
             this.groupBox4.Controls.Add(this.label11);
             this.groupBox4.Controls.Add(this.label10);
             this.groupBox4.Controls.Add(this.label9);
+            resources.ApplyResources(this.groupBox4, "groupBox4");
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.TabStop = false;
             // 
@@ -6604,7 +7303,6 @@
             // 
             // groupBox3
             // 
-            resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Controls.Add(this.DisableAdminBehavior);
             this.groupBox3.Controls.Add(this.DontateMe);
             this.groupBox3.Controls.Add(this.UseLibList);
@@ -6612,6 +7310,7 @@
             this.groupBox3.Controls.Add(this.label8);
             this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Controls.Add(this.label6);
+            resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
             // 
@@ -7083,7 +7782,9 @@
             this.随机身份证号码生成ToolStripMenuItem,
             this.文件副本生成ToolStripMenuItem,
             this.网卡设置ToolStripMenuItem,
-            this.选举报告单样式生成ToolStripMenuItem});
+            this.选举报告单样式生成ToolStripMenuItem,
+            this.单人表生成ToolStripMenuItem,
+            this.考评报表修改ToolStripMenuItem});
             this.sYX功能ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.云;
             this.sYX功能ToolStripMenuItem.Name = "sYX功能ToolStripMenuItem";
             resources.ApplyResources(this.sYX功能ToolStripMenuItem, "sYX功能ToolStripMenuItem");
@@ -7150,6 +7851,20 @@
             this.选举报告单样式生成ToolStripMenuItem.Name = "选举报告单样式生成ToolStripMenuItem";
             resources.ApplyResources(this.选举报告单样式生成ToolStripMenuItem, "选举报告单样式生成ToolStripMenuItem");
             this.选举报告单样式生成ToolStripMenuItem.Click += new System.EventHandler(this.选举报告单样式生成ToolStripMenuItem_Click);
+            // 
+            // 单人表生成ToolStripMenuItem
+            // 
+            this.单人表生成ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.word;
+            this.单人表生成ToolStripMenuItem.Name = "单人表生成ToolStripMenuItem";
+            resources.ApplyResources(this.单人表生成ToolStripMenuItem, "单人表生成ToolStripMenuItem");
+            this.单人表生成ToolStripMenuItem.Click += new System.EventHandler(this.单人表生成ToolStripMenuItem_Click);
+            // 
+            // 考评报表修改ToolStripMenuItem
+            // 
+            this.考评报表修改ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.文件;
+            this.考评报表修改ToolStripMenuItem.Name = "考评报表修改ToolStripMenuItem";
+            resources.ApplyResources(this.考评报表修改ToolStripMenuItem, "考评报表修改ToolStripMenuItem");
+            this.考评报表修改ToolStripMenuItem.Click += new System.EventHandler(this.考评报表修改ToolStripMenuItem_Click);
             // 
             // 其他功能ToolStripMenuItem
             // 
@@ -7367,6 +8082,36 @@
             this.TabPageIcoList.Images.SetKeyName(17, "文件.png");
             this.TabPageIcoList.Images.SetKeyName(18, "接口数据.png");
             this.TabPageIcoList.Images.SetKeyName(19, "报告单.png");
+            this.TabPageIcoList.Images.SetKeyName(20, "文档.png");
+            this.TabPageIcoList.Images.SetKeyName(21, "组 12064.png");
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = global::DocumentTools.Properties.Resources._6f258af2c19c9c3cdb97517573506c11ce48ff98;
+            resources.ApplyResources(this.pictureBox4, "pictureBox4");
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.TabStop = false;
+            // 
+            // pictureBox9
+            // 
+            this.pictureBox9.Image = global::DocumentTools.Properties.Resources._6f258af2c19c9c3cdb97517573506c11ce48ff98;
+            resources.ApplyResources(this.pictureBox9, "pictureBox9");
+            this.pictureBox9.Name = "pictureBox9";
+            this.pictureBox9.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::DocumentTools.Properties.Resources._6f258af2c19c9c3cdb97517573506c11ce48ff98;
+            resources.ApplyResources(this.pictureBox2, "pictureBox2");
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = global::DocumentTools.Properties.Resources._6f258af2c19c9c3cdb97517573506c11ce48ff98;
+            resources.ApplyResources(this.pictureBox3, "pictureBox3");
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.TabStop = false;
             // 
             // BodyForm
             // 
@@ -7380,6 +8125,7 @@
             this.Name = "BodyForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BodyForm_FormClosing);
             this.Load += new System.EventHandler(this.BodyForm_Load);
+            this.SizeChanged += new System.EventHandler(this.BodyForm_SizeChanged);
             this.Resize += new System.EventHandler(this.BodyForm_Resize);
             this.MainTabPage.ResumeLayout(false);
             this.TabPage_01.ResumeLayout(false);
@@ -7527,8 +8273,8 @@
             this.groupBox15.ResumeLayout(false);
             this.groupBox15.PerformLayout();
             this.TabPage_26.ResumeLayout(false);
-            this.groupBox28.ResumeLayout(false);
-            this.groupBox28.PerformLayout();
+            this.blockgroup.ResumeLayout(false);
+            this.blockgroup.PerformLayout();
             this.groupBox27.ResumeLayout(false);
             this.groupBox27.PerformLayout();
             this.groupBox26.ResumeLayout(false);
@@ -7541,6 +8287,25 @@
             this.groupBox40.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.votedataview)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.VotePicture)).EndInit();
+            this.TabPage_39.ResumeLayout(false);
+            this.TabPage_39.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
+            this.groupx.ResumeLayout(false);
+            this.groupBox55.ResumeLayout(false);
+            this.groupBox55.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SignDocumentNeedCount)).EndInit();
+            this.groupBox58.ResumeLayout(false);
+            this.groupBox58.PerformLayout();
+            this.groupBox54.ResumeLayout(false);
+            this.groupBox54.PerformLayout();
+            this.TabPage_40.ResumeLayout(false);
+            this.TabPage_40.PerformLayout();
+            this.groupBox59.ResumeLayout(false);
+            this.groupBox59.PerformLayout();
+            this.groupBox56.ResumeLayout(false);
+            this.groupBox56.PerformLayout();
+            this.groupBox57.ResumeLayout(false);
             this.TabPage_38.ResumeLayout(false);
             this.groupBox53.ResumeLayout(false);
             this.groupBox53.PerformLayout();
@@ -7559,6 +8324,9 @@
             this.groupBox49.ResumeLayout(false);
             this.groupBox49.PerformLayout();
             this.TabPage_36.ResumeLayout(false);
+            this.groupBox28.ResumeLayout(false);
+            this.groupBox28.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.GetRandomComputerNameRandLength)).EndInit();
             this.groupBox46.ResumeLayout(false);
             this.groupBox46.PerformLayout();
             this.groupBox43.ResumeLayout(false);
@@ -7571,11 +8339,6 @@
             this.groupBox44.ResumeLayout(false);
             this.groupBox44.PerformLayout();
             this.TabPage_08.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -7586,6 +8349,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.MainFormError)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -7652,9 +8419,6 @@
         private System.Windows.Forms.ContextMenuStrip ListViewRightMenu;
         private System.Windows.Forms.ToolStripMenuItem 列表操作ToolStripMenuItem;
         private System.Windows.Forms.TabPage TabPage_08;
-        private System.Windows.Forms.CheckBox PictureMergeMode;
-        private System.Windows.Forms.ComboBox MeregeFilePage;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
@@ -8028,8 +8792,6 @@
         private System.Windows.Forms.Button RestoreShort;
         private System.Windows.Forms.Button RemoveShort;
         private System.Windows.Forms.CheckBox AutoRestartExplorer;
-        private System.Windows.Forms.GroupBox groupBox28;
-        private System.Windows.Forms.Label label58;
         private System.Windows.Forms.TabPage TabPage_27;
         private System.Windows.Forms.Button SelectWord2EpubFiles;
         private System.Windows.Forms.Button ConvertWord2Epub;
@@ -8194,11 +8956,6 @@
         private System.Windows.Forms.ToolStripMenuItem 查看标签索引对照表ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripTextBox menu_chrome_path;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.PictureBox pictureBox6;
-        private System.Windows.Forms.PictureBox pictureBox5;
-        private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.Button UseLibList;
         private System.Windows.Forms.TabPage TabPage_33;
         private System.Windows.Forms.GroupBox groupBox34;
@@ -8466,6 +9223,101 @@
         private System.Windows.Forms.NumericUpDown VoteTableFontSize;
         private System.Windows.Forms.CheckBox VoteTable_KeepPageFooter;
         private System.Windows.Forms.CheckBox VoteTable_NumberIndex_Keep;
+        internal System.Windows.Forms.RadioButton SplitPdf_ByBookMark;
+        private System.Windows.Forms.TabPage TabPage_39;
+        private System.Windows.Forms.GroupBox groupBox54;
+        private System.Windows.Forms.Button SignPersionDocumentChooseFile;
+        private System.Windows.Forms.TextBox SignPersionDocument;
+        private System.Windows.Forms.Label label152;
+        private System.Windows.Forms.GroupBox blockgroup;
+        private System.Windows.Forms.Label label153;
+        private System.Windows.Forms.ComboBox PauseUpdateYears;
+        private System.Windows.Forms.Button SetPauseTime;
+        private System.Windows.Forms.Button OpenSystemUpdate;
+        private System.Windows.Forms.TabPage TabPage_40;
+        internal System.Windows.Forms.ListView VFSOFT_Report_ListView;
+        private System.Windows.Forms.Button RefreshVFSOFTREPORT;
+        private System.Windows.Forms.Label label154;
+        private System.Windows.Forms.Button SelectExamFile;
+        private System.Windows.Forms.TextBox ExamFileText;
+        private System.Windows.Forms.ComboBox ExamItemsCombox;
+        private System.Windows.Forms.ComboBox ExamItemsSelectorsCombox;
+        private System.Windows.Forms.GroupBox groupBox56;
+        private System.Windows.Forms.Label label156;
+        private System.Windows.Forms.Label label155;
+        private System.Windows.Forms.GroupBox groupBox57;
+        private System.Windows.Forms.Label label157;
+        private System.Windows.Forms.ComboBox ExamRaidInfoCombox;
+        private System.Windows.Forms.Label label158;
+        private System.Windows.Forms.ComboBox ExamReportDataFormat;
+        private System.Windows.Forms.Button ExamReportChange;
+        private System.Windows.Forms.TextBox SingPersonImageAlt;
+        private System.Windows.Forms.Label label159;
+        private System.Windows.Forms.GroupBox groupx;
+        private System.Windows.Forms.Label label160;
+        private System.Windows.Forms.TextBox SignDocumentFileSaveBox;
+        private System.Windows.Forms.Label label161;
+        private System.Windows.Forms.Button SignDocumentFileSaveButton;
+        private System.Windows.Forms.Button SignDocumentReplaceStart;
+        private System.Windows.Forms.NumericUpDown SignDocumentNeedCount;
+        private System.Windows.Forms.GroupBox groupBox55;
+        private System.Windows.Forms.RadioButton SignDocumentUseEmbedImage;
+        private System.Windows.Forms.RadioButton SignDocumentUseOutPersonPath;
+        private System.Windows.Forms.Button SignDocumentUseOutPersonPathButton;
+        private System.Windows.Forms.TextBox SignDocumentUseOutPersonPathTextBox;
+        private System.Windows.Forms.RadioButton SignDocumentOnlyUseOnlyImage;
+        private System.Windows.Forms.Button SignDocumentOnlyUseOnlyImageButton;
+        private System.Windows.Forms.TextBox SignDocumentOnlyUseOnlyImageTextBox;
+        private System.Windows.Forms.GroupBox groupBox58;
+        private System.Windows.Forms.ProgressBar SignDocumentProgress;
+        private System.Windows.Forms.Label label162;
+        private System.Windows.Forms.TextBox SignDocumentFileEndName;
+        private System.Windows.Forms.Label label164;
+        private System.Windows.Forms.Label label165;
+        private System.Windows.Forms.PictureBox pictureBox7;
+        private System.Windows.Forms.Label label163;
+        private System.Windows.Forms.Label label166;
+        private System.Windows.Forms.PictureBox pictureBox8;
+        private System.Windows.Forms.Label label167;
+        private System.Windows.Forms.GroupBox groupBox59;
+        private System.Windows.Forms.Label label168;
+        private System.Windows.Forms.ComboBox ExamReportItems;
+        private System.Windows.Forms.Label label169;
+        private System.Windows.Forms.ComboBox ExamReportRaids;
+        private System.Windows.Forms.Label label172;
+        private System.Windows.Forms.Label label171;
+        private System.Windows.Forms.Label label170;
+        private System.Windows.Forms.ComboBox ExamReplaceDataFormat;
+        private System.Windows.Forms.TextBox ExamReplaceItemName;
+        private System.Windows.Forms.TextBox ExamReplaceRaids;
+        private System.Windows.Forms.ProgressBar ExamReportChangeProgress;
+        private System.Windows.Forms.Label label173;
+        private ToolStripMenuItem 单人表生成ToolStripMenuItem;
+        private ToolStripMenuItem 考评报表修改ToolStripMenuItem;
+        private Button ExamRaidsCopy;
+        private GroupBox groupBox28;
+        private Label label5;
+        private Button ChooseExamFileButton;
+        private TextBox ChooseExamFileTextBox;
+        private Label label58;
+        private ComboBox ExamComputerNames;
+        private Button ExamComputerNameChange;
+        private TextBox ExamComputerChangeName;
+        private Label label174;
+        private Button GetRandomComputerNameButton;
+        private Label label175;
+        private NumericUpDown GetRandomComputerNameRandLength;
+        internal CheckBox SplitWordReUpdatePageNumber;
+        private RadioButton ExamReportChangeItemDataFormat;
+        private RadioButton ExamReportChangeItemName;
+        private RadioButton ExamReportChangeItemDataRaid;
+        private LinkLabel linkLabel5;
+        private LinkLabel linkLabel6;
+        private Label label176;
+        private PictureBox pictureBox4;
+        private PictureBox pictureBox3;
+        private PictureBox pictureBox2;
+        private PictureBox pictureBox9;
     }
 }
 

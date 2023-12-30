@@ -177,6 +177,9 @@
     <Reference Include="Gma.System.MouseKeyHook, Version=5.7.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MouseKeyHook.5.7.1\lib\net48\Gma.System.MouseKeyHook.dll</HintPath>
     </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=1.4.2.13, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.1.4.2\lib\netstandard2.0\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNetCore.WebUtilities, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNetCore.WebUtilities.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.WebUtilities.dll</HintPath>
     </Reference>
@@ -287,6 +290,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.8.0.0\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
@@ -467,6 +471,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AspWordsWarningCallBack.cs" />
+    <Compile Include="AutoWindowsSize.cs" />
     <Compile Include="DonateMeFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -474,11 +479,11 @@
       <DependentUpon>DonateMeFrm.cs</DependentUpon>
     </Compile>
     <Compile Include="FileDropHandler.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="BodyForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="BodyForm.Designer.cs">
+      <DependentUpon>BodyForm.cs</DependentUpon>
     </Compile>
     <Compile Include="IPAddressInputTextBox.cs">
       <SubType>Component</SubType>
@@ -495,15 +500,16 @@
     <EmbeddedResource Include="DonateMeFrm.resx">
       <DependentUpon>DonateMeFrm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.en.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="BodyForm.en.resx">
+      <DependentUpon>BodyForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="BodyForm.resx">
+      <DependentUpon>BodyForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="IPAddressInputTextBox.resx">
       <DependentUpon>IPAddressInputTextBox.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -534,6 +540,7 @@
   <ItemGroup>
     <Content Include="6.ico" />
     <None Include="Resources\BarCodeTemplate.xlsx" />
+    <None Include="Resources\PersonCode.zip" />
     <None Include="Resources\Remove.png" />
     <None Include="Resources\Clear.png" />
     <None Include="Resources\VoteReportDoc.doc" />
@@ -553,6 +560,8 @@
     <None Include="Resources\chinese_han.txt" />
     <None Include="Resources\chinse_first.txt" />
     <None Include="Resources\F6D781F44F41AAEE77BEA2A8E2F55510.jpg" />
+    <None Include="Resources\A.png" />
+    <None Include="Resources\B.png" />
     <Content Include="Resources\wzdsny.mp3" />
     <None Include="Resources\功能.png" />
     <None Include="Resources\关于.png" />
