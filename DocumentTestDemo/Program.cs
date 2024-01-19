@@ -4,6 +4,8 @@ using Aspose.Words.Layout;
 using System;
 using System.Diagnostics;
 using System.Linq;
+using Aspose.Slides;
+using System.IO;
 
 namespace DocumentTestDemo
 {
@@ -13,64 +15,52 @@ namespace DocumentTestDemo
         {
             Aspose.Hook.HookManager.StartHook();
 
-            string filename = @"C:\Users\pwn\Desktop\测试表格\1、政治素质测评（单人单表）.docx";
-            string savefilename = @"C:\Users\pwn\Desktop\测试表格\1、政治素质测评（单人单表）_1.docx";
+            string f1 = @"C:\Users\pwn\Desktop\新建文件夹 (2)\001.pptx";
+            string f2 = @"C:\Users\pwn\Desktop\新建文件夹 (2)";
 
-            // testdemo1(filename,savefilename);
-
-            testdemo0(filename,savefilename);
-
+            testdemo0(f1,f2);
 
         }
 
 
         static void testdemo0(string f1,string f2)
         {
-            Document testdoc = new Document(f1);
+            Presentation DestPre = new Presentation();
+            
+            DestPre.SlideSize.SetSize(SlideSizeType.OnScreen16x9, SlideSizeScaleType.Maximize);
 
-            DocumentBuilder testbud = new DocumentBuilder(testdoc);
-
-            LayoutCollector TempLayoutCol = new LayoutCollector(testdoc);
-            LayoutEnumerator TempLayoutEm = new LayoutEnumerator(testdoc);
-
-            foreach (Shape shape in testdoc.GetChildNodes(NodeType.Shape,true))
+            using (Presentation SourcePre = new Presentation(f1))
             {
-                //插入单人表逻辑。
-                if(shape.IsImage)
+                ISlideCollection SourceSildes = SourcePre.Slides;//原稿的slides集合
+
+                for(int SlideIndex = 0;SlideIndex< SourceSildes.Count;SlideIndex++)
                 {
+                    ISlide TempSourceSlide = SourceSildes[SlideIndex];//原告的单个slide
+                    
+                    //原稿的母版slide
+                    IMasterSlide TempSourceMasterSlide = TempSourceSlide.LayoutSlide.MasterSlide;
 
-                    if(shape.AlternativeText!=string.Empty)
-                    {
-                        //Debug.WriteLine(shape.AlternativeText);
+                        IMasterSlideCollection DestMasters = DestPre.Masters;
 
-                        shape.ImageData.SetImage(@"C:\Users\pwn\Pictures\二维码\测评\右下角\002测评人.bmp");
-                    }
+                        IMasterSlide DestMasterSlide = TempSourceSlide.LayoutSlide.MasterSlide;
+
+                        IMasterSlide DestClonePreSlide = DestMasters.AddClone(TempSourceMasterSlide);
+
+                        ISlideCollection DestSlides = DestPre.Slides;
+
+
+                        DestSlides.RemoveAt(0);
+                        
+                        DestSlides.AddClone(TempSourceSlide, DestClonePreSlide,false);
+
+                        string SaveDestName = $"{Path.Combine(f2,SlideIndex.ToString())}.pptx";
+
+                        DestPre.Save(SaveDestName,Aspose.Slides.Export.SaveFormat.Pptx);
                 }
+                DestPre.Dispose();
             }
+            
 
-            testdoc.Save(f2);
-        }
-        static void testdemo1(string f1,string f2)
-        {
-            Document TempDocument = new Document(f1);
-
-            LayoutCollector TempLayoutCol = new LayoutCollector(TempDocument);
-            LayoutEnumerator TempLayoutEm = new LayoutEnumerator(TempDocument);
-
-            foreach (Shape TempShape in TempDocument.GetChildNodes(NodeType.Shape, true))
-            {
-                if (TempShape.IsImage)
-                {
-                    TempLayoutEm.Current = TempLayoutCol.GetEntity(TempShape);
-                    TempShape.RelativeVerticalPosition = RelativeVerticalPosition.Page;
-                    TempShape.Top = TempLayoutEm.Rectangle.Top;
-                }
-
-            }
-
-            TempDocument.Save(f2);
-
-            Console.ReadLine();
         }
     }
 }

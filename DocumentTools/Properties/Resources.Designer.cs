@@ -83,6 +83,26 @@ namespace DocumentTools.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap _78383f3dgy1hkcbcvjkxgj20rz0rztc2 {
+            get {
+                object obj = ResourceManager.GetObject("78383f3dgy1hkcbcvjkxgj20rz0rztc2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap _78383f3dgy1hkcbcyxmgcj20f60f6goy {
+            get {
+                object obj = ResourceManager.GetObject("78383f3dgy1hkcbcyxmgcj20f60f6goy", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap A {
             get {
                 object obj = ResourceManager.GetObject("A", resourceCulture);
@@ -192,13 +212,15 @@ namespace DocumentTools.Properties {
         /// <summary>
         ///   查找类似 &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;configuration&gt;
-        ///  &lt;configSections&gt;
-        ///    &lt;sectionGroup name=&quot;applicationSettings&quot; type=&quot;System.Configuration.ApplicationSettingsGroup, System&quot;&gt;
-        ///      &lt;section name=&quot;DevExpress.LookAndFeel.Design.AppSettings&quot; type=&quot;System.Configuration.ClientSettingsSection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot; requirePermission=&quot;false&quot; /&gt;
-        ///    &lt;/sectionGroup&gt;
-        ///  &lt;/configSections&gt;
-        ///  &lt;applicationSettings&gt;
-        ///    &lt;DevExpress.LookAndFeel.Design.AppSet [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///  &lt;appSettings&gt;
+        ///    &lt;!--配置初始页面索引，根据对照表，修改Value中的数字为对照表中的数字，重新打开软件即可--&gt;
+        ///    &lt;add key=&quot;StartPageIndex&quot; value=&quot;0&quot; /&gt;
+        ///    &lt;!--配置是否开启高亮标签卡，修改Value为on表示开启，修改Value为off表示关闭，修改完毕后，重新打开软件即可--&gt;
+        ///    &lt;add key=&quot;TabPageHeighLight&quot; value=&quot;off&quot; /&gt;
+        ///    &lt;!--设置是否开启标签卡的图标，默认为on，修改为off关闭，只在TabPageHeight值为off时生效--&gt;
+        ///    &lt;add key=&quot;ShowTabPageIco&quot; value=&quot;on&quot; /&gt;
+        ///    &lt;!--配置是否开启转换完成后，显示打开转换目录弹窗的选项，修改Value为on表示开启，修改Value为off表示关闭，修改完毕后，重新打开软件即可--&gt;
+        ///    &lt;add key=&quot;ShowOpenTarg [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string ConfigTemplate {
             get {
@@ -267,6 +289,40 @@ namespace DocumentTools.Properties {
         }
         
         /// <summary>
+        ///   查找类似 &lt;!-- : Begin batch script
+        ///@setlocal DisableDelayedExpansion
+        ///@set uivr=v51
+        ///@echo off
+        ///:: ### 配置选项 ###
+        ///
+        ///:: 更改参数为 1 以启用调试模式（可与无人参与选项一起使用）
+        ///set _Debug=0
+        ///
+        ///:: 更改参数为 0 以通过脚本关闭 Windows 或 Office 激活处理
+        ///set ActWindows=1
+        ///set ActOffice=1
+        ///
+        ///:: 更改参数为 0 关闭 Office C2R 零售版转为批量版
+        ///set AutoR2V=1
+        ///
+        ///:: 更改参数为 0 以将 保持Office C2R vNext 许可证（包年订阅或永久激活）
+        ///set vNextOverride=1
+        ///
+        ///:: 更改参数为 0 以将 Windows 10/11 KMS38激活形式还原为普通KMS激活形式
+        ///set SkipKMS38=1
+        ///
+        ///:: ### 无人值守选项 ###
+        ///
+        ///:: 更改参数为 1 并设置 KMS_IP 地址以通过无人值守的外部 KMS 服务器激活
+        ///set External=0        /// [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string KMSAIO {
+            get {
+                return ResourceManager.GetString("KMSAIO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
         internal static System.Drawing.Bitmap pdf {
@@ -299,10 +355,30 @@ namespace DocumentTools.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap QQ截图20240115183157 {
+            get {
+                object obj = ResourceManager.GetObject("QQ截图20240115183157", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap Remove {
             get {
                 object obj = ResourceManager.GetObject("Remove", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] ReNamerPro73 {
+            get {
+                object obj = ResourceManager.GetObject("ReNamerPro73", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
@@ -399,6 +475,16 @@ namespace DocumentTools.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap 内存 {
+            get {
+                object obj = ResourceManager.GetObject("内存", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap 初始化 {
             get {
                 object obj = ResourceManager.GetObject("初始化", resourceCulture);
@@ -482,6 +568,16 @@ namespace DocumentTools.Properties {
         internal static System.Drawing.Bitmap 宽度 {
             get {
                 object obj = ResourceManager.GetObject("宽度", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 布局 {
+            get {
+                object obj = ResourceManager.GetObject("布局", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -604,6 +700,16 @@ namespace DocumentTools.Properties {
         internal static string 注册 {
             get {
                 return ResourceManager.GetString("注册", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] 移除副本规则_部分自定义规则 {
+            get {
+                object obj = ResourceManager.GetObject("移除副本规则_部分自定义规则", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         

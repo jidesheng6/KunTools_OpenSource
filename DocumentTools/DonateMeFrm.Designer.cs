@@ -41,7 +41,7 @@
             this.groupBox1.Controls.Add(this.WechatDonatePicture);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(246, 273);
+            this.groupBox1.Size = new System.Drawing.Size(337, 359);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "微信";
@@ -54,16 +54,16 @@
             this.WechatDonatePicture.InitialImage = null;
             this.WechatDonatePicture.Location = new System.Drawing.Point(6, 27);
             this.WechatDonatePicture.Name = "WechatDonatePicture";
-            this.WechatDonatePicture.Size = new System.Drawing.Size(234, 240);
-            this.WechatDonatePicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.WechatDonatePicture.Size = new System.Drawing.Size(322, 322);
+            this.WechatDonatePicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.WechatDonatePicture.TabIndex = 0;
             this.WechatDonatePicture.TabStop = false;
             // 
             // ShowWechatQR
             // 
-            this.ShowWechatQR.Location = new System.Drawing.Point(47, 291);
+            this.ShowWechatQR.Location = new System.Drawing.Point(84, 377);
             this.ShowWechatQR.Name = "ShowWechatQR";
-            this.ShowWechatQR.Size = new System.Drawing.Size(185, 57);
+            this.ShowWechatQR.Size = new System.Drawing.Size(189, 56);
             this.ShowWechatQR.TabIndex = 2;
             this.ShowWechatQR.Text = "加载赞赏码";
             this.ShowWechatQR.UseVisualStyleBackColor = true;
@@ -73,7 +73,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(290, 360);
+            this.ClientSize = new System.Drawing.Size(353, 445);
             this.Controls.Add(this.ShowWechatQR);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -85,6 +85,7 @@
             this.Text = "谢谢老板！";
             this.Load += new System.EventHandler(this.DonateMeFrm_Load);
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WechatDonatePicture)).EndInit();
             this.ResumeLayout(false);
 

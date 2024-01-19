@@ -23,6 +23,7 @@ namespace DocumentTools
         Excel2Word,
         SplitPdf,
         SplitWord,
+        SplitPPT,
         AddWaterMarkPdf,
         RemovePdfWaterMark,
         PPT2PDF,
@@ -39,7 +40,6 @@ namespace DocumentTools
 
     internal class UI
     {
-
         public static void AddCompressImageFiles()
         { AddFilesToListView("PDF文档", "*.jpg;*.jpeg;*.png;*.bmp", BodyForm.MainForm.CompressImageFileList); }
 
@@ -69,6 +69,7 @@ namespace DocumentTools
 
         public static void AddExcelReplaceFiles()
         { AddFilesToListView("EXCEL文档", "*.xls;*.xlsx", BodyForm.MainForm.ReplaceExcelFileView); }
+
         /// <summary>
         /// 添加文件列表到Listview中，并返回项目数量
         /// </summary>
@@ -248,6 +249,10 @@ namespace DocumentTools
 
         public static void AddWordReplaceFiles()
         { AddFilesToListView("WORD文档", "*.docx;*.doc;*.wps", BodyForm.MainForm.ReplaceWordFileList); }
+
+        public static void AddSplitPPTFiles()
+        { AddFilesToListView("演示文稿", "*.ppt;*.pptx", BodyForm.MainForm.SplitPPTFilesList); }
+
 
         /// <summary>
         /// 转换文件通用方法
@@ -579,6 +584,20 @@ namespace DocumentTools
                                 break;
                             case ConvertFileType.WeBp2Image:
                                 Util.ConvertWeBp2Image(ListViewFirstColumnText, ConvertedFileName);
+                                break;
+                            case ConvertFileType.SplitPPT:
+                                Util.SplitPPT(
+                                    ListViewFirstColumnText,
+                                    SelectSavePathstring,
+                                    BodyForm.MainForm.SplitPPT_SignleExport.Checked,
+                                    BodyForm.MainForm.SplitPPT_RangeExport_Start.Text,
+                                    BodyForm.MainForm.SplitPPT_RangeExport_End.Text,
+                                    (Aspose.Slides.SlideSizeType)Enum.Parse(
+                                        typeof(Aspose.Slides.SlideSizeType),
+                                        BodyForm.MainForm.SplitPdfSizeCombox.SelectedItem.ToString()),
+                                    (Aspose.Slides.SlideSizeScaleType)Enum.Parse(
+                                        typeof(Aspose.Slides.SlideSizeScaleType),
+                                        BodyForm.MainForm.SplitPdfScaleCombox.SelectedValue.ToString()));
                                 break;
                             default:
                                 break;

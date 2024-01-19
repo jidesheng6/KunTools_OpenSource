@@ -33,6 +33,12 @@ namespace DocumentTools
             if (WechatDonatePicture.Image.Width != TempBitMap.Width)
             {
                 WechatDonatePicture.Image = TempBitMap;
+                groupBox1.Width = WechatDonatePicture.Width + 100;
+                groupBox1.Height = WechatDonatePicture.Height + 100;
+                this.Width = WechatDonatePicture.Width + 100;
+                this.Height = WechatDonatePicture.Height + 100;
+                this.WindowState = FormWindowState.Maximized;
+                ShowWechatQR.Hide();
             }
         }
 

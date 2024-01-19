@@ -7,8 +7,8 @@ using Aspose.Imaging.ImageOptions;
 using Aspose.Pdf;
 using Aspose.Pdf.Annotations;
 using Aspose.Pdf.Facades;
-using Aspose.Pdf.Forms;
 using Aspose.Pdf.Text;
+using Aspose.Slides;
 using Aspose.Slides.Export;
 using Aspose.Words;
 using Aspose.Words.Tables;
@@ -49,7 +49,7 @@ namespace DocumentTools
         /// </summary>
         /// <param name="byteNumber"></param>
         /// <returns></returns>
-        private static double Byte2GB(long byteNumber) { return byteNumber / Math.Pow(1024.0, 3); }
+        public static double Byte2GB(long byteNumber) { return byteNumber / Math.Pow(1024.0, 3); }
 
 
         /// <summary>
@@ -1062,18 +1062,18 @@ namespace DocumentTools
         /// <param name="SaveDocumentFileName">转换后的文件名称</param>
         public static void ConvertExcel2Word(string DocumentFileName, string SaveDocumentFileName)
         {
-            using Aspose.Cells.Workbook TempLoadWorkBook = new Aspose.Cells.Workbook(DocumentFileName);
-            Aspose.Cells.DocxSaveOptions TempDocxSaveOption = new DocxSaveOptions
-            {
-                AllColumnsInOnePagePerSheet = false,
-                CheckWorkbookDefaultFont = true,
-                MergeAreas = true,
-                ValidateMergedAreas = true,
-                GridlineType = GridlineType.Hair,
-                TextCrossType = TextCrossType.Default,
-                OnePagePerSheet = false,
-            };
-            TempLoadWorkBook.Save(SaveDocumentFileName, TempDocxSaveOption);
+            //using Aspose.Cells.Workbook TempLoadWorkBook = new Aspose.Cells.Workbook(DocumentFileName);
+            //Aspose.Cells.DocxSaveOptions TempDocxSaveOption = new DocxSaveOptions
+            //{
+            //    AllColumnsInOnePagePerSheet = false,
+            //    CheckWorkbookDefaultFont = true,
+            //    MergeAreas = true,
+            //    ValidateMergedAreas = true,
+            //    GridlineType = GridlineType.Hair,
+            //    TextCrossType = TextCrossType.Default,
+            //    OnePagePerSheet = false,
+            //};
+            //TempLoadWorkBook.Save(SaveDocumentFileName, TempDocxSaveOption);
         }
 
         public static void ConvertHtml2Pdf(string DocumentFileName, string SavedFileName)
@@ -2250,10 +2250,10 @@ namespace DocumentTools
                 foreach (string existingCopy in existingCopies)
                 {
                     string existingFileName = Path.GetFileNameWithoutExtension(existingCopy);
-                    if (existingFileName.StartsWith($"{SourceFileName}- {ReNameStr} （"))
+                    if (existingFileName.StartsWith($"{SourceFileName} - {ReNameStr} ("))
                     {
-                        int countStartIndex = existingFileName.LastIndexOf('（') + 1;
-                        int countEndIndex = existingFileName.LastIndexOf('）');
+                        int countStartIndex = existingFileName.LastIndexOf('(') + 1;
+                        int countEndIndex = existingFileName.LastIndexOf(')');
                         if (countStartIndex >= 0 && countEndIndex >= 0)
                         {
                             string countStr = existingFileName.Substring(
@@ -2275,7 +2275,7 @@ namespace DocumentTools
 
                 for (int i = 1; i <= GenNumber; i++)
                 {
-                    string TempCopiedName = $"{SourceFileName}- {ReNameStr} （{(maxCount + i).ToString($"D{PrefixNumberCount}")}）{SourceFileNameExt}";
+                    string TempCopiedName = $"{SourceFileName} - {ReNameStr} ({(maxCount + i).ToString($"D{PrefixNumberCount}")}){SourceFileNameExt}";
                     string GenFileName = Path.Combine(OutPutPath, TempCopiedName);
                     File.Copy(SourceFile, GenFileName);
                     StatusLabel.Text = $"目录内共有{maxCount + i}个该文件";
@@ -2458,7 +2458,8 @@ namespace DocumentTools
             double Report_Table_Height,
             int Report_Table_FontSize,
             bool Report_Footer_Keep,
-            bool Report_NumberIndex_Keep)
+            bool Report_NumberIndex_Keep,
+            bool Report_Need_Another_Table)
         {
             Aspose.Words.Document TempLoadDocument = new Aspose.Words.Document(DocumentStream);
             Aspose.Words.DocumentBuilder TempVoteDocumentBuilder = new Aspose.Words.DocumentBuilder(TempLoadDocument);
@@ -2469,6 +2470,11 @@ namespace DocumentTools
             VoteTableHeaderItems.Add(Report_Table_Agree_Desc);
             VoteTableHeaderItems.Add(Report_Table_UnAgree_Desc);
             VoteTableHeaderItems.Add(Report_Table_Abdon_Desc);
+
+            List<string> VoteAnotherTableHeaderItems = new List<string>();
+            VoteAnotherTableHeaderItems.Add("序号");
+            VoteAnotherTableHeaderItems.Add("另选人姓名");
+            VoteAnotherTableHeaderItems.Add(Report_Table_Agree_Desc);
 
 
             //string[] VoteTableHeaderItems = new string[] { "序号",
@@ -2489,6 +2495,7 @@ namespace DocumentTools
             if (!Report_NumberIndex_Keep)
             {
                 VoteTableHeaderItems.RemoveAt(0);
+                VoteAnotherTableHeaderItems.RemoveAt(0);
             }
 
             //添加基础表头信息
@@ -2556,9 +2563,79 @@ namespace DocumentTools
                 }
             }
             TempVoteDocumentBuilder.EndTable();
+
+            if (Report_Need_Another_Table)
+            {
+                //插入另选人表格
+                //TempVoteDocumentBuilder.MoveToDocumentEnd();
+                TempVoteDocumentBuilder.InsertParagraph();
+                TempVoteDocumentBuilder.ParagraphFormat.FirstLineIndent = 15;
+                TempVoteDocumentBuilder.ParagraphFormat.SpaceBeforeAuto = true;
+                TempVoteDocumentBuilder.ParagraphFormat.SpaceAfter = 6;
+                TempVoteDocumentBuilder.Font.Size = 16;
+                TempVoteDocumentBuilder.Font.Name = "FangSong_GB2312";
+                //TempVoteDocumentBuilder.ParagraphFormat.Alignment = ParagraphAlignment.Left;
+                TempVoteDocumentBuilder.Write("另选人得票情况如下：");
+
+
+                Aspose.Words.Tables.Table TempVoteAnotherTable = TempVoteDocumentBuilder.StartTable();
+
+                foreach (string VoteAnotherTableItem in VoteAnotherTableHeaderItems)
+                {
+                    TempVoteDocumentBuilder.InsertCell();
+                    TempVoteAnotherTable.RelativeHorizontalAlignment = Aspose.Words.Drawing.HorizontalAlignment.Center;
+                    TempVoteAnotherTable.TextWrapping = Aspose.Words.Tables.TextWrapping.None;
+                    TempVoteAnotherTable.AllowAutoFit = false;
+                    TempVoteDocumentBuilder.ParagraphFormat.SpaceAfter = 0;
+                    TempVoteDocumentBuilder.RowFormat.Height = Report_Table_Height * 28.4;
+                    TempVoteDocumentBuilder.RowFormat.HeightRule = HeightRule.Exactly;
+                    TempVoteDocumentBuilder.RowFormat.HeadingFormat = true;
+                    TempVoteDocumentBuilder.ParagraphFormat.FirstLineIndent = 0;
+                    TempVoteDocumentBuilder.ParagraphFormat.Alignment = ParagraphAlignment.Center;
+                    TempVoteDocumentBuilder.CellFormat.VerticalAlignment = CellVerticalAlignment.Center;
+                    TempVoteDocumentBuilder.CellFormat.Shading.BackgroundPatternColor = Color.LightYellow;
+                    TempVoteDocumentBuilder.CellFormat.WrapText = false;
+                    TempVoteDocumentBuilder.Font.Size = Report_Table_FontSize;
+                    TempVoteDocumentBuilder.Font.Name = "SimSun";
+                    TempVoteDocumentBuilder.Write(VoteAnotherTableItem);
+                }
+
+                TempVoteDocumentBuilder.EndRow();
+
+
+                for (int OtherNumber = 0; OtherNumber < 3; OtherNumber++)
+                {
+                    TempVoteDocumentBuilder.InsertCell();
+                    TempVoteDocumentBuilder.RowFormat.HeadingFormat = false;
+                    TempVoteDocumentBuilder.CellFormat.Shading.BackgroundPatternColor = Color.White;
+                    TempVoteDocumentBuilder.Font.Name = "SimSun";
+                    //如果没有保留序号列，第一列就直接写名字，不写序号
+                    if (Report_NumberIndex_Keep)
+                    {
+                        TempVoteDocumentBuilder.Write((OtherNumber + 1).ToString());
+                    }
+                    else
+                    {
+                        TempVoteDocumentBuilder.Write(string.Empty);
+                    }
+                    for (int ColumnIndex = 1; ColumnIndex < VoteAnotherTableHeaderItems.Count; ColumnIndex++)
+                    {
+                        TempVoteDocumentBuilder.InsertCell();
+                        //只有写入序号列才往第一列写名字
+                        if (ColumnIndex == 1 && Report_NumberIndex_Keep)
+                        {
+                            TempVoteDocumentBuilder.Write(string.Empty);
+                        }
+                    }
+                    TempVoteDocumentBuilder.EndRow();
+                }
+
+                TempVoteDocumentBuilder.EndTable();
+            }
+
             if (!Report_Footer_Keep)
             {
-                foreach (Section TempSec in TempLoadDocument.Sections)
+                foreach (Aspose.Words.Section TempSec in TempLoadDocument.Sections)
                 {
                     Aspose.Words.HeaderFooter TempFooter = TempSec.HeadersFooters[HeaderFooterType.FooterEven];
                     TempFooter?.Remove();
@@ -2618,7 +2695,7 @@ namespace DocumentTools
             string gen_random_result = string.Empty;
 
             int random_first_index = random_obj_first.Next(0, Name_First_List.Length);
-            int random_name_index = random_obj_name.Next(0, Name_Text_List.Length);
+            int random_name_index = random_obj_name.Next(0, Name_Text_List.Length - 1);
 
             int random_name_len = random_obj_name.Next(2, 4);
 
@@ -3106,14 +3183,17 @@ namespace DocumentTools
         /// 获取程序使用掉的内存，单位MB
         /// </summary>
         /// <returns></returns>
-        public static string GetProcessUsedMemory()
+        public static (double MTM, double MFM, double PUM) GetProcessUsedMemory()
         {
             ComputerInfo computerInfo = new ComputerInfo();
             double MachineTotalMemory = Byte2GB((long)computerInfo.TotalPhysicalMemory);
             double MachineFreeMemory = Byte2GB((long)computerInfo.AvailablePhysicalMemory);
-            double ProcessUsedMemory = Process.GetCurrentProcess().PrivateMemorySize64 / 1024.0 / 1024.0;
+            double ProcessUsedMemory = Process.GetCurrentProcess().PrivateMemorySize64;
 
-            return $"程序占用内存：{ProcessUsedMemory:f2}MB|本机可用内存：{MachineFreeMemory:f2}GB|本机总内存：{MachineTotalMemory:f2}GB";
+            return (MTM: MachineTotalMemory, MFM: MachineFreeMemory, PUM: ProcessUsedMemory);
+
+
+            //return $"程序占用内存：{ProcessUsedMemory:f2}MB|本机可用内存：{MachineFreeMemory:f2}GB|本机总内存：{MachineTotalMemory:f2}GB";
         }
 
         /// <summary>
@@ -3247,7 +3327,7 @@ namespace DocumentTools
             string QueryUnitComputerString = @"SELECT DISTINCT CompName from Result_Essinfo;";
             var (DataReader, DataConnection) = GetAccessDataReader(DataBaseFile, QueryUnitComputerString);
 
-            while(DataReader.Read())
+            while (DataReader.Read())
             {
                 UnitComputerNames.Add(DataReader["CompName"].ToString());
             }
@@ -3256,7 +3336,7 @@ namespace DocumentTools
             return UnitComputerNames;
         }
 
-        public static string ChangeUnitExamComputerName(string ComputerName,string NewComputerName)
+        public static string ChangeUnitExamComputerName(string ComputerName, string NewComputerName)
         {
             string UpdateString = @$"Update Result_Essinfo SET CompName = Replace(CompName,'{ComputerName}','{NewComputerName}')";
 
@@ -3269,8 +3349,8 @@ namespace DocumentTools
 
             Random TempRandom = new Random();
 
-            string RandomString = new string(Enumerable.Repeat(FixedString, StringLength)
-            .Select(s => s[TempRandom.Next(s.Length)]).ToArray());
+            string RandomString = new string(
+                Enumerable.Repeat(FixedString, StringLength).Select(s => s[TempRandom.Next(s.Length)]).ToArray());
 
 
             return RandomString;
@@ -3285,10 +3365,16 @@ namespace DocumentTools
 
             string RandomString = GetRandomString(RandLength);
 
-            int RandomInt =  TempRandom.Next(CurrentComputerName.Length);
+            int RandomInt = TempRandom.Next(CurrentComputerName.Length);
 
+            string RandomComName = CurrentComputerName.Insert(RandomInt, RandomString);
 
-            return CurrentComputerName.Insert(RandomInt, RandomString);
+            if (RandomComName.Length > 30)
+            {
+                RandomComName = RandomComName.Substring(0, 30);
+            }
+
+            return RandomComName;
         }
 
 
@@ -3512,7 +3598,7 @@ namespace DocumentTools
                 DocumentName =>
                 {
                     Aspose.Words.Document LoadTempDocument = new Aspose.Words.Document(DocumentName);
-                    
+
                     MergeDocument.AppendDocument(LoadTempDocument, Aspose.Words.ImportFormatMode.KeepSourceFormatting);
                 });
 
@@ -3688,10 +3774,10 @@ namespace DocumentTools
 
 
                     /**
-                             * 测评单位码 A01 测评页码 T11
-                             * 选举单位码 B   选举页码 T11
-                             * 推荐单位吗 B   推荐页码 T10
-                             * **/
+                                 * 测评单位码 A01 测评页码 T11
+                                 * 选举单位码 B   选举页码 T11
+                                 * 推荐单位吗 B   推荐页码 T10
+                                 * **/
                 }
             }
             TempTreeView.Invoke(
@@ -4002,14 +4088,16 @@ namespace DocumentTools
             bool MulitSelect,
             bool isPickFolder,
             string FilterDisplayName,
-            string FilterExtensionsName)
+            string FilterExtensionsName,
+            string InitDirectory = "")
         {
             IEnumerable<string> ReturnFileNameString = new List<string>();
 
             CommonOpenFileDialog FileSelectDialog = new CommonOpenFileDialog
             {
                 Multiselect = MulitSelect,
-                IsFolderPicker = isPickFolder
+                IsFolderPicker = isPickFolder,
+                InitialDirectory = InitDirectory
             };
 
             if (!isPickFolder)
@@ -4161,7 +4249,8 @@ namespace DocumentTools
             bool SplitSignle,
             string Range_Start,
             string Range_End,
-            int SplitPerCount,bool UpdatePageNumber)
+            int SplitPerCount,
+            bool UpdatePageNumber)
         {
             Aspose.Words.Document TempDocument = new Aspose.Words.Document(DocumentFileName);
 
@@ -4185,7 +4274,7 @@ namespace DocumentTools
                         Aspose.Words.Document TempSplitDocument = TempDocument.ExtractPages(pageIndex, PageExtra);
                         TempSplitDocument.CompatibilityOptions.OptimizeFor(Aspose.Words.Settings.MsWordVersion.Word2010);
                         TempSplitDocument.CompatibilityOptions.BalanceSingleByteDoubleByteWidth = true;
-                        if(UpdatePageNumber)
+                        if (UpdatePageNumber)
                         {
                             TempSplitDocument.FirstSection.PageSetup.PageStartingNumber = 1;
                         }
@@ -4209,6 +4298,53 @@ namespace DocumentTools
                     TempSplitDocument.UpdatePageLayout();
                     TempSplitDocument.Save(SavedFileName, TempSaveOption);
                 }
+            }
+        }
+
+        public static void SplitPPT(
+            string DocumentFileName,
+            string SavePath,
+            bool SplitSignle,
+            string Range_Start,
+            string Range_End,
+            Aspose.Slides.SlideSizeType SplitSizeType,
+            Aspose.Slides.SlideSizeScaleType SplitScaleMode)
+        {
+            using Aspose.Slides.Presentation TempOutPutPresentation = new Aspose.Slides.Presentation();
+            using Aspose.Slides.Presentation TempSourcePresentation = new Aspose.Slides.Presentation(DocumentFileName);
+
+            ISlideCollection SourceSlides = TempSourcePresentation.Slides;
+
+            TempOutPutPresentation.SlideSize.SetSize(SplitSizeType, SplitScaleMode);
+            TempOutPutPresentation.Slides.RemoveAt(0);
+
+            int SourceSlideCount = SourceSlides.Count;
+
+            if (SplitSignle)//逐页拆分
+            {
+                for (int SlideIndex = 0; SlideIndex < SourceSlideCount; SlideIndex++)
+                {
+                    using Aspose.Slides.Presentation TempOutPutPresentation_Signle = new Aspose.Slides.Presentation();
+                    TempOutPutPresentation_Signle.SlideSize.SetSize(SplitSizeType, SplitScaleMode);
+                    string SavedFileName = $"{Path.Combine(SavePath, Path.GetFileNameWithoutExtension(DocumentFileName))}_第{SlideIndex + 1}页.pptx";
+                    TempOutPutPresentation_Signle.Slides.RemoveAt(0);
+                    TempOutPutPresentation_Signle.Slides.AddClone(SourceSlides[SlideIndex]);
+                    TempOutPutPresentation_Signle.Save(SavedFileName, Aspose.Slides.Export.SaveFormat.Pptx);
+                }
+            }
+            else
+            {
+                string SavedFileName = $"{Path.Combine(SavePath, Path.GetFileNameWithoutExtension(DocumentFileName))}_第{Range_Start}到{Range_End}页.pptx";
+
+                int ExportEndSlideCount = Math.Min(int.Parse(Range_End), SourceSlideCount);
+
+                for (int SlideIndex = int.Parse(Range_Start) - 1; SlideIndex < ExportEndSlideCount; SlideIndex++)
+                {
+                    ISlide RangeSlide = SourceSlides[SlideIndex];
+
+                    TempOutPutPresentation.Slides.AddClone(RangeSlide);
+                }
+                TempOutPutPresentation.Save(SavedFileName, Aspose.Slides.Export.SaveFormat.Pptx);
             }
         }
 
