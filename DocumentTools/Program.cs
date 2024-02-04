@@ -15,7 +15,7 @@ namespace DocumentTools
         [STAThread]
         static void Main()
         {
-            SetProcessDPIAware();
+            //SetProcessDPIAware();
             Aspose.Hook.HookManager.StartHook();
 
             Application.EnableVisualStyles();

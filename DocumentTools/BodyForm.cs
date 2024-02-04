@@ -52,8 +52,8 @@ namespace DocumentTools
         public string AddWaterMarkBackGroundImageFileName = string.Empty;
         public string WidgetAnchorMode = "off";
 
-        public int FormWidth = 1358;
-        public int FormHeight = 1178;
+        public int FormWidth = 906;
+        public int FormHeight = 834;
 
         public JArray City_Json;//城市的json字符串数据
 
@@ -2145,7 +2145,7 @@ namespace DocumentTools
              * datasource使用完毕后，订阅了SourceDisabled事件，就会自动进行Close
              * datasource不进行Close，在其他地方调用datasource会出现内存块错误，如果session被提前关闭，datasource将变为null
              * **/
-            NTwain.PlatformInfo.Current.PreferNewDSM = false;
+            //NTwain.PlatformInfo.Current.PreferNewDSM = false;
             TWIdentity tWIdentity = TWIdentity.CreateFromAssembly(DataGroups.Image, Assembly.GetExecutingAssembly());
             twainSession = new TwainSession(tWIdentity);
             twainSession.Open();
@@ -2198,11 +2198,11 @@ namespace DocumentTools
                     }
                     if (dataSource.Capabilities.CapSerialNumber.CanGet)
                     {
-                        ScanSerialNumber.Text = $"序列号：{dataSource.Capabilities.CapSerialNumber.GetValues().FirstOrDefault()}";
+                        ScanSerialNumberTextBox.Text = $"{dataSource.Capabilities.CapSerialNumber.GetValues().FirstOrDefault()}";
                     }
                     else
                     {
-                        ScanSerialNumber.Text = $"序列号：无";
+                        ScanSerialNumberTextBox.Text = $"无";
                     }
                     if (this.ExportCaps.Checked)
                     {
@@ -2234,7 +2234,7 @@ namespace DocumentTools
 
             if (dataSource.Open() == ReturnCode.Success)
             {
-                dataSource.Enable(SourceEnableMode.ShowUIOnly, TwainSolveErr27.Checked, this.Handle);
+                dataSource.Enable(SourceEnableMode.ShowUIOnly, false,IntPtr.Zero);
             }
         }
 
@@ -2306,7 +2306,7 @@ namespace DocumentTools
                     if (UseInterfaceUi.Checked)
                     {
                         (sender as System.Windows.Forms.Button).Enabled = false;
-                        dataSource.Enable(SourceEnableMode.ShowUI, TwainSolveErr27.Checked, this.Handle);
+                        dataSource.Enable(SourceEnableMode.ShowUI, false, IntPtr.Zero);
                         (sender as System.Windows.Forms.Button).Enabled = true;
                         ScanStopWatch = new Stopwatch();
                     }
@@ -2315,7 +2315,7 @@ namespace DocumentTools
                         if (dataSource.Capabilities.CapUIControllable.IsSupported)
                         {
                             (sender as System.Windows.Forms.Button).Enabled = false;
-                            dataSource.Enable(SourceEnableMode.NoUI, TwainSolveErr27.Checked, this.Handle);
+                            dataSource.Enable(SourceEnableMode.NoUI, false, IntPtr.Zero);
                             (sender as System.Windows.Forms.Button).Enabled = true;
                             ScanStopWatch = new Stopwatch();
                         }
@@ -5835,29 +5835,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
         private void SplitPPT_Button_Click(object sender, EventArgs e)
         {
-            Task.Run(
-                () =>
-                {
-                    try
-                    {
-                        UI.ConvertStart(
-                            SplitPPTFilesList,
-                            SplitPPTStatusText,
-                            ConvertFileType.SplitPPT,
-                            string.Empty,
-                            CallButton: sender as System.Windows.Forms.Button);
-                    }
-                    catch (Exception ex)
-                    {
-                        this.BeginInvoke(
-                            new Action(
-                                () =>
-                                {
-                                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                    (sender as System.Windows.Forms.Button).Enabled = true;
-                                }));
-                    }
-                });
+
         }
 
         private void 拆分PPTToolStripMenuItem_Click(object sender, EventArgs e)

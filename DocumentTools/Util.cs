@@ -1558,11 +1558,12 @@ namespace DocumentTools
                 DrawSlidesFrame = DrawBlackLine,
                 JpegQuality = 100,
                 ShowHiddenSlides = ExportHiddenPage,
-                Password = ProtectedPassword
+                Password = ProtectedPassword,
+                SlidesLayoutOptions = new NotesCommentsLayoutingOptions
+                {
+                    NotesPosition = Position
+                }
             };
-
-            INotesCommentsLayoutingOptions layoutingOptions = TempPdfOption.NotesCommentsLayouting;
-            layoutingOptions.NotesPosition = Position;
 
             TempDocument.Save(SavedFileName, Aspose.Slides.Export.SaveFormat.Pdf, TempPdfOption);
         }
