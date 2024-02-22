@@ -20,6 +20,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web.UI.WebControls;
 using System.Windows.Forms;
+using AutoUpdaterDotNET;
 
 namespace DocumentTools
 {
@@ -28,7 +29,6 @@ namespace DocumentTools
         public static BodyForm MainForm;
         private TwainSession twainSession;
         private DataSource dataSource;
-        private bool private_version = false;//是否为内部版本
         private int ImageIndex = 0;
         private int TempImageCount = 0;
         private int TotalTempImageCount = 0;
@@ -57,11 +57,8 @@ namespace DocumentTools
 
         public JArray City_Json;//城市的json字符串数据
 
+        bool TwainInitState = false;
 
-        string NowVersion = "正式版 V0.4.1";//项目版本号
-
-
-        //new AutoAdaptWindowsSize AutoSize;
 
         private void OutPutListViewIndex()
         {
@@ -386,25 +383,36 @@ namespace DocumentTools
 
             //this.AutoScaleMode = AutoScaleMode.Font;
         }
+        private void UpdateCheckEvent(UpdateInfoEventArgs updateArgs)
+        {
+            if (updateArgs.Error == null && updateArgs.IsUpdateAvailable)
+            {
+                VersionInfo.VersionUpdateLogUrl = updateArgs.ChangelogURL;
+                this.UpdateCheckText.IsLink = true;
+                this.UpdateCheckText.Text = $"当前版本为：{VersionInfo.VersionNumber}，最新版本为：{updateArgs.CurrentVersion}，点击更新";
+                this.UpdateCheckText.Click -= (s1, s2) =>
+                {
+                    Process.Start(updateArgs.DownloadURL);
+                };
+                this.UpdateCheckText.Click += (s1, s2) =>
+                {
+                    Process.Start(updateArgs.DownloadURL);
+                };
+            }
+        }
 
         private void BodyForm_Load(object sender, EventArgs e)
         {
             //判断内部版本
 
-            if (private_version)
-            {
-                this.gen_card_id_group.Enabled = true;
-                this.gen_card_result_group.Enabled = true;
-                NowVersion += "_内部版本";
-            }
-            else//不是内部版本，需要输入sfz解锁
-            {
-                this.gen_card_id_group.Enabled = false;
-                this.gen_card_result_group.Enabled = false;
-            }
+            AutoUpdater.InstalledVersion = new Version(VersionInfo.VersionNumber);
+            AutoUpdater.Start(VersionInfo.VersionUpdateCheckUrl);
+            AutoUpdater.CheckForUpdateEvent += UpdateCheckEvent;
+
 
             //初始化
-            this.Text = $"坤_Tools【软件完全离线|更新请看关于软件|版本：{NowVersion}】";
+            this.Text = $"坤_Tools【软件完全离线|更新请看关于软件|版本：{VersionInfo.VersionNumber}】";
+            this.UpdateCheckText.Text = $"当前版本为：{VersionInfo.VersionNumber}，没有检测到新版本";
             this.AutoScaleMode = AutoScaleMode.Dpi;
             this.AutoSize = false;
             City_Json = Newtonsoft.Json.Linq.JArray.Parse((string)Util.GetEmbedResourceObj("china_level"));
@@ -439,25 +447,14 @@ namespace DocumentTools
             //ReleaseRegistry.Enabled = false;
             this.Image2PDFCOmpressImage.Enabled = false;
 
+            this.gen_card_id_group.Enabled = false;
+            this.gen_card_result_group.Enabled = false;
 
             //Util.PlayMp3WithStream();
 
             ShortStatus.Text = Util.GetShortStatus();
             ShortStatus.ForeColor = ShortStatus.Text == "已移除" ? Color.Red : Color.Green;
 
-
-            try
-            {
-                InitTwain();
-            }
-            catch
-            {
-                MessageBox.Show(
-                    "没有在系统中找到TwainDsm数据源管理器，请自行下载TwainDsm.dll文件放在程序目录下调用，否则无法使用twain调试功能",
-                    "提示",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-            }
 
 
             this.WaterMarkImageHeight.Validating += ValidTextBoxContent;
@@ -560,6 +557,8 @@ namespace DocumentTools
 
             //AutoSize = new AutoAdaptWindowsSize(this);
         }
+
+
 
 
         //初始化Listview
@@ -1610,6 +1609,7 @@ namespace DocumentTools
                                 {
                                     MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     (sender as System.Windows.Forms.Button).Enabled = true;
+                                    Debug.WriteLine(ex);
                                 }));
                     }
                 });
@@ -2366,12 +2366,12 @@ namespace DocumentTools
 
             double MemoryUsedPercent = Math.Round((Util.Byte2GB((long)MemoryInfo.PUM) / MemoryInfo.MTM) * 100.0, 2);
 
-            this.MemoryStatusLabel.Text = $"程序占用内存：{MemoryInfo.PUM / 1024.0 / 1024.0:f2}MB|本机可用内存：{MemoryInfo.MFM:f2}GB|本机总内存：{MemoryInfo.MTM:f2}GB|程序占用比例（{MemoryUsedPercent}%）";
+            this.MemoryStatusLabel.Text = $"占用内存：{MemoryInfo.PUM / 1024.0 / 1024.0:f2}MB|可用内存：{MemoryInfo.MFM:f2}GB|总内存：{MemoryInfo.MTM:f2}GB|程序占用比例（{MemoryUsedPercent}%）";
 
             this.MemoryProgressBar.Maximum = (int)MemoryInfo.MTM;
             this.MemoryProgressBar.Value = (int)(Util.Byte2GB((long)MemoryInfo.PUM));
 
-            this.MemoryProgressBar.ToolTipText = $"程序使用内存占比：{MemoryUsedPercent}%";
+            this.MemoryProgressBar.ToolTipText = $"程序占用比例：{MemoryUsedPercent}%";
         }
 
         private void RemoveAllFiles_Click(object sender, EventArgs e)
@@ -2922,30 +2922,6 @@ namespace DocumentTools
             e.Graphics.DrawString(TabName, PageFont, ForeBrush, TabRec, FormatTab);
         }
         #endregion
-
-        private async void ChceckVersion_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Uri CheckVersionUrl = new Uri(
-                    "http://jdsnmsl.tpddns.cn:3009/pwn/Version/raw/branch/main/DocumentTools.txt");
-
-                using HttpClient client = new HttpClient();
-                string UserAgentName = $"{Application.ProductName}_{RuntimeInformation.ProcessArchitecture}";
-                client.DefaultRequestHeaders.Add("User-Agent", UserAgentName);
-                string RemoteVersion = await client.GetStringAsync(CheckVersionUrl);
-
-                MessageBox.Show(
-                    $"{RemoteVersion} 当前使用的版本为: {NowVersion}",
-                    "检查更新",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Asterisk);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show($"无法获取更新信息，可能是本机没有网络或版本服务器已宕机", "检查更新", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
 
         private void SelectPPT2PdfFile_Click(object sender, EventArgs e) { UI.AddPPT2PdfFiles(); }
 
@@ -4972,6 +4948,35 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                 SignDocumentOnlyUseOnlyImageTextBox.Enabled = SignDocumentOnlyUseOnlyImage.Checked;
                 SignDocumentOnlyUseOnlyImageButton.Enabled = SignDocumentOnlyUseOnlyImage.Checked;
             }
+            if(MainTabPage.SelectedIndex == GetTabPageIndex("Twain扫描仪调试"))
+            {
+                try
+                {
+                    if(!TwainInitState)
+                    {
+                        InitTwain();
+                        TwainInitState = true;
+                    }
+
+                    foreach (Control TwainControl in MainTabPage.TabPages[GetTabPageIndex("Twain扫描仪调试")].Controls)
+                    {
+                        TwainControl.Enabled = true;
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show(
+                        "没有在系统中找到TwainDsm数据源管理器，请自行下载TwainDsm.dll文件放在程序目录下调用，否则无法使用twain调试功能",
+                        "提示",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    
+                    foreach (Control TwainControl in MainTabPage.TabPages[GetTabPageIndex("Twain扫描仪调试")].Controls)
+                    {
+                        TwainControl.Enabled = false;
+                    }
+                }
+            }
         }
 
         private void 初始化配置文件ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -5903,7 +5908,62 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                 }
             }
         }
-    }
+
+        private void CheckVersionButton_Click(object sender, EventArgs e)
+        {
+            AutoUpdater.Start(VersionInfo.VersionUpdateCheckUrl);
+            AutoUpdater.CheckForUpdateEvent -= AutoUpdater_CheckVersion_ClickEvent;
+            AutoUpdater.CheckForUpdateEvent += AutoUpdater_CheckVersion_ClickEvent;
+        }
+        private void AutoUpdater_CheckVersion_ClickEvent(UpdateInfoEventArgs s1)
+        {
+            if (s1.Error == null && s1.IsUpdateAvailable)
+            {
+                VersionInfo.VersionUpdateLogUrl = s1.ChangelogURL;
+                DialogResult UpdateResult = MessageBox.Show($"当前版本为：{s1.InstalledVersion}，最新版本为：{s1.CurrentVersion}，是否需要打开更新页面进行更新？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+
+                if (UpdateResult == DialogResult.OK)
+                {
+                    Process.Start(s1.DownloadURL);
+                }
+            }
+            else
+            {
+                MessageBox.Show($"当前版本为{s1.InstalledVersion}，没有检测到新版本", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
+        }
+
+        private void VersionUpdateLog_Click(object sender, EventArgs e)
+        {
+            if(VersionInfo.VersionUpdateLogUrl != string.Empty)
+            {
+                Process.Start(VersionInfo.VersionUpdateLogUrl);
+            }
+        }
+
+        private void UseLocalOffice_CheckedChanged(object sender, EventArgs e)
+        {
+            if(Util.IsAdministrator())
+            {
+                this.PDFComplianceBox.Enabled = !UseLocalOffice.Checked;
+                this.Word2PDFOptimizCombox.Enabled = !UseLocalOffice.Checked;
+                this.word2pdf_colorMode.Enabled = !UseLocalOffice.Checked;
+                this.EmbedFonts.Enabled = !UseLocalOffice.Checked;
+                this.word2pdf_need_update_fields.Enabled = !UseLocalOffice.Checked;
+                UseLocalOffice.Enabled = true;
+            }
+            else
+            {
+                if(UseLocalOffice.Checked)
+                {
+                    MessageBox.Show("本功能需要管理员身份运行程序，请使用管理员身份运行后重试", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                UseLocalOffice.Checked = false;
+                UseLocalOffice.Enabled = false;
+            }
+
+        }
+            }
 }
 
 internal class PrivateFontSetting

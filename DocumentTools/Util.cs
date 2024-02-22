@@ -25,6 +25,7 @@ using System.Data.OleDb;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Drawing.Printing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -1062,18 +1063,18 @@ namespace DocumentTools
         /// <param name="SaveDocumentFileName">转换后的文件名称</param>
         public static void ConvertExcel2Word(string DocumentFileName, string SaveDocumentFileName)
         {
-            //using Aspose.Cells.Workbook TempLoadWorkBook = new Aspose.Cells.Workbook(DocumentFileName);
-            //Aspose.Cells.DocxSaveOptions TempDocxSaveOption = new DocxSaveOptions
-            //{
-            //    AllColumnsInOnePagePerSheet = false,
-            //    CheckWorkbookDefaultFont = true,
-            //    MergeAreas = true,
-            //    ValidateMergedAreas = true,
-            //    GridlineType = GridlineType.Hair,
-            //    TextCrossType = TextCrossType.Default,
-            //    OnePagePerSheet = false,
-            //};
-            //TempLoadWorkBook.Save(SaveDocumentFileName, TempDocxSaveOption);
+            using Aspose.Cells.Workbook TempLoadWorkBook = new Aspose.Cells.Workbook(DocumentFileName);
+            Aspose.Cells.DocxSaveOptions TempDocxSaveOption = new DocxSaveOptions
+            {
+                AllColumnsInOnePagePerSheet = false,
+                CheckWorkbookDefaultFont = true,
+                MergeAreas = true,
+                ValidateMergedAreas = true,
+                GridlineType = GridlineType.Hair,
+                TextCrossType = TextCrossType.Default,
+                OnePagePerSheet = false,
+            };
+            TempLoadWorkBook.Save(SaveDocumentFileName, TempDocxSaveOption);
         }
 
         public static void ConvertHtml2Pdf(string DocumentFileName, string SavedFileName)
@@ -1934,9 +1935,16 @@ namespace DocumentTools
         /// <summary>
         /// 将word文档转换为pdf文件
         /// </summary>
-        /// <param name="documentFileName">doc/docx文档路径</param>
-        /// <param name="SavePdfName">导出pdf的路径</param>
-        /// <param name="tempSaveDocxPath">临时存放转换的docx目录</param>
+        /// <param name="documentFileName">文件名称</param>
+        /// <param name="SavePdfName">PDF名称</param>
+        /// <param name="tempSaveDocxPath">保存路径</param>
+        /// <param name="PdfComplanceOption">PDF版本</param>
+        /// <param name="OptiMizMswVersion">兼容模式</param>
+        /// <param name="UpdateField">更新域</param>
+        /// <param name="SavePdfColorMode">颜色模式</param>
+        /// <param name="EmbedFonts">嵌入字体</param>
+        /// <param name="DocumentPassword">文档密码</param>
+        /// <param name="UseLocalOffice">是否使用本地Office进行转换</param>
         public static void ConvertWord2Pdf(
             string documentFileName,
             string SavePdfName,
@@ -1946,120 +1954,142 @@ namespace DocumentTools
             bool UpdateField,
             Aspose.Words.Saving.ColorMode SavePdfColorMode,
             bool EmbedFonts,
-            string DocumentPassword)
+            string DocumentPassword,
+            bool UseLocalOffice)
         {
             string DocumentName, SaveDocxName;
-
-            //设置加载word文档的时候参数
-            Aspose.Words.Loading.LoadOptions TempDocuemntLoadOption = new Aspose.Words.Loading.LoadOptions()
+            
+            if(!UseLocalOffice)
             {
-                ConvertMetafilesToPng = false,
-                MswVersion = OptiMizMswVersion,
-                Password = DocumentPassword,
-            };
+                //设置加载word文档的时候参数
+                Aspose.Words.Loading.LoadOptions TempDocuemntLoadOption = new Aspose.Words.Loading.LoadOptions()
+                {
+                    ConvertMetafilesToPng = false,
+                    MswVersion = OptiMizMswVersion,
+                    Password = DocumentPassword,
+                };
 
-            TempDocuemntLoadOption.LanguagePreferences
-                .AddEditingLanguage(Aspose.Words.Loading.EditingLanguage.ChinesePRC);
+                TempDocuemntLoadOption.LanguagePreferences
+                    .AddEditingLanguage(Aspose.Words.Loading.EditingLanguage.ChinesePRC);
 
-            AspWordsWarningCallBack AspCallBack = new AspWordsWarningCallBack();
+                AspWordsWarningCallBack AspCallBack = new AspWordsWarningCallBack();
 
-            //Aspose.Words.Fonts.FontSettings TempFontSettings = new Aspose.Words.Fonts.FontSettings();
-            //TempFontSettings.SubstitutionSettings.DefaultFontSubstitution.Enabled = true;
-            //TempFontSettings.SubstitutionSettings.TableSubstitution.Enabled = false;
-            //TempFontSettings.SubstitutionSettings.FontInfoSubstitution.Enabled = false;
-            //TempFontSettings.SubstitutionSettings.FontConfigSubstitution.Enabled = false;
-            //TempFontSettings.SubstitutionSettings.FontNameSubstitution.Enabled = false;
-            //TempFontSettings.SubstitutionSettings.DefaultFontSubstitution.DefaultFontName = "SimSun";
-
-
-            //TempDocuemntLoadOption.FontSettings = TempFontSettings;
-
-
-            //设置PDF保存参数
-            Aspose.Words.Saving.PdfSaveOptions TempPdfaveOption = new Aspose.Words.Saving.PdfSaveOptions()
-            {
-                AllowEmbeddingPostScriptFonts = true,
-                EmbedFullFonts = EmbedFonts,
-                FontEmbeddingMode = Aspose.Words.Saving.PdfFontEmbeddingMode.EmbedAll,
-                ColorMode = SavePdfColorMode,
-                ImageColorSpaceExportMode = Aspose.Words.Saving.PdfImageColorSpaceExportMode.Auto,
-                ImageCompression = Aspose.Words.Saving.PdfImageCompression.Auto,
-                PageMode = Aspose.Words.Saving.PdfPageMode.UseOutlines,
-                ZoomBehavior = Aspose.Words.Saving.PdfZoomBehavior.None,
-                SaveFormat = Aspose.Words.SaveFormat.Pdf,
-                UseHighQualityRendering = true,
-                UseAntiAliasing = true,
-                PreblendImages = true,
-                JpegQuality = 100,
-                Compliance = PdfComplanceOption,
-                ExportGeneratorName = false,
-                UpdateFields = UpdateField,
-            };
-
-            //设置PDF保存带word中的目录
-            TempPdfaveOption.OutlineOptions.DefaultBookmarksOutlineLevel = 0;
-            TempPdfaveOption.OutlineOptions.CreateMissingOutlineLevels = false;
-            TempPdfaveOption.OutlineOptions.ExpandedOutlineLevels = 3;
-            TempPdfaveOption.OutlineOptions.HeadingsOutlineLevels = 9;
-            TempPdfaveOption.HeaderFooterBookmarksExportMode = Aspose.Words.Saving.HeaderFooterBookmarksExportMode.All;
+                //Aspose.Words.Fonts.FontSettings TempFontSettings = new Aspose.Words.Fonts.FontSettings();
+                //TempFontSettings.SubstitutionSettings.DefaultFontSubstitution.Enabled = true;
+                //TempFontSettings.SubstitutionSettings.TableSubstitution.Enabled = false;
+                //TempFontSettings.SubstitutionSettings.FontInfoSubstitution.Enabled = false;
+                //TempFontSettings.SubstitutionSettings.FontConfigSubstitution.Enabled = false;
+                //TempFontSettings.SubstitutionSettings.FontNameSubstitution.Enabled = false;
+                //TempFontSettings.SubstitutionSettings.DefaultFontSubstitution.DefaultFontName = "SimSun";
 
 
-            //设置Docx保存参数
-            Aspose.Words.Saving.OoxmlSaveOptions TempDocxSaveOption = new Aspose.Words.Saving.OoxmlSaveOptions()
-            {
-                Compliance = Aspose.Words.Saving.OoxmlCompliance.Iso29500_2008_Transitional,
-                SaveFormat = Aspose.Words.SaveFormat.Docx,
-                KeepLegacyControlChars = true,
-                UpdateFields = UpdateField,
-            };
-
-            Aspose.Words.Document TempDocument = new Aspose.Words.Document(documentFileName, TempDocuemntLoadOption)
-            {
-                RemovePersonalInformation = true,
-            };
-
-            TempDocument.CompatibilityOptions.OptimizeFor(OptiMizMswVersion);
-            TempDocument.CompatibilityOptions.BalanceSingleByteDoubleByteWidth = true;//区分全角和半角字符
-
-            DocumentName = System.IO.Path.GetFileNameWithoutExtension(documentFileName);
-
-            SaveDocxName = System.IO.Path.Combine(tempSaveDocxPath, DocumentName + ".docx");
+                //TempDocuemntLoadOption.FontSettings = TempFontSettings;
 
 
-            TempDocument.Save(SaveDocxName, TempDocxSaveOption);
+                //设置PDF保存参数
+                Aspose.Words.Saving.PdfSaveOptions TempPdfaveOption = new Aspose.Words.Saving.PdfSaveOptions()
+                {
+                    AllowEmbeddingPostScriptFonts = true,
+                    EmbedFullFonts = EmbedFonts,
+                    FontEmbeddingMode = Aspose.Words.Saving.PdfFontEmbeddingMode.EmbedAll,
+                    ColorMode = SavePdfColorMode,
+                    ImageColorSpaceExportMode = Aspose.Words.Saving.PdfImageColorSpaceExportMode.Auto,
+                    ImageCompression = Aspose.Words.Saving.PdfImageCompression.Auto,
+                    PageMode = Aspose.Words.Saving.PdfPageMode.UseOutlines,
+                    ZoomBehavior = Aspose.Words.Saving.PdfZoomBehavior.None,
+                    SaveFormat = Aspose.Words.SaveFormat.Pdf,
+                    UseHighQualityRendering = true,
+                    UseAntiAliasing = true,
+                    PreblendImages = true,
+                    JpegQuality = 100,
+                    Compliance = PdfComplanceOption,
+                    ExportGeneratorName = false,
+                    UpdateFields = UpdateField,
+                };
 
-            Aspose.Words.Document TempDocxDocument = new Aspose.Words.Document(SaveDocxName, TempDocuemntLoadOption);
+                //设置PDF保存带word中的目录
+                TempPdfaveOption.OutlineOptions.DefaultBookmarksOutlineLevel = 0;
+                TempPdfaveOption.OutlineOptions.CreateMissingOutlineLevels = false;
+                TempPdfaveOption.OutlineOptions.ExpandedOutlineLevels = 3;
+                TempPdfaveOption.OutlineOptions.HeadingsOutlineLevels = 9;
+                TempPdfaveOption.HeaderFooterBookmarksExportMode = Aspose.Words.Saving.HeaderFooterBookmarksExportMode.All;
 
-            TempDocxDocument.WarningCallback = AspCallBack;
-            //TempDocxDocument.FontSettings = TempFontSettings;
-            //TempDocxDocument.LayoutOptions.KeepOriginalFontMetrics = true;
-            TempDocxDocument.Save(SavePdfName, TempPdfaveOption);
+
+                //设置Docx保存参数
+                Aspose.Words.Saving.OoxmlSaveOptions TempDocxSaveOption = new Aspose.Words.Saving.OoxmlSaveOptions()
+                {
+                    Compliance = Aspose.Words.Saving.OoxmlCompliance.Iso29500_2008_Transitional,
+                    SaveFormat = Aspose.Words.SaveFormat.Docx,
+                    KeepLegacyControlChars = true,
+                    UpdateFields = UpdateField,
+                };
+
+                Aspose.Words.Document TempDocument = new Aspose.Words.Document(documentFileName, TempDocuemntLoadOption)
+                {
+                    RemovePersonalInformation = true,
+                };
+
+                TempDocument.CompatibilityOptions.OptimizeFor(OptiMizMswVersion);
+                TempDocument.CompatibilityOptions.BalanceSingleByteDoubleByteWidth = true;//区分全角和半角字符
+
+                DocumentName = System.IO.Path.GetFileNameWithoutExtension(documentFileName);
+
+                SaveDocxName = System.IO.Path.Combine(tempSaveDocxPath, DocumentName + ".docx");
 
 
-            //将渲染警告输出到日志文件中
+                TempDocument.Save(SaveDocxName, TempDocxSaveOption);
 
-            string OutPutLogFileName = Path.Combine(Path.GetDirectoryName(SavePdfName), "告警日志_WORD转PDF.log");
+                Aspose.Words.Document TempDocxDocument = new Aspose.Words.Document(SaveDocxName, TempDocuemntLoadOption);
 
-            if (File.Exists(OutPutLogFileName))
-            {
-                File.Delete(OutPutLogFileName);
+                TempDocxDocument.WarningCallback = AspCallBack;
+
+                //TempDocxDocument.FontSettings = TempFontSettings;
+                //TempDocxDocument.LayoutOptions.KeepOriginalFontMetrics = true;
+                TempDocxDocument.Save(SavePdfName, TempPdfaveOption);
+
+
+                //将渲染警告输出到日志文件中
+
+                string OutPutLogFileName = Path.Combine(Path.GetDirectoryName(SavePdfName), "告警日志_WORD转PDF.log");
+
+                if (File.Exists(OutPutLogFileName))
+                {
+                    File.Delete(OutPutLogFileName);
+                }
+
+                using IEnumerator<Aspose.Words.WarningInfo> RenderWarnings = AspCallBack.Warnings.GetEnumerator();
+                while (RenderWarnings.MoveNext())
+                {
+                    StringBuilder TempWaringsInfo = new StringBuilder();
+                    TempWaringsInfo.Append($"[{GetNowDateTime()}]:\t\t");
+                    TempWaringsInfo.Append($"[告警文件：{SaveDocxName}]");
+                    TempWaringsInfo.AppendLine(string.Empty);
+                    TempWaringsInfo.AppendLine(string.Empty);
+                    TempWaringsInfo.AppendLine($"[告警类型：{RenderWarnings.Current.WarningType}]");
+                    TempWaringsInfo.AppendLine(string.Empty);
+                    TempWaringsInfo.AppendLine($"[告警内容：{RenderWarnings.Current.Description}]");
+                    using StreamWriter TempWarningsWriter = File.AppendText(OutPutLogFileName);
+                    TempWarningsWriter.WriteLine(TempWaringsInfo.ToString());
+                }
+                AspCallBack.Warnings.Clear();
             }
-
-            using IEnumerator<Aspose.Words.WarningInfo> RenderWarnings = AspCallBack.Warnings.GetEnumerator();
-            while (RenderWarnings.MoveNext())
+            else
             {
-                StringBuilder TempWaringsInfo = new StringBuilder();
-                TempWaringsInfo.Append($"[{GetNowDateTime()}]:\t\t");
-                TempWaringsInfo.Append($"[告警文件：{SaveDocxName}]");
-                TempWaringsInfo.AppendLine(string.Empty);
-                TempWaringsInfo.AppendLine(string.Empty);
-                TempWaringsInfo.AppendLine($"[告警类型：{RenderWarnings.Current.WarningType}]");
-                TempWaringsInfo.AppendLine(string.Empty);
-                TempWaringsInfo.AppendLine($"[告警内容：{RenderWarnings.Current.Description}]");
-                using StreamWriter TempWarningsWriter = File.AppendText(OutPutLogFileName);
-                TempWarningsWriter.WriteLine(TempWaringsInfo.ToString());
+                // 使用本机的Office来转换PDF，速度略慢
+                Microsoft.Office.Interop.Word.Application TempWordApplication = new Microsoft.Office.Interop.Word.Application();
+
+                Microsoft.Office.Interop.Word.Document TempLocalDocument = TempWordApplication.Documents.Open(documentFileName,PasswordDocument:DocumentPassword);
+
+                TempLocalDocument.ExportAsFixedFormat(
+                    SavePdfName,
+                    ExportFormat: Microsoft.Office.Interop.Word.WdExportFormat.wdExportFormatPDF,
+                    OptimizeFor: Microsoft.Office.Interop.Word.WdExportOptimizeFor.wdExportOptimizeForPrint,
+                    CreateBookmarks: Microsoft.Office.Interop.Word.WdExportCreateBookmarks.wdExportCreateWordBookmarks);
+
+                TempLocalDocument.Close();
+
+                TempWordApplication.Quit();
             }
-            AspCallBack.Warnings.Clear();
         }
 
         /// <summary>
@@ -3586,25 +3616,27 @@ namespace DocumentTools
         {
             Aspose.Words.Document MergeDocument = new Aspose.Words.Document();
 
+            Aspose.Words.Loading.LoadOptions TempLoadOption = new Aspose.Words.Loading.LoadOptions();
+
+            TempLoadOption.LanguagePreferences.DefaultEditingLanguage = Aspose.Words.Loading.EditingLanguage.ChinesePRC;
+
             //设置Docx保存参数
             Aspose.Words.Saving.OoxmlSaveOptions TempDocxSaveOption = new Aspose.Words.Saving.OoxmlSaveOptions()
             {
                 Compliance = Aspose.Words.Saving.OoxmlCompliance.Iso29500_2008_Transitional,
                 SaveFormat = Aspose.Words.SaveFormat.Docx,
-                KeepLegacyControlChars = true,
-                UpdateFields = true,
+                KeepLegacyControlChars = true
             };
 
             DocumentsFileNames.ForEach(
                 DocumentName =>
                 {
                     Aspose.Words.Document LoadTempDocument = new Aspose.Words.Document(DocumentName);
-
                     MergeDocument.AppendDocument(LoadTempDocument, Aspose.Words.ImportFormatMode.KeepSourceFormatting);
                 });
-
             MergeDocument.FirstSection.Remove();
-            MergeDocument.Save(SavedDocumentFileName);
+            MergeDocument.CompatibilityOptions.OptimizeFor(Aspose.Words.Settings.MsWordVersion.Word2003);
+            MergeDocument.Save(SavedDocumentFileName,TempDocxSaveOption);
         }
 
         /// <summary>
@@ -3889,9 +3921,17 @@ namespace DocumentTools
             {
                 Aspose.Cells.Workbook TempExcelDocument = new Aspose.Cells.Workbook(DocumentsFileName);
                 Aspose.Cells.ReplaceOptions TempExcelReplaceOptions = new Aspose.Cells.ReplaceOptions();
-                Aspose.Cells.XlsSaveOptions TempXlsSaveOption = new XlsSaveOptions();
+                Aspose.Cells.OoxmlSaveOptions TempXlsxSaveOption = new OoxmlSaveOptions();
+                TempExcelReplaceOptions.MatchEntireCellContents = false;
                 TempExcelReplaceOptions.CaseSensitive = NoIgnoreCase;
                 TempExcelReplaceOptions.RegexKey = UseRegex;
+                
+                //FindOptions TempCellsFindOption = new FindOptions();
+
+                //TempCellsFindOption.LookInType = LookInType.ValuesExcludeFormulaCell;
+
+                //Aspose.Cells.Cells Cells = TempExcelDocument.Worksheets[0].Cells;
+
                 if (InputRegexRule != string.Empty)
                 {
                     TempExcelDocument.Replace(InputRegexRule, ReplaceContent, TempExcelReplaceOptions);
@@ -3913,7 +3953,7 @@ namespace DocumentTools
                     }
                 }
                 TempExcelDocument.CalculateFormula();
-                TempExcelDocument.Save(SavedDoucmentFileName, TempXlsSaveOption);
+                TempExcelDocument.Save(SavedDoucmentFileName, TempXlsxSaveOption);
             }
         }
 

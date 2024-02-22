@@ -645,6 +645,26 @@ namespace DocumentTools.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap 更新 {
+            get {
+                object obj = ResourceManager.GetObject("更新", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 更新日志 {
+            get {
+                object obj = ResourceManager.GetObject("更新日志", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap 查找替换_replace_线 {
             get {
                 object obj = ResourceManager.GetObject("查找替换-replace-线", resourceCulture);
@@ -700,6 +720,26 @@ namespace DocumentTools.Properties {
         internal static string 注册 {
             get {
                 return ResourceManager.GetString("注册", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 版本更新 {
+            get {
+                object obj = ResourceManager.GetObject("版本更新", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 版本更新__1_ {
+            get {
+                object obj = ResourceManager.GetObject("版本更新 (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

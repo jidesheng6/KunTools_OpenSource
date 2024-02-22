@@ -43,6 +43,7 @@ namespace DocumentTools
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BodyForm));
             this.MainTabPage = new System.Windows.Forms.TabControl();
             this.TabPage_01 = new System.Windows.Forms.TabPage();
+            this.UseLocalOffice = new System.Windows.Forms.CheckBox();
             this.WORD2PDF_LoadPassword = new System.Windows.Forms.TextBox();
             this.label147 = new System.Windows.Forms.Label();
             this.EmbedFonts = new System.Windows.Forms.CheckBox();
@@ -927,7 +928,6 @@ namespace DocumentTools
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.PlayCXKMusic = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.ChceckVersion = new System.Windows.Forms.Button();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.label13 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -1046,12 +1046,15 @@ namespace DocumentTools
             this.查看标签索引对照表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.初始化配置文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.保存设置并重启软件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.程序更新ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CheckVersionButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.VersionUpdateLog = new System.Windows.Forms.ToolStripMenuItem();
             this.MainToolsTip = new System.Windows.Forms.ToolTip(this.components);
             this.TabPageIcoList = new System.Windows.Forms.ImageList(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.MemoryStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.MemoryProgressBar = new System.Windows.Forms.ToolStripProgressBar();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.UpdateCheckText = new System.Windows.Forms.ToolStripStatusLabel();
             this.MainTabPage.SuspendLayout();
             this.TabPage_01.SuspendLayout();
             this.TabPage_02.SuspendLayout();
@@ -1258,6 +1261,7 @@ namespace DocumentTools
             // 
             // TabPage_01
             // 
+            this.TabPage_01.Controls.Add(this.UseLocalOffice);
             this.TabPage_01.Controls.Add(this.WORD2PDF_LoadPassword);
             this.TabPage_01.Controls.Add(this.label147);
             this.TabPage_01.Controls.Add(this.EmbedFonts);
@@ -1287,6 +1291,21 @@ namespace DocumentTools
             this.TabPage_01.TabIndex = 0;
             this.TabPage_01.Text = "WORD转PDF";
             this.TabPage_01.UseVisualStyleBackColor = true;
+            // 
+            // UseLocalOffice
+            // 
+            this.UseLocalOffice.AutoSize = true;
+            this.UseLocalOffice.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.UseLocalOffice.Location = new System.Drawing.Point(255, 466);
+            this.UseLocalOffice.Margin = new System.Windows.Forms.Padding(1);
+            this.UseLocalOffice.Name = "UseLocalOffice";
+            this.UseLocalOffice.Size = new System.Drawing.Size(132, 16);
+            this.UseLocalOffice.TabIndex = 22;
+            this.UseLocalOffice.Tag = "anchor_left_bottom";
+            this.UseLocalOffice.Text = "使用本机Office转换";
+            this.MainToolsTip.SetToolTip(this.UseLocalOffice, resources.GetString("UseLocalOffice.ToolTip"));
+            this.UseLocalOffice.UseVisualStyleBackColor = true;
+            this.UseLocalOffice.CheckedChanged += new System.EventHandler(this.UseLocalOffice_CheckedChanged);
             // 
             // WORD2PDF_LoadPassword
             // 
@@ -1717,7 +1736,6 @@ namespace DocumentTools
             // 
             // ProcessPage_P2W
             // 
-            this.ProcessPage_P2W.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ProcessPage_P2W.AutoSize = true;
             this.ProcessPage_P2W.ForeColor = System.Drawing.Color.ForestGreen;
             this.ProcessPage_P2W.ImeMode = System.Windows.Forms.ImeMode.NoControl;
@@ -1726,6 +1744,7 @@ namespace DocumentTools
             this.ProcessPage_P2W.Name = "ProcessPage_P2W";
             this.ProcessPage_P2W.Size = new System.Drawing.Size(59, 12);
             this.ProcessPage_P2W.TabIndex = 5;
+            this.ProcessPage_P2W.Tag = "anchor_left_bottom";
             this.ProcessPage_P2W.Text = "已保存X页";
             // 
             // PdfStatusText
@@ -12596,7 +12615,6 @@ namespace DocumentTools
             this.groupBox4.Controls.Add(this.pictureBox6);
             this.groupBox4.Controls.Add(this.PlayCXKMusic);
             this.groupBox4.Controls.Add(this.pictureBox1);
-            this.groupBox4.Controls.Add(this.ChceckVersion);
             this.groupBox4.Controls.Add(this.linkLabel2);
             this.groupBox4.Controls.Add(this.label13);
             this.groupBox4.Controls.Add(this.label11);
@@ -12650,18 +12668,6 @@ namespace DocumentTools
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Tag = "anchor_right_top";
-            // 
-            // ChceckVersion
-            // 
-            this.ChceckVersion.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.ChceckVersion.Location = new System.Drawing.Point(367, 125);
-            this.ChceckVersion.Margin = new System.Windows.Forms.Padding(1);
-            this.ChceckVersion.Name = "ChceckVersion";
-            this.ChceckVersion.Size = new System.Drawing.Size(96, 24);
-            this.ChceckVersion.TabIndex = 6;
-            this.ChceckVersion.Text = "检查更新";
-            this.ChceckVersion.UseVisualStyleBackColor = true;
-            this.ChceckVersion.Click += new System.EventHandler(this.ChceckVersion_Click);
             // 
             // linkLabel2
             // 
@@ -12996,7 +13002,8 @@ namespace DocumentTools
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.liblist,
-            this.软件设置ToolStripMenuItem});
+            this.软件设置ToolStripMenuItem,
+            this.程序更新ToolStripMenuItem});
             this.menuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -13719,6 +13726,32 @@ namespace DocumentTools
             this.保存设置并重启软件ToolStripMenuItem.Text = "保存设置并重启软件";
             this.保存设置并重启软件ToolStripMenuItem.Click += new System.EventHandler(this.保存设置并重启软件ToolStripMenuItem_Click);
             // 
+            // 程序更新ToolStripMenuItem
+            // 
+            this.程序更新ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CheckVersionButton,
+            this.VersionUpdateLog});
+            this.程序更新ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.版本更新__1_;
+            this.程序更新ToolStripMenuItem.Name = "程序更新ToolStripMenuItem";
+            this.程序更新ToolStripMenuItem.Size = new System.Drawing.Size(92, 24);
+            this.程序更新ToolStripMenuItem.Text = "版本更新";
+            // 
+            // CheckVersionButton
+            // 
+            this.CheckVersionButton.Image = global::DocumentTools.Properties.Resources.更新;
+            this.CheckVersionButton.Name = "CheckVersionButton";
+            this.CheckVersionButton.Size = new System.Drawing.Size(156, 30);
+            this.CheckVersionButton.Text = "检查更新";
+            this.CheckVersionButton.Click += new System.EventHandler(this.CheckVersionButton_Click);
+            // 
+            // VersionUpdateLog
+            // 
+            this.VersionUpdateLog.Image = global::DocumentTools.Properties.Resources.更新日志;
+            this.VersionUpdateLog.Name = "VersionUpdateLog";
+            this.VersionUpdateLog.Size = new System.Drawing.Size(156, 30);
+            this.VersionUpdateLog.Text = "查看更新日志";
+            this.VersionUpdateLog.Click += new System.EventHandler(this.VersionUpdateLog_Click);
+            // 
             // MainToolsTip
             // 
             this.MainToolsTip.AutoPopDelay = 5000;
@@ -13757,7 +13790,8 @@ namespace DocumentTools
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MemoryStatusLabel,
-            this.MemoryProgressBar});
+            this.MemoryProgressBar,
+            this.UpdateCheckText});
             this.statusStrip1.Location = new System.Drawing.Point(0, 765);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 9, 0);
@@ -13779,8 +13813,14 @@ namespace DocumentTools
             // 
             this.MemoryProgressBar.Margin = new System.Windows.Forms.Padding(2, 4, 2, 3);
             this.MemoryProgressBar.Name = "MemoryProgressBar";
-            this.MemoryProgressBar.Size = new System.Drawing.Size(200, 23);
+            this.MemoryProgressBar.Size = new System.Drawing.Size(70, 23);
             this.MemoryProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            // 
+            // UpdateCheckText
+            // 
+            this.UpdateCheckText.Name = "UpdateCheckText";
+            this.UpdateCheckText.Size = new System.Drawing.Size(56, 25);
+            this.UpdateCheckText.Text = "程序版本";
             // 
             // BodyForm
             // 
@@ -14274,7 +14314,6 @@ namespace DocumentTools
         internal System.Windows.Forms.TextBox WaterMarkImageHeight;
         private System.Windows.Forms.Label label34;
         internal System.Windows.Forms.ComboBox PDFComplianceBox;
-        private System.Windows.Forms.Button ChceckVersion;
         private System.Windows.Forms.TabPage TabPage_20;
         private System.Windows.Forms.TabPage TabPage_21;
         private System.Windows.Forms.Button ConvertPPT2PDF;
@@ -15062,7 +15101,11 @@ namespace DocumentTools
         private ToolStripStatusLabel MemoryStatusLabel;
         private ToolStripProgressBar MemoryProgressBar;
         private TextBox ScanSerialNumberTextBox;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private ToolStripStatusLabel UpdateCheckText;
+        private ToolStripMenuItem 程序更新ToolStripMenuItem;
+        private ToolStripMenuItem CheckVersionButton;
+        private ToolStripMenuItem VersionUpdateLog;
+        internal CheckBox UseLocalOffice;
     }
 }
 

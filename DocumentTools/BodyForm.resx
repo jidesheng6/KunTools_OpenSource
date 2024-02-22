@@ -123,6 +123,22 @@
   <metadata name="TabPage_01.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <metadata name="UseLocalOffice.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="MainToolsTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>213, 64</value>
+  </metadata>
+  <data name="UseLocalOffice.ToolTip" xml:space="preserve">
+    <value>1、使用本机Office转换准确率为100%，但是速度较慢
+2、确保本机安装了Office，且不能混装，如果出现报错，请自行搜索报错内容进行解决
+3、勾选后，部分功能将不可用（原生API不支持）
+4、如果过程提示文件被占用，进入任务管理器结束WORD相关进程即可
+5、请不要使用任何精简版的Office安装程序，可能精简掉了PIA程序（微软用来让第三方程序操作Office的工具包）
+6、如果出现任何错误，建议卸载本机全部Office后重新安装，可自行搜索各种一键Office部署的第三方工具，如“Office Tools”、“Office 2013-2024 C2R Install”；根据需要自行搜索即可，建议Office版本在2007及以上，有条件的最好安装office2010
+7、理论上该功能也支持调用WPS进行转换
+8、请使用管理员身份运行软件后再勾选本功能，COM调用需要管理员权限执行</value>
+  </data>
   <metadata name="WORD2PDF_LoadPassword.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -1721,9 +1737,6 @@
   </metadata>
   <metadata name="ver_card_id_text_box.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
-  </metadata>
-  <metadata name="MainToolsTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>213, 64</value>
   </metadata>
   <metadata name="label99.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -14746,9 +14759,6 @@
         Pd2vNV3kJV7URUfVZV3adVzYhV5rnS/axV3rvV7Z1F389FbK/N2iFV7w9Vjl7UjRPd7kPV+y/YeAAAA7
 </value>
   </data>
-  <metadata name="ChceckVersion.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <metadata name="linkLabel2.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -15082,7 +15092,7 @@
     <value>True</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>52</value>
+    <value>248</value>
   </metadata>
   <metadata name="statusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>827, 47</value>
@@ -21253,7 +21263,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAADK
-        bwAAAk1TRnQBSQFMAgEBFgEAAYQBGgGEARoBEgEAARIBAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFI
+        bwAAAk1TRnQBSQFMAgEBFgEAAfQBGgH0ARoBEgEAARIBAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFI
         AwABbAMAAQEBAAEgBQABgAF5YgADLgFGAa8B5AL/Aa8B5AL/Aa8B5AL/Aa8B5AL/Aa8B5AL/Aa8B5AL/
         Aa8B5AL/Aa8B5AL/Aa8B5AL/Aa8B5AL/Aa8B5AL/Aa8B5AL/Aa8B5AL/AwUBBqAAAzMB/wMzAf8DMwH/
         AzMB/wMzAf8DMwH/AzMB/wMzAf8DMwH/AzMB/wNQAZoYAAGvAeQC/wGhAcIB0wH/A4gB/wOIAf8DiAH/
@@ -21733,7 +21743,4 @@
         AwAL
 </value>
   </data>
-  <metadata name="backgroundWorker1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>347, 64</value>
-  </metadata>
 </root>
