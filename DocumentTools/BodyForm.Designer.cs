@@ -597,6 +597,7 @@ namespace DocumentTools
             this.city_level_3_combox = new System.Windows.Forms.ComboBox();
             this.city_level_2_combox = new System.Windows.Forms.ComboBox();
             this.TabPage_05 = new System.Windows.Forms.TabPage();
+            this.DoubleTextClear = new System.Windows.Forms.CheckBox();
             this.NameMarkColor = new System.Windows.Forms.ComboBox();
             this.MarkDupName = new System.Windows.Forms.CheckBox();
             this.ExportNameTxt = new System.Windows.Forms.Button();
@@ -8347,6 +8348,7 @@ namespace DocumentTools
             // 
             // TabPage_05
             // 
+            this.TabPage_05.Controls.Add(this.DoubleTextClear);
             this.TabPage_05.Controls.Add(this.NameMarkColor);
             this.TabPage_05.Controls.Add(this.MarkDupName);
             this.TabPage_05.Controls.Add(this.ExportNameTxt);
@@ -8375,10 +8377,23 @@ namespace DocumentTools
             this.TabPage_05.Text = "姓名横转竖列";
             this.TabPage_05.UseVisualStyleBackColor = true;
             // 
+            // DoubleTextClear
+            // 
+            this.DoubleTextClear.AutoSize = true;
+            this.DoubleTextClear.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.DoubleTextClear.Location = new System.Drawing.Point(397, 382);
+            this.DoubleTextClear.Margin = new System.Windows.Forms.Padding(1);
+            this.DoubleTextClear.Name = "DoubleTextClear";
+            this.DoubleTextClear.Size = new System.Drawing.Size(72, 16);
+            this.DoubleTextClear.TabIndex = 22;
+            this.DoubleTextClear.Tag = "anchor_bottom";
+            this.DoubleTextClear.Text = "文本去重";
+            this.DoubleTextClear.UseVisualStyleBackColor = true;
+            // 
             // NameMarkColor
             // 
             this.NameMarkColor.FormattingEnabled = true;
-            this.NameMarkColor.Location = new System.Drawing.Point(480, 343);
+            this.NameMarkColor.Location = new System.Drawing.Point(470, 341);
             this.NameMarkColor.Margin = new System.Windows.Forms.Padding(1);
             this.NameMarkColor.Name = "NameMarkColor";
             this.NameMarkColor.Size = new System.Drawing.Size(88, 20);
@@ -8389,7 +8404,7 @@ namespace DocumentTools
             // 
             this.MarkDupName.AutoSize = true;
             this.MarkDupName.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.MarkDupName.Location = new System.Drawing.Point(396, 345);
+            this.MarkDupName.Location = new System.Drawing.Point(397, 345);
             this.MarkDupName.Margin = new System.Windows.Forms.Padding(1);
             this.MarkDupName.Name = "MarkDupName";
             this.MarkDupName.Size = new System.Drawing.Size(72, 16);
@@ -8431,7 +8446,7 @@ namespace DocumentTools
             this.NameReplaceRegexMode.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Underline);
             this.NameReplaceRegexMode.ForeColor = System.Drawing.Color.Red;
             this.NameReplaceRegexMode.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.NameReplaceRegexMode.Location = new System.Drawing.Point(479, 321);
+            this.NameReplaceRegexMode.Location = new System.Drawing.Point(492, 316);
             this.NameReplaceRegexMode.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.NameReplaceRegexMode.Name = "NameReplaceRegexMode";
             this.NameReplaceRegexMode.Size = new System.Drawing.Size(89, 12);
@@ -8457,7 +8472,7 @@ namespace DocumentTools
             this.NameAutoCopy.Checked = true;
             this.NameAutoCopy.CheckState = System.Windows.Forms.CheckState.Checked;
             this.NameAutoCopy.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.NameAutoCopy.Location = new System.Drawing.Point(396, 365);
+            this.NameAutoCopy.Location = new System.Drawing.Point(397, 363);
             this.NameAutoCopy.Margin = new System.Windows.Forms.Padding(1);
             this.NameAutoCopy.Name = "NameAutoCopy";
             this.NameAutoCopy.Size = new System.Drawing.Size(72, 16);
@@ -8470,7 +8485,7 @@ namespace DocumentTools
             // 
             this.NameReplaceWord.AutoSize = true;
             this.NameReplaceWord.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.NameReplaceWord.Location = new System.Drawing.Point(311, 321);
+            this.NameReplaceWord.Location = new System.Drawing.Point(324, 316);
             this.NameReplaceWord.Margin = new System.Windows.Forms.Padding(1);
             this.NameReplaceWord.Name = "NameReplaceWord";
             this.NameReplaceWord.Size = new System.Drawing.Size(72, 16);
@@ -8483,7 +8498,7 @@ namespace DocumentTools
             // 
             this.label56.AutoSize = true;
             this.label56.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label56.Location = new System.Drawing.Point(419, 321);
+            this.label56.Location = new System.Drawing.Point(432, 316);
             this.label56.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label56.Name = "label56";
             this.label56.Size = new System.Drawing.Size(17, 12);
@@ -8494,7 +8509,7 @@ namespace DocumentTools
             // NameReplaceWord_Target
             // 
             this.NameReplaceWord_Target.AcceptsReturn = true;
-            this.NameReplaceWord_Target.Location = new System.Drawing.Point(439, 319);
+            this.NameReplaceWord_Target.Location = new System.Drawing.Point(452, 312);
             this.NameReplaceWord_Target.Margin = new System.Windows.Forms.Padding(1);
             this.NameReplaceWord_Target.Multiline = true;
             this.NameReplaceWord_Target.Name = "NameReplaceWord_Target";
@@ -8505,7 +8520,7 @@ namespace DocumentTools
             // NameReplaceWord_Search
             // 
             this.NameReplaceWord_Search.AcceptsReturn = true;
-            this.NameReplaceWord_Search.Location = new System.Drawing.Point(384, 317);
+            this.NameReplaceWord_Search.Location = new System.Drawing.Point(397, 312);
             this.NameReplaceWord_Search.Margin = new System.Windows.Forms.Padding(1);
             this.NameReplaceWord_Search.Multiline = true;
             this.NameReplaceWord_Search.Name = "NameReplaceWord_Search";
@@ -8517,7 +8532,7 @@ namespace DocumentTools
             // 
             this.NameStorkeChcek.AutoSize = true;
             this.NameStorkeChcek.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.NameStorkeChcek.Location = new System.Drawing.Point(396, 385);
+            this.NameStorkeChcek.Location = new System.Drawing.Point(397, 400);
             this.NameStorkeChcek.Margin = new System.Windows.Forms.Padding(1);
             this.NameStorkeChcek.Name = "NameStorkeChcek";
             this.NameStorkeChcek.Size = new System.Drawing.Size(72, 16);
@@ -8530,7 +8545,7 @@ namespace DocumentTools
             // 
             this.MutilLineMode.AutoSize = true;
             this.MutilLineMode.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.MutilLineMode.Location = new System.Drawing.Point(396, 401);
+            this.MutilLineMode.Location = new System.Drawing.Point(397, 418);
             this.MutilLineMode.Margin = new System.Windows.Forms.Padding(1);
             this.MutilLineMode.Name = "MutilLineMode";
             this.MutilLineMode.Size = new System.Drawing.Size(72, 16);
@@ -8546,7 +8561,7 @@ namespace DocumentTools
             this.DoubleTextAlignCheck.Checked = true;
             this.DoubleTextAlignCheck.CheckState = System.Windows.Forms.CheckState.Checked;
             this.DoubleTextAlignCheck.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.DoubleTextAlignCheck.Location = new System.Drawing.Point(396, 421);
+            this.DoubleTextAlignCheck.Location = new System.Drawing.Point(397, 436);
             this.DoubleTextAlignCheck.Margin = new System.Windows.Forms.Padding(1);
             this.DoubleTextAlignCheck.Name = "DoubleTextAlignCheck";
             this.DoubleTextAlignCheck.Size = new System.Drawing.Size(72, 16);
@@ -8559,7 +8574,7 @@ namespace DocumentTools
             // 
             this.RemoveNumberCheck.AutoSize = true;
             this.RemoveNumberCheck.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.RemoveNumberCheck.Location = new System.Drawing.Point(396, 441);
+            this.RemoveNumberCheck.Location = new System.Drawing.Point(397, 454);
             this.RemoveNumberCheck.Margin = new System.Windows.Forms.Padding(1);
             this.RemoveNumberCheck.Name = "RemoveNumberCheck";
             this.RemoveNumberCheck.Size = new System.Drawing.Size(72, 16);
@@ -8572,7 +8587,7 @@ namespace DocumentTools
             // 
             this.RemoveSquareCheck.AutoSize = true;
             this.RemoveSquareCheck.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.RemoveSquareCheck.Location = new System.Drawing.Point(396, 457);
+            this.RemoveSquareCheck.Location = new System.Drawing.Point(397, 472);
             this.RemoveSquareCheck.Margin = new System.Windows.Forms.Padding(1);
             this.RemoveSquareCheck.Name = "RemoveSquareCheck";
             this.RemoveSquareCheck.Size = new System.Drawing.Size(72, 16);
@@ -8586,7 +8601,7 @@ namespace DocumentTools
             this.TargetTextNumberText.AutoSize = true;
             this.TargetTextNumberText.ForeColor = System.Drawing.Color.ForestGreen;
             this.TargetTextNumberText.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.TargetTextNumberText.Location = new System.Drawing.Point(395, 481);
+            this.TargetTextNumberText.Location = new System.Drawing.Point(395, 494);
             this.TargetTextNumberText.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.TargetTextNumberText.Name = "TargetTextNumberText";
             this.TargetTextNumberText.Size = new System.Drawing.Size(95, 12);
@@ -15106,6 +15121,7 @@ namespace DocumentTools
         private ToolStripMenuItem CheckVersionButton;
         private ToolStripMenuItem VersionUpdateLog;
         internal CheckBox UseLocalOffice;
+        private CheckBox DoubleTextClear;
     }
 }
 

@@ -1802,6 +1802,11 @@ namespace DocumentTools
                                 }
                             });
                     }
+
+                    if(DoubleTextClear.Checked)
+                    {
+                        this.TargetTextBox.Lines = this.TargetTextBox.Lines.ToList().Distinct().ToArray();
+                    }
                 }
             }
             catch (Exception ex)
