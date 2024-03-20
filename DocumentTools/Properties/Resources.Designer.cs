@@ -151,6 +151,16 @@ namespace DocumentTools.Properties {
         }
         
         /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] ChangeReporItem {
+            get {
+                object obj = ResourceManager.GetObject("ChangeReporItem", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 [{
         ///    &quot;code&quot;: &quot;11&quot;,
         ///    &quot;name&quot;: &quot;北京市&quot;,

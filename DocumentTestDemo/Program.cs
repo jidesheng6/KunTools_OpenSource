@@ -1,12 +1,4 @@
-﻿using Aspose.Words;
-using Aspose.Words.Drawing;
-using Aspose.Words.Layout;
-using System;
-using System.Diagnostics;
-using System.Linq;
-using Aspose.Slides;
-using System.IO;
-using Aspose.OCR;
+﻿using Aspose.OCR;
 
 namespace DocumentTestDemo
 {
@@ -19,12 +11,12 @@ namespace DocumentTestDemo
             string f1 = @"F:\BaiduNetdiskDownload\税务局面试真题258页_第1到5页.pdf";
             string f2 = @"F:\BaiduNetdiskDownload\";
 
-            testdemo0(f1,f2);
+            testdemo0(f1, f2);
 
         }
 
 
-        static void testdemo0(string f1,string f2)
+        static void testdemo0(string f1, string f2)
         {
             Aspose.OCR.Logging.Console = true;
             Aspose.OCR.Logging.LoggingLevel = LoggingLevel.Debug;
@@ -36,7 +28,7 @@ namespace DocumentTestDemo
 
             recognitionSettings.Language = Language.Chi;
 
-            AsposeOcr.SaveMultipageDocument($@"{f2}1.docx",Aspose.OCR.SaveFormat.Docx,ocr.Recognize(input,recognitionSettings));
+            AsposeOcr.SaveMultipageDocument($@"{f2}1.docx", Aspose.OCR.SaveFormat.Docx, ocr.Recognize(input, recognitionSettings));
 
         }
     }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace DocumentTools
@@ -8,7 +7,7 @@ namespace DocumentTools
     public partial class DonateMeFrm : Form
     {
         Point QR_Wechat_Button_Point;
-        int MoveCount = 0;
+        int MoveCount;
         public DonateMeFrm()
         {
             InitializeComponent();

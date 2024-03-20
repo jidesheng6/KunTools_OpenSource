@@ -9,66 +9,37 @@ using System.Windows.Forms;
 
 namespace DocumentTools
 {
-    internal enum ConvertFileType
-    {
-        Word2Pdf,
-        Pdf2Word,
-        Excel2Pdf,
-        Word2Image,
-        Pdf2Excel,
-        WordReplace,
-        ExcelReplace,
-        Image2Ico,
-        Word2Excel,
-        Excel2Word,
-        SplitPdf,
-        SplitWord,
-        SplitPPT,
-        AddWaterMarkPdf,
-        RemovePdfWaterMark,
-        PPT2PDF,
-        PDF2PPT,
-        ConvertPdfCompliance,
-        CompressPDF,
-        CompressImage,
-        Html2PDF,
-        Word2EPUB,
-        EPUB2Word,
-        EPUB2Pdf,
-        WeBp2Image,
-    }
-
     internal class UI
     {
         public static void AddCompressImageFiles()
-        { AddFilesToListView("PDF文档", "*.jpg;*.jpeg;*.png;*.bmp", BodyForm.MainForm.CompressImageFileList); }
+        { AddFilesToListViewAsync("PDF文档", "*.jpg;*.jpeg;*.png;*.bmp", BodyForm.MainForm.CompressImageFileList); }
 
         public static void AddCompressPDFFiles()
-        { AddFilesToListView("PDF文档", "*.pdf", BodyForm.MainForm.CompressPdfFileList); }
+        { AddFilesToListViewAsync("PDF文档", "*.pdf", BodyForm.MainForm.CompressPdfFileList); }
 
         public static void AddConvertComplicePdfFiles()
-        { AddFilesToListView("PDF文档", "*.pdf", BodyForm.MainForm.ConvertPdfComplianceFileList); }
+        { AddFilesToListViewAsync("PDF文档", "*.pdf", BodyForm.MainForm.ConvertPdfComplianceFileList); }
 
         public static void AddConvertImage2PDFFiles()
-        { AddFilesToListView("图片文件", "*.jpg;*.jpeg;*.png;*.bmp", BodyForm.MainForm.ConvertImage2PDFFileList); }
+        { AddFilesToListViewAsync("图片文件", "*.jpg;*.jpeg;*.png;*.bmp", BodyForm.MainForm.ConvertImage2PDFFileList); }
 
         public static void AddDataMatrixWordFiles()
-        { AddFilesToListView("WORD文档|PDF文档", "*.doc;*.docx;*.pdf", BodyForm.MainForm.DecodeMatrixWordListView); }
+        { AddFilesToListViewAsync("WORD文档|PDF文档", "*.doc;*.docx;*.pdf", BodyForm.MainForm.DecodeMatrixWordListView); }
 
         public static void AddEPUB2PDFFiles()
-        { AddFilesToListView("EPUB文件", "*.epub", BodyForm.MainForm.EPUB2PDFFileList); }
+        { AddFilesToListViewAsync("EPUB文件", "*.epub", BodyForm.MainForm.EPUB2PDFFileList); }
 
         public static void AddEPUB2WORDFiles()
-        { AddFilesToListView("EPUB文件", "*.epub", BodyForm.MainForm.EPUB2WORDFileList); }
+        { AddFilesToListViewAsync("EPUB文件", "*.epub", BodyForm.MainForm.EPUB2WORDFileList); }
 
         public static void AddExcel2WordFiles()
-        { AddFilesToListView("EXCEL文档", "*.xls;*.xlsx", BodyForm.MainForm.Excel2WordFileList); }
+        { AddFilesToListViewAsync("EXCEL文档", "*.xls;*.xlsx", BodyForm.MainForm.Excel2WordFileList); }
 
         public static void AddExcelFiles()
-        { AddFilesToListView("EXCEL文档", "*.xls;*.xlsx;*.et", BodyForm.MainForm.ExcelFileListView); }
+        { AddFilesToListViewAsync("EXCEL文档", "*.xls;*.xlsx;*.et", BodyForm.MainForm.ExcelFileListView); }
 
         public static void AddExcelReplaceFiles()
-        { AddFilesToListView("EXCEL文档", "*.xls;*.xlsx", BodyForm.MainForm.ReplaceExcelFileView); }
+        { AddFilesToListViewAsync("EXCEL文档", "*.xls;*.xlsx", BodyForm.MainForm.ReplaceExcelFileView); }
 
         /// <summary>
         /// 添加文件列表到Listview中，并返回项目数量
@@ -77,7 +48,7 @@ namespace DocumentTools
         /// <param name="FilterArgs"></param>
         /// <param name="ListViewControl"></param>
         /// <returns>文件数量</returns>
-        public static Task<int> AddFilesToListView(
+        public static Task<int> AddFilesToListViewAsync(
             string DisplayFilterString,
             string FilterArgs,
             ListView ListViewControl)
@@ -93,7 +64,7 @@ namespace DocumentTools
                     List<ListViewItem> itemsToAdd = new List<ListViewItem>(); // 保存待添加的 ListViewItems
                     try
                     {
-                        foreach(string TempDocumentFileName in TempDocuemntFileNames)
+                        foreach (string TempDocumentFileName in TempDocuemntFileNames)
                         {
                             ListViewItem TempDocuemntFileNamesListView = new ListViewItem
                             {
@@ -108,7 +79,7 @@ namespace DocumentTools
                             new Action(
                                 () =>
                                 {
-                                    if(itemsToAdd.Count > 0)
+                                    if (itemsToAdd.Count > 0)
                                     {
                                         ListViewControl.BeginUpdate();
                                         ListViewControl.Items.AddRange(itemsToAdd.ToArray());
@@ -117,7 +88,8 @@ namespace DocumentTools
                                         ListViewControl.EndUpdate();
                                     }
                                 }));
-                    } catch(Exception)
+                    }
+                    catch (Exception)
                     {
                     }
                     return itemsToAdd.Count;
@@ -140,15 +112,15 @@ namespace DocumentTools
                 {
                     try
                     {
-                        if(FileList.Length > 0)
+                        if (FileList.Length > 0)
                         {
                             List<ListViewItem> itemsToAdd = new List<ListViewItem>(); // 保存待添加的 ListViewItems
 
-                            foreach(string file in FileList)
+                            foreach (string file in FileList)
                             {
                                 FileInfo TempFileInfo = new FileInfo(file);
                                 DirectoryInfo TempDirInfo = new DirectoryInfo(file);
-                                if(Directory.Exists(file) &&
+                                if (Directory.Exists(file) &&
                                     (TempDirInfo.Attributes & FileAttributes.ReparsePoint) !=
                                     FileAttributes.ReparsePoint)
                                 {
@@ -159,13 +131,15 @@ namespace DocumentTools
                                     //通过递归实现获取子目录文件
                                     string[] SubPathFiles = Directory.GetDirectories(file);
                                     AddFilesToListViewWithNotDialog(SubPathFiles, ListviewControl, FileFilters);
-                                } else if(File.Exists(file) &&
+                                }
+                                else if (File.Exists(file) &&
                                     (TempFileInfo.Attributes & FileAttributes.ReparsePoint) !=
                                     FileAttributes.ReparsePoint)
                                 {
-                                    foreach(string FileFilter in FileFilters)
+                                    foreach (string FileFilter in FileFilters)
                                     {
-                                        if(Path.GetExtension(file) == FileFilter)
+                                        if (string.Compare(Path.GetExtension(file), FileFilter, StringComparison.Ordinal) ==
+                                            0)
                                         {
                                             ListViewItem FileListListView = new ListViewItem { Text = file };
                                             FileListListView.SubItems.Add(Util.GetNowDateTime());
@@ -180,7 +154,7 @@ namespace DocumentTools
                                 new Action(
                                     () =>
                                     {
-                                        if(itemsToAdd.Count > 0)
+                                        if (itemsToAdd.Count > 0)
                                         {
                                             ListviewControl.BeginUpdate();
                                             ListviewControl.Items.AddRange(itemsToAdd.ToArray());
@@ -190,65 +164,68 @@ namespace DocumentTools
                                         }
                                     }));
                         }
-                    } catch(Exception)
+                    }
+                    catch (Exception)
                     {
                     }
                 });
         }
 
         public static void AddHtml2PdfFiles()
-        { AddFilesToListView("HTML文档", "*.html;*.htm;*.mhtml;*.mht", BodyForm.MainForm.HTML2PDFFileList); }
+        { AddFilesToListViewAsync("HTML文档", "*.html;*.htm;*.mhtml;*.mht", BodyForm.MainForm.HTML2PDFFileList); }
 
         public static void AddIcoConvertFiles()
-        { AddFilesToListView("图片文件", "*.jpg;*.png;*.bmp", BodyForm.MainForm.IcoFileView); }
+        { AddFilesToListViewAsync("图片文件", "*.jpg;*.png;*.bmp", BodyForm.MainForm.IcoFileView); }
 
         public static void AddMergePdfFiles()
-        { AddFilesToListView("支持的文件", "*.pdf;*.jpg;*.png;*.bmp;*.tif", BodyForm.MainForm.MergePdfFileView); }
+        { AddFilesToListViewAsync("支持的文件", "*.pdf;*.jpg;*.png;*.bmp;*.tif", BodyForm.MainForm.MergePdfFileView); }
 
         public static void AddMergeWordFiles()
-        { AddFilesToListView("WORD文档", "*.doc;*.docx;*.wps", BodyForm.MainForm.MergeWordFileList); }
+        { AddFilesToListViewAsync("WORD文档", "*.doc;*.docx;*.wps", BodyForm.MainForm.MergeWordFileList); }
 
         public static void AddPdf2ExcelFiles()
-        { AddFilesToListView("PDF文档", "*.pdf", BodyForm.MainForm.PDF2ExcelFileView); }
+        { AddFilesToListViewAsync("PDF文档", "*.pdf", BodyForm.MainForm.PDF2ExcelFileView); }
 
         public static void AddPdf2PPTFiles()
-        { AddFilesToListView("PDF文档", "*.pdf", BodyForm.MainForm.PDF2PPTFileList); }
+        { AddFilesToListViewAsync("PDF文档", "*.pdf", BodyForm.MainForm.PDF2PPTFileList); }
 
-        public static void AddPdfFiles() { AddFilesToListView("PDF文档", "*.pdf", BodyForm.MainForm.PdfFileListView); }
+        public static void AddPdfFiles()
+        { AddFilesToListViewAsync("PDF文档", "*.pdf", BodyForm.MainForm.PdfFileListView); }
 
         public static void AddPPT2PdfFiles()
-        { AddFilesToListView("演示文稿", "*.ppt;*.pptx", BodyForm.MainForm.PPT2PdfFileList); }
+        { AddFilesToListViewAsync("演示文稿", "*.ppt;*.pptx", BodyForm.MainForm.PPT2PdfFileList); }
 
         public static void AddRemoveWaterFiles()
-        { AddFilesToListView("PDF文档", "*.pdf", BodyForm.MainForm.RemovePdfWaterMarkFileList); }
+        { AddFilesToListViewAsync("PDF文档", "*.pdf", BodyForm.MainForm.RemovePdfWaterMarkFileList); }
 
         public static void AddSplitPdfFiles()
-        { AddFilesToListView("PDF文档", "*.pdf", BodyForm.MainForm.SplitPdfFileList); }
+        { AddFilesToListViewAsync("PDF文档", "*.pdf", BodyForm.MainForm.SplitPdfFileList); }
 
         public static void AddSplitWordFiles()
-        { AddFilesToListView("WORD文档", "*.doc;*.docx;*.wps", BodyForm.MainForm.SplitWordFileList); }
+        { AddFilesToListViewAsync("WORD文档", "*.doc;*.docx;*.wps", BodyForm.MainForm.SplitWordFileList); }
 
         public static void AddWaterMarkPdfFiles()
-        { AddFilesToListView("PDF文档", "*.pdf", BodyForm.MainForm.PdfWaterMarkFileList); }
-        public static void AddWeBpFiles() { AddFilesToListView("WEBP图片", "*.webp", BodyForm.MainForm.WebpFileList); }
+        { AddFilesToListViewAsync("PDF文档", "*.pdf", BodyForm.MainForm.PdfWaterMarkFileList); }
+        public static void AddWeBpFiles()
+        { AddFilesToListViewAsync("WEBP图片", "*.webp", BodyForm.MainForm.WebpFileList); }
 
         public static void AddWord2EPUBFiles()
-        { AddFilesToListView("WORD文档", "*.doc;*.docx;*.wps", BodyForm.MainForm.Word2EPUBFileList); }
+        { AddFilesToListViewAsync("WORD文档", "*.doc;*.docx;*.wps", BodyForm.MainForm.Word2EPUBFileList); }
 
         public static void AddWord2ExcelFiles()
-        { AddFilesToListView("WORD文档", "*.doc;*.docx;*.wps", BodyForm.MainForm.Word2ExcelFileList); }
+        { AddFilesToListViewAsync("WORD文档", "*.doc;*.docx;*.wps", BodyForm.MainForm.Word2ExcelFileList); }
 
         public static void AddWord2ImageFiles()
-        { AddFilesToListView("支持的文档", "*.docx;*.doc;*.xls;*.xlsx;*.pdf", BodyForm.MainForm.DocumentsListView); }
+        { AddFilesToListViewAsync("支持的文档", "*.docx;*.doc;*.xls;*.xlsx;*.pdf", BodyForm.MainForm.DocumentsListView); }
 
-        public static Task<int> AddWordFiles()
-        { return AddFilesToListView("WORD文档", "*.doc;*.docx;*.wps", BodyForm.MainForm.WordFileListView); }
+        public static Task<int> AddWordFilesAsync()
+        { return AddFilesToListViewAsync("WORD文档", "*.doc;*.docx;*.wps", BodyForm.MainForm.WordFileListView); }
 
         public static void AddWordReplaceFiles()
-        { AddFilesToListView("WORD文档", "*.docx;*.doc;*.wps", BodyForm.MainForm.ReplaceWordFileList); }
+        { AddFilesToListViewAsync("WORD文档", "*.docx;*.doc;*.wps", BodyForm.MainForm.ReplaceWordFileList); }
 
         public static void AddSplitPPTFiles()
-        { AddFilesToListView("演示文稿", "*.ppt;*.pptx", BodyForm.MainForm.SplitPPTFilesList); }
+        { AddFilesToListViewAsync("演示文稿", "*.ppt;*.pptx", BodyForm.MainForm.SplitPPTFilesList); }
 
 
         /// <summary>
@@ -266,11 +243,11 @@ namespace DocumentTools
             bool UseSourcePath = false,
             Button CallButton = null)
         {
-            if(ListViewControl.Items.Count > 0)
+            if (ListViewControl.Items.Count > 0)
             {
                 string TempSaveDocxPathString = string.Empty;
                 string SelectSavePathstring = "A";
-                if(!UseSourcePath)
+                if (!UseSourcePath)
                 {
                     IEnumerable<string> ISelectSavePathstring = Util.ShowSelectDialog(
                         false,
@@ -280,28 +257,27 @@ namespace DocumentTools
                     SelectSavePathstring = ISelectSavePathstring.FirstOrDefault();
                 }
 
-                if(SelectSavePathstring != default &&
+                if (string.Compare(SelectSavePathstring, default, StringComparison.Ordinal) != 0 &&
                     SelectSavePathstring != string.Empty &&
                     SelectSavePathstring != null)
                 {
                     CallButton.Enabled = false;
-                    for(int TempIndex = 0; TempIndex < ListViewControl.Items.Count; TempIndex++)
+                    for (int TempIndex = 0; TempIndex < ListViewControl.Items.Count; TempIndex++)
                     {
                         string ListViewFirstColumnText = ListViewControl.Items[TempIndex].Text;
                         string FileNameWithOutExtension = Path.GetFileNameWithoutExtension(ListViewFirstColumnText);//不带后缀的文件名
                         string FileNameSourcePath = Path.GetDirectoryName(ListViewFirstColumnText);//所选文件列表中文件的源目录
-                        DirectoryInfo directoryInfo = new DirectoryInfo(ListViewFirstColumnText);
                         if (UseSourcePath)
                         {
                             SelectSavePathstring = FileNameSourcePath;
                         }
                         string ConvertedFileName = Path.Combine(
                             SelectSavePathstring,
-                            FileNameWithOutExtension + ExtensionString);
+                            $"{FileNameWithOutExtension}{ExtensionString}");
                         StatusLabelControl.Text = $"正在处理第{TempIndex + 1}个文件";
 
                         //根据不同类型调用不同的函数
-                        switch(ConverType)
+                        switch (ConverType)
                         {
                             //word转pdf
                             case ConvertFileType.Word2Pdf:
@@ -366,7 +342,7 @@ namespace DocumentTools
                                 break;
                             //批量替换word内容
                             case ConvertFileType.WordReplace:
-                                if(BodyForm.MainForm.WordReplaceFindTextBox.Text != string.Empty)
+                                if (BodyForm.MainForm.WordReplaceFindTextBox.Text != string.Empty)
                                 {
                                     Util.ReplaceDocumentContent(
                                         ListViewFirstColumnText,
@@ -504,16 +480,17 @@ namespace DocumentTools
                             case ConvertFileType.CompressImage:
                                 bool UseSelfExt = BodyForm.MainForm.CompressImage_NotUseSelfExt.Checked;//是否不使用源文件后缀名
                                 string SavedFileName = string.Empty;
-                                if(UseSelfExt)
+                                if (UseSelfExt)
                                 {
                                     SavedFileName = ConvertedFileName;
-                                } else
+                                }
+                                else
                                 {
                                     string ImageFileExtenString = Path.GetExtension(ListViewFirstColumnText);
 
                                     SavedFileName = Path.Combine(
                                         SelectSavePathstring,
-                                        FileNameWithOutExtension + ImageFileExtenString);
+                                        $"{FileNameWithOutExtension}{ImageFileExtenString}");
                                 }
 
                                 Util.CompressImage(
@@ -554,7 +531,7 @@ namespace DocumentTools
                                 break;
                             case ConvertFileType.Word2EPUB:
                                 int TempImageDpiValue = 100;
-                                if(BodyForm.MainForm.CoverImageDpi.Text != string.Empty)
+                                if (BodyForm.MainForm.CoverImageDpi.Text != string.Empty)
                                 {
                                     TempImageDpiValue = int.Parse(BodyForm.MainForm.CoverImageDpi.Text);
                                 }
@@ -604,7 +581,7 @@ namespace DocumentTools
                         ListViewControl.Items[TempIndex].SubItems.Add(ConvertedFileName);
                         ListViewControl.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
 
-                        if(File.Exists(ConvertedFileName))
+                        if (File.Exists(ConvertedFileName))
                         {
                             FileInfo ConverdFileInfo = new FileInfo(ConvertedFileName);
 
@@ -627,12 +604,12 @@ namespace DocumentTools
                     CallButton.Enabled = true;
 
                     //处理完毕后需要做的事情
-                    switch(ConverType)
+                    switch (ConverType)
                     {
                         case ConvertFileType.Word2Pdf:
-                            if(BodyForm.MainForm.OpenPdfOptions.Checked)
+                            if (BodyForm.MainForm.OpenPdfOptions.Checked)
                             {
-                                Task<List<string>> TempPdfFileNames = GetListViewLastItemContent(
+                                Task<List<string>> TempPdfFileNames = GetListViewLastItemContentAsync(
                                     BodyForm.MainForm.WordFileListView);
                                 TempPdfFileNames.Result
                                     .ForEach(
@@ -642,9 +619,9 @@ namespace DocumentTools
                                         });
                             }
 
-                            if(BodyForm.MainForm.RemoveTempDocx.Checked)
+                            if (BodyForm.MainForm.RemoveTempDocx.Checked)
                             {
-                                if(TempSaveDocxPathString != string.Empty)
+                                if (TempSaveDocxPathString != string.Empty)
                                 {
                                     Directory.Delete(TempSaveDocxPathString, true);
                                 }
@@ -660,14 +637,18 @@ namespace DocumentTools
                             new Action(
                                 () =>
                                 {
-                                    if(BodyForm.MainForm.ShowOpenTargetDialog == "on")
+                                    if (string.Compare(
+                                            BodyForm.MainForm.ShowOpenTargetDialog,
+                                            "on",
+                                            StringComparison.Ordinal) ==
+                                        0)
                                     {
                                         DialogResult MessageBoxResult = MessageBox.Show(
                                             "处理完毕，是否需要打开转换后目录？",
                                             "提示",
                                             MessageBoxButtons.YesNo,
                                             MessageBoxIcon.Question);
-                                        if(MessageBoxResult == DialogResult.Yes)
+                                        if (MessageBoxResult == DialogResult.Yes)
                                         {
                                             Process.Start(SelectSavePathstring);
                                         }
@@ -682,7 +663,7 @@ namespace DocumentTools
         /// </summary>
         /// <param name="ListViewControl"></param>
         /// <returns></returns>
-        public static Task<List<string>> GetListViewFirstItemContent(ListView ListViewControl)
+        public static Task<List<string>> GetListViewFirstItemContentAsync(ListView ListViewControl)
         {
             return Task.Run(
                 () =>
@@ -690,14 +671,15 @@ namespace DocumentTools
                     List<string> FileNames = new List<string>();
                     try
                     {
-                        if(ListViewControl.Items.Count > 0)
+                        if (ListViewControl.Items.Count > 0)
                         {
-                            for(int Index = 0; Index < ListViewControl.Items.Count; Index++)
+                            for (int Index = 0; Index < ListViewControl.Items.Count; Index++)
                             {
                                 FileNames.Add(ListViewControl.Items[Index].Text);
                             }
                         }
-                    } catch
+                    }
+                    catch
                     {
                     }
                     return FileNames;
@@ -709,7 +691,7 @@ namespace DocumentTools
         /// </summary>
         /// <param name="ListViewControl"></param>
         /// <returns></returns>
-        public static Task<List<string>> GetListViewLastItemContent(ListView ListViewControl)
+        public static Task<List<string>> GetListViewLastItemContentAsync(ListView ListViewControl)
         {
             return Task.Run(
                 () =>
@@ -717,14 +699,15 @@ namespace DocumentTools
                     List<string> FileNames = new List<string>();
                     try
                     {
-                        if(ListViewControl.Items.Count > 0)
+                        if (ListViewControl.Items.Count > 0)
                         {
-                            for(int Index = 0; Index < ListViewControl.Items.Count; Index++)
+                            for (int Index = 0; Index < ListViewControl.Items.Count; Index++)
                             {
                                 FileNames.Add(ListViewControl.Items[Index].SubItems[2].Text);
                             }
                         }
-                    } catch
+                    }
+                    catch
                     {
                     }
                     return FileNames;
@@ -732,8 +715,8 @@ namespace DocumentTools
         }
 
 
-        public static Task<List<string>> GetPdfFileNames()
-        { return GetListViewLastItemContent(BodyForm.MainForm.PdfFileListView); }
+        public static Task<List<string>> GetPdfFileNamesAsync()
+        { return GetListViewLastItemContentAsync(BodyForm.MainForm.PdfFileListView); }
 
         /// <summary>
         /// 将Listview中的项目向下移动（文本）
@@ -742,12 +725,12 @@ namespace DocumentTools
         public static void MoveDownListViewItem(ListView ListViewControl)
         {
             //列表中有项目才响应
-            if(ListViewControl.Items.Count > 0)
+            if (ListViewControl.Items.Count > 0)
             {
                 //获取当前选中项目的索引
                 int NowSelectIndex = ListViewControl.SelectedIndices[0];
 
-                if(NowSelectIndex < ListViewControl.Items.Count - 1)
+                if (NowSelectIndex < ListViewControl.Items.Count - 1)
                 {
                     //项目索引不在第一个时才处理
 
@@ -776,12 +759,12 @@ namespace DocumentTools
         public static void MoveUpListViewItem(ListView ListViewControl)
         {
             //列表中有项目才响应
-            if(ListViewControl.Items.Count > 0)
+            if (ListViewControl.Items.Count > 0)
             {
                 //获取当前选中项目的索引
                 int NowSelectIndex = ListViewControl.SelectedIndices[0];
 
-                if(NowSelectIndex > 0)
+                if (NowSelectIndex > 0)
                 {
                     //项目索引不在第一个时才处理
 
@@ -809,19 +792,20 @@ namespace DocumentTools
         /// <param name="ListViewControl"></param>
         public static void RemoveListViewItem(bool ClearAllItems, ListView ListViewControl)
         {
-            if(ListViewControl.Items.Count != 0)
+            if (ListViewControl.Items.Count != 0)
             {
-                if(ClearAllItems)
+                if (ClearAllItems)
                 {
                     ListViewControl.Items.Clear();
-                } else
+                }
+                else
                 {
-                    if(ListViewControl.FocusedItem != null && ListViewControl.FocusedItem.Index >= 0)
+                    if (ListViewControl.FocusedItem != null && ListViewControl.FocusedItem.Index >= 0)
                     {
                         //删除列表一个项目,先移除，移动到没有项目时，focuseditem会变为null，这时候就不处理了
                         //同时移除后会自动选中临近的item，所以用focuseditem就可以了
                         ListViewControl.Items.RemoveAt(ListViewControl.FocusedItem.Index);
-                        if(ListViewControl.FocusedItem != null)
+                        if (ListViewControl.FocusedItem != null)
                         {
                             ListViewControl.Items[ListViewControl.FocusedItem.Index].Selected = true;
                         }

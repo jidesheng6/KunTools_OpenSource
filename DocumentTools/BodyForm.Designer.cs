@@ -766,11 +766,50 @@ namespace DocumentTools
             this.SignPersionDocument = new System.Windows.Forms.TextBox();
             this.label152 = new System.Windows.Forms.Label();
             this.TabPage_40 = new System.Windows.Forms.TabPage();
+            this.linkLabel7 = new System.Windows.Forms.LinkLabel();
+            this.groupBox65 = new System.Windows.Forms.GroupBox();
+            this.ExamReportParaChangeProcessBar = new System.Windows.Forms.ProgressBar();
+            this.label183 = new System.Windows.Forms.Label();
+            this.GetAllItemSplit = new System.Windows.Forms.Button();
+            this.ExamReportRowMode_ExamItemInsertSame = new System.Windows.Forms.CheckBox();
+            this.ExamReportRowMode_ExamSelectorInsertSame = new System.Windows.Forms.CheckBox();
+            this.ExamReportColMode_ExamSelectorBox = new System.Windows.Forms.TextBox();
+            this.label196 = new System.Windows.Forms.Label();
+            this.ExamReportColMode_ExamBox = new System.Windows.Forms.TextBox();
+            this.label190 = new System.Windows.Forms.Label();
+            this.ExamReportColMode_Row_End_Combox = new System.Windows.Forms.ComboBox();
+            this.label191 = new System.Windows.Forms.Label();
+            this.ExamReportColMode_Row_Start_Combox = new System.Windows.Forms.ComboBox();
+            this.ExamReportColMode_Col_Combox = new System.Windows.Forms.ComboBox();
+            this.label193 = new System.Windows.Forms.Label();
+            this.label194 = new System.Windows.Forms.Label();
+            this.groupBox66 = new System.Windows.Forms.GroupBox();
+            this.ExamReportParaDataFormatReverse_Combox = new System.Windows.Forms.ComboBox();
+            this.label192 = new System.Windows.Forms.Label();
+            this.ExamReportParaDataFormatFont_Box = new System.Windows.Forms.TextBox();
+            this.label186 = new System.Windows.Forms.Label();
+            this.ExamReportParaRaidInfo_Combox = new System.Windows.Forms.ComboBox();
+            this.ExamReportParaDataFormat_Combox = new System.Windows.Forms.ComboBox();
+            this.label189 = new System.Windows.Forms.Label();
+            this.label188 = new System.Windows.Forms.Label();
+            this.label187 = new System.Windows.Forms.Label();
+            this.ExamReportRowMode_ExamSelectorBox = new System.Windows.Forms.TextBox();
+            this.ChangeExamReportParaButton = new System.Windows.Forms.Button();
+            this.ExamReportRowMode_ExamList = new System.Windows.Forms.ComboBox();
+            this.label185 = new System.Windows.Forms.Label();
+            this.ExamReportRowMode_Col_End_Combox = new System.Windows.Forms.ComboBox();
+            this.label184 = new System.Windows.Forms.Label();
+            this.ExamReportRowMode_Col_Start_Combox = new System.Windows.Forms.ComboBox();
+            this.ExamReportRowMode_Row_Combox = new System.Windows.Forms.ComboBox();
+            this.label182 = new System.Windows.Forms.Label();
+            this.label176 = new System.Windows.Forms.Label();
+            this.ExamReportPara_ColMode = new System.Windows.Forms.RadioButton();
+            this.ExamReportPara_RowMode = new System.Windows.Forms.RadioButton();
             this.linkLabel5 = new System.Windows.Forms.LinkLabel();
-            this.label173 = new System.Windows.Forms.Label();
             this.groupBox59 = new System.Windows.Forms.GroupBox();
             this.ExamReportChangeItemDataFormat = new System.Windows.Forms.RadioButton();
             this.ExamReportChangeItemName = new System.Windows.Forms.RadioButton();
+            this.label173 = new System.Windows.Forms.Label();
             this.ExamReportChangeItemDataRaid = new System.Windows.Forms.RadioButton();
             this.ExamReportChangeProgress = new System.Windows.Forms.ProgressBar();
             this.ExamReplaceRaids = new System.Windows.Forms.TextBox();
@@ -1162,6 +1201,8 @@ namespace DocumentTools
             this.groupBox58.SuspendLayout();
             this.groupBox54.SuspendLayout();
             this.TabPage_40.SuspendLayout();
+            this.groupBox65.SuspendLayout();
+            this.groupBox66.SuspendLayout();
             this.groupBox59.SuspendLayout();
             this.groupBox56.SuspendLayout();
             this.groupBox57.SuspendLayout();
@@ -8641,7 +8682,7 @@ namespace DocumentTools
             this.TargetTextBox.Location = new System.Drawing.Point(4, 15);
             this.TargetTextBox.Margin = new System.Windows.Forms.Padding(1);
             this.TargetTextBox.Name = "TargetTextBox";
-            this.TargetTextBox.Size = new System.Drawing.Size(181, 535);
+            this.TargetTextBox.Size = new System.Drawing.Size(181, 531);
             this.TargetTextBox.TabIndex = 3;
             this.TargetTextBox.Tag = "anchor_top_right_bottom";
             this.TargetTextBox.Text = "";
@@ -10328,12 +10369,13 @@ namespace DocumentTools
             // 
             this.SignDocumentUseOutPersonPath.AutoSize = true;
             this.SignDocumentUseOutPersonPath.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.SignDocumentUseOutPersonPath.Location = new System.Drawing.Point(4, 64);
+            this.SignDocumentUseOutPersonPath.Location = new System.Drawing.Point(4, 66);
             this.SignDocumentUseOutPersonPath.Margin = new System.Windows.Forms.Padding(1);
             this.SignDocumentUseOutPersonPath.Name = "SignDocumentUseOutPersonPath";
             this.SignDocumentUseOutPersonPath.Size = new System.Drawing.Size(131, 16);
             this.SignDocumentUseOutPersonPath.TabIndex = 9;
             this.SignDocumentUseOutPersonPath.Text = "使用外部单人码目录";
+            this.MainToolsTip.SetToolTip(this.SignDocumentUseOutPersonPath, "注：\r\n使用该模式时，如果生成份数大于目录内文件数量，将会生成文件内图片数量相同的文档");
             this.SignDocumentUseOutPersonPath.UseVisualStyleBackColor = true;
             this.SignDocumentUseOutPersonPath.CheckedChanged += new System.EventHandler(this.SignDocumentUseOutPersonPath_CheckedChanged);
             // 
@@ -10376,7 +10418,7 @@ namespace DocumentTools
             // 
             this.SignDocumentOnlyUseOnlyImage.AutoSize = true;
             this.SignDocumentOnlyUseOnlyImage.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.SignDocumentOnlyUseOnlyImage.Location = new System.Drawing.Point(4, 103);
+            this.SignDocumentOnlyUseOnlyImage.Location = new System.Drawing.Point(4, 102);
             this.SignDocumentOnlyUseOnlyImage.Margin = new System.Windows.Forms.Padding(1);
             this.SignDocumentOnlyUseOnlyImage.Name = "SignDocumentOnlyUseOnlyImage";
             this.SignDocumentOnlyUseOnlyImage.Size = new System.Drawing.Size(131, 16);
@@ -10558,8 +10600,9 @@ namespace DocumentTools
             // 
             // TabPage_40
             // 
+            this.TabPage_40.Controls.Add(this.linkLabel7);
+            this.TabPage_40.Controls.Add(this.groupBox65);
             this.TabPage_40.Controls.Add(this.linkLabel5);
-            this.TabPage_40.Controls.Add(this.label173);
             this.TabPage_40.Controls.Add(this.groupBox59);
             this.TabPage_40.Controls.Add(this.ExamReportChange);
             this.TabPage_40.Controls.Add(this.groupBox56);
@@ -10577,11 +10620,449 @@ namespace DocumentTools
             this.TabPage_40.Text = "考评报表修改";
             this.TabPage_40.UseVisualStyleBackColor = true;
             // 
+            // linkLabel7
+            // 
+            this.linkLabel7.AutoSize = true;
+            this.linkLabel7.Location = new System.Drawing.Point(183, 391);
+            this.linkLabel7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.linkLabel7.Name = "linkLabel7";
+            this.linkLabel7.Size = new System.Drawing.Size(215, 12);
+            this.linkLabel7.TabIndex = 32;
+            this.linkLabel7.TabStop = true;
+            this.linkLabel7.Text = "点击查看功能简易说明手册（离线PDF）";
+            this.linkLabel7.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel7_LinkClicked);
+            // 
+            // groupBox65
+            // 
+            this.groupBox65.Controls.Add(this.ExamReportParaChangeProcessBar);
+            this.groupBox65.Controls.Add(this.label183);
+            this.groupBox65.Controls.Add(this.GetAllItemSplit);
+            this.groupBox65.Controls.Add(this.ExamReportRowMode_ExamItemInsertSame);
+            this.groupBox65.Controls.Add(this.ExamReportRowMode_ExamSelectorInsertSame);
+            this.groupBox65.Controls.Add(this.ExamReportColMode_ExamSelectorBox);
+            this.groupBox65.Controls.Add(this.label196);
+            this.groupBox65.Controls.Add(this.ExamReportColMode_ExamBox);
+            this.groupBox65.Controls.Add(this.label190);
+            this.groupBox65.Controls.Add(this.ExamReportColMode_Row_End_Combox);
+            this.groupBox65.Controls.Add(this.label191);
+            this.groupBox65.Controls.Add(this.ExamReportColMode_Row_Start_Combox);
+            this.groupBox65.Controls.Add(this.ExamReportColMode_Col_Combox);
+            this.groupBox65.Controls.Add(this.label193);
+            this.groupBox65.Controls.Add(this.label194);
+            this.groupBox65.Controls.Add(this.groupBox66);
+            this.groupBox65.Controls.Add(this.label187);
+            this.groupBox65.Controls.Add(this.ExamReportRowMode_ExamSelectorBox);
+            this.groupBox65.Controls.Add(this.ChangeExamReportParaButton);
+            this.groupBox65.Controls.Add(this.ExamReportRowMode_ExamList);
+            this.groupBox65.Controls.Add(this.label185);
+            this.groupBox65.Controls.Add(this.ExamReportRowMode_Col_End_Combox);
+            this.groupBox65.Controls.Add(this.label184);
+            this.groupBox65.Controls.Add(this.ExamReportRowMode_Col_Start_Combox);
+            this.groupBox65.Controls.Add(this.ExamReportRowMode_Row_Combox);
+            this.groupBox65.Controls.Add(this.label182);
+            this.groupBox65.Controls.Add(this.label176);
+            this.groupBox65.Controls.Add(this.ExamReportPara_ColMode);
+            this.groupBox65.Controls.Add(this.ExamReportPara_RowMode);
+            this.groupBox65.Location = new System.Drawing.Point(16, 431);
+            this.groupBox65.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox65.Name = "groupBox65";
+            this.groupBox65.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox65.Size = new System.Drawing.Size(855, 167);
+            this.groupBox65.TabIndex = 17;
+            this.groupBox65.TabStop = false;
+            this.groupBox65.Text = "报表参数批量修改";
+            // 
+            // ExamReportParaChangeProcessBar
+            // 
+            this.ExamReportParaChangeProcessBar.Location = new System.Drawing.Point(748, 137);
+            this.ExamReportParaChangeProcessBar.Margin = new System.Windows.Forms.Padding(2);
+            this.ExamReportParaChangeProcessBar.Name = "ExamReportParaChangeProcessBar";
+            this.ExamReportParaChangeProcessBar.Size = new System.Drawing.Size(95, 25);
+            this.ExamReportParaChangeProcessBar.TabIndex = 32;
+            // 
+            // label183
+            // 
+            this.label183.AutoSize = true;
+            this.label183.ForeColor = System.Drawing.Color.Crimson;
+            this.label183.Location = new System.Drawing.Point(7, 116);
+            this.label183.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label183.Name = "label183";
+            this.label183.Size = new System.Drawing.Size(497, 24);
+            this.label183.TabIndex = 31;
+            this.label183.Text = "注：多个选项和项目都使用|分隔，比如A|B|C；\r\n多项合计类型都使用@连接，比如A@B|C@D；修改完毕且检查完毕后，建议在系统中保存一次。";
+            // 
+            // GetAllItemSplit
+            // 
+            this.GetAllItemSplit.Location = new System.Drawing.Point(561, 111);
+            this.GetAllItemSplit.Margin = new System.Windows.Forms.Padding(2);
+            this.GetAllItemSplit.Name = "GetAllItemSplit";
+            this.GetAllItemSplit.Size = new System.Drawing.Size(91, 23);
+            this.GetAllItemSplit.TabIndex = 30;
+            this.GetAllItemSplit.Text = "全部项目获取";
+            this.MainToolsTip.SetToolTip(this.GetAllItemSplit, "使用|分隔符拼接考评表的所有项目到剪贴板");
+            this.GetAllItemSplit.UseVisualStyleBackColor = true;
+            this.GetAllItemSplit.Click += new System.EventHandler(this.GetAllItemSplit_Click);
+            // 
+            // ExamReportRowMode_ExamItemInsertSame
+            // 
+            this.ExamReportRowMode_ExamItemInsertSame.AutoSize = true;
+            this.ExamReportRowMode_ExamItemInsertSame.Location = new System.Drawing.Point(561, 83);
+            this.ExamReportRowMode_ExamItemInsertSame.Margin = new System.Windows.Forms.Padding(2);
+            this.ExamReportRowMode_ExamItemInsertSame.Name = "ExamReportRowMode_ExamItemInsertSame";
+            this.ExamReportRowMode_ExamItemInsertSame.Size = new System.Drawing.Size(96, 16);
+            this.ExamReportRowMode_ExamItemInsertSame.TabIndex = 29;
+            this.ExamReportRowMode_ExamItemInsertSame.Text = "插入相同项目";
+            this.ExamReportRowMode_ExamItemInsertSame.UseVisualStyleBackColor = true;
+            // 
+            // ExamReportRowMode_ExamSelectorInsertSame
+            // 
+            this.ExamReportRowMode_ExamSelectorInsertSame.AutoSize = true;
+            this.ExamReportRowMode_ExamSelectorInsertSame.Location = new System.Drawing.Point(561, 38);
+            this.ExamReportRowMode_ExamSelectorInsertSame.Margin = new System.Windows.Forms.Padding(2);
+            this.ExamReportRowMode_ExamSelectorInsertSame.Name = "ExamReportRowMode_ExamSelectorInsertSame";
+            this.ExamReportRowMode_ExamSelectorInsertSame.Size = new System.Drawing.Size(96, 16);
+            this.ExamReportRowMode_ExamSelectorInsertSame.TabIndex = 18;
+            this.ExamReportRowMode_ExamSelectorInsertSame.Text = "插入相同选项";
+            this.ExamReportRowMode_ExamSelectorInsertSame.UseVisualStyleBackColor = true;
+            // 
+            // ExamReportColMode_ExamSelectorBox
+            // 
+            this.ExamReportColMode_ExamSelectorBox.Location = new System.Drawing.Point(465, 81);
+            this.ExamReportColMode_ExamSelectorBox.Margin = new System.Windows.Forms.Padding(2);
+            this.ExamReportColMode_ExamSelectorBox.Name = "ExamReportColMode_ExamSelectorBox";
+            this.ExamReportColMode_ExamSelectorBox.Size = new System.Drawing.Size(94, 21);
+            this.ExamReportColMode_ExamSelectorBox.TabIndex = 28;
+            // 
+            // label196
+            // 
+            this.label196.AutoSize = true;
+            this.label196.Location = new System.Drawing.Point(443, 84);
+            this.label196.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label196.Name = "label196";
+            this.label196.Size = new System.Drawing.Size(17, 12);
+            this.label196.TabIndex = 27;
+            this.label196.Text = "的";
+            // 
+            // ExamReportColMode_ExamBox
+            // 
+            this.ExamReportColMode_ExamBox.Location = new System.Drawing.Point(338, 80);
+            this.ExamReportColMode_ExamBox.Margin = new System.Windows.Forms.Padding(2);
+            this.ExamReportColMode_ExamBox.Name = "ExamReportColMode_ExamBox";
+            this.ExamReportColMode_ExamBox.Size = new System.Drawing.Size(103, 21);
+            this.ExamReportColMode_ExamBox.TabIndex = 26;
+            this.ExamReportColMode_ExamBox.MouseHover += new System.EventHandler(this.ExamReportColMode_ExamBox_MouseHover);
+            // 
+            // label190
+            // 
+            this.label190.AutoSize = true;
+            this.label190.Location = new System.Drawing.Point(257, 84);
+            this.label190.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label190.Name = "label190";
+            this.label190.Size = new System.Drawing.Size(77, 12);
+            this.label190.TabIndex = 24;
+            this.label190.Text = "行设置为项目";
+            // 
+            // ExamReportColMode_Row_End_Combox
+            // 
+            this.ExamReportColMode_Row_End_Combox.FormattingEnabled = true;
+            this.ExamReportColMode_Row_End_Combox.Location = new System.Drawing.Point(219, 82);
+            this.ExamReportColMode_Row_End_Combox.Margin = new System.Windows.Forms.Padding(2);
+            this.ExamReportColMode_Row_End_Combox.Name = "ExamReportColMode_Row_End_Combox";
+            this.ExamReportColMode_Row_End_Combox.Size = new System.Drawing.Size(36, 20);
+            this.ExamReportColMode_Row_End_Combox.TabIndex = 23;
+            this.ExamReportColMode_Row_End_Combox.MouseHover += new System.EventHandler(this.ExamReportColMode_Row_End_Combox_MouseHover);
+            // 
+            // label191
+            // 
+            this.label191.AutoSize = true;
+            this.label191.Location = new System.Drawing.Point(197, 85);
+            this.label191.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label191.Name = "label191";
+            this.label191.Size = new System.Drawing.Size(17, 12);
+            this.label191.TabIndex = 22;
+            this.label191.Text = "到";
+            // 
+            // ExamReportColMode_Row_Start_Combox
+            // 
+            this.ExamReportColMode_Row_Start_Combox.FormattingEnabled = true;
+            this.ExamReportColMode_Row_Start_Combox.Location = new System.Drawing.Point(155, 82);
+            this.ExamReportColMode_Row_Start_Combox.Margin = new System.Windows.Forms.Padding(2);
+            this.ExamReportColMode_Row_Start_Combox.Name = "ExamReportColMode_Row_Start_Combox";
+            this.ExamReportColMode_Row_Start_Combox.Size = new System.Drawing.Size(40, 20);
+            this.ExamReportColMode_Row_Start_Combox.TabIndex = 21;
+            this.ExamReportColMode_Row_Start_Combox.MouseHover += new System.EventHandler(this.ExamReportColMode_Row_Start_Combox_MouseHover);
+            // 
+            // ExamReportColMode_Col_Combox
+            // 
+            this.ExamReportColMode_Col_Combox.FormattingEnabled = true;
+            this.ExamReportColMode_Col_Combox.Location = new System.Drawing.Point(85, 82);
+            this.ExamReportColMode_Col_Combox.Margin = new System.Windows.Forms.Padding(2);
+            this.ExamReportColMode_Col_Combox.Name = "ExamReportColMode_Col_Combox";
+            this.ExamReportColMode_Col_Combox.Size = new System.Drawing.Size(35, 20);
+            this.ExamReportColMode_Col_Combox.TabIndex = 20;
+            this.ExamReportColMode_Col_Combox.MouseHover += new System.EventHandler(this.ExamReportColMode_Col_Combox_MouseHover);
+            // 
+            // label193
+            // 
+            this.label193.AutoSize = true;
+            this.label193.Location = new System.Drawing.Point(122, 85);
+            this.label193.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label193.Name = "label193";
+            this.label193.Size = new System.Drawing.Size(29, 12);
+            this.label193.TabIndex = 18;
+            this.label193.Text = "列的";
+            // 
+            // label194
+            // 
+            this.label194.AutoSize = true;
+            this.label194.Location = new System.Drawing.Point(63, 85);
+            this.label194.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label194.Name = "label194";
+            this.label194.Size = new System.Drawing.Size(17, 12);
+            this.label194.TabIndex = 17;
+            this.label194.Text = "将";
+            // 
+            // groupBox66
+            // 
+            this.groupBox66.Controls.Add(this.ExamReportParaDataFormatReverse_Combox);
+            this.groupBox66.Controls.Add(this.label192);
+            this.groupBox66.Controls.Add(this.ExamReportParaDataFormatFont_Box);
+            this.groupBox66.Controls.Add(this.label186);
+            this.groupBox66.Controls.Add(this.ExamReportParaRaidInfo_Combox);
+            this.groupBox66.Controls.Add(this.ExamReportParaDataFormat_Combox);
+            this.groupBox66.Controls.Add(this.label189);
+            this.groupBox66.Controls.Add(this.label188);
+            this.groupBox66.Location = new System.Drawing.Point(660, 11);
+            this.groupBox66.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox66.Name = "groupBox66";
+            this.groupBox66.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox66.Size = new System.Drawing.Size(183, 124);
+            this.groupBox66.TabIndex = 16;
+            this.groupBox66.TabStop = false;
+            this.groupBox66.Text = "数据类型和身份设置";
+            // 
+            // ExamReportParaDataFormatReverse_Combox
+            // 
+            this.ExamReportParaDataFormatReverse_Combox.FormattingEnabled = true;
+            this.ExamReportParaDataFormatReverse_Combox.Location = new System.Drawing.Point(67, 73);
+            this.ExamReportParaDataFormatReverse_Combox.Margin = new System.Windows.Forms.Padding(2);
+            this.ExamReportParaDataFormatReverse_Combox.Name = "ExamReportParaDataFormatReverse_Combox";
+            this.ExamReportParaDataFormatReverse_Combox.Size = new System.Drawing.Size(113, 20);
+            this.ExamReportParaDataFormatReverse_Combox.TabIndex = 34;
+            // 
+            // label192
+            // 
+            this.label192.AutoSize = true;
+            this.label192.Location = new System.Drawing.Point(5, 76);
+            this.label192.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label192.Name = "label192";
+            this.label192.Size = new System.Drawing.Size(53, 12);
+            this.label192.TabIndex = 33;
+            this.label192.Text = "小数位数";
+            // 
+            // ExamReportParaDataFormatFont_Box
+            // 
+            this.ExamReportParaDataFormatFont_Box.Location = new System.Drawing.Point(67, 47);
+            this.ExamReportParaDataFormatFont_Box.Margin = new System.Windows.Forms.Padding(2);
+            this.ExamReportParaDataFormatFont_Box.Name = "ExamReportParaDataFormatFont_Box";
+            this.ExamReportParaDataFormatFont_Box.Size = new System.Drawing.Size(113, 21);
+            this.ExamReportParaDataFormatFont_Box.TabIndex = 32;
+            this.ExamReportParaDataFormatFont_Box.Text = "宋体,12,0";
+            this.MainToolsTip.SetToolTip(this.ExamReportParaDataFormatFont_Box, "注：\r\n设置格式为：字体,大小,加粗\r\n比如：宋体,12,0\r\n第三项为0表示不加粗，1表示加粗\r\n为空则设置为默认值，宋体12号不加粗字体");
+            // 
+            // label186
+            // 
+            this.label186.AutoSize = true;
+            this.label186.Location = new System.Drawing.Point(5, 50);
+            this.label186.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label186.Name = "label186";
+            this.label186.Size = new System.Drawing.Size(53, 12);
+            this.label186.TabIndex = 20;
+            this.label186.Text = "字体设置";
+            // 
+            // ExamReportParaRaidInfo_Combox
+            // 
+            this.ExamReportParaRaidInfo_Combox.FormattingEnabled = true;
+            this.ExamReportParaRaidInfo_Combox.Location = new System.Drawing.Point(67, 98);
+            this.ExamReportParaRaidInfo_Combox.Margin = new System.Windows.Forms.Padding(2);
+            this.ExamReportParaRaidInfo_Combox.Name = "ExamReportParaRaidInfo_Combox";
+            this.ExamReportParaRaidInfo_Combox.Size = new System.Drawing.Size(113, 20);
+            this.ExamReportParaRaidInfo_Combox.TabIndex = 19;
+            this.ExamReportParaRaidInfo_Combox.MouseHover += new System.EventHandler(this.ExamReportParaRaidInfo_Combox_MouseHover);
+            // 
+            // ExamReportParaDataFormat_Combox
+            // 
+            this.ExamReportParaDataFormat_Combox.FormattingEnabled = true;
+            this.ExamReportParaDataFormat_Combox.Location = new System.Drawing.Point(67, 23);
+            this.ExamReportParaDataFormat_Combox.Margin = new System.Windows.Forms.Padding(2);
+            this.ExamReportParaDataFormat_Combox.Name = "ExamReportParaDataFormat_Combox";
+            this.ExamReportParaDataFormat_Combox.Size = new System.Drawing.Size(113, 20);
+            this.ExamReportParaDataFormat_Combox.TabIndex = 17;
+            // 
+            // label189
+            // 
+            this.label189.AutoSize = true;
+            this.label189.Location = new System.Drawing.Point(5, 101);
+            this.label189.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label189.Name = "label189";
+            this.label189.Size = new System.Drawing.Size(53, 12);
+            this.label189.TabIndex = 18;
+            this.label189.Text = "评测主体";
+            // 
+            // label188
+            // 
+            this.label188.AutoSize = true;
+            this.label188.Location = new System.Drawing.Point(5, 26);
+            this.label188.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label188.Name = "label188";
+            this.label188.Size = new System.Drawing.Size(53, 12);
+            this.label188.TabIndex = 17;
+            this.label188.Text = "数据类型";
+            // 
+            // label187
+            // 
+            this.label187.AutoSize = true;
+            this.label187.Location = new System.Drawing.Point(443, 40);
+            this.label187.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label187.Name = "label187";
+            this.label187.Size = new System.Drawing.Size(17, 12);
+            this.label187.TabIndex = 15;
+            this.label187.Text = "的";
+            // 
+            // ExamReportRowMode_ExamSelectorBox
+            // 
+            this.ExamReportRowMode_ExamSelectorBox.Location = new System.Drawing.Point(465, 36);
+            this.ExamReportRowMode_ExamSelectorBox.Margin = new System.Windows.Forms.Padding(2);
+            this.ExamReportRowMode_ExamSelectorBox.Name = "ExamReportRowMode_ExamSelectorBox";
+            this.ExamReportRowMode_ExamSelectorBox.Size = new System.Drawing.Size(94, 21);
+            this.ExamReportRowMode_ExamSelectorBox.TabIndex = 14;
+            this.ExamReportRowMode_ExamSelectorBox.MouseHover += new System.EventHandler(this.ExamReportRowMode_ExamSelectorBox_MouseHover);
+            // 
+            // ChangeExamReportParaButton
+            // 
+            this.ChangeExamReportParaButton.Location = new System.Drawing.Point(653, 139);
+            this.ChangeExamReportParaButton.Margin = new System.Windows.Forms.Padding(2);
+            this.ChangeExamReportParaButton.Name = "ChangeExamReportParaButton";
+            this.ChangeExamReportParaButton.Size = new System.Drawing.Size(91, 23);
+            this.ChangeExamReportParaButton.TabIndex = 13;
+            this.ChangeExamReportParaButton.Text = "执行修改";
+            this.ChangeExamReportParaButton.UseVisualStyleBackColor = true;
+            this.ChangeExamReportParaButton.Click += new System.EventHandler(this.ChangeExamReportParaButton_Click);
+            // 
+            // ExamReportRowMode_ExamList
+            // 
+            this.ExamReportRowMode_ExamList.FormattingEnabled = true;
+            this.ExamReportRowMode_ExamList.Location = new System.Drawing.Point(338, 37);
+            this.ExamReportRowMode_ExamList.Margin = new System.Windows.Forms.Padding(2);
+            this.ExamReportRowMode_ExamList.Name = "ExamReportRowMode_ExamList";
+            this.ExamReportRowMode_ExamList.Size = new System.Drawing.Size(103, 20);
+            this.ExamReportRowMode_ExamList.TabIndex = 12;
+            this.ExamReportRowMode_ExamList.MouseHover += new System.EventHandler(this.ExamReportRowMode_ExamList_MouseHover);
+            // 
+            // label185
+            // 
+            this.label185.AutoSize = true;
+            this.label185.Location = new System.Drawing.Point(257, 39);
+            this.label185.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label185.Name = "label185";
+            this.label185.Size = new System.Drawing.Size(77, 12);
+            this.label185.TabIndex = 10;
+            this.label185.Text = "列设置为项目";
+            // 
+            // ExamReportRowMode_Col_End_Combox
+            // 
+            this.ExamReportRowMode_Col_End_Combox.FormattingEnabled = true;
+            this.ExamReportRowMode_Col_End_Combox.Location = new System.Drawing.Point(219, 37);
+            this.ExamReportRowMode_Col_End_Combox.Margin = new System.Windows.Forms.Padding(2);
+            this.ExamReportRowMode_Col_End_Combox.Name = "ExamReportRowMode_Col_End_Combox";
+            this.ExamReportRowMode_Col_End_Combox.Size = new System.Drawing.Size(36, 20);
+            this.ExamReportRowMode_Col_End_Combox.TabIndex = 9;
+            this.ExamReportRowMode_Col_End_Combox.MouseHover += new System.EventHandler(this.ExamReportRowMode_Col_End_Combox_MouseHover);
+            // 
+            // label184
+            // 
+            this.label184.AutoSize = true;
+            this.label184.Location = new System.Drawing.Point(197, 40);
+            this.label184.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label184.Name = "label184";
+            this.label184.Size = new System.Drawing.Size(17, 12);
+            this.label184.TabIndex = 8;
+            this.label184.Text = "到";
+            // 
+            // ExamReportRowMode_Col_Start_Combox
+            // 
+            this.ExamReportRowMode_Col_Start_Combox.FormattingEnabled = true;
+            this.ExamReportRowMode_Col_Start_Combox.Location = new System.Drawing.Point(155, 37);
+            this.ExamReportRowMode_Col_Start_Combox.Margin = new System.Windows.Forms.Padding(2);
+            this.ExamReportRowMode_Col_Start_Combox.Name = "ExamReportRowMode_Col_Start_Combox";
+            this.ExamReportRowMode_Col_Start_Combox.Size = new System.Drawing.Size(40, 20);
+            this.ExamReportRowMode_Col_Start_Combox.TabIndex = 7;
+            this.ExamReportRowMode_Col_Start_Combox.MouseHover += new System.EventHandler(this.ExamReportRowMode_Col_Start_Combox_MouseHover);
+            // 
+            // ExamReportRowMode_Row_Combox
+            // 
+            this.ExamReportRowMode_Row_Combox.FormattingEnabled = true;
+            this.ExamReportRowMode_Row_Combox.Location = new System.Drawing.Point(85, 37);
+            this.ExamReportRowMode_Row_Combox.Margin = new System.Windows.Forms.Padding(2);
+            this.ExamReportRowMode_Row_Combox.Name = "ExamReportRowMode_Row_Combox";
+            this.ExamReportRowMode_Row_Combox.Size = new System.Drawing.Size(35, 20);
+            this.ExamReportRowMode_Row_Combox.TabIndex = 6;
+            this.ExamReportRowMode_Row_Combox.MouseHover += new System.EventHandler(this.ExamReportRowMode_Row_Combox_MouseHover);
+            // 
+            // label182
+            // 
+            this.label182.AutoSize = true;
+            this.label182.Location = new System.Drawing.Point(122, 40);
+            this.label182.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label182.Name = "label182";
+            this.label182.Size = new System.Drawing.Size(29, 12);
+            this.label182.TabIndex = 4;
+            this.label182.Text = "行的";
+            // 
+            // label176
+            // 
+            this.label176.AutoSize = true;
+            this.label176.Location = new System.Drawing.Point(63, 40);
+            this.label176.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label176.Name = "label176";
+            this.label176.Size = new System.Drawing.Size(17, 12);
+            this.label176.TabIndex = 2;
+            this.label176.Text = "将";
+            // 
+            // ExamReportPara_ColMode
+            // 
+            this.ExamReportPara_ColMode.AutoSize = true;
+            this.ExamReportPara_ColMode.Location = new System.Drawing.Point(4, 84);
+            this.ExamReportPara_ColMode.Margin = new System.Windows.Forms.Padding(2);
+            this.ExamReportPara_ColMode.Name = "ExamReportPara_ColMode";
+            this.ExamReportPara_ColMode.Size = new System.Drawing.Size(59, 16);
+            this.ExamReportPara_ColMode.TabIndex = 1;
+            this.ExamReportPara_ColMode.TabStop = true;
+            this.ExamReportPara_ColMode.Text = "列模式";
+            this.MainToolsTip.SetToolTip(this.ExamReportPara_ColMode, "列模式：\r\n1、选择Y列的X到X行\r\n2、设置多个项目的某个选项\r\n3、项目支持使用|分隔，表示多个选项，比如A|B|C|D\r\n4、支持多项合计选项，使用@连接，" +
+        "比如优秀@良好\r\n5、插入行的数量，根据项目数量决定，比如选了3-18行，实际项目只有5个，只会插入3-8行，后面的将会忽略\r\n6、如果希望所选的某行到某行都是" +
+        "某个项目的选项，可使用插入相同项目功能，此时只会插入某项目的选项\r\n");
+            this.ExamReportPara_ColMode.UseVisualStyleBackColor = true;
+            // 
+            // ExamReportPara_RowMode
+            // 
+            this.ExamReportPara_RowMode.AutoSize = true;
+            this.ExamReportPara_RowMode.Checked = true;
+            this.ExamReportPara_RowMode.Location = new System.Drawing.Point(4, 39);
+            this.ExamReportPara_RowMode.Margin = new System.Windows.Forms.Padding(2);
+            this.ExamReportPara_RowMode.Name = "ExamReportPara_RowMode";
+            this.ExamReportPara_RowMode.Size = new System.Drawing.Size(59, 16);
+            this.ExamReportPara_RowMode.TabIndex = 0;
+            this.ExamReportPara_RowMode.TabStop = true;
+            this.ExamReportPara_RowMode.Text = "行模式";
+            this.MainToolsTip.SetToolTip(this.ExamReportPara_RowMode, resources.GetString("ExamReportPara_RowMode.ToolTip"));
+            this.ExamReportPara_RowMode.UseVisualStyleBackColor = true;
+            // 
             // linkLabel5
             // 
             this.linkLabel5.AutoSize = true;
             this.linkLabel5.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.linkLabel5.Location = new System.Drawing.Point(15, 489);
+            this.linkLabel5.Location = new System.Drawing.Point(432, 391);
             this.linkLabel5.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.linkLabel5.Name = "linkLabel5";
             this.linkLabel5.Size = new System.Drawing.Size(281, 12);
@@ -10591,23 +11072,11 @@ namespace DocumentTools
             this.linkLabel5.Text = "功能需要AccessDataBaseEngine组件，点击前往下载";
             this.linkLabel5.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel5_LinkClicked);
             // 
-            // label173
-            // 
-            this.label173.AutoSize = true;
-            this.label173.ForeColor = System.Drawing.Color.Crimson;
-            this.label173.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label173.Location = new System.Drawing.Point(333, 483);
-            this.label173.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
-            this.label173.Name = "label173";
-            this.label173.Size = new System.Drawing.Size(521, 12);
-            this.label173.TabIndex = 15;
-            this.label173.Tag = "anchor_right_bottom";
-            this.label173.Text = "注：评测主体修改内容为空则表示删除该报表内的评测主体；使用本功能时建议关闭报表设计页面";
-            // 
             // groupBox59
             // 
             this.groupBox59.Controls.Add(this.ExamReportChangeItemDataFormat);
             this.groupBox59.Controls.Add(this.ExamReportChangeItemName);
+            this.groupBox59.Controls.Add(this.label173);
             this.groupBox59.Controls.Add(this.ExamReportChangeItemDataRaid);
             this.groupBox59.Controls.Add(this.ExamReportChangeProgress);
             this.groupBox59.Controls.Add(this.ExamReplaceRaids);
@@ -10622,7 +11091,7 @@ namespace DocumentTools
             this.groupBox59.Controls.Add(this.ExamReportItems);
             this.groupBox59.Controls.Add(this.label158);
             this.groupBox59.Controls.Add(this.ExamReportDataFormat);
-            this.groupBox59.Location = new System.Drawing.Point(331, 327);
+            this.groupBox59.Location = new System.Drawing.Point(331, 215);
             this.groupBox59.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox59.Name = "groupBox59";
             this.groupBox59.Padding = new System.Windows.Forms.Padding(1);
@@ -10660,6 +11129,19 @@ namespace DocumentTools
         "下拉项目出现空白项，可能是有单元格没合并的原因，可忽略");
             this.ExamReportChangeItemName.UseVisualStyleBackColor = true;
             // 
+            // label173
+            // 
+            this.label173.AutoSize = true;
+            this.label173.ForeColor = System.Drawing.Color.Crimson;
+            this.label173.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label173.Location = new System.Drawing.Point(11, 105);
+            this.label173.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label173.Name = "label173";
+            this.label173.Size = new System.Drawing.Size(521, 12);
+            this.label173.TabIndex = 15;
+            this.label173.Tag = "anchor_right_bottom";
+            this.label173.Text = "注：评测主体修改内容为空则表示删除该报表内的评测主体；使用本功能时建议关闭报表设计页面";
+            // 
             // ExamReportChangeItemDataRaid
             // 
             this.ExamReportChangeItemDataRaid.AutoSize = true;
@@ -10684,7 +11166,7 @@ namespace DocumentTools
             // 
             // ExamReplaceRaids
             // 
-            this.ExamReplaceRaids.Location = new System.Drawing.Point(273, 75);
+            this.ExamReplaceRaids.Location = new System.Drawing.Point(273, 77);
             this.ExamReplaceRaids.Margin = new System.Windows.Forms.Padding(1);
             this.ExamReplaceRaids.Name = "ExamReplaceRaids";
             this.ExamReplaceRaids.Size = new System.Drawing.Size(211, 21);
@@ -10693,7 +11175,7 @@ namespace DocumentTools
             // ExamReplaceDataFormat
             // 
             this.ExamReplaceDataFormat.FormattingEnabled = true;
-            this.ExamReplaceDataFormat.Location = new System.Drawing.Point(273, 51);
+            this.ExamReplaceDataFormat.Location = new System.Drawing.Point(273, 52);
             this.ExamReplaceDataFormat.Margin = new System.Windows.Forms.Padding(1);
             this.ExamReplaceDataFormat.Name = "ExamReplaceDataFormat";
             this.ExamReplaceDataFormat.Size = new System.Drawing.Size(211, 20);
@@ -10701,7 +11183,7 @@ namespace DocumentTools
             // 
             // ExamReplaceItemName
             // 
-            this.ExamReplaceItemName.Location = new System.Drawing.Point(273, 25);
+            this.ExamReplaceItemName.Location = new System.Drawing.Point(273, 27);
             this.ExamReplaceItemName.Margin = new System.Windows.Forms.Padding(1);
             this.ExamReplaceItemName.Name = "ExamReplaceItemName";
             this.ExamReplaceItemName.Size = new System.Drawing.Size(211, 21);
@@ -10780,7 +11262,7 @@ namespace DocumentTools
             this.ExamReportItems.Name = "ExamReportItems";
             this.ExamReportItems.Size = new System.Drawing.Size(155, 20);
             this.ExamReportItems.TabIndex = 15;
-            this.ExamReportItems.SelectedIndexChanged += new System.EventHandler(this.ExamReportItems_SelectedIndexChanged);
+            this.ExamReportItems.SelectedIndexChanged += new System.EventHandler(this.ExamReportItems_SelectedIndexChangedAsync);
             this.ExamReportItems.MouseHover += new System.EventHandler(this.ExamReportItems_MouseHover);
             // 
             // label158
@@ -10806,7 +11288,7 @@ namespace DocumentTools
             // ExamReportChange
             // 
             this.ExamReportChange.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.ExamReportChange.Location = new System.Drawing.Point(740, 539);
+            this.ExamReportChange.Location = new System.Drawing.Point(741, 372);
             this.ExamReportChange.Margin = new System.Windows.Forms.Padding(1);
             this.ExamReportChange.Name = "ExamReportChange";
             this.ExamReportChange.Size = new System.Drawing.Size(129, 41);
@@ -10825,7 +11307,7 @@ namespace DocumentTools
             this.groupBox56.Controls.Add(this.label155);
             this.groupBox56.Controls.Add(this.ExamItemsCombox);
             this.groupBox56.Controls.Add(this.ExamItemsSelectorsCombox);
-            this.groupBox56.Location = new System.Drawing.Point(16, 327);
+            this.groupBox56.Location = new System.Drawing.Point(16, 215);
             this.groupBox56.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox56.Name = "groupBox56";
             this.groupBox56.Padding = new System.Windows.Forms.Padding(1);
@@ -10900,7 +11382,7 @@ namespace DocumentTools
             this.ExamItemsCombox.Name = "ExamItemsCombox";
             this.ExamItemsCombox.Size = new System.Drawing.Size(235, 20);
             this.ExamItemsCombox.TabIndex = 5;
-            this.ExamItemsCombox.SelectedIndexChanged += new System.EventHandler(this.ExamItemsCombox_SelectedIndexChanged);
+            this.ExamItemsCombox.SelectedIndexChanged += new System.EventHandler(this.ExamItemsCombox_SelectedIndexChangedAsync);
             this.ExamItemsCombox.MouseHover += new System.EventHandler(this.ExamItemsCombox_MouseHover);
             // 
             // ExamItemsSelectorsCombox
@@ -10950,7 +11432,7 @@ namespace DocumentTools
             // RefreshVFSOFTREPORT
             // 
             this.RefreshVFSOFTREPORT.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.RefreshVFSOFTREPORT.Location = new System.Drawing.Point(16, 539);
+            this.RefreshVFSOFTREPORT.Location = new System.Drawing.Point(16, 372);
             this.RefreshVFSOFTREPORT.Margin = new System.Windows.Forms.Padding(1);
             this.RefreshVFSOFTREPORT.Name = "RefreshVFSOFTREPORT";
             this.RefreshVFSOFTREPORT.Size = new System.Drawing.Size(129, 41);
@@ -10967,7 +11449,7 @@ namespace DocumentTools
             this.groupBox57.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox57.Name = "groupBox57";
             this.groupBox57.Padding = new System.Windows.Forms.Padding(1);
-            this.groupBox57.Size = new System.Drawing.Size(863, 276);
+            this.groupBox57.Size = new System.Drawing.Size(863, 167);
             this.groupBox57.TabIndex = 8;
             this.groupBox57.TabStop = false;
             this.groupBox57.Tag = "anchor_full_fill";
@@ -10979,11 +11461,11 @@ namespace DocumentTools
             this.VFSOFT_Report_ListView.Location = new System.Drawing.Point(8, 17);
             this.VFSOFT_Report_ListView.Margin = new System.Windows.Forms.Padding(1);
             this.VFSOFT_Report_ListView.Name = "VFSOFT_Report_ListView";
-            this.VFSOFT_Report_ListView.Size = new System.Drawing.Size(848, 251);
+            this.VFSOFT_Report_ListView.Size = new System.Drawing.Size(848, 141);
             this.VFSOFT_Report_ListView.TabIndex = 0;
             this.VFSOFT_Report_ListView.Tag = "anchor_full_fill";
             this.VFSOFT_Report_ListView.UseCompatibleStateImageBehavior = false;
-            this.VFSOFT_Report_ListView.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.VFSOFT_Report_ListView_ItemSelectionChanged);
+            this.VFSOFT_Report_ListView.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.VFSOFT_Report_ListView_ItemSelectionChangedAsync);
             // 
             // TabPage_38
             // 
@@ -14040,6 +14522,10 @@ namespace DocumentTools
             this.groupBox54.PerformLayout();
             this.TabPage_40.ResumeLayout(false);
             this.TabPage_40.PerformLayout();
+            this.groupBox65.ResumeLayout(false);
+            this.groupBox65.PerformLayout();
+            this.groupBox66.ResumeLayout(false);
+            this.groupBox66.PerformLayout();
             this.groupBox59.ResumeLayout(false);
             this.groupBox59.PerformLayout();
             this.groupBox56.ResumeLayout(false);
@@ -15122,6 +15608,45 @@ namespace DocumentTools
         private ToolStripMenuItem VersionUpdateLog;
         internal CheckBox UseLocalOffice;
         private CheckBox DoubleTextClear;
+        private GroupBox groupBox65;
+        private RadioButton ExamReportPara_RowMode;
+        private RadioButton ExamReportPara_ColMode;
+        private Label label182;
+        private Label label176;
+        private Label label185;
+        private ComboBox ExamReportRowMode_Col_End_Combox;
+        private Label label184;
+        private ComboBox ExamReportRowMode_Col_Start_Combox;
+        private ComboBox ExamReportRowMode_Row_Combox;
+        private ComboBox ExamReportRowMode_ExamList;
+        private Button ChangeExamReportParaButton;
+        private TextBox ExamReportRowMode_ExamSelectorBox;
+        private Label label187;
+        private GroupBox groupBox66;
+        private Label label189;
+        private Label label188;
+        private ComboBox ExamReportParaRaidInfo_Combox;
+        private ComboBox ExamReportParaDataFormat_Combox;
+        private Label label190;
+        private ComboBox ExamReportColMode_Row_End_Combox;
+        private Label label191;
+        private ComboBox ExamReportColMode_Row_Start_Combox;
+        private ComboBox ExamReportColMode_Col_Combox;
+        private Label label193;
+        private Label label194;
+        private TextBox ExamReportColMode_ExamBox;
+        private Label label196;
+        private TextBox ExamReportColMode_ExamSelectorBox;
+        private CheckBox ExamReportRowMode_ExamSelectorInsertSame;
+        private CheckBox ExamReportRowMode_ExamItemInsertSame;
+        private Button GetAllItemSplit;
+        private Label label183;
+        private LinkLabel linkLabel7;
+        private Label label186;
+        private TextBox ExamReportParaDataFormatFont_Box;
+        private Label label192;
+        private ComboBox ExamReportParaDataFormatReverse_Combox;
+        private ProgressBar ExamReportParaChangeProcessBar;
     }
 }
 

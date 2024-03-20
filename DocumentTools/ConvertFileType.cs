@@ -1,0 +1,31 @@
+﻿namespace DocumentTools
+{
+    internal enum ConvertFileType
+    {
+        Word2Pdf,
+        Pdf2Word,
+        Excel2Pdf,
+        Word2Image,
+        Pdf2Excel,
+        WordReplace,
+        ExcelReplace,
+        Image2Ico,
+        Word2Excel,
+        Excel2Word,
+        SplitPdf,
+        SplitWord,
+        SplitPPT,
+        AddWaterMarkPdf,
+        RemovePdfWaterMark,
+        PPT2PDF,
+        PDF2PPT,
+        ConvertPdfCompliance,
+        CompressPDF,
+        CompressImage,
+        Html2PDF,
+        Word2EPUB,
+        EPUB2Word,
+        EPUB2Pdf,
+        WeBp2Image,
+    }
+}
