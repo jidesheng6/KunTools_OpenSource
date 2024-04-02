@@ -333,6 +333,16 @@ namespace DocumentTools.Properties {
         }
         
         /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] Man {
+            get {
+                object obj = ResourceManager.GetObject("Man", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
         internal static System.Drawing.Bitmap pdf {
@@ -598,6 +608,16 @@ namespace DocumentTools.Properties {
         internal static System.Drawing.Bitmap 弹窗消息 {
             get {
                 object obj = ResourceManager.GetObject("弹窗消息", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 微信图片_20240401192428 {
+            get {
+                object obj = ResourceManager.GetObject("微信图片_20240401192428", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

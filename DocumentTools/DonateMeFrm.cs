@@ -27,16 +27,17 @@ namespace DocumentTools
         {
             Bitmap TempBitMap = new Bitmap((Bitmap)Util.GetEmbedResourceObj("F6D781F44F41AAEE77BEA2A8E2F55510"));
 
-            Util.PlayMp3WithStream("amagi");
+            Util.PlayMp3WithStream("amagi", status => { });
 
             if (WechatDonatePicture.Image.Width != TempBitMap.Width)
             {
                 WechatDonatePicture.Image = TempBitMap;
-                groupBox1.Width = WechatDonatePicture.Width + 100;
-                groupBox1.Height = WechatDonatePicture.Height + 100;
-                this.Width = WechatDonatePicture.Width + 100;
-                this.Height = WechatDonatePicture.Height + 100;
-                this.WindowState = FormWindowState.Maximized;
+                WechatDonatePicture.SizeMode = PictureBoxSizeMode.AutoSize;
+                groupBox1.AutoSize = true;
+                this.AutoSize = true;
+                this.AutoScroll = true;
+                this.MaximizeBox = true;
+                this.CenterToParent();
                 ShowWechatQR.Hide();
             }
         }

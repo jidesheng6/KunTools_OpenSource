@@ -48,14 +48,13 @@
             // 
             // WechatDonatePicture
             // 
-            this.WechatDonatePicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.WechatDonatePicture.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.WechatDonatePicture.Image = global::DocumentTools.Properties.Resources._6f258af2c19c9c3cdb97517573506c11ce48ff98;
             this.WechatDonatePicture.InitialImage = null;
             this.WechatDonatePicture.Location = new System.Drawing.Point(6, 27);
             this.WechatDonatePicture.Name = "WechatDonatePicture";
             this.WechatDonatePicture.Size = new System.Drawing.Size(322, 322);
-            this.WechatDonatePicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.WechatDonatePicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.WechatDonatePicture.TabIndex = 0;
             this.WechatDonatePicture.TabStop = false;
             // 
@@ -85,7 +84,6 @@
             this.Text = "谢谢老板！";
             this.Load += new System.EventHandler(this.DonateMeFrm_Load);
             this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WechatDonatePicture)).EndInit();
             this.ResumeLayout(false);
 

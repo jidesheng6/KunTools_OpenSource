@@ -3297,7 +3297,18 @@ namespace DocumentTools
             }
         }
 
-        private void PlayCXKMusic_Click(object sender, EventArgs e) { Util.PlayMp3WithStream("zdsny"); }
+        private void PlayCXKMusic_Click(object sender, EventArgs e)
+        {
+            PlayCXKMusic.Enabled = false;
+            PlayCXKMusic.Text = "正在唱跳RAP中...";
+            Util.PlayMp3WithStream(
+                "zdsny",
+                status =>
+                {
+                    PlayCXKMusic.Enabled = true;
+                    PlayCXKMusic.Text = "点一下";
+                });
+        }
 
         private void NameReplaceRegexMode_Click(object sender, EventArgs e)
         {
@@ -4002,7 +4013,11 @@ namespace DocumentTools
                 {
                     try
                     {
-                        Util.PlayMp3WithStream("amagi");
+                        Util.PlayMp3WithStream(
+                            "amagi",
+                            status =>
+                            {
+                            });
                         if (barcodeTextContentBox.Text != string.Empty)
                         {
                             MemoryStream tempstream = Util.GenerateBarCode(
@@ -4332,7 +4347,11 @@ namespace DocumentTools
             {
                 gen_card_id_group.Enabled = true;
                 gen_card_result_group.Enabled = true;
-                Util.PlayMp3WithStream("amagi");
+                Util.PlayMp3WithStream(
+                    "amagi",
+                    status =>
+                    {
+                    });
             }
 
             if (string.Compare(ver_card_id_birthday.Text, "日期不正确", StringComparison.Ordinal) == 0)
@@ -6295,6 +6314,22 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                     ExamReportColMode_Row_End_Combox,
                     ExamReportColMode_Row_End_Combox.SelectedItem.ToString());
             }
+        }
+
+        private void linkLabel8_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        { Process.Start("https://www.123pan.com/s/JXY5Vv-dLrwd.html"); }
+
+        private void ManW_Click(object sender, EventArgs e)
+        {
+            ManW.Enabled = false;
+            ManW.Text = "正在复活中...";
+            Util.PlayMp3WithStream(
+                "Man",
+                status =>
+                {
+                    ManW.Enabled = true;
+                    ManW.Text = "点击复活牢大";
+                });
         }
     }
 }

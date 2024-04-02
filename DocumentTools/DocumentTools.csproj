@@ -596,6 +596,7 @@
     <Content Include="dll\TWAINDSM.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\Man.mp3" />
     <Content Include="Resources\wzdsny.mp3" />
     <None Include="Resources\功能.png" />
     <None Include="Resources\关于.png" />
@@ -636,6 +637,7 @@
     <None Include="Resources\版本更新.png" />
     <None Include="Resources\版本更新 %281%29.png" />
     <None Include="Resources\更新日志.png" />
+    <None Include="Resources\微信图片_20240401192428.jpg" />
     <Content Include="v2-30675d7656fcb8e2cc959cedd8b8db19_r.ico" />
     <Content Include="转换.ico" />
   </ItemGroup>
