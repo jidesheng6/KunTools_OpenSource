@@ -61,6 +61,7 @@ namespace DocumentTools
                         false,
                         DisplayFilterString,
                         FilterArgs);
+                    //TempDocuemntFileNames = TempDocuemntFileNames.OrderBy(x => x, new FileNameComparerInstance());
                     List<ListViewItem> itemsToAdd = new List<ListViewItem>(); // 保存待添加的 ListViewItems
                     try
                     {
@@ -86,6 +87,7 @@ namespace DocumentTools
                                         // 仅调用一次AutoResizeColumns以提高效率
                                         ListViewControl.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
                                         ListViewControl.EndUpdate();
+                                        //ListViewControl.ListViewItemSorter = new ListViewItemComparer_ASC();
                                     }
                                 }));
                     }
@@ -114,6 +116,8 @@ namespace DocumentTools
                     {
                         if (FileList.Length > 0)
                         {
+                            FileList = FileList.OrderBy(x => x, new FileNameComparerInstance()).ToArray();
+
                             List<ListViewItem> itemsToAdd = new List<ListViewItem>(); // 保存待添加的 ListViewItems
 
                             foreach (string file in FileList)
@@ -161,6 +165,8 @@ namespace DocumentTools
                                             // 仅调用一次AutoResizeColumns以提高效率
                                             ListviewControl.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
                                             ListviewControl.EndUpdate();
+                                            //ListviewControl.ListViewItemSorter = new ListViewItemComparer_ASC();
+
                                         }
                                     }));
                         }

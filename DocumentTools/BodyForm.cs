@@ -2174,6 +2174,7 @@ namespace DocumentTools
                 default:
                     break;
             }
+            DragedListview.ListViewItemSorter = new ListViewItemComparer_ASC();
         }
 
         private void DownloadFrameWorkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -3009,21 +3010,22 @@ namespace DocumentTools
 
         private void ListviewSortHandler(object sender, ColumnClickEventArgs e)
         {
+            bool IsAscing = true;
             //自定义比较器进行排序
 
             if (e.Column == 0)
             {
                 System.Windows.Forms.ListView TempListview = sender as System.Windows.Forms.ListView;
 
-                //默认加载进来都是顺序，所以第一次点击先排为逆序
-                if (TempListview.ListViewItemSorter == null ||
-                    TempListview.ListViewItemSorter is ListViewItemComparer_ASC)
+                if(IsAscing)
                 {
                     TempListview.ListViewItemSorter = new ListViewItemComparer_DSC();
+                    IsAscing = false;
                 }
                 else
                 {
                     TempListview.ListViewItemSorter = new ListViewItemComparer_ASC();
+                    IsAscing = true;
                 }
             }
         }
@@ -6330,6 +6332,11 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                     ManW.Enabled = true;
                     ManW.Text = "点击复活牢大";
                 });
+        }
+
+        private void city_level_1_combox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
