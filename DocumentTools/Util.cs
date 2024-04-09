@@ -2419,7 +2419,6 @@ namespace DocumentTools
                 TempWordApplication.Quit();
 
                 Marshal.ReleaseComObject(TempLocalDocument);
-                
             }
         }
 
@@ -3973,7 +3972,7 @@ namespace DocumentTools
         /// <summary>
         /// 播放MP3流
         /// </summary>
-        public static void PlayMp3WithStream(string MusicName,Action<bool> PlayBackStop)
+        public static void PlayMp3WithStream(string MusicName, Action<bool> PlayBackStop)
         {
             //这里必须这样写，不要用using语句来自动执行dispose，否则声音还没播放的时候就已经被dispose了
             MemoryStream EmbedResouceObj = new MemoryStream((byte[])GetEmbedResourceObj(MusicName));

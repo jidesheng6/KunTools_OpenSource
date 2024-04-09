@@ -63,7 +63,7 @@ namespace DocumentTools
 
         private void OutPutListViewIndex()
         {
-            foreach (TabPage TempPage in this.MainTabPage.TabPages)
+            foreach(TabPage TempPage in this.MainTabPage.TabPages)
             {
                 Debug.WriteLine($"{TempPage.Text}：{MainTabPage.TabPages.IndexOf(TempPage)}");
             }
@@ -72,11 +72,10 @@ namespace DocumentTools
         private void GetAdministratorBehaviorStatus()
         {
             string BehaviorStatus = Util.GetAdministratorBehavior();
-            if (string.Compare(BehaviorStatus, "1", StringComparison.Ordinal) == 0)
+            if(string.Compare(BehaviorStatus, "1", StringComparison.Ordinal) == 0)
             {
                 DisableAdminBehavior.Text = "禁用管理员批准模式";
-            }
-            else if (string.Compare(BehaviorStatus, "0", StringComparison.Ordinal) == 0)
+            } else if(string.Compare(BehaviorStatus, "0", StringComparison.Ordinal) == 0)
             {
                 DisableAdminBehavior.Text = "启用管理员批准模式";
             }
@@ -84,7 +83,7 @@ namespace DocumentTools
 
         private void SetInitTabPage()
         {
-            if (int.TryParse(ConfigurationManager.AppSettings["StartPageIndex"], out int StartIndex))
+            if(int.TryParse(ConfigurationManager.AppSettings["StartPageIndex"], out int StartIndex))
             {
                 MainTabPage.SelectedIndex = StartIndex;
                 menu_start_page_index_combox.SelectedIndex = StartIndex;
@@ -97,17 +96,16 @@ namespace DocumentTools
 
             SetTabPageShowIco();//先对tabpage进行设置
 
-            if (string.Compare(OpenTabPageHeight, "on", StringComparison.Ordinal) == 0)
+            if(string.Compare(OpenTabPageHeight, "on", StringComparison.Ordinal) == 0)
             {
                 this.MainTabPage.DrawMode = TabDrawMode.OwnerDrawFixed;
                 menu_tabpage_heigh_light_combox.SelectedIndex = 0;
-            }
-            else
+            } else
             {
                 this.MainTabPage.DrawMode = TabDrawMode.Normal;
                 menu_tabpage_heigh_light_combox.SelectedIndex = 1;
 
-                if (string.Compare(ShowTabPageIcon, "on", StringComparison.Ordinal) == 0)
+                if(string.Compare(ShowTabPageIcon, "on", StringComparison.Ordinal) == 0)
                 {
                     MainTabPage.ImageList = TabPageIcoList;
                 }
@@ -131,13 +129,13 @@ namespace DocumentTools
         {
             List<string> DisablePageIndexList = ConfigurationManager.AppSettings["HidePageIndex"].Split(',').ToList();
 
-            foreach (string DisablePageIndex in DisablePageIndexList)
+            foreach(string DisablePageIndex in DisablePageIndexList)
             {
-                if (DisablePageIndex != string.Empty)
+                if(DisablePageIndex != string.Empty)
                 {
-                    if (int.TryParse(DisablePageIndex, out int PageIndex))
+                    if(int.TryParse(DisablePageIndex, out int PageIndex))
                     {
-                        if (PageIndex >= 0 & PageIndex <= MainTabPage.TabCount - 1)
+                        if(PageIndex >= 0 & PageIndex <= MainTabPage.TabCount - 1)
                         {
                             MainTabPage.TabPages[PageIndex].Parent = null;
                         }
@@ -150,7 +148,7 @@ namespace DocumentTools
         {
             string ListViewLineHeight = ConfigurationManager.AppSettings["ListViewLineHeight"];
 
-            if (int.TryParse(ListViewLineHeight, out int LineHeight) && LineHeight > 0 && LineHeight <= 256)
+            if(int.TryParse(ListViewLineHeight, out int LineHeight) && LineHeight > 0 && LineHeight <= 256)
             {
                 TempImageList.ImageSize = new Size(1, LineHeight);
                 menu_listview_line_heigh_combox.SelectedIndex = LineHeight - 1;
@@ -197,7 +195,7 @@ namespace DocumentTools
 
         private void SetFormSize()
         {
-            if (int.TryParse(ConfigurationManager.AppSettings["FormWidth"], out int width) &&
+            if(int.TryParse(ConfigurationManager.AppSettings["FormWidth"], out int width) &&
                 int.TryParse(ConfigurationManager.AppSettings["FormHeight"], out int height))
             {
                 FormWidth = width;
@@ -231,15 +229,15 @@ namespace DocumentTools
             SignDocumentPicSourceGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             SingleDocumentConfigGroupBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
 
-            foreach (TabPage TempPage in MainTabPage.TabPages)
+            foreach(TabPage TempPage in MainTabPage.TabPages)
             {
-                foreach (System.Windows.Forms.Control TempControl in TempPage.Controls)
+                foreach(System.Windows.Forms.Control TempControl in TempPage.Controls)
                 {
-                    if (TempControl is System.Windows.Forms.GroupBox)
+                    if(TempControl is System.Windows.Forms.GroupBox)
                     {
-                        foreach (System.Windows.Forms.Control control in TempControl.Controls)
+                        foreach(System.Windows.Forms.Control control in TempControl.Controls)
                         {
-                            switch (control.Tag)
+                            switch(control.Tag)
                             {
                                 case "anchor_full_fill"://全方向跟随
                                     control.Anchor = AnchorStyles.Top |
@@ -294,7 +292,7 @@ namespace DocumentTools
                             }
                         }
                     }
-                    switch (TempControl.Tag)
+                    switch(TempControl.Tag)
                     {
                         case "anchor_full_fill"://全方向跟随
                             TempControl.Anchor = AnchorStyles.Top |
@@ -354,7 +352,7 @@ namespace DocumentTools
         private void InitConfigSettings()
         {
             //如果配置文件存在就按照配置文件中的参数来设置
-            if (File.Exists(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile))
+            if(File.Exists(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile))
             {
                 SetInitTabPage();//设置起始页面
                 SetConfirmDialogShow();//设置是否显示转换后弹窗
@@ -405,7 +403,7 @@ namespace DocumentTools
 
         private void UpdateCheckEvent(UpdateInfoEventArgs updateArgs)
         {
-            if (updateArgs.Error == null && updateArgs.IsUpdateAvailable)
+            if(updateArgs.Error == null && updateArgs.IsUpdateAvailable)
             {
                 VersionInfo.VersionUpdateLogUrl = updateArgs.ChangelogURL;
                 this.UpdateCheckText.IsLink = true;
@@ -446,7 +444,7 @@ namespace DocumentTools
             //InitConfigSettings();
             InitTabPageIcon();
             OutPutListViewIndex();
-            if (string.Compare(WidgetAnchorMode, "on", StringComparison.Ordinal) == 0)
+            if(string.Compare(WidgetAnchorMode, "on", StringComparison.Ordinal) == 0)
             {
                 SetWidgetAnchor();//设置控件锚点
             }
@@ -567,9 +565,9 @@ namespace DocumentTools
 
             this.DecodeDataMatrixView.MouseClick += (s1, s2) =>
             {
-                if (s2.Button == MouseButtons.Right)
+                if(s2.Button == MouseButtons.Right)
                 {
-                    if (s1 is System.Windows.Forms.TreeView TempTreeView)
+                    if(s1 is System.Windows.Forms.TreeView TempTreeView)
                     {
                         TreeViewContentMenu.Show(TempTreeView, s2.Location);
                     }
@@ -600,14 +598,13 @@ namespace DocumentTools
                         TempListView.SmallImageList = TempImageList;
                         TempListView.Name = TempListView.Name.ToString();
 
-                        if (string.Compare(TempListView.Name, "VFSOFT_Report_ListView", StringComparison.Ordinal) == 0)
+                        if(string.Compare(TempListView.Name, "VFSOFT_Report_ListView", StringComparison.Ordinal) == 0)
                         {
                             TempListView.Columns.Add("报表ID", 330);
                             TempListView.Columns.Add("报表名称", 330);
                             TempListView.Columns.Add("所属考评表", 330);
                             TempListView.Columns.Add("考评表ID", 330);
-                        }
-                        else
+                        } else
                         {
                             TempListView.Columns.Add("文件名称", 300, HorizontalAlignment.Left);
                             TempListView.Columns.Add("添加时间", 300, HorizontalAlignment.Left);
@@ -620,7 +617,7 @@ namespace DocumentTools
 
                             TempListView.MouseClick += (MouseSender, MouseEvent) =>
                             {
-                                if (MouseEvent.Button == MouseButtons.Right)
+                                if(MouseEvent.Button == MouseButtons.Right)
                                 {
                                     ListViewRightMenu.Show(TempListView, MouseEvent.Location);
                                 }
@@ -871,7 +868,7 @@ namespace DocumentTools
             this.html2pdf_combox_pagedirect.DisplayMember = "DisplayValue";
             this.html2pdf_combox_pagedirect.ValueMember = "RealValue";
 
-            foreach (TabPage tempPage in MainTabPage.TabPages)
+            foreach(TabPage tempPage in MainTabPage.TabPages)
             {
                 this.menu_start_page_index_combox.Items.Add(MainTabPage.TabPages.IndexOf(tempPage));
             }
@@ -1079,9 +1076,9 @@ namespace DocumentTools
 
             //加载城市数据到combox中
             this.city_level_1_combox.Items.Clear();//先清空数据
-            if (City_Json != null)
+            if(City_Json != null)
             {
-                foreach (JToken City_1_Name in City_Json)
+                foreach(JToken City_1_Name in City_Json)
                 {
                     city_level_1_combox.Items.Add(City_1_Name["name"]);//添加省级信息
                 }
@@ -1121,11 +1118,11 @@ namespace DocumentTools
                 .ForEach(
                     x =>
                     {
-                        if (x.FieldType == controlType)
+                        if(x.FieldType == controlType)
                         {
                             object TempObj = x.GetValue(this);
 
-                            if (TempObj != null)
+                            if(TempObj != null)
                             {
                                 controlTypes.Add(TempObj);
                             }
@@ -1145,14 +1142,14 @@ namespace DocumentTools
                         System.Windows.Forms.Button TempButton = x as System.Windows.Forms.Button;
                         string[] SplitButtonName = TempButton.Name.Split('_');
 
-                        if (SplitButtonName.Length == 2)//只有确实分割了才处理
+                        if(SplitButtonName.Length == 2)//只有确实分割了才处理
                         {
                             GetFormMembers(typeof(System.Windows.Forms.ListView))
                                 .ForEach(
                                     listview =>
                                     {
                                         System.Windows.Forms.ListView TempListView = listview as System.Windows.Forms.ListView;
-                                        if (SplitButtonName[1].Contains("MoveUp") &&
+                                        if(SplitButtonName[1].Contains("MoveUp") &&
                                             string.Compare(
                                             TempListView.Name,
                                             SplitButtonName[0],
@@ -1163,8 +1160,7 @@ namespace DocumentTools
                                             {
                                                 UI.MoveUpListViewItem(TempListView);
                                             };
-                                        }
-                                        else if (SplitButtonName[1].Contains("MoveDown") &&
+                                        } else if(SplitButtonName[1].Contains("MoveDown") &&
                                             string.Compare(
                                             TempListView.Name,
                                             SplitButtonName[0],
@@ -1480,19 +1476,16 @@ namespace DocumentTools
                     {
                         System.Windows.Forms.Button TempButton = member as System.Windows.Forms.Button;
 
-                        if (TempButton.Name.Contains("_clear"))
+                        if(TempButton.Name.Contains("_clear"))
                         {
                             MainToolsTip.SetToolTip(TempButton, "清空列表中所有文件");
-                        }
-                        else if (TempButton.Name.Contains("_remove"))
+                        } else if(TempButton.Name.Contains("_remove"))
                         {
                             MainToolsTip.SetToolTip(TempButton, "移除选中文件");
-                        }
-                        else if (TempButton.Name.Contains("MoveDown"))
+                        } else if(TempButton.Name.Contains("MoveDown"))
                         {
                             MainToolsTip.SetToolTip(TempButton, "向下移动选中文件");
-                        }
-                        else if (TempButton.Name.Contains("MoveUp"))
+                        } else if(TempButton.Name.Contains("MoveUp"))
                         {
                             MainToolsTip.SetToolTip(TempButton, "向上移动选中文件");
                         }
@@ -1506,114 +1499,88 @@ namespace DocumentTools
                 .ForEach(
                     member =>
                     {
-                        if (member is TabPage TempPage)
+                        if(member is TabPage TempPage)
                         {
                             string TabPageCaption = TempPage.Text;
-                            if (TabPageCaption.StartsWith("WORD转"))
+                            if(TabPageCaption.StartsWith("WORD转"))
                             {
                                 TempPage.ImageIndex = 0;
-                            }
-                            else if (TabPageCaption.StartsWith("PDF"))
+                            } else if(TabPageCaption.StartsWith("PDF"))
                             {
                                 TempPage.ImageIndex = 1;
-                            }
-                            else if (TabPageCaption.StartsWith("EXCEL转"))
+                            } else if(TabPageCaption.StartsWith("EXCEL转"))
                             {
                                 TempPage.ImageIndex = 2;
-                            }
-                            else if (TabPageCaption.StartsWith("PPT转"))
+                            } else if(TabPageCaption.StartsWith("PPT转"))
                             {
                                 TempPage.ImageIndex = 3;
-                            }
-                            else if (TabPageCaption.StartsWith("WORD内"))
+                            } else if(TabPageCaption.StartsWith("WORD内"))
                             {
                                 TempPage.ImageIndex = 0;
-                            }
-                            else if (TabPageCaption.StartsWith("EXCEL内"))
+                            } else if(TabPageCaption.StartsWith("EXCEL内"))
                             {
                                 TempPage.ImageIndex = 1;
-                            }
-                            else if (TabPageCaption.StartsWith("EPUB"))
+                            } else if(TabPageCaption.StartsWith("EPUB"))
                             {
                                 TempPage.ImageIndex = 4;
-                            }
-                            else if (TabPageCaption.StartsWith("压缩"))
+                            } else if(TabPageCaption.StartsWith("压缩"))
                             {
                                 TempPage.ImageIndex = 7;
-                            }
-                            else if (TabPageCaption.Contains("图片"))
+                            } else if(TabPageCaption.Contains("图片"))
                             {
                                 TempPage.ImageIndex = 5;
-                            }
-                            else if (TabPageCaption.EndsWith("水印"))
+                            } else if(TabPageCaption.EndsWith("水印"))
                             {
                                 TempPage.ImageIndex = 13;
-                            }
-                            else if (TabPageCaption.EndsWith("WORD"))
+                            } else if(TabPageCaption.EndsWith("WORD"))
                             {
                                 TempPage.ImageIndex = 0;
-                            }
-                            else if (TabPageCaption.EndsWith("PDF"))
+                            } else if(TabPageCaption.EndsWith("PDF"))
                             {
                                 TempPage.ImageIndex = 1;
-                            }
-                            else if (TabPageCaption.StartsWith("特殊"))
+                            } else if(TabPageCaption.StartsWith("特殊"))
                             {
                                 TempPage.ImageIndex = 8;
-                            }
-                            else if (TabPageCaption.StartsWith("Twain"))
+                            } else if(TabPageCaption.StartsWith("Twain"))
                             {
                                 TempPage.ImageIndex = 9;
-                            }
-                            else if (TabPageCaption.StartsWith("其他"))
+                            } else if(TabPageCaption.StartsWith("其他"))
                             {
                                 TempPage.ImageIndex = 10;
-                            }
-                            else if (TabPageCaption.StartsWith("系统"))
+                            } else if(TabPageCaption.StartsWith("系统"))
                             {
                                 TempPage.ImageIndex = 11;
-                            }
-                            else if (TabPageCaption.StartsWith("关于"))
+                            } else if(TabPageCaption.StartsWith("关于"))
                             {
                                 TempPage.ImageIndex = 12;
-                            }
-                            else if (TabPageCaption.StartsWith("姓名"))
+                            } else if(TabPageCaption.StartsWith("姓名"))
                             {
                                 TempPage.ImageIndex = 14;
-                            }
-                            else if (TabPageCaption.StartsWith("MSS"))
+                            } else if(TabPageCaption.StartsWith("MSS"))
                             {
                                 TempPage.ImageIndex = 11;
-                            }
-                            else if (TabPageCaption.StartsWith("简易"))
+                            } else if(TabPageCaption.StartsWith("简易"))
                             {
                                 TempPage.ImageIndex = 15;
-                            }
-                            else if (TabPageCaption.Contains("身份证"))
+                            } else if(TabPageCaption.Contains("身份证"))
                             {
                                 TempPage.ImageIndex = 16;
-                            }
-                            else if (TabPageCaption.Contains("文件副本"))
+                            } else if(TabPageCaption.Contains("文件副本"))
                             {
                                 TempPage.ImageIndex = 17;
-                            }
-                            else if (TabPageCaption.Contains("网卡设置"))
+                            } else if(TabPageCaption.Contains("网卡设置"))
                             {
                                 TempPage.ImageIndex = 18;
-                            }
-                            else if (TabPageCaption.Contains("选举结果报告单样式生成"))
+                            } else if(TabPageCaption.Contains("选举结果报告单样式生成"))
                             {
                                 TempPage.ImageIndex = 19;
-                            }
-                            else if (TabPageCaption.Contains("单人表"))
+                            } else if(TabPageCaption.Contains("单人表"))
                             {
                                 TempPage.ImageIndex = 20;
-                            }
-                            else if (TabPageCaption.Contains("考评报表"))
+                            } else if(TabPageCaption.Contains("考评报表"))
                             {
                                 TempPage.ImageIndex = 21;
-                            }
-                            else if (TabPageCaption.Contains("拆分PPT"))
+                            } else if(TabPageCaption.Contains("拆分PPT"))
                             {
                                 TempPage.ImageIndex = 3;
                             }
@@ -1642,8 +1609,7 @@ namespace DocumentTools
                             ".pdf",
                             word2pdf_save_source.Checked,
                             sender as System.Windows.Forms.Button);
-                    }
-                    catch (Exception ex)
+                    } catch(Exception ex)
                     {
                         this.BeginInvoke(
                             new Action(
@@ -1673,8 +1639,7 @@ namespace DocumentTools
                             ".docx",
                             pdf2word_save_source.Checked,
                             sender as System.Windows.Forms.Button);
-                    }
-                    catch (Exception ex)
+                    } catch(Exception ex)
                     {
                         this.BeginInvoke(
                             new Action(
@@ -1702,8 +1667,7 @@ namespace DocumentTools
                             ConvertFileType.Excel2Pdf,
                             ".pdf",
                             CallButton: sender as System.Windows.Forms.Button);
-                    }
-                    catch (Exception ex)
+                    } catch(Exception ex)
                     {
                         this.BeginInvoke(
                             new Action(
@@ -1734,8 +1698,7 @@ namespace DocumentTools
                             this.ConvertImageList.SelectedValue.ToString(),
                             word2image_save_source.Checked,
                             CallButton: sender as System.Windows.Forms.Button);
-                    }
-                    catch (Exception ex)
+                    } catch(Exception ex)
                     {
                         this.BeginInvoke(
                             new Action(
@@ -1769,15 +1732,15 @@ namespace DocumentTools
                     NameReplaceWord_Target.Text);
                 //双字对齐功能，放在全部的文本处理完毕以后再进行重新处理，不然只能针对源文本字符长度进行判断，不太合适
 
-                if (this.TargetTextBox.Text != string.Empty)
+                if(this.TargetTextBox.Text != string.Empty)
                 {
-                    if (DoubleTextAlignCheck.Checked)
+                    if(DoubleTextAlignCheck.Checked)
                     {
                         string DoubleText;
-                        foreach (string TargetTextTemp in this.TargetTextBox.Lines)
+                        foreach(string TargetTextTemp in this.TargetTextBox.Lines)
                         {
                             DoubleText = TargetTextTemp;
-                            if (DoubleText.Length == 2)
+                            if(DoubleText.Length == 2)
                             {
                                 DoubleText = DoubleText.Insert(1, "  ");
                             }
@@ -1787,18 +1750,17 @@ namespace DocumentTools
                     }
 
 
-                    if (NameAutoCopy.Checked && TargetTextBox.Text != string.Empty)
+                    if(NameAutoCopy.Checked && TargetTextBox.Text != string.Empty)
                     {
                         Clipboard.SetText(TargetTextBox.Text.Replace("\n", Environment.NewLine));//替换换行
                         NameAutoCopyStatusText.Text = "[已复制到剪贴板]";
                         NameAutoCopyStatusText.ForeColor = Color.ForestGreen;
-                    }
-                    else
+                    } else
                     {
                         NameAutoCopyStatusText.Text = string.Empty;
                     }
 
-                    if (MarkDupName.Checked)
+                    if(MarkDupName.Checked)
                     {
                         Task.Run(
                             () =>
@@ -1811,14 +1773,14 @@ namespace DocumentTools
                                 var duplicateLineIndices = new HashSet<int>();
 
                                 // 遍历富文本框中的文本行
-                                for (int i = 0; i < TargetTextBox.Lines.Length; i++)
+                                for(int i = 0; i < TargetTextBox.Lines.Length; i++)
                                 {
                                     string currentLine = TargetTextBox.Lines[i];
 
                                     // 在当前行之后的行中查找是否存在相同的文本行
-                                    for (int j = i + 1; j < TargetTextBox.Lines.Length; j++)
+                                    for(int j = i + 1; j < TargetTextBox.Lines.Length; j++)
                                     {
-                                        if (currentLine.Equals(TargetTextBox.Lines[j]))
+                                        if(currentLine.Equals(TargetTextBox.Lines[j]))
                                         {
                                             // 记录重复行的索引
                                             duplicateLineIndices.Add(i);
@@ -1827,10 +1789,10 @@ namespace DocumentTools
                                     }
                                 }
 
-                                if (duplicateLineIndices.Count > 0)
+                                if(duplicateLineIndices.Count > 0)
                                 {
                                     // 高亮显示所有重复的文本行
-                                    foreach (int index in duplicateLineIndices)
+                                    foreach(int index in duplicateLineIndices)
                                     {
                                         TargetTextBox.Select(
                                             TargetTextBox.GetFirstCharIndexFromLine(index),
@@ -1845,13 +1807,12 @@ namespace DocumentTools
                             });
                     }
 
-                    if (DoubleTextClear.Checked)
+                    if(DoubleTextClear.Checked)
                     {
                         this.TargetTextBox.Lines = this.TargetTextBox.Lines.ToList().Distinct().ToArray();
                     }
                 }
-            }
-            catch (Exception ex)
+            } catch(Exception ex)
             {
                 this.BeginInvoke(
                     new Action(
@@ -1866,7 +1827,7 @@ namespace DocumentTools
         private void SourceTextBox_TextChanged(object sender, EventArgs e)
         {
             //如果启用多行模式，则每次添加文本后，都在末尾添加\t控制字符
-            if (MutilLineMode.Checked)
+            if(MutilLineMode.Checked)
             {
                 SourceTextBox.AppendText("\t");
             }
@@ -1894,8 +1855,7 @@ namespace DocumentTools
                             ConvertFileType.Pdf2Excel,
                             ".xlsx",
                             CallButton: sender as System.Windows.Forms.Button);
-                    }
-                    catch (Exception ex)
+                    } catch(Exception ex)
                     {
                         this.BeginInvoke(
                             new Action(
@@ -1911,10 +1871,10 @@ namespace DocumentTools
         private void MeregePdfFileButtonConvert_Click(object sender, EventArgs e)
         {
             Task<List<string>> MeregePdfFiles = UI.GetListViewFirstItemContentAsync(this.MergePdfFileView);
-            if (MeregePdfFiles.Result.Count > 0)
+            if(MeregePdfFiles.Result.Count > 0)
             {
                 string MeregePdfFileName = Util.ShowSaveFileDialog("PDF文档|.pdf", "设置文件名称");
-                if (MeregePdfFileName != string.Empty)
+                if(MeregePdfFileName != string.Empty)
                 {
                     Task.Run(
                         () =>
@@ -1927,7 +1887,7 @@ namespace DocumentTools
                                 Util.MergerPdfFIle(MeregePdfFiles.Result, MeregePdfFileName);
                                 this.MeregePdfFileStatusText.Text = "合并完毕，右键名称可移除文件";
                                 (sender as System.Windows.Forms.Button).Enabled = true;
-                                if (OpenMeregePdfFile.Checked)
+                                if(OpenMeregePdfFile.Checked)
                                 {
                                     Process.Start(MeregePdfFileName);
                                 }
@@ -1940,13 +1900,12 @@ namespace DocumentTools
                                                 "提示",
                                                 MessageBoxButtons.YesNo,
                                                 MessageBoxIcon.Asterisk);
-                                            if (OpenResult == DialogResult.Yes)
+                                            if(OpenResult == DialogResult.Yes)
                                             {
                                                 Process.Start(MeregeDirectory);
                                             }
                                         }));
-                            }
-                            catch (Exception ex)
+                            } catch(Exception ex)
                             {
                                 this.BeginInvoke(
                                     new Action(
@@ -1974,7 +1933,7 @@ namespace DocumentTools
         /// <param name="e"></param>
         private void 删除本项ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (ListViewRightMenu.SourceControl.GetType() == typeof(System.Windows.Forms.ListView))
+            if(ListViewRightMenu.SourceControl.GetType() == typeof(System.Windows.Forms.ListView))
             {
                 System.Windows.Forms.ListView TempListView = ListViewRightMenu.SourceControl as System.Windows.Forms.ListView;
                 UI.RemoveListViewItem(false, TempListView);
@@ -1989,7 +1948,7 @@ namespace DocumentTools
 
         private void 清空列表ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (ListViewRightMenu.SourceControl.GetType() == typeof(System.Windows.Forms.ListView))
+            if(ListViewRightMenu.SourceControl.GetType() == typeof(System.Windows.Forms.ListView))
             {
                 System.Windows.Forms.ListView TempListView = ListViewRightMenu.SourceControl as System.Windows.Forms.ListView;
                 UI.RemoveListViewItem(true, TempListView);
@@ -2003,11 +1962,10 @@ namespace DocumentTools
         /// <param name="e"></param>
         private void ListViewDragEnter(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            if(e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 e.Effect = DragDropEffects.Copy;
-            }
-            else
+            } else
             {
                 e.Effect = DragDropEffects.None;
             }
@@ -2022,7 +1980,7 @@ namespace DocumentTools
         {
             System.Windows.Forms.ListView DragedListview = sender as System.Windows.Forms.ListView;
             string[] DropFiles = e.Data.GetData(DataFormats.FileDrop, false) as string[];
-            switch (DragedListview.Name)
+            switch(DragedListview.Name)
             {
                 case "WordFileListView":
                     UI.AddFilesToListViewWithNotDialog(
@@ -2201,7 +2159,7 @@ namespace DocumentTools
             twainSession.SourceDisabled += (twainSender, twainArgs) =>
             {
                 Debug.WriteLine("SourceDisabled Event");
-                if (ScanSeconds > 0)
+                if(ScanSeconds > 0)
                 {
                     this.ScanSpendTime.Text = $"本次扫描时间：{ScanSeconds}秒";
                 }
@@ -2218,45 +2176,43 @@ namespace DocumentTools
         private void SelectTwainDevice_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             dataSource = twainSession.ShowSourceSelector();
-            if (dataSource != null)
+            if(dataSource != null)
             {
-                if (dataSource.Open() == ReturnCode.Success)
+                if(dataSource.Open() == ReturnCode.Success)
                 {
-                    if (dataSource.Capabilities.CapPowerSaveTime.IsSupported)
+                    if(dataSource.Capabilities.CapPowerSaveTime.IsSupported)
                     {
                         TwainSleepTimeSet.DataSource = dataSource.Capabilities.CapPowerSaveTime.GetValues().ToList();
                         TwainSleepTimeSet.SelectedItem = dataSource.Capabilities.CapPowerSaveTime.GetCurrent();
                         TwainSetDeviceSaveTime.Enabled = true;
-                    }
-                    else
+                    } else
                     {
                         TwainSleepTimeSet.DataSource = new string[] { "不支持" };
                         TwainSetDeviceSaveTime.Enabled = false;
                     }
-                    if (dataSource.Capabilities.ICapXResolution.IsSupported ||
+                    if(dataSource.Capabilities.ICapXResolution.IsSupported ||
                         dataSource.Capabilities.ICapYResolution.IsSupported)
                     {
                         TwainDpi.DataSource = dataSource.Capabilities.ICapXResolution.GetValues().ToList();
                         TwainDpi.SelectedItem = dataSource.Capabilities.ICapXResolution.GetCurrent();
                     }
-                    if (dataSource.Capabilities.ICapSupportedSizes.IsSupported)
+                    if(dataSource.Capabilities.ICapSupportedSizes.IsSupported)
                     {
                         TwainPaperSizeBox.DataSource = dataSource.Capabilities.ICapSupportedSizes.GetValues().ToList();
                         TwainPaperSizeBox.SelectedItem = dataSource.Capabilities.ICapSupportedSizes.GetCurrent();
                     }
-                    if (dataSource.Capabilities.CapSerialNumber.CanGet)
+                    if(dataSource.Capabilities.CapSerialNumber.CanGet)
                     {
                         ScanSerialNumberTextBox.Text = $"{dataSource.Capabilities.CapSerialNumber.GetValues().FirstOrDefault()}";
-                    }
-                    else
+                    } else
                     {
                         ScanSerialNumberTextBox.Text = $"无";
                     }
-                    if (this.ExportCaps.Checked)
+                    if(this.ExportCaps.Checked)
                     {
                         //输出扫描仪支持的设置参数
                         string DebugName = $"{dataSource.Name}_Support_Capabilities.txt";
-                        if (File.Exists(DebugName))
+                        if(File.Exists(DebugName))
                         {
                             File.Delete(DebugName);
                         }
@@ -2280,7 +2236,7 @@ namespace DocumentTools
         {
             dataSource ??= twainSession.DefaultSource;
 
-            if (dataSource.Open() == ReturnCode.Success)
+            if(dataSource.Open() == ReturnCode.Success)
             {
                 dataSource.Enable(SourceEnableMode.ShowUIOnly, false, IntPtr.Zero);
             }
@@ -2288,14 +2244,14 @@ namespace DocumentTools
 
         private void StartScanButton_Click(object sender, EventArgs e)
         {
-            if (this.ScanPictureSavePathBox.Text != string.Empty)
+            if(this.ScanPictureSavePathBox.Text != string.Empty)
             {
                 TempImageCount = 0;
                 ScanSeconds = 0;
                 dataSource ??= twainSession.DefaultSource;
                 ImageIndex = Directory.GetFiles(this.ScanPictureSavePathBox.Text).Length;
 
-                if (dataSource.Open() == ReturnCode.Success)
+                if(dataSource.Open() == ReturnCode.Success)
                 {
                     #region 扫描仪参数设置
                     //if (dataSource.Capabilities.ICapPixelType.CanSet)
@@ -2306,19 +2262,19 @@ namespace DocumentTools
                     //            .SetValue((NTwain.Data.PixelType)TwainColorMode.SelectedItem);
                     //    }
                     //}
-                    if (dataSource.Capabilities.ICapXResolution.CanSet && dataSource.Capabilities.ICapYResolution.CanSet)
+                    if(dataSource.Capabilities.ICapXResolution.CanSet && dataSource.Capabilities.ICapYResolution.CanSet)
                     {
-                        if (TwainDpi.Items.Count > 0)
+                        if(TwainDpi.Items.Count > 0)
                         {
                             dataSource.Capabilities.ICapXResolution.SetValue((TWFix32)TwainDpi.SelectedItem);
                             dataSource.Capabilities.ICapYResolution.SetValue((TWFix32)TwainDpi.SelectedItem);
                         }
                     }
-                    if (DoubleScanBox.Checked && dataSource.Capabilities.CapDuplex.IsSupported)
+                    if(DoubleScanBox.Checked && dataSource.Capabilities.CapDuplex.IsSupported)
                     {
                         dataSource.Capabilities.CapDuplexEnabled.SetValue(BoolType.True);
                     }
-                    if (SkipBlankPage.Checked && dataSource.Capabilities.ICapAutoDiscardBlankPages.IsSupported)
+                    if(SkipBlankPage.Checked && dataSource.Capabilities.ICapAutoDiscardBlankPages.IsSupported)
                     {
                         dataSource.Capabilities.ICapAutoDiscardBlankPages.SetValue(BlankPage.Auto);
                     }
@@ -2331,36 +2287,34 @@ namespace DocumentTools
                     //    }
                     //}
                     //设置本次会话中需要获取的文件数量
-                    if (TwainScanNumberSet.Text != string.Empty &&
+                    if(TwainScanNumberSet.Text != string.Empty &&
                         Int32.TryParse(TwainScanNumberSet.Text, out int TwainScanNumberSetInt))
                     {
-                        if (dataSource.Capabilities.CapXferCount.CanSet)
+                        if(dataSource.Capabilities.CapXferCount.CanSet)
                         {
-                            if (TwainScanNumberSetInt > 0)
+                            if(TwainScanNumberSetInt > 0)
                             {
                                 //对于支持双面扫描的扫描仪，先把扫描模式设置为单面扫描
-                                if (dataSource.Capabilities.CapDuplex.IsSupported && !(DoubleScanBox.Checked))
+                                if(dataSource.Capabilities.CapDuplex.IsSupported && !(DoubleScanBox.Checked))
                                 {
                                     dataSource.Capabilities.CapDuplexEnabled.SetValue(BoolType.False);
                                 }
                                 dataSource.Capabilities.CapXferCount.SetValue(TwainScanNumberSetInt);
-                            }
-                            else
+                            } else
                             {
                                 dataSource.Capabilities.CapXferCount.SetValue(-1);
                             }
                         }
                     }
-                    if (UseInterfaceUi.Checked)
+                    if(UseInterfaceUi.Checked)
                     {
                         (sender as System.Windows.Forms.Button).Enabled = false;
                         dataSource.Enable(SourceEnableMode.ShowUI, false, IntPtr.Zero);
                         (sender as System.Windows.Forms.Button).Enabled = true;
                         ScanStopWatch = new Stopwatch();
-                    }
-                    else
+                    } else
                     {
-                        if (dataSource.Capabilities.CapUIControllable.IsSupported)
+                        if(dataSource.Capabilities.CapUIControllable.IsSupported)
                         {
                             (sender as System.Windows.Forms.Button).Enabled = false;
                             dataSource.Enable(SourceEnableMode.NoUI, false, IntPtr.Zero);
@@ -2376,7 +2330,7 @@ namespace DocumentTools
         private void Twain_Scanning(object sender, DataTransferredEventArgs e)
         {
             using System.Drawing.Image TempScannedImage = System.Drawing.Image.FromStream(e.GetNativeImageStream());
-            if (this.ScanPictureSavePathBox.Text != string.Empty)
+            if(this.ScanPictureSavePathBox.Text != string.Empty)
             {
                 ScanStopWatch.Start();
                 ++TempImageCount;//每次扫描的时候进入纸张数量，扫描完毕后需要在开始扫描按钮重置该值为0
@@ -2401,7 +2355,7 @@ namespace DocumentTools
         {
             IEnumerable<string> IDirectoryString = Util.ShowSelectDialog(false, true, string.Empty, string.Empty);
             string DirectoryString = IDirectoryString.FirstOrDefault();
-            if (string.Compare(DirectoryString, default, StringComparison.Ordinal) != 0)
+            if(string.Compare(DirectoryString, default, StringComparison.Ordinal) != 0)
             {
                 this.ScanPictureSavePathBox.Text = DirectoryString;
                 this.SavedPathFileCount.Text = $"扫描路径内文件数量：{Directory.GetFiles(DirectoryString).Length}";
@@ -2424,13 +2378,13 @@ namespace DocumentTools
 
         private void RemoveAllFiles_Click(object sender, EventArgs e)
         {
-            if (ScanPictureSavePathBox.Text != string.Empty)
+            if(ScanPictureSavePathBox.Text != string.Empty)
             {
                 string[] Files = Directory.GetFiles(ScanPictureSavePathBox.Text);
-                if (Files.Length > 0)
+                if(Files.Length > 0)
                 {
                     //删除文件之前清除全部的bitmap对象
-                    if (TempScannedImageBmpList.Count > 0)
+                    if(TempScannedImageBmpList.Count > 0)
                     {
                         TempScannedImageBmpList.ForEach(
                             ScannBmp =>
@@ -2441,7 +2395,7 @@ namespace DocumentTools
                         this.PreviewPictureBox.Image = null;
                         TempScannedImageBmpList.Clear();
                     }
-                    foreach (string file in Files)
+                    foreach(string file in Files)
                     {
                         File.Delete(file);
                         this.SavedPathFileCount.Text = $"扫描路径内文件数量：{Directory.GetFiles(this.ScanPictureSavePathBox.Text).Length}";
@@ -2472,8 +2426,7 @@ namespace DocumentTools
                             ConvertFileType.WordReplace,
                             ".docx",
                             CallButton: sender as System.Windows.Forms.Button);
-                    }
-                    catch (Exception ex)
+                    } catch(Exception ex)
                     {
                         this.BeginInvoke(
                             new Action(
@@ -2508,8 +2461,7 @@ namespace DocumentTools
                             ConvertFileType.ExcelReplace,
                             ".xlsx",
                             CallButton: sender as System.Windows.Forms.Button);
-                    }
-                    catch (Exception ex)
+                    } catch(Exception ex)
                     {
                         this.BeginInvoke(
                             new Action(
@@ -2562,7 +2514,7 @@ namespace DocumentTools
 
         private void 展开折叠全部节点ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            foreach (System.Windows.Forms.TreeNode TempNode in DecodeDataMatrixView.Nodes)
+            foreach(System.Windows.Forms.TreeNode TempNode in DecodeDataMatrixView.Nodes)
             {
                 TempNode.ExpandAll();
             }
@@ -2570,7 +2522,7 @@ namespace DocumentTools
 
         private void 打开文件ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (File.Exists(this.DecodeDataMatrixView.SelectedNode.Text))
+            if(File.Exists(this.DecodeDataMatrixView.SelectedNode.Text))
                 Process.Start(this.DecodeDataMatrixView.SelectedNode.Text);
         }
 
@@ -2588,7 +2540,7 @@ namespace DocumentTools
         {
             string SaveFileName = Util.ShowSaveFileDialog("注册表文件|*.reg");
 
-            if (SaveFileName != string.Empty)
+            if(SaveFileName != string.Empty)
             {
                 object RegistryString = Util.GetEmbedResourceObj("注册");
 
@@ -2600,11 +2552,10 @@ namespace DocumentTools
 
         private void Label9_DoubleClick(object sender, EventArgs e)
         {
-            if (ReleaseRegistry.Enabled)
+            if(ReleaseRegistry.Enabled)
             {
                 ReleaseRegistry.Enabled = false;
-            }
-            else
+            } else
             {
                 ReleaseRegistry.Enabled = true;
             }
@@ -2625,8 +2576,7 @@ namespace DocumentTools
                             ConvertFileType.Image2Ico,
                             ".ico",
                             CallButton: sender as System.Windows.Forms.Button);
-                    }
-                    catch (Exception ex)
+                    } catch(Exception ex)
                     {
                         this.BeginInvoke(
                             new Action(
@@ -2641,7 +2591,7 @@ namespace DocumentTools
 
         private void BodyForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (ChangeReportItemTempHelpPdfFile != string.Empty)
+            if(ChangeReportItemTempHelpPdfFile != string.Empty)
             {
                 File.Delete(ChangeReportItemTempHelpPdfFile);
             }
@@ -2672,10 +2622,10 @@ namespace DocumentTools
         private void MergeWordFile_Click(object sender, EventArgs e)
         {
             Task<List<string>> MergeWordFiles = UI.GetListViewFirstItemContentAsync(this.MergeWordFileList);
-            if (MergeWordFiles.Result.Count > 0)
+            if(MergeWordFiles.Result.Count > 0)
             {
                 string MergeWordFileName = Util.ShowSaveFileDialog("WORD文档|.docx", "设置文件名称");
-                if (MergeWordFileName != string.Empty)
+                if(MergeWordFileName != string.Empty)
                 {
                     Task.Run(
                         () =>
@@ -2697,13 +2647,12 @@ namespace DocumentTools
                                                 "提示",
                                                 MessageBoxButtons.YesNo,
                                                 MessageBoxIcon.Asterisk);
-                                            if (OpenResult == DialogResult.Yes)
+                                            if(OpenResult == DialogResult.Yes)
                                             {
                                                 Process.Start(MeregeDirectory);
                                             }
                                         }));
-                            }
-                            catch (Exception ex)
+                            } catch(Exception ex)
                             {
                                 this.BeginInvoke(
                                     new Action(
@@ -2738,8 +2687,7 @@ namespace DocumentTools
                             ".xlsx",
                             word2excel_save_source.Checked,
                             sender as System.Windows.Forms.Button);
-                    }
-                    catch (Exception ex)
+                    } catch(Exception ex)
                     {
                         this.BeginInvoke(
                             new Action(
@@ -2769,8 +2717,7 @@ namespace DocumentTools
                             ".docx",
                             excel2word_save_source.Checked,
                             CallButton: sender as System.Windows.Forms.Button);
-                    }
-                    catch (Exception ex)
+                    } catch(Exception ex)
                     {
                         this.BeginInvoke(
                             new Action(
@@ -2798,8 +2745,7 @@ namespace DocumentTools
                             ConvertFileType.SplitPdf,
                             ".pdf",
                             CallButton: sender as System.Windows.Forms.Button);
-                    }
-                    catch (Exception ex)
+                    } catch(Exception ex)
                     {
                         this.BeginInvoke(
                             new Action(
@@ -2819,7 +2765,7 @@ namespace DocumentTools
         {
             DialogResult FontSelectDialogResult = FontSelectDialog.ShowDialog();
 
-            if (FontSelectDialogResult == DialogResult.OK)
+            if(FontSelectDialogResult == DialogResult.OK)
             {
                 PrivateFontSetting.FontName = FontSelectDialog.Font.FontFamily.GetName(1033);
                 PrivateFontSetting.FontSize = FontSelectDialog.Font.Size;
@@ -2830,7 +2776,7 @@ namespace DocumentTools
         {
             DialogResult ColorSelectDialogResult = ColorSelectDialog.ShowDialog();
 
-            if (ColorSelectDialogResult == DialogResult.OK)
+            if(ColorSelectDialogResult == DialogResult.OK)
             {
                 PrivateFontSetting.FontColor = ColorSelectDialog.Color;
             }
@@ -2849,8 +2795,7 @@ namespace DocumentTools
                             ConvertFileType.AddWaterMarkPdf,
                             ".pdf",
                             CallButton: sender as System.Windows.Forms.Button);
-                    }
-                    catch (Exception ex)
+                    } catch(Exception ex)
                     {
                         this.BeginInvoke(
                             new Action(
@@ -2879,8 +2824,7 @@ namespace DocumentTools
                             ConvertFileType.RemovePdfWaterMark,
                             ".pdf",
                             CallButton: sender as System.Windows.Forms.Button);
-                    }
-                    catch (Exception ex)
+                    } catch(Exception ex)
                     {
                         this.BeginInvoke(
                             new Action(
@@ -2901,7 +2845,7 @@ namespace DocumentTools
                 "图片文件",
                 "*.jpg;*png;*.jpeg;*.bmp");
 
-            if (string.Compare(BackGroundImageFileNames.FirstOrDefault(), default, StringComparison.Ordinal) != 0)
+            if(string.Compare(BackGroundImageFileNames.FirstOrDefault(), default, StringComparison.Ordinal) != 0)
             {
                 AddWaterMarkBackGroundImageFileName = BackGroundImageFileNames.FirstOrDefault();
 
@@ -2921,7 +2865,7 @@ namespace DocumentTools
 
             string TempText = TempTextBox.Text;
 
-            if (!IsNumber(TempText))
+            if(!IsNumber(TempText))
             {
                 e.Cancel = true;
                 MainFormError.SetError(TempTextBox, "请输入正确的数字");
@@ -2950,7 +2894,7 @@ namespace DocumentTools
             TabRec = new Rectangle(TabRec.X, TabRec.Y + 4, TabRec.Width, TabRec.Height - 4);
 
 
-            if (e.Index == this.MainTabPage.SelectedIndex)
+            if(e.Index == this.MainTabPage.SelectedIndex)
             {
                 PageFont = new System.Drawing.Font(e.Font, FontStyle.Regular);
                 BackBrush = new System.Drawing.Drawing2D.LinearGradientBrush(
@@ -2960,8 +2904,7 @@ namespace DocumentTools
                     System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal);
 
                 ForeBrush = Brushes.Red;
-            }
-            else
+            } else
             {
                 PageFont = e.Font;
                 BackBrush = new SolidBrush(SystemColors.Control);
@@ -2994,8 +2937,7 @@ namespace DocumentTools
                             ".pdf",
                             ppt2pdf_save_source.Checked,
                             CallButton: sender as System.Windows.Forms.Button);
-                    }
-                    catch (Exception ex)
+                    } catch(Exception ex)
                     {
                         this.BeginInvoke(
                             new Action(
@@ -3013,7 +2955,7 @@ namespace DocumentTools
             bool IsAscing = true;
             //自定义比较器进行排序
 
-            if (e.Column == 0)
+            if(e.Column == 0)
             {
                 System.Windows.Forms.ListView TempListview = sender as System.Windows.Forms.ListView;
 
@@ -3021,8 +2963,7 @@ namespace DocumentTools
                 {
                     TempListview.ListViewItemSorter = new ListViewItemComparer_DSC();
                     IsAscing = false;
-                }
-                else
+                } else
                 {
                     TempListview.ListViewItemSorter = new ListViewItemComparer_ASC();
                     IsAscing = true;
@@ -3044,8 +2985,7 @@ namespace DocumentTools
                             ".pptx",
                             pdf2ppt_save_source.Checked,
                             CallButton: sender as System.Windows.Forms.Button);
-                    }
-                    catch (Exception ex)
+                    } catch(Exception ex)
                     {
                         this.BeginInvoke(
                             new Action(
@@ -3075,8 +3015,7 @@ namespace DocumentTools
                             ConvertFileType.ConvertPdfCompliance,
                             ".pdf",
                             CallButton: sender as System.Windows.Forms.Button);
-                    }
-                    catch (Exception ex)
+                    } catch(Exception ex)
                     {
                         this.BeginInvoke(
                             new Action(
@@ -3094,9 +3033,9 @@ namespace DocumentTools
         private void ConvertImage2PDF_Click(object sender, EventArgs e)
         {
             Task<List<string>> ImageFiles = UI.GetListViewFirstItemContentAsync(this.ConvertImage2PDFFileList);
-            if (ImageFiles.Result.Count > 0)
+            if(ImageFiles.Result.Count > 0)
             {
-                if (ExportSignlePDF.Checked)
+                if(ExportSignlePDF.Checked)
                 {
                     IEnumerable<string> SavePaths = Util.ShowSelectDialog(true, true, string.Empty, string.Empty);
                     Task.Run(
@@ -3105,10 +3044,10 @@ namespace DocumentTools
                             try
                             {
                                 string SavePath = SavePaths.FirstOrDefault();
-                                if (SavePath != string.Empty ||
+                                if(SavePath != string.Empty ||
                                     string.Compare(SavePath, default, StringComparison.Ordinal) != 0)
                                 {
-                                    if (SavePath != null)
+                                    if(SavePath != null)
                                     {
                                         (sender as System.Windows.Forms.Button).Enabled = false;
                                         int ImageCount = 0;
@@ -3144,15 +3083,14 @@ namespace DocumentTools
                                                         MessageBoxButtons.YesNo,
                                                         MessageBoxIcon.Asterisk);
                                                     (sender as System.Windows.Forms.Button).Enabled = true;
-                                                    if (OpenResult == DialogResult.Yes)
+                                                    if(OpenResult == DialogResult.Yes)
                                                     {
                                                         Process.Start(SavePath);
                                                     }
                                                 }));
                                     }
                                 }
-                            }
-                            catch (Exception ex)
+                            } catch(Exception ex)
                             {
                                 this.BeginInvoke(
                                     new Action(
@@ -3167,8 +3105,7 @@ namespace DocumentTools
                                         }));
                             }
                         });
-                }
-                else
+                } else
                 {
                     string MeregePdfFileName = Util.ShowSaveFileDialog("PDF文档|.pdf", "设置文件名称");
                     Task.Run(
@@ -3176,7 +3113,7 @@ namespace DocumentTools
                         {
                             try
                             {
-                                if (MeregePdfFileName != string.Empty)
+                                if(MeregePdfFileName != string.Empty)
                                 {
                                     (sender as System.Windows.Forms.Button).Enabled = false;
                                     this.COnvertImage2PDFStatusText.Text = "正在合并中...";
@@ -3203,14 +3140,13 @@ namespace DocumentTools
                                                     "提示",
                                                     MessageBoxButtons.YesNo,
                                                     MessageBoxIcon.Asterisk);
-                                                if (OpenResult == DialogResult.Yes)
+                                                if(OpenResult == DialogResult.Yes)
                                                 {
                                                     Process.Start(Path.GetDirectoryName(MeregePdfFileName));
                                                 }
                                             }));
                                 }
-                            }
-                            catch (Exception ex)
+                            } catch(Exception ex)
                             {
                                 this.BeginInvoke(
                                     new Action(
@@ -3244,8 +3180,7 @@ namespace DocumentTools
                             ConvertFileType.CompressPDF,
                             ".pdf",
                             CallButton: sender as System.Windows.Forms.Button);
-                    }
-                    catch (Exception ex)
+                    } catch(Exception ex)
                     {
                         this.BeginInvoke(
                             new Action(
@@ -3273,8 +3208,7 @@ namespace DocumentTools
                             ConvertFileType.CompressImage,
                             this.CompressImage_OutPutImageFormat.SelectedValue.ToString(),
                             CallButton: sender as System.Windows.Forms.Button);
-                    }
-                    catch (Exception ex)
+                    } catch(Exception ex)
                     {
                         this.BeginInvoke(
                             new Action(
@@ -3289,11 +3223,10 @@ namespace DocumentTools
 
         private void CompressImage_NotUseSelfExt_CheckedChanged(object sender, EventArgs e)
         {
-            if (this.CompressImage_NotUseSelfExt.Checked)
+            if(this.CompressImage_NotUseSelfExt.Checked)
             {
                 this.CompressImage_OutPutImageFormat.Enabled = true;
-            }
-            else
+            } else
             {
                 this.CompressImage_OutPutImageFormat.Enabled = false;
             }
@@ -3314,13 +3247,12 @@ namespace DocumentTools
 
         private void NameReplaceRegexMode_Click(object sender, EventArgs e)
         {
-            if (NameReplaceMode)
+            if(NameReplaceMode)
             {
                 NameReplaceMode = false;
                 NameReplaceRegexMode.Text = "[正则模式：关]";
                 NameReplaceRegexMode.ForeColor = Color.Red;
-            }
-            else
+            } else
             {
                 NameReplaceMode = true;
                 NameReplaceRegexMode.Text = "[正则模式：开]";
@@ -3357,32 +3289,30 @@ namespace DocumentTools
         {
             try
             {
-                if (Util.IsAdministrator())
+                if(Util.IsAdministrator())
                 {
                     Util.RemoveShort();
                     ShortStatus.Text = "已移除";
                     ShortStatus.ForeColor = Color.Red;
-                    if (AutoRestartExplorer.Checked)
+                    if(AutoRestartExplorer.Checked)
                     {
                         Process.GetProcesses()
                             .ToList()
                             .ForEach(
                                 p =>
                                 {
-                                    if (string.Compare(p.ProcessName, "explorer", StringComparison.Ordinal) == 0)
+                                    if(string.Compare(p.ProcessName, "explorer", StringComparison.Ordinal) == 0)
                                     {
                                         p.Kill();
                                     }
                                 });
                         Process.Start("explorer.exe");
                     }
-                }
-                else
+                } else
                 {
                     MessageBox.Show("请使用管理员身份证重新运行软件后执行本操作", "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
-            }
-            catch (Exception ex)
+            } catch(Exception ex)
             {
                 MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -3392,32 +3322,30 @@ namespace DocumentTools
         {
             try
             {
-                if (Util.IsAdministrator())
+                if(Util.IsAdministrator())
                 {
                     Util.RestoreShort();
                     ShortStatus.Text = "已恢复";
                     ShortStatus.ForeColor = Color.Green;
-                    if (AutoRestartExplorer.Checked)
+                    if(AutoRestartExplorer.Checked)
                     {
                         Process.GetProcesses()
                             .ToList()
                             .ForEach(
                                 p =>
                                 {
-                                    if (string.Compare(p.ProcessName, "explorer", StringComparison.Ordinal) == 0)
+                                    if(string.Compare(p.ProcessName, "explorer", StringComparison.Ordinal) == 0)
                                     {
                                         p.Kill();
                                     }
                                 });
                         Process.Start("explorer.exe");
                     }
-                }
-                else
+                } else
                 {
                     MessageBox.Show("请使用管理员身份证重新运行软件后执行本操作", "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
-            }
-            catch (Exception ex)
+            } catch(Exception ex)
             {
                 MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -3438,8 +3366,7 @@ namespace DocumentTools
                             ConvertFileType.Word2EPUB,
                             ".epub",
                             CallButton: sender as System.Windows.Forms.Button);
-                    }
-                    catch (Exception ex)
+                    } catch(Exception ex)
                     {
                         this.BeginInvoke(
                             new Action(
@@ -3467,18 +3394,15 @@ namespace DocumentTools
                             ConvertFileType.EPUB2Word,
                             ".docx",
                             CallButton: sender as System.Windows.Forms.Button);
-                    }
-                    catch (NullReferenceException)
+                    } catch(NullReferenceException)
                     {
                         MessageBox.Show($"EPUB格式不正确，请移除错误文件后重试", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         (sender as System.Windows.Forms.Button).Enabled = true;
-                    }
-                    catch (IndexOutOfRangeException)
+                    } catch(IndexOutOfRangeException)
                     {
                         MessageBox.Show($"EPUB格式不正确，请移除错误文件后重试", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         (sender as System.Windows.Forms.Button).Enabled = true;
-                    }
-                    catch (Exception ex)
+                    } catch(Exception ex)
                     {
                         this.BeginInvoke(
                             new Action(
@@ -3506,18 +3430,15 @@ namespace DocumentTools
                             ConvertFileType.EPUB2Pdf,
                             ".pdf",
                             CallButton: sender as System.Windows.Forms.Button);
-                    }
-                    catch (NullReferenceException)
+                    } catch(NullReferenceException)
                     {
                         MessageBox.Show($"EPUB格式不正确，请移除错误文件后重试", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         (sender as System.Windows.Forms.Button).Enabled = true;
-                    }
-                    catch (IndexOutOfRangeException)
+                    } catch(IndexOutOfRangeException)
                     {
                         MessageBox.Show($"EPUB格式不正确，请移除错误文件后重试", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         (sender as System.Windows.Forms.Button).Enabled = true;
-                    }
-                    catch (Exception ex)
+                    } catch(Exception ex)
                     {
                         this.BeginInvoke(
                             new Action(
@@ -3532,11 +3453,11 @@ namespace DocumentTools
 
         private void 打开源文件目录ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (ListViewRightMenu.SourceControl.GetType() == typeof(System.Windows.Forms.ListView))
+            if(ListViewRightMenu.SourceControl.GetType() == typeof(System.Windows.Forms.ListView))
             {
                 System.Windows.Forms.ListView TempListView = ListViewRightMenu.SourceControl as System.Windows.Forms.ListView;
 
-                if (File.Exists(TempListView.FocusedItem.Text))
+                if(File.Exists(TempListView.FocusedItem.Text))
                 {
                     Process.Start(Path.GetDirectoryName(TempListView.FocusedItem.Text));
                 }
@@ -3545,11 +3466,11 @@ namespace DocumentTools
 
         private void 打开源文件ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (ListViewRightMenu.SourceControl.GetType() == typeof(System.Windows.Forms.ListView))
+            if(ListViewRightMenu.SourceControl.GetType() == typeof(System.Windows.Forms.ListView))
             {
                 System.Windows.Forms.ListView TempListView = ListViewRightMenu.SourceControl as System.Windows.Forms.ListView;
 
-                if (File.Exists(TempListView.FocusedItem.Text))
+                if(File.Exists(TempListView.FocusedItem.Text))
                 {
                     Process.Start(TempListView.FocusedItem.Text);
                 }
@@ -3558,13 +3479,13 @@ namespace DocumentTools
 
         private void 打开转换后目录ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (ListViewRightMenu.SourceControl.GetType() == typeof(System.Windows.Forms.ListView))
+            if(ListViewRightMenu.SourceControl.GetType() == typeof(System.Windows.Forms.ListView))
             {
                 System.Windows.Forms.ListView TempListView = ListViewRightMenu.SourceControl as System.Windows.Forms.ListView;
 
-                if (TempListView.FocusedItem.SubItems.Count >= 4)
+                if(TempListView.FocusedItem.SubItems.Count >= 4)
                 {
-                    if (File.Exists(TempListView.FocusedItem.SubItems[2].Text))
+                    if(File.Exists(TempListView.FocusedItem.SubItems[2].Text))
                     {
                         Process.Start(Path.GetDirectoryName(TempListView.FocusedItem.SubItems[2].Text));
                     }
@@ -3574,13 +3495,13 @@ namespace DocumentTools
 
         private void 打开转换后文件ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (ListViewRightMenu.SourceControl.GetType() == typeof(System.Windows.Forms.ListView))
+            if(ListViewRightMenu.SourceControl.GetType() == typeof(System.Windows.Forms.ListView))
             {
                 System.Windows.Forms.ListView TempListView = ListViewRightMenu.SourceControl as System.Windows.Forms.ListView;
 
-                if (TempListView.FocusedItem.SubItems.Count >= 4)
+                if(TempListView.FocusedItem.SubItems.Count >= 4)
                 {
-                    if (File.Exists(TempListView.FocusedItem.SubItems[2].Text))
+                    if(File.Exists(TempListView.FocusedItem.SubItems[2].Text))
                     {
                         Process.Start(TempListView.FocusedItem.SubItems[2].Text);
                     }
@@ -3590,7 +3511,7 @@ namespace DocumentTools
 
         private void 获取PDF文件版本信息ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (ListViewRightMenu.SourceControl.GetType() == typeof(System.Windows.Forms.ListView))
+            if(ListViewRightMenu.SourceControl.GetType() == typeof(System.Windows.Forms.ListView))
             {
                 System.Windows.Forms.ListView TempListView = ListViewRightMenu.SourceControl as System.Windows.Forms.ListView;
 
@@ -3601,7 +3522,7 @@ namespace DocumentTools
 
                         string Information = string.Empty;
 
-                        if (File.Exists(FileName))
+                        if(File.Exists(FileName))
                         {
                             Information = Path.GetExtension(FileName) switch
                             {
@@ -3624,8 +3545,7 @@ namespace DocumentTools
                                             MessageBoxButtons.OK,
                                             MessageBoxIcon.Asterisk);
                                     }));
-                        }
-                        else
+                        } else
                         {
                             MessageBox.Show("所选文件不存在", "信息", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         }
@@ -3642,7 +3562,7 @@ namespace DocumentTools
                 {
                     try
                     {
-                        if (this.html2pdf_textbox_chromepath.Text != string.Empty)
+                        if(this.html2pdf_textbox_chromepath.Text != string.Empty)
                         {
                             UI.ConvertStart(
                                 this.HTML2PDFFileList,
@@ -3651,8 +3571,7 @@ namespace DocumentTools
                                 ".pdf",
                                 CallButton: sender as System.Windows.Forms.Button);
                         }
-                    }
-                    catch (Exception ex)
+                    } catch(Exception ex)
                     {
                         this.BeginInvoke(
                             new Action(
@@ -3670,7 +3589,7 @@ namespace DocumentTools
             string SelectImageFileName = Util.ShowSelectDialog(false, false, "图片文件", "*.jpg;*.jpeg;*.png;*.bmp")
                 .FirstOrDefault();
 
-            if (string.Compare(SelectImageFileName, default, StringComparison.Ordinal) != 0 &&
+            if(string.Compare(SelectImageFileName, default, StringComparison.Ordinal) != 0 &&
                 !string.IsNullOrEmpty(SelectImageFileName))
             {
                 this.Word2EpubConverImage.Text = SelectImageFileName;
@@ -3692,8 +3611,7 @@ namespace DocumentTools
                             ConvertFileType.SplitWord,
                             ".docx",
                             CallButton: sender as System.Windows.Forms.Button);
-                    }
-                    catch (Exception ex)
+                    } catch(Exception ex)
                     {
                         this.BeginInvoke(
                             new Action(
@@ -3718,7 +3636,7 @@ namespace DocumentTools
 
             string chrome_path_string = chrome_path.FirstOrDefault();
 
-            if (chrome_path_string != string.Empty &&
+            if(chrome_path_string != string.Empty &&
                 string.Compare(chrome_path_string, default, StringComparison.Ordinal) != 0 &&
                 chrome_path_string != null)
             {
@@ -3745,7 +3663,7 @@ namespace DocumentTools
                     {
                         try
                         {
-                            if (Mss3Path != string.Empty &&
+                            if(Mss3Path != string.Empty &&
                                 string.Compare(Mss3Path, default, StringComparison.Ordinal) != 0 &&
                                 Mss3Path != null)
                             {
@@ -3757,14 +3675,13 @@ namespace DocumentTools
                                         {
                                             DataTable TempVoteDataTable = Util.GetMss3VoteInfo(Mss3Path);
 
-                                            if (TempVoteDataTable != null && TempVoteDataTable.Rows.Count > 0)
+                                            if(TempVoteDataTable != null && TempVoteDataTable.Rows.Count > 0)
                                             {
                                                 this.votedataview.DataSource = TempVoteDataTable;
                                             }
                                         }));
                             }
-                        }
-                        catch (Exception ex)
+                        } catch(Exception ex)
                         {
                             this.BeginInvoke(
                                 new Action(
@@ -3794,8 +3711,7 @@ namespace DocumentTools
                             this.votepageIndexCombox.SelectedValue.ToString(),
                             this.votepage_type_combox.SelectedValue.ToString());
                         (sender as System.Windows.Forms.Button).Enabled = true;
-                    }
-                    catch (Exception ex)
+                    } catch(Exception ex)
                     {
                         this.BeginInvoke(
                             new Action(
@@ -3812,7 +3728,7 @@ namespace DocumentTools
         {
             string VoteImagePath = Util.ShowSelectDialog(false, false, "图片文件", "*.jpg;*.bmp;*.png;*.tif;*.tiff")
                 .FirstOrDefault();
-            if (VoteImagePath != string.Empty &&
+            if(VoteImagePath != string.Empty &&
                 string.Compare(VoteImagePath, default, StringComparison.Ordinal) != 0 &&
                 VoteImagePath != null)
             {
@@ -3828,7 +3744,7 @@ namespace DocumentTools
             FontSelectDialog.AllowVerticalFonts = false;
             DialogResult FontSelectDialogResult = FontSelectDialog.ShowDialog();
 
-            if (FontSelectDialogResult == DialogResult.OK)
+            if(FontSelectDialogResult == DialogResult.OK)
             {
                 ReplaceWordFontSetting.FontName = FontSelectDialog.Font.FontFamily.GetName(1033);
                 ReplaceWordFontSetting.FontSize = FontSelectDialog.Font.Size;
@@ -3924,7 +3840,7 @@ namespace DocumentTools
 
         private void 保存设置并重启软件ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (File.Exists(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile))
+            if(File.Exists(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile))
             {
                 Configuration TempConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
                 TempConfig.AppSettings.Settings["StartPageIndex"].Value = menu_start_page_index_combox.Text;
@@ -3960,15 +3876,14 @@ namespace DocumentTools
                     "提示",
                     MessageBoxButtons.OKCancel,
                     MessageBoxIcon.Asterisk);
-                if (ExitResult == DialogResult.OK)
+                if(ExitResult == DialogResult.OK)
                 {
                     string AppExcuteFile = Application.ExecutablePath;
                     Process.Start(AppExcuteFile);
 
                     Environment.Exit(0);
                 }
-            }
-            else
+            } else
             {
                 string ProgramFileName = Process.GetCurrentProcess().ProcessName;
 
@@ -3985,7 +3900,7 @@ namespace DocumentTools
         private void 查看标签索引对照表ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             StringBuilder TempIndexTable = new StringBuilder();
-            foreach (TabPage TempPage in this.MainTabPage.TabPages)
+            foreach(TabPage TempPage in this.MainTabPage.TabPages)
             {
                 TempIndexTable.AppendLine($"{TempPage.Text}：{MainTabPage.TabPages.IndexOf(TempPage)}");
             }
@@ -3998,9 +3913,9 @@ namespace DocumentTools
             AssemblyName[] LibNames = TempAssmbly.GetReferencedAssemblies();
             StringBuilder LibNameShow = new StringBuilder();
 
-            foreach (AssemblyName LibName in LibNames)
+            foreach(AssemblyName LibName in LibNames)
             {
-                if (string.Compare(LibName.Name, "Aspose.Hook", StringComparison.Ordinal) != 0)
+                if(string.Compare(LibName.Name, "Aspose.Hook", StringComparison.Ordinal) != 0)
                 {
                     LibNameShow.AppendLine($"· {LibName.Name}\tV{LibName.Version}");
                 }
@@ -4020,7 +3935,7 @@ namespace DocumentTools
                             status =>
                             {
                             });
-                        if (barcodeTextContentBox.Text != string.Empty)
+                        if(barcodeTextContentBox.Text != string.Empty)
                         {
                             MemoryStream tempstream = Util.GenerateBarCode(
                                 barcodeTypeCombox.SelectedIndex,
@@ -4050,8 +3965,7 @@ namespace DocumentTools
                                 barcodeScanTypeCombox.SelectedIndex);
                             barcodePreviewBox.Image = new Bitmap(tempstream);
                         }
-                    }
-                    catch (Exception ex)
+                    } catch(Exception ex)
                     {
                         this.BeginInvoke(
                             new Action(
@@ -4076,7 +3990,7 @@ namespace DocumentTools
                             "Excel文件",
                             "*.xls;*.xlsx");
                         string barcodeTemplateFile = barcodeTemplateName.FirstOrDefault();
-                        if (!string.IsNullOrEmpty(barcodeTemplateFile))
+                        if(!string.IsNullOrEmpty(barcodeTemplateFile))
                         {
                             this.Invoke(
                                 (Action)(() =>
@@ -4084,8 +3998,7 @@ namespace DocumentTools
                                     this.barcodeMutilList.DataSource = Util.ReadBarCodeTemplate(barcodeTemplateFile);
                                 }));
                         }
-                    }
-                    catch (Exception ex)
+                    } catch(Exception ex)
                     {
                         this.BeginInvoke(
                             new Action(
@@ -4104,7 +4017,7 @@ namespace DocumentTools
                 {
                     try
                     {
-                        if (this.barcodeMutilList.DataSource != null && this.barcodeMutilList.Rows.Count > 1)
+                        if(this.barcodeMutilList.DataSource != null && this.barcodeMutilList.Rows.Count > 1)
                         {
                             IEnumerable<string> TempMutilSavePath = Util.ShowSelectDialog(
                                 false,
@@ -4113,13 +4026,13 @@ namespace DocumentTools
                                 string.Empty);
                             string MutilSavePath = TempMutilSavePath.FirstOrDefault();
 
-                            if (MutilSavePath != string.Empty &&
+                            if(MutilSavePath != string.Empty &&
                                 string.Compare(MutilSavePath, default, StringComparison.Ordinal) != 0)
                             {
                                 (sender as System.Windows.Forms.Button).Enabled = false;
-                                foreach (DataGridViewRow TempRow in barcodeMutilList.Rows)
+                                foreach(DataGridViewRow TempRow in barcodeMutilList.Rows)
                                 {
-                                    if (!TempRow.IsNewRow)
+                                    if(!TempRow.IsNewRow)
                                     {
                                         string barcodeParam_FileName = TempRow.Cells[0].Value.ToString();
                                         string barcodeParam_Caption = TempRow.Cells[1].Value.ToString();
@@ -4162,7 +4075,7 @@ namespace DocumentTools
                                         () =>
                                         {
                                             (sender as System.Windows.Forms.Button).Enabled = true;
-                                            if (MessageBox.Show(
+                                            if(MessageBox.Show(
                                                     "生成完毕，是否打开生成目录？",
                                                     "提示",
                                                     MessageBoxButtons.YesNo,
@@ -4174,8 +4087,7 @@ namespace DocumentTools
                                         }));
                             }
                         }
-                    }
-                    catch (Exception ex)
+                    } catch(Exception ex)
                     {
                         this.BeginInvoke(
                             new Action(
@@ -4194,11 +4106,11 @@ namespace DocumentTools
 
             string SaveTemplateFile = Util.ShowSaveFileDialog("Excel文件|*.xlsx");
 
-            if (SaveTemplateFile != string.Empty)
+            if(SaveTemplateFile != string.Empty)
             {
                 File.WriteAllBytes(SaveTemplateFile, (byte[])BarcodeTemplateUpload);
 
-                if (File.Exists(SaveTemplateFile))
+                if(File.Exists(SaveTemplateFile))
                 {
                     MessageBox.Show("导出完毕", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 }
@@ -4209,28 +4121,26 @@ namespace DocumentTools
         {
             try
             {
-                if (barcodePreviewBox.Image != null)
+                if(barcodePreviewBox.Image != null)
                 {
                     string SaveFileName = Util.ShowSaveFileDialog("PNG图片|*.png");
                     Bitmap TempBitMap = new Bitmap(barcodePreviewBox.Image);
 
-                    if (SaveFileName != string.Empty)
+                    if(SaveFileName != string.Empty)
                     {
                         TempBitMap.Save(SaveFileName);
 
-                        if (MessageBox.Show("生成完毕，是否打开生成目录？", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) ==
+                        if(MessageBox.Show("生成完毕，是否打开生成目录？", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) ==
                             DialogResult.Yes)
                         {
                             Process.Start(Path.GetDirectoryName(SaveFileName));
                         }
                     }
                 }
-            }
-            catch (ExternalException)
+            } catch(ExternalException)
             {
                 MessageBox.Show("请不要覆盖保存已被加载到软件中的图片文件", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (Exception ex)
+            } catch(Exception ex)
             {
                 MessageBox.Show(ex.ToString(), "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -4241,7 +4151,7 @@ namespace DocumentTools
 
         private void barcodeCopyImage_Click(object sender, EventArgs e)
         {
-            if (barcodePreviewBox.Image != null)
+            if(barcodePreviewBox.Image != null)
             {
                 Clipboard.SetImage(barcodePreviewBox.Image);
                 MessageBox.Show("已复制图像", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -4251,7 +4161,7 @@ namespace DocumentTools
         private void city_level_1_combox_TextChanged(object sender, EventArgs e)
         {
             city_level_2_combox.Items.Clear();
-            foreach (JToken City_2_Name in City_Json[city_level_1_combox.SelectedIndex]["children"])
+            foreach(JToken City_2_Name in City_Json[city_level_1_combox.SelectedIndex]["children"])
             {
                 city_level_2_combox.Items.Add(City_2_Name["name"]);//添加对应的二级城市
             }
@@ -4261,7 +4171,7 @@ namespace DocumentTools
         private void city_level_2_combox_TextChanged(object sender, EventArgs e)
         {
             city_level_3_combox.Items.Clear();
-            foreach (JToken City_3_Name in City_Json[city_level_1_combox.SelectedIndex]["children"][
+            foreach(JToken City_3_Name in City_Json[city_level_1_combox.SelectedIndex]["children"][
                 city_level_2_combox.SelectedIndex]["children"])
             {
                 city_level_3_combox.Items.Add(City_3_Name["name"]);//添加对应的三级城市
@@ -4279,29 +4189,30 @@ namespace DocumentTools
                         //获取对应的行政区域代码
                         JToken Pac_Code = City_Json[city_level_1_combox.SelectedIndex]["children"][
                             city_level_2_combox.SelectedIndex]["children"][city_level_3_combox.SelectedIndex]["code"];
-                        List<string> gen_card_ids = new List<string>();
-                        List<string> gen_card_names = new List<string>();
+                        gen_card_id_box.Clear();
+                        gen_card_id_name_box.Clear();
                         Random random = new Random();
-                        for (int i = 0; i < gen_card_number.Value; i++)
+                        for(int i = 0; i < gen_card_number.Value; i++)
                         {
-                            if (gen_card_id_name_check_box.Checked)
+                            if(gen_card_id_name_check_box.Checked)
                             {
                                 string gen_card_name = Util.GenRandomName(random, random);
-                                gen_card_names.Add(gen_card_name);
+                                gen_card_id_name_box.AppendText(gen_card_name + Environment.NewLine);
+                                gen_card_id_name_box.ScrollToCaret();
                                 gen_card_id_name_text.Text = $"[已勾选，已生成{i + 1}个姓名]";
                             }
                             string gen_card_id = Util.GenChinaCard(
                                 Pac_Code.ToString(),
                                 Util.GenRandomBirthday(random, ony_gen_18_year.Checked),
                                 Util.GenRandomIndex(random));
-                            gen_card_ids.Add(gen_card_id);
+                            gen_card_id_box.AppendText(gen_card_id+ Environment.NewLine);
+                            gen_card_id_box.ScrollToCaret();
                             gen_card_num_text.Text = $"正在生成第{i + 1}个号码";
                         }
-                        gen_card_id_box.Lines = gen_card_ids.ToArray();
-                        gen_card_id_name_box.Lines = gen_card_names.ToArray();
+                        gen_card_id_box.Lines = gen_card_id_box.Lines.Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();//去除空行重新赋值
+                        gen_card_id_name_box.Lines = gen_card_id_name_box.Lines.Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
                     });
-            }
-            catch (Exception ex)
+            } catch(Exception ex)
             {
                 this.BeginInvoke(
                     new Action(
@@ -4317,7 +4228,7 @@ namespace DocumentTools
 
         private void copy_gen_card_cliboard_Click(object sender, EventArgs e)
         {
-            if (gen_card_id_box.Text != string.Empty)
+            if(gen_card_id_box.Text != string.Empty)
             {
                 Clipboard.SetText(gen_card_id_box.Text.Replace("\n", Environment.NewLine));
                 MessageBox.Show("已复制到剪贴板", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -4334,18 +4245,17 @@ namespace DocumentTools
             ver_card_id_birthday.Text = vaildate_tuple.Item1;
             ver_card_id_sex.Text = vaildate_tuple.Item2;
             ver_card_id_index.Text = vaildate_tuple.Item3;
-            if (vaildate_tuple.Item4)
+            if(vaildate_tuple.Item4)
             {
                 ver_card_id_sign_tips.ForeColor = Color.ForestGreen;
                 ver_card_id_sign_tips.Text = "正确";
-            }
-            else
+            } else
             {
                 ver_card_id_sign_tips.ForeColor = Color.Tomato;
                 ver_card_id_sign_tips.Text = $"校验码不正确，应为 {vaildate_tuple.Item5}";
             }
 
-            if (string.Compare(ver_card_id_text_box.Text, "sfz", StringComparison.Ordinal) == 0)
+            if(string.Compare(ver_card_id_text_box.Text, "sfz", StringComparison.Ordinal) == 0)
             {
                 gen_card_id_group.Enabled = true;
                 gen_card_result_group.Enabled = true;
@@ -4356,11 +4266,10 @@ namespace DocumentTools
                     });
             }
 
-            if (string.Compare(ver_card_id_birthday.Text, "日期不正确", StringComparison.Ordinal) == 0)
+            if(string.Compare(ver_card_id_birthday.Text, "日期不正确", StringComparison.Ordinal) == 0)
             {
                 ver_card_id_birthday.ForeColor = Color.Tomato;
-            }
-            else
+            } else
             {
                 ver_card_id_birthday.ForeColor = Color.ForestGreen;
             }
@@ -4368,7 +4277,7 @@ namespace DocumentTools
 
         private void gen_card_id_name_copy_Click(object sender, EventArgs e)
         {
-            if (gen_card_id_name_box.Text != string.Empty)
+            if(gen_card_id_name_box.Text != string.Empty)
             {
                 Clipboard.SetText(gen_card_id_name_box.Text.Replace("\n", Environment.NewLine));
                 MessageBox.Show("已复制到剪贴板", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -4377,12 +4286,11 @@ namespace DocumentTools
 
         private void gen_card_id_name_check_box_CheckedChanged(object sender, EventArgs e)
         {
-            if (gen_card_id_name_check_box.Checked)
+            if(gen_card_id_name_check_box.Checked)
             {
                 gen_card_id_name_text.ForeColor = Color.Green;
                 gen_card_id_name_text.Text = $"[已勾选]";
-            }
-            else
+            } else
             {
                 gen_card_id_name_text.ForeColor = Color.Red;
                 gen_card_id_name_text.Text = "[未勾选]";
@@ -4402,14 +4310,13 @@ namespace DocumentTools
                             "支持的图片",
                             "*.jpg;*.jpeg;*.png;*.bmp")
                             .FirstOrDefault();
-                        if (string.Compare(BarcodeImageFile, default, StringComparison.Ordinal) != 0 &&
+                        if(string.Compare(BarcodeImageFile, default, StringComparison.Ordinal) != 0 &&
                             BarcodeImageFile != string.Empty)
                         {
                             barcodeRegionPicture.Image = System.Drawing.Image.FromFile(BarcodeImageFile);
                         }
                     });
-            }
-            catch (Exception ex)
+            } catch(Exception ex)
             {
                 this.BeginInvoke(
                     new Action(
@@ -4427,15 +4334,14 @@ namespace DocumentTools
                 Task.Run(
                     () =>
                     {
-                        if (barcodeRegionPicture.Image != null)
+                        if(barcodeRegionPicture.Image != null)
                         {
                             (sender as System.Windows.Forms.Button).Enabled = false;
                             barcodeReaderResultbox.Text = Util.ReadBarCodeContent((Bitmap)barcodeRegionPicture.Image);
                             (sender as System.Windows.Forms.Button).Enabled = true;
                         }
                     });
-            }
-            catch (Exception ex)
+            } catch(Exception ex)
             {
                 this.BeginInvoke(
                     new Action(
@@ -4449,7 +4355,7 @@ namespace DocumentTools
 
         private void CopyBarcodeReadResult_Click(object sender, EventArgs e)
         {
-            if (barcodeReaderResultbox.Text != string.Empty)
+            if(barcodeReaderResultbox.Text != string.Empty)
             {
                 Clipboard.SetText(barcodeReaderResultbox.Text.Replace("\n", Environment.NewLine));
                 MessageBox.Show("已复制到剪贴板", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -4471,8 +4377,7 @@ namespace DocumentTools
                             ConvertFileType.WeBp2Image,
                             this.webp2image_combox.SelectedValue.ToString(),
                             CallButton: sender as System.Windows.Forms.Button);
-                    }
-                    catch (Exception ex)
+                    } catch(Exception ex)
                     {
                         this.BeginInvoke(
                             new Action(
@@ -4490,7 +4395,7 @@ namespace DocumentTools
 
         private void ExportNameTxt_Click(object sender, EventArgs e)
         {
-            if (TargetTextBox.Text != string.Empty)
+            if(TargetTextBox.Text != string.Empty)
             {
                 string TempExportTxtFile = Util.ShowSaveFileDialog("文本文件|*.txt");
 
@@ -4499,7 +4404,7 @@ namespace DocumentTools
                     {
                         try
                         {
-                            if (TempExportTxtFile != string.Empty && TempExportTxtFile != null)
+                            if(TempExportTxtFile != string.Empty && TempExportTxtFile != null)
                             {
                                 (sender as System.Windows.Forms.Button).Enabled = false;
                                 File.WriteAllText(TempExportTxtFile, TargetTextBox.Text);
@@ -4511,8 +4416,7 @@ namespace DocumentTools
                                             (sender as System.Windows.Forms.Button).Enabled = true;
                                         }));
                             }
-                        }
-                        catch (Exception ex)
+                        } catch(Exception ex)
                         {
                             this.BeginInvoke(
                                 new Action(
@@ -4530,7 +4434,7 @@ namespace DocumentTools
         {
             string TempFileName = Util.ShowSelectDialog(false, false, "所有文件", "*.*").FirstOrDefault();
 
-            if (!string.IsNullOrEmpty(TempFileName) &&
+            if(!string.IsNullOrEmpty(TempFileName) &&
                 string.Compare(TempFileName, default, StringComparison.Ordinal) != 0)
             {
                 Gen_Copied_SourceFileBox.Text = TempFileName;
@@ -4541,7 +4445,7 @@ namespace DocumentTools
         {
             string TempPath = Util.ShowSelectDialog(false, true, "所有文件", "*.*").FirstOrDefault();
 
-            if (!string.IsNullOrEmpty(TempPath) && string.Compare(TempPath, default, StringComparison.Ordinal) != 0)
+            if(!string.IsNullOrEmpty(TempPath) && string.Compare(TempPath, default, StringComparison.Ordinal) != 0)
             {
                 Gen_Copied_TargetPath.Text = TempPath;
             }
@@ -4549,7 +4453,7 @@ namespace DocumentTools
 
         private void CopiedGen_Click(object sender, EventArgs e)
         {
-            if (Gen_Copied_SourceFileBox.Text != string.Empty && Gen_Copied_TargetPath.Text != string.Empty)
+            if(Gen_Copied_SourceFileBox.Text != string.Empty && Gen_Copied_TargetPath.Text != string.Empty)
             {
                 Task.Run(
                     () =>
@@ -4572,8 +4476,7 @@ namespace DocumentTools
                                         (sender as System.Windows.Forms.Button).Enabled = true;
                                         MessageBox.Show("生成完毕", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                                     }));
-                        }
-                        catch (Exception ex)
+                        } catch(Exception ex)
                         {
                             this.BeginInvoke(
                                 new Action(
@@ -4589,7 +4492,7 @@ namespace DocumentTools
 
         private void Gen_Copied_Namer_TextChanged(object sender, EventArgs e)
         {
-            if (Gen_Copied_Namer.Text != string.Empty && Gen_Copied_SourceFileBox.Text != string.Empty)
+            if(Gen_Copied_Namer.Text != string.Empty && Gen_Copied_SourceFileBox.Text != string.Empty)
             {
                 string Number = 1.ToString($"D{copied_number_prefix_count.Text}");
                 CopiedNamerText.Text = $"最终生成名称为：{Path.GetFileNameWithoutExtension(Gen_Copied_SourceFileBox.Text)}- {Gen_Copied_Namer.Text}（{Number}）{Path.GetExtension(Gen_Copied_SourceFileBox.Text)}";
@@ -4608,7 +4511,7 @@ namespace DocumentTools
                 {
                     var (ipv4_address_source, default_mask_source, default_gateway_source, dns1_address, dns2_address, mac_address, is_dhcp_enabled) = Util.GetCard_Information(
                         network_info_card_list.Text);
-                    if (network_info_ipv4 != null &&
+                    if(network_info_ipv4 != null &&
                         network_info_mask != null &&
                         network_info_gateway != null &&
                         network_info_dns1 != null &&
@@ -4637,11 +4540,10 @@ namespace DocumentTools
                             mac_address == string.Empty ? "未获取到" : mac_address
                         };
                     }
-                    if (is_dhcp_enabled)
+                    if(is_dhcp_enabled)
                     {
                         set_interface_mode_auto.Checked = true;
-                    }
-                    else
+                    } else
                     {
                         set_interface_mode_static.Checked = true;
                     }
@@ -4671,7 +4573,7 @@ namespace DocumentTools
             Task.Run(
                 () =>
                 {
-                    if (network_info_card_list != null && set_interface_name_list != null)
+                    if(network_info_card_list != null && set_interface_name_list != null)
                     {
                         this.network_info_card_list.DataSource = Util.GetNetWorkCardList(
                             network_info_show_normal.Checked);
@@ -4688,7 +4590,7 @@ namespace DocumentTools
                 {
                     try
                     {
-                        if (Util.IsAdministrator())
+                        if(Util.IsAdministrator())
                         {
                             (sender as System.Windows.Forms.Button).Enabled = false;
                             Util.SetInterfaceInformation(
@@ -4708,8 +4610,7 @@ namespace DocumentTools
                                         UpdateNetworkInfo();//更新基础网络信息
                                         UpdateSetNetWorkInfo();//更新设置部分网络信息
                                     }));
-                        }
-                        else
+                        } else
                         {
                             this.BeginInvoke(
                                 new Action(
@@ -4722,8 +4623,7 @@ namespace DocumentTools
                                             MessageBoxIcon.Exclamation);
                                     }));
                         }
-                    }
-                    catch (Exception ex)
+                    } catch(Exception ex)
                     {
                         this.BeginInvoke(
                             new Action(
@@ -4741,15 +4641,14 @@ namespace DocumentTools
 
         private void set_interface_mode_auto_CheckedChanged(object sender, EventArgs e)
         {
-            if (set_interface_mode_auto.Checked)
+            if(set_interface_mode_auto.Checked)
             {
                 set_interface_ipaddress.Enabled = false;
                 set_interface_mask.Enabled = false;
                 set_interface_gateway.Enabled = false;
                 set_interface_dns1.Enabled = false;
                 set_interface_dns2.Enabled = false;
-            }
-            else
+            } else
             {
                 set_interface_ipaddress.Enabled = true;
                 set_interface_mask.Enabled = true;
@@ -4761,7 +4660,7 @@ namespace DocumentTools
 
         private void set_interface_clear_Click(object sender, EventArgs e)
         {
-            if (set_interface_mode_static.Checked)
+            if(set_interface_mode_static.Checked)
             {
                 set_interface_ipaddress.Text = "0.0.0.0";
                 set_interface_mask.Text = "0.0.0.0";
@@ -4785,8 +4684,7 @@ namespace DocumentTools
                                 {
                                     MessageBox.Show("启用成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                                 }));
-                    }
-                    catch (Exception ex)
+                    } catch(Exception ex)
                     {
                         this.BeginInvoke(
                             new Action(
@@ -4812,8 +4710,7 @@ namespace DocumentTools
                                 {
                                     MessageBox.Show("禁用成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                                 }));
-                    }
-                    catch (Exception ex)
+                    } catch(Exception ex)
                     {
                         this.BeginInvoke(
                             new Action(
@@ -4835,7 +4732,7 @@ namespace DocumentTools
 
         private void copy_network_info_mac_address_Click(object sender, EventArgs e)
         {
-            if (network_info_mac_address.Text != string.Empty &&
+            if(network_info_mac_address.Text != string.Empty &&
                 string.Compare(network_info_mac_address.Text, "未获取到", StringComparison.Ordinal) != 0)
             {
                 Clipboard.SetText(network_info_mac_address.Text);
@@ -4850,7 +4747,7 @@ namespace DocumentTools
 
         private void Gen_Copied_SourceFileBox_TextChanged(object sender, EventArgs e)
         {
-            if (Gen_Copied_Namer.Text != string.Empty && Gen_Copied_SourceFileBox.Text != string.Empty)
+            if(Gen_Copied_Namer.Text != string.Empty && Gen_Copied_SourceFileBox.Text != string.Empty)
             {
                 string Number = 1.ToString($"D{copied_number_prefix_count.Text}");
                 CopiedNamerText.Text = $"最终生成名称为：{Path.GetFileNameWithoutExtension(Gen_Copied_SourceFileBox.Text)}- {Gen_Copied_Namer.Text}（{Number}）{Path.GetExtension(Gen_Copied_SourceFileBox.Text)}";
@@ -4859,7 +4756,7 @@ namespace DocumentTools
 
         private void copy_network_info_ip_address_Click(object sender, EventArgs e)
         {
-            if (network_info_ipv4.Text != string.Empty &&
+            if(network_info_ipv4.Text != string.Empty &&
                 string.Compare(network_info_ipv4.Text, "未获取到", StringComparison.Ordinal) != 0)
             {
                 Clipboard.SetText(network_info_ipv4.Text);
@@ -4869,7 +4766,7 @@ namespace DocumentTools
 
         private void copied_number_prefix_count_TextChanged(object sender, EventArgs e)
         {
-            if (Gen_Copied_Namer.Text != string.Empty && Gen_Copied_SourceFileBox.Text != string.Empty)
+            if(Gen_Copied_Namer.Text != string.Empty && Gen_Copied_SourceFileBox.Text != string.Empty)
             {
                 string Number = 1.ToString($"D{copied_number_prefix_count.Text}");
                 CopiedNamerText.Text = $"最终生成名称为：{Path.GetFileNameWithoutExtension(Gen_Copied_SourceFileBox.Text)}- {Gen_Copied_Namer.Text}（{Number}）{Path.GetExtension(Gen_Copied_SourceFileBox.Text)}";
@@ -4888,13 +4785,12 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
                 string TempSaveFileName = Util.ShowSaveFileDialog("坤Tools网卡配置(*.KUNNET)|*.KUNNET");
 
-                if (TempSaveFileName != string.Empty)
+                if(TempSaveFileName != string.Empty)
                 {
                     File.WriteAllText(TempSaveFileName, JObject.Parse(JSON_IPCONFIG).ToString());
                     MessageBox.Show("导出完毕", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 }
-            }
-            catch (Exception ex)
+            } catch(Exception ex)
             {
                 MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -4907,12 +4803,12 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                 string TempLoadConfigFileName = Util.ShowSelectDialog(false, false, "坤Tools网卡配置", "*.KUNNET")
                     .FirstOrDefault();
 
-                if (TempLoadConfigFileName != string.Empty &&
+                if(TempLoadConfigFileName != string.Empty &&
                     string.Compare(TempLoadConfigFileName, default, StringComparison.Ordinal) != 0)
                 {
                     string JsonContent = File.ReadAllText(TempLoadConfigFileName);
 
-                    if (JsonContent != string.Empty)
+                    if(JsonContent != string.Empty)
                     {
                         JObject TempObj = JObject.Parse(JsonContent);
 
@@ -4931,14 +4827,12 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                         set_interface_dns2.Text = TempObj.TryGetValue("DNS2", out JToken dns2Token)
                             ? dns2Token.ToString()
                             : "0.0.0.0";
-                    }
-                    else
+                    } else
                     {
                         MessageBox.Show("配置文件内无内容，配置未加载", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
                 }
-            }
-            catch (Exception ex)
+            } catch(Exception ex)
             {
                 MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -4952,11 +4846,10 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
         private void money_small_TextChanged(object sender, EventArgs e)
         {
-            if (money_small.Text != string.Empty && Decimal.TryParse(money_small.Text, out decimal Money) && Money > 0)
+            if(money_small.Text != string.Empty && Decimal.TryParse(money_small.Text, out decimal Money) && Money > 0)
             {
                 money_big.Text = Util.ConvertMoney2ChineseYulan(Decimal.Parse(money_small.Text));
-            }
-            else
+            } else
             {
                 money_big.Text = string.Empty;
             }
@@ -4964,7 +4857,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
         private void copy_money_big_result_Click(object sender, EventArgs e)
         {
-            if (money_big.Text != string.Empty)
+            if(money_big.Text != string.Empty)
             {
                 Clipboard.SetText(money_big.Text);
                 MessageBox.Show("复制成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -4980,21 +4873,19 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
         private void DisableAdminBehavior_Click(object sender, EventArgs e)
         {
-            if (Util.IsAdministrator())
+            if(Util.IsAdministrator())
             {
-                if (DisableAdminBehavior.Text.StartsWith("启用"))
+                if(DisableAdminBehavior.Text.StartsWith("启用"))
                 {
                     Util.SetAdministratorBehavior(true);
-                }
-                else if (DisableAdminBehavior.Text.StartsWith("禁用"))
+                } else if(DisableAdminBehavior.Text.StartsWith("禁用"))
                 {
                     Util.SetAdministratorBehavior(false);
                 }
 
                 MessageBox.Show("修改成功，重启电脑后设置生效", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 GetAdministratorBehaviorStatus();
-            }
-            else
+            } else
             {
                 MessageBox.Show("请使用管理员身份重新运行软件执行修改", "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
@@ -5013,9 +4904,9 @@ IPGATEWAY:'{set_interface_gateway.Text}',
         private int GetTabPageIndex(string TabPageName)
         {
             int PageIndex = -1;
-            foreach (TabPage TempPage in MainTabPage.TabPages)
+            foreach(TabPage TempPage in MainTabPage.TabPages)
             {
-                if (string.Compare(TempPage.Text, TabPageName, StringComparison.Ordinal) == 0)
+                if(string.Compare(TempPage.Text, TabPageName, StringComparison.Ordinal) == 0)
                 {
                     PageIndex = MainTabPage.TabPages.IndexOf(TempPage);
                 }
@@ -5031,11 +4922,11 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
         private void MainTabPage_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (MainTabPage.SelectedIndex == GetTabPageIndex("网卡设置"))
+            if(MainTabPage.SelectedIndex == GetTabPageIndex("网卡设置"))
             {
                 UpdateNetworkList();
             }
-            if (MainTabPage.SelectedIndex == GetTabPageIndex("单人表生成"))
+            if(MainTabPage.SelectedIndex == GetTabPageIndex("单人表生成"))
             {
                 SignDocumentUseOutPersonPathTextBox.Enabled = SignDocumentUseOutPersonPath.Checked;
                 SignDocumentUseOutPersonPathButton.Enabled = SignDocumentUseOutPersonPath.Checked;
@@ -5043,22 +4934,21 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                 SignDocumentOnlyUseOnlyImageTextBox.Enabled = SignDocumentOnlyUseOnlyImage.Checked;
                 SignDocumentOnlyUseOnlyImageButton.Enabled = SignDocumentOnlyUseOnlyImage.Checked;
             }
-            if (MainTabPage.SelectedIndex == GetTabPageIndex("Twain扫描仪调试"))
+            if(MainTabPage.SelectedIndex == GetTabPageIndex("Twain扫描仪调试"))
             {
                 try
                 {
-                    if (!TwainInitState)
+                    if(!TwainInitState)
                     {
                         InitTwain();
                         TwainInitState = true;
                     }
 
-                    foreach (Control TwainControl in MainTabPage.TabPages[GetTabPageIndex("Twain扫描仪调试")].Controls)
+                    foreach(Control TwainControl in MainTabPage.TabPages[GetTabPageIndex("Twain扫描仪调试")].Controls)
                     {
                         TwainControl.Enabled = true;
                     }
-                }
-                catch
+                } catch
                 {
                     MessageBox.Show(
                         "没有在系统中找到TwainDsm数据源管理器，请自行下载TwainDsm.dll文件放在程序目录下调用，否则无法使用twain调试功能",
@@ -5066,7 +4956,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
 
-                    foreach (Control TwainControl in MainTabPage.TabPages[GetTabPageIndex("Twain扫描仪调试")].Controls)
+                    foreach(Control TwainControl in MainTabPage.TabPages[GetTabPageIndex("Twain扫描仪调试")].Controls)
                     {
                         TwainControl.Enabled = false;
                     }
@@ -5089,7 +4979,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                 "提示",
                 MessageBoxButtons.OKCancel,
                 MessageBoxIcon.Asterisk);
-            if (ExitResult == DialogResult.OK)
+            if(ExitResult == DialogResult.OK)
             {
                 string AppExcuteFile = Application.ExecutablePath;
                 Process.Start(AppExcuteFile);
@@ -5115,7 +5005,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                 {
                     try
                     {
-                        if (SaveVoteFileName != string.Empty)
+                        if(SaveVoteFileName != string.Empty)
                         {
                             (sender as System.Windows.Forms.Button).Enabled = false;
                             using MemoryStream TempDocumentMemoryStream = new MemoryStream(
@@ -5143,7 +5033,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                                     () =>
                                     {
                                         (sender as System.Windows.Forms.Button).Enabled = true;
-                                        if (MessageBox.Show(
+                                        if(MessageBox.Show(
                                                 "已生成选举报告单，是否打开文件？",
                                                 "提示",
                                                 MessageBoxButtons.YesNo,
@@ -5154,8 +5044,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                                         }
                                     }));
                         }
-                    }
-                    catch (Exception ex)
+                    } catch(Exception ex)
                     {
                         this.BeginInvoke(
                             new Action(
@@ -5176,25 +5065,22 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
         private void SetPauseTime_Click(object sender, EventArgs e)
         {
-            if (Util.IsAdministrator())
+            if(Util.IsAdministrator())
             {
                 Util.SetPauseUpdateTime(int.Parse(PauseUpdateYears.SelectedValue.ToString()));
 
                 string CheckVersionResult = Util.Check_11_Or_10_Version();
-                if (string.Compare(CheckVersionResult, "10", StringComparison.Ordinal) == 0)
+                if(string.Compare(CheckVersionResult, "10", StringComparison.Ordinal) == 0)
                 {
                     Process.Start("ms-settings:windowsupdate-options");
-                }
-                else if (string.Compare(CheckVersionResult, "11", StringComparison.Ordinal) == 0)
+                } else if(string.Compare(CheckVersionResult, "11", StringComparison.Ordinal) == 0)
                 {
                     Process.Start("ms-settings:windowsupdate");
-                }
-                else
+                } else
                 {
                     MessageBox.Show("只支持windows10/windows11系统", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 }
-            }
-            else
+            } else
             {
                 MessageBox.Show("请使用管理员身份证重新运行软件后执行本操作", "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
@@ -5203,11 +5089,10 @@ IPGATEWAY:'{set_interface_gateway.Text}',
         private void OpenSystemUpdate_Click(object sender, EventArgs e)
         {
             string CheckVersionResult = Util.Check_11_Or_10_Version();
-            if (string.Compare(CheckVersionResult, "10", StringComparison.Ordinal) == 0)
+            if(string.Compare(CheckVersionResult, "10", StringComparison.Ordinal) == 0)
             {
                 Process.Start("ms-settings:windowsupdate-options");
-            }
-            else if (string.Compare(CheckVersionResult, "11", StringComparison.Ordinal) == 0)
+            } else if(string.Compare(CheckVersionResult, "11", StringComparison.Ordinal) == 0)
             {
                 Process.Start("ms-settings:windowsupdate");
             }
@@ -5219,17 +5104,17 @@ IPGATEWAY:'{set_interface_gateway.Text}',
             Task.Run(
                 () =>
                 {
-                    if (ExamFileText.Text != string.Empty)
+                    if(ExamFileText.Text != string.Empty)
                     {
                         try
                         {
                             //获取数据库内的报表和考评表信息
                             DataTable TempTable = Util.GetExamInfo(ExamFileText.Text);
 
-                            if (TempTable != null && TempTable.Rows.Count > 0)
+                            if(TempTable != null && TempTable.Rows.Count > 0)
                             {
                                 VFSOFT_Report_ListView.Items.Clear();//加载之前先清除数据
-                                foreach (DataRow row in TempTable.Rows)
+                                foreach(DataRow row in TempTable.Rows)
                                 {
                                     System.Windows.Forms.ListViewItem item = new System.Windows.Forms.ListViewItem(
                                         row["报表ID"].ToString());
@@ -5239,8 +5124,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                                     VFSOFT_Report_ListView.Items.Add(item);
                                 }
                             }
-                        }
-                        catch (Exception ex)
+                        } catch(Exception ex)
                         {
                             this.BeginInvoke(
                                 new Action(
@@ -5257,13 +5141,12 @@ IPGATEWAY:'{set_interface_gateway.Text}',
         private string GET_VFSOFT_ID(string IdType)
         {
             string ResultId = string.Empty;
-            if (VFSOFT_Report_ListView.Items.Count > 0 && VFSOFT_Report_ListView.SelectedItems.Count > 0)
+            if(VFSOFT_Report_ListView.Items.Count > 0 && VFSOFT_Report_ListView.SelectedItems.Count > 0)
             {
-                if (string.Compare(IdType, "exam", StringComparison.Ordinal) == 0)
+                if(string.Compare(IdType, "exam", StringComparison.Ordinal) == 0)
                 {
                     ResultId = VFSOFT_Report_ListView.SelectedItems[0].SubItems[3].Text;
-                }
-                else if (string.Compare(IdType, "report", StringComparison.Ordinal) == 0)
+                } else if(string.Compare(IdType, "report", StringComparison.Ordinal) == 0)
                 {
                     ResultId = VFSOFT_Report_ListView.SelectedItems[0].Text;
                 }
@@ -5277,7 +5160,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
             string ExamFile = Util.ShowSelectDialog(false, false, "MDB文件", "*.mdb", vfsoft_examdata_path_textbox.Text)
                 .FirstOrDefault();
 
-            if (string.Compare(ExamFile, default, StringComparison.Ordinal) != 0 && ExamFile != string.Empty)
+            if(string.Compare(ExamFile, default, StringComparison.Ordinal) != 0 && ExamFile != string.Empty)
             {
                 ExamFileText.Text = ExamFile;
                 LoadExamFile_FillReportView();
@@ -5293,7 +5176,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                 string selectedExamId = GET_VFSOFT_ID("exam");
                 string selectedReportId = GET_VFSOFT_ID("report");
 
-                if (ExamFileText.Text != string.Empty && selectedExamId != string.Empty)
+                if(ExamFileText.Text != string.Empty && selectedExamId != string.Empty)
                 {
                     List<string> selectedExamItems = await Task.Run(
                         () => Util.GetExamItemsAndExamSelectors(ExamFileText.Text, selectedExamId))
@@ -5330,8 +5213,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                     ExamReportColMode_Row_Start_Combox.DataSource = new List<int>(selectedReportColsAndRows.report_rows);
                     ExamReportColMode_Row_End_Combox.DataSource = new List<int>(selectedReportColsAndRows.report_rows);
                 }
-            }
-            catch (Exception ex)
+            } catch(Exception ex)
             {
                 MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -5343,20 +5225,19 @@ IPGATEWAY:'{set_interface_gateway.Text}',
             {
                 string selectedExamId = GET_VFSOFT_ID("exam");
 
-                if (ExamFileText.Text != string.Empty && selectedExamId != string.Empty)
+                if(ExamFileText.Text != string.Empty && selectedExamId != string.Empty)
                 {
                     List<string> selectedExamItemsSelectors = await Task.Run(
                         () => Util.GetExamItems_Selectors(ExamFileText.Text, selectedExamId, ExamItemsCombox.Text))
                         .ConfigureAwait(true);
                     ExamItemsSelectorsCombox.DataSource = selectedExamItemsSelectors;
 
-                    if (ExamReportItems.SelectedIndex != 0)
+                    if(ExamReportItems.SelectedIndex != 0)
                     {
                         ExamReplaceItemName.Text = ExamItemsCombox.SelectedItem.ToString();
                     }
                 }
-            }
-            catch (Exception ex)
+            } catch(Exception ex)
             {
                 MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -5368,7 +5249,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
         {
             try
             {
-                if (VFSOFT_Report_ListView.SelectedItems.Count > 0 &&
+                if(VFSOFT_Report_ListView.SelectedItems.Count > 0 &&
                     (ExamReportChangeItemName.Checked ||
                         ExamReportChangeItemDataFormat.Checked ||
                         ExamReportChangeItemDataRaid.Checked))
@@ -5381,7 +5262,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                     Task.Run(
                         () =>
                         {
-                            if (TempConfirmResult == DialogResult.Yes)
+                            if(TempConfirmResult == DialogResult.Yes)
                             {
                                 (sender as System.Windows.Forms.Button).Enabled = false;
                                 RefreshVFSOFTREPORT.Enabled = false;
@@ -5389,9 +5270,9 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
                                 string selectedReportId = GET_VFSOFT_ID("report");
 
-                                if (ExamFileText.Text != string.Empty && selectedReportId != string.Empty)
+                                if(ExamFileText.Text != string.Empty && selectedReportId != string.Empty)
                                 {
-                                    if (ExamReportItems.SelectedIndex == 0)
+                                    if(ExamReportItems.SelectedIndex == 0)
                                     {
                                         SqlStrings = Util.ChangeExamReportContent(
                                             ExamFileText.Text,
@@ -5403,8 +5284,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                                             ExamReplaceItemName.Text,
                                             ExamReplaceDataFormat.SelectedItem.ToString(),
                                             ExamReplaceRaids.Text);
-                                    }
-                                    else
+                                    } else
                                     {
                                         SqlStrings = Util.ChangeExamReportContent(
                                             ExamFileText.Text,
@@ -5422,11 +5302,11 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                 );
                                     }
 
-                                    if (ExamReportChangeItemName.Checked ||
+                                    if(ExamReportChangeItemName.Checked ||
                                         ExamReportChangeItemDataFormat.Checked ||
                                         ExamReportChangeItemDataRaid.Checked)
                                     {
-                                        foreach (string UpdateString in SqlStrings)
+                                        foreach(string UpdateString in SqlStrings)
                                         {
                                             Debug.WriteLine(UpdateString);
                                             var (_, Connection) = Util.ExecuteAccessSql(ExamFileText.Text, UpdateString);
@@ -5455,8 +5335,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                             }
                         });
                 }
-            }
-            catch (Exception ex)
+            } catch(Exception ex)
             {
                 (sender as System.Windows.Forms.Button).Enabled = true;
                 RefreshVFSOFTREPORT.Enabled = true;
@@ -5468,7 +5347,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
         {
             string SignDocumentFileName = Util.ShowSelectDialog(false, false, "WORD文档", "*.doc;*.docx").FirstOrDefault();
 
-            if (string.Compare(SignDocumentFileName, default, StringComparison.Ordinal) != 0 &&
+            if(string.Compare(SignDocumentFileName, default, StringComparison.Ordinal) != 0 &&
                 SignDocumentFileName != string.Empty)
             {
                 SignPersionDocument.Text = SignDocumentFileName;
@@ -5480,7 +5359,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
             string SignDocumentFileSavePath = Util.ShowSelectDialog(false, true, string.Empty, string.Empty)
                 .FirstOrDefault();
 
-            if (string.Compare(SignDocumentFileSavePath, default, StringComparison.Ordinal) != 0 &&
+            if(string.Compare(SignDocumentFileSavePath, default, StringComparison.Ordinal) != 0 &&
                 SignDocumentFileSavePath != string.Empty)
             {
                 SignDocumentFileSaveBox.Text = SignDocumentFileSavePath;
@@ -5494,7 +5373,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                 {
                     try
                     {
-                        if (SignPersionDocument.Text != string.Empty &&
+                        if(SignPersionDocument.Text != string.Empty &&
                             SignDocumentFileSaveBox.Text != string.Empty &&
                             SingPersonImageAlt.Text != string.Empty)
                         {
@@ -5508,24 +5387,24 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                             string FileIndexName = string.Empty;
                             string FileEndName = SignDocumentFileEndName.Text;
 
-                            if (SignDocumentUseEmbedImage.Checked)
+                            if(SignDocumentUseEmbedImage.Checked)
                             {
                                 //使用内置的图片文件，最多只有999张
 
                                 List<Stream> TempPersonStrem = Util.GetPersonCodeZipFileStream();
 
-                                foreach (Stream PersonCode in TempPersonStrem)
+                                foreach(Stream PersonCode in TempPersonStrem)
                                 {
                                     FileIndex++;
-                                    if (SignDocumentUseOnlyPageNumber.Checked)
+                                    if(SignDocumentUseOnlyPageNumber.Checked)
                                     {
                                         FileIndexName = $"（第{FileIndex}页）";
                                     }
-                                    if (SignDocumentUsePersonNumber.Checked)
+                                    if(SignDocumentUsePersonNumber.Checked)
                                     {
                                         FileIndexName = $"（第{FileIndex}人）";
                                     }
-                                    if (SignDocumentUseOnlyNumber.Checked)
+                                    if(SignDocumentUseOnlyNumber.Checked)
                                     {
                                         FileIndexName = $"（{FileIndex.ToString("D3")}{FileEndName}）";
                                     }
@@ -5539,7 +5418,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                                         NewDocumentFileName);
                                     PersonCode.Close();
                                     SignDocumentProgress.PerformStep();
-                                    if (FileIndex >= SignDocumentNeedCount.Value)
+                                    if(FileIndex >= SignDocumentNeedCount.Value)
                                     {
                                         break;
                                     }
@@ -5555,36 +5434,36 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                                                 "提示",
                                                 MessageBoxButtons.YesNo,
                                                 MessageBoxIcon.Asterisk);
-                                            if (OpenResult == DialogResult.Yes)
+                                            if(OpenResult == DialogResult.Yes)
                                             {
                                                 Process.Start(SignDocumentFileSaveBox.Text);
                                             }
                                         }));
                             }
 
-                            if (SignDocumentUseOutPersonPath.Checked &&
+                            if(SignDocumentUseOutPersonPath.Checked &&
                                 SignDocumentUseOutPersonPathTextBox.Text != string.Empty)
                             {
                                 //使用外部的图片文件
                                 string[] PersonFiles = Directory.GetFiles(SignDocumentUseOutPersonPathTextBox.Text, "*");
 
-                                foreach (string PersonFile in PersonFiles)
+                                foreach(string PersonFile in PersonFiles)
                                 {
-                                    if (PersonFile.Contains(".jpeg") ||
+                                    if(PersonFile.Contains(".jpeg") ||
                                         PersonFile.Contains(".jpg") ||
                                         PersonFile.Contains(".png") ||
                                         PersonFile.Contains(".bmp"))
                                     {
                                         FileIndex++;
-                                        if (SignDocumentUseOnlyPageNumber.Checked)
+                                        if(SignDocumentUseOnlyPageNumber.Checked)
                                         {
                                             FileIndexName = $"（第{FileIndex}页）";
                                         }
-                                        if (SignDocumentUsePersonNumber.Checked)
+                                        if(SignDocumentUsePersonNumber.Checked)
                                         {
                                             FileIndexName = $"（第{FileIndex}人）";
                                         }
-                                        if (SignDocumentUseOnlyNumber.Checked)
+                                        if(SignDocumentUseOnlyNumber.Checked)
                                         {
                                             FileIndexName = $"（{FileIndex.ToString("D3")}{FileEndName}）";
                                         }
@@ -5597,12 +5476,11 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                                             PersonFile,
                                             NewDocumentFileName);
                                         SignDocumentProgress.PerformStep();
-                                        if (FileIndex >= SignDocumentNeedCount.Value)
+                                        if(FileIndex >= SignDocumentNeedCount.Value)
                                         {
                                             break;
                                         }
-                                    }
-                                    else
+                                    } else
                                     {
                                         break;
                                     }
@@ -5618,28 +5496,28 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                                                 "提示",
                                                 MessageBoxButtons.YesNo,
                                                 MessageBoxIcon.Asterisk);
-                                            if (OpenResult == DialogResult.Yes)
+                                            if(OpenResult == DialogResult.Yes)
                                             {
                                                 Process.Start(SignDocumentFileSaveBox.Text);
                                             }
                                         }));
                             }
 
-                            if (SignDocumentOnlyUseOnlyImage.Checked &&
+                            if(SignDocumentOnlyUseOnlyImage.Checked &&
                                 SignDocumentOnlyUseOnlyImageTextBox.Text != string.Empty)
                             {
                                 //只使用一张图片
-                                for (int TempIndex = 0; TempIndex < SignDocumentNeedCount.Value; TempIndex++)
+                                for(int TempIndex = 0; TempIndex < SignDocumentNeedCount.Value; TempIndex++)
                                 {
-                                    if (SignDocumentUseOnlyPageNumber.Checked)
+                                    if(SignDocumentUseOnlyPageNumber.Checked)
                                     {
                                         FileIndexName = $"（第{FileIndex}页）";
                                     }
-                                    if (SignDocumentUsePersonNumber.Checked)
+                                    if(SignDocumentUsePersonNumber.Checked)
                                     {
                                         FileIndexName = $"（第{FileIndex}人）";
                                     }
-                                    if (SignDocumentUseOnlyNumber.Checked)
+                                    if(SignDocumentUseOnlyNumber.Checked)
                                     {
                                         FileIndexName = $"（{FileIndex.ToString("D3")}{FileEndName}）";
                                     }
@@ -5664,7 +5542,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                                                 "提示",
                                                 MessageBoxButtons.YesNo,
                                                 MessageBoxIcon.Asterisk);
-                                            if (OpenResult == DialogResult.Yes)
+                                            if(OpenResult == DialogResult.Yes)
                                             {
                                                 Process.Start(SignDocumentFileSaveBox.Text);
                                             }
@@ -5672,8 +5550,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                             }
                  (sender as System.Windows.Forms.Button).Enabled = true;
                         }
-                    }
-                    catch (Exception ex)
+                    } catch(Exception ex)
                     {
                         this.BeginInvoke(
                             new Action(
@@ -5690,7 +5567,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
         {
             string PerSonPath = Util.ShowSelectDialog(false, true, string.Empty, string.Empty).FirstOrDefault();
 
-            if (string.Compare(PerSonPath, default, StringComparison.Ordinal) != 0 && PerSonPath != string.Empty)
+            if(string.Compare(PerSonPath, default, StringComparison.Ordinal) != 0 && PerSonPath != string.Empty)
             {
                 SignDocumentUseOutPersonPathTextBox.Text = PerSonPath;
             }
@@ -5707,7 +5584,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
             string PerSonImage = Util.ShowSelectDialog(false, false, "图片文件", "*.jpg;*.jpeg;*.bmp;*.png")
                 .FirstOrDefault();
 
-            if (string.Compare(PerSonImage, default, StringComparison.Ordinal) != 0 && PerSonImage != string.Empty)
+            if(string.Compare(PerSonImage, default, StringComparison.Ordinal) != 0 && PerSonImage != string.Empty)
             {
                 SignDocumentOnlyUseOnlyImageTextBox.Text = PerSonImage;
             }
@@ -5722,7 +5599,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
         private void TwainScanNumberSet_TextChanged(object sender, EventArgs e)
         {
             //当设置扫描份数的时候，禁止选择跳过空白页和双面扫描
-            if (TwainScanNumberSet.Text != string.Empty)
+            if(TwainScanNumberSet.Text != string.Empty)
             {
                 DoubleScanBox.Checked = false;
                 SkipBlankPage.Checked = false;
@@ -5741,21 +5618,20 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                 ExamReportChangeItemName.Enabled = ExamReportItems.SelectedIndex != 0;
 
 
-                if (ExamReportItems.SelectedIndex == 0)
+                if(ExamReportItems.SelectedIndex == 0)
                 {
                     ExamReplaceItemName.Text = string.Empty;
                     ExamReportChangeItemName.Checked = false;
-                }
-                else
+                } else
                 {
-                    if (ExamReportItems.SelectedIndex <= ExamItemsCombox.Items.Count)
+                    if(ExamReportItems.SelectedIndex <= ExamItemsCombox.Items.Count)
                     {
                         ExamItemsCombox.SelectedIndex = ExamReportItems.SelectedIndex - 1;
                     }
                 }
 
                 string selectedReportId = GET_VFSOFT_ID("report");
-                if (ExamFileText.Text != string.Empty && selectedReportId != string.Empty)
+                if(ExamFileText.Text != string.Empty && selectedReportId != string.Empty)
                 {
                     List<string> selectedReportKind = await Task.Run(
                         () => Util.GetReportItemInfoByExamName(
@@ -5776,8 +5652,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                     ExamReportDataFormat.DataSource = selectedReportKind;
                     ExamReportRaids.DataSource = selectedReportRaid;
                 }
-            }
-            catch (Exception ex)
+            } catch(Exception ex)
             {
                 MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -5806,11 +5681,11 @@ IPGATEWAY:'{set_interface_gateway.Text}',
         {
             List<string> RaidsList = ExamRaidInfoCombox.DataSource as List<string>;
 
-            if (RaidsList != null && RaidsList.Count > 0)
+            if(RaidsList != null && RaidsList.Count > 0)
             {
                 StringBuilder TempRaidString = new StringBuilder();
 
-                foreach (string Raid in RaidsList)
+                foreach(string Raid in RaidsList)
                 {
                     TempRaidString.Append(Raid);
                     TempRaidString.Append("，");
@@ -5827,7 +5702,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
         {
             string UnitExamFileName = Util.ShowSelectDialog(false, false, "exam文件", ".exam").FirstOrDefault();
 
-            if (string.Compare(UnitExamFileName, default, StringComparison.Ordinal) != 0 &&
+            if(string.Compare(UnitExamFileName, default, StringComparison.Ordinal) != 0 &&
                 UnitExamFileName != string.Empty)
             {
                 ChooseExamFileTextBox.Text = UnitExamFileName;
@@ -5839,7 +5714,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
         {
             try
             {
-                if (ChooseExamFileTextBox.Text != string.Empty)
+                if(ChooseExamFileTextBox.Text != string.Empty)
                 {
                     List<string> UnitComputerNames = await Task.Run(
                         () => Util.GetUnitExamComputerName(ChooseExamFileTextBox.Text))
@@ -5847,8 +5722,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
                     ExamComputerNames.DataSource = UnitComputerNames;
                 }
-            }
-            catch (Exception ex)
+            } catch(Exception ex)
             {
                 MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -5859,7 +5733,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
         private void ExamComputerNameChange_Click(object sender, EventArgs e)
         {
-            if (ChooseExamFileTextBox.Text != string.Empty &&
+            if(ChooseExamFileTextBox.Text != string.Empty &&
                 ExamComputerChangeName.Text != string.Empty &&
                 ExamComputerNames.SelectedItem != null)
             {
@@ -5868,7 +5742,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                     "提示",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Exclamation);
-                if (TempConfirmResult == DialogResult.Yes)
+                if(TempConfirmResult == DialogResult.Yes)
                 {
                     Task.Run(
                         () =>
@@ -5894,8 +5768,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                                             MessageBox.Show("修改完毕", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                                             LoadUnitCompNameAsync();
                                         }));
-                            }
-                            catch (Exception ex)
+                            } catch(Exception ex)
                             {
                                 this.BeginInvoke(
                                     new Action(
@@ -5922,7 +5795,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
         private void ExamItemsCombox_MouseHover(object sender, EventArgs e)
         {
-            if (ExamItemsCombox.Items.Count > 0)
+            if(ExamItemsCombox.Items.Count > 0)
             {
                 MainToolsTip.SetToolTip(ExamItemsCombox, $"[共有{ExamItemsCombox.Items.Count}个项目]");
             }
@@ -5930,7 +5803,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
         private void ExamItemsSelectorsCombox_MouseHover(object sender, EventArgs e)
         {
-            if (ExamItemsSelectorsCombox.Items.Count > 0)
+            if(ExamItemsSelectorsCombox.Items.Count > 0)
             {
                 MainToolsTip.SetToolTip(ExamItemsSelectorsCombox, $"[共有{ExamItemsSelectorsCombox.Items.Count}个选项]");
             }
@@ -5938,7 +5811,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
         private void ExamRaidInfoCombox_MouseHover(object sender, EventArgs e)
         {
-            if (ExamRaidInfoCombox.Items.Count > 0)
+            if(ExamRaidInfoCombox.Items.Count > 0)
             {
                 MainToolsTip.SetToolTip(ExamRaidInfoCombox, $"[共有{ExamRaidInfoCombox.Items.Count}个主体]");
             }
@@ -5946,7 +5819,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
         private void ExamReportItems_MouseHover(object sender, EventArgs e)
         {
-            if (ExamReportItems.Items.Count > 0)
+            if(ExamReportItems.Items.Count > 0)
             {
                 MainToolsTip.SetToolTip(ExamReportItems, $"[共有{ExamReportItems.Items.Count - 1}个项目]");
             }
@@ -5954,7 +5827,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
         private void ExamRaidInfoCombox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (string.Compare(
+            if(string.Compare(
                     ExamRaidInfoCombox.SelectedValue.ToString(),
                     "System.Data.DataRowView",
                     StringComparison.Ordinal) !=
@@ -5971,7 +5844,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                 {
                     List<string> TempIndexLists = new List<string>();
 
-                    for (int NumberIndex = (int)NumberIndexStart.Value; NumberIndex <= (int)NumberIndexEnd.Value; NumberIndex++)
+                    for(int NumberIndex = (int)NumberIndexStart.Value; NumberIndex <= (int)NumberIndexEnd.Value; NumberIndex++)
                     {
                         TempIndexLists.Add(NumberIndex.ToString());
                     }
@@ -5982,7 +5855,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
         private void CopyNumberIndexResult_Click(object sender, EventArgs e)
         {
-            if (NumberIndexResultBox.Text != string.Empty)
+            if(NumberIndexResultBox.Text != string.Empty)
             {
                 Clipboard.SetText(NumberIndexResultBox.Text.Replace("\n", Environment.NewLine));
 
@@ -6003,7 +5876,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
         {
             string SaveFileName = Util.ShowSaveFileDialog("CMD文件|*.cmd");
 
-            if (SaveFileName != string.Empty)
+            if(SaveFileName != string.Empty)
             {
                 string KMSAIOCMD = Util.GetEmbedResourceObj("KMSAIO") as string;
                 File.WriteAllText(SaveFileName, KMSAIOCMD, Encoding.Default);
@@ -6015,7 +5888,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
         {
             string SaveFileName = Util.ShowSaveFileDialog("EXE文件|*.exe");
 
-            if (SaveFileName != string.Empty)
+            if(SaveFileName != string.Empty)
             {
                 byte[] RenamerProApplicationBytes = Util.GetEmbedResourceObj("ReNamerPro73") as byte[];
                 File.WriteAllBytes(SaveFileName, RenamerProApplicationBytes);
@@ -6027,7 +5900,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
         {
             string SaveFileName = Util.ShowSaveFileDialog("RNP文件|*.rnp");
 
-            if (SaveFileName != string.Empty)
+            if(SaveFileName != string.Empty)
             {
                 byte[] RenamerProRnpBytes = Util.GetEmbedResourceObj("移除副本规则_部分自定义规则") as byte[];
                 File.WriteAllBytes(SaveFileName, RenamerProRnpBytes);
@@ -6043,7 +5916,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
         private void 折叠全部节点ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            foreach (System.Windows.Forms.TreeNode TempNode in DecodeDataMatrixView.Nodes)
+            foreach(System.Windows.Forms.TreeNode TempNode in DecodeDataMatrixView.Nodes)
             {
                 TempNode.Collapse();
             }
@@ -6053,9 +5926,9 @@ IPGATEWAY:'{set_interface_gateway.Text}',
         {
             dataSource ??= twainSession.DefaultSource;
 
-            if (dataSource.Open() == ReturnCode.Success)
+            if(dataSource.Open() == ReturnCode.Success)
             {
-                if (dataSource.Capabilities.CapPowerSaveTime.CanSet)
+                if(dataSource.Capabilities.CapPowerSaveTime.CanSet)
                 {
                     dataSource.Capabilities.CapPowerSaveTime.SetValue((int)TwainSleepTimeSet.SelectedItem);
                 }
@@ -6071,7 +5944,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
         private void AutoUpdater_CheckVersion_ClickEvent(UpdateInfoEventArgs s1)
         {
-            if (s1.Error == null && s1.IsUpdateAvailable)
+            if(s1.Error == null && s1.IsUpdateAvailable)
             {
                 VersionInfo.VersionUpdateLogUrl = s1.ChangelogURL;
                 DialogResult UpdateResult = MessageBox.Show(
@@ -6080,12 +5953,11 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                     MessageBoxButtons.OKCancel,
                     MessageBoxIcon.Asterisk);
 
-                if (UpdateResult == DialogResult.OK)
+                if(UpdateResult == DialogResult.OK)
                 {
                     Process.Start(s1.DownloadURL);
                 }
-            }
-            else
+            } else
             {
                 MessageBox.Show(
                     $"当前版本为{s1.InstalledVersion}，没有检测到新版本",
@@ -6097,7 +5969,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
         private void VersionUpdateLog_Click(object sender, EventArgs e)
         {
-            if (VersionInfo.VersionUpdateLogUrl != string.Empty)
+            if(VersionInfo.VersionUpdateLogUrl != string.Empty)
             {
                 Process.Start(VersionInfo.VersionUpdateLogUrl);
             }
@@ -6105,7 +5977,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
         private void UseLocalOffice_CheckedChanged(object sender, EventArgs e)
         {
-            if (Util.IsAdministrator())
+            if(Util.IsAdministrator())
             {
                 this.PDFComplianceBox.Enabled = !UseLocalOffice.Checked;
                 this.Word2PDFOptimizCombox.Enabled = !UseLocalOffice.Checked;
@@ -6113,10 +5985,9 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                 this.EmbedFonts.Enabled = !UseLocalOffice.Checked;
                 this.word2pdf_need_update_fields.Enabled = !UseLocalOffice.Checked;
                 UseLocalOffice.Enabled = true;
-            }
-            else
+            } else
             {
-                if (UseLocalOffice.Checked)
+                if(UseLocalOffice.Checked)
                 {
                     MessageBox.Show("本功能需要管理员身份运行程序，请使用管理员身份运行后重试", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
@@ -6127,7 +5998,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
         private void ExamReportRowMode_ExamList_MouseHover(object sender, EventArgs e)
         {
-            if (ExamReportRowMode_ExamList.SelectedItem != null)
+            if(ExamReportRowMode_ExamList.SelectedItem != null)
             {
                 MainToolsTip.SetToolTip(ExamReportRowMode_ExamList, ExamReportRowMode_ExamList.SelectedItem.ToString());
             }
@@ -6135,7 +6006,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
         private void ExamReportRowMode_ExamSelectorBox_MouseHover(object sender, EventArgs e)
         {
-            if (ExamReportRowMode_ExamSelectorBox.Text != string.Empty)
+            if(ExamReportRowMode_ExamSelectorBox.Text != string.Empty)
             {
                 MainToolsTip.SetToolTip(ExamReportRowMode_ExamSelectorBox, ExamReportRowMode_ExamSelectorBox.Text);
             }
@@ -6143,7 +6014,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
         private void ExamReportParaRaidInfo_Combox_MouseHover(object sender, EventArgs e)
         {
-            if (ExamReportParaRaidInfo_Combox.SelectedItem != null)
+            if(ExamReportParaRaidInfo_Combox.SelectedItem != null)
             {
                 MainToolsTip.SetToolTip(
                     ExamReportParaRaidInfo_Combox,
@@ -6155,7 +6026,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
         {
             try
             {
-                if (VFSOFT_Report_ListView.SelectedItems.Count > 0)
+                if(VFSOFT_Report_ListView.SelectedItems.Count > 0)
                 {
                     DialogResult TempConfirmResult = MessageBox.Show(
                         "确定执行修改吗？执行后数据无法恢复",
@@ -6165,13 +6036,13 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                     Task.Run(
                         () =>
                         {
-                            if (TempConfirmResult == DialogResult.Yes)
+                            if(TempConfirmResult == DialogResult.Yes)
                             {
                                 (sender as System.Windows.Forms.Button).Enabled = false;
 
                                 string ExamReportId = GET_VFSOFT_ID("report");
 
-                                if (ExamFileText.Text != string.Empty && ExamReportId != string.Empty)
+                                if(ExamFileText.Text != string.Empty && ExamReportId != string.Empty)
                                 {
                                     Util.ChangeExamReportParaContent(
                                         ExamFileText.Text,
@@ -6210,8 +6081,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                             }
                         });
                 }
-            }
-            catch (Exception ex)
+            } catch(Exception ex)
             {
                 (sender as System.Windows.Forms.Button).Enabled = true;
                 MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -6220,12 +6090,12 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
         private void GetAllItemSplit_Click(object sender, EventArgs e)
         {
-            if (ExamReportRowMode_ExamList.Items.Count > 0)
+            if(ExamReportRowMode_ExamList.Items.Count > 0)
             {
                 string ItemSplitsString = string.Join(
                     "|",
                     ExamReportRowMode_ExamList.Items.Cast<object>().Select(item => item.ToString()).ToList());
-                if (ItemSplitsString != string.Empty)
+                if(ItemSplitsString != string.Empty)
                 {
                     Clipboard.SetText(ItemSplitsString);
 
@@ -6236,7 +6106,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
         private void ExamReportColMode_ExamBox_MouseHover(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(ExamReportColMode_ExamBox.Text))
+            if(!string.IsNullOrEmpty(ExamReportColMode_ExamBox.Text))
             {
                 MainToolsTip.SetToolTip(ExamReportColMode_ExamBox, ExamReportColMode_ExamBox.Text);
             }
@@ -6244,23 +6114,23 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
         private void linkLabel7_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (string.IsNullOrEmpty(ChangeReportItemTempHelpPdfFile) || !File.Exists(ChangeReportItemTempHelpPdfFile))
+            if(string.IsNullOrEmpty(ChangeReportItemTempHelpPdfFile) || !File.Exists(ChangeReportItemTempHelpPdfFile))
             {
                 ChangeReportItemTempHelpPdfFile = Path.GetTempFileName().Replace(".tmp", ".pdf");
                 byte[] resourceBytes = (byte[])Util.GetEmbedResourceObj("ChangeReporItem");
-                using (MemoryStream TempChangeReportItemHelpStream = new MemoryStream(resourceBytes))
-                using (FileStream TempPdfFileStream = File.Create(ChangeReportItemTempHelpPdfFile))
-                {
-                    TempChangeReportItemHelpStream.CopyTo(TempPdfFileStream);
-                    TempPdfFileStream.Flush(); // 确保文件写入完成
-                }
+                using(MemoryStream TempChangeReportItemHelpStream = new MemoryStream(resourceBytes))
+                    using(FileStream TempPdfFileStream = File.Create(ChangeReportItemTempHelpPdfFile))
+                    {
+                        TempChangeReportItemHelpStream.CopyTo(TempPdfFileStream);
+                        TempPdfFileStream.Flush(); // 确保文件写入完成
+                    }
             }
             Process.Start(ChangeReportItemTempHelpPdfFile);
         }
 
         private void ExamReportRowMode_Row_Combox_MouseHover(object sender, EventArgs e)
         {
-            if (ExamReportRowMode_Row_Combox.SelectedItem != null)
+            if(ExamReportRowMode_Row_Combox.SelectedItem != null)
             {
                 MainToolsTip.SetToolTip(
                     ExamReportRowMode_Row_Combox,
@@ -6270,7 +6140,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
         private void ExamReportRowMode_Col_Start_Combox_MouseHover(object sender, EventArgs e)
         {
-            if (ExamReportRowMode_Col_Start_Combox.SelectedItem != null)
+            if(ExamReportRowMode_Col_Start_Combox.SelectedItem != null)
             {
                 MainToolsTip.SetToolTip(
                     ExamReportRowMode_Col_Start_Combox,
@@ -6280,7 +6150,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
         private void ExamReportRowMode_Col_End_Combox_MouseHover(object sender, EventArgs e)
         {
-            if (ExamReportRowMode_Col_End_Combox.SelectedItem != null)
+            if(ExamReportRowMode_Col_End_Combox.SelectedItem != null)
             {
                 MainToolsTip.SetToolTip(
                     ExamReportRowMode_Col_End_Combox,
@@ -6290,7 +6160,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
         private void ExamReportColMode_Col_Combox_MouseHover(object sender, EventArgs e)
         {
-            if (ExamReportColMode_Col_Combox.SelectedItem != null)
+            if(ExamReportColMode_Col_Combox.SelectedItem != null)
             {
                 MainToolsTip.SetToolTip(
                     ExamReportColMode_Col_Combox,
@@ -6300,7 +6170,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
         private void ExamReportColMode_Row_Start_Combox_MouseHover(object sender, EventArgs e)
         {
-            if (ExamReportColMode_Row_Start_Combox.SelectedItem != null)
+            if(ExamReportColMode_Row_Start_Combox.SelectedItem != null)
             {
                 MainToolsTip.SetToolTip(
                     ExamReportColMode_Row_Start_Combox,
@@ -6310,7 +6180,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
         private void ExamReportColMode_Row_End_Combox_MouseHover(object sender, EventArgs e)
         {
-            if (ExamReportColMode_Row_End_Combox.SelectedItem != null)
+            if(ExamReportColMode_Row_End_Combox.SelectedItem != null)
             {
                 MainToolsTip.SetToolTip(
                     ExamReportColMode_Row_End_Combox,
@@ -6332,11 +6202,6 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                     ManW.Enabled = true;
                     ManW.Text = "点击复活牢大";
                 });
-        }
-
-        private void city_level_1_combox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }
