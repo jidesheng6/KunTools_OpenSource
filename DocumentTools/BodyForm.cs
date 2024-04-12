@@ -6203,5 +6203,12 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                     ManW.Text = "点击复活牢大";
                 });
         }
+
+        private void 查看公告信息ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PublicNoticeDialog publicNoticeDialog = new PublicNoticeDialog();
+
+            publicNoticeDialog.ShowDialog();
+        }
     }
 }

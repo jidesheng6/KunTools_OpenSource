@@ -1898,9 +1898,9 @@ namespace DocumentTools
 
         public static void ConvertWeBp2Image(string ImageFileName, string SavedFileName)
         {
-            Aspose.Imaging.Image TempWebpImage = Aspose.Imaging.Image.Load(ImageFileName);
+           using Aspose.Imaging.Image TempWebpImage = Aspose.Imaging.Image.Load(ImageFileName);
 
-            Aspose.Imaging.ImageOptionsBase TempImageOption = null;
+           Aspose.Imaging.ImageOptionsBase TempImageOption = null;
 
             string SavedFileExt = Path.GetExtension(SavedFileName);
 
@@ -2466,6 +2466,25 @@ namespace DocumentTools
                 DownloadProgressBar.Value = 0;
                 DownloadStatusLabel.Text = "下载进度：0%";
             };
+        }
+
+
+        public static string DownloadString(string Url)
+        {
+            try
+            {
+                using WebClient TempClient = new WebClient();
+
+                TempClient.Encoding = Encoding.UTF8;
+
+                return TempClient.DownloadString(new Uri(Url));
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex);
+                return string.Empty;
+            }
+
         }
 
         /// <summary>
@@ -3934,6 +3953,7 @@ namespace DocumentTools
                 });
             Aspose.Pdf.Facades.PdfFileEditor TempPdfEditor = new Aspose.Pdf.Facades.PdfFileEditor();
             TempPdfEditor.Concatenate(TempFileList.ToArray(), mergrePdfFileName);
+            TempPdfEditor.MakeNUp(mergrePdfFileName, "test.pdf",3,2);
         }
 
 

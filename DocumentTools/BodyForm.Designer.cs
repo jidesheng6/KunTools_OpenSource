@@ -1090,6 +1090,7 @@ namespace DocumentTools
             this.程序更新ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CheckVersionButton = new System.Windows.Forms.ToolStripMenuItem();
             this.VersionUpdateLog = new System.Windows.Forms.ToolStripMenuItem();
+            this.查看公告信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainToolsTip = new System.Windows.Forms.ToolTip(this.components);
             this.TabPageIcoList = new System.Windows.Forms.ImageList(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -8886,10 +8887,10 @@ namespace DocumentTools
             this.TabPage_09.Controls.Add(this.groupBox7);
             this.TabPage_09.Controls.Add(this.groupBox6);
             this.TabPage_09.Controls.Add(this.groupBox5);
-            this.TabPage_09.Location = new System.Drawing.Point(4, 76);
+            this.TabPage_09.Location = new System.Drawing.Point(4, 58);
             this.TabPage_09.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.TabPage_09.Name = "TabPage_09";
-            this.TabPage_09.Size = new System.Drawing.Size(882, 659);
+            this.TabPage_09.Size = new System.Drawing.Size(882, 677);
             this.TabPage_09.TabIndex = 8;
             this.TabPage_09.Text = "Twain扫描仪调试";
             this.TabPage_09.UseVisualStyleBackColor = true;
@@ -14242,11 +14243,12 @@ namespace DocumentTools
             // 
             this.程序更新ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CheckVersionButton,
-            this.VersionUpdateLog});
+            this.VersionUpdateLog,
+            this.查看公告信息ToolStripMenuItem});
             this.程序更新ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.版本更新__1_;
             this.程序更新ToolStripMenuItem.Name = "程序更新ToolStripMenuItem";
-            this.程序更新ToolStripMenuItem.Size = new System.Drawing.Size(92, 24);
-            this.程序更新ToolStripMenuItem.Text = "版本更新";
+            this.程序更新ToolStripMenuItem.Size = new System.Drawing.Size(256, 24);
+            this.程序更新ToolStripMenuItem.Text = "版本更新和公告信息[请常关注公告信息]";
             // 
             // CheckVersionButton
             // 
@@ -14263,6 +14265,14 @@ namespace DocumentTools
             this.VersionUpdateLog.Size = new System.Drawing.Size(156, 30);
             this.VersionUpdateLog.Text = "查看更新日志";
             this.VersionUpdateLog.Click += new System.EventHandler(this.VersionUpdateLog_Click);
+            // 
+            // 查看公告信息ToolStripMenuItem
+            // 
+            this.查看公告信息ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.公告;
+            this.查看公告信息ToolStripMenuItem.Name = "查看公告信息ToolStripMenuItem";
+            this.查看公告信息ToolStripMenuItem.Size = new System.Drawing.Size(156, 30);
+            this.查看公告信息ToolStripMenuItem.Text = "查看公告信息";
+            this.查看公告信息ToolStripMenuItem.Click += new System.EventHandler(this.查看公告信息ToolStripMenuItem_Click);
             // 
             // MainToolsTip
             // 
@@ -15662,6 +15672,7 @@ namespace DocumentTools
         private LinkLabel linkLabel8;
         private PictureBox Man_WhatCanISay;
         private Button ManW;
+        private ToolStripMenuItem 查看公告信息ToolStripMenuItem;
     }
 }
 
