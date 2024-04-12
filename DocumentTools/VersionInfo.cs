@@ -23,5 +23,9 @@
         /// </summary>
         public static string VersionUpdateLogUrl = "https://gitee.com/jidesheng666/document-tools-version/tree/master/ReleaseLog";
 
+        /// <summary>
+        /// 程序的公告信息
+        /// </summary>
+        public static string VersionNoticeMessageUrl = "https://jipkqhufibk.feishu.cn/wiki/AoxswyndqiO169kvpZ8cPxbtncb";
     }
 }

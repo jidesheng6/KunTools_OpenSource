@@ -151,8 +151,8 @@
   <data name="身份证" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\身份证.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="A" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\A.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="注册" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\注册.reg;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
   </data>
   <data name="excel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\excel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -193,17 +193,17 @@
   <data name="ppt" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ppt.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="关于" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\关于.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="微信图片_20240401192428" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\微信图片_20240401192428.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="A" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\A.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="二维码 (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\二维码 (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="版本更新 (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\版本更新 (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="注册" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\注册.reg;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-16</value>
   </data>
   <data name="6f258af2c19c9c3cdb97517573506c11ce48ff98" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\6f258af2c19c9c3cdb97517573506c11ce48ff98.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -244,6 +244,9 @@
   <data name="图片" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\图片.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="更新日志" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\更新日志.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="压缩" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\压缩.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -259,8 +262,14 @@
   <data name="系统" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\系统.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ChangeReporItem" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ChangeReporItem.pdf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="高度" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\高度.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="关于" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\关于.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="VoteReportDoc" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\VoteReportDoc.doc;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -279,6 +288,9 @@
   </data>
   <data name="Remove" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Remove.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Man" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Man.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="amagi" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\amagi.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -322,16 +334,7 @@
   <data name="去水印" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\去水印.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="更新日志" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\更新日志.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ChangeReporItem" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ChangeReporItem.pdf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="Man" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Man.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="微信图片_20240401192428" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\微信图片_20240401192428.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="公告" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\公告.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
