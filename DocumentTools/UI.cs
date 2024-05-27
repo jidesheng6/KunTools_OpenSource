@@ -532,7 +532,7 @@ namespace DocumentTools
                             case ConvertFileType.CompressImage:
                                 bool UseSelfExt = BodyForm.MainForm.CompressImage_NotUseSelfExt.Checked;//是否不使用源文件后缀名
                                 string SavedFileName = string.Empty;
-                                if(UseSelfExt)
+                                if(UseSelfExt || BodyForm.MainForm.CompressIamge_NoCompress.Checked)
                                 {
                                     SavedFileName = ConvertedFileName;
                                 } else

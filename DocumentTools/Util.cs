@@ -1195,6 +1195,9 @@ namespace DocumentTools
 
             Aspose.Imaging.ImageOptions.BmpOptions TempBmpOption = new Aspose.Imaging.ImageOptions.BmpOptions();
 
+            Aspose.Imaging.ImageOptions.TiffOptions TempTifOption = new Aspose.Imaging.ImageOptions.TiffOptions(Aspose.Imaging.FileFormats.Tiff.Enums.TiffExpectedFormat.Default);
+
+
             if(!NeedCompress)
             {
                 switch (ImageExtensionString)
@@ -1256,6 +1259,12 @@ namespace DocumentTools
                     break;
                 case ".svg":
                     TempLoadImage.Save(SavedFileName);
+                    break;
+                case ".tif":
+                    //将图片转为8位灰度tif图片，选举图片可用
+                    TempTifOption.BitsPerSample = new ushort[] { 8 };
+                    TempTifOption.Photometric = Aspose.Imaging.FileFormats.Tiff.Enums.TiffPhotometrics.MinIsBlack;
+                    TempLoadImage.Save(SavedFileName,TempTifOption);
                     break;
                 default:
                     break;

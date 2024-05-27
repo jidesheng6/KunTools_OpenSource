@@ -822,6 +822,7 @@ namespace DocumentTools
             CompressImage_OutPutFormat.Rows.Add("JPEG", ".jpeg");
             CompressImage_OutPutFormat.Rows.Add("PNG", ".png");
             CompressImage_OutPutFormat.Rows.Add("BMP", ".bmp");
+            CompressImage_OutPutFormat.Rows.Add("TIF", ".tif");
 
             this.CompressImage_OutPutImageFormat.DataSource = CompressImage_OutPutFormat;
             this.CompressImage_OutPutImageFormat.DisplayMember = "DisplayValue";
@@ -3287,7 +3288,7 @@ namespace DocumentTools
 
         private void CompressImage_NotUseSelfExt_CheckedChanged(object sender, EventArgs e)
         {
-            this.CompressImage_OutPutImageFormat.Enabled = CompressImage_NotUseSelfExt.Checked;
+            this.CompressImage_OutPutImageFormat.Enabled = this.CompressImage_NotUseSelfExt.Checked || this.CompressImage_NotUseSelfExt.Checked;
         }
 
         private void PlayCXKMusic_Click(object sender, EventArgs e)
@@ -3867,7 +3868,7 @@ namespace DocumentTools
         { this.MainTabPage.SelectedIndex = GetTabPageIndex("压缩PDF"); }
 
         private void 压缩图片ToolStripMenuItem_Click(object sender, EventArgs e)
-        { this.MainTabPage.SelectedIndex = GetTabPageIndex("压缩图片"); }
+        { this.MainTabPage.SelectedIndex = GetTabPageIndex("压缩图片（格式转换）"); }
 
         private void wORDEXCELPDF转图片ToolStripMenuItem_Click(object sender, EventArgs e)
         { this.MainTabPage.SelectedIndex = GetTabPageIndex("WORD/PDF/EXCEL转图片"); }
@@ -6440,7 +6441,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
         private void CompressIamge_NoCompress_CheckedChanged(object sender, EventArgs e)
         {
-            this.CompressImage_OutPutImageFormat.Enabled = CompressIamge_NoCompress.Checked;
+            this.CompressImage_OutPutImageFormat.Enabled = CompressIamge_NoCompress.Checked || CompressImage_NotUseSelfExt.Checked;
         }
 
         private void Excel2Pdf_PrintScalePercent_Enable_CheckedChanged(object sender, EventArgs e)
