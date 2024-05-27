@@ -6,7 +6,7 @@
         /// <summary>
         /// 程序的版本号，格式为：主版本号.次版本号.修订版本号
         /// </summary>
-        public static string VersionNumber = "0.4.2";
+        public static string VersionNumber = "0.4.3";
 
         /// <summary>
         /// 软件名称

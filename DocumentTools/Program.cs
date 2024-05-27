@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Aspose.BarCode.BarCodeRecognition;
+using System;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace DocumentTools
@@ -17,6 +19,16 @@ namespace DocumentTools
         {
             //SetProcessDPIAware();
             Aspose.Hook.HookManager.StartHook();
+
+            int workerThreads;
+            int completionPortThreads;
+            ThreadPool.GetMaxThreads(out workerThreads, out completionPortThreads);
+            ThreadPool.SetMaxThreads(Math.Max(Environment.ProcessorCount * 4, workerThreads), completionPortThreads);
+            ThreadPool.GetMinThreads(out workerThreads, out completionPortThreads);
+            ThreadPool.SetMinThreads(Math.Max(Environment.ProcessorCount * 4, workerThreads), completionPortThreads);
+
+            BarCodeReader.ProcessorSettings.UseAllCores = true;
+            BarCodeReader.ProcessorSettings.MaxAdditionalAllowedThreads = Environment.ProcessorCount * 2;
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
