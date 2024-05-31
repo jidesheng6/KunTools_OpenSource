@@ -1,4 +1,5 @@
-﻿using AutoUpdaterDotNET;
+﻿using Aspose.Pdf.Operators;
+using AutoUpdaterDotNET;
 using Gma.System.MouseKeyHook;
 using Newtonsoft.Json.Linq;
 using NTwain;
@@ -1980,7 +1981,7 @@ namespace DocumentTools
             if(e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 e.Effect = DragDropEffects.Copy;
-            } 
+            }
             //else if(e.Data.GetDataPresent(typeof(System.Windows.Forms.ListViewItem)))
             //{
             //    e.Effect = DragDropEffects.Move;
@@ -1995,11 +1996,11 @@ namespace DocumentTools
         private void ListviewDragDrop(object sender, DragEventArgs e)
         {
             ListView DragedListview = sender as ListView;
-            
+
             if(e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 string[] DropFiles = e.Data.GetData(DataFormats.FileDrop, false) as string[];
-                switch (DragedListview.Name)
+                switch(DragedListview.Name)
                 {
                     case "WordFileListView":
                         UI.AddFilesToListViewWithNotDialog(
@@ -2077,7 +2078,10 @@ namespace DocumentTools
                         UI.AddFilesToListViewWithNotDialog(DropFiles, this.SplitPdfFileList, new string[] { ".pdf" });
                         break;
                     case "PdfWaterMarkFileList":
-                        UI.AddFilesToListViewWithNotDialog(DropFiles, this.PdfWaterMarkFileList, new string[] { ".pdf" });
+                        UI.AddFilesToListViewWithNotDialog(
+                            DropFiles,
+                            this.PdfWaterMarkFileList,
+                            new string[] { ".pdf" });
                         break;
                     case "RemovePdfWaterMarkFileList":
                         UI.AddFilesToListViewWithNotDialog(
@@ -2113,7 +2117,7 @@ namespace DocumentTools
                         UI.AddFilesToListViewWithNotDialog(
                             DropFiles,
                             this.CompressImageFileList,
-                            new string[] { ".jpg", ".jpeg", ".png", ".bmp",".svg" });
+                            new string[] { ".jpg", ".jpeg", ".png", ".bmp", ".svg" });
                         break;
                     case "Word2EPUBFileList":
                         UI.AddFilesToListViewWithNotDialog(
@@ -2173,7 +2177,7 @@ namespace DocumentTools
             //}
         }
 
-        private void ListviewItemDrag(object sender,ItemDragEventArgs e)
+        private void ListviewItemDrag(object sender, ItemDragEventArgs e)
         {
             ListView TempListView = sender as ListView;
             TempListView.DoDragDrop(e.Item, DragDropEffects.Move);
@@ -2182,16 +2186,15 @@ namespace DocumentTools
         private void ListViewDragOver(object sender, DragEventArgs e)
         {
             ListView TempListView = sender as ListView;
-            Point TempPoint = new Point(e.X,e.Y);
+            Point TempPoint = new Point(e.X, e.Y);
             Point TempListViewPoint = TempListView.PointToClient(TempPoint);
 
             ListViewItem TempItem = TempListView.GetItemAt(TempListViewPoint.X, TempListViewPoint.Y);
 
-            if(TempItem!=null)
+            if(TempItem != null)
             {
                 TempItem.Selected = true;
             }
-
         }
 
         private void DownloadFrameWorkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -3288,7 +3291,8 @@ namespace DocumentTools
 
         private void CompressImage_NotUseSelfExt_CheckedChanged(object sender, EventArgs e)
         {
-            this.CompressImage_OutPutImageFormat.Enabled = this.CompressImage_NotUseSelfExt.Checked || this.CompressImage_NotUseSelfExt.Checked;
+            this.CompressImage_OutPutImageFormat.Enabled = this.CompressImage_NotUseSelfExt.Checked ||
+                this.CompressImage_NotUseSelfExt.Checked;
         }
 
         private void PlayCXKMusic_Click(object sender, EventArgs e)
@@ -3720,17 +3724,16 @@ namespace DocumentTools
                 new Action(
                     () =>
                     {
-                        try
+                        if(Mss3Path != string.Empty &&
+                            string.Compare(Mss3Path, default, StringComparison.Ordinal) != 0 &&
+                            Mss3Path != null)
                         {
-                            if(Mss3Path != string.Empty &&
-                                string.Compare(Mss3Path, default, StringComparison.Ordinal) != 0 &&
-                                Mss3Path != null)
-                            {
-                                this.Mss3Path.Text = Mss3Path;
-
-                                this.BeginInvoke(
-                                    new Action(
-                                        () =>
+                            this.Mss3Path.Text = Mss3Path;
+                            this.BeginInvoke(
+                                new Action(
+                                    () =>
+                                    {
+                                        try
                                         {
                                             DataTable TempVoteDataTable = Util.GetMss3VoteInfo(Mss3Path);
 
@@ -3738,15 +3741,19 @@ namespace DocumentTools
                                             {
                                                 this.votedataview.DataSource = TempVoteDataTable;
                                             }
-                                        }));
-                            }
-                        } catch(Exception ex)
-                        {
-                            this.BeginInvoke(
-                                new Action(
-                                    () =>
-                                    {
-                                        MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        } catch(Exception ex)
+                                        {
+                                            this.BeginInvoke(
+                                                new Action(
+                                                    () =>
+                                                    {
+                                                        MessageBox.Show(
+                                                            ex.Message,
+                                                            "错误",
+                                                            MessageBoxButtons.OK,
+                                                            MessageBoxIcon.Error);
+                                                    }));
+                                        }
                                     }));
                         }
                     }));
@@ -4470,7 +4477,7 @@ namespace DocumentTools
                             if(TempExportTxtFile != string.Empty && TempExportTxtFile != null)
                             {
                                 (sender as Button).Enabled = false;
-                                File.WriteAllLines(TempExportTxtFile, TargetTextBox.Lines,Encoding.UTF8);
+                                File.WriteAllLines(TempExportTxtFile, TargetTextBox.Lines, Encoding.UTF8);
                                 //File.WriteAllText(TempExportTxtFile, TargetTextBox.Text);
                                 this.BeginInvoke(
                                     new Action(
@@ -5180,8 +5187,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                                 VFSOFT_Report_ListView.Items.Clear();//加载之前先清除数据
                                 foreach(DataRow row in TempTable.Rows)
                                 {
-                                    ListViewItem item = new ListViewItem(
-                                        row["报表ID"].ToString());
+                                    ListViewItem item = new ListViewItem(row["报表ID"].ToString());
                                     item.SubItems.Add(row["报表名称"].ToString());
                                     item.SubItems.Add(row["所属考评表"].ToString());
                                     item.SubItems.Add(row["考评表ID"].ToString());
@@ -6028,7 +6034,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
             } else
             {
                 MessageBox.Show(
-                    $"当前版本为{s1.InstalledVersion}，没有检测到新版本",
+                    $"当前版本为{VersionInfo.VersionNumber}，没有检测到新版本",
                     "提示",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Asterisk);
@@ -6353,9 +6359,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
         }
 
         private void linkLabel9_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Process.Start("https://www.123pan.com/s/JXY5Vv-HX8wd.html");
-        }
+        { Process.Start("https://www.123pan.com/s/JXY5Vv-HX8wd.html"); }
 
         /// <summary>
         /// 动态添加控件到另一个控件上去
@@ -6365,11 +6369,12 @@ IPGATEWAY:'{set_interface_gateway.Text}',
         /// <param name="ControlName">被添加的控件名称</param>
         /// <param name="ControlLocation">被添加的控件位置</param>
         /// <param name="ControlSize">被添加的控件大小</param>
-        private void DynamicControlAdd<T>(Control CntainerControl,
+        private void DynamicControlAdd<T>(
+            Control CntainerControl,
             string ControlName,
             Point ControlLocation,
-            Size ControlSize
-            ) where T : Control,new()
+            Size ControlSize)
+            where T : Control, new()
         {
             T AddedControl = new T();
             AddedControl.Location = ControlLocation;
@@ -6387,23 +6392,42 @@ IPGATEWAY:'{set_interface_gateway.Text}',
             string TempControlName_Find = $"{DynamicAddControlParams.WORDFINDREPLACE_FIND_NAME_PREFIX}{DynamicAddControlParams.WORDFINDREPLACE_FIND_NAME_INDEX}";
             string TempControlName_Replace = $"{DynamicAddControlParams.WORDFINDREPLACE_REPLACE_NAME_PREFIX}{DynamicAddControlParams.WORDFINDREPLACE_FIND_NAME_INDEX}";
 
-            Point TempPoint_FindArea = new Point(WordReplaceFindTextBox.Location.X, WordReplaceFindTextBox.Location.Y + DynamicAddControlParams.WORDFINDREPLACE_FINDREPLACE_LOCATION_Y);
-            Point TempPoint_ReplaceArea = new Point(WordReplaceTextBox.Location.X, WordReplaceTextBox.Location.Y + DynamicAddControlParams.WORDFINDREPLACE_FINDREPLACE_LOCATION_Y);
+            Point TempPoint_FindArea = new Point(
+                WordReplaceFindTextBox.Location.X,
+                WordReplaceFindTextBox.Location.Y + DynamicAddControlParams.WORDFINDREPLACE_FINDREPLACE_LOCATION_Y);
+            Point TempPoint_ReplaceArea = new Point(
+                WordReplaceTextBox.Location.X,
+                WordReplaceTextBox.Location.Y + DynamicAddControlParams.WORDFINDREPLACE_FINDREPLACE_LOCATION_Y);
 
-            DynamicControlAdd<TextBox>(WordReplaceFindPanel, TempControlName_Find, TempPoint_FindArea, WordReplaceFindTextBox.Size);
-            DynamicControlAdd<TextBox>(WordReplaceReplacePanel, TempControlName_Replace, TempPoint_ReplaceArea, WordReplaceTextBox.Size);
+            DynamicControlAdd<TextBox>(
+                WordReplaceFindPanel,
+                TempControlName_Find,
+                TempPoint_FindArea,
+                WordReplaceFindTextBox.Size);
+            DynamicControlAdd<TextBox>(
+                WordReplaceReplacePanel,
+                TempControlName_Replace,
+                TempPoint_ReplaceArea,
+                WordReplaceTextBox.Size);
 
-            DynamicAddControlParams.WORDFINDREPLACE_ADD_FIND_CONTROL_LIST.Add(TempControlName_Find,TempControlName_Replace);
-
+            DynamicAddControlParams.WORDFINDREPLACE_ADD_FIND_CONTROL_LIST
+                .Add(TempControlName_Find, TempControlName_Replace);
         }
 
         private void WordReplaceRemoveFind_Click(object sender, EventArgs e)
         {
             if(DynamicAddControlParams.WORDFINDREPLACE_ADD_FIND_CONTROL_LIST.Keys.Count > 0)
             {
-                WordReplaceFindPanel.Controls.Remove(WordReplaceFindPanel.Controls[DynamicAddControlParams.WORDFINDREPLACE_ADD_FIND_CONTROL_LIST.Keys.Last()]);
-                WordReplaceReplacePanel.Controls.Remove(WordReplaceReplacePanel.Controls[DynamicAddControlParams.WORDFINDREPLACE_ADD_FIND_CONTROL_LIST.Values.Last()]);
-                DynamicAddControlParams.WORDFINDREPLACE_ADD_FIND_CONTROL_LIST.Remove(DynamicAddControlParams.WORDFINDREPLACE_ADD_FIND_CONTROL_LIST.Keys.Last());
+                WordReplaceFindPanel.Controls
+                    .Remove(
+                        WordReplaceFindPanel.Controls[
+                            DynamicAddControlParams.WORDFINDREPLACE_ADD_FIND_CONTROL_LIST.Keys.Last()]);
+                WordReplaceReplacePanel.Controls
+                    .Remove(
+                        WordReplaceReplacePanel.Controls[
+                            DynamicAddControlParams.WORDFINDREPLACE_ADD_FIND_CONTROL_LIST.Values.Last()]);
+                DynamicAddControlParams.WORDFINDREPLACE_ADD_FIND_CONTROL_LIST
+                    .Remove(DynamicAddControlParams.WORDFINDREPLACE_ADD_FIND_CONTROL_LIST.Keys.Last());
                 DynamicAddControlParams.WORDFINDREPLACE_FINDREPLACE_LOCATION_Y = 0;
                 DynamicAddControlParams.WORDFINDREPLACE_FIND_NAME_INDEX = 0;
             }
@@ -6417,23 +6441,41 @@ IPGATEWAY:'{set_interface_gateway.Text}',
             string TempControlName_Find = $"{DynamicAddControlParams.EXCELFINDREPLACE_FIND_NAME_PREFIX}{DynamicAddControlParams.EXCELFINDREPLACE_NAME_INDEX}";
             string TempControlName_Replace = $"{DynamicAddControlParams.EXCELFINDREPLACE_REPLACE_NAME_PREFIX}{DynamicAddControlParams.EXCELFINDREPLACE_NAME_INDEX}";
 
-            Point TempPoint_Find = new Point(ExcelFindTextBox.Location.X,ExcelFindTextBox.Location.Y + DynamicAddControlParams.EXCELFINDREPLACE_LOCATION_Y);
-            Point TempPoint_Replace = new Point(ExcelReplaceBox.Location.X, ExcelReplaceBox.Location.Y + DynamicAddControlParams.EXCELFINDREPLACE_LOCATION_Y);
+            Point TempPoint_Find = new Point(
+                ExcelFindTextBox.Location.X,
+                ExcelFindTextBox.Location.Y + DynamicAddControlParams.EXCELFINDREPLACE_LOCATION_Y);
+            Point TempPoint_Replace = new Point(
+                ExcelReplaceBox.Location.X,
+                ExcelReplaceBox.Location.Y + DynamicAddControlParams.EXCELFINDREPLACE_LOCATION_Y);
 
-            DynamicControlAdd<TextBox>(ExcelFindReplace_FindPanel, TempControlName_Find, TempPoint_Find, ExcelFindTextBox.Size);
-            DynamicControlAdd<TextBox>(ExcelFindReplace_ReplacePanel, TempControlName_Replace, TempPoint_Replace, ExcelReplaceBox.Size);
+            DynamicControlAdd<TextBox>(
+                ExcelFindReplace_FindPanel,
+                TempControlName_Find,
+                TempPoint_Find,
+                ExcelFindTextBox.Size);
+            DynamicControlAdd<TextBox>(
+                ExcelFindReplace_ReplacePanel,
+                TempControlName_Replace,
+                TempPoint_Replace,
+                ExcelReplaceBox.Size);
 
             DynamicAddControlParams.EXCELFINDREPLACE_ADD_CONTROL_LIST.Add(TempControlName_Find, TempControlName_Replace);
-
         }
 
         private void ExcelReplaceFindRemove_Click(object sender, EventArgs e)
         {
-            if (DynamicAddControlParams.EXCELFINDREPLACE_ADD_CONTROL_LIST.Keys.Count > 0)
+            if(DynamicAddControlParams.EXCELFINDREPLACE_ADD_CONTROL_LIST.Keys.Count > 0)
             {
-                ExcelFindReplace_FindPanel.Controls.Remove(ExcelFindReplace_FindPanel.Controls[DynamicAddControlParams.EXCELFINDREPLACE_ADD_CONTROL_LIST.Keys.Last()]);
-                ExcelFindReplace_ReplacePanel.Controls.Remove(ExcelFindReplace_ReplacePanel.Controls[DynamicAddControlParams.EXCELFINDREPLACE_ADD_CONTROL_LIST.Values.Last()]);
-                DynamicAddControlParams.EXCELFINDREPLACE_ADD_CONTROL_LIST.Remove(DynamicAddControlParams.EXCELFINDREPLACE_ADD_CONTROL_LIST.Keys.Last());
+                ExcelFindReplace_FindPanel.Controls
+                    .Remove(
+                        ExcelFindReplace_FindPanel.Controls[
+                            DynamicAddControlParams.EXCELFINDREPLACE_ADD_CONTROL_LIST.Keys.Last()]);
+                ExcelFindReplace_ReplacePanel.Controls
+                    .Remove(
+                        ExcelFindReplace_ReplacePanel.Controls[
+                            DynamicAddControlParams.EXCELFINDREPLACE_ADD_CONTROL_LIST.Values.Last()]);
+                DynamicAddControlParams.EXCELFINDREPLACE_ADD_CONTROL_LIST
+                    .Remove(DynamicAddControlParams.EXCELFINDREPLACE_ADD_CONTROL_LIST.Keys.Last());
                 DynamicAddControlParams.EXCELFINDREPLACE_LOCATION_Y = 0;
                 DynamicAddControlParams.EXCELFINDREPLACE_NAME_INDEX = 0;
             }
@@ -6441,7 +6483,8 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
         private void CompressIamge_NoCompress_CheckedChanged(object sender, EventArgs e)
         {
-            this.CompressImage_OutPutImageFormat.Enabled = CompressIamge_NoCompress.Checked || CompressImage_NotUseSelfExt.Checked;
+            this.CompressImage_OutPutImageFormat.Enabled = CompressIamge_NoCompress.Checked ||
+                CompressImage_NotUseSelfExt.Checked;
         }
 
         private void Excel2Pdf_PrintScalePercent_Enable_CheckedChanged(object sender, EventArgs e)
@@ -6450,7 +6493,6 @@ IPGATEWAY:'{set_interface_gateway.Text}',
             //this.Excel2Pdf_PrintScale_Row.Text = string.Empty;
             this.Excel2Pdf_PrintScale_Col.Enabled = !Excel2Pdf_PrintScalePercent_Enable.Checked;
             //this.Excel2Pdf_PrintScale_Col.Text = string.Empty;
-            
         }
     }
 }

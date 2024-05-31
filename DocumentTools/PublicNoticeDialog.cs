@@ -21,13 +21,21 @@ namespace DocumentTools
 
         private async void PublicNoticeDialog_Load(object sender, EventArgs e)
         {
-            await NoticeWeb.EnsureCoreWebView2Async(null);
+            try
+            {
+                await NoticeWeb.EnsureCoreWebView2Async(null);
 
-            NoticeWeb.CoreWebView2.NewWindowRequested += CoreWebView2_NewWindowRequested;
-            NoticeWeb.CoreWebView2.NavigationStarting += CoreWebView2_NavigationStarting;
-            NoticeWeb.CoreWebView2.NavigationCompleted += CoreWebView2_NavigationCompleted;
-            NoticeWeb.CoreWebView2.Settings.AreDefaultContextMenusEnabled = false;
-            NoticeWeb.CoreWebView2.Settings.IsSwipeNavigationEnabled = false;
+                NoticeWeb.CoreWebView2.NewWindowRequested += CoreWebView2_NewWindowRequested;
+                NoticeWeb.CoreWebView2.NavigationStarting += CoreWebView2_NavigationStarting;
+                NoticeWeb.CoreWebView2.NavigationCompleted += CoreWebView2_NavigationCompleted;
+                NoticeWeb.CoreWebView2.Settings.AreDefaultContextMenusEnabled = false;
+                NoticeWeb.CoreWebView2.Settings.IsSwipeNavigationEnabled = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message,"提示",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
+
 
             try
             {
