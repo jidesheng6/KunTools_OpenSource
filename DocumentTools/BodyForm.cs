@@ -4748,13 +4748,28 @@ namespace DocumentTools
                 {
                     try
                     {
-                        Util.SetInterfaceStatus(network_info_card_list.SelectedItem.ToString(), "Enable");
-                        this.BeginInvoke(
-                            new Action(
-                                () =>
-                                {
-                                    MessageBox.Show("启用成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                                }));
+                        if(Util.IsAdministrator())
+                        {
+                            Util.SetInterfaceStatus(network_info_card_list.SelectedItem.ToString(), "Enable");
+                            this.BeginInvoke(
+                                new Action(
+                                    () =>
+                                    {
+                                        MessageBox.Show("启用成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                                    }));
+                        } else
+                        {
+                            this.BeginInvoke(
+                                new Action(
+                                    () =>
+                                    {
+                                        MessageBox.Show(
+                                            "禁用失败，请使用管理员身份执行",
+                                            "提示",
+                                            MessageBoxButtons.OK,
+                                            MessageBoxIcon.Warning);
+                                    }));
+                        }
                     } catch(Exception ex)
                     {
                         this.BeginInvoke(
@@ -4774,13 +4789,28 @@ namespace DocumentTools
                 {
                     try
                     {
-                        Util.SetInterfaceStatus(network_info_card_list.SelectedItem.ToString(), "Disable");
-                        this.BeginInvoke(
-                            new Action(
-                                () =>
-                                {
-                                    MessageBox.Show("禁用成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                                }));
+                        if(Util.IsAdministrator())
+                        {
+                            Util.SetInterfaceStatus(network_info_card_list.SelectedItem.ToString(), "Disable");
+                            this.BeginInvoke(
+                                new Action(
+                                    () =>
+                                    {
+                                        MessageBox.Show("禁用成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                                    }));
+                        } else
+                        {
+                            this.BeginInvoke(
+                                new Action(
+                                    () =>
+                                    {
+                                        MessageBox.Show(
+                                            "禁用失败，请使用管理员身份执行",
+                                            "提示",
+                                            MessageBoxButtons.OK,
+                                            MessageBoxIcon.Warning);
+                                    }));
+                        }
                     } catch(Exception ex)
                     {
                         this.BeginInvoke(
