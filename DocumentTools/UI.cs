@@ -438,7 +438,7 @@ namespace DocumentTools
 
                             // Word批量转换为Excel
                             case ConvertFileType.Word2Excel:
-                                Util.ConvertWord2Excel(ListViewFirstColumnText, ConvertedFileName);
+                                Util.ConvertWord2Excel(ListViewFirstColumnText, ConvertedFileName,BodyForm.MainForm.Word2Excel_ExportSingleSheet.Checked);
                                 break;
                             // Excel批量转换为Word
                             case ConvertFileType.Excel2Word:
@@ -647,8 +647,8 @@ namespace DocumentTools
                             new Action(
                                 () =>
                                 {
-                                    ListViewControl.Items[TempIndex - 1].Selected = true;
-                                    ListViewControl.EnsureVisible(TempIndex - 1);
+                                    ListViewControl.Items[TempIndex - 1 > 0 ? TempIndex - 1 : 0].Selected = true;
+                                    ListViewControl.EnsureVisible(TempIndex - 1 > 0 ? TempIndex - 1 : 0);
                                     ListViewControl.Focus();
                                 }));
                     }

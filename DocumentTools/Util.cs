@@ -380,6 +380,7 @@ namespace DocumentTools
 
             if (MatchRegexStatus("\\t", InputText))//表示匹配到的是传统word表格中直接复制的内容
             {
+                InputText = Regex.Replace(InputText, "\n", "", RegexOptions.Multiline);//去除全部的windows下回车符号
                 InputText = Regex.Replace(InputText, "\t", "\n", RegexOptions.Multiline);//将\t全部换成\n换行符
 
                 string[] TempInputTextByTap = InputText.Split(new char[] { '\n' });//使用\n来分割数组，确保每个文字都独立存储
@@ -429,6 +430,7 @@ namespace DocumentTools
             else
             {
                 //以下是对常规列文本进行普通处理
+
                 string[] TempNewLineText = InputText.Split(new char[] { '\n' });
                 foreach (string TempText in TempNewLineText)
                 {
@@ -2077,14 +2079,15 @@ namespace DocumentTools
         /// </summary>
         /// <param name="DocumentFileName">文档名称</param>
         /// <param name="SavedDcoumentFileName">保存后的文件名称</param>
-        public static void ConvertWord2Excel(string DocumentFileName, string SavedDcoumentFileName)
+        public static void ConvertWord2Excel(string DocumentFileName, string SavedDcoumentFileName,bool ExportSignleSheet=true)
         {
             Aspose.Words.Document TempLoadDocument = new Aspose.Words.Document(DocumentFileName);
 
             Aspose.Words.Saving.XlsxSaveOptions TempSaveXlsOption = new Aspose.Words.Saving.XlsxSaveOptions
             {
                 SaveFormat = Aspose.Words.SaveFormat.Xlsx,
-                CompressionLevel = Aspose.Words.Saving.CompressionLevel.Maximum
+                CompressionLevel = Aspose.Words.Saving.CompressionLevel.Maximum,
+                SectionMode = ExportSignleSheet == true ? Aspose.Words.Saving.XlsxSectionMode.SingleWorksheet : Aspose.Words.Saving.XlsxSectionMode.MultipleWorksheets
             };
 
             TempLoadDocument.Save(SavedDcoumentFileName, TempSaveXlsOption);
@@ -2814,17 +2817,19 @@ namespace DocumentTools
                     break;
             }
 
-            if (barcodeGenTypeIndex == 0)
-            {
-                TempGenerate.Parameters.Barcode.QR.QrEncodeMode = QREncodeMode.ECIEncoding;
-                TempGenerate.Parameters.Barcode.QR.QrECIEncoding = ECIEncodings.UTF8;
-            }
-            else if (barcodeGenTypeIndex == 1)
-            {
-                TempGenerate.Parameters.Barcode.QR.QrEncodeMode = QREncodeMode.Bytes;
-            }
-
-
+            //if (barcodeGenTypeIndex == 0)
+            //{
+            //    TempGenerate.Parameters.Barcode.QR.QrEncodeMode = QREncodeMode.ECI;
+            //    TempGenerate.Parameters.Barcode.QR.QrECIEncoding = ECIEncodings.UTF8;
+            //    TempGenerate.CodeText = barcodeTextContent;
+            //}
+            //else if (barcodeGenTypeIndex == 1)
+            //{
+            //    //TempGenerate.Parameters.Barcode.QR.QrEncodeMode = QREncodeMode.Bytes;
+            //    TempGenerate.SetCodeText(Encoding.Default.GetBytes(barcodeTextContent));
+            //}
+            TempGenerate.Parameters.Barcode.QR.QrEncodeMode = QREncodeMode.ECI;
+            TempGenerate.Parameters.Barcode.QR.QrECIEncoding = ECIEncodings.UTF8;
             TempGenerate.CodeText = barcodeTextContent;
             TempGenerate.Parameters.AutoSizeMode = barcodeAutoSizeMode;
 
