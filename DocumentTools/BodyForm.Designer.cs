@@ -645,6 +645,7 @@ namespace DocumentTools
             this.TargetTextNumberText = new System.Windows.Forms.Label();
             this.ConvertTextButton = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.TargetBoxIndex_number = new System.Windows.Forms.RichTextBox();
             this.TargetTextBox = new System.Windows.Forms.RichTextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.SourceTextBox = new System.Windows.Forms.RichTextBox();
@@ -1136,6 +1137,8 @@ namespace DocumentTools
             this.CheckVersionButton = new System.Windows.Forms.ToolStripMenuItem();
             this.VersionUpdateLog = new System.Windows.Forms.ToolStripMenuItem();
             this.查看公告信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.跳转到该功能ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuSearchTextBox = new System.Windows.Forms.ToolStripTextBox();
             this.MainToolsTip = new System.Windows.Forms.ToolTip(this.components);
             this.TabPageIcoList = new System.Windows.Forms.ImageList(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -8865,10 +8868,10 @@ namespace DocumentTools
             // ExportNameTxt
             // 
             this.ExportNameTxt.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.ExportNameTxt.Location = new System.Drawing.Point(685, 563);
+            this.ExportNameTxt.Location = new System.Drawing.Point(681, 563);
             this.ExportNameTxt.Margin = new System.Windows.Forms.Padding(1);
             this.ExportNameTxt.Name = "ExportNameTxt";
-            this.ExportNameTxt.Size = new System.Drawing.Size(183, 31);
+            this.ExportNameTxt.Size = new System.Drawing.Size(187, 31);
             this.ExportNameTxt.TabIndex = 19;
             this.ExportNameTxt.Tag = "anchor_right_bottom";
             this.ExportNameTxt.Text = "导出内容到本地";
@@ -9074,6 +9077,7 @@ namespace DocumentTools
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.TargetBoxIndex_number);
             this.groupBox2.Controls.Add(this.TargetTextBox);
             this.groupBox2.Location = new System.Drawing.Point(681, 1);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(1);
@@ -9085,16 +9089,29 @@ namespace DocumentTools
             this.groupBox2.Tag = "anchor_top_right_bottom";
             this.groupBox2.Text = "处理后姓名";
             // 
+            // TargetBoxIndex_number
+            // 
+            this.TargetBoxIndex_number.Enabled = false;
+            this.TargetBoxIndex_number.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.TargetBoxIndex_number.Location = new System.Drawing.Point(4, 17);
+            this.TargetBoxIndex_number.Margin = new System.Windows.Forms.Padding(2);
+            this.TargetBoxIndex_number.Name = "TargetBoxIndex_number";
+            this.TargetBoxIndex_number.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.TargetBoxIndex_number.Size = new System.Drawing.Size(29, 531);
+            this.TargetBoxIndex_number.TabIndex = 4;
+            this.TargetBoxIndex_number.Text = "";
+            // 
             // TargetTextBox
             // 
             this.TargetTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TargetTextBox.Location = new System.Drawing.Point(4, 15);
+            this.TargetTextBox.Location = new System.Drawing.Point(36, 15);
             this.TargetTextBox.Margin = new System.Windows.Forms.Padding(1);
             this.TargetTextBox.Name = "TargetTextBox";
-            this.TargetTextBox.Size = new System.Drawing.Size(181, 531);
+            this.TargetTextBox.Size = new System.Drawing.Size(150, 531);
             this.TargetTextBox.TabIndex = 3;
             this.TargetTextBox.Tag = "anchor_top_right_bottom";
             this.TargetTextBox.Text = "";
+            this.TargetTextBox.VScroll += new System.EventHandler(this.TargetTextBox_VScroll);
             this.TargetTextBox.TextChanged += new System.EventHandler(this.TargetTextBox_TextChanged);
             // 
             // groupBox1
@@ -9113,6 +9130,7 @@ namespace DocumentTools
             // SourceTextBox
             // 
             this.SourceTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.SourceTextBox.EnableAutoDragDrop = true;
             this.SourceTextBox.Location = new System.Drawing.Point(3, 16);
             this.SourceTextBox.Margin = new System.Windows.Forms.Padding(1);
             this.SourceTextBox.Name = "SourceTextBox";
@@ -14129,19 +14147,20 @@ namespace DocumentTools
             // 
             // menuStrip1
             // 
-            this.menuStrip1.AutoSize = false;
             this.menuStrip1.BackColor = System.Drawing.Color.Moccasin;
             this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(0);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.liblist,
             this.软件设置ToolStripMenuItem,
-            this.程序更新ToolStripMenuItem});
+            this.程序更新ToolStripMenuItem,
+            this.跳转到该功能ToolStripMenuItem,
+            this.MenuSearchTextBox});
             this.menuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(0);
-            this.menuStrip1.Size = new System.Drawing.Size(890, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(890, 28);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -14163,7 +14182,7 @@ namespace DocumentTools
             this.关于软件ToolStripMenuItem});
             this.liblist.Image = global::DocumentTools.Properties.Resources.功能;
             this.liblist.Name = "liblist";
-            this.liblist.Size = new System.Drawing.Size(92, 24);
+            this.liblist.Size = new System.Drawing.Size(92, 28);
             this.liblist.Text = "功能分类";
             // 
             // wORD功能ToolStripMenuItem
@@ -14630,7 +14649,7 @@ namespace DocumentTools
             this.保存设置并重启软件ToolStripMenuItem});
             this.软件设置ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.系统;
             this.软件设置ToolStripMenuItem.Name = "软件设置ToolStripMenuItem";
-            this.软件设置ToolStripMenuItem.Size = new System.Drawing.Size(92, 24);
+            this.软件设置ToolStripMenuItem.Size = new System.Drawing.Size(92, 28);
             this.软件设置ToolStripMenuItem.Text = "软件设置";
             // 
             // menu_start_page_index
@@ -14867,7 +14886,7 @@ namespace DocumentTools
             this.查看公告信息ToolStripMenuItem});
             this.程序更新ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.版本更新__1_;
             this.程序更新ToolStripMenuItem.Name = "程序更新ToolStripMenuItem";
-            this.程序更新ToolStripMenuItem.Size = new System.Drawing.Size(256, 24);
+            this.程序更新ToolStripMenuItem.Size = new System.Drawing.Size(256, 28);
             this.程序更新ToolStripMenuItem.Text = "版本更新和公告信息[请常关注公告信息]";
             // 
             // CheckVersionButton
@@ -14893,6 +14912,26 @@ namespace DocumentTools
             this.查看公告信息ToolStripMenuItem.Size = new System.Drawing.Size(156, 30);
             this.查看公告信息ToolStripMenuItem.Text = "查看公告信息";
             this.查看公告信息ToolStripMenuItem.Click += new System.EventHandler(this.查看公告信息ToolStripMenuItem_Click);
+            // 
+            // 跳转到该功能ToolStripMenuItem
+            // 
+            this.跳转到该功能ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.跳转;
+            this.跳转到该功能ToolStripMenuItem.Name = "跳转到该功能ToolStripMenuItem";
+            this.跳转到该功能ToolStripMenuItem.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.跳转到该功能ToolStripMenuItem.Size = new System.Drawing.Size(116, 28);
+            this.跳转到该功能ToolStripMenuItem.Text = "转到指定功能";
+            this.跳转到该功能ToolStripMenuItem.Click += new System.EventHandler(this.跳转到该功能ToolStripMenuItem_Click);
+            // 
+            // MenuSearchTextBox
+            // 
+            this.MenuSearchTextBox.AutoSize = false;
+            this.MenuSearchTextBox.BackColor = System.Drawing.Color.Moccasin;
+            this.MenuSearchTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.MenuSearchTextBox.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.MenuSearchTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 0);
+            this.MenuSearchTextBox.Name = "MenuSearchTextBox";
+            this.MenuSearchTextBox.Size = new System.Drawing.Size(150, 23);
+            this.MenuSearchTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MenuSearchTextBox_KeyDown);
             // 
             // MainToolsTip
             // 
@@ -16347,6 +16386,9 @@ namespace DocumentTools
         internal CheckBox Excel2Pdf_PrintScalePercent_Enable;
         internal CheckBox Excel2Pdf_ForceContentOnOnePage;
         internal CheckBox Word2Excel_ExportSingleSheet;
+        private RichTextBox TargetBoxIndex_number;
+        private ToolStripTextBox MenuSearchTextBox;
+        private ToolStripMenuItem 跳转到该功能ToolStripMenuItem;
     }
 }
 

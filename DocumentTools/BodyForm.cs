@@ -52,6 +52,8 @@ namespace DocumentTools
         public string AddWaterMarkBackGroundImageFileName = string.Empty;
         public string WidgetAnchorMode = "off";
 
+        AutoCompleteStringCollection MenuStringSource = new AutoCompleteStringCollection();//坤Tools所有菜单的名称，用来给自动建议作为输入源做的
+
         public int FormWidth = 906;
         public int FormHeight = 834;
 
@@ -66,6 +68,14 @@ namespace DocumentTools
             foreach(TabPage TempPage in this.MainTabPage.TabPages)
             {
                 Debug.WriteLine($"{TempPage.Text}：{MainTabPage.TabPages.IndexOf(TempPage)}");
+            }
+        }
+
+        private void InitMenuNameAutoCompleteSource()
+        {
+            foreach (TabPage TempPage in this.MainTabPage.TabPages)
+            {
+                MenuStringSource.Add(TempPage.Text);
             }
         }
 
@@ -444,7 +454,14 @@ namespace DocumentTools
             //InitConfigSettings();
             InitTabPageIcon();
             OutPutListViewIndex();
-            if(string.Compare(WidgetAnchorMode, "on", StringComparison.Ordinal) == 0)
+
+            //设置功能搜索直达的自动完成数据源
+            InitMenuNameAutoCompleteSource();
+            this.MenuSearchTextBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            this.MenuSearchTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            this.MenuSearchTextBox.AutoCompleteCustomSource = MenuStringSource;
+            
+            if (string.Compare(WidgetAnchorMode, "on", StringComparison.Ordinal) == 0)
             {
                 SetWidgetAnchor();//设置控件锚点
             }
@@ -1088,7 +1105,6 @@ namespace DocumentTools
                         .Select(x => (object)x)
                         .ToArray());
             this.Exam_Picture_ThreadNumbers.SelectedIndex = 0;
-
 
             //加载城市数据到combox中
             this.city_level_1_combox.Items.Clear();//先清空数据
@@ -1849,8 +1865,27 @@ namespace DocumentTools
             }
         }
 
+        private void UpdateNameIndex()
+        {
+            Point pt = new Point(0, 0);
+            int firstIndex = TargetTextBox.GetCharIndexFromPosition(pt);
+            int firstLine = TargetTextBox.GetLineFromCharIndex(firstIndex);
+
+            pt.Y += TargetTextBox.Height;
+            int lastIndex = TargetTextBox.GetCharIndexFromPosition(pt);
+            int lastLine = TargetTextBox.GetLineFromCharIndex(lastIndex);
+
+            TargetBoxIndex_number.Text = string.Empty;
+            for (int i = firstLine; i < lastLine + 1; i++)
+            {
+                TargetBoxIndex_number.Text += (i + 1)+ "\r\n";
+            }
+        }
         private void TargetTextBox_TextChanged(object sender, EventArgs e)
-        { TargetTextNumberText.Text = $"处理后姓名有{TargetTextBox.Lines.Length}个"; }
+        { 
+            TargetTextNumberText.Text = $"处理后姓名有{TargetTextBox.Lines.Length}个";
+            UpdateNameIndex();
+        }
 
         private void MutilLineMode_CheckedChanged(object sender, EventArgs e)
         {
@@ -6523,6 +6558,29 @@ IPGATEWAY:'{set_interface_gateway.Text}',
             //this.Excel2Pdf_PrintScale_Row.Text = string.Empty;
             this.Excel2Pdf_PrintScale_Col.Enabled = !Excel2Pdf_PrintScalePercent_Enable.Checked;
             //this.Excel2Pdf_PrintScale_Col.Text = string.Empty;
+        }
+
+        private void TargetTextBox_VScroll(object sender, EventArgs e)
+        {
+            TargetBoxIndex_number.Text = string.Empty;
+            UpdateNameIndex();
+            TargetBoxIndex_number.Invalidate();
+        }
+
+        private void MenuSearchTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(GetTabPageIndex(MenuSearchTextBox.Text)>=0 && (e.KeyCode==Keys.Enter || e.KeyCode==Keys.Tab))
+            {
+                this.MainTabPage.SelectedIndex = GetTabPageIndex(MenuSearchTextBox.Text);
+            }
+        }
+
+        private void 跳转到该功能ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (GetTabPageIndex(MenuSearchTextBox.Text) >= 0)
+            {
+                this.MainTabPage.SelectedIndex = GetTabPageIndex(MenuSearchTextBox.Text);
+            }
         }
     }
 }

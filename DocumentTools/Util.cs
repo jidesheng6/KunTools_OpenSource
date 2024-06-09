@@ -2380,16 +2380,16 @@ namespace DocumentTools
 
                 AspWordsWarningCallBack AspCallBack = new AspWordsWarningCallBack();
 
-                //Aspose.Words.Fonts.FontSettings TempFontSettings = new Aspose.Words.Fonts.FontSettings();
-                //TempFontSettings.SubstitutionSettings.DefaultFontSubstitution.Enabled = true;
-                //TempFontSettings.SubstitutionSettings.TableSubstitution.Enabled = false;
-                //TempFontSettings.SubstitutionSettings.FontInfoSubstitution.Enabled = false;
-                //TempFontSettings.SubstitutionSettings.FontConfigSubstitution.Enabled = false;
-                //TempFontSettings.SubstitutionSettings.FontNameSubstitution.Enabled = false;
-                //TempFontSettings.SubstitutionSettings.DefaultFontSubstitution.DefaultFontName = "SimSun";
+                Aspose.Words.Fonts.FontSettings TempFontSettings = new Aspose.Words.Fonts.FontSettings();
+                TempFontSettings.SubstitutionSettings.DefaultFontSubstitution.Enabled = true;
+                TempFontSettings.SubstitutionSettings.TableSubstitution.Enabled = false;
+                TempFontSettings.SubstitutionSettings.FontInfoSubstitution.Enabled = false;
+                TempFontSettings.SubstitutionSettings.FontConfigSubstitution.Enabled = false;
+                TempFontSettings.SubstitutionSettings.FontNameSubstitution.Enabled = false;
+                TempFontSettings.SubstitutionSettings.DefaultFontSubstitution.DefaultFontName = "SimSun";
 
 
-                //TempDocuemntLoadOption.FontSettings = TempFontSettings;
+                TempDocuemntLoadOption.FontSettings = TempFontSettings;
 
 
                 //设置PDF保存参数
