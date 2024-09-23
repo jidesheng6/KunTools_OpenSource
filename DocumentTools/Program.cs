@@ -1,6 +1,5 @@
 ﻿using Aspose.BarCode.BarCodeRecognition;
 using System;
-using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -8,9 +7,6 @@ namespace DocumentTools
 {
     internal static class Program
     {
-
-        [DllImport("user32.dll")]
-        public static extern bool SetProcessDPIAware();
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>

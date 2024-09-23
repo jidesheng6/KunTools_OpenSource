@@ -471,7 +471,10 @@ namespace DocumentTools
                                     PrivateFontSetting.FontSize,
                                     BodyForm.MainForm.AddWaterMarkBackGroundImageFileName,
                                     BodyForm.MainForm.WaterMarkImageHeight.Text,
-                                    BodyForm.MainForm.WaterMarkImageWidth.Text);
+                                    BodyForm.MainForm.WaterMarkImageWidth.Text,
+                                    BodyForm.MainForm.AddPdfWaterMark_FullScren.Checked,
+                                    (int)BodyForm.MainForm.AddPdfWaterMark_FullScren_HorDmi.Value,
+                                    (int)BodyForm.MainForm.AddPdfWaterMark_FullScren_VerDmi.Value);
                                 break;
                             // pdf移除水印
                             case ConvertFileType.RemovePdfWaterMark:

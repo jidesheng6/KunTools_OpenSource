@@ -52,7 +52,13 @@ namespace DocumentTools
         public string AddWaterMarkBackGroundImageFileName = string.Empty;
         public string WidgetAnchorMode = "off";
 
-        AutoCompleteStringCollection MenuStringSource = new AutoCompleteStringCollection();//坤Tools所有菜单的名称，用来给自动建议作为输入源做的
+        //AutoCompleteStringCollection MenuStringSource = new AutoCompleteStringCollection();//坤Tools所有菜单的名称，用来给自动建议作为输入源做的
+
+        private List<string> MenuStringOrign = new List<string>();
+        private List<string> MenuStringNew = new List<string>();
+
+        private int TabMenPagePreIndex = -1;
+        private int TabMenPageCurrentIndex = -1;
 
         public int FormWidth = 906;
         public int FormHeight = 834;
@@ -75,8 +81,10 @@ namespace DocumentTools
         {
             foreach (TabPage TempPage in this.MainTabPage.TabPages)
             {
-                MenuStringSource.Add(TempPage.Text);
+                //MenuStringSource.Add(TempPage.Text);
+                MenuStringOrign.Add(TempPage.Text);
             }
+            this.MenuSearchTextBox.Items.AddRange(MenuStringOrign.ToArray());
         }
 
         private void GetAdministratorBehaviorStatus()
@@ -457,10 +465,13 @@ namespace DocumentTools
 
             //设置功能搜索直达的自动完成数据源
             InitMenuNameAutoCompleteSource();
+            //this.MenuSearchTextBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            //this.MenuSearchTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            //this.MenuSearchTextBox.AutoCompleteCustomSource = MenuStringSource;
             this.MenuSearchTextBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            this.MenuSearchTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            this.MenuSearchTextBox.AutoCompleteCustomSource = MenuStringSource;
-            
+            this.MenuSearchTextBox.AutoCompleteSource = AutoCompleteSource.ListItems;
+            //this.MenuSearchTextBox.MaxDropDownItems = MainTabPage.TabPages.Count;
+            //this.MenuSearchTextBox.AutoCompleteCustomSource = MenuStringSource;
             if (string.Compare(WidgetAnchorMode, "on", StringComparison.Ordinal) == 0)
             {
                 SetWidgetAnchor();//设置控件锚点
@@ -1106,6 +1117,9 @@ namespace DocumentTools
                         .ToArray());
             this.Exam_Picture_ThreadNumbers.SelectedIndex = 0;
 
+            this.MenuSearchMode.Items.AddRange(new string[] { "精确匹配模式","模糊匹配模式"});
+            this.MenuSearchMode.SelectedIndex = 0;
+
             //加载城市数据到combox中
             this.city_level_1_combox.Items.Clear();//先清空数据
             if(City_Json != null)
@@ -1132,7 +1146,10 @@ namespace DocumentTools
                     x =>
                     {
                         ToolStripComboBox TempCombox = x as ToolStripComboBox;
-                        TempCombox.DropDownStyle = ComboBoxStyle.DropDownList;
+                        if(TempCombox.Name!= "MenuSearchTextBox")
+                        {
+                            TempCombox.DropDownStyle = ComboBoxStyle.DropDownList;
+                        }
                     });
         }
 
@@ -2017,10 +2034,10 @@ namespace DocumentTools
             {
                 e.Effect = DragDropEffects.Copy;
             }
-            //else if(e.Data.GetDataPresent(typeof(System.Windows.Forms.ListViewItem)))
-            //{
-            //    e.Effect = DragDropEffects.Move;
-            //}
+            else if (e.Data.GetDataPresent(typeof(System.Windows.Forms.ListViewItem)))
+            {
+                e.Effect = DragDropEffects.Move;
+            }
         }
 
         /// <summary>
@@ -2192,44 +2209,58 @@ namespace DocumentTools
                 }
                 DragedListview.ListViewItemSorter = new ListViewItemComparer_ASC();
             }
-            //else if(e.Data.GetDataPresent(typeof(System.Windows.Forms.ListViewItem)))
-            //{
-            //    System.Windows.Forms.ListViewItem TempItem = (System.Windows.Forms.ListViewItem)e.Data.GetData(typeof(System.Windows.Forms.ListViewItem));
+            else if (e.Data.GetDataPresent(typeof(System.Windows.Forms.ListViewItem)))
+            {
+                // 获取目标位置
+                Point cp = DragedListview.PointToClient(new Point(e.X, e.Y));
+                ListViewItem targetItem = DragedListview.GetItemAt(cp.X, cp.Y);
+                int targetIndex = targetItem?.Index ?? DragedListview.Items.Count - 1;
 
-            //    Point TempPoint = new Point(e.X, e.Y);
+                // 获取拖动的项目
+                ListViewItem[] draggedItems = (ListViewItem[])e.Data.GetData("ListViewItemArray");
 
-            //    Point TempListViewPoint = DragedListview.PointToClient(TempPoint);
+                // 处理项目交换逻辑
+                if (draggedItems != null)
+                {
+                    // 将拖动的项目从原位置移除
+                    foreach (ListViewItem item in draggedItems)
+                    {
+                        DragedListview.Items.Remove(item);
+                    }
 
-            //    System.Windows.Forms.ListViewItem TargetItem = DragedListview.GetItemAt(TempListViewPoint.X, TempListViewPoint.Y);
+                    // 在目标位置插入项目
+                    for (int i = 0; i < draggedItems.Length; i++)
+                    {
+                        DragedListview.Items.Insert(targetIndex + i, draggedItems[i]);
+                    }
+                }
 
-            //    if(TargetItem!=null)
-            //    {
-            //        DragedListview.Items.Insert(TargetItem.Index, (System.Windows.Forms.ListViewItem)TempItem.Clone());
-
-            //        DragedListview.Items.Remove(TempItem);
-            //    }
-
-            //}
+            }
         }
 
         private void ListviewItemDrag(object sender, ItemDragEventArgs e)
         {
             ListView TempListView = sender as ListView;
-            TempListView.DoDragDrop(e.Item, DragDropEffects.Move);
+            //TempListView.DoDragDrop(e.Item, DragDropEffects.Move);
+
+            // 开始拖动操作
+            ListViewItem[] selectedItems = TempListView.SelectedItems.Cast<ListViewItem>().ToArray();
+            TempListView.DoDragDrop(new DataObject("ListViewItemArray", selectedItems), DragDropEffects.Move);
         }
 
         private void ListViewDragOver(object sender, DragEventArgs e)
         {
-            ListView TempListView = sender as ListView;
-            Point TempPoint = new Point(e.X, e.Y);
-            Point TempListViewPoint = TempListView.PointToClient(TempPoint);
+            e.Effect = DragDropEffects.Move;
+            //ListView TempListView = sender as ListView;
+            //Point TempPoint = new Point(e.X, e.Y);
+            //Point TempListViewPoint = TempListView.PointToClient(TempPoint);
 
-            ListViewItem TempItem = TempListView.GetItemAt(TempListViewPoint.X, TempListViewPoint.Y);
+            //ListViewItem TempItem = TempListView.GetItemAt(TempListViewPoint.X, TempListViewPoint.Y);
 
-            if(TempItem != null)
-            {
-                TempItem.Selected = true;
-            }
+            //if(TempItem != null)
+            //{
+            //    TempItem.Selected = true;
+            //}
         }
 
         private void DownloadFrameWorkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -2528,7 +2559,8 @@ namespace DocumentTools
                             ReplaceWordContentStatusText,
                             ConvertFileType.WordReplace,
                             ".docx",
-                            CallButton: sender as Button);
+                            CallButton: sender as Button,
+                            UseSourcePath:WordTextReplace_SaveSourceBox.Checked);
                     } catch(Exception ex)
                     {
                         this.BeginInvoke(
@@ -2892,12 +2924,15 @@ namespace DocumentTools
                 {
                     try
                     {
-                        UI.ConvertStart(
+                        if(!string.IsNullOrEmpty(PdfWaterMarkText.Text)||!string.IsNullOrEmpty(AddWaterMarkBackGroundImageFileName))
+                        {
+                            UI.ConvertStart(
                             this.PdfWaterMarkFileList,
                             this.AddWaterMark2PdfStatusText,
                             ConvertFileType.AddWaterMarkPdf,
                             ".pdf",
                             CallButton: sender as Button);
+                        }
                     } catch(Exception ex)
                     {
                         this.BeginInvoke(
@@ -4066,13 +4101,23 @@ namespace DocumentTools
                                 barcodeScanTypeCombox.SelectedIndex);
                             barcodePreviewBox.Image = new Bitmap(tempstream);
                         }
-                    } catch(Exception ex)
+                    }
+                    catch(Exception ex)
                     {
                         this.BeginInvoke(
                             new Action(
                                 () =>
                                 {
-                                    MessageBox.Show(ex.ToString(), "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    if(ex.Message.Contains("enough space"))
+                                    {
+                                        MessageBox.Show("没有足够空间存放文字，请将尺寸模式设置为 无 后重试", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                                    }
                                 }));
                     }
                 });
@@ -5098,6 +5143,11 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                     }
                 }
             }
+            if(TabMenPageCurrentIndex!=-1)
+            {
+                TabMenPagePreIndex = TabMenPageCurrentIndex;
+            }
+            TabMenPageCurrentIndex = this.MainTabPage.SelectedIndex;
         }
 
         private void 初始化配置文件ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -6580,6 +6630,90 @@ IPGATEWAY:'{set_interface_gateway.Text}',
             if (GetTabPageIndex(MenuSearchTextBox.Text) >= 0)
             {
                 this.MainTabPage.SelectedIndex = GetTabPageIndex(MenuSearchTextBox.Text);
+            }
+        }
+
+        private void AddPdfWaterMark_FullScren_CheckedChanged(object sender, EventArgs e)
+        {
+            this.AddPdfWaterMark_FullScren_HorDmi.Enabled = AddPdfWaterMark_FullScren.Checked;
+            this.AddPdfWaterMark_FullScren_VerDmi.Enabled = AddPdfWaterMark_FullScren.Checked;
+            this.WaterMarkImageHeight.Enabled = !AddPdfWaterMark_FullScren.Checked;
+            this.WaterMarkImageWidth.Enabled = !AddPdfWaterMark_FullScren.Checked;
+        }
+
+        private void RemovePdfAddWaterImage_Click(object sender, EventArgs e)
+        {
+            if(!string.IsNullOrEmpty(this.AddWaterMarkBackGroundImageFileName) && this.WaterMarkImage.Image!=null)
+            {
+                this.AddWaterMarkBackGroundImageFileName = string.Empty;
+                this.WaterMarkImageHeight.Text = string.Empty;
+                this.WaterMarkImageWidth.Text = string.Empty;
+                this.WaterMarkImage.Image.Dispose();
+                this.WaterMarkImage.Image = null;
+            }
+        }
+
+        private void 返回上一个功能ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(TabMenPagePreIndex!=-1)
+            {
+                this.MainTabPage.SelectedIndex = TabMenPagePreIndex;
+            }
+        }
+
+        private void MenuSearchTextBox_TextUpdate(object sender, EventArgs e)
+        {
+            // 使用 BeginInvoke 以确保不在 UI 线程中调用
+            this.BeginInvoke(new Action(() =>
+            {
+                string currentText = this.MenuSearchTextBox.Text.ToUpper();
+
+                // 先关闭下拉列表，以防止在更新项目时发生冲突
+                this.MenuSearchTextBox.DroppedDown = false;
+
+                // 清除现有的项
+                this.MenuSearchTextBox.Items.Clear();
+                MenuStringNew.Clear();
+
+                foreach (string MenuString in MenuStringOrign)
+                {
+                    if (MenuString.Contains(currentText))
+                    {
+                        MenuStringNew.Add(MenuString);
+                    }
+                }
+
+                this.MenuSearchTextBox.Items.AddRange(MenuStringNew.ToArray());
+
+                // 重新设置光标位置
+                this.MenuSearchTextBox.SelectionStart = currentText.Length;
+                Cursor = Cursors.Default;
+
+                // 使用 BeginInvoke 延迟打开下拉列表，避免与更新操作冲突
+                this.BeginInvoke(new Action(() =>
+                {
+                    if(this.MenuSearchTextBox.Text!=string.Empty && this.MenuSearchTextBox.Items.Count>0)
+                    {
+                        this.MenuSearchTextBox.DroppedDown = true;
+                    }
+                }));
+            }));
+        }
+
+        private void MenuSearchMode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(MenuSearchMode.SelectedIndex==0)
+            {
+                //切换搜索模式时候，清除原有item，然后将初始化时候的list数据重新添加进来
+                this.MenuSearchTextBox.TextUpdate -= new System.EventHandler(this.MenuSearchTextBox_TextUpdate);
+                this.MenuSearchTextBox.Items.Clear();
+                this.MenuSearchTextBox.Items.AddRange(MenuStringOrign.ToArray());
+
+            }
+            else
+            {
+                this.MenuSearchTextBox.TextUpdate -= new System.EventHandler(this.MenuSearchTextBox_TextUpdate);
+                this.MenuSearchTextBox.TextUpdate += new System.EventHandler(this.MenuSearchTextBox_TextUpdate);
             }
         }
     }

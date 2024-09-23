@@ -228,6 +228,7 @@ namespace DocumentTools
             this.SplitPPT_SelectFiles = new System.Windows.Forms.Button();
             this.SplitPPTFilesList = new System.Windows.Forms.ListView();
             this.TabPage_18 = new System.Windows.Forms.TabPage();
+            this.label205 = new System.Windows.Forms.Label();
             this.PdfWaterMarkFileList_MoveDown = new System.Windows.Forms.Button();
             this.PdfWaterMarkFileList_MoveUp = new System.Windows.Forms.Button();
             this.addpdfwater_clear = new System.Windows.Forms.Button();
@@ -237,6 +238,12 @@ namespace DocumentTools
             this.AddWaterMark2Pdf = new System.Windows.Forms.Button();
             this.SelectWaterMarkPdfFiles = new System.Windows.Forms.Button();
             this.groupBox18 = new System.Windows.Forms.GroupBox();
+            this.RemovePdfAddWaterImage = new System.Windows.Forms.Button();
+            this.AddPdfWaterMark_FullScren_VerDmi = new System.Windows.Forms.NumericUpDown();
+            this.label204 = new System.Windows.Forms.Label();
+            this.AddPdfWaterMark_FullScren_HorDmi = new System.Windows.Forms.NumericUpDown();
+            this.label203 = new System.Windows.Forms.Label();
+            this.AddPdfWaterMark_FullScren = new System.Windows.Forms.CheckBox();
             this.label33 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
             this.WaterMarkImageWidth = new System.Windows.Forms.TextBox();
@@ -474,6 +481,7 @@ namespace DocumentTools
             this.SelectCompressImageFile = new System.Windows.Forms.Button();
             this.CompressImageFileList = new System.Windows.Forms.ListView();
             this.TabPage_10 = new System.Windows.Forms.TabPage();
+            this.WordTextReplace_SaveSourceBox = new System.Windows.Forms.CheckBox();
             this.WordReplace_UseRegextSub = new System.Windows.Forms.CheckBox();
             this.WordReplace_IgnoreShapes = new System.Windows.Forms.CheckBox();
             this.WordReplace_IgnoreInsert = new System.Windows.Forms.CheckBox();
@@ -1137,8 +1145,10 @@ namespace DocumentTools
             this.CheckVersionButton = new System.Windows.Forms.ToolStripMenuItem();
             this.VersionUpdateLog = new System.Windows.Forms.ToolStripMenuItem();
             this.查看公告信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.返回上一个功能ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.跳转到该功能ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuSearchTextBox = new System.Windows.Forms.ToolStripTextBox();
+            this.MenuSearchTextBox = new System.Windows.Forms.ToolStripComboBox();
+            this.MenuSearchMode = new System.Windows.Forms.ToolStripComboBox();
             this.MainToolsTip = new System.Windows.Forms.ToolTip(this.components);
             this.TabPageIcoList = new System.Windows.Forms.ImageList(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -1167,6 +1177,8 @@ namespace DocumentTools
             this.groupBox61.SuspendLayout();
             this.TabPage_18.SuspendLayout();
             this.groupBox18.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.AddPdfWaterMark_FullScren_VerDmi)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AddPdfWaterMark_FullScren_HorDmi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WaterMarkImage)).BeginInit();
             this.TabPage_19.SuspendLayout();
             this.TabPage_22.SuspendLayout();
@@ -3771,6 +3783,7 @@ namespace DocumentTools
             // 
             // TabPage_18
             // 
+            this.TabPage_18.Controls.Add(this.label205);
             this.TabPage_18.Controls.Add(this.PdfWaterMarkFileList_MoveDown);
             this.TabPage_18.Controls.Add(this.PdfWaterMarkFileList_MoveUp);
             this.TabPage_18.Controls.Add(this.addpdfwater_clear);
@@ -3788,6 +3801,19 @@ namespace DocumentTools
             this.TabPage_18.TabIndex = 17;
             this.TabPage_18.Text = "添加PDF水印";
             this.TabPage_18.UseVisualStyleBackColor = true;
+            // 
+            // label205
+            // 
+            this.label205.AutoSize = true;
+            this.label205.ForeColor = System.Drawing.Color.Tomato;
+            this.label205.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label205.Location = new System.Drawing.Point(8, 539);
+            this.label205.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label205.Name = "label205";
+            this.label205.Size = new System.Drawing.Size(809, 12);
+            this.label205.TabIndex = 18;
+            this.label205.Tag = "anchor_left_bottom";
+            this.label205.Text = "注：水印密度的值越小表示水印越密集，最小值为25，支持图片水印设置密度，建议图片尺寸不要太大，图片设置为满屏水印时，不支持修改高度和宽度";
             // 
             // PdfWaterMarkFileList_MoveDown
             // 
@@ -3845,7 +3871,7 @@ namespace DocumentTools
             this.label31.AutoSize = true;
             this.label31.ForeColor = System.Drawing.Color.Tomato;
             this.label31.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label31.Location = new System.Drawing.Point(273, 1083);
+            this.label31.Location = new System.Drawing.Point(273, 1079);
             this.label31.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(161, 36);
@@ -3893,6 +3919,12 @@ namespace DocumentTools
             // 
             // groupBox18
             // 
+            this.groupBox18.Controls.Add(this.RemovePdfAddWaterImage);
+            this.groupBox18.Controls.Add(this.AddPdfWaterMark_FullScren_VerDmi);
+            this.groupBox18.Controls.Add(this.label204);
+            this.groupBox18.Controls.Add(this.AddPdfWaterMark_FullScren_HorDmi);
+            this.groupBox18.Controls.Add(this.label203);
+            this.groupBox18.Controls.Add(this.AddPdfWaterMark_FullScren);
             this.groupBox18.Controls.Add(this.label33);
             this.groupBox18.Controls.Add(this.label32);
             this.groupBox18.Controls.Add(this.WaterMarkImageWidth);
@@ -3923,11 +3955,112 @@ namespace DocumentTools
             this.groupBox18.Tag = "anchor_left_bottom";
             this.groupBox18.Text = "水印设置";
             // 
+            // RemovePdfAddWaterImage
+            // 
+            this.RemovePdfAddWaterImage.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.RemovePdfAddWaterImage.Location = new System.Drawing.Point(761, 70);
+            this.RemovePdfAddWaterImage.Margin = new System.Windows.Forms.Padding(1);
+            this.RemovePdfAddWaterImage.Name = "RemovePdfAddWaterImage";
+            this.RemovePdfAddWaterImage.Size = new System.Drawing.Size(65, 27);
+            this.RemovePdfAddWaterImage.TabIndex = 26;
+            this.RemovePdfAddWaterImage.Text = "清除图片";
+            this.RemovePdfAddWaterImage.UseVisualStyleBackColor = true;
+            this.RemovePdfAddWaterImage.Click += new System.EventHandler(this.RemovePdfAddWaterImage_Click);
+            // 
+            // AddPdfWaterMark_FullScren_VerDmi
+            // 
+            this.AddPdfWaterMark_FullScren_VerDmi.Enabled = false;
+            this.AddPdfWaterMark_FullScren_VerDmi.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.AddPdfWaterMark_FullScren_VerDmi.Location = new System.Drawing.Point(408, 77);
+            this.AddPdfWaterMark_FullScren_VerDmi.Maximum = new decimal(new int[] {
+            65536,
+            0,
+            0,
+            0});
+            this.AddPdfWaterMark_FullScren_VerDmi.Minimum = new decimal(new int[] {
+            25,
+            0,
+            0,
+            0});
+            this.AddPdfWaterMark_FullScren_VerDmi.Name = "AddPdfWaterMark_FullScren_VerDmi";
+            this.AddPdfWaterMark_FullScren_VerDmi.Size = new System.Drawing.Size(56, 21);
+            this.AddPdfWaterMark_FullScren_VerDmi.TabIndex = 25;
+            this.AddPdfWaterMark_FullScren_VerDmi.Value = new decimal(new int[] {
+            25,
+            0,
+            0,
+            0});
+            // 
+            // label204
+            // 
+            this.label204.AutoSize = true;
+            this.label204.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label204.Location = new System.Drawing.Point(351, 81);
+            this.label204.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label204.Name = "label204";
+            this.label204.Size = new System.Drawing.Size(53, 12);
+            this.label204.TabIndex = 24;
+            this.label204.Text = "纵向密度";
+            // 
+            // AddPdfWaterMark_FullScren_HorDmi
+            // 
+            this.AddPdfWaterMark_FullScren_HorDmi.Enabled = false;
+            this.AddPdfWaterMark_FullScren_HorDmi.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.AddPdfWaterMark_FullScren_HorDmi.Location = new System.Drawing.Point(408, 50);
+            this.AddPdfWaterMark_FullScren_HorDmi.Maximum = new decimal(new int[] {
+            65536,
+            0,
+            0,
+            0});
+            this.AddPdfWaterMark_FullScren_HorDmi.Minimum = new decimal(new int[] {
+            25,
+            0,
+            0,
+            0});
+            this.AddPdfWaterMark_FullScren_HorDmi.Name = "AddPdfWaterMark_FullScren_HorDmi";
+            this.AddPdfWaterMark_FullScren_HorDmi.Size = new System.Drawing.Size(56, 21);
+            this.AddPdfWaterMark_FullScren_HorDmi.TabIndex = 23;
+            this.AddPdfWaterMark_FullScren_HorDmi.Value = new decimal(new int[] {
+            25,
+            0,
+            0,
+            0});
+            // 
+            // label203
+            // 
+            this.label203.AutoSize = true;
+            this.label203.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label203.Location = new System.Drawing.Point(351, 54);
+            this.label203.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label203.Name = "label203";
+            this.label203.Size = new System.Drawing.Size(53, 12);
+            this.label203.TabIndex = 22;
+            this.label203.Text = "横向密度";
+            // 
+            // AddPdfWaterMark_FullScren
+            // 
+            this.AddPdfWaterMark_FullScren.AutoSize = true;
+            this.AddPdfWaterMark_FullScren.Location = new System.Drawing.Point(356, 26);
+            this.AddPdfWaterMark_FullScren.Name = "AddPdfWaterMark_FullScren";
+            this.AddPdfWaterMark_FullScren.Size = new System.Drawing.Size(72, 16);
+            this.AddPdfWaterMark_FullScren.TabIndex = 21;
+            this.AddPdfWaterMark_FullScren.Text = "满屏水印";
+            this.AddPdfWaterMark_FullScren.UseVisualStyleBackColor = true;
+            this.AddPdfWaterMark_FullScren.CheckedChanged += new System.EventHandler(this.AddPdfWaterMark_FullScren_CheckedChanged);
+            // 
             // label33
             // 
             this.label33.AutoSize = true;
             this.label33.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label33.Location = new System.Drawing.Point(493, 87);
+            this.label33.Location = new System.Drawing.Point(512, 83);
             this.label33.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(53, 12);
@@ -3938,7 +4071,7 @@ namespace DocumentTools
             // 
             this.label32.AutoSize = true;
             this.label32.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label32.Location = new System.Drawing.Point(493, 57);
+            this.label32.Location = new System.Drawing.Point(512, 53);
             this.label32.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(53, 12);
@@ -3947,7 +4080,7 @@ namespace DocumentTools
             // 
             // WaterMarkImageWidth
             // 
-            this.WaterMarkImageWidth.Location = new System.Drawing.Point(551, 83);
+            this.WaterMarkImageWidth.Location = new System.Drawing.Point(570, 79);
             this.WaterMarkImageWidth.Margin = new System.Windows.Forms.Padding(1);
             this.WaterMarkImageWidth.Name = "WaterMarkImageWidth";
             this.WaterMarkImageWidth.Size = new System.Drawing.Size(83, 21);
@@ -3956,18 +4089,19 @@ namespace DocumentTools
             // AddBackGroudImage
             // 
             this.AddBackGroudImage.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.AddBackGroudImage.Location = new System.Drawing.Point(641, 80);
+            this.AddBackGroudImage.Location = new System.Drawing.Point(655, 71);
             this.AddBackGroudImage.Margin = new System.Windows.Forms.Padding(1);
             this.AddBackGroudImage.Name = "AddBackGroudImage";
-            this.AddBackGroudImage.Size = new System.Drawing.Size(136, 23);
+            this.AddBackGroudImage.Size = new System.Drawing.Size(105, 27);
             this.AddBackGroudImage.TabIndex = 15;
             this.AddBackGroudImage.Text = "选择图片水印...";
+            this.MainToolsTip.SetToolTip(this.AddBackGroudImage, "这种水印是图片水印，是无法通过去水印工具去除的（包括本工具的去水印功能）");
             this.AddBackGroudImage.UseVisualStyleBackColor = true;
             this.AddBackGroudImage.Click += new System.EventHandler(this.AddBackGroudImage_Click);
             // 
             // WaterMarkImageHeight
             // 
-            this.WaterMarkImageHeight.Location = new System.Drawing.Point(551, 53);
+            this.WaterMarkImageHeight.Location = new System.Drawing.Point(570, 49);
             this.WaterMarkImageHeight.Margin = new System.Windows.Forms.Padding(1);
             this.WaterMarkImageHeight.Name = "WaterMarkImageHeight";
             this.WaterMarkImageHeight.Size = new System.Drawing.Size(83, 21);
@@ -3977,10 +4111,10 @@ namespace DocumentTools
             // 
             this.WaterMarkImage.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.WaterMarkImage.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.WaterMarkImage.Location = new System.Drawing.Point(641, 23);
+            this.WaterMarkImage.Location = new System.Drawing.Point(655, 19);
             this.WaterMarkImage.Margin = new System.Windows.Forms.Padding(1);
             this.WaterMarkImage.Name = "WaterMarkImage";
-            this.WaterMarkImage.Size = new System.Drawing.Size(136, 57);
+            this.WaterMarkImage.Size = new System.Drawing.Size(171, 46);
             this.WaterMarkImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.WaterMarkImage.TabIndex = 16;
             this.WaterMarkImage.TabStop = false;
@@ -3988,7 +4122,7 @@ namespace DocumentTools
             // PdfWaterMarkOpcityNumber
             // 
             this.PdfWaterMarkOpcityNumber.FormattingEnabled = true;
-            this.PdfWaterMarkOpcityNumber.Location = new System.Drawing.Point(551, 23);
+            this.PdfWaterMarkOpcityNumber.Location = new System.Drawing.Point(570, 19);
             this.PdfWaterMarkOpcityNumber.Margin = new System.Windows.Forms.Padding(1);
             this.PdfWaterMarkOpcityNumber.Name = "PdfWaterMarkOpcityNumber";
             this.PdfWaterMarkOpcityNumber.Size = new System.Drawing.Size(83, 20);
@@ -3998,7 +4132,7 @@ namespace DocumentTools
             // 
             this.label30.AutoSize = true;
             this.label30.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label30.Location = new System.Drawing.Point(493, 27);
+            this.label30.Location = new System.Drawing.Point(512, 23);
             this.label30.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(53, 12);
@@ -4007,7 +4141,7 @@ namespace DocumentTools
             // 
             // PdfWaterMarkRotateDegNumber
             // 
-            this.PdfWaterMarkRotateDegNumber.Location = new System.Drawing.Point(327, 76);
+            this.PdfWaterMarkRotateDegNumber.Location = new System.Drawing.Point(266, 76);
             this.PdfWaterMarkRotateDegNumber.Margin = new System.Windows.Forms.Padding(1);
             this.PdfWaterMarkRotateDegNumber.Name = "PdfWaterMarkRotateDegNumber";
             this.PdfWaterMarkRotateDegNumber.Size = new System.Drawing.Size(83, 21);
@@ -4018,7 +4152,7 @@ namespace DocumentTools
             // 
             this.label29.AutoSize = true;
             this.label29.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label29.Location = new System.Drawing.Point(245, 83);
+            this.label29.Location = new System.Drawing.Point(182, 81);
             this.label29.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(77, 12);
@@ -4028,7 +4162,7 @@ namespace DocumentTools
             // PDFWaterMarkVerSetting
             // 
             this.PDFWaterMarkVerSetting.FormattingEnabled = true;
-            this.PDFWaterMarkVerSetting.Location = new System.Drawing.Point(327, 51);
+            this.PDFWaterMarkVerSetting.Location = new System.Drawing.Point(266, 51);
             this.PDFWaterMarkVerSetting.Margin = new System.Windows.Forms.Padding(1);
             this.PDFWaterMarkVerSetting.Name = "PDFWaterMarkVerSetting";
             this.PDFWaterMarkVerSetting.Size = new System.Drawing.Size(83, 20);
@@ -4037,7 +4171,7 @@ namespace DocumentTools
             // PdfWaterMarkHorSetting
             // 
             this.PdfWaterMarkHorSetting.FormattingEnabled = true;
-            this.PdfWaterMarkHorSetting.Location = new System.Drawing.Point(327, 24);
+            this.PdfWaterMarkHorSetting.Location = new System.Drawing.Point(266, 24);
             this.PdfWaterMarkHorSetting.Margin = new System.Windows.Forms.Padding(1);
             this.PdfWaterMarkHorSetting.Name = "PdfWaterMarkHorSetting";
             this.PdfWaterMarkHorSetting.Size = new System.Drawing.Size(83, 20);
@@ -4047,7 +4181,7 @@ namespace DocumentTools
             // 
             this.label28.AutoSize = true;
             this.label28.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label28.Location = new System.Drawing.Point(243, 55);
+            this.label28.Location = new System.Drawing.Point(182, 55);
             this.label28.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(77, 12);
@@ -4058,7 +4192,7 @@ namespace DocumentTools
             // 
             this.shui.AutoSize = true;
             this.shui.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.shui.Location = new System.Drawing.Point(245, 27);
+            this.shui.Location = new System.Drawing.Point(184, 27);
             this.shui.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.shui.Name = "shui";
             this.shui.Size = new System.Drawing.Size(77, 12);
@@ -4071,7 +4205,7 @@ namespace DocumentTools
             this.PDFWaterMarkTextFontSetting.Location = new System.Drawing.Point(61, 53);
             this.PDFWaterMarkTextFontSetting.Margin = new System.Windows.Forms.Padding(1);
             this.PDFWaterMarkTextFontSetting.Name = "PDFWaterMarkTextFontSetting";
-            this.PDFWaterMarkTextFontSetting.Size = new System.Drawing.Size(112, 17);
+            this.PDFWaterMarkTextFontSetting.Size = new System.Drawing.Size(112, 21);
             this.PDFWaterMarkTextFontSetting.TabIndex = 6;
             this.PDFWaterMarkTextFontSetting.Text = "设置...";
             this.PDFWaterMarkTextFontSetting.UseVisualStyleBackColor = true;
@@ -4080,10 +4214,10 @@ namespace DocumentTools
             // PdfWaterMarkFontColorSettings
             // 
             this.PdfWaterMarkFontColorSettings.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.PdfWaterMarkFontColorSettings.Location = new System.Drawing.Point(63, 79);
+            this.PdfWaterMarkFontColorSettings.Location = new System.Drawing.Point(61, 79);
             this.PdfWaterMarkFontColorSettings.Margin = new System.Windows.Forms.Padding(1);
             this.PdfWaterMarkFontColorSettings.Name = "PdfWaterMarkFontColorSettings";
-            this.PdfWaterMarkFontColorSettings.Size = new System.Drawing.Size(111, 17);
+            this.PdfWaterMarkFontColorSettings.Size = new System.Drawing.Size(111, 21);
             this.PdfWaterMarkFontColorSettings.TabIndex = 5;
             this.PdfWaterMarkFontColorSettings.Text = "设置...";
             this.PdfWaterMarkFontColorSettings.UseVisualStyleBackColor = true;
@@ -4788,10 +4922,10 @@ namespace DocumentTools
             this.label4.Location = new System.Drawing.Point(3, 481);
             this.label4.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(425, 12);
+            this.label4.Size = new System.Drawing.Size(455, 12);
             this.label4.TabIndex = 10;
             this.label4.Tag = "anchor_left_bottom";
-            this.label4.Text = "提示：8位BMP转换只支持word文档，一般情况下，此选项用于选票模板位置比对";
+            this.label4.Text = "提示：8位BMP转换只支持word和pdf文档，一般情况下，此选项用于选票模板位置比对";
             // 
             // PageExportCheck
             // 
@@ -6883,6 +7017,7 @@ namespace DocumentTools
             // 
             // TabPage_10
             // 
+            this.TabPage_10.Controls.Add(this.WordTextReplace_SaveSourceBox);
             this.TabPage_10.Controls.Add(this.WordReplace_UseRegextSub);
             this.TabPage_10.Controls.Add(this.WordReplace_IgnoreShapes);
             this.TabPage_10.Controls.Add(this.WordReplace_IgnoreInsert);
@@ -6914,6 +7049,19 @@ namespace DocumentTools
             this.TabPage_10.TabIndex = 9;
             this.TabPage_10.Text = "WORD内容批量替换";
             this.TabPage_10.UseVisualStyleBackColor = true;
+            // 
+            // WordTextReplace_SaveSourceBox
+            // 
+            this.WordTextReplace_SaveSourceBox.AutoSize = true;
+            this.WordTextReplace_SaveSourceBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.WordTextReplace_SaveSourceBox.Location = new System.Drawing.Point(749, 457);
+            this.WordTextReplace_SaveSourceBox.Margin = new System.Windows.Forms.Padding(1);
+            this.WordTextReplace_SaveSourceBox.Name = "WordTextReplace_SaveSourceBox";
+            this.WordTextReplace_SaveSourceBox.Size = new System.Drawing.Size(96, 16);
+            this.WordTextReplace_SaveSourceBox.TabIndex = 22;
+            this.WordTextReplace_SaveSourceBox.Tag = "anchor_right_bottom";
+            this.WordTextReplace_SaveSourceBox.Text = "保存到源目录";
+            this.WordTextReplace_SaveSourceBox.UseVisualStyleBackColor = true;
             // 
             // WordReplace_UseRegextSub
             // 
@@ -14154,8 +14302,10 @@ namespace DocumentTools
             this.liblist,
             this.软件设置ToolStripMenuItem,
             this.程序更新ToolStripMenuItem,
+            this.返回上一个功能ToolStripMenuItem,
             this.跳转到该功能ToolStripMenuItem,
-            this.MenuSearchTextBox});
+            this.MenuSearchTextBox,
+            this.MenuSearchMode});
             this.menuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -14453,7 +14603,7 @@ namespace DocumentTools
             // 
             this.压缩PDFToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.pdf;
             this.压缩PDFToolStripMenuItem.Name = "压缩PDFToolStripMenuItem";
-            this.压缩PDFToolStripMenuItem.Size = new System.Drawing.Size(132, 30);
+            this.压缩PDFToolStripMenuItem.Size = new System.Drawing.Size(204, 30);
             this.压缩PDFToolStripMenuItem.Text = "压缩PDF";
             this.压缩PDFToolStripMenuItem.Click += new System.EventHandler(this.压缩PDFToolStripMenuItem_Click);
             // 
@@ -14461,8 +14611,8 @@ namespace DocumentTools
             // 
             this.压缩图片ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.图片;
             this.压缩图片ToolStripMenuItem.Name = "压缩图片ToolStripMenuItem";
-            this.压缩图片ToolStripMenuItem.Size = new System.Drawing.Size(132, 30);
-            this.压缩图片ToolStripMenuItem.Text = "压缩图片";
+            this.压缩图片ToolStripMenuItem.Size = new System.Drawing.Size(204, 30);
+            this.压缩图片ToolStripMenuItem.Text = "压缩图片（格式转换）";
             this.压缩图片ToolStripMenuItem.Click += new System.EventHandler(this.压缩图片ToolStripMenuItem_Click);
             // 
             // 图片功能ToolStripMenuItem
@@ -14886,8 +15036,8 @@ namespace DocumentTools
             this.查看公告信息ToolStripMenuItem});
             this.程序更新ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.版本更新__1_;
             this.程序更新ToolStripMenuItem.Name = "程序更新ToolStripMenuItem";
-            this.程序更新ToolStripMenuItem.Size = new System.Drawing.Size(256, 28);
-            this.程序更新ToolStripMenuItem.Text = "版本更新和公告信息[请常关注公告信息]";
+            this.程序更新ToolStripMenuItem.Size = new System.Drawing.Size(152, 28);
+            this.程序更新ToolStripMenuItem.Text = "版本更新和公告信息";
             // 
             // CheckVersionButton
             // 
@@ -14913,6 +15063,14 @@ namespace DocumentTools
             this.查看公告信息ToolStripMenuItem.Text = "查看公告信息";
             this.查看公告信息ToolStripMenuItem.Click += new System.EventHandler(this.查看公告信息ToolStripMenuItem_Click);
             // 
+            // 返回上一个功能ToolStripMenuItem
+            // 
+            this.返回上一个功能ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.返回;
+            this.返回上一个功能ToolStripMenuItem.Name = "返回上一个功能ToolStripMenuItem";
+            this.返回上一个功能ToolStripMenuItem.Size = new System.Drawing.Size(116, 28);
+            this.返回上一个功能ToolStripMenuItem.Text = "返回上个功能";
+            this.返回上一个功能ToolStripMenuItem.Click += new System.EventHandler(this.返回上一个功能ToolStripMenuItem_Click);
+            // 
             // 跳转到该功能ToolStripMenuItem
             // 
             this.跳转到该功能ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.跳转;
@@ -14926,12 +15084,19 @@ namespace DocumentTools
             // 
             this.MenuSearchTextBox.AutoSize = false;
             this.MenuSearchTextBox.BackColor = System.Drawing.Color.Moccasin;
-            this.MenuSearchTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.MenuSearchTextBox.ForeColor = System.Drawing.SystemColors.InfoText;
             this.MenuSearchTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 0);
             this.MenuSearchTextBox.Name = "MenuSearchTextBox";
-            this.MenuSearchTextBox.Size = new System.Drawing.Size(150, 23);
+            this.MenuSearchTextBox.Size = new System.Drawing.Size(150, 25);
             this.MenuSearchTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MenuSearchTextBox_KeyDown);
+            // 
+            // MenuSearchMode
+            // 
+            this.MenuSearchMode.AutoSize = false;
+            this.MenuSearchMode.BackColor = System.Drawing.Color.Moccasin;
+            this.MenuSearchMode.Name = "MenuSearchMode";
+            this.MenuSearchMode.Size = new System.Drawing.Size(100, 25);
+            this.MenuSearchMode.SelectedIndexChanged += new System.EventHandler(this.MenuSearchMode_SelectedIndexChanged);
             // 
             // MainToolsTip
             // 
@@ -15065,6 +15230,8 @@ namespace DocumentTools
             this.TabPage_18.PerformLayout();
             this.groupBox18.ResumeLayout(false);
             this.groupBox18.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.AddPdfWaterMark_FullScren_VerDmi)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AddPdfWaterMark_FullScren_HorDmi)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.WaterMarkImage)).EndInit();
             this.TabPage_19.ResumeLayout(false);
             this.TabPage_19.PerformLayout();
@@ -16387,8 +16554,18 @@ namespace DocumentTools
         internal CheckBox Excel2Pdf_ForceContentOnOnePage;
         internal CheckBox Word2Excel_ExportSingleSheet;
         private RichTextBox TargetBoxIndex_number;
-        private ToolStripTextBox MenuSearchTextBox;
         private ToolStripMenuItem 跳转到该功能ToolStripMenuItem;
+        private Label label203;
+        private Label label204;
+        internal CheckBox AddPdfWaterMark_FullScren;
+        internal NumericUpDown AddPdfWaterMark_FullScren_HorDmi;
+        internal NumericUpDown AddPdfWaterMark_FullScren_VerDmi;
+        private Label label205;
+        private Button RemovePdfAddWaterImage;
+        private ToolStripMenuItem 返回上一个功能ToolStripMenuItem;
+        private ToolStripComboBox MenuSearchTextBox;
+        private ToolStripComboBox MenuSearchMode;
+        internal CheckBox WordTextReplace_SaveSourceBox;
     }
 }
 
