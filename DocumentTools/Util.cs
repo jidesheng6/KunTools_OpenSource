@@ -1352,7 +1352,7 @@ namespace DocumentTools
 
             TempComressOption.ImageCompressionOptions.Version = CompressPDF_CompressImageVersion;
             TempComressOption.RemoveUnusedStreams = CompressPDF_RemoveUnUseStream;
-            TempComressOption.LinkDuplcateStreams = CompressPDF_LinkeSameStream;
+            TempComressOption.LinkDuplicateStreams = CompressPDF_LinkeSameStream;
             TempComressOption.RemoveUnusedObjects = CompressPDF_RemoveUnUseObject;
             TempComressOption.UnembedFonts = CompressPDF_CancelEmbedFont;
 
@@ -1662,7 +1662,7 @@ namespace DocumentTools
                 RemoveUnusedObjects = true,
                 RemoveUnusedStreams = true,
                 AllowReusePageContent = true,
-                LinkDuplcateStreams = true
+                LinkDuplicateStreams = true
             };
 
             if (CompressPdfImage)

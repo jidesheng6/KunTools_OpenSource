@@ -21,6 +21,8 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 //using System.Web.UI.WebControls;
 using System.Windows.Forms;
+using NPinyin;
+using System.Web.UI.HtmlControls;
 
 namespace DocumentTools
 {
@@ -903,7 +905,7 @@ namespace DocumentTools
             this.html2pdf_combox_pagedirect.DisplayMember = "DisplayValue";
             this.html2pdf_combox_pagedirect.ValueMember = "RealValue";
 
-            foreach(TabPage tempPage in MainTabPage.TabPages)
+            foreach (TabPage tempPage in MainTabPage.TabPages)
             {
                 this.menu_start_page_index_combox.Items.Add(MainTabPage.TabPages.IndexOf(tempPage));
             }
@@ -1117,8 +1119,19 @@ namespace DocumentTools
                         .ToArray());
             this.Exam_Picture_ThreadNumbers.SelectedIndex = 0;
 
-            this.MenuSearchMode.Items.AddRange(new string[] { "精确匹配模式","模糊匹配模式"});
+            this.MenuSearchMode.Items.AddRange(new string[] { "精确匹配模式", "模糊匹配模式" });
             this.MenuSearchMode.SelectedIndex = 0;
+
+            this.GetChinsesHanPinYin_TypeBox.DataSource = new string[] 
+            { 
+                "大写拼音首字母",
+                "小写拼音首字母",
+                "大写拼音（带空格）",
+                "大写拼音（不带空格）",
+                "小写拼音（带空格）",
+                "小写拼音（不带空格）",
+            };
+
 
             //加载城市数据到combox中
             this.city_level_1_combox.Items.Clear();//先清空数据
@@ -1798,8 +1811,37 @@ namespace DocumentTools
                         TargetTextBox.Lines = TempLines.ToArray();
                     }
 
+                    if (GetChinsesHanPinYin.Checked)
+                    {
+                        List<string> PinYingLists = new List<string>();
 
-                    if(NameAutoCopy.Checked && TargetTextBox.Text != string.Empty)
+                        switch (this.GetChinsesHanPinYin_TypeBox.SelectedIndex)
+                        {
+                            case 0://首字母大写
+                                PinYingLists = this.TargetTextBox.Lines.Select(line => Pinyin.GetInitials(line).ToUpper()).ToList();
+                                break;
+                            case 1://首字母小写
+                                PinYingLists = this.TargetTextBox.Lines.Select(line => Pinyin.GetInitials(line).ToLower()).ToList();
+                                break;
+                            case 2://拼音大写（空格）
+                                PinYingLists = this.TargetTextBox.Lines.Select(line => Pinyin.GetPinyin(line).ToUpper()).ToList();
+                                break;
+                            case 3://拼音大写（无空格）
+                                PinYingLists = this.TargetTextBox.Lines.Select(line => Regex.Replace(Pinyin.GetPinyin(line).ToUpper(), @"\s+", "")).ToList();
+                                break;
+                            case 4://拼音小写（空格）
+                                PinYingLists = this.TargetTextBox.Lines.Select(line => Pinyin.GetPinyin(line).ToLower()).ToList();
+                                break;
+                            case 5://拼音小写（无空格）
+                                PinYingLists = this.TargetTextBox.Lines.Select(line => Regex.Replace(Pinyin.GetPinyin(line).ToLower(), @"\s+", "")).ToList();
+                                break;
+                            default:
+                                break;
+                        }
+                        this.TargetTextBox.Lines = PinYingLists.ToArray();
+                    }
+
+                    if (NameAutoCopy.Checked && TargetTextBox.Text != string.Empty)
                     {
                         Clipboard.SetText(TargetTextBox.Text.Replace("\n", Environment.NewLine));//替换换行
                         NameAutoCopyStatusText.Text = "[已复制到剪贴板]";
@@ -1860,6 +1902,8 @@ namespace DocumentTools
                     {
                         this.TargetTextBox.Lines = this.TargetTextBox.Lines.ToList().Distinct().ToArray();
                     }
+
+
                 }
             } catch(Exception ex)
             {
@@ -6715,6 +6759,22 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                 this.MenuSearchTextBox.TextUpdate -= new System.EventHandler(this.MenuSearchTextBox_TextUpdate);
                 this.MenuSearchTextBox.TextUpdate += new System.EventHandler(this.MenuSearchTextBox_TextUpdate);
             }
+        }
+
+        private void GetChinsesHanPinYin_CheckedChanged(object sender, EventArgs e)
+        {
+            DoubleTextAlignCheck.Checked = !GetChinsesHanPinYin.Checked;
+            DoubleTextAlignCheck.Enabled = !GetChinsesHanPinYin.Checked;
+            //if (GetChinsesHanPinYin.Checked==true)
+            //{
+            //    DoubleTextAlignCheck.Checked = false;
+            //    DoubleTextAlignCheck.Enabled = false;
+            //}
+            //else
+            //{
+            //    DoubleTextAlignCheck.Checked = true;
+            //    DoubleTextAlignCheck.Enabled = true;
+            //}
         }
     }
 }
