@@ -131,6 +131,15 @@ namespace DocumentTools.Properties {
         }
         
         /// <summary>
+        ///   查找类似 PExpY2Vuc2U+CiAgPERhdGE+CiAgICA8TGljZW5zZWRUbz5Eb3dubG9hZERldlRvb2xzLmNvbTwvTGljZW5zZWRUbz4KICAgIDxFbWFpbFRvPlN1cHBvcnRARG93bmxvYWREZXZUb29scy5jb208L0VtYWlsVG8+CiAgICA8TGljZW5zZVR5cGU+U2l0ZSBPRU08L0xpY2Vuc2VUeXBlPgogICAgPExpY2Vuc2VOb3RlPkxpbWl0ZWQgdG8gMTAwMCBkZXZlbG9wZXJzLCB1bmxpbWl0ZWQgcGh5c2ljYWwgbG9jYXRpb25zPC9MaWNlbnNlTm90ZT4KICAgIDxPcmRlcklEPjM2NjMyMDA4NTQ4MjwvT3JkZXJJRD4KICAgIDxVc2VySUQ+NjU0MTk0Mzg2PC9Vc2VySUQ+CiAgICA8T0VNPlRoaXMgaXMgYSByZWRpc3RyaWJ1dGFibGUgbGljZW5zZTwvT0VNPgogICAgPFByb2R1Y3RzPgogICAg [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string AsposeCrackLicBaseString {
+            get {
+                return ResourceManager.GetString("AsposeCrackLicBaseString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
         internal static System.Drawing.Bitmap B {
@@ -146,6 +155,16 @@ namespace DocumentTools.Properties {
         internal static byte[] BarCodeTemplate {
             get {
                 object obj = ResourceManager.GetObject("BarCodeTemplate", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] ChangeExamComputerName {
+            get {
+                object obj = ResourceManager.GetObject("ChangeExamComputerName", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -405,6 +424,16 @@ namespace DocumentTools.Properties {
         /// <summary>
         ///   查找 System.Byte[] 类型的本地化资源。
         /// </summary>
+        internal static byte[] VoteMssTif {
+            get {
+                object obj = ResourceManager.GetObject("VoteMssTif", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
         internal static byte[] VoteReportDoc {
             get {
                 object obj = ResourceManager.GetObject("VoteReportDoc", resourceCulture);
@@ -575,6 +604,16 @@ namespace DocumentTools.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap 大头儿子 {
+            get {
+                object obj = ResourceManager.GetObject("大头儿子", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap 姓名 {
             get {
                 object obj = ResourceManager.GetObject("姓名", resourceCulture);
@@ -628,6 +667,16 @@ namespace DocumentTools.Properties {
         internal static System.Drawing.Bitmap 微信图片_20240401192428 {
             get {
                 object obj = ResourceManager.GetObject("微信图片_20240401192428", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 懒得喷 {
+            get {
+                object obj = ResourceManager.GetObject("懒得喷", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -819,6 +868,16 @@ namespace DocumentTools.Properties {
         internal static System.Drawing.Bitmap 红旗_高亮 {
             get {
                 object obj = ResourceManager.GetObject("红旗_高亮", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 红温 {
+            get {
+                object obj = ResourceManager.GetObject("红温", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

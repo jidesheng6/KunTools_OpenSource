@@ -59,7 +59,7 @@ namespace DocumentTools
                 System.Drawing.Imaging.PixelFormat.Format8bppIndexed);
 
             System.Drawing.Imaging.ColorPalette palette = outputBitmap.Palette;
-            for (int i = 0; i < 256; i++)
+            for(int i = 0; i < 256; i++)
             {
                 palette.Entries[i] = Color.FromArgb(i, i, i);
             }
@@ -76,27 +76,27 @@ namespace DocumentTools
 
             unsafe
             {
-                byte* inputPointer = (byte*)inputData.Scan0;
-                byte* outputPointer = (byte*)outputData.Scan0;
+    byte* inputPointer = (byte*)inputData.Scan0;
+    byte* outputPointer = (byte*)outputData.Scan0;
 
-                for (int y = 0; y < inputBitmap.Height; y++)
-                {
-                    for (int x = 0; x < inputBitmap.Width; x++)
-                    {
-                        byte r = inputPointer[2];
-                        byte g = inputPointer[1];
-                        byte b = inputPointer[0];
-                        byte grayValue = (byte)(0.299 * r + 0.587 * g + 0.114 * b);
+    for(int y = 0; y < inputBitmap.Height; y++)
+    {
+        for(int x = 0; x < inputBitmap.Width; x++)
+        {
+            byte r = inputPointer[2];
+            byte g = inputPointer[1];
+            byte b = inputPointer[0];
+            byte grayValue = (byte)(0.299 * r + 0.587 * g + 0.114 * b);
 
-                        outputPointer[0] = grayValue;
+            outputPointer[0] = grayValue;
 
-                        inputPointer += 3;
-                        outputPointer++;
-                    }
+            inputPointer += 3;
+            outputPointer++;
+        }
 
-                    inputPointer += inputData.Stride - inputBitmap.Width * 3;
-                    outputPointer += outputData.Stride - outputBitmap.Width;
-                }
+        inputPointer += inputData.Stride - inputBitmap.Width * 3;
+        outputPointer += outputData.Stride - outputBitmap.Width;
+    }
             }
 
             inputBitmap.UnlockBits(inputData);
@@ -114,17 +114,16 @@ namespace DocumentTools
         private static void DeleteRegistryKey(RegistryHive OpenRegistryHive, string OpenRegistryPath, string DeleteName)
         {
             RegistryKey TempRootRegistryKey;
-            if (Environment.Is64BitOperatingSystem)
+            if(Environment.Is64BitOperatingSystem)
             {
                 TempRootRegistryKey = RegistryKey.OpenBaseKey(OpenRegistryHive, RegistryView.Registry64);
-            }
-            else
+            } else
             {
                 TempRootRegistryKey = RegistryKey.OpenBaseKey(OpenRegistryHive, RegistryView.Registry32);
             }
             RegistryKey TempSubKey = TempRootRegistryKey.OpenSubKey(OpenRegistryPath, true);
 
-            if (TempSubKey != null && TempSubKey.GetValueNames().Contains(DeleteName))
+            if(TempSubKey != null && TempSubKey.GetValueNames().Contains(DeleteName))
             {
                 TempSubKey.DeleteValue(DeleteName);
                 TempSubKey.Close();
@@ -166,12 +165,12 @@ namespace DocumentTools
             Aspose.Pdf.Facades.Bookmarks TempBookMarks,
             Aspose.Pdf.Facades.Bookmark TempCurrentMark)
         {
-            foreach (Aspose.Pdf.Facades.Bookmark TempBookMark in TempBookMarks)
+            foreach(Aspose.Pdf.Facades.Bookmark TempBookMark in TempBookMarks)
             {
-                if (TempBookMark == TempCurrentMark)
+                if(TempBookMark == TempCurrentMark)
                 {
                     int currentIndex = TempBookMarks.IndexOf(TempBookMark);
-                    if (currentIndex < TempBookMarks.Count - 1)
+                    if(currentIndex < TempBookMarks.Count - 1)
                     {
                         return TempBookMarks[currentIndex + 1];
                     }
@@ -207,21 +206,20 @@ namespace DocumentTools
         {
             object TempValue = null;
             RegistryKey TempRootRegistryKey;
-            if (Environment.Is64BitOperatingSystem)
+            if(Environment.Is64BitOperatingSystem)
             {
                 TempRootRegistryKey = RegistryKey.OpenBaseKey(OpenRegistryHive, RegistryView.Registry64);
-            }
-            else
+            } else
             {
                 TempRootRegistryKey = RegistryKey.OpenBaseKey(OpenRegistryHive, RegistryView.Registry32);
             }
             RegistryKey TempSubKey = TempRootRegistryKey.OpenSubKey(OpenRegistryPath);
 
-            if (TempSubKey != null)
+            if(TempSubKey != null)
             {
                 TempValue = TempSubKey.GetValue(RegistryName);
 
-                if (TempValue != null)
+                if(TempValue != null)
                 {
                     TempSubKey.Close();
                 }
@@ -241,7 +239,7 @@ namespace DocumentTools
             Match TempMacth = RegexClass.Match(ContentString);
             string ContentText = string.Empty;
 
-            if (TempMacth.Success)
+            if(TempMacth.Success)
             {
                 ContentText = TempMacth.Value;
             }
@@ -255,9 +253,9 @@ namespace DocumentTools
 
             List<string> ContentTexts = new List<string>();
 
-            foreach (Match TempMatch in TempMacth)
+            foreach(Match TempMatch in TempMacth)
             {
-                if (TempMatch.Success)
+                if(TempMatch.Success)
                 {
                     ContentTexts.Add(TempMatch.Value);
                 }
@@ -292,10 +290,10 @@ namespace DocumentTools
         /// <returns></returns>
         private static string RemoveSpeciCharacter(string[] SpecialCharacters, string InputText)
         {
-            foreach (string SpecialCharacter in SpecialCharacters)
+            foreach(string SpecialCharacter in SpecialCharacters)
             {
                 bool MatchStatus = Regex.Match(InputText, SpecialCharacter, RegexOptions.Multiline).Success;
-                if (MatchStatus)
+                if(MatchStatus)
                 {
                     InputText = Regex.Replace(InputText, SpecialCharacter, string.Empty, RegexOptions.Multiline);
                 }
@@ -312,7 +310,7 @@ namespace DocumentTools
             string UserProfileDir, IconCacheFile;
             UserProfileDir = Environment.GetEnvironmentVariable("userprofile");
             IconCacheFile = $@"{UserProfileDir}\AppData\Local\iconcache.db";
-            if (File.Exists(IconCacheFile))
+            if(File.Exists(IconCacheFile))
             {
                 File.SetAttributes(IconCacheFile, FileAttributes.Normal);
                 File.Delete(IconCacheFile);
@@ -335,11 +333,10 @@ namespace DocumentTools
             RegistryValueKind WriteKind)
         {
             RegistryKey TempRootRegistryKey;
-            if (Environment.Is64BitOperatingSystem)
+            if(Environment.Is64BitOperatingSystem)
             {
                 TempRootRegistryKey = RegistryKey.OpenBaseKey(OpenRegistryHive, RegistryView.Registry64);
-            }
-            else
+            } else
             {
                 TempRootRegistryKey = RegistryKey.OpenBaseKey(OpenRegistryHive, RegistryView.Registry32);
             }
@@ -349,7 +346,7 @@ namespace DocumentTools
 
             RegistryKey TempSubKey = TempRootRegistryKey.OpenSubKey(OpenRegistryPath, true);
 
-            if (TempSubKey != null)
+            if(TempSubKey != null)
             {
                 TempSubKey.SetValue(WriteRegistryName, WriteRegistryValue, WriteKind);
                 TempSubKey.Close();
@@ -378,7 +375,7 @@ namespace DocumentTools
 
             string[] ReturnTextList;
 
-            if (MatchRegexStatus("\\t", InputText))//表示匹配到的是传统word表格中直接复制的内容
+            if(MatchRegexStatus("\\t", InputText))//表示匹配到的是传统word表格中直接复制的内容
             {
                 InputText = Regex.Replace(InputText, "\n", string.Empty, RegexOptions.Multiline);//去除全部的windows下回车符号
                 InputText = Regex.Replace(InputText, "\t", "\n", RegexOptions.Multiline);//将\t全部换成\n换行符
@@ -387,16 +384,16 @@ namespace DocumentTools
 
                 string[] AllSpaceChar = new string[] { "\\s", "○", "□", "£" };//设置基础特殊字符列表
 
-                foreach (string TempText in TempInputTextByTap)//遍历分割数组，得到每个文字
+                foreach(string TempText in TempInputTextByTap)//遍历分割数组，得到每个文字
                 {
                     string TempInputTextNoSpace = RemoveSpeciCharacter(AllSpaceChar, TempText);//对每个文字进行删除特殊字符处理
 
-                    if (RemoveNumber)
+                    if(RemoveNumber)
                     {
                         TempInputTextNoSpace = RemoveSpeciCharacter(new string[] { "[0-9]" }, TempInputTextNoSpace);//移除数字
                     }
 
-                    if (RemoveSquare)
+                    if(RemoveSquare)
                     {
                         //删除括号
                         TempInputTextNoSpace = RemoveSpeciCharacter(
@@ -404,46 +401,44 @@ namespace DocumentTools
                             TempInputTextNoSpace);
                     }
 
-                    if (NameReplace && SearchText != string.Empty)
+                    if(NameReplace && SearchText != string.Empty)
                     {
-                        if (BodyForm.MainForm.NameReplaceMode)
+                        if(BodyForm.MainForm.NameReplaceMode)
                         {
                             TempInputTextNoSpace = Regex.Replace(
                                 TempInputTextNoSpace,
                                 SearchText,
                                 ReplaceText,
                                 RegexOptions.Multiline);
-                        }
-                        else
+                        } else
                         {
                             TempInputTextNoSpace = TempInputTextNoSpace.Replace(SearchText, ReplaceText);
                         }
                     }
 
-                    if (TempInputTextNoSpace != string.Empty)
+                    if(TempInputTextNoSpace != string.Empty)
                     {
                         //只有非空白文本才添加到数组中
                         TextList.Add(TempInputTextNoSpace);
                     }
                 }
-            }
-            else
+            } else
             {
                 //以下是对常规列文本进行普通处理
 
                 string[] TempNewLineText = InputText.Split(new char[] { '\n' });
-                foreach (string TempText in TempNewLineText)
+                foreach(string TempText in TempNewLineText)
                 {
-                    if (TempText != string.Empty)
+                    if(TempText != string.Empty)
                     {
                         string AddListText = RemoveSpeciCharacter(new string[] { "\\s" }, TempText);
 
-                        if (RemoveNumber)
+                        if(RemoveNumber)
                         {
                             AddListText = RemoveSpeciCharacter(new string[] { "[0-9]" }, AddListText);//移除数字
                         }
 
-                        if (RemoveSquare)
+                        if(RemoveSquare)
                         {
                             //删除括号
                             AddListText = RemoveSpeciCharacter(
@@ -451,23 +446,22 @@ namespace DocumentTools
                                 AddListText);
                         }
 
-                        if (NameReplace && SearchText != string.Empty)
+                        if(NameReplace && SearchText != string.Empty)
                         {
-                            if (BodyForm.MainForm.NameReplaceMode)
+                            if(BodyForm.MainForm.NameReplaceMode)
                             {
                                 AddListText = Regex.Replace(
                                     AddListText,
                                     SearchText,
                                     ReplaceText,
                                     RegexOptions.Multiline);
-                            }
-                            else
+                            } else
                             {
                                 AddListText = AddListText.Replace(SearchText, ReplaceText);
                             }
                         }
 
-                        if (AddListText != string.Empty)
+                        if(AddListText != string.Empty)
                         {
                             //只有非空白文本才添加到数组中
                             TextList.Add(AddListText);
@@ -478,7 +472,7 @@ namespace DocumentTools
 
             ReturnTextList = TextList.ToArray();
 
-            if (NameStorke)
+            if(NameStorke)
             {
                 //按照姓氏笔画排序
                 CultureInfo cultureInfo = new CultureInfo(133124);
@@ -508,7 +502,7 @@ namespace DocumentTools
             string AddBackGroundImageFileName)
         {
             using Aspose.Pdf.Document TempLoadDocument = new Aspose.Pdf.Document(DocuementFileName);
-            foreach (Aspose.Pdf.Page TempPage in TempLoadDocument.Pages)
+            foreach(Aspose.Pdf.Page TempPage in TempLoadDocument.Pages)
             {
                 BackgroundArtifact TempAddArtifact = new BackgroundArtifact
                 {
@@ -516,7 +510,7 @@ namespace DocumentTools
                 };
 
                 //通过获取combox索引来设置对齐方式
-                switch (WaterMarkHorAlignIndex)
+                switch(WaterMarkHorAlignIndex)
                 {
                     case 0:
                         TempAddArtifact.ArtifactHorizontalAlignment = Aspose.Pdf.HorizontalAlignment.None;
@@ -540,7 +534,7 @@ namespace DocumentTools
                         break;
                 }
 
-                switch (WaterMarkVerAlignIndex)
+                switch(WaterMarkVerAlignIndex)
                 {
                     case 0:
                         TempAddArtifact.ArtifactVerticalAlignment = Aspose.Pdf.VerticalAlignment.None;
@@ -597,7 +591,10 @@ namespace DocumentTools
             string AddImageWidth = "100",
             bool FullScreenMode = false,
             int WaterDmi_Hor = 25,
-            int WaterDmi_Ver = 25)
+            int WaterDmi_Ver = 25,
+            bool CustomPostion=false,
+            double CustomPostion_X=0,
+            double CustomPostion_Y=0)
         {
             using Aspose.Pdf.Document TempLoadDocument = new Aspose.Pdf.Document(DocuementFileName);
             #region foreach添加水印
@@ -609,34 +606,34 @@ namespace DocumentTools
                 int PageRow = (int)(PageHeight / WaterDmi_Hor);
                 int PageCol = (int)(PageWidth / WaterDmi_Ver);
 
-                if (!string.IsNullOrEmpty(AddImageFileName))
+                if(!string.IsNullOrEmpty(AddImageFileName))
                 {
-                    lock (TempPage)
+                    lock(TempPage)
                     {
-                        if (FullScreenMode)
+                        if(FullScreenMode)
                         {
-                            for (int i = 0; i <= PageRow; i++)
+                            for(int i = 0; i <= PageRow; i++)
                             {
-                                for (int j = 0; j <= PageCol; j++)
+                                for(int j = 0; j <= PageCol; j++)
                                 {
                                     WatermarkArtifact TempAddArtifact = new WatermarkArtifact();
 
-                                    TempAddArtifact.ArtifactHorizontalAlignment = GetHorizontalAlignment(WaterMarkHorAlignIndex);
-                                    TempAddArtifact.ArtifactVerticalAlignment = GetVerticalAlignment(WaterMarkVerAlignIndex);
+                                    TempAddArtifact.ArtifactHorizontalAlignment = GetHorizontalAlignment(
+                                        WaterMarkHorAlignIndex);
+                                    TempAddArtifact.ArtifactVerticalAlignment = GetVerticalAlignment(
+                                        WaterMarkVerAlignIndex);
                                     TempAddArtifact.Rotation = Convert.ToInt32(WaterMarkRotateDegNum);
                                     TempAddArtifact.Opacity = WaterMarkOpactiyNum;
                                     TempAddArtifact.IsBackground = false;
                                     TempAddArtifact.SetImage(AddImageFileName);
                                     TempAddArtifact.Position = new Aspose.Pdf.Point(j * WaterDmi_Hor, i * WaterDmi_Ver);
-                                    lock (TempAddArtifact)
+                                    lock(TempAddArtifact)
                                     {
                                         TempPage.Artifacts.Add(TempAddArtifact);
-
                                     }
                                 }
                             }
-                        }
-                        else
+                        } else
                         {
                             ImageStamp TempAddArtifact = new ImageStamp(AddImageFileName)
                             {
@@ -653,10 +650,10 @@ namespace DocumentTools
                         }
                     }
                 }
-                //没有图片就用文字水印
-                else
+ //没有图片就用文字水印
+ else
                 {
-                    lock (TempPage)
+                    lock(TempPage)
                     {
                         WatermarkArtifact TempAddArtifact = new WatermarkArtifact();
 
@@ -675,15 +672,20 @@ namespace DocumentTools
                         TempAddArtifact.Rotation = Convert.ToInt32(WaterMarkRotateDegNum);
                         TempAddArtifact.Opacity = WaterMarkOpactiyNum;
                         TempAddArtifact.IsBackground = false;
+
+                        if (CustomPostion)
+                        {
+                            TempAddArtifact.Position = new Aspose.Pdf.Point(CustomPostion_X, CustomPostion_Y);
+                        }
+
                         lock (TempAddArtifact)
                         {
-                            if (FullScreenMode)
+                            if(FullScreenMode)
                             {
-                                for (int i = 0; i <= PageRow; i++)
+                                for(int i = 0; i <= PageRow; i++)
                                 {
-                                    for (int j = 0; j <= PageCol; j++)
+                                    for(int j = 0; j <= PageCol; j++)
                                     {
-
                                         TempAddArtifact.Position = new Aspose.Pdf.Point(
                                             j * WaterDmi_Hor,
                                             i * WaterDmi_Ver);
@@ -691,8 +693,7 @@ namespace DocumentTools
                                         Debug.WriteLine($"已经添加第{i}行第{j}列的水印...");
                                     }
                                 }
-                            }
-                            else
+                            } else
                             {
                                 TempPage.Artifacts.Add(TempAddArtifact);
                             }
@@ -757,54 +758,53 @@ namespace DocumentTools
 
             var (DataReader, DataConnection) = GetAccessDataReader(DataBaseFile, VF_Report.QueryContent(ReportId));
 
-            while (DataReader.Read())
+            while(DataReader.Read())
             {
                 string TempContent = DataReader["Content"].ToString();
 
-                if (string.Compare(ChangeType, "所有项目", StringComparison.Ordinal) == 0)
+                if(string.Compare(ChangeType, "所有项目", StringComparison.Ordinal) == 0)
                 {
-                    if (ChangeItemDataFormat)
+                    if(ChangeItemDataFormat)
                     {
                         SearchContentTexts = Util.GetReportContentTexts(VF_Report.KindFormat_Regex, TempContent);
 
-                        foreach (string SearchContentText in SearchContentTexts)
+                        foreach(string SearchContentText in SearchContentTexts)
                         {
                             UpdateSqlStrings.Add(
                                 @$"UPDATE Report_Detail SET Content = Replace(Content,'{SearchContentText}','Kind={ChangeItemDataFormatText}') WHERE ReportID={ReportId}");
                         }
                     }
 
-                    if (ChangeItemRaid)
+                    if(ChangeItemRaid)
                     {
                         SearchContentTexts = Util.GetReportContentTexts(VF_Report.RaidFormat_Regex, TempContent);
 
-                        foreach (string SearchContentText in SearchContentTexts)
+                        foreach(string SearchContentText in SearchContentTexts)
                         {
                             UpdateSqlStrings.Add(
                                 @$"UPDATE Report_Detail SET Content = Replace(Content,'{SearchContentText}','Raid={ChangeItemRaidText}') WHERE ReportID={ReportId} AND Content='{TempContent}'");
                         }
                     }
-                }
-                else
+                } else
                 {
                     string ExamName = Util.GetReportContentText(VF_Report.ExamItemFormat_Regex, TempContent)
                         .Replace("Item=", string.Empty);
 
-                    if (string.Compare(ChangeType, ExamName, StringComparison.Ordinal) == 0)
+                    if(string.Compare(ChangeType, ExamName, StringComparison.Ordinal) == 0)
                     {
-                        if (ChangeItemName)
+                        if(ChangeItemName)
                         {
                             UpdateSqlStrings.Add(
                                 @$"UPDATE Report_Detail SET Content = Replace(Content,'Item={ChangeType}','Item={ChangeItemText}') WHERE ReportID={ReportId} AND Content = '{TempContent}'");
                         }
 
-                        if (ChangeItemDataFormat)
+                        if(ChangeItemDataFormat)
                         {
                             UpdateSqlStrings.Add(
                                 @$"UPDATE Report_Detail SET Content = Replace(Content,'Kind={ItemDataFormatText}','Kind={ChangeItemDataFormatText}') WHERE ReportID={ReportId} AND Content = '{TempContent}'");
                         }
 
-                        if (ChangeItemRaid)
+                        if(ChangeItemRaid)
                         {
                             UpdateSqlStrings.Add(
                                 @$"UPDATE Report_Detail SET Content = Replace(Content,'Raid={ItemRaidText}','Raid={ChangeItemRaidText}') WHERE ReportID={ReportId} AND Content = '{TempContent}'");
@@ -862,10 +862,10 @@ namespace DocumentTools
 
             DataFormatFontSetString = string.IsNullOrEmpty(DataFormatFontSetString) &&
                     DataFormatFontSetString.Split(',').Length == 3
-                ? "宋体,12,0"
+                ? "宋体,11,0"
                 : DataFormatFontSetString;
 
-            switch (DataFormatNumberPointSelectIndex)
+            switch(DataFormatNumberPointSelectIndex)
             {
                 case "0":
                     Report_Para_ValueDisplayText = "999";
@@ -897,9 +897,9 @@ namespace DocumentTools
 
 
             //使用行模式
-            if (isRowMode)
+            if(isRowMode)
             {
-                for (int Col = int.Parse(RowMode_Col_Start); Col <= int.Parse(RowMode_Col_End); Col++)
+                for(int Col = int.Parse(RowMode_Col_Start); Col <= int.Parse(RowMode_Col_End); Col++)
                 {
                     ChangeExamReporParaProgressBar.PerformStep();
 
@@ -907,47 +907,71 @@ namespace DocumentTools
 
                     // 使用 | 来区分多个选项，比如优秀|良好|一般|较差|弃权
                     string[] ItemSelectors = RowMode_ItemSelector.Split('|');
+                    //多个项目分隔
+                    string[] ItemNames = RowMode_ItemName.Split('|');
 
-                    foreach (string ItemSelector in ItemSelectors)
+                    string[] ItemDataKinds = DataFormatKind.Split('|');
+
+                    foreach(string TempItemName in ItemNames)
                     {
-                        //当循环多个选项中存在@符号的时候，表示这个里面有合计多项合计的项目
-                        string[] ItemSelectorMutil = ItemSelector.Split('@');
-
-                        //构造一个通用的组合，项目名称和选项
-                        string ReportParaContent_PartString = $"Item={RowMode_ItemName}&vftab;Selector={ItemSelector}";
-
-                        //如果确实存在，而不是单个选项才进行字段改写
-                        if (ItemSelectorMutil.Length > 1)
+                        foreach(string ItemSelector in ItemSelectors)
                         {
-                            //对字段清空，准备改写这部分的参数
-                            ReportParaContent_PartString = string.Empty;
-
-                            Report_Para_Kind2 = "多项合计";
-
-                            foreach (string ItemMutilSelector in ItemSelectorMutil)
+                            foreach(string TempDataKind in ItemDataKinds)
                             {
-                                //将选项和项目使用#号拼接
-                                ReportParaContent_PartString += $"{RowMode_ItemName}#{ItemMutilSelector}，";
+                                //当循环多个选项中存在@符号的时候，表示这个里面有合计多项合计的项目
+                                string[] ItemSelectorMutil = ItemSelector.Split('@');
+
+                                //构造一个通用的组合，项目名称和选项
+                                string ReportParaContent_PartString = $"Item={TempItemName}&vftab;Selector={ItemSelector}";
+
+                                //此处改写DataFormatKind的值，用于设置得票数和得票率跟随的项目
+                                DataFormatKind = TempDataKind;
+
+                                //if(ItemNames.Length>1)
+                                //{
+                                //    foreach(string TempItemName in ItemNames)
+                                //    {
+                                //        ReportParaContent_PartString = $"Item={TempItemName}&vftab;Selector={ItemSelector}";
+
+                                //        Debug.WriteLine(ReportParaContent_PartString);
+                                //    }
+                                //}
+
+                                //如果确实存在，而不是单个选项才进行字段改写
+                                if(ItemSelectorMutil.Length > 1)
+                                {
+                                    //对字段清空，准备改写这部分的参数
+                                    ReportParaContent_PartString = string.Empty;
+
+                                    Report_Para_Kind2 = "多项合计";
+
+                                    foreach(string ItemMutilSelector in ItemSelectorMutil)
+                                    {
+                                        //将选项和项目使用#号拼接
+                                        ReportParaContent_PartString += $"{RowMode_ItemName}#{ItemMutilSelector}，";
+                                    }
+                                    //将拼接后的字符串作为多项合计的参数组合起来
+                                    ReportParaContent_PartString = $"GridItem={ReportParaContent_PartString}".TrimEnd(
+                                        '，');
+                                }
+
+                                StringBuilder ReportParaContent = new StringBuilder(); // 在这里重新创建 ReportParaContent
+
+                                ReportParaContent.Append($"Bool:Kind={DataFormatKind}&vftab;");
+                                ReportParaContent.Append($"Kind2={Report_Para_Kind2}&vftab;");
+                                ReportParaContent.Append($"Raid={DataFormatRaid}&vftab;");
+                                ReportParaContent.Append(
+                                    $"{Report_Para_ValueSetOption}&vftab;{ReportParaContent_PartString}");
+
+                                //开始往HashSet里面添加内容
+                                ReportContentHash.Add(ReportParaContent.ToString());
+                                ReportItemHash.Add(currentItemKey);
+
+                                //添加完毕后清除builder内容，准备下一次循环
+                                ReportParaContent.Clear();
                             }
-                            //将拼接后的字符串作为多项合计的参数组合起来
-                            ReportParaContent_PartString = $"GridItem={ReportParaContent_PartString}".TrimEnd('，');
                         }
-
-                        StringBuilder ReportParaContent = new StringBuilder(); // 在这里重新创建 ReportParaContent
-
-                        ReportParaContent.Append($"Bool:Kind={DataFormatKind}&vftab;");
-                        ReportParaContent.Append($"Kind2={Report_Para_Kind2}&vftab;");
-                        ReportParaContent.Append($"Raid={DataFormatRaid}&vftab;");
-                        ReportParaContent.Append($"{Report_Para_ValueSetOption}&vftab;{ReportParaContent_PartString}");
-
-                        //开始往HashSet里面添加内容
-                        ReportContentHash.Add(ReportParaContent.ToString());
-                        ReportItemHash.Add(currentItemKey);
-
-                        //添加完毕后清除builder内容，准备下一次循环
-                        ReportParaContent.Clear();
                     }
-
                     //插入999数字
                     TempInsertSql.Parameters.AddWithValue(Report_Para_ReportID, ReportId);
                     TempInsertSql.Parameters.AddWithValue(Report_Para_Kind, "GridFormatText");
@@ -985,25 +1009,24 @@ namespace DocumentTools
                 //基础插入的循环结束以后，开始准备插入数据
                 ChangeExamReporParaProgressBar.Value = 0;
 
-                foreach (string ReportItemString in ReportItemHash)
+                foreach(string ReportItemString in ReportItemHash)
                 {
                     ChangeExamReporParaProgressBar.PerformStep();
 
-                    foreach (string ReportContentString in ReportContentHash)
+                    foreach(string ReportContentString in ReportContentHash)
                     {
-                        if (!RowMode_InsertSameItemSelector)
+                        if(!RowMode_InsertSameItemSelector)
                         {
                             //确保key和value的唯一性，不过这样的话，运行的时候，有几个选项，插入也只会执行几次
                             //如果有五个选项，优秀、良好、一般、较差、弃权，那就是正常插入，如果只有两个选项，也就只会插入两列的数据
-                            if (!ReportItemAndReportContent.ContainsKey(ReportItemString) &&
+                            if(!ReportItemAndReportContent.ContainsKey(ReportItemString) &&
                                 !ReportItemAndReportContent.ContainsValue(ReportContentString))
                             {
                                 ReportItemAndReportContent.Add(ReportItemString, ReportContentString);
                             }
-                        }
-                        else
+                        } else
                         {
-                            if (!ReportItemAndReportContent.ContainsKey(ReportItemString))
+                            if(!ReportItemAndReportContent.ContainsKey(ReportItemString))
                             {
                                 ReportItemAndReportContent.Add(ReportItemString, ReportContentString);
                             }
@@ -1013,7 +1036,7 @@ namespace DocumentTools
 
                 ChangeExamReporParaProgressBar.Value = 0;
 
-                foreach (KeyValuePair<string, string> ReportItem_Content in ReportItemAndReportContent)
+                foreach(KeyValuePair<string, string> ReportItem_Content in ReportItemAndReportContent)
                 {
                     ChangeExamReporParaProgressBar.PerformStep();
 
@@ -1026,12 +1049,11 @@ namespace DocumentTools
                     TempInsertSql.Parameters.Clear();
                 }
                 ChangeExamReporParaProgressBar.Value = 0;
-            }
-            else
+            } else
             {
                 string ReportParaContent_PartString = string.Empty;
 
-                for (int Row = int.Parse(ColMode_Row_Start); Row <= int.Parse(ColMode_Row_End); Row++)
+                for(int Row = int.Parse(ColMode_Row_Start); Row <= int.Parse(ColMode_Row_End); Row++)
                 {
                     ChangeExamReporParaProgressBar.PerformStep();
 
@@ -1039,35 +1061,42 @@ namespace DocumentTools
 
                     string[] ItemNames = ColMode_ItemName.Split('|');
 
-                    foreach (string ItemName in ItemNames)
+                    string[] RaidNames = DataFormatRaid.Split('|');
+
+                    foreach(string ItemName in ItemNames)
                     {
-                        string[] ItemSelectorMutil = ColMode_ItemSelector.Split('@');
-
-                        ReportParaContent_PartString = $"Item={ItemName}&vftab;Selector={ColMode_ItemSelector}";
-
-                        if (ItemSelectorMutil.Length > 1)
+                        foreach(string TempRaidName in RaidNames)
                         {
-                            ReportParaContent_PartString = string.Empty;
+                            DataFormatRaid = TempRaidName;
+                            string[] ItemSelectorMutil = ColMode_ItemSelector.Split('@');
 
-                            Report_Para_Kind2 = "多项合计";
+                            ReportParaContent_PartString = $"Item={ItemName}&vftab;Selector={ColMode_ItemSelector}";
 
-                            foreach (string ItemSelectorString in ItemSelectorMutil)
+                            if(ItemSelectorMutil.Length > 1)
                             {
-                                ReportParaContent_PartString += $"{ItemName}#{ItemSelectorString}，";
+                                ReportParaContent_PartString = string.Empty;
+
+                                Report_Para_Kind2 = "多项合计";
+
+                                foreach(string ItemSelectorString in ItemSelectorMutil)
+                                {
+                                    ReportParaContent_PartString += $"{ItemName}#{ItemSelectorString}，";
+                                }
+                                ReportParaContent_PartString = $"GridItem={ReportParaContent_PartString}".TrimEnd('，');
                             }
-                            ReportParaContent_PartString = $"GridItem={ReportParaContent_PartString}".TrimEnd('，');
+                            StringBuilder ReportParaContent = new StringBuilder(); // 在这里重新创建 ReportParaContent
+
+                            ReportParaContent.Append($"Bool:Kind={DataFormatKind}&vftab;");
+                            ReportParaContent.Append($"Kind2={Report_Para_Kind2}&vftab;");
+                            ReportParaContent.Append($"Raid={DataFormatRaid}&vftab;");
+                            ReportParaContent.Append(
+                                $"{Report_Para_ValueSetOption}&vftab;{ReportParaContent_PartString}");
+
+                            ReportItemHash.Add(CurrentItemKey);
+                            ReportContentHash.Add(ReportParaContent.ToString());
+
+                            ReportParaContent.Clear();
                         }
-                        StringBuilder ReportParaContent = new StringBuilder(); // 在这里重新创建 ReportParaContent
-
-                        ReportParaContent.Append($"Bool:Kind={DataFormatKind}&vftab;");
-                        ReportParaContent.Append($"Kind2={Report_Para_Kind2}&vftab;");
-                        ReportParaContent.Append($"Raid={DataFormatRaid}&vftab;");
-                        ReportParaContent.Append($"{Report_Para_ValueSetOption}&vftab;{ReportParaContent_PartString}");
-
-                        ReportItemHash.Add(CurrentItemKey);
-                        ReportContentHash.Add(ReportParaContent.ToString());
-
-                        ReportParaContent.Clear();
                     }
                     //插入999数字
                     TempInsertSql.Parameters.AddWithValue(Report_Para_ReportID, ReportId);
@@ -1106,23 +1135,22 @@ namespace DocumentTools
 
                 ChangeExamReporParaProgressBar.Value = 0;
 
-                foreach (string ReportItemString in ReportItemHash)
+                foreach(string ReportItemString in ReportItemHash)
                 {
                     ChangeExamReporParaProgressBar.PerformStep();
 
-                    foreach (string ReportContentString in ReportContentHash)
+                    foreach(string ReportContentString in ReportContentHash)
                     {
-                        if (!ColMode_InsertSameItemItem)
+                        if(!ColMode_InsertSameItemItem)
                         {
-                            if (!ReportItemAndReportContent.ContainsKey(ReportItemString) &&
+                            if(!ReportItemAndReportContent.ContainsKey(ReportItemString) &&
                                 !ReportItemAndReportContent.ContainsValue(ReportContentString))
                             {
                                 ReportItemAndReportContent.Add(ReportItemString, ReportContentString);
                             }
-                        }
-                        else
+                        } else
                         {
-                            if (!ReportItemAndReportContent.ContainsKey(ReportItemString))
+                            if(!ReportItemAndReportContent.ContainsKey(ReportItemString))
                             {
                                 ReportItemAndReportContent.Add(ReportItemString, ReportContentString);
                             }
@@ -1132,7 +1160,7 @@ namespace DocumentTools
 
                 ChangeExamReporParaProgressBar.Value = 0;
 
-                foreach (KeyValuePair<string, string> ReportItem_Content in ReportItemAndReportContent)
+                foreach(KeyValuePair<string, string> ReportItem_Content in ReportItemAndReportContent)
                 {
                     ChangeExamReporParaProgressBar.PerformStep();
 
@@ -1155,14 +1183,20 @@ namespace DocumentTools
             return UpdateString;
         }
 
+        public static string ChangeUnitExamPicPath(string PicPath, string NewPicPath)
+        {
+            string UpdateString = @$"Update Result_Essinfo SET PicPath = Replace(PicPath,'{PicPath}','{NewPicPath}')";
+
+            return UpdateString;
+        }
+
         public static string Check_11_Or_10_Version()
         {
             string ReturnVersion = string.Empty;
-            if (Environment.OSVersion.Version.Major == 10 && Environment.OSVersion.Version.Build <= 22000)
+            if(Environment.OSVersion.Version.Major == 10 && Environment.OSVersion.Version.Build <= 22000)
             {
                 ReturnVersion = "10";
-            }
-            else if (Environment.OSVersion.Version.Major == 10 && Environment.OSVersion.Version.Build > 22000)
+            } else if(Environment.OSVersion.Version.Major == 10 && Environment.OSVersion.Version.Build > 22000)
             {
                 ReturnVersion = "11";
             }
@@ -1209,9 +1243,9 @@ namespace DocumentTools
                 Aspose.Imaging.FileFormats.Tiff.Enums.TiffExpectedFormat.Default);
 
 
-            if (!NeedCompress)
+            if(!NeedCompress)
             {
-                switch (ImageExtensionString)
+                switch(ImageExtensionString)
                 {
                     case ".jpg":
                         TempJpgOption.CompressionType = Compress_Jpeg_Mode;
@@ -1233,17 +1267,15 @@ namespace DocumentTools
                     case ".bmp":
                         TempBmpOption.Compression = Compress_Bmp_Compression;
                         TempBmpOption.BitsPerPixel = Compress_Bmp_Bits_Pixel;
-                        if (Compress_Bmp_Compression == Aspose.Imaging.FileFormats.Bmp.BitmapCompression.Rle4 &&
+                        if(Compress_Bmp_Compression == Aspose.Imaging.FileFormats.Bmp.BitmapCompression.Rle4 &&
                             Compress_Bmp_Bits_Pixel == 4)
                         {
                             TempBmpOption.Palette = ColorPaletteHelper.Create4Bit();
-                        }
-                        else if (Compress_Bmp_Compression == Aspose.Imaging.FileFormats.Bmp.BitmapCompression.Rle8 &&
+                        } else if(Compress_Bmp_Compression == Aspose.Imaging.FileFormats.Bmp.BitmapCompression.Rle8 &&
                             Compress_Bmp_Bits_Pixel == 8)
                         {
                             TempBmpOption.Palette = ColorPaletteHelper.Create8Bit();
-                        }
-                        else
+                        } else
                         {
                             TempBmpOption.Palette = ColorPaletteHelper.CreateMonochrome();
                         }
@@ -1254,7 +1286,7 @@ namespace DocumentTools
             }
 
 
-            switch (Path.GetExtension(SavedFileName))
+            switch(Path.GetExtension(SavedFileName))
             {
                 case ".jpg":
                     TempLoadImage.Save(SavedFileName, TempJpgOption);
@@ -1317,33 +1349,33 @@ namespace DocumentTools
             Aspose.Pdf.Optimization.OptimizationOptions TempComressOption = new Aspose.Pdf.Optimization.OptimizationOptions(
                 );
 
-            if (CompressPDF_WEB)//如果勾选了WEB优化，就执行自动优化
+            if(CompressPDF_WEB)//如果勾选了WEB优化，就执行自动优化
             {
                 TempLoadDocument.Optimize();
             }
 
-            if (CommpressPDF_CompressImage)//勾选了压缩图片，则图片质量设置就生效
+            if(CommpressPDF_CompressImage)//勾选了压缩图片，则图片质量设置就生效
             {
                 TempComressOption.ImageCompressionOptions.CompressImages = true;
                 TempComressOption.ImageCompressionOptions.ImageQuality = CompressPDF_CompressImageQuailty;
             }
 
-            if (CompressPDF_ImageMaxDPI > 0)//如果设置DPI大于0，则修改DPI生效
+            if(CompressPDF_ImageMaxDPI > 0)//如果设置DPI大于0，则修改DPI生效
             {
                 TempComressOption.ImageCompressionOptions.ResizeImages = true;
                 TempComressOption.ImageCompressionOptions.MaxResolution = CompressPDF_ImageMaxDPI;
             }
 
-            if (CompressPDF_UseFlateCode)//如果勾选flate编码，则生效
+            if(CompressPDF_UseFlateCode)//如果勾选flate编码，则生效
             {
                 TempComressOption.ImageCompressionOptions.Encoding = Aspose.Pdf.Optimization.ImageEncoding.Flate;
             }
 
-            if (CompressPDF_RemoveForms)//如果勾选了移除表单域，则进行移除
+            if(CompressPDF_RemoveForms)//如果勾选了移除表单域，则进行移除
             {
-                foreach (Aspose.Pdf.Page TempPage in TempLoadDocument.Pages)
+                foreach(Aspose.Pdf.Page TempPage in TempLoadDocument.Pages)
                 {
-                    foreach (Annotation annotation in TempPage.Annotations)
+                    foreach(Annotation annotation in TempPage.Annotations)
                     {
                         annotation.Flatten();
                     }
@@ -1352,7 +1384,7 @@ namespace DocumentTools
 
             TempComressOption.ImageCompressionOptions.Version = CompressPDF_CompressImageVersion;
             TempComressOption.RemoveUnusedStreams = CompressPDF_RemoveUnUseStream;
-            TempComressOption.LinkDuplicateStreams = CompressPDF_LinkeSameStream;
+            TempComressOption.LinkDuplcateStreams = CompressPDF_LinkeSameStream;
             TempComressOption.RemoveUnusedObjects = CompressPDF_RemoveUnUseObject;
             TempComressOption.UnembedFonts = CompressPDF_CancelEmbedFont;
 
@@ -1432,30 +1464,29 @@ namespace DocumentTools
             };
 
             //进行pagesetup的设置
-            for (int i = 0; i < TempExcelDocument.Worksheets.Count; i++)
+            for(int i = 0; i < TempExcelDocument.Worksheets.Count; i++)
             {
                 TempExcelDocument.Worksheets[i].PageSetup.CenterHorizontally = Hor_Print;
                 TempExcelDocument.Worksheets[i].PageSetup.CenterVertically = Ver_Print;
-                if (PrintScalePercent_Enable)
+                if(PrintScalePercent_Enable)
                 {
                     TempExcelDocument.Worksheets[i].PageSetup.Zoom = PrintScalePercent_Value;
-                }
-                else
+                } else
                 {
                     TempExcelDocument.Worksheets[i].PageSetup.FitToPagesTall = PrintScalePage_Row;
                     TempExcelDocument.Worksheets[i].PageSetup.FitToPagesWide = PrintScalePage_Col;
                 }
             }
 
-            if (ExportEachSheet)
+            if(ExportEachSheet)
             {
                 //将Excel中的每一个Sheet保存为单个PDF文件
-                for (int i = 0; i < TempExcelDocument.Worksheets.Count; i++)
+                for(int i = 0; i < TempExcelDocument.Worksheets.Count; i++)
                 {
                     TempExcelDocument.Worksheets[i].IsVisible = true;
-                    for (int j = 0; j < TempExcelDocument.Worksheets.Count; j++)
+                    for(int j = 0; j < TempExcelDocument.Worksheets.Count; j++)
                     {
-                        if (j != i)
+                        if(j != i)
                         {
                             TempExcelDocument.Worksheets[j].IsVisible = false;
                         }
@@ -1465,8 +1496,7 @@ namespace DocumentTools
                         $"_{TempExcelDocument.Worksheets[i].Name}.pdf");
                     TempExcelDocument.Save(TempSavedPdfileWithSheetName, SavePdfOptions);
                 }
-            }
-            else
+            } else
             {
                 TempExcelDocument.Save(SavePdfFileName, SavePdfOptions);
             }
@@ -1530,7 +1560,7 @@ namespace DocumentTools
             decimal WaitTimeOut,
             bool WaitAllResouce)
         {
-            if (ChromeDriverPath != string.Empty && ChromeDriverPath != null && File.Exists(ChromeDriverPath))
+            if(ChromeDriverPath != string.Empty && ChromeDriverPath != null && File.Exists(ChromeDriverPath))
             {
                 PuppeteerSharp.LaunchOptions LanuachOption = new PuppeteerSharp.LaunchOptions
                 {
@@ -1549,11 +1579,10 @@ namespace DocumentTools
 
                 using PuppeteerSharp.IPage TempPage = await TempBroswer.NewPageAsync().ConfigureAwait(true);
 
-                if (WaitAllResouce)
+                if(WaitAllResouce)
                 {
                     await TempPage.WaitForFrameAsync(TempPage.Url).ConfigureAwait(true);
-                }
-                else
+                } else
                 {
                     TempPage.DefaultTimeout = (int)DefaultTimeOut * 1000;
                     TempPage.DefaultNavigationTimeout = (int)WaitTimeOut * 1000;
@@ -1582,11 +1611,10 @@ namespace DocumentTools
                 TempPdfOption.Landscape = isLand;
                 TempPdfOption.PrintBackground = true;
 
-                if (isUseCss)
+                if(isUseCss)
                 {
                     TempPdfOption.PreferCSSPageSize = true;
-                }
-                else
+                } else
                 {
                     TempPdfOption.PreferCSSPageSize = false;
 
@@ -1662,23 +1690,23 @@ namespace DocumentTools
                 RemoveUnusedObjects = true,
                 RemoveUnusedStreams = true,
                 AllowReusePageContent = true,
-                LinkDuplicateStreams = true
+                LinkDuplcateStreams = true
             };
 
-            if (CompressPdfImage)
+            if(CompressPdfImage)
             {
                 TempOpt.ImageCompressionOptions.CompressImages = true;
                 TempOpt.ImageCompressionOptions.Encoding = Aspose.Pdf.Optimization.ImageEncoding.Flate;
             }
 
-            if (IsNeedMerge)
+            if(IsNeedMerge)
             {
                 ImageFilesList.ForEach(
                     file =>
                     {
                         Aspose.Pdf.Page TempPage = BuilderDocument.Pages.Add();
                         Aspose.Pdf.Image TempLoadImage = new Aspose.Pdf.Image { File = file };
-                        switch (LandStyleIndex)
+                        switch(LandStyleIndex)
                         {
                             case 0:
                                 TempPage.PageInfo.Height = System.Drawing.Image.FromFile(file).Height;
@@ -1699,18 +1727,17 @@ namespace DocumentTools
                         TempPage.PageInfo.Margin.Bottom = Margin_Bottom;
                         TempPage.Paragraphs.Add(TempLoadImage);
                     });
-                if (AutoOptiomizePdf)
+                if(AutoOptiomizePdf)
                 {
                     BuilderDocument.Optimize();
                     BuilderDocument.OptimizeResources(TempOpt);
                 }
                 BuilderDocument.Save(SavedDocumentFileName);
-            }
-            else
+            } else
             {
                 Aspose.Pdf.Page TempPage = BuilderDocument.Pages.Add();
                 Aspose.Pdf.Image TempLoadImage = new Aspose.Pdf.Image { File = ImageFileName };
-                switch (LandStyleIndex)
+                switch(LandStyleIndex)
                 {
                     case 0:
                         TempPage.PageInfo.Height = System.Drawing.Image.FromFile(ImageFileName).Height;
@@ -1730,7 +1757,7 @@ namespace DocumentTools
                 TempPage.PageInfo.Margin.Right = Margin_RIGHT;
                 TempPage.PageInfo.Margin.Bottom = Margin_Bottom;
                 TempPage.Paragraphs.Add(TempLoadImage);
-                if (AutoOptiomizePdf)
+                if(AutoOptiomizePdf)
                 {
                     BuilderDocument.Optimize();
                     BuilderDocument.OptimizeResources(TempOpt);
@@ -1756,75 +1783,68 @@ namespace DocumentTools
             num = Math.Round(Math.Abs(num), 2);    //将num取绝对值并四舍五入取2位小数 
             str4 = ((long)(num * 100)).ToString();        //将num乘100并转换成字符串形式 
             j = str4.Length;      //找出最高位 
-            if (j > 15)
+            if(j > 15)
             {
                 return "溢出";
             }
             str2 = str2.Substring(15 - j);   //取出对应位数的str2的值。如：200.55,j为5所以str2=佰拾元角分 
 
             //循环取出每一位需要转换的值 
-            for (i = 0; i < j; i++)
+            for(i = 0; i < j; i++)
             {
                 str3 = str4.Substring(i, 1);          //取出需转换的某一位的值 
                 temp = Convert.ToInt32(str3);      //转换为数字 
-                if (i != (j - 3) && i != (j - 7) && i != (j - 11) && i != (j - 15))
+                if(i != (j - 3) && i != (j - 7) && i != (j - 11) && i != (j - 15))
                 {
                     //当所取位数不为元、万、亿、万亿上的数字时 
-                    if (string.Compare(str3, "0", StringComparison.Ordinal) == 0)
+                    if(string.Compare(str3, "0", StringComparison.Ordinal) == 0)
                     {
                         ch1 = string.Empty;
                         ch2 = string.Empty;
                         nzero = nzero + 1;
-                    }
-                    else
+                    } else
                     {
-                        if (string.Compare(str3, "0", StringComparison.Ordinal) != 0 && nzero != 0)
+                        if(string.Compare(str3, "0", StringComparison.Ordinal) != 0 && nzero != 0)
                         {
                             ch1 = $"零{(str1.Substring(temp * 1, 1))}";
                             ch2 = str2.Substring(i, 1);
                             nzero = 0;
-                        }
-                        else
+                        } else
                         {
                             ch1 = str1.Substring(temp * 1, 1);
                             ch2 = str2.Substring(i, 1);
                             nzero = 0;
                         }
                     }
-                }
-                else
+                } else
                 {
                     //该位是万亿，亿，万，元位等关键位 
-                    if (string.Compare(str3, "0", StringComparison.Ordinal) != 0 && nzero != 0)
+                    if(string.Compare(str3, "0", StringComparison.Ordinal) != 0 && nzero != 0)
                     {
                         ch1 = $"零{(str1.Substring(temp * 1, 1))}";
                         ch2 = str2.Substring(i, 1);
                         nzero = 0;
-                    }
-                    else
+                    } else
                     {
-                        if (string.Compare(str3, "0", StringComparison.Ordinal) != 0 && nzero == 0)
+                        if(string.Compare(str3, "0", StringComparison.Ordinal) != 0 && nzero == 0)
                         {
                             ch1 = str1.Substring(temp * 1, 1);
                             ch2 = str2.Substring(i, 1);
                             nzero = 0;
-                        }
-                        else
+                        } else
                         {
-                            if (string.Compare(str3, "0", StringComparison.Ordinal) == 0 && nzero >= 3)
+                            if(string.Compare(str3, "0", StringComparison.Ordinal) == 0 && nzero >= 3)
                             {
                                 ch1 = string.Empty;
                                 ch2 = string.Empty;
                                 nzero = nzero + 1;
-                            }
-                            else
+                            } else
                             {
-                                if (j >= 11)
+                                if(j >= 11)
                                 {
                                     ch1 = string.Empty;
                                     nzero = nzero + 1;
-                                }
-                                else
+                                } else
                                 {
                                     ch1 = string.Empty;
                                     ch2 = str2.Substring(i, 1);
@@ -1834,20 +1854,20 @@ namespace DocumentTools
                         }
                     }
                 }
-                if (i == (j - 11) || i == (j - 3))
+                if(i == (j - 11) || i == (j - 3))
                 {
                     //如果该位是亿位或元位，则必须写上 
                     ch2 = str2.Substring(i, 1);
                 }
                 str5 = $"{str5}{ch1}{ch2}";
 
-                if (i == j - 1 && string.Compare(str3, "0", StringComparison.Ordinal) == 0)
+                if(i == j - 1 && string.Compare(str3, "0", StringComparison.Ordinal) == 0)
                 {
                     //最后一位（分）为0时，加上“整” 
                     str5 = $"{str5}整";
                 }
             }
-            if (num == 0)
+            if(num == 0)
             {
                 str5 = "零元整";
             }
@@ -1868,11 +1888,10 @@ namespace DocumentTools
                 Format = Aspose.Pdf.ExcelSaveOptions.ExcelFormat.XLSX,
                 ExtractOcrSublayerOnly = true,
             };
-            if (MergeAllPages)
+            if(MergeAllPages)
             {
                 TempExcelSaveOption.MinimizeTheNumberOfWorksheets = true;
-            }
-            else
+            } else
             {
                 TempExcelSaveOption.MinimizeTheNumberOfWorksheets = false;
             }
@@ -2000,7 +2019,7 @@ namespace DocumentTools
             string SavedFileExt = Path.GetExtension(SavedFileName);
 
 
-            switch (SavedFileExt)
+            switch(SavedFileExt)
             {
                 case ".jpg":
                     TempImageOption = new Aspose.Imaging.ImageOptions.JpegOptions() { Quality = 100, };
@@ -2045,11 +2064,10 @@ namespace DocumentTools
                 PageSet = new Aspose.Words.Saving.PageSet(0),
                 Resolution = CoverImageDpi
             };
-            if (!string.IsNullOrEmpty(CoverImageFileName) && File.Exists(CoverImageFileName))
+            if(!string.IsNullOrEmpty(CoverImageFileName) && File.Exists(CoverImageFileName))
             {
                 ConverImageBytes = File.ReadAllBytes(CoverImageFileName);
-            }
-            else
+            } else
             {
                 MemoryStream TempMemoryStream = new MemoryStream();
 
@@ -2166,7 +2184,7 @@ namespace DocumentTools
             TempDocuemntLoadOption.LanguagePreferences
                 .AddEditingLanguage(Aspose.Words.Loading.EditingLanguage.ChinesePRC);
 
-            switch (FileType)
+            switch(FileType)
             {
                 case ".doc":
                     TempWordDocument = new Aspose.Words.Document(DocumentsFileName, TempDocuemntLoadOption);
@@ -2201,7 +2219,7 @@ namespace DocumentTools
             }
 
             //根据不同导出类型进行预初始化处理
-            switch (ConvertImageType)
+            switch(ConvertImageType)
             {
                 case ".jpg":
                     TempWordImageSaveOption = new Aspose.Words.Saving.ImageSaveOptions(Aspose.Words.SaveFormat.Jpeg)
@@ -2245,20 +2263,20 @@ namespace DocumentTools
             TempExcelImageOPtion.CheckWorkbookDefaultFont = true;
             TempExcelImageOPtion.DefaultFont = "SimSun";
 
-            if (PageExport)
+            if(PageExport)
             {
-                if (string.Compare(FileType, ".doc", StringComparison.Ordinal) == 0 ||
+                if(string.Compare(FileType, ".doc", StringComparison.Ordinal) == 0 ||
                     string.Compare(FileType, ".docx", StringComparison.Ordinal) == 0)
                 {
                     //逐页导出WORD图片
-                    for (int pageIndex = 0; pageIndex < TempWordDocument.PageCount; pageIndex++)
+                    for(int pageIndex = 0; pageIndex < TempWordDocument.PageCount; pageIndex++)
                     {
                         string MutilPageFileName = SavedImageFileName.Replace(
                             ConvertImageType,
                             $"_第{pageIndex + 1}页{ConvertImageType}");
                         TempWordImageSaveOption.PageSet = new Aspose.Words.Saving.PageSet(pageIndex);
                         TempWordDocument.Save(MutilPageFileName, TempWordImageSaveOption);
-                        if (SetGrayMode)
+                        if(SetGrayMode)
                         {
                             string SavedPath = Path.GetDirectoryName(SavedImageFileName);
                             string BMP_8BitPath = Path.Combine(SavedPath, "word_8_bmp_image");
@@ -2269,17 +2287,16 @@ namespace DocumentTools
                             ConvertedBitMap.Save(ConvertedBmpFileName, System.Drawing.Imaging.ImageFormat.Bmp);
                         }
                     }
-                }
-                else if (string.Compare(FileType, ".pdf", StringComparison.Ordinal) == 0)
+                } else if(string.Compare(FileType, ".pdf", StringComparison.Ordinal) == 0)
                 {
                     //逐页导出PDF的图片，tif图片需要单独处理，他不是imagedeivice类型
-                    for (int PdfPageIndex = 0; PdfPageIndex < TempPdfDocument.Pages.Count; PdfPageIndex++)
+                    for(int PdfPageIndex = 0; PdfPageIndex < TempPdfDocument.Pages.Count; PdfPageIndex++)
                     {
                         string MutilPageFileName = SavedImageFileName.Replace(
                             ConvertImageType,
                             $"_第{PdfPageIndex + 1}页{ConvertImageType}");
                         TempPdfImageDevice.Process(TempPdfDocument.Pages[PdfPageIndex + 1], MutilPageFileName);
-                        if (SetGrayMode)
+                        if(SetGrayMode)
                         {
                             string SavedPath = Path.GetDirectoryName(SavedImageFileName);
                             string BMP_8BitPath = Path.Combine(SavedPath, "pdf_8_bmp_image");
@@ -2290,11 +2307,10 @@ namespace DocumentTools
                             ConvertedBitMap.Save(ConvertedBmpFileName, System.Drawing.Imaging.ImageFormat.Bmp);
                         }
                     }
-                }
-                else
+                } else
                 {
                     //对excel文件进行sheet表逐个导出
-                    for (int ExcelSheetIndex = 0; ExcelSheetIndex < TempExcelDocument.Worksheets.Count; ExcelSheetIndex++)
+                    for(int ExcelSheetIndex = 0; ExcelSheetIndex < TempExcelDocument.Worksheets.Count; ExcelSheetIndex++)
                     {
                         Worksheet TempWorkSheet = TempExcelDocument.Worksheets[ExcelSheetIndex];
                         string TempSavedImageileWithSheetName = SavedImageFileName.Replace(
@@ -2304,11 +2320,10 @@ namespace DocumentTools
                         TempSheetRender.ToImage(0, TempSavedImageileWithSheetName);
                     }
                 }
-            }
-            else//合并一页导出，只支持word文档
+            } else//合并一页导出，只支持word文档
             {
                 string TempSvgFile = SavedImageFileName.Replace(ConvertImageType, ".svg");
-                if (string.Compare(FileType, ".doc", StringComparison.Ordinal) == 0 ||
+                if(string.Compare(FileType, ".doc", StringComparison.Ordinal) == 0 ||
                     string.Compare(FileType, ".docx", StringComparison.Ordinal) == 0)
                 {
                     TempWordImageSaveOption = new Aspose.Words.Saving.ImageSaveOptions(Aspose.Words.SaveFormat.Svg)
@@ -2326,7 +2341,7 @@ namespace DocumentTools
                     //using Aspose.Imaging.ImageOptions.VectorRasterizationOptions TempRasterOption = new VectorRasterizationOptions();
                     //TempRasterOption.PageWidth = TempLoadImage.Width;
                     //TempRasterOption.PageHeight = TempLoadImage.Height;
-                    switch (ConvertImageType)
+                    switch(ConvertImageType)
                     {
                         case ".jpg":
                             TempConvertJpegOption.Quality = 100;
@@ -2353,13 +2368,13 @@ namespace DocumentTools
 
             string OutPutLogFileName = Path.Combine(Path.GetDirectoryName(SavedImageFileName), "告警日志_WORD转图片.log");
 
-            if (File.Exists(OutPutLogFileName))
+            if(File.Exists(OutPutLogFileName))
             {
                 File.Delete(OutPutLogFileName);
             }
 
             using IEnumerator<Aspose.Words.WarningInfo> RenderWarnings = AspCallBack.Warnings.GetEnumerator();
-            while (RenderWarnings.MoveNext())
+            while(RenderWarnings.MoveNext())
             {
                 StringBuilder TempWaringsInfo = new StringBuilder();
                 TempWaringsInfo.Append($"[{GetNowDateTime()}]:\t\t");
@@ -2402,7 +2417,7 @@ namespace DocumentTools
         {
             string DocumentName, SaveDocxName;
 
-            if (!UseLocalOffice)
+            if(!UseLocalOffice)
             {
                 //设置加载word文档的时候参数
                 Aspose.Words.Loading.LoadOptions TempDocuemntLoadOption = new Aspose.Words.Loading.LoadOptions()
@@ -2474,7 +2489,7 @@ namespace DocumentTools
 
                 TempDocument.CompatibilityOptions.OptimizeFor(OptiMizMswVersion);
                 TempDocument.CompatibilityOptions.BalanceSingleByteDoubleByteWidth = true;//区分全角和半角字符
-                TempDocument.CompatibilityOptions.UlTrailSpace = true;
+                //TempDocument.CompatibilityOptions.UlTrailSpace = true;
                 DocumentName = System.IO.Path.GetFileNameWithoutExtension(documentFileName);
 
                 SaveDocxName = System.IO.Path.Combine(tempSaveDocxPath, $"{DocumentName}.docx");
@@ -2495,13 +2510,13 @@ namespace DocumentTools
 
                 string OutPutLogFileName = Path.Combine(Path.GetDirectoryName(SavePdfName), "告警日志_WORD转PDF.log");
 
-                if (File.Exists(OutPutLogFileName))
+                if(File.Exists(OutPutLogFileName))
                 {
                     File.Delete(OutPutLogFileName);
                 }
 
                 using IEnumerator<Aspose.Words.WarningInfo> RenderWarnings = AspCallBack.Warnings.GetEnumerator();
-                while (RenderWarnings.MoveNext())
+                while(RenderWarnings.MoveNext())
                 {
                     StringBuilder TempWaringsInfo = new StringBuilder();
                     TempWaringsInfo.Append($"[{GetNowDateTime()}]:\t\t");
@@ -2515,8 +2530,7 @@ namespace DocumentTools
                     TempWarningsWriter.WriteLine(TempWaringsInfo.ToString());
                 }
                 AspCallBack.Warnings.Clear();
-            }
-            else
+            } else
             {
                 // 使用本机的Office来转换PDF，速度略慢
                 Microsoft.Office.Interop.Word.Application TempWordApplication = new Microsoft.Office.Interop.Word.Application(
@@ -2564,15 +2578,14 @@ namespace DocumentTools
             };
             TempDownloadClient.DownloadFileCompleted += (download_sender, download_event) =>
             {
-                if (download_event.Error != null) // Check if there was an error during download
+                if(download_event.Error != null) // Check if there was an error during download
                 {
                     MessageBox.Show(
                         $"下载失败：{download_event.Error.Message}",
                         "提示",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Exclamation);
-                }
-                else // Download completed successfully
+                } else // Download completed successfully
                 {
                     DownloadStatusLabel.Text = $"下载完毕，文件名称为：{SavedFileName}";
                     MessageBox.Show(
@@ -2596,8 +2609,7 @@ namespace DocumentTools
                 TempClient.Encoding = Encoding.UTF8;
 
                 return TempClient.DownloadString(new Uri(Url));
-            }
-            catch (Exception ex)
+            } catch(Exception ex)
             {
                 Debug.WriteLine(ex);
                 return string.Empty;
@@ -2672,7 +2684,7 @@ namespace DocumentTools
                 11;
 
 
-            switch (result_sign_code)
+            switch(result_sign_code)
             {
                 case 0:
                     result_card_id += "1";
@@ -2731,7 +2743,7 @@ namespace DocumentTools
             string PrefixNumberCount,
             string OutPutPath)
         {
-            if (SourceFile != string.Empty && File.Exists(SourceFile))
+            if(SourceFile != string.Empty && File.Exists(SourceFile))
             {
                 string SourceFileName = Path.GetFileNameWithoutExtension(SourceFile);
                 string SourceFileNameExt = Path.GetExtension(SourceFile);
@@ -2743,19 +2755,19 @@ namespace DocumentTools
 
                 Dictionary<string, int> fileCounts = new Dictionary<string, int>();
 
-                foreach (string existingCopy in existingCopies)
+                foreach(string existingCopy in existingCopies)
                 {
                     string existingFileName = Path.GetFileNameWithoutExtension(existingCopy);
-                    if (existingFileName.StartsWith($"{SourceFileName} - {ReNameStr} ("))
+                    if(existingFileName.StartsWith($"{SourceFileName} - {ReNameStr} ("))
                     {
                         int countStartIndex = existingFileName.LastIndexOf('(') + 1;
                         int countEndIndex = existingFileName.LastIndexOf(')');
-                        if (countStartIndex >= 0 && countEndIndex >= 0)
+                        if(countStartIndex >= 0 && countEndIndex >= 0)
                         {
                             string countStr = existingFileName.Substring(
                                 countStartIndex,
                                 countEndIndex - countStartIndex);
-                            if (int.TryParse(countStr, out int count))
+                            if(int.TryParse(countStr, out int count))
                             {
                                 fileCounts[existingCopy] = count;
                             }
@@ -2764,12 +2776,12 @@ namespace DocumentTools
                 }
 
                 int maxCount = 0;
-                if (fileCounts.Count > 0)
+                if(fileCounts.Count > 0)
                 {
                     maxCount = fileCounts.Values.Max();
                 }
 
-                for (int i = 1; i <= GenNumber; i++)
+                for(int i = 1; i <= GenNumber; i++)
                 {
                     string TempCopiedName = $"{SourceFileName} - {ReNameStr} ({(maxCount + i).ToString($"D{PrefixNumberCount}")}){SourceFileNameExt}";
                     string GenFileName = Path.Combine(OutPutPath, TempCopiedName);
@@ -2827,7 +2839,7 @@ namespace DocumentTools
             Aspose.BarCode.Generation.BarcodeGenerator TempGenerate = null;
             MemoryStream TempStream = new MemoryStream();
 
-            switch (barcodeTypeIndex)
+            switch(barcodeTypeIndex)
             {
                 case 0:
                     TempGenerate = new Aspose.BarCode.Generation.BarcodeGenerator(
@@ -2894,7 +2906,7 @@ namespace DocumentTools
             TempGenerate.Parameters.CaptionAbove.Alignment = Aspose.BarCode.Generation.TextAlignment.Center;
             TempGenerate.Parameters.CaptionBelow.Alignment = Aspose.BarCode.Generation.TextAlignment.Center;
 
-            if (barcodeAutoSizeMode == Aspose.BarCode.Generation.AutoSizeMode.Interpolation)
+            if(barcodeAutoSizeMode == Aspose.BarCode.Generation.AutoSizeMode.Interpolation)
             {
                 //当设置为插值的时候才生效
                 TempGenerate.Parameters.ImageWidth.Pixels = barcodeImageWidth;
@@ -2902,9 +2914,9 @@ namespace DocumentTools
             }
 
 
-            if (barcodeCaptionContent != string.Empty)
+            if(barcodeCaptionContent != string.Empty)
             {
-                switch (barcodeCaptionLocationIndex)
+                switch(barcodeCaptionLocationIndex)
                 {
                     case 0:
                         TempGenerate.Parameters.CaptionBelow.Visible = false;
@@ -2923,7 +2935,7 @@ namespace DocumentTools
                 }
             }
 
-            switch (useState)
+            switch(useState)
             {
                 case "barcode_preview":
                     TempGenerate.Save(TempStream, Aspose.BarCode.Generation.BarCodeImageFormat.Png);
@@ -2990,14 +3002,14 @@ namespace DocumentTools
             Aspose.Words.Tables.Table TempVoteTable = TempVoteDocumentBuilder.StartTable();
 
             //如果不勾选保留序号列，直接移除序号元素
-            if (!Report_NumberIndex_Keep)
+            if(!Report_NumberIndex_Keep)
             {
                 VoteTableHeaderItems.RemoveAt(0);
                 VoteAnotherTableHeaderItems.RemoveAt(0);
             }
 
             //添加基础表头信息
-            foreach (string VoteTableHeaderItem in VoteTableHeaderItems)
+            foreach(string VoteTableHeaderItem in VoteTableHeaderItems)
             {
                 TempVoteDocumentBuilder.InsertCell();
                 TempVoteTable.RelativeHorizontalAlignment = Aspose.Words.Drawing.HorizontalAlignment.Center;
@@ -3018,39 +3030,36 @@ namespace DocumentTools
 
             int Report_Index = 1;
             Random TempRandom = new Random();
-            foreach (string Report_FillName in Report_FillNames)
+            foreach(string Report_FillName in Report_FillNames)
             {
-                if (Report_FillName != string.Empty)
+                if(Report_FillName != string.Empty)
                 {
                     TempVoteDocumentBuilder.InsertCell();
                     TempVoteDocumentBuilder.RowFormat.HeadingFormat = false;
                     TempVoteDocumentBuilder.CellFormat.Shading.BackgroundPatternColor = Color.White;
                     TempVoteDocumentBuilder.Font.Name = "SimSun";
                     //如果没有保留序号列，第一列就直接写名字，不写序号
-                    if (Report_NumberIndex_Keep)
+                    if(Report_NumberIndex_Keep)
                     {
                         TempVoteDocumentBuilder.Write(Report_Index.ToString());
-                    }
-                    else
+                    } else
                     {
                         TempVoteDocumentBuilder.Write(Report_FillName);
                     }
-                    for (int ColumnIndex = 1; ColumnIndex < VoteTableHeaderItems.Count; ColumnIndex++)
+                    for(int ColumnIndex = 1; ColumnIndex < VoteTableHeaderItems.Count; ColumnIndex++)
                     {
                         TempVoteDocumentBuilder.InsertCell();
                         //只有写入序号列才往第一列写名字
-                        if (ColumnIndex == 1 && Report_NumberIndex_Keep)
+                        if(ColumnIndex == 1 && Report_NumberIndex_Keep)
                         {
                             TempVoteDocumentBuilder.Write(Report_FillName);
-                        }
-                        else
+                        } else
                         {
-                            if (Report_Random_VoteCounts)
+                            if(Report_Random_VoteCounts)
                             {
                                 int RandomCount = TempRandom.Next(Report_Index, Report_Index * 10);
                                 TempVoteDocumentBuilder.Write(RandomCount.ToString());
-                            }
-                            else
+                            } else
                             {
                                 TempVoteDocumentBuilder.Write("0");
                             }
@@ -3062,7 +3071,7 @@ namespace DocumentTools
             }
             TempVoteDocumentBuilder.EndTable();
 
-            if (Report_Need_Another_Table)
+            if(Report_Need_Another_Table)
             {
                 //插入另选人表格
                 //TempVoteDocumentBuilder.MoveToDocumentEnd();
@@ -3078,7 +3087,7 @@ namespace DocumentTools
 
                 Aspose.Words.Tables.Table TempVoteAnotherTable = TempVoteDocumentBuilder.StartTable();
 
-                foreach (string VoteAnotherTableItem in VoteAnotherTableHeaderItems)
+                foreach(string VoteAnotherTableItem in VoteAnotherTableHeaderItems)
                 {
                     TempVoteDocumentBuilder.InsertCell();
                     TempVoteAnotherTable.RelativeHorizontalAlignment = Aspose.Words.Drawing.HorizontalAlignment.Center;
@@ -3101,26 +3110,25 @@ namespace DocumentTools
                 TempVoteDocumentBuilder.EndRow();
 
 
-                for (int OtherNumber = 0; OtherNumber < 3; OtherNumber++)
+                for(int OtherNumber = 0; OtherNumber < 3; OtherNumber++)
                 {
                     TempVoteDocumentBuilder.InsertCell();
                     TempVoteDocumentBuilder.RowFormat.HeadingFormat = false;
                     TempVoteDocumentBuilder.CellFormat.Shading.BackgroundPatternColor = Color.White;
                     TempVoteDocumentBuilder.Font.Name = "SimSun";
                     //如果没有保留序号列，第一列就直接写名字，不写序号
-                    if (Report_NumberIndex_Keep)
+                    if(Report_NumberIndex_Keep)
                     {
                         TempVoteDocumentBuilder.Write((OtherNumber + 1).ToString());
-                    }
-                    else
+                    } else
                     {
                         TempVoteDocumentBuilder.Write(string.Empty);
                     }
-                    for (int ColumnIndex = 1; ColumnIndex < VoteAnotherTableHeaderItems.Count; ColumnIndex++)
+                    for(int ColumnIndex = 1; ColumnIndex < VoteAnotherTableHeaderItems.Count; ColumnIndex++)
                     {
                         TempVoteDocumentBuilder.InsertCell();
                         //只有写入序号列才往第一列写名字
-                        if (ColumnIndex == 1 && Report_NumberIndex_Keep)
+                        if(ColumnIndex == 1 && Report_NumberIndex_Keep)
                         {
                             TempVoteDocumentBuilder.Write(string.Empty);
                         }
@@ -3131,9 +3139,9 @@ namespace DocumentTools
                 TempVoteDocumentBuilder.EndTable();
             }
 
-            if (!Report_Footer_Keep)
+            if(!Report_Footer_Keep)
             {
-                foreach (Aspose.Words.Section TempSec in TempLoadDocument.Sections)
+                foreach(Aspose.Words.Section TempSec in TempLoadDocument.Sections)
                 {
                     Aspose.Words.HeaderFooter TempFooter = TempSec.HeadersFooters[HeaderFooterType.FooterEven];
                     TempFooter?.Remove();
@@ -3157,7 +3165,7 @@ namespace DocumentTools
         public static string GenRandomBirthday(Random random_obj, bool only_gen_18_year)
         {
             int random_year = random_obj.Next(1900, DateTime.Now.Year);
-            if (only_gen_18_year)
+            if(only_gen_18_year)
             {
                 random_year = random_obj.Next(1900, DateTime.Now.Year - 18);
             }
@@ -3204,11 +3212,10 @@ namespace DocumentTools
 
             string random_name_2 = Name_Text_List[random_name_index + 1];
 
-            if (random_name_len == 2)
+            if(random_name_len == 2)
             {
                 gen_random_result = $"{random_first}  {random_name_1}";
-            }
-            else
+            } else
             {
                 gen_random_result = $"{random_first}{random_name_1}{random_name_2}";
             }
@@ -3247,19 +3254,19 @@ namespace DocumentTools
             NetworkInterface TempInterface = NetworkInterface.GetAllNetworkInterfaces()
                 .FirstOrDefault(n => string.Compare(n.Description, NetworkCardName, StringComparison.Ordinal) == 0);
 
-            if (TempInterface != null && TempInterface != default)
+            if(TempInterface != null && TempInterface != default)
             {
-                foreach (UnicastIPAddressInformation TempIp in TempInterface.GetIPProperties().UnicastAddresses)
+                foreach(UnicastIPAddressInformation TempIp in TempInterface.GetIPProperties().UnicastAddresses)
                 {
-                    if (TempIp.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                    if(TempIp.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
                     {
                         IPV4_ADDRESSES.Add(TempIp.Address.ToString());
                         SUBNET_MASKS.Add(TempIp.IPv4Mask.ToString());
 
-                        foreach (GatewayIPAddressInformation TempGateway in TempInterface.GetIPProperties()
+                        foreach(GatewayIPAddressInformation TempGateway in TempInterface.GetIPProperties()
                             .GatewayAddresses)
                         {
-                            if (TempGateway.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                            if(TempGateway.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
                             {
                                 DEFAULT_GATEWAYS.Add(TempGateway.Address.ToString());
                             }
@@ -3270,9 +3277,9 @@ namespace DocumentTools
                 IPInterfaceProperties TempInterfacePro = TempInterface.GetIPProperties();
                 IPAddressCollection DNSAddresses = TempInterfacePro.DnsAddresses;
                 IS_ENABLE_DHCP = TempInterfacePro.GetIPv4Properties().IsDhcpEnabled;
-                foreach (IPAddress DnsAddress in DNSAddresses)
+                foreach(IPAddress DnsAddress in DNSAddresses)
                 {
-                    if (DnsAddress.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                    if(DnsAddress.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
                     {
                         DnsLists.Add(DnsAddress.ToString());
                     }
@@ -3298,7 +3305,7 @@ namespace DocumentTools
 
             int FilePages = 0;
 
-            switch (Extension)
+            switch(Extension)
             {
                 case ".doc":
                     FilePages = new Aspose.Words.Document(FileName).PageCount;
@@ -3379,11 +3386,11 @@ namespace DocumentTools
 
             using OleDbDataReader QueryExamSelector_Reader = DataReader;
 
-            while (QueryExamSelector_Reader.Read())
+            while(QueryExamSelector_Reader.Read())
             {
                 string QueryExamItemSelecorName = QueryExamSelector_Reader["SelName"].ToString();
 
-                if (string.Compare(QueryExamItemSelecorName, "无效", StringComparison.Ordinal) != 0)
+                if(string.Compare(QueryExamItemSelecorName, "无效", StringComparison.Ordinal) != 0)
                 {
                     ItemsSelectorLists.Add(QueryExamItemSelecorName);
                 }
@@ -3409,7 +3416,7 @@ namespace DocumentTools
 
             using OleDbDataReader QueryExam_Items_Reader = DataReader;
 
-            while (QueryExam_Items_Reader.Read())
+            while(QueryExam_Items_Reader.Read())
             {
                 string QueryExamItemName = QueryExam_Items_Reader["ItemName"].ToString();
 
@@ -3441,7 +3448,7 @@ namespace DocumentTools
 
             using OleDbDataReader QueryExamRaidInfoReader = DataReader;
 
-            while (QueryExamRaidInfoReader.Read())
+            while(QueryExamRaidInfoReader.Read())
             {
                 string RaidInfo = QueryExamRaidInfoReader["RaidName"].ToString();
 
@@ -3452,11 +3459,16 @@ namespace DocumentTools
 
             string RaidInfoSum = string.Join("，", ExamRaidInfoLists);
             string RaidInfoShow = "合计";
-            if (string.Compare(RaidInfoSum, string.Empty, StringComparison.Ordinal) == 0)
+
+            string RaidMultValue = string.Join("|", ExamRaidInfoLists) + "|" + RaidInfoSum;
+            string RaidMultShow = "批量设置全部身份";
+            
+            if(string.IsNullOrEmpty(RaidInfoSum)|| string.IsNullOrEmpty(RaidMultValue))
             {
                 RaidInfoShow = "无测评身份";
             }
             ExamRaidInfoDataTable.Rows.Add(RaidInfoShow, RaidInfoSum);
+            ExamRaidInfoDataTable.Rows.Add(RaidMultShow, RaidMultValue);
 
             DataConnection.Close();
 
@@ -3479,7 +3491,7 @@ namespace DocumentTools
 
             var (DataReader, DataConnection) = GetAccessDataReader(DataBaseFile, QueryCommand);
 
-            while (DataReader.Read())
+            while(DataReader.Read())
             {
                 Report_Cols = DataReader["ColWidthStr"].ToString().Split('，').Length - 1;
                 Report_Rows = DataReader["RowHeightStr"].ToString().Split('，').Length - 1;
@@ -3538,21 +3550,18 @@ namespace DocumentTools
 
             string ReturnValue;
 
-            if (fileSizeBytes < KB_Value)
+            if(fileSizeBytes < KB_Value)
             {
                 ReturnValue = $"{fileSizeBytes} 字节";
-            }
-            else if (fileSizeBytes < MB_Value)
+            } else if(fileSizeBytes < MB_Value)
             {
                 double KB_Size = fileSizeBytes / KB_Value;
                 ReturnValue = $"{KB_Size:F2} KB";
-            }
-            else if (fileSizeBytes < GB_Value)
+            } else if(fileSizeBytes < GB_Value)
             {
                 double MB_SIZE = fileSizeBytes / MB_Value;
                 ReturnValue = $"{MB_SIZE:F2} MB";
-            }
-            else
+            } else
             {
                 double GB_SIZE = fileSizeBytes / GB_Value;
                 ReturnValue = $"{GB_SIZE:F2} GB";
@@ -3565,8 +3574,7 @@ namespace DocumentTools
         {
             System.Data.DataTable VoteEssInfoTable = new System.Data.DataTable();
 
-
-            if (DataBaseFile != string.Empty && DataBaseFile != null)
+            if(DataBaseFile != string.Empty && DataBaseFile != null)
             {
                 string QueryVoteInfoCommand = $"SELECT VoteId AS 选票序号,VoteName AS 选票名称,Threshold AS 色差校准值,HxrScore AS 候选人填涂值（pixel）,LxrScore AS 另选人填涂值（pixel）,OutsideThreshold AS 纸张级别,SelName AS 选框类型 FROM Vote_EssInfo";
 
@@ -3594,14 +3602,14 @@ namespace DocumentTools
             List<string> NetworkLists = new List<string>();
             string QueryNetwork = "SELECT * FROM Win32_NetworkAdapter";
 
-            if (OnlyShowNormal)
+            if(OnlyShowNormal)
             {
                 QueryNetwork += " WHERE NetConnectionStatus = 2";
             }
 
             using ManagementObjectSearcher TempSearcher = new ManagementObjectSearcher(QueryNetwork);
             using ManagementObjectCollection TempNetworkList = TempSearcher.Get();
-            foreach (ManagementObject TempNetwork in TempNetworkList)
+            foreach(ManagementObject TempNetwork in TempNetworkList)
             {
                 string NetworkCardName = TempNetwork.GetPropertyValue("Description") as string ?? "无法加载网卡";
                 NetworkLists.Add(NetworkCardName);
@@ -3659,9 +3667,9 @@ namespace DocumentTools
 
             ZipEntry TempEntry;
 
-            while ((TempEntry = TempZipStream.GetNextEntry()) != null)
+            while((TempEntry = TempZipStream.GetNextEntry()) != null)
             {
-                if (!TempEntry.IsFile)
+                if(!TempEntry.IsFile)
                 {
                     continue;
                 }
@@ -3671,7 +3679,7 @@ namespace DocumentTools
 
                 int TempCount;
 
-                while ((TempCount = TempZipStream.Read(TempBuffer, 0, TempBuffer.Length)) > 0)
+                while((TempCount = TempZipStream.Read(TempBuffer, 0, TempBuffer.Length)) > 0)
                 {
                     TempFileStream.Write(TempBuffer, 0, TempCount);
                 }
@@ -3737,7 +3745,7 @@ namespace DocumentTools
 
             string RandomComName = CurrentComputerName.Insert(RandomInt, RandomString);
 
-            if (RandomComName.Length > 30)
+            if(RandomComName.Length > 30)
             {
                 RandomComName = RandomComName.Substring(0, 30);
             }
@@ -3762,21 +3770,21 @@ namespace DocumentTools
 
             var (DataReader, DataConnection) = GetAccessDataReader(DataBaseFile, VF_Report.QueryContent(ReportId));
 
-            while (DataReader.Read())
+            while(DataReader.Read())
             {
                 string TempContent = DataReader["Content"].ToString();
 
                 string TempExamName = GetReportContentText(VF_Report.ExamItemFormat_Regex, TempContent)
                     .Replace("Item=", string.Empty);
 
-                switch (InfoType)
+                switch(InfoType)
                 {
                     case "Kind"://检索数据类型
 
                         string ExamKind = GetReportContentText(VF_Report.KindFormat_Regex, TempContent)
                             .Replace("Kind=", string.Empty);
 
-                        if (string.Compare(ExamName, TempExamName, StringComparison.Ordinal) == 0 &&
+                        if(string.Compare(ExamName, TempExamName, StringComparison.Ordinal) == 0 &&
                             !ReportCurrentItemsInfos.Contains(ExamKind))
                         {
                             ReportCurrentItemsInfos.Add(ExamKind);
@@ -3788,7 +3796,7 @@ namespace DocumentTools
                         string ExamRaid = GetReportContentText(VF_Report.RaidFormat_Regex, TempContent)
                             .Replace("Raid=", string.Empty);
 
-                        if (string.Compare(ExamName, TempExamName, StringComparison.Ordinal) == 0 &&
+                        if(string.Compare(ExamName, TempExamName, StringComparison.Ordinal) == 0 &&
                             !ReportCurrentItemsInfos.Contains(ExamRaid))
                         {
                             ReportCurrentItemsInfos.Add(ExamRaid);
@@ -3799,9 +3807,9 @@ namespace DocumentTools
 
                         string ExamNumberPoint = GetReportContentText(VF_Report.NumberPoint_Regex, TempContent);
 
-                        if (string.Compare(ExamName, TempExamName, StringComparison.Ordinal) == 0)
+                        if(string.Compare(ExamName, TempExamName, StringComparison.Ordinal) == 0)
                         {
-                            switch (ExamNumberPoint)
+                            switch(ExamNumberPoint)
                             {
                                 case "0":
                                     ExamNumberPoint = "不保留";
@@ -3824,7 +3832,7 @@ namespace DocumentTools
                                 default:
                                     break;
                             }
-                            if (!ReportCurrentItemsInfos.Contains(ExamNumberPoint))
+                            if(!ReportCurrentItemsInfos.Contains(ExamNumberPoint))
                             {
                                 ReportCurrentItemsInfos.Add(ExamNumberPoint);
                             }
@@ -3850,17 +3858,20 @@ namespace DocumentTools
 
             var (DataReader, DataConnection) = GetAccessDataReader(DataBaseFile, VF_Report.QueryContent(ReportId));
 
-            while (DataReader.Read())
+            while(DataReader.Read())
             {
                 string TempContent = DataReader["Content"].ToString();
 
                 string ItemName = GetReportContentText(VF_Report.ExamItemFormat_Regex, TempContent)
                     .Replace("Item=", string.Empty);
 
-                if (!ReportCurrentItems.Contains(ItemName))
+                if(!ReportCurrentItems.Contains(ItemName) && ItemName != string.Empty)
                     ReportCurrentItems.Add(ItemName);
             }
             DataConnection.Close();
+
+            ReportCurrentItems.Sort(new FileNameComparerInstance());
+
             ReportCurrentItems.Insert(0, "所有项目");
 
             return ReportCurrentItems;
@@ -3874,11 +3885,11 @@ namespace DocumentTools
             TempTable.Columns.Add("DisplayValue");
             TempTable.Columns.Add("RealValue");
             using ManagementObjectSearcher TempSearcher = new ManagementObjectSearcher("SELECT * FROM Win32_Share");
-            foreach (ManagementObject TempShare in TempSearcher.Get())
+            foreach(ManagementObject TempShare in TempSearcher.Get())
             {
                 string ShareName = TempShare.GetPropertyValue("Name").ToString();
                 string SharePath = TempShare.GetPropertyValue("Path").ToString();
-                if (SharePath != string.Empty)
+                if(SharePath != string.Empty)
                 {
                     TempTable.Rows.Add(ShareName, SharePath);
                 }
@@ -3897,11 +3908,10 @@ namespace DocumentTools
                 @"Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons",
                 "29");
 
-            if (TempObj != null && TempObj.ToString().Contains("imageres.dll"))
+            if(TempObj != null && TempObj.ToString().Contains("imageres.dll"))
             {
                 return "已移除";
-            }
-            else
+            } else
             {
                 return "未移除";
             }
@@ -3917,13 +3927,32 @@ namespace DocumentTools
             string QueryUnitComputerString = @"SELECT DISTINCT CompName from Result_Essinfo;";
             var (DataReader, DataConnection) = GetAccessDataReader(DataBaseFile, QueryUnitComputerString);
 
-            while (DataReader.Read())
+            while(DataReader.Read())
             {
                 UnitComputerNames.Add(DataReader["CompName"].ToString());
             }
             DataConnection.Close();
 
             return UnitComputerNames;
+        }
+
+        /// <summary>
+        /// 查询单位数据包中的扫描图片路径
+        /// </summary>
+        /// <param name="DataBaseFile"></param>
+        public static List<string> GetUnitExamPicPath(string DataBaseFile)
+        {
+            List<string> UnitPicPaths = new List<string>();
+            string QueryUnitPicPathString = @"SELECT DISTINCT PicPath from Result_Essinfo;";
+            var (DataReader, DataConnection) = GetAccessDataReader(DataBaseFile, QueryUnitPicPathString);
+
+            while(DataReader.Read())
+            {
+                UnitPicPaths.Add(DataReader["PicPath"].ToString());
+            }
+            DataConnection.Close();
+
+            return UnitPicPaths;
         }
 
         public static string GetWordInformation(string DocumentFileName)
@@ -3960,7 +3989,7 @@ namespace DocumentTools
         /// <param name="VoteName"></param>
         /// <param name="VoteIndex"></param>
         /// <param name="pageIndex"></param>
-        public static void InsertVotePicContent(
+        public static int InsertVotePicContent(
             string DataBaseFile,
             string ImageFileName,
             Label statusLabel,
@@ -3970,7 +3999,8 @@ namespace DocumentTools
             string pageIndex,
             string pageSquareType)
         {
-            if (DataBaseFile != string.Empty &&
+            int ReturnCode = -1;
+            if(DataBaseFile != string.Empty &&
                 DataBaseFile != null &&
                 ImageFileName != string.Empty &&
                 ImageFileName != null &&
@@ -3997,7 +4027,7 @@ namespace DocumentTools
                 int row_count = Convert.ToInt32(checkComand.ExecuteScalar());
 
                 //根据输入的内容，对数据库进行查询，如果找到记录，就对记录进行删除
-                if (row_count > 0)
+                if(row_count > 0)
                 {
                     using OleDbCommand deleteComand = new OleDbCommand(DeleteCommand, TempConnection);
                     deleteComand.ExecuteNonQuery();
@@ -4008,7 +4038,7 @@ namespace DocumentTools
                 int ess_count = Convert.ToInt32(checkEssComand.ExecuteScalar());
 
                 //正常情况是允许有两条记录存在的
-                if (ess_count == 0)
+                if(ess_count == 0)
                 {
                     using OleDbCommand insertEssComand = new OleDbCommand(InsertTempCommand, TempConnection);
                     insertEssComand.Parameters.AddWithValue("@VoteID", VoteId);
@@ -4037,12 +4067,14 @@ namespace DocumentTools
                         new Action(
                             () =>
                             {
-                                MessageBox.Show("插入完毕", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                                MessageBox.Show("执行完毕", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                                 BodyForm.MainForm.votedataview.DataSource = GetMss3VoteInfo(DataBaseFile);
                                 BodyForm.MainForm.votedataview.FirstDisplayedScrollingRowIndex = BodyForm.MainForm.votedataview.RowCount -
                                     1;
                             }));
+                ReturnCode = 0;
             }
+            return ReturnCode;
         }
 
         public static bool IsAdministrator()
@@ -4069,12 +4101,11 @@ namespace DocumentTools
                 FileName =>
                 {
                     string FileExtension = System.IO.Path.GetExtension(FileName);
-                    if (string.Compare(FileExtension, ".pdf", StringComparison.Ordinal) != 0)
+                    if(string.Compare(FileExtension, ".pdf", StringComparison.Ordinal) != 0)
                     {
                         TempPicturePdfBuilder.InsertImage(FileName);
                         TempPicturePdfBuilder.Writeln();
-                    }
-                    else
+                    } else
                     {
                         TempFileList.Add(FileName);
                     }
@@ -4144,11 +4175,11 @@ namespace DocumentTools
             using BarCodeReader TempReader = new BarCodeReader(
                 barcodeImage,
                 DecodeType.AllSupportedTypes.Exclude(DecodeType.MicrE13B));
-            foreach (BarCodeResult TempResult in TempReader.ReadBarCodes())
+            foreach(BarCodeResult TempResult in TempReader.ReadBarCodes())
             {
                 ReaderResult += TempResult.CodeText;
             }
-            if (string.Compare(ReaderResult, string.Empty, StringComparison.Ordinal) == 0)
+            if(string.Compare(ReaderResult, string.Empty, StringComparison.Ordinal) == 0)
             {
                 ReaderResult = "识别失败，可能是以下原因：\r\n1、条码不完整\r\n2、图片内无条码内容\r\n3、不支持的条码类型";
             }
@@ -4169,15 +4200,15 @@ namespace DocumentTools
             TempBarCodeGenTable.Columns.Add("编号");
             TempBarCodeGenTable.Columns.Add("标题");
             TempBarCodeGenTable.Columns.Add("内容");
-            for (int row = 1; row <= TempWorkSheet.Cells.MaxDataRow; row++)
+            for(int row = 1; row <= TempWorkSheet.Cells.MaxDataRow; row++)
             {
                 Aspose.Cells.Cell TempCell_GenNumber = TempWorkSheet.Cells.CheckCell(row, 0);
                 Aspose.Cells.Cell TempCell_GenCaption = TempWorkSheet.Cells.CheckCell(row, 1);
                 Aspose.Cells.Cell TempCell_GenContent = TempWorkSheet.Cells.CheckCell(row, 2);
 
-                if (TempCell_GenNumber != null && TempCell_GenContent != null)
+                if(TempCell_GenNumber != null && TempCell_GenContent != null)
                 {
-                    if (TempCell_GenNumber.StringValue != string.Empty && TempCell_GenContent.StringValue != string.Empty)
+                    if(TempCell_GenNumber.StringValue != string.Empty && TempCell_GenContent.StringValue != string.Empty)
                     {
                         TempBarCodeGenTable.Rows
                             .Add(
@@ -4185,8 +4216,7 @@ namespace DocumentTools
                                 TempCell_GenCaption?.StringValue,
                                 TempCell_GenContent.StringValue);
                     }
-                }
-                else
+                } else
                 {
                     TempBarCodeGenTable.Rows.Add("模板错误_编号列无内容", "模板错误_标题列无内容", "模板错误_内容列无内容");
                 }
@@ -4207,24 +4237,23 @@ namespace DocumentTools
             int PagesCount = 0;
             Aspose.Words.Document TempDocxDocument = null;
             Aspose.Pdf.Document TempPdfDocument = null;
-            if (string.Compare(DocumentExtension, ".doc", StringComparison.Ordinal) == 0 ||
+            if(string.Compare(DocumentExtension, ".doc", StringComparison.Ordinal) == 0 ||
                 string.Compare(DocumentExtension, ".docx", StringComparison.Ordinal) == 0)
             {
                 TempDocxDocument = new Aspose.Words.Document(DocumentFileName);
                 PagesCount = TempDocxDocument.PageCount;
-            }
-            else if (string.Compare(DocumentExtension, ".pdf", StringComparison.Ordinal) == 0)
+            } else if(string.Compare(DocumentExtension, ".pdf", StringComparison.Ordinal) == 0)
             {
                 TempPdfDocument = new Aspose.Pdf.Document(DocumentFileName);
                 PagesCount = TempPdfDocument.Pages.Count;
             }
             ;
-            for (int PageIndex = 0; PageIndex < PagesCount; PageIndex++)
+            for(int PageIndex = 0; PageIndex < PagesCount; PageIndex++)
             {
                 TreeNode PageIndexNode = TempDocumentNameRootNode.Nodes.Add($"第{PageIndex + 1}页");//在文件节点信息基础上添加页面信息
                 using MemoryStream TempMemoryStream = new MemoryStream();
                 PageIndexNode.ForeColor = System.Drawing.Color.ForestGreen;
-                if (string.Compare(DocumentExtension, ".doc", StringComparison.Ordinal) == 0 ||
+                if(string.Compare(DocumentExtension, ".doc", StringComparison.Ordinal) == 0 ||
                     string.Compare(DocumentExtension, ".docx", StringComparison.Ordinal) == 0)
                 {
                     Aspose.Words.Saving.ImageSaveOptions TempImageSaveOption = new Aspose.Words.Saving.ImageSaveOptions(
@@ -4235,8 +4264,7 @@ namespace DocumentTools
                     };
                     TempDocxDocument.Save(TempMemoryStream, TempImageSaveOption);
                     TempMemoryStream.Position = 0;
-                }
-                else if (string.Compare(DocumentExtension, ".pdf", StringComparison.Ordinal) == 0)
+                } else if(string.Compare(DocumentExtension, ".pdf", StringComparison.Ordinal) == 0)
                 {
                     Aspose.Pdf.Devices.Resolution TempPdfResoultion = new Aspose.Pdf.Devices.Resolution(300);
                     Aspose.Pdf.Devices.JpegDevice TempPdfJepegDevices = new Aspose.Pdf.Devices.JpegDevice(
@@ -4245,49 +4273,46 @@ namespace DocumentTools
                     TempPdfJepegDevices.Process(TempPdfDocument.Pages[PageIndex + 1], TempMemoryStream);
                 }
                 using BarCodeReader TempCodeReader = new BarCodeReader(TempMemoryStream, DecodeType.DataMatrix);
-                foreach (BarCodeResult TempResult in TempCodeReader.ReadBarCodes())
+                foreach(BarCodeResult TempResult in TempCodeReader.ReadBarCodes())
                 {
                     string TempText = TempResult.CodeText;
                     string TableType = string.Empty;
                     string CurrentDataMatrixNumber = string.Empty;
                     string SignleNumber = string.Empty;
                     TreeNode TableTypeNode, PageMatrixNumberNode, SignleNumberNode;
-                    if (string.Compare(TempText, "A01", StringComparison.Ordinal) == 0)
+                    if(string.Compare(TempText, "A01", StringComparison.Ordinal) == 0)
                     {
                         TableType = "测评";
-                    }
-                    else if (string.Compare(TempText, "B", StringComparison.Ordinal) == 0)
+                    } else if(string.Compare(TempText, "B", StringComparison.Ordinal) == 0)
                     {
                         TableType = "选举/推荐";
-                    }
-                    else if (TempText.StartsWith("T"))
+                    } else if(TempText.StartsWith("T"))
                     {
                         CurrentDataMatrixNumber = TempText.Replace("T", string.Empty);
-                    }
-                    else
+                    } else
                     {
                         SignleNumber = TempText;
                     }
                     //页面信息基础上添加更深层信息
-                    if (TableType != string.Empty)
+                    if(TableType != string.Empty)
                     {
                         TableTypeNode = PageIndexNode.Nodes.Add("表格类型");
 
                         TableTypeNode.Nodes.Add(TableType).ForeColor = System.Drawing.Color.Red;
                     }
-                    if (CurrentDataMatrixNumber != string.Empty)
+                    if(CurrentDataMatrixNumber != string.Empty)
                     {
                         PageMatrixNumberNode = PageIndexNode.Nodes.Add("页面编码");
                         PageMatrixNumberNode.Nodes.Add(CurrentDataMatrixNumber).ForeColor = System.Drawing.Color.Red;
                     }
-                    if (SignleNumber != string.Empty)
+                    if(SignleNumber != string.Empty)
                     {
                         SignleNumberNode = PageIndexNode.Nodes.Add("单人码编码");
                         SignleNumberNode.Nodes.Add(SignleNumber).ForeColor = System.Drawing.Color.Red;
                     }
 
 
-                    /**
+                /**
                                                          * 测评单位码 A01 测评页码 T11
                                                          * 选举单位码 B   选举页码 T11
                                                          * 推荐单位吗 B   推荐页码 T10
@@ -4312,12 +4337,12 @@ namespace DocumentTools
         {
             Aspose.Pdf.Document TempLoadDocument = new Aspose.Pdf.Document(DocumentFileName);
 
-            foreach (Aspose.Pdf.Page TempPage in TempLoadDocument.Pages)
+            foreach(Aspose.Pdf.Page TempPage in TempLoadDocument.Pages)
             {
-                foreach (Aspose.Pdf.Artifact TempWaterMark in TempPage.Artifacts)
+                foreach(Aspose.Pdf.Artifact TempWaterMark in TempPage.Artifacts)
                 {
                     Debug.WriteLine(TempWaterMark.Subtype);
-                    if (TempWaterMark.Subtype == Artifact.ArtifactSubtype.Watermark ||
+                    if(TempWaterMark.Subtype == Artifact.ArtifactSubtype.Watermark ||
                         TempWaterMark.Subtype == Artifact.ArtifactSubtype.Background)
                     {
                         TempPage.Artifacts.Delete(TempWaterMark);
@@ -4375,7 +4400,7 @@ namespace DocumentTools
             bool UseRegexSub = false,
             bool ExcelReplace_MatchWholeWord = false)
         {
-            if (string.Compare(RelaceDocumentType, "WORD", StringComparison.Ordinal) == 0)
+            if(string.Compare(RelaceDocumentType, "WORD", StringComparison.Ordinal) == 0)
             {
                 Aspose.Words.Loading.LoadOptions DocuemntLoadOption = new Aspose.Words.Loading.LoadOptions()
                 {
@@ -4403,19 +4428,18 @@ namespace DocumentTools
                 TempWordFindReplaceOption.IgnoreShapes = WordReplace_IgnoreShapes;
                 TempWordFindReplaceOption.UseSubstitutions = UseRegexSub;
 
-                if (UseNewStyle)
+                if(UseNewStyle)
                 {
                     TempWordFindReplaceOption.ApplyFont.Name = replace_word_fontName;
                     TempWordFindReplaceOption.ApplyFont.Size = Convert.ToDouble(replace_word_fontSize);
                 }
-                foreach (var FindReplaceObj in FindReplaceTupleList)
+                foreach(var FindReplaceObj in FindReplaceTupleList)
                 {
                     Regex DocuemntRegex = new Regex(FindReplaceObj.Item1, RegexOptions.Multiline);
                     TempWordDocument.Range.Replace(DocuemntRegex, FindReplaceObj.Item2, TempWordFindReplaceOption);
                 }
                 TempWordDocument.Save(SavedDoucmentFileName, DocumentSaveOption);
-            }
-            else
+            } else
             {
                 Aspose.Cells.Workbook TempExcelDocument = new Aspose.Cells.Workbook(DocumentsFileName);
                 Aspose.Cells.ReplaceOptions TempExcelReplaceOptions = new Aspose.Cells.ReplaceOptions();
@@ -4430,21 +4454,20 @@ namespace DocumentTools
 
                 //Aspose.Cells.Cells Cells = TempExcelDocument.Worksheets[0].Cells;
 
-                foreach (var FindReplaceObj in FindReplaceTupleList)
+                foreach(var FindReplaceObj in FindReplaceTupleList)
                 {
                     TempExcelDocument.Replace(FindReplaceObj.Item1, FindReplaceObj.Item2, TempExcelReplaceOptions);
                 }
                 //不为默认值才进行行数据操作
-                if (ExcelStartRow > -1 && ExcelEndRow > -1)
+                if(ExcelStartRow > -1 && ExcelEndRow > -1)
                 {
-                    foreach (Worksheet TempSheet in TempExcelDocument.Worksheets)
+                    foreach(Worksheet TempSheet in TempExcelDocument.Worksheets)
                     {
                         Aspose.Cells.Cells TempCells = TempSheet.Cells;
-                        if (RemoveRowMode)
+                        if(RemoveRowMode)
                         {
                             TempCells.DeleteRows(ExcelStartRow - 1, ExcelEndRow - 1);//删除行，excel行号从1开始，但是代码里面从0，所以输入什么数据都要-1，确保区间正确
-                        }
-                        else
+                        } else
                         {
                             TempCells.ClearRange(ExcelStartRow - 1, 0, ExcelEndRow - 1, 255);//清空行内数据，但是保留行高
                         }
@@ -4469,7 +4492,7 @@ namespace DocumentTools
 
         public static void SetAdministratorBehavior(bool Enbale)
         {
-            if (Enbale)
+            if(Enbale)
             {
                 SetRegistryValue(
                     RegistryHive.LocalMachine,
@@ -4477,8 +4500,7 @@ namespace DocumentTools
                     "EnableLUA",
                     1,
                     RegistryValueKind.DWord);
-            }
-            else
+            } else
             {
                 SetRegistryValue(
                     RegistryHive.LocalMachine,
@@ -4513,20 +4535,20 @@ namespace DocumentTools
 
             using ManagementObjectCollection TempObjects = TempClass.GetInstances();
 
-            foreach (ManagementObject TempObject in TempObjects)
+            foreach(ManagementObject TempObject in TempObjects)
             {
                 //网卡必须已启用且有效
-                if ((bool)TempObject.GetPropertyValue("IPEnabled"))
+                if((bool)TempObject.GetPropertyValue("IPEnabled"))
                 {
                     //根据网卡描述匹配进行地址设置
-                    if (string.Compare(
+                    if(string.Compare(
                             TempObject.GetPropertyValue("Description").ToString(),
                             NetworkCardName,
                             StringComparison.Ordinal) ==
                         0)
                     {
                         ManagementBaseObject InputParama;
-                        if (UseStatic)
+                        if(UseStatic)
                         {
                             //使用静态IP
                             InputParama = TempObject.GetMethodParameters("EnableStatic");
@@ -4539,24 +4561,21 @@ namespace DocumentTools
                             TempObject.InvokeMethod("SetGateways", InputParama, null);
 
                             InputParama = TempObject.GetMethodParameters("SetDNSServerSearchOrder");
-                            if (string.Compare(dns1, "0.0.0.0", StringComparison.Ordinal) == 0 ||
+                            if(string.Compare(dns1, "0.0.0.0", StringComparison.Ordinal) == 0 ||
                                 string.Compare(dns1, string.Empty, StringComparison.Ordinal) == 0)
                             {
                                 InputParama["DNSServerSearchOrder"] = new string[] { dns2 };
-                            }
-                            else if (string.Compare(dns2, "0.0.0.0", StringComparison.Ordinal) == 0 ||
+                            } else if(string.Compare(dns2, "0.0.0.0", StringComparison.Ordinal) == 0 ||
                                 string.Compare(dns1, string.Empty, StringComparison.Ordinal) == 0)
                             {
                                 InputParama["DNSServerSearchOrder"] = new string[] { dns1 };
-                            }
-                            else
+                            } else
                             {
                                 InputParama["DNSServerSearchOrder"] = new string[] { dns1, dns2 };
                             }
 
                             TempObject.InvokeMethod("SetDNSServerSearchOrder", InputParama, null);
-                        }
-                        else//设置DHCP
+                        } else//设置DHCP
                         {
                             InputParama = TempObject.GetMethodParameters("EnableDHCP");
                             TempObject.InvokeMethod("EnableDHCP", InputParama, null);
@@ -4582,7 +4601,7 @@ namespace DocumentTools
                 $"SELECT * FROM Win32_NetworkAdapter WHERE Description='{NetworkCardName}'");
             using ManagementObjectCollection TempList = TempSearcher.Get();
 
-            foreach (ManagementObject TempObject in TempList)
+            foreach(ManagementObject TempObject in TempList)
             {
                 TempObject.InvokeMethod(StatusMethodText, null);
             }
@@ -4612,7 +4631,7 @@ namespace DocumentTools
             BodyForm.MainForm.SaveFileDialog.Title = DisplayTitleString;
             BodyForm.MainForm.SaveFileDialog.Filter = FileFilterString;
             DialogResult SaveFileDialogResult = BodyForm.MainForm.SaveFileDialog.ShowDialog();
-            if (SaveFileDialogResult == DialogResult.OK)
+            if(SaveFileDialogResult == DialogResult.OK)
             {
                 SaveFileName = BodyForm.MainForm.SaveFileDialog.FileName;
             }
@@ -4643,7 +4662,7 @@ namespace DocumentTools
                 InitialDirectory = InitDirectory
             };
 
-            if (!isPickFolder)
+            if(!isPickFolder)
             {
                 CommonFileDialogFilter FileFilterItems = new CommonFileDialogFilter(
                     FilterDisplayName,
@@ -4653,7 +4672,7 @@ namespace DocumentTools
 
             CommonFileDialogResult FileSelectResult = FileSelectDialog.ShowDialog();
 
-            if (FileSelectResult == CommonFileDialogResult.Ok)
+            if(FileSelectResult == CommonFileDialogResult.Ok)
             {
                 ReturnFileNameString = FileSelectDialog.FileNames;
             }
@@ -4670,13 +4689,13 @@ namespace DocumentTools
         {
             Aspose.Words.Document TempDocument = new Aspose.Words.Document(TemplateFileName);
 
-            foreach (Aspose.Words.Drawing.Shape TempShape in TempDocument.GetChildNodes(NodeType.Shape, true))
+            foreach(Aspose.Words.Drawing.Shape TempShape in TempDocument.GetChildNodes(NodeType.Shape, true))
             {
-                if (TempShape.IsImage && TempShape.AlternativeText != string.Empty)
+                if(TempShape.IsImage && TempShape.AlternativeText != string.Empty)
                 {
-                    foreach (string ReplacePersonCodeTitle in ReplacePersonCodeTitles)
+                    foreach(string ReplacePersonCodeTitle in ReplacePersonCodeTitles)
                     {
-                        if (string.Compare(ReplacePersonCodeTitle, TempShape.AlternativeText, StringComparison.Ordinal) ==
+                        if(string.Compare(ReplacePersonCodeTitle, TempShape.AlternativeText, StringComparison.Ordinal) ==
                             0)
                         {
                             TempShape.ImageData.SetImage(PersonImageFileName);
@@ -4688,6 +4707,13 @@ namespace DocumentTools
             TempDocument.Save(NewSingleDoucmentFileName);
         }
 
+        /// <summary>
+        /// 根据图片说明替换单人表文档中指定的图片
+        /// </summary>
+        /// <param name="TemplateFileName">模板名称</param>
+        /// <param name="ReplacePersonCodeTitles">说明备注</param>
+        /// <param name="PersonImageStream">单人码字节流</param>
+        /// <param name="NewSingleDoucmentFileName">输出文档名称</param>
         public static void SingleDocumentReplacePersonCode(
             string TemplateFileName,
             string[] ReplacePersonCodeTitles,
@@ -4696,13 +4722,13 @@ namespace DocumentTools
         {
             Aspose.Words.Document TempDocument = new Aspose.Words.Document(TemplateFileName);
 
-            foreach (Aspose.Words.Drawing.Shape TempShape in TempDocument.GetChildNodes(NodeType.Shape, true))
+            foreach(Aspose.Words.Drawing.Shape TempShape in TempDocument.GetChildNodes(NodeType.Shape, true))
             {
-                if (TempShape.IsImage && TempShape.AlternativeText != string.Empty)
+                if(TempShape.IsImage && TempShape.AlternativeText != string.Empty)
                 {
-                    foreach (string ReplacePersonCodeTitle in ReplacePersonCodeTitles)
+                    foreach(string ReplacePersonCodeTitle in ReplacePersonCodeTitles)
                     {
-                        if (string.Compare(ReplacePersonCodeTitle, TempShape.AlternativeText, StringComparison.Ordinal) ==
+                        if(string.Compare(ReplacePersonCodeTitle, TempShape.AlternativeText, StringComparison.Ordinal) ==
                             0)
                         {
                             TempShape.ImageData.SetImage(PersonImageStream);
@@ -4732,21 +4758,21 @@ namespace DocumentTools
             using Aspose.Pdf.Document TempLoadDocument = new Aspose.Pdf.Document(DocumentFileName);
             PdfFileEditor TempPdfEditor = new PdfFileEditor();
 
-            if (SplitSignle)
+            if(SplitSignle)
             {
                 int OutPageCount = 0;
                 int TotalPages = TempLoadDocument.Pages.Count;
-                for (int PageIndex = 1; PageIndex <= TotalPages; PageIndex += SplitPageCount)
+                for(int PageIndex = 1; PageIndex <= TotalPages; PageIndex += SplitPageCount)
                 {
                     OutPageCount++;
                     int SplitEndPage = PageIndex + SplitPageCount - 1;
-                    if (SplitEndPage > TotalPages)
+                    if(SplitEndPage > TotalPages)
                     {
                         SplitEndPage = TotalPages;
                     }
 
                     using Aspose.Pdf.Document PerDocument = new Aspose.Pdf.Document();
-                    for (int j = PageIndex; j <= SplitEndPage; j++)
+                    for(int j = PageIndex; j <= SplitEndPage; j++)
                     {
                         PerDocument.Pages.Add(TempLoadDocument.Pages[j]);
                     }
@@ -4754,15 +4780,15 @@ namespace DocumentTools
                     PerDocument.Save(ExportPerPdfFileName);
                 }
             }
-            if (SplitRange)
+            if(SplitRange)
             {
-                if (int.TryParse(Range_Start, out int start_index) && int.TryParse(Range_End, out int end_index))
+                if(int.TryParse(Range_Start, out int start_index) && int.TryParse(Range_End, out int end_index))
                 {
                     string SavedExtractName = $"{Path.Combine(SavedPath, $"{Path.GetFileNameWithoutExtension(DocumentFileName)}_第{start_index}到{end_index}页.pdf")}";
                     TempPdfEditor.Extract(DocumentFileName, start_index, end_index, SavedExtractName);
                 }
             }
-            if (SplitByBookMark)
+            if(SplitByBookMark)
             {
                 Aspose.Pdf.Facades.PdfBookmarkEditor TempBookMarksEditor = new PdfBookmarkEditor();
                 TempBookMarksEditor.BindPdf(TempLoadDocument);
@@ -4770,7 +4796,7 @@ namespace DocumentTools
 
                 int Start_Page = 1;
                 int FileIndex = 0;
-                foreach (Aspose.Pdf.Facades.Bookmark TempMark in TempBookMarks)
+                foreach(Aspose.Pdf.Facades.Bookmark TempMark in TempBookMarks)
                 {
                     string BookMarkTitle = TempMark.Title.Replace("\t", string.Empty).Replace("/", string.Empty);
                     string ExportPdfFileName = $"{Path.Combine(SavedPath, $"{++FileIndex}、{Path.GetFileNameWithoutExtension(DocumentFileName)}_{BookMarkTitle}.pdf")}";
@@ -4778,7 +4804,7 @@ namespace DocumentTools
                         ? GetPdfNextBookMark(TempBookMarks, TempMark).PageNumber - 1
                         : TempLoadDocument.Pages.Count;
                     using Aspose.Pdf.Document TempBookMarkSplitDocument = new Aspose.Pdf.Document();
-                    for (int i = Start_Page; i <= End_Page; i++)
+                    for(int i = Start_Page; i <= End_Page; i++)
                     {
                         TempBookMarkSplitDocument.Pages.Add(TempLoadDocument.Pages[i]);
                     }
@@ -4807,9 +4833,9 @@ namespace DocumentTools
 
             int SourceSlideCount = SourceSlides.Count;
 
-            if (SplitSignle)//逐页拆分
+            if(SplitSignle)//逐页拆分
             {
-                for (int SlideIndex = 0; SlideIndex < SourceSlideCount; SlideIndex++)
+                for(int SlideIndex = 0; SlideIndex < SourceSlideCount; SlideIndex++)
                 {
                     using Aspose.Slides.Presentation TempOutPutPresentation_Signle = new Aspose.Slides.Presentation();
                     TempOutPutPresentation_Signle.SlideSize.SetSize(SplitSizeType, SplitScaleMode);
@@ -4818,14 +4844,13 @@ namespace DocumentTools
                     TempOutPutPresentation_Signle.Slides.AddClone(SourceSlides[SlideIndex]);
                     TempOutPutPresentation_Signle.Save(SavedFileName, Aspose.Slides.Export.SaveFormat.Pptx);
                 }
-            }
-            else
+            } else
             {
                 string SavedFileName = $"{Path.Combine(SavePath, Path.GetFileNameWithoutExtension(DocumentFileName))}_第{Range_Start}到{Range_End}页.pptx";
 
                 int ExportEndSlideCount = Math.Min(int.Parse(Range_End), SourceSlideCount);
 
-                for (int SlideIndex = int.Parse(Range_Start) - 1; SlideIndex < ExportEndSlideCount; SlideIndex++)
+                for(int SlideIndex = int.Parse(Range_Start) - 1; SlideIndex < ExportEndSlideCount; SlideIndex++)
                 {
                     ISlide RangeSlide = SourceSlides[SlideIndex];
 
@@ -4850,23 +4875,23 @@ namespace DocumentTools
             {
                 Compliance = Aspose.Words.Saving.OoxmlCompliance.Iso29500_2008_Transitional,
             };
-            if (SplitSignle)
+            if(SplitSignle)
             {
                 int OutPageCount = 0;
                 int TotalPages = TempDocument.PageCount;
-                for (int pageIndex = 0; pageIndex < TempDocument.PageCount; pageIndex += SplitPerCount)
+                for(int pageIndex = 0; pageIndex < TempDocument.PageCount; pageIndex += SplitPerCount)
                 {
                     OutPageCount++;
 
                     int LeftPage = TotalPages - pageIndex;
                     int PageExtra = Math.Min(SplitPerCount, LeftPage);
-                    if (PageExtra > 0)
+                    if(PageExtra > 0)
                     {
                         string SavedFileName = $"{Path.Combine(SavedPath, Path.GetFileNameWithoutExtension(DocumentFileName))}_第{OutPageCount}页.docx";
                         Aspose.Words.Document TempSplitDocument = TempDocument.ExtractPages(pageIndex, PageExtra);
                         TempSplitDocument.CompatibilityOptions.OptimizeFor(Aspose.Words.Settings.MsWordVersion.Word2010);
                         TempSplitDocument.CompatibilityOptions.BalanceSingleByteDoubleByteWidth = true;
-                        if (UpdatePageNumber)
+                        if(UpdatePageNumber)
                         {
                             TempSplitDocument.FirstSection.PageSetup.PageStartingNumber = 1;
                         }
@@ -4874,16 +4899,15 @@ namespace DocumentTools
                         TempSplitDocument.Save(SavedFileName, TempSaveOption);
                     }
                 }
-            }
-            else
+            } else
             {
                 string SavedFileName = $"{Path.Combine(SavedPath, Path.GetFileNameWithoutExtension(DocumentFileName))}_第{Range_Start}到{Range_End}页.docx";
-                if (int.TryParse(Range_Start, out int range_start) && int.TryParse(Range_End, out int range_end))
+                if(int.TryParse(Range_Start, out int range_start) && int.TryParse(Range_End, out int range_end))
                 {
                     Aspose.Words.Document TempSplitDocument = TempDocument.ExtractPages(range_start - 1, range_end);
                     TempSplitDocument.CompatibilityOptions.OptimizeFor(Aspose.Words.Settings.MsWordVersion.Word2010);
                     TempSplitDocument.CompatibilityOptions.BalanceSingleByteDoubleByteWidth = true;
-                    if (UpdatePageNumber)
+                    if(UpdatePageNumber)
                     {
                         TempSplitDocument.FirstSection.PageSetup.PageStartingNumber = 1;
                     }
@@ -4901,7 +4925,7 @@ namespace DocumentTools
                 string.Empty,
                 false,
                 string.Empty);
-            if (card_id.Length == 18)
+            if(card_id.Length == 18)
             {
                 //提取前6位的信息
 
@@ -4948,35 +4972,33 @@ namespace DocumentTools
                 bool sign_ver_status = false;//校验状态
 
                 //日期校验
-                if (card_id_year_number_ver && card_id_month_number_ver && card_id_day_number_ver)
+                if(card_id_year_number_ver && card_id_month_number_ver && card_id_day_number_ver)
                 {
-                    if (card_id_year_int >= 1900 &&
+                    if(card_id_year_int >= 1900 &&
                         card_id_year_int <= now_year &&
                         card_id_month_int <= 12 &&
                         card_id_day_int <= 31)
                     {
                         ver_pass_date = new DateTime(card_id_year_int, card_id_month_int, card_id_day_int).ToString(
                             "yyyy年MM月dd日");
-                    }
-                    else
+                    } else
                     {
                         ver_pass_date = "日期不正确";
                     }
                 }
 
                 //提取顺序
-                if (card_id_index_number_ver)
+                if(card_id_index_number_ver)
                 {
                     ver_pass_index = card_id_index_number_int.ToString();
                 }
                 //计算性别
-                if (card_id_sex_sign_number_ver)
+                if(card_id_sex_sign_number_ver)
                 {
-                    if (card_id_sex_sign_int % 2 == 0)
+                    if(card_id_sex_sign_int % 2 == 0)
                     {
                         ver_pass_sex = "女";
-                    }
-                    else
+                    } else
                     {
                         ver_pass_sex = "男";
                     }
@@ -4984,7 +5006,7 @@ namespace DocumentTools
 
 
                 //计算校验码，确保全是数字以后再进行计算
-                if (card_id_01_ver &&
+                if(card_id_01_ver &&
                     card_id_02_ver &&
                     card_id_03_ver &&
                     card_id_04_ver &&
@@ -5037,7 +5059,7 @@ namespace DocumentTools
 
                     string curren_sign_code = string.Empty;
 
-                    switch (result_sign_code)
+                    switch(result_sign_code)
                     {
                         case 0:
                             curren_sign_code = "1";
@@ -5180,11 +5202,11 @@ namespace DocumentTools
                     ProcessControl.PerformStep();
 
                     using BarCodeReader TempBarcodeReader = new BarCodeReader(fileName, DecodeType.DataMatrix);
-                    foreach (BarCodeResult TempReadResult in TempBarcodeReader.ReadBarCodes())
+                    foreach(BarCodeResult TempReadResult in TempBarcodeReader.ReadBarCodes())
                     {
                         string CodeText = TempReadResult.CodeText;
 
-                        if (CodeText.StartsWith("T"))
+                        if(CodeText.StartsWith("T"))
                         {
                             string ImagePartenName = Directory.GetParent(fileName).FullName
                                 .Replace(Directory.GetDirectoryRoot(fileName), string.Empty);
@@ -5194,7 +5216,7 @@ namespace DocumentTools
                             string PictureCopyDirectory = Path.Combine(TargetSaveDirectory, $"页码-{PageNumberText}");
 
 
-                            if (RecognSubDirectory)
+                            if(RecognSubDirectory)
                             {
                                 PictureCopyDirectory = Path.Combine(
                                     TargetSaveDirectory,
@@ -5205,7 +5227,7 @@ namespace DocumentTools
                             string TargetImageFileName = Path.Combine(PictureCopyDirectory, Path.GetFileName(fileName));
 
 
-                            if (!Directory.Exists(PictureCopyDirectory))
+                            if(!Directory.Exists(PictureCopyDirectory))
                             {
                                 Directory.CreateDirectory(PictureCopyDirectory);
                             }
@@ -5213,14 +5235,14 @@ namespace DocumentTools
                             File.Copy(fileName, TargetImageFileName, true);
                         }
 
-                        if (TempBarcodeReader.FoundCount == 0)
+                        if(TempBarcodeReader.FoundCount == 0)
                         {
                             string NoInfoDirctoryName = Path.Combine(TargetSaveDirectory, "异常-无法识别的图片");
 
                             string ErrorImageFileName = Path.Combine(NoInfoDirctoryName, Path.GetFileName(fileName));
 
 
-                            if (!Directory.Exists(NoInfoDirctoryName))
+                            if(!Directory.Exists(NoInfoDirctoryName))
                             {
                                 Directory.CreateDirectory(NoInfoDirctoryName);
                             }
@@ -5240,7 +5262,7 @@ namespace DocumentTools
         /// <param name="info"></param>
         public static void WritePdf2WordDebugInfo(Aspose.Pdf.DocSaveOptions.ProgressEventHandlerInfo info)
         {
-            switch (info.EventType)
+            switch(info.EventType)
             {
                 case Aspose.Pdf.ProgressEventType.TotalProgress:
                     Debug.WriteLine($"Pdf2Word_Process：{info.Value}");

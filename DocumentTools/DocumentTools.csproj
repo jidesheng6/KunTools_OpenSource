@@ -146,29 +146,29 @@
     <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Aspose.BarCode, Version=24.11.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
-      <HintPath>..\packages\Aspose.BarCode.24.11.0\lib\net48\Aspose.BarCode.dll</HintPath>
+    <Reference Include="Aspose.BarCode, Version=25.1.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
+      <HintPath>..\packages\Aspose.BarCode.25.1.0\lib\net48\Aspose.BarCode.dll</HintPath>
     </Reference>
-    <Reference Include="Aspose.Cells, Version=24.11.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
-      <HintPath>..\packages\Aspose.Cells.24.11.0\lib\net40\Aspose.Cells.dll</HintPath>
+    <Reference Include="Aspose.Cells, Version=25.1.1.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
+      <HintPath>..\packages\Aspose.Cells.25.1.1\lib\net40\Aspose.Cells.dll</HintPath>
     </Reference>
     <Reference Include="Aspose.Hook">
-      <HintPath>..\..\..\..\..\.net_out_dll\aspose\2023.7.17\Aspose.Hook.dll</HintPath>
+      <HintPath>..\..\..\..\..\.net_out_dll\aspose\2025.1.7\Release\net40\Aspose.Hook.dll</HintPath>
     </Reference>
-    <Reference Include="Aspose.HTML, Version=24.10.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
-      <HintPath>..\packages\Aspose.HTML.24.10.0\lib\netstandard2.0\Aspose.HTML.dll</HintPath>
+    <Reference Include="Aspose.HTML, Version=24.12.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
+      <HintPath>..\packages\Aspose.HTML.24.12.0\lib\netstandard2.0\Aspose.HTML.dll</HintPath>
     </Reference>
-    <Reference Include="Aspose.Imaging, Version=24.11.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
-      <HintPath>..\packages\Aspose.Imaging.24.11.0\lib\net40\Aspose.Imaging.dll</HintPath>
+    <Reference Include="Aspose.Imaging, Version=24.12.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
+      <HintPath>..\packages\Aspose.Imaging.24.12.0\lib\net40\Aspose.Imaging.dll</HintPath>
     </Reference>
-    <Reference Include="Aspose.PDF, Version=24.11.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
-      <HintPath>..\packages\Aspose.PDF.24.11.0\lib\netstandard2.0\Aspose.PDF.dll</HintPath>
+    <Reference Include="Aspose.PDF, Version=24.9.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
+      <HintPath>..\packages\Aspose.PDF.24.9.0\lib\netstandard2.0\Aspose.PDF.dll</HintPath>
     </Reference>
-    <Reference Include="Aspose.Slides, Version=24.11.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
-      <HintPath>..\packages\Aspose.Slides.NET.24.11.0\lib\net4.0-client\Aspose.Slides.dll</HintPath>
+    <Reference Include="Aspose.Slides, Version=25.1.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
+      <HintPath>..\packages\Aspose.Slides.NET.25.1.0\lib\net4.0-client\Aspose.Slides.dll</HintPath>
     </Reference>
-    <Reference Include="Aspose.Words, Version=24.11.1.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
-      <HintPath>..\packages\Aspose.Words.24.11.1\lib\net462\Aspose.Words.dll</HintPath>
+    <Reference Include="Aspose.Words, Version=25.1.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
+      <HintPath>..\packages\Aspose.Words.25.1.0\lib\net462\Aspose.Words.dll</HintPath>
     </Reference>
     <Reference Include="AutoUpdater.NET, Version=1.9.2.0, Culture=neutral, PublicKeyToken=501435c91b35f4bc, processorArchitecture=MSIL">
       <HintPath>..\packages\Autoupdater.NET.Official.1.9.2\lib\net462\AutoUpdater.NET.dll</HintPath>
@@ -417,6 +417,7 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Security.AccessControl, Version=6.0.0.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -497,6 +498,7 @@
     <Reference Include="TestableIO.System.IO.Abstractions.Wrappers, Version=21.0.0.0, Culture=neutral, PublicKeyToken=96bf224d23c43e59, processorArchitecture=MSIL">
       <HintPath>..\packages\TestableIO.System.IO.Abstractions.Wrappers.21.0.2\lib\net462\TestableIO.System.IO.Abstractions.Wrappers.dll</HintPath>
     </Reference>
+    <Reference Include="UIAutomationClient" />
     <Reference Include="WindowsBase" />
     <Reference Include="WindowsFormsIntegration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WindowsAPICodePack.7.0.4\lib\net48\WindowsFormsIntegration.dll</HintPath>
@@ -543,6 +545,7 @@
     <Compile Include="Util.cs" />
     <Compile Include="VersionInfo.cs" />
     <Compile Include="VF_Report.cs" />
+    <Compile Include="WatcherMakeTestFileHelper.cs" />
     <EmbeddedResource Include="DonateMeFrm.resx">
       <DependentUpon>DonateMeFrm.cs</DependentUpon>
     </EmbeddedResource>
@@ -590,11 +593,13 @@
   <ItemGroup>
     <Content Include="6.ico" />
     <None Include="Resources\BarCodeTemplate.xlsx" />
+    <None Include="Resources\ChangeExamComputerName.pdf" />
     <None Include="Resources\ChangeReporItem.pdf" />
     <None Include="Resources\KMSAIO.cmd" />
     <None Include="Resources\PersonCode.zip" />
     <None Include="Resources\Remove.png" />
     <None Include="Resources\Clear.png" />
+    <None Include="Resources\VoteMssTif.pdf" />
     <None Include="Resources\VoteReportDoc.doc" />
     <None Include="Resources\word.png" />
     <None Include="Resources\ppt.png" />
@@ -675,6 +680,9 @@
     <None Include="Resources\公告.png" />
     <None Include="Resources\跳转.png" />
     <None Include="Resources\返回.png" />
+    <None Include="Resources\懒得喷.jpg" />
+    <None Include="Resources\大头儿子.png" />
+    <None Include="Resources\红温.gif" />
     <Content Include="v2-30675d7656fcb8e2cc959cedd8b8db19_r.ico" />
     <Content Include="转换.ico" />
   </ItemGroup>

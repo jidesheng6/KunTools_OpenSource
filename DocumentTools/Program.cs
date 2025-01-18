@@ -1,5 +1,7 @@
 ﻿using Aspose.BarCode.BarCodeRecognition;
 using System;
+using System.Diagnostics;
+using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -14,8 +16,13 @@ namespace DocumentTools
         static void Main()
         {
             //SetProcessDPIAware();
+            //string AsposeCrackString = Util.GetEmbedResourceObj("AsposeCrackLicBaseString").ToString();
+            //using (MemoryStream TempLoadStream = new MemoryStream(Convert.FromBase64String(AsposeCrackString)))
+            //{
+            //    new Aspose.Cells.License().SetLicense(TempLoadStream);
+            //}
+            Aspose.Hook.HookManager.ShowHookDetails(true);
             Aspose.Hook.HookManager.StartHook();
-
             int workerThreads;
             int completionPortThreads;
             ThreadPool.GetMaxThreads(out workerThreads, out completionPortThreads);

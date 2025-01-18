@@ -238,6 +238,11 @@ namespace DocumentTools
             this.AddWaterMark2Pdf = new System.Windows.Forms.Button();
             this.SelectWaterMarkPdfFiles = new System.Windows.Forms.Button();
             this.groupBox18 = new System.Windows.Forms.GroupBox();
+            this.AddPdfWater_CustomPostion_Y = new System.Windows.Forms.NumericUpDown();
+            this.label210 = new System.Windows.Forms.Label();
+            this.AddPdfWater_CustomPostion_X = new System.Windows.Forms.NumericUpDown();
+            this.label209 = new System.Windows.Forms.Label();
+            this.AddPdfWater_CustomPostion = new System.Windows.Forms.CheckBox();
             this.RemovePdfAddWaterImage = new System.Windows.Forms.Button();
             this.AddPdfWaterMark_FullScren_VerDmi = new System.Windows.Forms.NumericUpDown();
             this.label204 = new System.Windows.Forms.Label();
@@ -308,6 +313,7 @@ namespace DocumentTools
             this.SelectExcel2WordFiles = new System.Windows.Forms.Button();
             this.Excel2WordFileList = new System.Windows.Forms.ListView();
             this.TabPage_04 = new System.Windows.Forms.TabPage();
+            this.MoveToConvertTif = new System.Windows.Forms.LinkLabel();
             this.word2image_save_source = new System.Windows.Forms.CheckBox();
             this.DocumentsListView_MoveDown = new System.Windows.Forms.Button();
             this.DocumentsListView_MoveUp = new System.Windows.Forms.Button();
@@ -449,7 +455,7 @@ namespace DocumentTools
             this.SelectCompressPDFFiles = new System.Windows.Forms.Button();
             this.CompressPdfFileList = new System.Windows.Forms.ListView();
             this.TabPage_25 = new System.Windows.Forms.TabPage();
-            this.Compress_Label_Tips = new System.Windows.Forms.Label();
+            this.VoteMssTifHelpFile = new System.Windows.Forms.LinkLabel();
             this.CompressImageFileList_MoveDown = new System.Windows.Forms.Button();
             this.CompressImageFileList_MoveUp = new System.Windows.Forms.Button();
             this.compressimage_clear = new System.Windows.Forms.Button();
@@ -748,10 +754,13 @@ namespace DocumentTools
             this.LockKeyBoard = new System.Windows.Forms.Button();
             this.TabPage_32 = new System.Windows.Forms.TabPage();
             this.groupBox32 = new System.Windows.Forms.GroupBox();
+            this.ClickTurnImageConv = new System.Windows.Forms.LinkLabel();
             this.groupBox40 = new System.Windows.Forms.GroupBox();
             this.votedataview = new System.Windows.Forms.DataGridView();
             this.linkLabel6 = new System.Windows.Forms.LinkLabel();
             this.groupBox33 = new System.Windows.Forms.GroupBox();
+            this.ResetMssItemColumn = new System.Windows.Forms.CheckBox();
+            this.ChangeMssItemColumn = new System.Windows.Forms.CheckBox();
             this.votepageIndexCombox = new System.Windows.Forms.ComboBox();
             this.votepage_type_combox = new System.Windows.Forms.ComboBox();
             this.label105 = new System.Windows.Forms.Label();
@@ -775,6 +784,7 @@ namespace DocumentTools
             this.label166 = new System.Windows.Forms.Label();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.SingleDocumentConfigGroupBox = new System.Windows.Forms.GroupBox();
+            this.pictureBox10 = new System.Windows.Forms.PictureBox();
             this.SignDocumentProgress = new System.Windows.Forms.ProgressBar();
             this.groupBox55 = new System.Windows.Forms.GroupBox();
             this.SignDocumentUseOnlyNumber = new System.Windows.Forms.RadioButton();
@@ -810,7 +820,6 @@ namespace DocumentTools
             this.groupBox65 = new System.Windows.Forms.GroupBox();
             this.ExamReportParaChangeProcessBar = new System.Windows.Forms.ProgressBar();
             this.label183 = new System.Windows.Forms.Label();
-            this.GetAllItemSplit = new System.Windows.Forms.Button();
             this.ExamReportRowMode_ExamItemInsertSame = new System.Windows.Forms.CheckBox();
             this.ExamReportRowMode_ExamSelectorInsertSame = new System.Windows.Forms.CheckBox();
             this.ExamReportColMode_ExamSelectorBox = new System.Windows.Forms.TextBox();
@@ -866,6 +875,7 @@ namespace DocumentTools
             this.ExamReportDataFormat = new System.Windows.Forms.ComboBox();
             this.ExamReportChange = new System.Windows.Forms.Button();
             this.groupBox56 = new System.Windows.Forms.GroupBox();
+            this.GetAllItemSplit = new System.Windows.Forms.Button();
             this.ExamRaidsCopy = new System.Windows.Forms.Button();
             this.ExamRaidInfoCombox = new System.Windows.Forms.ComboBox();
             this.label157 = new System.Windows.Forms.Label();
@@ -914,6 +924,16 @@ namespace DocumentTools
             this.VoteTable_Name = new System.Windows.Forms.TextBox();
             this.label138 = new System.Windows.Forms.Label();
             this.TabPage_36 = new System.Windows.Forms.TabPage();
+            this.groupBox69 = new System.Windows.Forms.GroupBox();
+            this.WatcherSendNotify = new System.Windows.Forms.CheckBox();
+            this.WatcherMakeTestFile = new System.Windows.Forms.Button();
+            this.LatestWatcherFileNameBox = new System.Windows.Forms.TextBox();
+            this.SelectWatcherPath = new System.Windows.Forms.Button();
+            this.PathWatchLatestFile = new System.Windows.Forms.Label();
+            this.StopPathWatcher = new System.Windows.Forms.Button();
+            this.StartPathWatcher = new System.Windows.Forms.Button();
+            this.WatcherPathTextBox = new System.Windows.Forms.TextBox();
+            this.label208 = new System.Windows.Forms.Label();
             this.groupBox67 = new System.Windows.Forms.GroupBox();
             this.label198 = new System.Windows.Forms.Label();
             this.Exam_Picture_ThreadNumbers = new System.Windows.Forms.ComboBox();
@@ -940,6 +960,14 @@ namespace DocumentTools
             this.CopyNumberIndexResult = new System.Windows.Forms.Button();
             this.NumberIndexResultBox = new System.Windows.Forms.RichTextBox();
             this.groupBox28 = new System.Windows.Forms.GroupBox();
+            this.GetComputerNameSelf = new System.Windows.Forms.Button();
+            this.ChangeExamPicPathSelect = new System.Windows.Forms.RadioButton();
+            this.ChangeExamCompNameSelect = new System.Windows.Forms.RadioButton();
+            this.ExamTargetPicPathTextBox = new System.Windows.Forms.TextBox();
+            this.label207 = new System.Windows.Forms.Label();
+            this.ExamPicPathCombox = new System.Windows.Forms.ComboBox();
+            this.label206 = new System.Windows.Forms.Label();
+            this.linkLabel10 = new System.Windows.Forms.LinkLabel();
             this.label175 = new System.Windows.Forms.Label();
             this.GetRandomComputerNameRandLength = new System.Windows.Forms.NumericUpDown();
             this.GetRandomComputerNameButton = new System.Windows.Forms.Button();
@@ -952,6 +980,8 @@ namespace DocumentTools
             this.ChooseExamFileTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox46 = new System.Windows.Forms.GroupBox();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.money_big = new System.Windows.Forms.TextBox();
             this.money_small = new System.Windows.Forms.TextBox();
             this.label131 = new System.Windows.Forms.Label();
@@ -1152,6 +1182,32 @@ namespace DocumentTools
             this.MemoryStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.MemoryProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.UpdateCheckText = new System.Windows.Forms.ToolStripStatusLabel();
+            this.MainNotify = new System.Windows.Forms.NotifyIcon(this.components);
+            this.MainContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.OpenMainForm = new System.Windows.Forms.ToolStripMenuItem();
+            this.ExitApplication = new System.Windows.Forms.ToolStripMenuItem();
+            this.WatcherMakeTestFileMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.MakeJPGTestFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.MakeJPGErrTestFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.MakeJPGHanTestFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.MakeTIFTestFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.MakeTIFErrTestFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.MakeTIFHanTestFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.MakeALLFiles = new System.Windows.Forms.ToolStripMenuItem();
+            this.GetExamNameAndSelectorMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.GetAllExamName = new System.Windows.Forms.ToolStripMenuItem();
+            this.GetAllExamSelector = new System.Windows.Forms.ToolStripMenuItem();
+            this.AddPdfWater_GetSelectPdfPointInfo = new System.Windows.Forms.Button();
+            this.PdfWaterSetPreCustomMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.PdfWaterMarkPrePostion_TopLeft = new System.Windows.Forms.ToolStripMenuItem();
+            this.PdfWaterMarkPrePostion_TopMiddle = new System.Windows.Forms.ToolStripMenuItem();
+            this.PdfWaterMarkPrePostion_TopRight = new System.Windows.Forms.ToolStripMenuItem();
+            this.PdfWaterMarkPrePostion_CenterLeft = new System.Windows.Forms.ToolStripMenuItem();
+            this.PdfWaterMarkPrePostion_CenterMiddle = new System.Windows.Forms.ToolStripMenuItem();
+            this.PdfWaterMarkPrePostion_CenterRight = new System.Windows.Forms.ToolStripMenuItem();
+            this.PdfWaterMarkPrePostion_BottomLeft = new System.Windows.Forms.ToolStripMenuItem();
+            this.PdfWaterMarkPrePostion_BottomMiddle = new System.Windows.Forms.ToolStripMenuItem();
+            this.PdfWaterMarkPrePostion_BottomRight = new System.Windows.Forms.ToolStripMenuItem();
             this.set_interface_dns2 = new DocumentTools.IPAddressInputTextBox();
             this.set_interface_dns1 = new DocumentTools.IPAddressInputTextBox();
             this.set_interface_gateway = new DocumentTools.IPAddressInputTextBox();
@@ -1179,6 +1235,8 @@ namespace DocumentTools
             this.groupBox61.SuspendLayout();
             this.TabPage_18.SuspendLayout();
             this.groupBox18.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.AddPdfWater_CustomPostion_Y)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AddPdfWater_CustomPostion_X)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AddPdfWaterMark_FullScren_VerDmi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AddPdfWaterMark_FullScren_HorDmi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WaterMarkImage)).BeginInit();
@@ -1265,6 +1323,7 @@ namespace DocumentTools
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             this.SingleDocumentConfigGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             this.groupBox55.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SignDocumentNeedCount)).BeginInit();
             this.SignDocumentPicSourceGroupBox.SuspendLayout();
@@ -1287,6 +1346,7 @@ namespace DocumentTools
             this.groupBox50.SuspendLayout();
             this.groupBox49.SuspendLayout();
             this.TabPage_36.SuspendLayout();
+            this.groupBox69.SuspendLayout();
             this.groupBox67.SuspendLayout();
             this.groupBox60.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumberIndexEnd)).BeginInit();
@@ -1294,6 +1354,8 @@ namespace DocumentTools
             this.groupBox28.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GetRandomComputerNameRandLength)).BeginInit();
             this.groupBox46.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.groupBox43.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Gen_Copied_Number)).BeginInit();
             this.TabPage_37.SuspendLayout();
@@ -1313,6 +1375,10 @@ namespace DocumentTools
             ((System.ComponentModel.ISupportInitialize)(this.MainFormError)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.MainContextMenu.SuspendLayout();
+            this.WatcherMakeTestFileMenu.SuspendLayout();
+            this.GetExamNameAndSelectorMenu.SuspendLayout();
+            this.PdfWaterSetPreCustomMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainTabPage
@@ -1359,7 +1425,7 @@ namespace DocumentTools
             this.MainTabPage.Controls.Add(this.TabPage_37);
             this.MainTabPage.Controls.Add(this.TabPage_08);
             this.MainTabPage.Location = new System.Drawing.Point(0, 26);
-            this.MainTabPage.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.MainTabPage.Margin = new System.Windows.Forms.Padding(1);
             this.MainTabPage.Multiline = true;
             this.MainTabPage.Name = "MainTabPage";
             this.MainTabPage.SelectedIndex = 0;
@@ -1397,9 +1463,9 @@ namespace DocumentTools
             this.TabPage_01.Controls.Add(this.ChooseDocButton);
             this.TabPage_01.Controls.Add(this.WordFileListView);
             this.TabPage_01.Location = new System.Drawing.Point(4, 114);
-            this.TabPage_01.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_01.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_01.Name = "TabPage_01";
-            this.TabPage_01.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_01.Padding = new System.Windows.Forms.Padding(1);
             this.TabPage_01.Size = new System.Drawing.Size(882, 621);
             this.TabPage_01.TabIndex = 0;
             this.TabPage_01.Text = "WORD转PDF";
@@ -1423,7 +1489,7 @@ namespace DocumentTools
             this.UseLocalOffice.AutoSize = true;
             this.UseLocalOffice.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.UseLocalOffice.Location = new System.Drawing.Point(255, 466);
-            this.UseLocalOffice.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.UseLocalOffice.Margin = new System.Windows.Forms.Padding(1);
             this.UseLocalOffice.Name = "UseLocalOffice";
             this.UseLocalOffice.Size = new System.Drawing.Size(132, 16);
             this.UseLocalOffice.TabIndex = 22;
@@ -1436,7 +1502,7 @@ namespace DocumentTools
             // WORD2PDF_LoadPassword
             // 
             this.WORD2PDF_LoadPassword.Location = new System.Drawing.Point(489, 461);
-            this.WORD2PDF_LoadPassword.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.WORD2PDF_LoadPassword.Margin = new System.Windows.Forms.Padding(1);
             this.WORD2PDF_LoadPassword.Name = "WORD2PDF_LoadPassword";
             this.WORD2PDF_LoadPassword.Size = new System.Drawing.Size(117, 21);
             this.WORD2PDF_LoadPassword.TabIndex = 21;
@@ -1459,7 +1525,7 @@ namespace DocumentTools
             this.EmbedFonts.AutoSize = true;
             this.EmbedFonts.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.EmbedFonts.Location = new System.Drawing.Point(4, 465);
-            this.EmbedFonts.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.EmbedFonts.Margin = new System.Windows.Forms.Padding(1);
             this.EmbedFonts.Name = "EmbedFonts";
             this.EmbedFonts.Size = new System.Drawing.Size(72, 16);
             this.EmbedFonts.TabIndex = 19;
@@ -1471,7 +1537,7 @@ namespace DocumentTools
             // 
             this.word2pdf_colorMode.FormattingEnabled = true;
             this.word2pdf_colorMode.Location = new System.Drawing.Point(763, 461);
-            this.word2pdf_colorMode.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.word2pdf_colorMode.Margin = new System.Windows.Forms.Padding(1);
             this.word2pdf_colorMode.Name = "word2pdf_colorMode";
             this.word2pdf_colorMode.Size = new System.Drawing.Size(83, 24);
             this.word2pdf_colorMode.TabIndex = 18;
@@ -1494,7 +1560,7 @@ namespace DocumentTools
             this.word2pdf_need_update_fields.AutoSize = true;
             this.word2pdf_need_update_fields.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.word2pdf_need_update_fields.Location = new System.Drawing.Point(103, 465);
-            this.word2pdf_need_update_fields.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.word2pdf_need_update_fields.Margin = new System.Windows.Forms.Padding(1);
             this.word2pdf_need_update_fields.Name = "word2pdf_need_update_fields";
             this.word2pdf_need_update_fields.Size = new System.Drawing.Size(84, 16);
             this.word2pdf_need_update_fields.TabIndex = 16;
@@ -1507,7 +1573,7 @@ namespace DocumentTools
             this.word2pdf_save_source.AutoSize = true;
             this.word2pdf_save_source.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.word2pdf_save_source.Location = new System.Drawing.Point(4, 436);
-            this.word2pdf_save_source.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.word2pdf_save_source.Margin = new System.Windows.Forms.Padding(1);
             this.word2pdf_save_source.Name = "word2pdf_save_source";
             this.word2pdf_save_source.Size = new System.Drawing.Size(96, 16);
             this.word2pdf_save_source.TabIndex = 15;
@@ -1519,7 +1585,7 @@ namespace DocumentTools
             // 
             this.Word2PDFOptimizCombox.FormattingEnabled = true;
             this.Word2PDFOptimizCombox.Location = new System.Drawing.Point(763, 433);
-            this.Word2PDFOptimizCombox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Word2PDFOptimizCombox.Margin = new System.Windows.Forms.Padding(1);
             this.Word2PDFOptimizCombox.Name = "Word2PDFOptimizCombox";
             this.Word2PDFOptimizCombox.Size = new System.Drawing.Size(83, 24);
             this.Word2PDFOptimizCombox.TabIndex = 14;
@@ -1543,7 +1609,7 @@ namespace DocumentTools
             this.word2pdf_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.word2pdf_clear.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.word2pdf_clear.Location = new System.Drawing.Point(847, 225);
-            this.word2pdf_clear.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.word2pdf_clear.Margin = new System.Windows.Forms.Padding(1);
             this.word2pdf_clear.Name = "word2pdf_clear";
             this.word2pdf_clear.Size = new System.Drawing.Size(23, 57);
             this.word2pdf_clear.TabIndex = 12;
@@ -1556,7 +1622,7 @@ namespace DocumentTools
             this.word2pdf_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.word2pdf_remove.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.word2pdf_remove.Location = new System.Drawing.Point(847, 145);
-            this.word2pdf_remove.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.word2pdf_remove.Margin = new System.Windows.Forms.Padding(1);
             this.word2pdf_remove.Name = "word2pdf_remove";
             this.word2pdf_remove.Size = new System.Drawing.Size(23, 57);
             this.word2pdf_remove.TabIndex = 11;
@@ -1567,7 +1633,7 @@ namespace DocumentTools
             // 
             this.WordFileListView_MoveDown.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.WordFileListView_MoveDown.Location = new System.Drawing.Point(847, 307);
-            this.WordFileListView_MoveDown.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.WordFileListView_MoveDown.Margin = new System.Windows.Forms.Padding(1);
             this.WordFileListView_MoveDown.Name = "WordFileListView_MoveDown";
             this.WordFileListView_MoveDown.Size = new System.Drawing.Size(23, 57);
             this.WordFileListView_MoveDown.TabIndex = 10;
@@ -1579,7 +1645,7 @@ namespace DocumentTools
             // 
             this.WordFileListView_MoveUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.WordFileListView_MoveUp.Location = new System.Drawing.Point(847, 65);
-            this.WordFileListView_MoveUp.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.WordFileListView_MoveUp.Margin = new System.Windows.Forms.Padding(1);
             this.WordFileListView_MoveUp.Name = "WordFileListView_MoveUp";
             this.WordFileListView_MoveUp.Size = new System.Drawing.Size(23, 57);
             this.WordFileListView_MoveUp.TabIndex = 9;
@@ -1603,7 +1669,7 @@ namespace DocumentTools
             // 
             this.PDFComplianceBox.FormattingEnabled = true;
             this.PDFComplianceBox.Location = new System.Drawing.Point(489, 433);
-            this.PDFComplianceBox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.PDFComplianceBox.Margin = new System.Windows.Forms.Padding(1);
             this.PDFComplianceBox.Name = "PDFComplianceBox";
             this.PDFComplianceBox.Size = new System.Drawing.Size(117, 24);
             this.PDFComplianceBox.TabIndex = 7;
@@ -1614,7 +1680,7 @@ namespace DocumentTools
             this.RemoveTempDocx.AutoSize = true;
             this.RemoveTempDocx.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.RemoveTempDocx.Location = new System.Drawing.Point(255, 436);
-            this.RemoveTempDocx.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.RemoveTempDocx.Margin = new System.Windows.Forms.Padding(1);
             this.RemoveTempDocx.Name = "RemoveTempDocx";
             this.RemoveTempDocx.Size = new System.Drawing.Size(180, 16);
             this.RemoveTempDocx.TabIndex = 6;
@@ -1627,7 +1693,7 @@ namespace DocumentTools
             this.OpenPdfOptions.AutoSize = true;
             this.OpenPdfOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.OpenPdfOptions.Location = new System.Drawing.Point(103, 436);
-            this.OpenPdfOptions.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.OpenPdfOptions.Margin = new System.Windows.Forms.Padding(1);
             this.OpenPdfOptions.Name = "OpenPdfOptions";
             this.OpenPdfOptions.Size = new System.Drawing.Size(150, 16);
             this.OpenPdfOptions.TabIndex = 5;
@@ -1652,7 +1718,7 @@ namespace DocumentTools
             // 
             this.ConvertButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ConvertButton.Location = new System.Drawing.Point(697, 561);
-            this.ConvertButton.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ConvertButton.Margin = new System.Windows.Forms.Padding(1);
             this.ConvertButton.Name = "ConvertButton";
             this.ConvertButton.Size = new System.Drawing.Size(147, 37);
             this.ConvertButton.TabIndex = 2;
@@ -1666,7 +1732,7 @@ namespace DocumentTools
             this.ChooseDocButton.AutoSize = true;
             this.ChooseDocButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ChooseDocButton.Location = new System.Drawing.Point(5, 561);
-            this.ChooseDocButton.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ChooseDocButton.Margin = new System.Windows.Forms.Padding(1);
             this.ChooseDocButton.Name = "ChooseDocButton";
             this.ChooseDocButton.Size = new System.Drawing.Size(147, 37);
             this.ChooseDocButton.TabIndex = 1;
@@ -1679,7 +1745,7 @@ namespace DocumentTools
             // 
             this.WordFileListView.HideSelection = false;
             this.WordFileListView.Location = new System.Drawing.Point(4, 4);
-            this.WordFileListView.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.WordFileListView.Margin = new System.Windows.Forms.Padding(1);
             this.WordFileListView.Name = "WordFileListView";
             this.WordFileListView.Size = new System.Drawing.Size(841, 420);
             this.WordFileListView.TabIndex = 0;
@@ -1707,9 +1773,9 @@ namespace DocumentTools
             this.TabPage_02.Controls.Add(this.SelectPdfButton);
             this.TabPage_02.Controls.Add(this.PdfFileListView);
             this.TabPage_02.Location = new System.Drawing.Point(4, 114);
-            this.TabPage_02.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_02.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_02.Name = "TabPage_02";
-            this.TabPage_02.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_02.Padding = new System.Windows.Forms.Padding(1);
             this.TabPage_02.Size = new System.Drawing.Size(882, 621);
             this.TabPage_02.TabIndex = 1;
             this.TabPage_02.Text = "PDF转WORD";
@@ -1718,7 +1784,7 @@ namespace DocumentTools
             // PDF2WORD_LoadPassword
             // 
             this.PDF2WORD_LoadPassword.Location = new System.Drawing.Point(727, 431);
-            this.PDF2WORD_LoadPassword.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.PDF2WORD_LoadPassword.Margin = new System.Windows.Forms.Padding(1);
             this.PDF2WORD_LoadPassword.Name = "PDF2WORD_LoadPassword";
             this.PDF2WORD_LoadPassword.Size = new System.Drawing.Size(119, 21);
             this.PDF2WORD_LoadPassword.TabIndex = 18;
@@ -1741,7 +1807,7 @@ namespace DocumentTools
             this.pdf2word_save_source.AutoSize = true;
             this.pdf2word_save_source.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.pdf2word_save_source.Location = new System.Drawing.Point(4, 433);
-            this.pdf2word_save_source.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.pdf2word_save_source.Margin = new System.Windows.Forms.Padding(1);
             this.pdf2word_save_source.Name = "pdf2word_save_source";
             this.pdf2word_save_source.Size = new System.Drawing.Size(96, 16);
             this.pdf2word_save_source.TabIndex = 16;
@@ -1766,7 +1832,7 @@ namespace DocumentTools
             // 
             this.PDF2WORD_Mode.FormattingEnabled = true;
             this.PDF2WORD_Mode.Location = new System.Drawing.Point(379, 432);
-            this.PDF2WORD_Mode.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.PDF2WORD_Mode.Margin = new System.Windows.Forms.Padding(1);
             this.PDF2WORD_Mode.Name = "PDF2WORD_Mode";
             this.PDF2WORD_Mode.Size = new System.Drawing.Size(293, 24);
             this.PDF2WORD_Mode.TabIndex = 11;
@@ -1778,7 +1844,7 @@ namespace DocumentTools
             this.pdf2word_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pdf2word_clear.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.pdf2word_clear.Location = new System.Drawing.Point(847, 225);
-            this.pdf2word_clear.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.pdf2word_clear.Margin = new System.Windows.Forms.Padding(1);
             this.pdf2word_clear.Name = "pdf2word_clear";
             this.pdf2word_clear.Size = new System.Drawing.Size(23, 57);
             this.pdf2word_clear.TabIndex = 12;
@@ -1791,7 +1857,7 @@ namespace DocumentTools
             this.pdf2word_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pdf2word_remove.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.pdf2word_remove.Location = new System.Drawing.Point(847, 145);
-            this.pdf2word_remove.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.pdf2word_remove.Margin = new System.Windows.Forms.Padding(1);
             this.pdf2word_remove.Name = "pdf2word_remove";
             this.pdf2word_remove.Size = new System.Drawing.Size(23, 57);
             this.pdf2word_remove.TabIndex = 12;
@@ -1815,7 +1881,7 @@ namespace DocumentTools
             this.PDF2WORD_UseSUbOcr.AutoSize = true;
             this.PDF2WORD_UseSUbOcr.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.PDF2WORD_UseSUbOcr.Location = new System.Drawing.Point(104, 433);
-            this.PDF2WORD_UseSUbOcr.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.PDF2WORD_UseSUbOcr.Margin = new System.Windows.Forms.Padding(1);
             this.PDF2WORD_UseSUbOcr.Name = "PDF2WORD_UseSUbOcr";
             this.PDF2WORD_UseSUbOcr.Size = new System.Drawing.Size(114, 16);
             this.PDF2WORD_UseSUbOcr.TabIndex = 9;
@@ -1828,7 +1894,7 @@ namespace DocumentTools
             this.PDF2WORD_UseBullet.AutoSize = true;
             this.PDF2WORD_UseBullet.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.PDF2WORD_UseBullet.Location = new System.Drawing.Point(223, 433);
-            this.PDF2WORD_UseBullet.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.PDF2WORD_UseBullet.Margin = new System.Windows.Forms.Padding(1);
             this.PDF2WORD_UseBullet.Name = "PDF2WORD_UseBullet";
             this.PDF2WORD_UseBullet.Size = new System.Drawing.Size(96, 16);
             this.PDF2WORD_UseBullet.TabIndex = 8;
@@ -1840,7 +1906,7 @@ namespace DocumentTools
             // 
             this.PdfFileListView_MoveDown.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.PdfFileListView_MoveDown.Location = new System.Drawing.Point(847, 307);
-            this.PdfFileListView_MoveDown.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.PdfFileListView_MoveDown.Margin = new System.Windows.Forms.Padding(1);
             this.PdfFileListView_MoveDown.Name = "PdfFileListView_MoveDown";
             this.PdfFileListView_MoveDown.Size = new System.Drawing.Size(23, 57);
             this.PdfFileListView_MoveDown.TabIndex = 7;
@@ -1852,7 +1918,7 @@ namespace DocumentTools
             // 
             this.PdfFileListView_MoveUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.PdfFileListView_MoveUp.Location = new System.Drawing.Point(847, 65);
-            this.PdfFileListView_MoveUp.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.PdfFileListView_MoveUp.Margin = new System.Windows.Forms.Padding(1);
             this.PdfFileListView_MoveUp.Name = "PdfFileListView_MoveUp";
             this.PdfFileListView_MoveUp.Size = new System.Drawing.Size(23, 57);
             this.PdfFileListView_MoveUp.TabIndex = 6;
@@ -1890,7 +1956,7 @@ namespace DocumentTools
             // 
             this.Convert2DocButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.Convert2DocButton.Location = new System.Drawing.Point(697, 561);
-            this.Convert2DocButton.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Convert2DocButton.Margin = new System.Windows.Forms.Padding(1);
             this.Convert2DocButton.Name = "Convert2DocButton";
             this.Convert2DocButton.Size = new System.Drawing.Size(147, 37);
             this.Convert2DocButton.TabIndex = 2;
@@ -1903,7 +1969,7 @@ namespace DocumentTools
             // 
             this.SelectPdfButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SelectPdfButton.Location = new System.Drawing.Point(5, 561);
-            this.SelectPdfButton.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SelectPdfButton.Margin = new System.Windows.Forms.Padding(1);
             this.SelectPdfButton.Name = "SelectPdfButton";
             this.SelectPdfButton.Size = new System.Drawing.Size(147, 37);
             this.SelectPdfButton.TabIndex = 1;
@@ -1916,7 +1982,7 @@ namespace DocumentTools
             // 
             this.PdfFileListView.HideSelection = false;
             this.PdfFileListView.Location = new System.Drawing.Point(4, 4);
-            this.PdfFileListView.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.PdfFileListView.Margin = new System.Windows.Forms.Padding(1);
             this.PdfFileListView.Name = "PdfFileListView";
             this.PdfFileListView.Size = new System.Drawing.Size(841, 420);
             this.PdfFileListView.TabIndex = 0;
@@ -1937,7 +2003,7 @@ namespace DocumentTools
             this.TabPage_03.Controls.Add(this.SelectExcelFileButton);
             this.TabPage_03.Controls.Add(this.ExcelFileListView);
             this.TabPage_03.Location = new System.Drawing.Point(4, 114);
-            this.TabPage_03.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_03.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_03.Name = "TabPage_03";
             this.TabPage_03.Size = new System.Drawing.Size(882, 621);
             this.TabPage_03.TabIndex = 2;
@@ -2067,7 +2133,7 @@ namespace DocumentTools
             // 
             this.ExcelFileListView_MoveDown.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ExcelFileListView_MoveDown.Location = new System.Drawing.Point(847, 307);
-            this.ExcelFileListView_MoveDown.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ExcelFileListView_MoveDown.Margin = new System.Windows.Forms.Padding(1);
             this.ExcelFileListView_MoveDown.Name = "ExcelFileListView_MoveDown";
             this.ExcelFileListView_MoveDown.Size = new System.Drawing.Size(23, 57);
             this.ExcelFileListView_MoveDown.TabIndex = 7;
@@ -2079,7 +2145,7 @@ namespace DocumentTools
             // 
             this.ExcelFileListView_MoveUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ExcelFileListView_MoveUp.Location = new System.Drawing.Point(847, 65);
-            this.ExcelFileListView_MoveUp.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ExcelFileListView_MoveUp.Margin = new System.Windows.Forms.Padding(1);
             this.ExcelFileListView_MoveUp.Name = "ExcelFileListView_MoveUp";
             this.ExcelFileListView_MoveUp.Size = new System.Drawing.Size(23, 57);
             this.ExcelFileListView_MoveUp.TabIndex = 6;
@@ -2093,7 +2159,7 @@ namespace DocumentTools
             this.excel2pdf_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.excel2pdf_clear.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.excel2pdf_clear.Location = new System.Drawing.Point(847, 225);
-            this.excel2pdf_clear.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.excel2pdf_clear.Margin = new System.Windows.Forms.Padding(1);
             this.excel2pdf_clear.Name = "excel2pdf_clear";
             this.excel2pdf_clear.Size = new System.Drawing.Size(23, 57);
             this.excel2pdf_clear.TabIndex = 12;
@@ -2106,7 +2172,7 @@ namespace DocumentTools
             this.excel2pdf_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.excel2pdf_remove.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.excel2pdf_remove.Location = new System.Drawing.Point(847, 145);
-            this.excel2pdf_remove.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.excel2pdf_remove.Margin = new System.Windows.Forms.Padding(1);
             this.excel2pdf_remove.Name = "excel2pdf_remove";
             this.excel2pdf_remove.Size = new System.Drawing.Size(23, 57);
             this.excel2pdf_remove.TabIndex = 11;
@@ -2118,7 +2184,7 @@ namespace DocumentTools
             this.ExportEachSheet.AutoSize = true;
             this.ExportEachSheet.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ExportEachSheet.Location = new System.Drawing.Point(4, 431);
-            this.ExportEachSheet.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ExportEachSheet.Margin = new System.Windows.Forms.Padding(1);
             this.ExportEachSheet.Name = "ExportEachSheet";
             this.ExportEachSheet.Size = new System.Drawing.Size(192, 16);
             this.ExportEachSheet.TabIndex = 5;
@@ -2143,7 +2209,7 @@ namespace DocumentTools
             // 
             this.ConvertExcel2PdfButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ConvertExcel2PdfButton.Location = new System.Drawing.Point(697, 561);
-            this.ConvertExcel2PdfButton.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ConvertExcel2PdfButton.Margin = new System.Windows.Forms.Padding(1);
             this.ConvertExcel2PdfButton.Name = "ConvertExcel2PdfButton";
             this.ConvertExcel2PdfButton.Size = new System.Drawing.Size(147, 37);
             this.ConvertExcel2PdfButton.TabIndex = 3;
@@ -2156,7 +2222,7 @@ namespace DocumentTools
             // 
             this.SelectExcelFileButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SelectExcelFileButton.Location = new System.Drawing.Point(5, 561);
-            this.SelectExcelFileButton.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SelectExcelFileButton.Margin = new System.Windows.Forms.Padding(1);
             this.SelectExcelFileButton.Name = "SelectExcelFileButton";
             this.SelectExcelFileButton.Size = new System.Drawing.Size(147, 37);
             this.SelectExcelFileButton.TabIndex = 2;
@@ -2169,7 +2235,7 @@ namespace DocumentTools
             // 
             this.ExcelFileListView.HideSelection = false;
             this.ExcelFileListView.Location = new System.Drawing.Point(4, 4);
-            this.ExcelFileListView.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ExcelFileListView.Margin = new System.Windows.Forms.Padding(1);
             this.ExcelFileListView.Name = "ExcelFileListView";
             this.ExcelFileListView.Size = new System.Drawing.Size(841, 420);
             this.ExcelFileListView.TabIndex = 1;
@@ -2188,7 +2254,7 @@ namespace DocumentTools
             this.TabPage_07.Controls.Add(this.SelectPDF2ExcelButton);
             this.TabPage_07.Controls.Add(this.PDF2ExcelFileView);
             this.TabPage_07.Location = new System.Drawing.Point(4, 114);
-            this.TabPage_07.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_07.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_07.Name = "TabPage_07";
             this.TabPage_07.Size = new System.Drawing.Size(882, 621);
             this.TabPage_07.TabIndex = 6;
@@ -2199,7 +2265,7 @@ namespace DocumentTools
             // 
             this.PDF2ExcelFileView_MoveDown.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.PDF2ExcelFileView_MoveDown.Location = new System.Drawing.Point(847, 307);
-            this.PDF2ExcelFileView_MoveDown.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.PDF2ExcelFileView_MoveDown.Margin = new System.Windows.Forms.Padding(1);
             this.PDF2ExcelFileView_MoveDown.Name = "PDF2ExcelFileView_MoveDown";
             this.PDF2ExcelFileView_MoveDown.Size = new System.Drawing.Size(23, 57);
             this.PDF2ExcelFileView_MoveDown.TabIndex = 6;
@@ -2211,7 +2277,7 @@ namespace DocumentTools
             // 
             this.PDF2ExcelFileView_MoveUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.PDF2ExcelFileView_MoveUp.Location = new System.Drawing.Point(847, 65);
-            this.PDF2ExcelFileView_MoveUp.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.PDF2ExcelFileView_MoveUp.Margin = new System.Windows.Forms.Padding(1);
             this.PDF2ExcelFileView_MoveUp.Name = "PDF2ExcelFileView_MoveUp";
             this.PDF2ExcelFileView_MoveUp.Size = new System.Drawing.Size(23, 57);
             this.PDF2ExcelFileView_MoveUp.TabIndex = 5;
@@ -2225,7 +2291,7 @@ namespace DocumentTools
             this.pdf2excel_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pdf2excel_clear.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.pdf2excel_clear.Location = new System.Drawing.Point(847, 225);
-            this.pdf2excel_clear.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.pdf2excel_clear.Margin = new System.Windows.Forms.Padding(1);
             this.pdf2excel_clear.Name = "pdf2excel_clear";
             this.pdf2excel_clear.Size = new System.Drawing.Size(23, 57);
             this.pdf2excel_clear.TabIndex = 12;
@@ -2238,7 +2304,7 @@ namespace DocumentTools
             this.pdf2excel_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pdf2excel_remove.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.pdf2excel_remove.Location = new System.Drawing.Point(847, 145);
-            this.pdf2excel_remove.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.pdf2excel_remove.Margin = new System.Windows.Forms.Padding(1);
             this.pdf2excel_remove.Name = "pdf2excel_remove";
             this.pdf2excel_remove.Size = new System.Drawing.Size(23, 57);
             this.pdf2excel_remove.TabIndex = 11;
@@ -2250,7 +2316,7 @@ namespace DocumentTools
             this.ExcelSheelMode.AutoSize = true;
             this.ExcelSheelMode.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ExcelSheelMode.Location = new System.Drawing.Point(4, 431);
-            this.ExcelSheelMode.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ExcelSheelMode.Margin = new System.Windows.Forms.Padding(1);
             this.ExcelSheelMode.Name = "ExcelSheelMode";
             this.ExcelSheelMode.Size = new System.Drawing.Size(174, 16);
             this.ExcelSheelMode.TabIndex = 4;
@@ -2275,7 +2341,7 @@ namespace DocumentTools
             // 
             this.ConvertPDF2Excel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ConvertPDF2Excel.Location = new System.Drawing.Point(697, 561);
-            this.ConvertPDF2Excel.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ConvertPDF2Excel.Margin = new System.Windows.Forms.Padding(1);
             this.ConvertPDF2Excel.Name = "ConvertPDF2Excel";
             this.ConvertPDF2Excel.Size = new System.Drawing.Size(147, 37);
             this.ConvertPDF2Excel.TabIndex = 2;
@@ -2288,7 +2354,7 @@ namespace DocumentTools
             // 
             this.SelectPDF2ExcelButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SelectPDF2ExcelButton.Location = new System.Drawing.Point(5, 561);
-            this.SelectPDF2ExcelButton.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SelectPDF2ExcelButton.Margin = new System.Windows.Forms.Padding(1);
             this.SelectPDF2ExcelButton.Name = "SelectPDF2ExcelButton";
             this.SelectPDF2ExcelButton.Size = new System.Drawing.Size(147, 37);
             this.SelectPDF2ExcelButton.TabIndex = 1;
@@ -2301,7 +2367,7 @@ namespace DocumentTools
             // 
             this.PDF2ExcelFileView.HideSelection = false;
             this.PDF2ExcelFileView.Location = new System.Drawing.Point(4, 4);
-            this.PDF2ExcelFileView.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.PDF2ExcelFileView.Margin = new System.Windows.Forms.Padding(1);
             this.PDF2ExcelFileView.Name = "PDF2ExcelFileView";
             this.PDF2ExcelFileView.Size = new System.Drawing.Size(841, 420);
             this.PDF2ExcelFileView.TabIndex = 0;
@@ -2326,9 +2392,9 @@ namespace DocumentTools
             this.TabPage_20.Controls.Add(this.SelectPPT2PdfFile);
             this.TabPage_20.Controls.Add(this.PPT2PdfFileList);
             this.TabPage_20.Location = new System.Drawing.Point(4, 114);
-            this.TabPage_20.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_20.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_20.Name = "TabPage_20";
-            this.TabPage_20.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_20.Padding = new System.Windows.Forms.Padding(1);
             this.TabPage_20.Size = new System.Drawing.Size(882, 621);
             this.TabPage_20.TabIndex = 19;
             this.TabPage_20.Tag = "anchor_left_bottom";
@@ -2340,7 +2406,7 @@ namespace DocumentTools
             this.ppt2pdf_save_source.AutoSize = true;
             this.ppt2pdf_save_source.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ppt2pdf_save_source.Location = new System.Drawing.Point(4, 457);
-            this.ppt2pdf_save_source.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ppt2pdf_save_source.Margin = new System.Windows.Forms.Padding(1);
             this.ppt2pdf_save_source.Name = "ppt2pdf_save_source";
             this.ppt2pdf_save_source.Size = new System.Drawing.Size(96, 16);
             this.ppt2pdf_save_source.TabIndex = 17;
@@ -2352,7 +2418,7 @@ namespace DocumentTools
             // 
             this.PPT2PdfFileList_MoveDown.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.PPT2PdfFileList_MoveDown.Location = new System.Drawing.Point(847, 307);
-            this.PPT2PdfFileList_MoveDown.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.PPT2PdfFileList_MoveDown.Margin = new System.Windows.Forms.Padding(1);
             this.PPT2PdfFileList_MoveDown.Name = "PPT2PdfFileList_MoveDown";
             this.PPT2PdfFileList_MoveDown.Size = new System.Drawing.Size(23, 57);
             this.PPT2PdfFileList_MoveDown.TabIndex = 12;
@@ -2364,7 +2430,7 @@ namespace DocumentTools
             // 
             this.PPT2PdfFileList_MoveUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.PPT2PdfFileList_MoveUp.Location = new System.Drawing.Point(847, 65);
-            this.PPT2PdfFileList_MoveUp.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.PPT2PdfFileList_MoveUp.Margin = new System.Windows.Forms.Padding(1);
             this.PPT2PdfFileList_MoveUp.Name = "PPT2PdfFileList_MoveUp";
             this.PPT2PdfFileList_MoveUp.Size = new System.Drawing.Size(23, 57);
             this.PPT2PdfFileList_MoveUp.TabIndex = 11;
@@ -2378,7 +2444,7 @@ namespace DocumentTools
             this.ppt2pdf_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ppt2pdf_clear.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ppt2pdf_clear.Location = new System.Drawing.Point(847, 225);
-            this.ppt2pdf_clear.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ppt2pdf_clear.Margin = new System.Windows.Forms.Padding(1);
             this.ppt2pdf_clear.Name = "ppt2pdf_clear";
             this.ppt2pdf_clear.Size = new System.Drawing.Size(23, 57);
             this.ppt2pdf_clear.TabIndex = 12;
@@ -2391,7 +2457,7 @@ namespace DocumentTools
             this.ppt2pdf_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ppt2pdf_remove.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ppt2pdf_remove.Location = new System.Drawing.Point(847, 145);
-            this.ppt2pdf_remove.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ppt2pdf_remove.Margin = new System.Windows.Forms.Padding(1);
             this.ppt2pdf_remove.Name = "ppt2pdf_remove";
             this.ppt2pdf_remove.Size = new System.Drawing.Size(23, 57);
             this.ppt2pdf_remove.TabIndex = 11;
@@ -2413,7 +2479,7 @@ namespace DocumentTools
             // ConvertPPT2PDFPassword
             // 
             this.ConvertPPT2PDFPassword.Location = new System.Drawing.Point(428, 427);
-            this.ConvertPPT2PDFPassword.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ConvertPPT2PDFPassword.Margin = new System.Windows.Forms.Padding(1);
             this.ConvertPPT2PDFPassword.Name = "ConvertPPT2PDFPassword";
             this.ConvertPPT2PDFPassword.Size = new System.Drawing.Size(99, 21);
             this.ConvertPPT2PDFPassword.TabIndex = 8;
@@ -2435,7 +2501,7 @@ namespace DocumentTools
             // 
             this.ExportNotePageCombox.FormattingEnabled = true;
             this.ExportNotePageCombox.Location = new System.Drawing.Point(284, 427);
-            this.ExportNotePageCombox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ExportNotePageCombox.Margin = new System.Windows.Forms.Padding(1);
             this.ExportNotePageCombox.Name = "ExportNotePageCombox";
             this.ExportNotePageCombox.Size = new System.Drawing.Size(83, 24);
             this.ExportNotePageCombox.TabIndex = 6;
@@ -2446,7 +2512,7 @@ namespace DocumentTools
             this.DrawBlackLine.AutoSize = true;
             this.DrawBlackLine.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.DrawBlackLine.Location = new System.Drawing.Point(116, 431);
-            this.DrawBlackLine.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.DrawBlackLine.Margin = new System.Windows.Forms.Padding(1);
             this.DrawBlackLine.Name = "DrawBlackLine";
             this.DrawBlackLine.Size = new System.Drawing.Size(72, 16);
             this.DrawBlackLine.TabIndex = 5;
@@ -2459,7 +2525,7 @@ namespace DocumentTools
             this.ExportHiddenPage.AutoSize = true;
             this.ExportHiddenPage.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ExportHiddenPage.Location = new System.Drawing.Point(4, 431);
-            this.ExportHiddenPage.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ExportHiddenPage.Margin = new System.Windows.Forms.Padding(1);
             this.ExportHiddenPage.Name = "ExportHiddenPage";
             this.ExportHiddenPage.Size = new System.Drawing.Size(108, 16);
             this.ExportHiddenPage.TabIndex = 4;
@@ -2484,7 +2550,7 @@ namespace DocumentTools
             // 
             this.ConvertPPT2PDF.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ConvertPPT2PDF.Location = new System.Drawing.Point(697, 561);
-            this.ConvertPPT2PDF.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ConvertPPT2PDF.Margin = new System.Windows.Forms.Padding(1);
             this.ConvertPPT2PDF.Name = "ConvertPPT2PDF";
             this.ConvertPPT2PDF.Size = new System.Drawing.Size(147, 37);
             this.ConvertPPT2PDF.TabIndex = 2;
@@ -2497,7 +2563,7 @@ namespace DocumentTools
             // 
             this.SelectPPT2PdfFile.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SelectPPT2PdfFile.Location = new System.Drawing.Point(5, 561);
-            this.SelectPPT2PdfFile.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SelectPPT2PdfFile.Margin = new System.Windows.Forms.Padding(1);
             this.SelectPPT2PdfFile.Name = "SelectPPT2PdfFile";
             this.SelectPPT2PdfFile.Size = new System.Drawing.Size(147, 37);
             this.SelectPPT2PdfFile.TabIndex = 1;
@@ -2510,7 +2576,7 @@ namespace DocumentTools
             // 
             this.PPT2PdfFileList.HideSelection = false;
             this.PPT2PdfFileList.Location = new System.Drawing.Point(4, 4);
-            this.PPT2PdfFileList.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.PPT2PdfFileList.Margin = new System.Windows.Forms.Padding(1);
             this.PPT2PdfFileList.Name = "PPT2PdfFileList";
             this.PPT2PdfFileList.Size = new System.Drawing.Size(841, 420);
             this.PPT2PdfFileList.TabIndex = 0;
@@ -2532,7 +2598,7 @@ namespace DocumentTools
             this.TabPage_21.Controls.Add(this.SelectConvertPDF2PPT);
             this.TabPage_21.Controls.Add(this.PDF2PPTFileList);
             this.TabPage_21.Location = new System.Drawing.Point(4, 114);
-            this.TabPage_21.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_21.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_21.Name = "TabPage_21";
             this.TabPage_21.Size = new System.Drawing.Size(882, 621);
             this.TabPage_21.TabIndex = 20;
@@ -2544,7 +2610,7 @@ namespace DocumentTools
             this.pdf2ppt_save_source.AutoSize = true;
             this.pdf2ppt_save_source.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.pdf2ppt_save_source.Location = new System.Drawing.Point(4, 457);
-            this.pdf2ppt_save_source.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.pdf2ppt_save_source.Margin = new System.Windows.Forms.Padding(1);
             this.pdf2ppt_save_source.Name = "pdf2ppt_save_source";
             this.pdf2ppt_save_source.Size = new System.Drawing.Size(96, 16);
             this.pdf2ppt_save_source.TabIndex = 17;
@@ -2556,7 +2622,7 @@ namespace DocumentTools
             // 
             this.PDF2PPTFileList_MoveDown.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.PDF2PPTFileList_MoveDown.Location = new System.Drawing.Point(847, 307);
-            this.PDF2PPTFileList_MoveDown.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.PDF2PPTFileList_MoveDown.Margin = new System.Windows.Forms.Padding(1);
             this.PDF2PPTFileList_MoveDown.Name = "PDF2PPTFileList_MoveDown";
             this.PDF2PPTFileList_MoveDown.Size = new System.Drawing.Size(23, 57);
             this.PDF2PPTFileList_MoveDown.TabIndex = 8;
@@ -2568,7 +2634,7 @@ namespace DocumentTools
             // 
             this.PDF2PPTFileList_MoveUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.PDF2PPTFileList_MoveUp.Location = new System.Drawing.Point(847, 65);
-            this.PDF2PPTFileList_MoveUp.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.PDF2PPTFileList_MoveUp.Margin = new System.Windows.Forms.Padding(1);
             this.PDF2PPTFileList_MoveUp.Name = "PDF2PPTFileList_MoveUp";
             this.PDF2PPTFileList_MoveUp.Size = new System.Drawing.Size(23, 57);
             this.PDF2PPTFileList_MoveUp.TabIndex = 7;
@@ -2582,7 +2648,7 @@ namespace DocumentTools
             this.pdf2ppt_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pdf2ppt_clear.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.pdf2ppt_clear.Location = new System.Drawing.Point(847, 225);
-            this.pdf2ppt_clear.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.pdf2ppt_clear.Margin = new System.Windows.Forms.Padding(1);
             this.pdf2ppt_clear.Name = "pdf2ppt_clear";
             this.pdf2ppt_clear.Size = new System.Drawing.Size(23, 57);
             this.pdf2ppt_clear.TabIndex = 12;
@@ -2595,7 +2661,7 @@ namespace DocumentTools
             this.pdf2ppt_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pdf2ppt_remove.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.pdf2ppt_remove.Location = new System.Drawing.Point(847, 145);
-            this.pdf2ppt_remove.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.pdf2ppt_remove.Margin = new System.Windows.Forms.Padding(1);
             this.pdf2ppt_remove.Name = "pdf2ppt_remove";
             this.pdf2ppt_remove.Size = new System.Drawing.Size(23, 57);
             this.pdf2ppt_remove.TabIndex = 11;
@@ -2607,7 +2673,7 @@ namespace DocumentTools
             this.RenderImageBox.AutoSize = true;
             this.RenderImageBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.RenderImageBox.Location = new System.Drawing.Point(315, 431);
-            this.RenderImageBox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.RenderImageBox.Margin = new System.Windows.Forms.Padding(1);
             this.RenderImageBox.Name = "RenderImageBox";
             this.RenderImageBox.Size = new System.Drawing.Size(132, 16);
             this.RenderImageBox.TabIndex = 6;
@@ -2620,7 +2686,7 @@ namespace DocumentTools
             this.SplitShapeBox.AutoSize = true;
             this.SplitShapeBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SplitShapeBox.Location = new System.Drawing.Point(193, 431);
-            this.SplitShapeBox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SplitShapeBox.Margin = new System.Windows.Forms.Padding(1);
             this.SplitShapeBox.Name = "SplitShapeBox";
             this.SplitShapeBox.Size = new System.Drawing.Size(108, 16);
             this.SplitShapeBox.TabIndex = 5;
@@ -2633,7 +2699,7 @@ namespace DocumentTools
             this.ExtraOcrBox.AutoSize = true;
             this.ExtraOcrBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ExtraOcrBox.Location = new System.Drawing.Point(4, 431);
-            this.ExtraOcrBox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ExtraOcrBox.Margin = new System.Windows.Forms.Padding(1);
             this.ExtraOcrBox.Name = "ExtraOcrBox";
             this.ExtraOcrBox.Size = new System.Drawing.Size(186, 16);
             this.ExtraOcrBox.TabIndex = 4;
@@ -2659,7 +2725,7 @@ namespace DocumentTools
             // 
             this.ConvertPDF2PPT.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ConvertPDF2PPT.Location = new System.Drawing.Point(697, 561);
-            this.ConvertPDF2PPT.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ConvertPDF2PPT.Margin = new System.Windows.Forms.Padding(1);
             this.ConvertPDF2PPT.Name = "ConvertPDF2PPT";
             this.ConvertPDF2PPT.Size = new System.Drawing.Size(147, 37);
             this.ConvertPDF2PPT.TabIndex = 2;
@@ -2672,7 +2738,7 @@ namespace DocumentTools
             // 
             this.SelectConvertPDF2PPT.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SelectConvertPDF2PPT.Location = new System.Drawing.Point(5, 561);
-            this.SelectConvertPDF2PPT.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SelectConvertPDF2PPT.Margin = new System.Windows.Forms.Padding(1);
             this.SelectConvertPDF2PPT.Name = "SelectConvertPDF2PPT";
             this.SelectConvertPDF2PPT.Size = new System.Drawing.Size(147, 37);
             this.SelectConvertPDF2PPT.TabIndex = 1;
@@ -2685,7 +2751,7 @@ namespace DocumentTools
             // 
             this.PDF2PPTFileList.HideSelection = false;
             this.PDF2PPTFileList.Location = new System.Drawing.Point(4, 4);
-            this.PDF2PPTFileList.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.PDF2PPTFileList.Margin = new System.Windows.Forms.Padding(1);
             this.PDF2PPTFileList.Name = "PDF2PPTFileList";
             this.PDF2PPTFileList.Size = new System.Drawing.Size(841, 420);
             this.PDF2PPTFileList.TabIndex = 0;
@@ -2704,9 +2770,9 @@ namespace DocumentTools
             this.TabPage_14.Controls.Add(this.SelectMergeWordFiles);
             this.TabPage_14.Controls.Add(this.MergeWordFileList);
             this.TabPage_14.Location = new System.Drawing.Point(4, 114);
-            this.TabPage_14.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_14.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_14.Name = "TabPage_14";
-            this.TabPage_14.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_14.Padding = new System.Windows.Forms.Padding(1);
             this.TabPage_14.Size = new System.Drawing.Size(882, 621);
             this.TabPage_14.TabIndex = 13;
             this.TabPage_14.Text = "合并WORD";
@@ -2716,7 +2782,7 @@ namespace DocumentTools
             // 
             this.MergeWordFileList_MoveDown.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.MergeWordFileList_MoveDown.Location = new System.Drawing.Point(847, 307);
-            this.MergeWordFileList_MoveDown.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.MergeWordFileList_MoveDown.Margin = new System.Windows.Forms.Padding(1);
             this.MergeWordFileList_MoveDown.Name = "MergeWordFileList_MoveDown";
             this.MergeWordFileList_MoveDown.Size = new System.Drawing.Size(23, 57);
             this.MergeWordFileList_MoveDown.TabIndex = 6;
@@ -2728,7 +2794,7 @@ namespace DocumentTools
             // 
             this.MergeWordFileList_MoveUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.MergeWordFileList_MoveUp.Location = new System.Drawing.Point(847, 65);
-            this.MergeWordFileList_MoveUp.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.MergeWordFileList_MoveUp.Margin = new System.Windows.Forms.Padding(1);
             this.MergeWordFileList_MoveUp.Name = "MergeWordFileList_MoveUp";
             this.MergeWordFileList_MoveUp.Size = new System.Drawing.Size(23, 57);
             this.MergeWordFileList_MoveUp.TabIndex = 5;
@@ -2742,7 +2808,7 @@ namespace DocumentTools
             this.meregeword_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.meregeword_clear.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.meregeword_clear.Location = new System.Drawing.Point(847, 225);
-            this.meregeword_clear.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.meregeword_clear.Margin = new System.Windows.Forms.Padding(1);
             this.meregeword_clear.Name = "meregeword_clear";
             this.meregeword_clear.Size = new System.Drawing.Size(23, 57);
             this.meregeword_clear.TabIndex = 12;
@@ -2755,7 +2821,7 @@ namespace DocumentTools
             this.meregeword_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.meregeword_remove.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.meregeword_remove.Location = new System.Drawing.Point(847, 145);
-            this.meregeword_remove.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.meregeword_remove.Margin = new System.Windows.Forms.Padding(1);
             this.meregeword_remove.Name = "meregeword_remove";
             this.meregeword_remove.Size = new System.Drawing.Size(23, 57);
             this.meregeword_remove.TabIndex = 11;
@@ -2792,7 +2858,7 @@ namespace DocumentTools
             // 
             this.MergeWordFile.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.MergeWordFile.Location = new System.Drawing.Point(697, 561);
-            this.MergeWordFile.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.MergeWordFile.Margin = new System.Windows.Forms.Padding(1);
             this.MergeWordFile.Name = "MergeWordFile";
             this.MergeWordFile.Size = new System.Drawing.Size(147, 37);
             this.MergeWordFile.TabIndex = 2;
@@ -2805,7 +2871,7 @@ namespace DocumentTools
             // 
             this.SelectMergeWordFiles.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SelectMergeWordFiles.Location = new System.Drawing.Point(5, 561);
-            this.SelectMergeWordFiles.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SelectMergeWordFiles.Margin = new System.Windows.Forms.Padding(1);
             this.SelectMergeWordFiles.Name = "SelectMergeWordFiles";
             this.SelectMergeWordFiles.Size = new System.Drawing.Size(147, 37);
             this.SelectMergeWordFiles.TabIndex = 1;
@@ -2818,7 +2884,7 @@ namespace DocumentTools
             // 
             this.MergeWordFileList.HideSelection = false;
             this.MergeWordFileList.Location = new System.Drawing.Point(4, 4);
-            this.MergeWordFileList.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.MergeWordFileList.Margin = new System.Windows.Forms.Padding(1);
             this.MergeWordFileList.Name = "MergeWordFileList";
             this.MergeWordFileList.Size = new System.Drawing.Size(841, 420);
             this.MergeWordFileList.TabIndex = 0;
@@ -2838,7 +2904,7 @@ namespace DocumentTools
             this.TabPage_31.Controls.Add(this.SelectSplitWordFiles);
             this.TabPage_31.Controls.Add(this.SplitWordFileList);
             this.TabPage_31.Location = new System.Drawing.Point(4, 114);
-            this.TabPage_31.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_31.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_31.Name = "TabPage_31";
             this.TabPage_31.Size = new System.Drawing.Size(882, 621);
             this.TabPage_31.TabIndex = 30;
@@ -2850,7 +2916,7 @@ namespace DocumentTools
             this.SplitWordReUpdatePageNumber.AutoSize = true;
             this.SplitWordReUpdatePageNumber.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SplitWordReUpdatePageNumber.Location = new System.Drawing.Point(4, 508);
-            this.SplitWordReUpdatePageNumber.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SplitWordReUpdatePageNumber.Margin = new System.Windows.Forms.Padding(1);
             this.SplitWordReUpdatePageNumber.Name = "SplitWordReUpdatePageNumber";
             this.SplitWordReUpdatePageNumber.Size = new System.Drawing.Size(120, 16);
             this.SplitWordReUpdatePageNumber.TabIndex = 22;
@@ -2871,9 +2937,9 @@ namespace DocumentTools
             this.groupBox48.Controls.Add(this.label137);
             this.groupBox48.Controls.Add(this.SplitWord_Range);
             this.groupBox48.Location = new System.Drawing.Point(4, 427);
-            this.groupBox48.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox48.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox48.Name = "groupBox48";
-            this.groupBox48.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox48.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox48.Size = new System.Drawing.Size(353, 77);
             this.groupBox48.TabIndex = 21;
             this.groupBox48.TabStop = false;
@@ -2905,7 +2971,7 @@ namespace DocumentTools
             // SplitWord_PageCount
             // 
             this.SplitWord_PageCount.Location = new System.Drawing.Point(147, 45);
-            this.SplitWord_PageCount.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SplitWord_PageCount.Margin = new System.Windows.Forms.Padding(1);
             this.SplitWord_PageCount.Maximum = new decimal(new int[] {
             999999999,
             0,
@@ -2931,7 +2997,7 @@ namespace DocumentTools
             this.SplitWord_Single.Checked = true;
             this.SplitWord_Single.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SplitWord_Single.Location = new System.Drawing.Point(4, 48);
-            this.SplitWord_Single.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SplitWord_Single.Margin = new System.Windows.Forms.Padding(1);
             this.SplitWord_Single.Name = "SplitWord_Single";
             this.SplitWord_Single.Size = new System.Drawing.Size(71, 16);
             this.SplitWord_Single.TabIndex = 6;
@@ -2953,7 +3019,7 @@ namespace DocumentTools
             // SplitWord_Range_End
             // 
             this.SplitWord_Range_End.Location = new System.Drawing.Point(200, 15);
-            this.SplitWord_Range_End.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SplitWord_Range_End.Margin = new System.Windows.Forms.Padding(1);
             this.SplitWord_Range_End.Name = "SplitWord_Range_End";
             this.SplitWord_Range_End.Size = new System.Drawing.Size(28, 21);
             this.SplitWord_Range_End.TabIndex = 4;
@@ -2973,7 +3039,7 @@ namespace DocumentTools
             // SplitWord_Range_Start
             // 
             this.SplitWord_Range_Start.Location = new System.Drawing.Point(147, 15);
-            this.SplitWord_Range_Start.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SplitWord_Range_Start.Margin = new System.Windows.Forms.Padding(1);
             this.SplitWord_Range_Start.Name = "SplitWord_Range_Start";
             this.SplitWord_Range_Start.Size = new System.Drawing.Size(28, 21);
             this.SplitWord_Range_Start.TabIndex = 2;
@@ -2995,7 +3061,7 @@ namespace DocumentTools
             this.SplitWord_Range.AutoSize = true;
             this.SplitWord_Range.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SplitWord_Range.Location = new System.Drawing.Point(4, 17);
-            this.SplitWord_Range.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SplitWord_Range.Margin = new System.Windows.Forms.Padding(1);
             this.SplitWord_Range.Name = "SplitWord_Range";
             this.SplitWord_Range.Size = new System.Drawing.Size(119, 16);
             this.SplitWord_Range.TabIndex = 0;
@@ -3006,7 +3072,7 @@ namespace DocumentTools
             // 
             this.SplitWordFileList_MoveDown.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SplitWordFileList_MoveDown.Location = new System.Drawing.Point(847, 307);
-            this.SplitWordFileList_MoveDown.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SplitWordFileList_MoveDown.Margin = new System.Windows.Forms.Padding(1);
             this.SplitWordFileList_MoveDown.Name = "SplitWordFileList_MoveDown";
             this.SplitWordFileList_MoveDown.Size = new System.Drawing.Size(23, 57);
             this.SplitWordFileList_MoveDown.TabIndex = 18;
@@ -3018,7 +3084,7 @@ namespace DocumentTools
             // 
             this.SplitWordFileList_MoveUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SplitWordFileList_MoveUp.Location = new System.Drawing.Point(847, 65);
-            this.SplitWordFileList_MoveUp.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SplitWordFileList_MoveUp.Margin = new System.Windows.Forms.Padding(1);
             this.SplitWordFileList_MoveUp.Name = "SplitWordFileList_MoveUp";
             this.SplitWordFileList_MoveUp.Size = new System.Drawing.Size(23, 57);
             this.SplitWordFileList_MoveUp.TabIndex = 17;
@@ -3032,7 +3098,7 @@ namespace DocumentTools
             this.splitword_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.splitword_clear.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.splitword_clear.Location = new System.Drawing.Point(847, 225);
-            this.splitword_clear.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.splitword_clear.Margin = new System.Windows.Forms.Padding(1);
             this.splitword_clear.Name = "splitword_clear";
             this.splitword_clear.Size = new System.Drawing.Size(23, 57);
             this.splitword_clear.TabIndex = 20;
@@ -3045,7 +3111,7 @@ namespace DocumentTools
             this.splitword_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.splitword_remove.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.splitword_remove.Location = new System.Drawing.Point(847, 145);
-            this.splitword_remove.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.splitword_remove.Margin = new System.Windows.Forms.Padding(1);
             this.splitword_remove.Name = "splitword_remove";
             this.splitword_remove.Size = new System.Drawing.Size(23, 57);
             this.splitword_remove.TabIndex = 19;
@@ -3069,7 +3135,7 @@ namespace DocumentTools
             // 
             this.StartSplitWord.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.StartSplitWord.Location = new System.Drawing.Point(697, 561);
-            this.StartSplitWord.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.StartSplitWord.Margin = new System.Windows.Forms.Padding(1);
             this.StartSplitWord.Name = "StartSplitWord";
             this.StartSplitWord.Size = new System.Drawing.Size(147, 37);
             this.StartSplitWord.TabIndex = 15;
@@ -3082,7 +3148,7 @@ namespace DocumentTools
             // 
             this.SelectSplitWordFiles.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SelectSplitWordFiles.Location = new System.Drawing.Point(5, 561);
-            this.SelectSplitWordFiles.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SelectSplitWordFiles.Margin = new System.Windows.Forms.Padding(1);
             this.SelectSplitWordFiles.Name = "SelectSplitWordFiles";
             this.SelectSplitWordFiles.Size = new System.Drawing.Size(147, 37);
             this.SelectSplitWordFiles.TabIndex = 14;
@@ -3095,7 +3161,7 @@ namespace DocumentTools
             // 
             this.SplitWordFileList.HideSelection = false;
             this.SplitWordFileList.Location = new System.Drawing.Point(4, 4);
-            this.SplitWordFileList.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SplitWordFileList.Margin = new System.Windows.Forms.Padding(1);
             this.SplitWordFileList.Name = "SplitWordFileList";
             this.SplitWordFileList.Size = new System.Drawing.Size(841, 420);
             this.SplitWordFileList.TabIndex = 13;
@@ -3114,7 +3180,7 @@ namespace DocumentTools
             this.TabPage_06.Controls.Add(this.meregepdf_remove);
             this.TabPage_06.Controls.Add(this.MergePdfFileView);
             this.TabPage_06.Location = new System.Drawing.Point(4, 114);
-            this.TabPage_06.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_06.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_06.Name = "TabPage_06";
             this.TabPage_06.Size = new System.Drawing.Size(882, 621);
             this.TabPage_06.TabIndex = 5;
@@ -3126,7 +3192,7 @@ namespace DocumentTools
             this.OpenMeregePdfFile.AutoSize = true;
             this.OpenMeregePdfFile.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.OpenMeregePdfFile.Location = new System.Drawing.Point(4, 431);
-            this.OpenMeregePdfFile.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.OpenMeregePdfFile.Margin = new System.Windows.Forms.Padding(1);
             this.OpenMeregePdfFile.Name = "OpenMeregePdfFile";
             this.OpenMeregePdfFile.Size = new System.Drawing.Size(168, 16);
             this.OpenMeregePdfFile.TabIndex = 4;
@@ -3151,7 +3217,7 @@ namespace DocumentTools
             // 
             this.MeregePdfFileButtonConvert.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.MeregePdfFileButtonConvert.Location = new System.Drawing.Point(697, 561);
-            this.MeregePdfFileButtonConvert.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.MeregePdfFileButtonConvert.Margin = new System.Windows.Forms.Padding(1);
             this.MeregePdfFileButtonConvert.Name = "MeregePdfFileButtonConvert";
             this.MeregePdfFileButtonConvert.Size = new System.Drawing.Size(147, 37);
             this.MeregePdfFileButtonConvert.TabIndex = 2;
@@ -3164,7 +3230,7 @@ namespace DocumentTools
             // 
             this.MergePdfFileSelectButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.MergePdfFileSelectButton.Location = new System.Drawing.Point(5, 561);
-            this.MergePdfFileSelectButton.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.MergePdfFileSelectButton.Margin = new System.Windows.Forms.Padding(1);
             this.MergePdfFileSelectButton.Name = "MergePdfFileSelectButton";
             this.MergePdfFileSelectButton.Size = new System.Drawing.Size(147, 37);
             this.MergePdfFileSelectButton.TabIndex = 1;
@@ -3177,7 +3243,7 @@ namespace DocumentTools
             // 
             this.MergePdfFileView_MoveDown.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.MergePdfFileView_MoveDown.Location = new System.Drawing.Point(847, 307);
-            this.MergePdfFileView_MoveDown.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.MergePdfFileView_MoveDown.Margin = new System.Windows.Forms.Padding(1);
             this.MergePdfFileView_MoveDown.Name = "MergePdfFileView_MoveDown";
             this.MergePdfFileView_MoveDown.Size = new System.Drawing.Size(23, 57);
             this.MergePdfFileView_MoveDown.TabIndex = 9;
@@ -3189,7 +3255,7 @@ namespace DocumentTools
             // 
             this.MergePdfFileView_MoveUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.MergePdfFileView_MoveUp.Location = new System.Drawing.Point(847, 65);
-            this.MergePdfFileView_MoveUp.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.MergePdfFileView_MoveUp.Margin = new System.Windows.Forms.Padding(1);
             this.MergePdfFileView_MoveUp.Name = "MergePdfFileView_MoveUp";
             this.MergePdfFileView_MoveUp.Size = new System.Drawing.Size(23, 57);
             this.MergePdfFileView_MoveUp.TabIndex = 8;
@@ -3203,7 +3269,7 @@ namespace DocumentTools
             this.meregepdf_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.meregepdf_clear.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.meregepdf_clear.Location = new System.Drawing.Point(847, 225);
-            this.meregepdf_clear.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.meregepdf_clear.Margin = new System.Windows.Forms.Padding(1);
             this.meregepdf_clear.Name = "meregepdf_clear";
             this.meregepdf_clear.Size = new System.Drawing.Size(23, 57);
             this.meregepdf_clear.TabIndex = 12;
@@ -3216,7 +3282,7 @@ namespace DocumentTools
             this.meregepdf_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.meregepdf_remove.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.meregepdf_remove.Location = new System.Drawing.Point(847, 145);
-            this.meregepdf_remove.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.meregepdf_remove.Margin = new System.Windows.Forms.Padding(1);
             this.meregepdf_remove.Name = "meregepdf_remove";
             this.meregepdf_remove.Size = new System.Drawing.Size(23, 57);
             this.meregepdf_remove.TabIndex = 11;
@@ -3227,7 +3293,7 @@ namespace DocumentTools
             // 
             this.MergePdfFileView.HideSelection = false;
             this.MergePdfFileView.Location = new System.Drawing.Point(4, 4);
-            this.MergePdfFileView.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.MergePdfFileView.Margin = new System.Windows.Forms.Padding(1);
             this.MergePdfFileView.Name = "MergePdfFileView";
             this.MergePdfFileView.Size = new System.Drawing.Size(841, 420);
             this.MergePdfFileView.TabIndex = 0;
@@ -3246,9 +3312,9 @@ namespace DocumentTools
             this.TabPage_17.Controls.Add(this.SelectSplitPdf);
             this.TabPage_17.Controls.Add(this.SplitPdfFileList);
             this.TabPage_17.Location = new System.Drawing.Point(4, 114);
-            this.TabPage_17.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_17.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_17.Name = "TabPage_17";
-            this.TabPage_17.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_17.Padding = new System.Windows.Forms.Padding(1);
             this.TabPage_17.Size = new System.Drawing.Size(882, 621);
             this.TabPage_17.TabIndex = 16;
             this.TabPage_17.Text = "拆分PDF";
@@ -3268,9 +3334,9 @@ namespace DocumentTools
             this.groupBox47.Controls.Add(this.label132);
             this.groupBox47.Controls.Add(this.SplitPdf_Range);
             this.groupBox47.Location = new System.Drawing.Point(4, 427);
-            this.groupBox47.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox47.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox47.Name = "groupBox47";
-            this.groupBox47.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox47.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox47.Size = new System.Drawing.Size(360, 99);
             this.groupBox47.TabIndex = 13;
             this.groupBox47.TabStop = false;
@@ -3282,7 +3348,7 @@ namespace DocumentTools
             this.SplitPdf_ByBookMark.AutoSize = true;
             this.SplitPdf_ByBookMark.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SplitPdf_ByBookMark.Location = new System.Drawing.Point(4, 75);
-            this.SplitPdf_ByBookMark.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SplitPdf_ByBookMark.Margin = new System.Windows.Forms.Padding(1);
             this.SplitPdf_ByBookMark.Name = "SplitPdf_ByBookMark";
             this.SplitPdf_ByBookMark.Size = new System.Drawing.Size(119, 16);
             this.SplitPdf_ByBookMark.TabIndex = 10;
@@ -3314,7 +3380,7 @@ namespace DocumentTools
             // SplitPdf_PerPageCount
             // 
             this.SplitPdf_PerPageCount.Location = new System.Drawing.Point(147, 44);
-            this.SplitPdf_PerPageCount.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SplitPdf_PerPageCount.Margin = new System.Windows.Forms.Padding(1);
             this.SplitPdf_PerPageCount.Maximum = new decimal(new int[] {
             999999999,
             0,
@@ -3340,7 +3406,7 @@ namespace DocumentTools
             this.SplitPdf_Single.Checked = true;
             this.SplitPdf_Single.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SplitPdf_Single.Location = new System.Drawing.Point(4, 48);
-            this.SplitPdf_Single.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SplitPdf_Single.Margin = new System.Windows.Forms.Padding(1);
             this.SplitPdf_Single.Name = "SplitPdf_Single";
             this.SplitPdf_Single.Size = new System.Drawing.Size(71, 16);
             this.SplitPdf_Single.TabIndex = 6;
@@ -3362,7 +3428,7 @@ namespace DocumentTools
             // SplitPdfRange_End
             // 
             this.SplitPdfRange_End.Location = new System.Drawing.Point(200, 15);
-            this.SplitPdfRange_End.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SplitPdfRange_End.Margin = new System.Windows.Forms.Padding(1);
             this.SplitPdfRange_End.Name = "SplitPdfRange_End";
             this.SplitPdfRange_End.Size = new System.Drawing.Size(28, 21);
             this.SplitPdfRange_End.TabIndex = 4;
@@ -3382,7 +3448,7 @@ namespace DocumentTools
             // SplitPdfRange_Start
             // 
             this.SplitPdfRange_Start.Location = new System.Drawing.Point(147, 15);
-            this.SplitPdfRange_Start.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SplitPdfRange_Start.Margin = new System.Windows.Forms.Padding(1);
             this.SplitPdfRange_Start.Name = "SplitPdfRange_Start";
             this.SplitPdfRange_Start.Size = new System.Drawing.Size(28, 21);
             this.SplitPdfRange_Start.TabIndex = 2;
@@ -3404,7 +3470,7 @@ namespace DocumentTools
             this.SplitPdf_Range.AutoSize = true;
             this.SplitPdf_Range.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SplitPdf_Range.Location = new System.Drawing.Point(4, 17);
-            this.SplitPdf_Range.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SplitPdf_Range.Margin = new System.Windows.Forms.Padding(1);
             this.SplitPdf_Range.Name = "SplitPdf_Range";
             this.SplitPdf_Range.Size = new System.Drawing.Size(119, 16);
             this.SplitPdf_Range.TabIndex = 0;
@@ -3415,7 +3481,7 @@ namespace DocumentTools
             // 
             this.SplitPdfFileList_MoveDown.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SplitPdfFileList_MoveDown.Location = new System.Drawing.Point(847, 307);
-            this.SplitPdfFileList_MoveDown.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SplitPdfFileList_MoveDown.Margin = new System.Windows.Forms.Padding(1);
             this.SplitPdfFileList_MoveDown.Name = "SplitPdfFileList_MoveDown";
             this.SplitPdfFileList_MoveDown.Size = new System.Drawing.Size(23, 57);
             this.SplitPdfFileList_MoveDown.TabIndex = 5;
@@ -3427,7 +3493,7 @@ namespace DocumentTools
             // 
             this.SplitPdfFileList_MoveUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SplitPdfFileList_MoveUp.Location = new System.Drawing.Point(847, 65);
-            this.SplitPdfFileList_MoveUp.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SplitPdfFileList_MoveUp.Margin = new System.Windows.Forms.Padding(1);
             this.SplitPdfFileList_MoveUp.Name = "SplitPdfFileList_MoveUp";
             this.SplitPdfFileList_MoveUp.Size = new System.Drawing.Size(23, 57);
             this.SplitPdfFileList_MoveUp.TabIndex = 4;
@@ -3441,7 +3507,7 @@ namespace DocumentTools
             this.sqplitpdf_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.sqplitpdf_clear.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.sqplitpdf_clear.Location = new System.Drawing.Point(847, 225);
-            this.sqplitpdf_clear.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.sqplitpdf_clear.Margin = new System.Windows.Forms.Padding(1);
             this.sqplitpdf_clear.Name = "sqplitpdf_clear";
             this.sqplitpdf_clear.Size = new System.Drawing.Size(23, 57);
             this.sqplitpdf_clear.TabIndex = 12;
@@ -3454,7 +3520,7 @@ namespace DocumentTools
             this.sqplitpdf_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.sqplitpdf_remove.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.sqplitpdf_remove.Location = new System.Drawing.Point(847, 145);
-            this.sqplitpdf_remove.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.sqplitpdf_remove.Margin = new System.Windows.Forms.Padding(1);
             this.sqplitpdf_remove.Name = "sqplitpdf_remove";
             this.sqplitpdf_remove.Size = new System.Drawing.Size(23, 57);
             this.sqplitpdf_remove.TabIndex = 11;
@@ -3478,7 +3544,7 @@ namespace DocumentTools
             // 
             this.StartSplitPdf.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.StartSplitPdf.Location = new System.Drawing.Point(697, 561);
-            this.StartSplitPdf.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.StartSplitPdf.Margin = new System.Windows.Forms.Padding(1);
             this.StartSplitPdf.Name = "StartSplitPdf";
             this.StartSplitPdf.Size = new System.Drawing.Size(147, 37);
             this.StartSplitPdf.TabIndex = 2;
@@ -3491,7 +3557,7 @@ namespace DocumentTools
             // 
             this.SelectSplitPdf.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SelectSplitPdf.Location = new System.Drawing.Point(5, 561);
-            this.SelectSplitPdf.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SelectSplitPdf.Margin = new System.Windows.Forms.Padding(1);
             this.SelectSplitPdf.Name = "SelectSplitPdf";
             this.SelectSplitPdf.Size = new System.Drawing.Size(147, 37);
             this.SelectSplitPdf.TabIndex = 1;
@@ -3504,7 +3570,7 @@ namespace DocumentTools
             // 
             this.SplitPdfFileList.HideSelection = false;
             this.SplitPdfFileList.Location = new System.Drawing.Point(4, 4);
-            this.SplitPdfFileList.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SplitPdfFileList.Margin = new System.Windows.Forms.Padding(1);
             this.SplitPdfFileList.Name = "SplitPdfFileList";
             this.SplitPdfFileList.Size = new System.Drawing.Size(841, 420);
             this.SplitPdfFileList.TabIndex = 0;
@@ -3524,7 +3590,7 @@ namespace DocumentTools
             this.TabPage_41.Controls.Add(this.SplitPPT_SelectFiles);
             this.TabPage_41.Controls.Add(this.SplitPPTFilesList);
             this.TabPage_41.Location = new System.Drawing.Point(4, 114);
-            this.TabPage_41.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_41.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_41.Name = "TabPage_41";
             this.TabPage_41.Size = new System.Drawing.Size(882, 621);
             this.TabPage_41.TabIndex = 31;
@@ -3538,9 +3604,9 @@ namespace DocumentTools
             this.groupBox62.Controls.Add(this.SplitPdfScaleCombox);
             this.groupBox62.Controls.Add(this.SplitPdfSizeCombox);
             this.groupBox62.Location = new System.Drawing.Point(265, 427);
-            this.groupBox62.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox62.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox62.Name = "groupBox62";
-            this.groupBox62.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox62.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox62.Size = new System.Drawing.Size(201, 77);
             this.groupBox62.TabIndex = 33;
             this.groupBox62.TabStop = false;
@@ -3573,7 +3639,7 @@ namespace DocumentTools
             // 
             this.SplitPdfScaleCombox.FormattingEnabled = true;
             this.SplitPdfScaleCombox.Location = new System.Drawing.Point(61, 47);
-            this.SplitPdfScaleCombox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SplitPdfScaleCombox.Margin = new System.Windows.Forms.Padding(1);
             this.SplitPdfScaleCombox.Name = "SplitPdfScaleCombox";
             this.SplitPdfScaleCombox.Size = new System.Drawing.Size(123, 24);
             this.SplitPdfScaleCombox.TabIndex = 1;
@@ -3582,7 +3648,7 @@ namespace DocumentTools
             // 
             this.SplitPdfSizeCombox.FormattingEnabled = true;
             this.SplitPdfSizeCombox.Location = new System.Drawing.Point(61, 19);
-            this.SplitPdfSizeCombox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SplitPdfSizeCombox.Margin = new System.Windows.Forms.Padding(1);
             this.SplitPdfSizeCombox.Name = "SplitPdfSizeCombox";
             this.SplitPdfSizeCombox.Size = new System.Drawing.Size(123, 24);
             this.SplitPdfSizeCombox.TabIndex = 0;
@@ -3597,9 +3663,9 @@ namespace DocumentTools
             this.groupBox61.Controls.Add(this.label181);
             this.groupBox61.Controls.Add(this.radioButton2);
             this.groupBox61.Location = new System.Drawing.Point(4, 427);
-            this.groupBox61.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox61.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox61.Name = "groupBox61";
-            this.groupBox61.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox61.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox61.Size = new System.Drawing.Size(257, 77);
             this.groupBox61.TabIndex = 31;
             this.groupBox61.TabStop = false;
@@ -3612,7 +3678,7 @@ namespace DocumentTools
             this.SplitPPT_SignleExport.Checked = true;
             this.SplitPPT_SignleExport.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SplitPPT_SignleExport.Location = new System.Drawing.Point(4, 48);
-            this.SplitPPT_SignleExport.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SplitPPT_SignleExport.Margin = new System.Windows.Forms.Padding(1);
             this.SplitPPT_SignleExport.Name = "SplitPPT_SignleExport";
             this.SplitPPT_SignleExport.Size = new System.Drawing.Size(71, 16);
             this.SplitPPT_SignleExport.TabIndex = 6;
@@ -3634,7 +3700,7 @@ namespace DocumentTools
             // SplitPPT_RangeExport_End
             // 
             this.SplitPPT_RangeExport_End.Location = new System.Drawing.Point(200, 15);
-            this.SplitPPT_RangeExport_End.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SplitPPT_RangeExport_End.Margin = new System.Windows.Forms.Padding(1);
             this.SplitPPT_RangeExport_End.Name = "SplitPPT_RangeExport_End";
             this.SplitPPT_RangeExport_End.Size = new System.Drawing.Size(28, 21);
             this.SplitPPT_RangeExport_End.TabIndex = 4;
@@ -3654,7 +3720,7 @@ namespace DocumentTools
             // SplitPPT_RangeExport_Start
             // 
             this.SplitPPT_RangeExport_Start.Location = new System.Drawing.Point(147, 15);
-            this.SplitPPT_RangeExport_Start.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SplitPPT_RangeExport_Start.Margin = new System.Windows.Forms.Padding(1);
             this.SplitPPT_RangeExport_Start.Name = "SplitPPT_RangeExport_Start";
             this.SplitPPT_RangeExport_Start.Size = new System.Drawing.Size(28, 21);
             this.SplitPPT_RangeExport_Start.TabIndex = 2;
@@ -3676,7 +3742,7 @@ namespace DocumentTools
             this.radioButton2.AutoSize = true;
             this.radioButton2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.radioButton2.Location = new System.Drawing.Point(4, 17);
-            this.radioButton2.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.radioButton2.Margin = new System.Windows.Forms.Padding(1);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(119, 16);
             this.radioButton2.TabIndex = 0;
@@ -3687,7 +3753,7 @@ namespace DocumentTools
             // 
             this.SplitPPTFilesList_MoveDown.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SplitPPTFilesList_MoveDown.Location = new System.Drawing.Point(847, 307);
-            this.SplitPPTFilesList_MoveDown.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SplitPPTFilesList_MoveDown.Margin = new System.Windows.Forms.Padding(1);
             this.SplitPPTFilesList_MoveDown.Name = "SplitPPTFilesList_MoveDown";
             this.SplitPPTFilesList_MoveDown.Size = new System.Drawing.Size(23, 57);
             this.SplitPPTFilesList_MoveDown.TabIndex = 28;
@@ -3699,7 +3765,7 @@ namespace DocumentTools
             // 
             this.SplitPPTFilesList_MoveUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SplitPPTFilesList_MoveUp.Location = new System.Drawing.Point(847, 65);
-            this.SplitPPTFilesList_MoveUp.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SplitPPTFilesList_MoveUp.Margin = new System.Windows.Forms.Padding(1);
             this.SplitPPTFilesList_MoveUp.Name = "SplitPPTFilesList_MoveUp";
             this.SplitPPTFilesList_MoveUp.Size = new System.Drawing.Size(23, 57);
             this.SplitPPTFilesList_MoveUp.TabIndex = 27;
@@ -3713,7 +3779,7 @@ namespace DocumentTools
             this.splitppt_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.splitppt_clear.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.splitppt_clear.Location = new System.Drawing.Point(847, 225);
-            this.splitppt_clear.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.splitppt_clear.Margin = new System.Windows.Forms.Padding(1);
             this.splitppt_clear.Name = "splitppt_clear";
             this.splitppt_clear.Size = new System.Drawing.Size(23, 57);
             this.splitppt_clear.TabIndex = 30;
@@ -3726,7 +3792,7 @@ namespace DocumentTools
             this.splitppt_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.splitppt_remove.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.splitppt_remove.Location = new System.Drawing.Point(847, 145);
-            this.splitppt_remove.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.splitppt_remove.Margin = new System.Windows.Forms.Padding(1);
             this.splitppt_remove.Name = "splitppt_remove";
             this.splitppt_remove.Size = new System.Drawing.Size(23, 57);
             this.splitppt_remove.TabIndex = 29;
@@ -3750,7 +3816,7 @@ namespace DocumentTools
             // 
             this.SplitPPT_Button.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SplitPPT_Button.Location = new System.Drawing.Point(697, 561);
-            this.SplitPPT_Button.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SplitPPT_Button.Margin = new System.Windows.Forms.Padding(1);
             this.SplitPPT_Button.Name = "SplitPPT_Button";
             this.SplitPPT_Button.Size = new System.Drawing.Size(147, 37);
             this.SplitPPT_Button.TabIndex = 25;
@@ -3763,7 +3829,7 @@ namespace DocumentTools
             // 
             this.SplitPPT_SelectFiles.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SplitPPT_SelectFiles.Location = new System.Drawing.Point(5, 561);
-            this.SplitPPT_SelectFiles.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SplitPPT_SelectFiles.Margin = new System.Windows.Forms.Padding(1);
             this.SplitPPT_SelectFiles.Name = "SplitPPT_SelectFiles";
             this.SplitPPT_SelectFiles.Size = new System.Drawing.Size(147, 37);
             this.SplitPPT_SelectFiles.TabIndex = 24;
@@ -3776,7 +3842,7 @@ namespace DocumentTools
             // 
             this.SplitPPTFilesList.HideSelection = false;
             this.SplitPPTFilesList.Location = new System.Drawing.Point(4, 4);
-            this.SplitPPTFilesList.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SplitPPTFilesList.Margin = new System.Windows.Forms.Padding(1);
             this.SplitPPTFilesList.Name = "SplitPPTFilesList";
             this.SplitPPTFilesList.Size = new System.Drawing.Size(841, 420);
             this.SplitPPTFilesList.TabIndex = 23;
@@ -3797,7 +3863,7 @@ namespace DocumentTools
             this.TabPage_18.Controls.Add(this.groupBox18);
             this.TabPage_18.Controls.Add(this.PdfWaterMarkFileList);
             this.TabPage_18.Location = new System.Drawing.Point(4, 114);
-            this.TabPage_18.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_18.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_18.Name = "TabPage_18";
             this.TabPage_18.Size = new System.Drawing.Size(882, 621);
             this.TabPage_18.TabIndex = 17;
@@ -3809,7 +3875,7 @@ namespace DocumentTools
             this.label205.AutoSize = true;
             this.label205.ForeColor = System.Drawing.Color.Tomato;
             this.label205.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label205.Location = new System.Drawing.Point(8, 539);
+            this.label205.Location = new System.Drawing.Point(8, 549);
             this.label205.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label205.Name = "label205";
             this.label205.Size = new System.Drawing.Size(809, 12);
@@ -3821,7 +3887,7 @@ namespace DocumentTools
             // 
             this.PdfWaterMarkFileList_MoveDown.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.PdfWaterMarkFileList_MoveDown.Location = new System.Drawing.Point(847, 307);
-            this.PdfWaterMarkFileList_MoveDown.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.PdfWaterMarkFileList_MoveDown.Margin = new System.Windows.Forms.Padding(1);
             this.PdfWaterMarkFileList_MoveDown.Name = "PdfWaterMarkFileList_MoveDown";
             this.PdfWaterMarkFileList_MoveDown.Size = new System.Drawing.Size(23, 57);
             this.PdfWaterMarkFileList_MoveDown.TabIndex = 17;
@@ -3833,7 +3899,7 @@ namespace DocumentTools
             // 
             this.PdfWaterMarkFileList_MoveUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.PdfWaterMarkFileList_MoveUp.Location = new System.Drawing.Point(847, 65);
-            this.PdfWaterMarkFileList_MoveUp.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.PdfWaterMarkFileList_MoveUp.Margin = new System.Windows.Forms.Padding(1);
             this.PdfWaterMarkFileList_MoveUp.Name = "PdfWaterMarkFileList_MoveUp";
             this.PdfWaterMarkFileList_MoveUp.Size = new System.Drawing.Size(23, 57);
             this.PdfWaterMarkFileList_MoveUp.TabIndex = 16;
@@ -3847,7 +3913,7 @@ namespace DocumentTools
             this.addpdfwater_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.addpdfwater_clear.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.addpdfwater_clear.Location = new System.Drawing.Point(847, 225);
-            this.addpdfwater_clear.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.addpdfwater_clear.Margin = new System.Windows.Forms.Padding(1);
             this.addpdfwater_clear.Name = "addpdfwater_clear";
             this.addpdfwater_clear.Size = new System.Drawing.Size(23, 57);
             this.addpdfwater_clear.TabIndex = 12;
@@ -3860,7 +3926,7 @@ namespace DocumentTools
             this.addpdfwater_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.addpdfwater_remove.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.addpdfwater_remove.Location = new System.Drawing.Point(847, 145);
-            this.addpdfwater_remove.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.addpdfwater_remove.Margin = new System.Windows.Forms.Padding(1);
             this.addpdfwater_remove.Name = "addpdfwater_remove";
             this.addpdfwater_remove.Size = new System.Drawing.Size(23, 57);
             this.addpdfwater_remove.TabIndex = 11;
@@ -3885,7 +3951,7 @@ namespace DocumentTools
             this.AddWaterMark2PdfStatusText.AutoSize = true;
             this.AddWaterMark2PdfStatusText.ForeColor = System.Drawing.Color.ForestGreen;
             this.AddWaterMark2PdfStatusText.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.AddWaterMark2PdfStatusText.Location = new System.Drawing.Point(156, 575);
+            this.AddWaterMark2PdfStatusText.Location = new System.Drawing.Point(156, 585);
             this.AddWaterMark2PdfStatusText.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.AddWaterMark2PdfStatusText.Name = "AddWaterMark2PdfStatusText";
             this.AddWaterMark2PdfStatusText.Size = new System.Drawing.Size(95, 12);
@@ -3896,8 +3962,8 @@ namespace DocumentTools
             // AddWaterMark2Pdf
             // 
             this.AddWaterMark2Pdf.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.AddWaterMark2Pdf.Location = new System.Drawing.Point(697, 561);
-            this.AddWaterMark2Pdf.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.AddWaterMark2Pdf.Location = new System.Drawing.Point(697, 571);
+            this.AddWaterMark2Pdf.Margin = new System.Windows.Forms.Padding(1);
             this.AddWaterMark2Pdf.Name = "AddWaterMark2Pdf";
             this.AddWaterMark2Pdf.Size = new System.Drawing.Size(147, 37);
             this.AddWaterMark2Pdf.TabIndex = 3;
@@ -3909,8 +3975,8 @@ namespace DocumentTools
             // SelectWaterMarkPdfFiles
             // 
             this.SelectWaterMarkPdfFiles.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.SelectWaterMarkPdfFiles.Location = new System.Drawing.Point(5, 561);
-            this.SelectWaterMarkPdfFiles.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SelectWaterMarkPdfFiles.Location = new System.Drawing.Point(5, 571);
+            this.SelectWaterMarkPdfFiles.Margin = new System.Windows.Forms.Padding(1);
             this.SelectWaterMarkPdfFiles.Name = "SelectWaterMarkPdfFiles";
             this.SelectWaterMarkPdfFiles.Size = new System.Drawing.Size(147, 37);
             this.SelectWaterMarkPdfFiles.TabIndex = 2;
@@ -3921,6 +3987,12 @@ namespace DocumentTools
             // 
             // groupBox18
             // 
+            this.groupBox18.Controls.Add(this.AddPdfWater_GetSelectPdfPointInfo);
+            this.groupBox18.Controls.Add(this.AddPdfWater_CustomPostion_Y);
+            this.groupBox18.Controls.Add(this.label210);
+            this.groupBox18.Controls.Add(this.AddPdfWater_CustomPostion_X);
+            this.groupBox18.Controls.Add(this.label209);
+            this.groupBox18.Controls.Add(this.AddPdfWater_CustomPostion);
             this.groupBox18.Controls.Add(this.RemovePdfAddWaterImage);
             this.groupBox18.Controls.Add(this.AddPdfWaterMark_FullScren_VerDmi);
             this.groupBox18.Controls.Add(this.label204);
@@ -3947,21 +4019,101 @@ namespace DocumentTools
             this.groupBox18.Controls.Add(this.label26);
             this.groupBox18.Controls.Add(this.label25);
             this.groupBox18.Controls.Add(this.PdfWaterMarkText);
-            this.groupBox18.Location = new System.Drawing.Point(4, 427);
-            this.groupBox18.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox18.Location = new System.Drawing.Point(5, 397);
+            this.groupBox18.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox18.Name = "groupBox18";
-            this.groupBox18.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
-            this.groupBox18.Size = new System.Drawing.Size(839, 105);
+            this.groupBox18.Padding = new System.Windows.Forms.Padding(1);
+            this.groupBox18.Size = new System.Drawing.Size(839, 144);
             this.groupBox18.TabIndex = 1;
             this.groupBox18.TabStop = false;
             this.groupBox18.Tag = "anchor_left_bottom";
             this.groupBox18.Text = "水印设置";
             // 
+            // AddPdfWater_CustomPostion_Y
+            // 
+            this.AddPdfWater_CustomPostion_Y.Enabled = false;
+            this.AddPdfWater_CustomPostion_Y.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.AddPdfWater_CustomPostion_Y.Location = new System.Drawing.Point(571, 110);
+            this.AddPdfWater_CustomPostion_Y.Maximum = new decimal(new int[] {
+            65536,
+            0,
+            0,
+            0});
+            this.AddPdfWater_CustomPostion_Y.Name = "AddPdfWater_CustomPostion_Y";
+            this.AddPdfWater_CustomPostion_Y.Size = new System.Drawing.Size(82, 21);
+            this.AddPdfWater_CustomPostion_Y.TabIndex = 31;
+            this.AddPdfWater_CustomPostion_Y.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
+            // label210
+            // 
+            this.label210.AutoSize = true;
+            this.label210.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label210.Location = new System.Drawing.Point(512, 114);
+            this.label210.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label210.Name = "label210";
+            this.label210.Size = new System.Drawing.Size(47, 12);
+            this.label210.TabIndex = 30;
+            this.label210.Text = "Y轴位置";
+            // 
+            // AddPdfWater_CustomPostion_X
+            // 
+            this.AddPdfWater_CustomPostion_X.Enabled = false;
+            this.AddPdfWater_CustomPostion_X.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.AddPdfWater_CustomPostion_X.Location = new System.Drawing.Point(408, 110);
+            this.AddPdfWater_CustomPostion_X.Maximum = new decimal(new int[] {
+            65536,
+            0,
+            0,
+            0});
+            this.AddPdfWater_CustomPostion_X.Name = "AddPdfWater_CustomPostion_X";
+            this.AddPdfWater_CustomPostion_X.Size = new System.Drawing.Size(56, 21);
+            this.AddPdfWater_CustomPostion_X.TabIndex = 29;
+            this.AddPdfWater_CustomPostion_X.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
+            // label209
+            // 
+            this.label209.AutoSize = true;
+            this.label209.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label209.Location = new System.Drawing.Point(351, 114);
+            this.label209.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label209.Name = "label209";
+            this.label209.Size = new System.Drawing.Size(47, 12);
+            this.label209.TabIndex = 28;
+            this.label209.Text = "X轴位置";
+            // 
+            // AddPdfWater_CustomPostion
+            // 
+            this.AddPdfWater_CustomPostion.AutoSize = true;
+            this.AddPdfWater_CustomPostion.Location = new System.Drawing.Point(186, 111);
+            this.AddPdfWater_CustomPostion.Name = "AddPdfWater_CustomPostion";
+            this.AddPdfWater_CustomPostion.Size = new System.Drawing.Size(108, 16);
+            this.AddPdfWater_CustomPostion.TabIndex = 27;
+            this.AddPdfWater_CustomPostion.Text = "自定义水印位置";
+            this.MainToolsTip.SetToolTip(this.AddPdfWater_CustomPostion, "注：只支持文字水印，不支持图片水印");
+            this.AddPdfWater_CustomPostion.UseVisualStyleBackColor = true;
+            this.AddPdfWater_CustomPostion.CheckedChanged += new System.EventHandler(this.AddPdfWater_CustomPostion_CheckedChanged);
+            // 
             // RemovePdfAddWaterImage
             // 
             this.RemovePdfAddWaterImage.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.RemovePdfAddWaterImage.Location = new System.Drawing.Point(761, 70);
-            this.RemovePdfAddWaterImage.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.RemovePdfAddWaterImage.Location = new System.Drawing.Point(761, 105);
+            this.RemovePdfAddWaterImage.Margin = new System.Windows.Forms.Padding(1);
             this.RemovePdfAddWaterImage.Name = "RemovePdfAddWaterImage";
             this.RemovePdfAddWaterImage.Size = new System.Drawing.Size(65, 27);
             this.RemovePdfAddWaterImage.TabIndex = 26;
@@ -4083,7 +4235,7 @@ namespace DocumentTools
             // WaterMarkImageWidth
             // 
             this.WaterMarkImageWidth.Location = new System.Drawing.Point(570, 79);
-            this.WaterMarkImageWidth.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.WaterMarkImageWidth.Margin = new System.Windows.Forms.Padding(1);
             this.WaterMarkImageWidth.Name = "WaterMarkImageWidth";
             this.WaterMarkImageWidth.Size = new System.Drawing.Size(83, 21);
             this.WaterMarkImageWidth.TabIndex = 18;
@@ -4091,8 +4243,8 @@ namespace DocumentTools
             // AddBackGroudImage
             // 
             this.AddBackGroudImage.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.AddBackGroudImage.Location = new System.Drawing.Point(655, 71);
-            this.AddBackGroudImage.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.AddBackGroudImage.Location = new System.Drawing.Point(655, 105);
+            this.AddBackGroudImage.Margin = new System.Windows.Forms.Padding(1);
             this.AddBackGroudImage.Name = "AddBackGroudImage";
             this.AddBackGroudImage.Size = new System.Drawing.Size(105, 27);
             this.AddBackGroudImage.TabIndex = 15;
@@ -4104,7 +4256,7 @@ namespace DocumentTools
             // WaterMarkImageHeight
             // 
             this.WaterMarkImageHeight.Location = new System.Drawing.Point(570, 49);
-            this.WaterMarkImageHeight.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.WaterMarkImageHeight.Margin = new System.Windows.Forms.Padding(1);
             this.WaterMarkImageHeight.Name = "WaterMarkImageHeight";
             this.WaterMarkImageHeight.Size = new System.Drawing.Size(83, 21);
             this.WaterMarkImageHeight.TabIndex = 17;
@@ -4114,9 +4266,9 @@ namespace DocumentTools
             this.WaterMarkImage.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.WaterMarkImage.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.WaterMarkImage.Location = new System.Drawing.Point(655, 19);
-            this.WaterMarkImage.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.WaterMarkImage.Margin = new System.Windows.Forms.Padding(1);
             this.WaterMarkImage.Name = "WaterMarkImage";
-            this.WaterMarkImage.Size = new System.Drawing.Size(171, 46);
+            this.WaterMarkImage.Size = new System.Drawing.Size(171, 83);
             this.WaterMarkImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.WaterMarkImage.TabIndex = 16;
             this.WaterMarkImage.TabStop = false;
@@ -4125,7 +4277,7 @@ namespace DocumentTools
             // 
             this.PdfWaterMarkOpcityNumber.FormattingEnabled = true;
             this.PdfWaterMarkOpcityNumber.Location = new System.Drawing.Point(570, 19);
-            this.PdfWaterMarkOpcityNumber.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.PdfWaterMarkOpcityNumber.Margin = new System.Windows.Forms.Padding(1);
             this.PdfWaterMarkOpcityNumber.Name = "PdfWaterMarkOpcityNumber";
             this.PdfWaterMarkOpcityNumber.Size = new System.Drawing.Size(83, 24);
             this.PdfWaterMarkOpcityNumber.TabIndex = 14;
@@ -4144,7 +4296,7 @@ namespace DocumentTools
             // PdfWaterMarkRotateDegNumber
             // 
             this.PdfWaterMarkRotateDegNumber.Location = new System.Drawing.Point(266, 76);
-            this.PdfWaterMarkRotateDegNumber.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.PdfWaterMarkRotateDegNumber.Margin = new System.Windows.Forms.Padding(1);
             this.PdfWaterMarkRotateDegNumber.Name = "PdfWaterMarkRotateDegNumber";
             this.PdfWaterMarkRotateDegNumber.Size = new System.Drawing.Size(83, 21);
             this.PdfWaterMarkRotateDegNumber.TabIndex = 12;
@@ -4165,7 +4317,7 @@ namespace DocumentTools
             // 
             this.PDFWaterMarkVerSetting.FormattingEnabled = true;
             this.PDFWaterMarkVerSetting.Location = new System.Drawing.Point(266, 51);
-            this.PDFWaterMarkVerSetting.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.PDFWaterMarkVerSetting.Margin = new System.Windows.Forms.Padding(1);
             this.PDFWaterMarkVerSetting.Name = "PDFWaterMarkVerSetting";
             this.PDFWaterMarkVerSetting.Size = new System.Drawing.Size(83, 24);
             this.PDFWaterMarkVerSetting.TabIndex = 10;
@@ -4174,7 +4326,7 @@ namespace DocumentTools
             // 
             this.PdfWaterMarkHorSetting.FormattingEnabled = true;
             this.PdfWaterMarkHorSetting.Location = new System.Drawing.Point(266, 24);
-            this.PdfWaterMarkHorSetting.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.PdfWaterMarkHorSetting.Margin = new System.Windows.Forms.Padding(1);
             this.PdfWaterMarkHorSetting.Name = "PdfWaterMarkHorSetting";
             this.PdfWaterMarkHorSetting.Size = new System.Drawing.Size(83, 24);
             this.PdfWaterMarkHorSetting.TabIndex = 9;
@@ -4205,7 +4357,7 @@ namespace DocumentTools
             // 
             this.PDFWaterMarkTextFontSetting.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.PDFWaterMarkTextFontSetting.Location = new System.Drawing.Point(61, 53);
-            this.PDFWaterMarkTextFontSetting.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.PDFWaterMarkTextFontSetting.Margin = new System.Windows.Forms.Padding(1);
             this.PDFWaterMarkTextFontSetting.Name = "PDFWaterMarkTextFontSetting";
             this.PDFWaterMarkTextFontSetting.Size = new System.Drawing.Size(112, 21);
             this.PDFWaterMarkTextFontSetting.TabIndex = 6;
@@ -4217,7 +4369,7 @@ namespace DocumentTools
             // 
             this.PdfWaterMarkFontColorSettings.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.PdfWaterMarkFontColorSettings.Location = new System.Drawing.Point(61, 79);
-            this.PdfWaterMarkFontColorSettings.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.PdfWaterMarkFontColorSettings.Margin = new System.Windows.Forms.Padding(1);
             this.PdfWaterMarkFontColorSettings.Name = "PdfWaterMarkFontColorSettings";
             this.PdfWaterMarkFontColorSettings.Size = new System.Drawing.Size(111, 21);
             this.PdfWaterMarkFontColorSettings.TabIndex = 5;
@@ -4261,7 +4413,7 @@ namespace DocumentTools
             // PdfWaterMarkText
             // 
             this.PdfWaterMarkText.Location = new System.Drawing.Point(61, 27);
-            this.PdfWaterMarkText.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.PdfWaterMarkText.Margin = new System.Windows.Forms.Padding(1);
             this.PdfWaterMarkText.Name = "PdfWaterMarkText";
             this.PdfWaterMarkText.Size = new System.Drawing.Size(113, 21);
             this.PdfWaterMarkText.TabIndex = 0;
@@ -4270,9 +4422,9 @@ namespace DocumentTools
             // 
             this.PdfWaterMarkFileList.HideSelection = false;
             this.PdfWaterMarkFileList.Location = new System.Drawing.Point(4, 4);
-            this.PdfWaterMarkFileList.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.PdfWaterMarkFileList.Margin = new System.Windows.Forms.Padding(1);
             this.PdfWaterMarkFileList.Name = "PdfWaterMarkFileList";
-            this.PdfWaterMarkFileList.Size = new System.Drawing.Size(841, 420);
+            this.PdfWaterMarkFileList.Size = new System.Drawing.Size(841, 391);
             this.PdfWaterMarkFileList.TabIndex = 0;
             this.PdfWaterMarkFileList.Tag = "anchor_full_fill";
             this.PdfWaterMarkFileList.UseCompatibleStateImageBehavior = false;
@@ -4288,7 +4440,7 @@ namespace DocumentTools
             this.TabPage_19.Controls.Add(this.SelectRemovePdfWaterMarkFiles);
             this.TabPage_19.Controls.Add(this.RemovePdfWaterMarkFileList);
             this.TabPage_19.Location = new System.Drawing.Point(4, 114);
-            this.TabPage_19.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_19.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_19.Name = "TabPage_19";
             this.TabPage_19.Size = new System.Drawing.Size(882, 621);
             this.TabPage_19.TabIndex = 18;
@@ -4299,7 +4451,7 @@ namespace DocumentTools
             // 
             this.RemovePdfWaterMarkFileList_MoveDown.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.RemovePdfWaterMarkFileList_MoveDown.Location = new System.Drawing.Point(847, 307);
-            this.RemovePdfWaterMarkFileList_MoveDown.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.RemovePdfWaterMarkFileList_MoveDown.Margin = new System.Windows.Forms.Padding(1);
             this.RemovePdfWaterMarkFileList_MoveDown.Name = "RemovePdfWaterMarkFileList_MoveDown";
             this.RemovePdfWaterMarkFileList_MoveDown.Size = new System.Drawing.Size(23, 57);
             this.RemovePdfWaterMarkFileList_MoveDown.TabIndex = 5;
@@ -4311,7 +4463,7 @@ namespace DocumentTools
             // 
             this.RemovePdfWaterMarkFileList_MoveUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.RemovePdfWaterMarkFileList_MoveUp.Location = new System.Drawing.Point(847, 65);
-            this.RemovePdfWaterMarkFileList_MoveUp.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.RemovePdfWaterMarkFileList_MoveUp.Margin = new System.Windows.Forms.Padding(1);
             this.RemovePdfWaterMarkFileList_MoveUp.Name = "RemovePdfWaterMarkFileList_MoveUp";
             this.RemovePdfWaterMarkFileList_MoveUp.Size = new System.Drawing.Size(23, 57);
             this.RemovePdfWaterMarkFileList_MoveUp.TabIndex = 4;
@@ -4325,7 +4477,7 @@ namespace DocumentTools
             this.removepdfwater_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.removepdfwater_clear.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.removepdfwater_clear.Location = new System.Drawing.Point(847, 225);
-            this.removepdfwater_clear.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.removepdfwater_clear.Margin = new System.Windows.Forms.Padding(1);
             this.removepdfwater_clear.Name = "removepdfwater_clear";
             this.removepdfwater_clear.Size = new System.Drawing.Size(23, 57);
             this.removepdfwater_clear.TabIndex = 12;
@@ -4338,7 +4490,7 @@ namespace DocumentTools
             this.removepdfwater_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.removepdfwater_remove.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.removepdfwater_remove.Location = new System.Drawing.Point(847, 145);
-            this.removepdfwater_remove.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.removepdfwater_remove.Margin = new System.Windows.Forms.Padding(1);
             this.removepdfwater_remove.Name = "removepdfwater_remove";
             this.removepdfwater_remove.Size = new System.Drawing.Size(23, 57);
             this.removepdfwater_remove.TabIndex = 11;
@@ -4362,7 +4514,7 @@ namespace DocumentTools
             // 
             this.RemovePdfWaterMark.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.RemovePdfWaterMark.Location = new System.Drawing.Point(697, 561);
-            this.RemovePdfWaterMark.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.RemovePdfWaterMark.Margin = new System.Windows.Forms.Padding(1);
             this.RemovePdfWaterMark.Name = "RemovePdfWaterMark";
             this.RemovePdfWaterMark.Size = new System.Drawing.Size(147, 37);
             this.RemovePdfWaterMark.TabIndex = 2;
@@ -4375,7 +4527,7 @@ namespace DocumentTools
             // 
             this.SelectRemovePdfWaterMarkFiles.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SelectRemovePdfWaterMarkFiles.Location = new System.Drawing.Point(5, 561);
-            this.SelectRemovePdfWaterMarkFiles.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SelectRemovePdfWaterMarkFiles.Margin = new System.Windows.Forms.Padding(1);
             this.SelectRemovePdfWaterMarkFiles.Name = "SelectRemovePdfWaterMarkFiles";
             this.SelectRemovePdfWaterMarkFiles.Size = new System.Drawing.Size(147, 37);
             this.SelectRemovePdfWaterMarkFiles.TabIndex = 1;
@@ -4388,7 +4540,7 @@ namespace DocumentTools
             // 
             this.RemovePdfWaterMarkFileList.HideSelection = false;
             this.RemovePdfWaterMarkFileList.Location = new System.Drawing.Point(4, 4);
-            this.RemovePdfWaterMarkFileList.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.RemovePdfWaterMarkFileList.Margin = new System.Windows.Forms.Padding(1);
             this.RemovePdfWaterMarkFileList.Name = "RemovePdfWaterMarkFileList";
             this.RemovePdfWaterMarkFileList.Size = new System.Drawing.Size(841, 420);
             this.RemovePdfWaterMarkFileList.TabIndex = 0;
@@ -4408,7 +4560,7 @@ namespace DocumentTools
             this.TabPage_22.Controls.Add(this.SelectConvertComplaincePdf);
             this.TabPage_22.Controls.Add(this.ConvertPdfComplianceFileList);
             this.TabPage_22.Location = new System.Drawing.Point(4, 114);
-            this.TabPage_22.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_22.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_22.Name = "TabPage_22";
             this.TabPage_22.Size = new System.Drawing.Size(882, 621);
             this.TabPage_22.TabIndex = 21;
@@ -4419,7 +4571,7 @@ namespace DocumentTools
             // 
             this.ConvertPdfComplianceFileList_MoveDown.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ConvertPdfComplianceFileList_MoveDown.Location = new System.Drawing.Point(847, 307);
-            this.ConvertPdfComplianceFileList_MoveDown.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ConvertPdfComplianceFileList_MoveDown.Margin = new System.Windows.Forms.Padding(1);
             this.ConvertPdfComplianceFileList_MoveDown.Name = "ConvertPdfComplianceFileList_MoveDown";
             this.ConvertPdfComplianceFileList_MoveDown.Size = new System.Drawing.Size(23, 57);
             this.ConvertPdfComplianceFileList_MoveDown.TabIndex = 7;
@@ -4431,7 +4583,7 @@ namespace DocumentTools
             // 
             this.ConvertPdfComplianceFileList_MoveUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ConvertPdfComplianceFileList_MoveUp.Location = new System.Drawing.Point(847, 65);
-            this.ConvertPdfComplianceFileList_MoveUp.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ConvertPdfComplianceFileList_MoveUp.Margin = new System.Windows.Forms.Padding(1);
             this.ConvertPdfComplianceFileList_MoveUp.Name = "ConvertPdfComplianceFileList_MoveUp";
             this.ConvertPdfComplianceFileList_MoveUp.Size = new System.Drawing.Size(23, 57);
             this.ConvertPdfComplianceFileList_MoveUp.TabIndex = 6;
@@ -4445,7 +4597,7 @@ namespace DocumentTools
             this.pdfversion_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pdfversion_clear.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.pdfversion_clear.Location = new System.Drawing.Point(847, 225);
-            this.pdfversion_clear.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.pdfversion_clear.Margin = new System.Windows.Forms.Padding(1);
             this.pdfversion_clear.Name = "pdfversion_clear";
             this.pdfversion_clear.Size = new System.Drawing.Size(23, 57);
             this.pdfversion_clear.TabIndex = 12;
@@ -4458,7 +4610,7 @@ namespace DocumentTools
             this.pdfversion_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pdfversion_remove.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.pdfversion_remove.Location = new System.Drawing.Point(847, 145);
-            this.pdfversion_remove.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.pdfversion_remove.Margin = new System.Windows.Forms.Padding(1);
             this.pdfversion_remove.Name = "pdfversion_remove";
             this.pdfversion_remove.Size = new System.Drawing.Size(23, 57);
             this.pdfversion_remove.TabIndex = 11;
@@ -4469,7 +4621,7 @@ namespace DocumentTools
             // 
             this.ConvertPdfComplianceVersion.FormattingEnabled = true;
             this.ConvertPdfComplianceVersion.Location = new System.Drawing.Point(61, 427);
-            this.ConvertPdfComplianceVersion.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ConvertPdfComplianceVersion.Margin = new System.Windows.Forms.Padding(1);
             this.ConvertPdfComplianceVersion.Name = "ConvertPdfComplianceVersion";
             this.ConvertPdfComplianceVersion.Size = new System.Drawing.Size(147, 24);
             this.ConvertPdfComplianceVersion.TabIndex = 5;
@@ -4504,7 +4656,7 @@ namespace DocumentTools
             // 
             this.ConvertPdfCompliance.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ConvertPdfCompliance.Location = new System.Drawing.Point(697, 561);
-            this.ConvertPdfCompliance.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ConvertPdfCompliance.Margin = new System.Windows.Forms.Padding(1);
             this.ConvertPdfCompliance.Name = "ConvertPdfCompliance";
             this.ConvertPdfCompliance.Size = new System.Drawing.Size(147, 37);
             this.ConvertPdfCompliance.TabIndex = 2;
@@ -4517,7 +4669,7 @@ namespace DocumentTools
             // 
             this.SelectConvertComplaincePdf.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SelectConvertComplaincePdf.Location = new System.Drawing.Point(5, 561);
-            this.SelectConvertComplaincePdf.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SelectConvertComplaincePdf.Margin = new System.Windows.Forms.Padding(1);
             this.SelectConvertComplaincePdf.Name = "SelectConvertComplaincePdf";
             this.SelectConvertComplaincePdf.Size = new System.Drawing.Size(147, 37);
             this.SelectConvertComplaincePdf.TabIndex = 1;
@@ -4530,7 +4682,7 @@ namespace DocumentTools
             // 
             this.ConvertPdfComplianceFileList.HideSelection = false;
             this.ConvertPdfComplianceFileList.Location = new System.Drawing.Point(4, 4);
-            this.ConvertPdfComplianceFileList.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ConvertPdfComplianceFileList.Margin = new System.Windows.Forms.Padding(1);
             this.ConvertPdfComplianceFileList.Name = "ConvertPdfComplianceFileList";
             this.ConvertPdfComplianceFileList.Size = new System.Drawing.Size(841, 420);
             this.ConvertPdfComplianceFileList.TabIndex = 0;
@@ -4550,7 +4702,7 @@ namespace DocumentTools
             this.TabPage_15.Controls.Add(this.SelectWord2ExcelFiles);
             this.TabPage_15.Controls.Add(this.Word2ExcelFileList);
             this.TabPage_15.Location = new System.Drawing.Point(4, 114);
-            this.TabPage_15.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_15.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_15.Name = "TabPage_15";
             this.TabPage_15.Size = new System.Drawing.Size(882, 621);
             this.TabPage_15.TabIndex = 14;
@@ -4561,7 +4713,7 @@ namespace DocumentTools
             // 
             this.Word2Excel_ExportSingleSheet.AutoSize = true;
             this.Word2Excel_ExportSingleSheet.Location = new System.Drawing.Point(5, 429);
-            this.Word2Excel_ExportSingleSheet.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Word2Excel_ExportSingleSheet.Margin = new System.Windows.Forms.Padding(2);
             this.Word2Excel_ExportSingleSheet.Name = "Word2Excel_ExportSingleSheet";
             this.Word2Excel_ExportSingleSheet.Size = new System.Drawing.Size(186, 16);
             this.Word2Excel_ExportSingleSheet.TabIndex = 18;
@@ -4574,7 +4726,7 @@ namespace DocumentTools
             this.word2excel_save_source.AutoSize = true;
             this.word2excel_save_source.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.word2excel_save_source.Location = new System.Drawing.Point(5, 974);
-            this.word2excel_save_source.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.word2excel_save_source.Margin = new System.Windows.Forms.Padding(1);
             this.word2excel_save_source.Name = "word2excel_save_source";
             this.word2excel_save_source.Size = new System.Drawing.Size(96, 16);
             this.word2excel_save_source.TabIndex = 17;
@@ -4585,7 +4737,7 @@ namespace DocumentTools
             // 
             this.Word2ExcelFileList_MoveDown.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.Word2ExcelFileList_MoveDown.Location = new System.Drawing.Point(847, 307);
-            this.Word2ExcelFileList_MoveDown.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Word2ExcelFileList_MoveDown.Margin = new System.Windows.Forms.Padding(1);
             this.Word2ExcelFileList_MoveDown.Name = "Word2ExcelFileList_MoveDown";
             this.Word2ExcelFileList_MoveDown.Size = new System.Drawing.Size(23, 57);
             this.Word2ExcelFileList_MoveDown.TabIndex = 5;
@@ -4597,7 +4749,7 @@ namespace DocumentTools
             // 
             this.Word2ExcelFileList_MoveUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.Word2ExcelFileList_MoveUp.Location = new System.Drawing.Point(847, 65);
-            this.Word2ExcelFileList_MoveUp.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Word2ExcelFileList_MoveUp.Margin = new System.Windows.Forms.Padding(1);
             this.Word2ExcelFileList_MoveUp.Name = "Word2ExcelFileList_MoveUp";
             this.Word2ExcelFileList_MoveUp.Size = new System.Drawing.Size(23, 57);
             this.Word2ExcelFileList_MoveUp.TabIndex = 4;
@@ -4611,7 +4763,7 @@ namespace DocumentTools
             this.word2excel_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.word2excel_clear.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.word2excel_clear.Location = new System.Drawing.Point(847, 225);
-            this.word2excel_clear.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.word2excel_clear.Margin = new System.Windows.Forms.Padding(1);
             this.word2excel_clear.Name = "word2excel_clear";
             this.word2excel_clear.Size = new System.Drawing.Size(23, 57);
             this.word2excel_clear.TabIndex = 12;
@@ -4624,7 +4776,7 @@ namespace DocumentTools
             this.word2excel_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.word2excel_remove.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.word2excel_remove.Location = new System.Drawing.Point(847, 145);
-            this.word2excel_remove.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.word2excel_remove.Margin = new System.Windows.Forms.Padding(1);
             this.word2excel_remove.Name = "word2excel_remove";
             this.word2excel_remove.Size = new System.Drawing.Size(23, 57);
             this.word2excel_remove.TabIndex = 11;
@@ -4648,7 +4800,7 @@ namespace DocumentTools
             // 
             this.ConvertWord2Excel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ConvertWord2Excel.Location = new System.Drawing.Point(697, 561);
-            this.ConvertWord2Excel.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ConvertWord2Excel.Margin = new System.Windows.Forms.Padding(1);
             this.ConvertWord2Excel.Name = "ConvertWord2Excel";
             this.ConvertWord2Excel.Size = new System.Drawing.Size(147, 37);
             this.ConvertWord2Excel.TabIndex = 2;
@@ -4661,7 +4813,7 @@ namespace DocumentTools
             // 
             this.SelectWord2ExcelFiles.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SelectWord2ExcelFiles.Location = new System.Drawing.Point(5, 561);
-            this.SelectWord2ExcelFiles.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SelectWord2ExcelFiles.Margin = new System.Windows.Forms.Padding(1);
             this.SelectWord2ExcelFiles.Name = "SelectWord2ExcelFiles";
             this.SelectWord2ExcelFiles.Size = new System.Drawing.Size(147, 37);
             this.SelectWord2ExcelFiles.TabIndex = 1;
@@ -4674,7 +4826,7 @@ namespace DocumentTools
             // 
             this.Word2ExcelFileList.HideSelection = false;
             this.Word2ExcelFileList.Location = new System.Drawing.Point(4, 4);
-            this.Word2ExcelFileList.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Word2ExcelFileList.Margin = new System.Windows.Forms.Padding(1);
             this.Word2ExcelFileList.Name = "Word2ExcelFileList";
             this.Word2ExcelFileList.Size = new System.Drawing.Size(841, 420);
             this.Word2ExcelFileList.TabIndex = 0;
@@ -4694,7 +4846,7 @@ namespace DocumentTools
             this.TabPage_16.Controls.Add(this.SelectExcel2WordFiles);
             this.TabPage_16.Controls.Add(this.Excel2WordFileList);
             this.TabPage_16.Location = new System.Drawing.Point(4, 114);
-            this.TabPage_16.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_16.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_16.Name = "TabPage_16";
             this.TabPage_16.Size = new System.Drawing.Size(882, 621);
             this.TabPage_16.TabIndex = 15;
@@ -4707,7 +4859,7 @@ namespace DocumentTools
             this.excel2word_save_source.AutoSize = true;
             this.excel2word_save_source.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.excel2word_save_source.Location = new System.Drawing.Point(7, 902);
-            this.excel2word_save_source.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.excel2word_save_source.Margin = new System.Windows.Forms.Padding(1);
             this.excel2word_save_source.Name = "excel2word_save_source";
             this.excel2word_save_source.Size = new System.Drawing.Size(96, 16);
             this.excel2word_save_source.TabIndex = 17;
@@ -4718,7 +4870,7 @@ namespace DocumentTools
             // 
             this.Excel2WordFileList_MoveDown.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.Excel2WordFileList_MoveDown.Location = new System.Drawing.Point(847, 307);
-            this.Excel2WordFileList_MoveDown.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Excel2WordFileList_MoveDown.Margin = new System.Windows.Forms.Padding(1);
             this.Excel2WordFileList_MoveDown.Name = "Excel2WordFileList_MoveDown";
             this.Excel2WordFileList_MoveDown.Size = new System.Drawing.Size(23, 57);
             this.Excel2WordFileList_MoveDown.TabIndex = 6;
@@ -4730,7 +4882,7 @@ namespace DocumentTools
             // 
             this.Excel2WordFileList_MoveUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.Excel2WordFileList_MoveUp.Location = new System.Drawing.Point(847, 65);
-            this.Excel2WordFileList_MoveUp.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Excel2WordFileList_MoveUp.Margin = new System.Windows.Forms.Padding(1);
             this.Excel2WordFileList_MoveUp.Name = "Excel2WordFileList_MoveUp";
             this.Excel2WordFileList_MoveUp.Size = new System.Drawing.Size(23, 57);
             this.Excel2WordFileList_MoveUp.TabIndex = 5;
@@ -4744,7 +4896,7 @@ namespace DocumentTools
             this.excel2word_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.excel2word_clear.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.excel2word_clear.Location = new System.Drawing.Point(847, 225);
-            this.excel2word_clear.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.excel2word_clear.Margin = new System.Windows.Forms.Padding(1);
             this.excel2word_clear.Name = "excel2word_clear";
             this.excel2word_clear.Size = new System.Drawing.Size(23, 57);
             this.excel2word_clear.TabIndex = 12;
@@ -4757,7 +4909,7 @@ namespace DocumentTools
             this.excel2word_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.excel2word_remove.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.excel2word_remove.Location = new System.Drawing.Point(847, 145);
-            this.excel2word_remove.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.excel2word_remove.Margin = new System.Windows.Forms.Padding(1);
             this.excel2word_remove.Name = "excel2word_remove";
             this.excel2word_remove.Size = new System.Drawing.Size(23, 57);
             this.excel2word_remove.TabIndex = 11;
@@ -4794,7 +4946,7 @@ namespace DocumentTools
             // 
             this.ConvertExcel2Word.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ConvertExcel2Word.Location = new System.Drawing.Point(697, 561);
-            this.ConvertExcel2Word.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ConvertExcel2Word.Margin = new System.Windows.Forms.Padding(1);
             this.ConvertExcel2Word.Name = "ConvertExcel2Word";
             this.ConvertExcel2Word.Size = new System.Drawing.Size(147, 37);
             this.ConvertExcel2Word.TabIndex = 2;
@@ -4807,7 +4959,7 @@ namespace DocumentTools
             // 
             this.SelectExcel2WordFiles.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SelectExcel2WordFiles.Location = new System.Drawing.Point(5, 561);
-            this.SelectExcel2WordFiles.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SelectExcel2WordFiles.Margin = new System.Windows.Forms.Padding(1);
             this.SelectExcel2WordFiles.Name = "SelectExcel2WordFiles";
             this.SelectExcel2WordFiles.Size = new System.Drawing.Size(147, 37);
             this.SelectExcel2WordFiles.TabIndex = 1;
@@ -4820,7 +4972,7 @@ namespace DocumentTools
             // 
             this.Excel2WordFileList.HideSelection = false;
             this.Excel2WordFileList.Location = new System.Drawing.Point(4, 4);
-            this.Excel2WordFileList.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Excel2WordFileList.Margin = new System.Windows.Forms.Padding(1);
             this.Excel2WordFileList.Name = "Excel2WordFileList";
             this.Excel2WordFileList.Size = new System.Drawing.Size(841, 420);
             this.Excel2WordFileList.TabIndex = 0;
@@ -4829,6 +4981,7 @@ namespace DocumentTools
             // 
             // TabPage_04
             // 
+            this.TabPage_04.Controls.Add(this.MoveToConvertTif);
             this.TabPage_04.Controls.Add(this.word2image_save_source);
             this.TabPage_04.Controls.Add(this.DocumentsListView_MoveDown);
             this.TabPage_04.Controls.Add(this.DocumentsListView_MoveUp);
@@ -4846,19 +4999,31 @@ namespace DocumentTools
             this.TabPage_04.Controls.Add(this.ConvertImageList);
             this.TabPage_04.Controls.Add(this.DocumentsListView);
             this.TabPage_04.Location = new System.Drawing.Point(4, 114);
-            this.TabPage_04.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_04.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_04.Name = "TabPage_04";
             this.TabPage_04.Size = new System.Drawing.Size(882, 621);
             this.TabPage_04.TabIndex = 3;
             this.TabPage_04.Text = "WORD/PDF/EXCEL转图片";
             this.TabPage_04.UseVisualStyleBackColor = true;
             // 
+            // MoveToConvertTif
+            // 
+            this.MoveToConvertTif.AutoSize = true;
+            this.MoveToConvertTif.Location = new System.Drawing.Point(3, 508);
+            this.MoveToConvertTif.Name = "MoveToConvertTif";
+            this.MoveToConvertTif.Size = new System.Drawing.Size(383, 12);
+            this.MoveToConvertTif.TabIndex = 19;
+            this.MoveToConvertTif.TabStop = true;
+            this.MoveToConvertTif.Text = "点击前往[图片格式转换]可转换TIF图片[支持选举系统识别的图片格式]";
+            this.MoveToConvertTif.Visible = false;
+            this.MoveToConvertTif.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.MoveToConvertTif_LinkClicked);
+            // 
             // word2image_save_source
             // 
             this.word2image_save_source.AutoSize = true;
             this.word2image_save_source.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.word2image_save_source.Location = new System.Drawing.Point(4, 457);
-            this.word2image_save_source.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.word2image_save_source.Margin = new System.Windows.Forms.Padding(1);
             this.word2image_save_source.Name = "word2image_save_source";
             this.word2image_save_source.Size = new System.Drawing.Size(96, 16);
             this.word2image_save_source.TabIndex = 17;
@@ -4870,7 +5035,7 @@ namespace DocumentTools
             // 
             this.DocumentsListView_MoveDown.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.DocumentsListView_MoveDown.Location = new System.Drawing.Point(847, 307);
-            this.DocumentsListView_MoveDown.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.DocumentsListView_MoveDown.Margin = new System.Windows.Forms.Padding(1);
             this.DocumentsListView_MoveDown.Name = "DocumentsListView_MoveDown";
             this.DocumentsListView_MoveDown.Size = new System.Drawing.Size(23, 57);
             this.DocumentsListView_MoveDown.TabIndex = 12;
@@ -4882,7 +5047,7 @@ namespace DocumentTools
             // 
             this.DocumentsListView_MoveUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.DocumentsListView_MoveUp.Location = new System.Drawing.Point(847, 65);
-            this.DocumentsListView_MoveUp.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.DocumentsListView_MoveUp.Margin = new System.Windows.Forms.Padding(1);
             this.DocumentsListView_MoveUp.Name = "DocumentsListView_MoveUp";
             this.DocumentsListView_MoveUp.Size = new System.Drawing.Size(23, 57);
             this.DocumentsListView_MoveUp.TabIndex = 11;
@@ -4896,7 +5061,7 @@ namespace DocumentTools
             this.document2image_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.document2image_clear.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.document2image_clear.Location = new System.Drawing.Point(847, 225);
-            this.document2image_clear.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.document2image_clear.Margin = new System.Windows.Forms.Padding(1);
             this.document2image_clear.Name = "document2image_clear";
             this.document2image_clear.Size = new System.Drawing.Size(23, 57);
             this.document2image_clear.TabIndex = 12;
@@ -4909,7 +5074,7 @@ namespace DocumentTools
             this.document2image_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.document2image_remove.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.document2image_remove.Location = new System.Drawing.Point(847, 145);
-            this.document2image_remove.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.document2image_remove.Margin = new System.Windows.Forms.Padding(1);
             this.document2image_remove.Name = "document2image_remove";
             this.document2image_remove.Size = new System.Drawing.Size(23, 57);
             this.document2image_remove.TabIndex = 11;
@@ -4934,7 +5099,7 @@ namespace DocumentTools
             this.PageExportCheck.AutoSize = true;
             this.PageExportCheck.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.PageExportCheck.Location = new System.Drawing.Point(116, 431);
-            this.PageExportCheck.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.PageExportCheck.Margin = new System.Windows.Forms.Padding(1);
             this.PageExportCheck.Name = "PageExportCheck";
             this.PageExportCheck.Size = new System.Drawing.Size(72, 16);
             this.PageExportCheck.TabIndex = 9;
@@ -4958,7 +5123,7 @@ namespace DocumentTools
             // 
             this.DpiItemList.FormattingEnabled = true;
             this.DpiItemList.Location = new System.Drawing.Point(284, 427);
-            this.DpiItemList.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.DpiItemList.Margin = new System.Windows.Forms.Padding(1);
             this.DpiItemList.Name = "DpiItemList";
             this.DpiItemList.Size = new System.Drawing.Size(83, 24);
             this.DpiItemList.TabIndex = 7;
@@ -4981,7 +5146,7 @@ namespace DocumentTools
             // 
             this.SelectWord2ImageFileButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SelectWord2ImageFileButton.Location = new System.Drawing.Point(5, 561);
-            this.SelectWord2ImageFileButton.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SelectWord2ImageFileButton.Margin = new System.Windows.Forms.Padding(1);
             this.SelectWord2ImageFileButton.Name = "SelectWord2ImageFileButton";
             this.SelectWord2ImageFileButton.Size = new System.Drawing.Size(147, 37);
             this.SelectWord2ImageFileButton.TabIndex = 5;
@@ -5008,19 +5173,20 @@ namespace DocumentTools
             this.SetGrayCheckBox.AutoSize = true;
             this.SetGrayCheckBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SetGrayCheckBox.Location = new System.Drawing.Point(4, 431);
-            this.SetGrayCheckBox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SetGrayCheckBox.Margin = new System.Windows.Forms.Padding(1);
             this.SetGrayCheckBox.Name = "SetGrayCheckBox";
             this.SetGrayCheckBox.Size = new System.Drawing.Size(96, 16);
             this.SetGrayCheckBox.TabIndex = 3;
             this.SetGrayCheckBox.Tag = "anchor_left_bottom";
             this.SetGrayCheckBox.Text = "转换为8位BMP";
             this.SetGrayCheckBox.UseVisualStyleBackColor = true;
+            this.SetGrayCheckBox.CheckedChanged += new System.EventHandler(this.SetGrayCheckBox_CheckedChanged);
             // 
             // ConvertWord2ImageButton
             // 
             this.ConvertWord2ImageButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ConvertWord2ImageButton.Location = new System.Drawing.Point(697, 561);
-            this.ConvertWord2ImageButton.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ConvertWord2ImageButton.Margin = new System.Windows.Forms.Padding(1);
             this.ConvertWord2ImageButton.Name = "ConvertWord2ImageButton";
             this.ConvertWord2ImageButton.Size = new System.Drawing.Size(147, 37);
             this.ConvertWord2ImageButton.TabIndex = 2;
@@ -5033,7 +5199,7 @@ namespace DocumentTools
             // 
             this.ConvertImageList.FormattingEnabled = true;
             this.ConvertImageList.Location = new System.Drawing.Point(433, 427);
-            this.ConvertImageList.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ConvertImageList.Margin = new System.Windows.Forms.Padding(1);
             this.ConvertImageList.Name = "ConvertImageList";
             this.ConvertImageList.Size = new System.Drawing.Size(83, 24);
             this.ConvertImageList.TabIndex = 1;
@@ -5044,7 +5210,7 @@ namespace DocumentTools
             // 
             this.DocumentsListView.HideSelection = false;
             this.DocumentsListView.Location = new System.Drawing.Point(4, 4);
-            this.DocumentsListView.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.DocumentsListView.Margin = new System.Windows.Forms.Padding(1);
             this.DocumentsListView.Name = "DocumentsListView";
             this.DocumentsListView.Size = new System.Drawing.Size(841, 420);
             this.DocumentsListView.TabIndex = 0;
@@ -5070,7 +5236,7 @@ namespace DocumentTools
             this.TabPage_27.Controls.Add(this.SelectWord2EpubFiles);
             this.TabPage_27.Controls.Add(this.Word2EPUBFileList);
             this.TabPage_27.Location = new System.Drawing.Point(4, 114);
-            this.TabPage_27.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_27.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_27.Name = "TabPage_27";
             this.TabPage_27.Size = new System.Drawing.Size(882, 621);
             this.TabPage_27.TabIndex = 26;
@@ -5093,7 +5259,7 @@ namespace DocumentTools
             // CoverImageDpi
             // 
             this.CoverImageDpi.Location = new System.Drawing.Point(613, 427);
-            this.CoverImageDpi.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.CoverImageDpi.Margin = new System.Windows.Forms.Padding(1);
             this.CoverImageDpi.Name = "CoverImageDpi";
             this.CoverImageDpi.Size = new System.Drawing.Size(101, 21);
             this.CoverImageDpi.TabIndex = 23;
@@ -5116,7 +5282,7 @@ namespace DocumentTools
             this.SetWord2EpubCoverImage.AutoSize = true;
             this.SetWord2EpubCoverImage.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SetWord2EpubCoverImage.Location = new System.Drawing.Point(727, 427);
-            this.SetWord2EpubCoverImage.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SetWord2EpubCoverImage.Margin = new System.Windows.Forms.Padding(1);
             this.SetWord2EpubCoverImage.Name = "SetWord2EpubCoverImage";
             this.SetWord2EpubCoverImage.Size = new System.Drawing.Size(117, 28);
             this.SetWord2EpubCoverImage.TabIndex = 21;
@@ -5129,7 +5295,7 @@ namespace DocumentTools
             // 
             this.Word2EpubConverImage.Enabled = false;
             this.Word2EpubConverImage.Location = new System.Drawing.Point(349, 427);
-            this.Word2EpubConverImage.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Word2EpubConverImage.Margin = new System.Windows.Forms.Padding(1);
             this.Word2EpubConverImage.Name = "Word2EpubConverImage";
             this.Word2EpubConverImage.Size = new System.Drawing.Size(205, 21);
             this.Word2EpubConverImage.TabIndex = 20;
@@ -5150,7 +5316,7 @@ namespace DocumentTools
             // Word2EpubAuthorName
             // 
             this.Word2EpubAuthorName.Location = new System.Drawing.Point(85, 427);
-            this.Word2EpubAuthorName.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Word2EpubAuthorName.Margin = new System.Windows.Forms.Padding(1);
             this.Word2EpubAuthorName.MaxLength = 50;
             this.Word2EpubAuthorName.Name = "Word2EpubAuthorName";
             this.Word2EpubAuthorName.Size = new System.Drawing.Size(167, 21);
@@ -5188,7 +5354,7 @@ namespace DocumentTools
             this.word2epub_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.word2epub_clear.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.word2epub_clear.Location = new System.Drawing.Point(847, 225);
-            this.word2epub_clear.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.word2epub_clear.Margin = new System.Windows.Forms.Padding(1);
             this.word2epub_clear.Name = "word2epub_clear";
             this.word2epub_clear.Size = new System.Drawing.Size(23, 57);
             this.word2epub_clear.TabIndex = 15;
@@ -5201,7 +5367,7 @@ namespace DocumentTools
             this.word2epub_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.word2epub_remove.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.word2epub_remove.Location = new System.Drawing.Point(847, 145);
-            this.word2epub_remove.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.word2epub_remove.Margin = new System.Windows.Forms.Padding(1);
             this.word2epub_remove.Name = "word2epub_remove";
             this.word2epub_remove.Size = new System.Drawing.Size(23, 57);
             this.word2epub_remove.TabIndex = 14;
@@ -5212,7 +5378,7 @@ namespace DocumentTools
             // 
             this.Word2EPUBFileList_MoveDown.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.Word2EPUBFileList_MoveDown.Location = new System.Drawing.Point(847, 307);
-            this.Word2EPUBFileList_MoveDown.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Word2EPUBFileList_MoveDown.Margin = new System.Windows.Forms.Padding(1);
             this.Word2EPUBFileList_MoveDown.Name = "Word2EPUBFileList_MoveDown";
             this.Word2EPUBFileList_MoveDown.Size = new System.Drawing.Size(23, 57);
             this.Word2EPUBFileList_MoveDown.TabIndex = 13;
@@ -5224,7 +5390,7 @@ namespace DocumentTools
             // 
             this.Word2EPUBFileList_MoveUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.Word2EPUBFileList_MoveUp.Location = new System.Drawing.Point(847, 65);
-            this.Word2EPUBFileList_MoveUp.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Word2EPUBFileList_MoveUp.Margin = new System.Windows.Forms.Padding(1);
             this.Word2EPUBFileList_MoveUp.Name = "Word2EPUBFileList_MoveUp";
             this.Word2EPUBFileList_MoveUp.Size = new System.Drawing.Size(23, 57);
             this.Word2EPUBFileList_MoveUp.TabIndex = 5;
@@ -5236,7 +5402,7 @@ namespace DocumentTools
             // 
             this.ConvertWord2Epub.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ConvertWord2Epub.Location = new System.Drawing.Point(697, 561);
-            this.ConvertWord2Epub.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ConvertWord2Epub.Margin = new System.Windows.Forms.Padding(1);
             this.ConvertWord2Epub.Name = "ConvertWord2Epub";
             this.ConvertWord2Epub.Size = new System.Drawing.Size(147, 37);
             this.ConvertWord2Epub.TabIndex = 2;
@@ -5249,7 +5415,7 @@ namespace DocumentTools
             // 
             this.SelectWord2EpubFiles.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SelectWord2EpubFiles.Location = new System.Drawing.Point(5, 561);
-            this.SelectWord2EpubFiles.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SelectWord2EpubFiles.Margin = new System.Windows.Forms.Padding(1);
             this.SelectWord2EpubFiles.Name = "SelectWord2EpubFiles";
             this.SelectWord2EpubFiles.Size = new System.Drawing.Size(147, 37);
             this.SelectWord2EpubFiles.TabIndex = 1;
@@ -5262,7 +5428,7 @@ namespace DocumentTools
             // 
             this.Word2EPUBFileList.HideSelection = false;
             this.Word2EPUBFileList.Location = new System.Drawing.Point(4, 4);
-            this.Word2EPUBFileList.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Word2EPUBFileList.Margin = new System.Windows.Forms.Padding(1);
             this.Word2EPUBFileList.Name = "Word2EPUBFileList";
             this.Word2EPUBFileList.Size = new System.Drawing.Size(841, 420);
             this.Word2EPUBFileList.TabIndex = 0;
@@ -5281,7 +5447,7 @@ namespace DocumentTools
             this.TabPage_28.Controls.Add(this.SelectEpub2WordFiles);
             this.TabPage_28.Controls.Add(this.EPUB2WORDFileList);
             this.TabPage_28.Location = new System.Drawing.Point(4, 114);
-            this.TabPage_28.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_28.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_28.Name = "TabPage_28";
             this.TabPage_28.Size = new System.Drawing.Size(882, 621);
             this.TabPage_28.TabIndex = 27;
@@ -5305,7 +5471,7 @@ namespace DocumentTools
             // 
             this.EPUB2WORDFileList_MoveDown.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.EPUB2WORDFileList_MoveDown.Location = new System.Drawing.Point(847, 307);
-            this.EPUB2WORDFileList_MoveDown.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.EPUB2WORDFileList_MoveDown.Margin = new System.Windows.Forms.Padding(1);
             this.EPUB2WORDFileList_MoveDown.Name = "EPUB2WORDFileList_MoveDown";
             this.EPUB2WORDFileList_MoveDown.Size = new System.Drawing.Size(23, 57);
             this.EPUB2WORDFileList_MoveDown.TabIndex = 18;
@@ -5317,7 +5483,7 @@ namespace DocumentTools
             // 
             this.EPUB2WORDFileList_MoveUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.EPUB2WORDFileList_MoveUp.Location = new System.Drawing.Point(847, 65);
-            this.EPUB2WORDFileList_MoveUp.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.EPUB2WORDFileList_MoveUp.Margin = new System.Windows.Forms.Padding(1);
             this.EPUB2WORDFileList_MoveUp.Name = "EPUB2WORDFileList_MoveUp";
             this.EPUB2WORDFileList_MoveUp.Size = new System.Drawing.Size(23, 57);
             this.EPUB2WORDFileList_MoveUp.TabIndex = 17;
@@ -5331,7 +5497,7 @@ namespace DocumentTools
             this.epub2word_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.epub2word_clear.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.epub2word_clear.Location = new System.Drawing.Point(847, 225);
-            this.epub2word_clear.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.epub2word_clear.Margin = new System.Windows.Forms.Padding(1);
             this.epub2word_clear.Name = "epub2word_clear";
             this.epub2word_clear.Size = new System.Drawing.Size(23, 57);
             this.epub2word_clear.TabIndex = 20;
@@ -5344,7 +5510,7 @@ namespace DocumentTools
             this.epub2word_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.epub2word_remove.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.epub2word_remove.Location = new System.Drawing.Point(847, 145);
-            this.epub2word_remove.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.epub2word_remove.Margin = new System.Windows.Forms.Padding(1);
             this.epub2word_remove.Name = "epub2word_remove";
             this.epub2word_remove.Size = new System.Drawing.Size(23, 57);
             this.epub2word_remove.TabIndex = 19;
@@ -5368,7 +5534,7 @@ namespace DocumentTools
             // 
             this.ConvertEpub2Word.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ConvertEpub2Word.Location = new System.Drawing.Point(697, 561);
-            this.ConvertEpub2Word.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ConvertEpub2Word.Margin = new System.Windows.Forms.Padding(1);
             this.ConvertEpub2Word.Name = "ConvertEpub2Word";
             this.ConvertEpub2Word.Size = new System.Drawing.Size(147, 37);
             this.ConvertEpub2Word.TabIndex = 15;
@@ -5381,7 +5547,7 @@ namespace DocumentTools
             // 
             this.SelectEpub2WordFiles.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SelectEpub2WordFiles.Location = new System.Drawing.Point(5, 561);
-            this.SelectEpub2WordFiles.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SelectEpub2WordFiles.Margin = new System.Windows.Forms.Padding(1);
             this.SelectEpub2WordFiles.Name = "SelectEpub2WordFiles";
             this.SelectEpub2WordFiles.Size = new System.Drawing.Size(147, 37);
             this.SelectEpub2WordFiles.TabIndex = 14;
@@ -5394,7 +5560,7 @@ namespace DocumentTools
             // 
             this.EPUB2WORDFileList.HideSelection = false;
             this.EPUB2WORDFileList.Location = new System.Drawing.Point(4, 4);
-            this.EPUB2WORDFileList.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.EPUB2WORDFileList.Margin = new System.Windows.Forms.Padding(1);
             this.EPUB2WORDFileList.Name = "EPUB2WORDFileList";
             this.EPUB2WORDFileList.Size = new System.Drawing.Size(841, 420);
             this.EPUB2WORDFileList.TabIndex = 13;
@@ -5413,7 +5579,7 @@ namespace DocumentTools
             this.TabPage_29.Controls.Add(this.SelectEPUB2PDFFiles);
             this.TabPage_29.Controls.Add(this.EPUB2PDFFileList);
             this.TabPage_29.Location = new System.Drawing.Point(4, 114);
-            this.TabPage_29.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_29.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_29.Name = "TabPage_29";
             this.TabPage_29.Size = new System.Drawing.Size(882, 621);
             this.TabPage_29.TabIndex = 28;
@@ -5437,7 +5603,7 @@ namespace DocumentTools
             // 
             this.EPUB2PDFFileList_MoveDown.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.EPUB2PDFFileList_MoveDown.Location = new System.Drawing.Point(847, 307);
-            this.EPUB2PDFFileList_MoveDown.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.EPUB2PDFFileList_MoveDown.Margin = new System.Windows.Forms.Padding(1);
             this.EPUB2PDFFileList_MoveDown.Name = "EPUB2PDFFileList_MoveDown";
             this.EPUB2PDFFileList_MoveDown.Size = new System.Drawing.Size(23, 57);
             this.EPUB2PDFFileList_MoveDown.TabIndex = 26;
@@ -5449,7 +5615,7 @@ namespace DocumentTools
             // 
             this.EPUB2PDFFileList_MoveUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.EPUB2PDFFileList_MoveUp.Location = new System.Drawing.Point(847, 65);
-            this.EPUB2PDFFileList_MoveUp.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.EPUB2PDFFileList_MoveUp.Margin = new System.Windows.Forms.Padding(1);
             this.EPUB2PDFFileList_MoveUp.Name = "EPUB2PDFFileList_MoveUp";
             this.EPUB2PDFFileList_MoveUp.Size = new System.Drawing.Size(23, 57);
             this.EPUB2PDFFileList_MoveUp.TabIndex = 25;
@@ -5463,7 +5629,7 @@ namespace DocumentTools
             this.epub2pdf_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.epub2pdf_clear.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.epub2pdf_clear.Location = new System.Drawing.Point(847, 225);
-            this.epub2pdf_clear.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.epub2pdf_clear.Margin = new System.Windows.Forms.Padding(1);
             this.epub2pdf_clear.Name = "epub2pdf_clear";
             this.epub2pdf_clear.Size = new System.Drawing.Size(23, 57);
             this.epub2pdf_clear.TabIndex = 28;
@@ -5476,7 +5642,7 @@ namespace DocumentTools
             this.epub2pdf_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.epub2pdf_remove.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.epub2pdf_remove.Location = new System.Drawing.Point(847, 145);
-            this.epub2pdf_remove.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.epub2pdf_remove.Margin = new System.Windows.Forms.Padding(1);
             this.epub2pdf_remove.Name = "epub2pdf_remove";
             this.epub2pdf_remove.Size = new System.Drawing.Size(23, 57);
             this.epub2pdf_remove.TabIndex = 27;
@@ -5500,7 +5666,7 @@ namespace DocumentTools
             // 
             this.ConvertEPUB2PDF.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ConvertEPUB2PDF.Location = new System.Drawing.Point(697, 561);
-            this.ConvertEPUB2PDF.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ConvertEPUB2PDF.Margin = new System.Windows.Forms.Padding(1);
             this.ConvertEPUB2PDF.Name = "ConvertEPUB2PDF";
             this.ConvertEPUB2PDF.Size = new System.Drawing.Size(147, 37);
             this.ConvertEPUB2PDF.TabIndex = 23;
@@ -5513,7 +5679,7 @@ namespace DocumentTools
             // 
             this.SelectEPUB2PDFFiles.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SelectEPUB2PDFFiles.Location = new System.Drawing.Point(5, 561);
-            this.SelectEPUB2PDFFiles.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SelectEPUB2PDFFiles.Margin = new System.Windows.Forms.Padding(1);
             this.SelectEPUB2PDFFiles.Name = "SelectEPUB2PDFFiles";
             this.SelectEPUB2PDFFiles.Size = new System.Drawing.Size(147, 37);
             this.SelectEPUB2PDFFiles.TabIndex = 22;
@@ -5526,7 +5692,7 @@ namespace DocumentTools
             // 
             this.EPUB2PDFFileList.HideSelection = false;
             this.EPUB2PDFFileList.Location = new System.Drawing.Point(4, 4);
-            this.EPUB2PDFFileList.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.EPUB2PDFFileList.Margin = new System.Windows.Forms.Padding(1);
             this.EPUB2PDFFileList.Name = "EPUB2PDFFileList";
             this.EPUB2PDFFileList.Size = new System.Drawing.Size(841, 420);
             this.EPUB2PDFFileList.TabIndex = 21;
@@ -5545,7 +5711,7 @@ namespace DocumentTools
             this.TabPage_23.Controls.Add(this.SelectConvertImage2PDF);
             this.TabPage_23.Controls.Add(this.ConvertImage2PDFFileList);
             this.TabPage_23.Location = new System.Drawing.Point(4, 114);
-            this.TabPage_23.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_23.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_23.Name = "TabPage_23";
             this.TabPage_23.Size = new System.Drawing.Size(882, 621);
             this.TabPage_23.TabIndex = 22;
@@ -5556,7 +5722,7 @@ namespace DocumentTools
             // 
             this.ConvertImage2PDFFileList_MoveDown.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ConvertImage2PDFFileList_MoveDown.Location = new System.Drawing.Point(847, 307);
-            this.ConvertImage2PDFFileList_MoveDown.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ConvertImage2PDFFileList_MoveDown.Margin = new System.Windows.Forms.Padding(1);
             this.ConvertImage2PDFFileList_MoveDown.Name = "ConvertImage2PDFFileList_MoveDown";
             this.ConvertImage2PDFFileList_MoveDown.Size = new System.Drawing.Size(23, 57);
             this.ConvertImage2PDFFileList_MoveDown.TabIndex = 6;
@@ -5568,7 +5734,7 @@ namespace DocumentTools
             // 
             this.ConvertImage2PDFFileList_MoveUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ConvertImage2PDFFileList_MoveUp.Location = new System.Drawing.Point(847, 65);
-            this.ConvertImage2PDFFileList_MoveUp.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ConvertImage2PDFFileList_MoveUp.Margin = new System.Windows.Forms.Padding(1);
             this.ConvertImage2PDFFileList_MoveUp.Name = "ConvertImage2PDFFileList_MoveUp";
             this.ConvertImage2PDFFileList_MoveUp.Size = new System.Drawing.Size(23, 57);
             this.ConvertImage2PDFFileList_MoveUp.TabIndex = 5;
@@ -5582,7 +5748,7 @@ namespace DocumentTools
             this.image2pdf_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.image2pdf_clear.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.image2pdf_clear.Location = new System.Drawing.Point(847, 225);
-            this.image2pdf_clear.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.image2pdf_clear.Margin = new System.Windows.Forms.Padding(1);
             this.image2pdf_clear.Name = "image2pdf_clear";
             this.image2pdf_clear.Size = new System.Drawing.Size(23, 57);
             this.image2pdf_clear.TabIndex = 12;
@@ -5595,7 +5761,7 @@ namespace DocumentTools
             this.image2pdf_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.image2pdf_remove.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.image2pdf_remove.Location = new System.Drawing.Point(847, 145);
-            this.image2pdf_remove.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.image2pdf_remove.Margin = new System.Windows.Forms.Padding(1);
             this.image2pdf_remove.Name = "image2pdf_remove";
             this.image2pdf_remove.Size = new System.Drawing.Size(23, 57);
             this.image2pdf_remove.TabIndex = 11;
@@ -5624,9 +5790,9 @@ namespace DocumentTools
             this.groupBox19.Controls.Add(this.label38);
             this.groupBox19.Controls.Add(this.ExportSignlePDF);
             this.groupBox19.Location = new System.Drawing.Point(4, 431);
-            this.groupBox19.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox19.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox19.Name = "groupBox19";
-            this.groupBox19.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox19.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox19.Size = new System.Drawing.Size(836, 95);
             this.groupBox19.TabIndex = 3;
             this.groupBox19.TabStop = false;
@@ -5638,7 +5804,7 @@ namespace DocumentTools
             this.Image2PDFCOmpressImage.AutoSize = true;
             this.Image2PDFCOmpressImage.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.Image2PDFCOmpressImage.Location = new System.Drawing.Point(123, 21);
-            this.Image2PDFCOmpressImage.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Image2PDFCOmpressImage.Margin = new System.Windows.Forms.Padding(1);
             this.Image2PDFCOmpressImage.Name = "Image2PDFCOmpressImage";
             this.Image2PDFCOmpressImage.Size = new System.Drawing.Size(72, 16);
             this.Image2PDFCOmpressImage.TabIndex = 5;
@@ -5650,7 +5816,7 @@ namespace DocumentTools
             this.Image2PDFOptiomize.AutoSize = true;
             this.Image2PDFOptiomize.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.Image2PDFOptiomize.Location = new System.Drawing.Point(7, 57);
-            this.Image2PDFOptiomize.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Image2PDFOptiomize.Margin = new System.Windows.Forms.Padding(1);
             this.Image2PDFOptiomize.Name = "Image2PDFOptiomize";
             this.Image2PDFOptiomize.Size = new System.Drawing.Size(276, 16);
             this.Image2PDFOptiomize.TabIndex = 4;
@@ -5668,9 +5834,9 @@ namespace DocumentTools
             this.groupBox20.Controls.Add(this.label41);
             this.groupBox20.Controls.Add(this.label40);
             this.groupBox20.Location = new System.Drawing.Point(599, 9);
-            this.groupBox20.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox20.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox20.Name = "groupBox20";
-            this.groupBox20.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox20.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox20.Size = new System.Drawing.Size(227, 81);
             this.groupBox20.TabIndex = 3;
             this.groupBox20.TabStop = false;
@@ -5679,7 +5845,7 @@ namespace DocumentTools
             // ImagePdfPageSIze_RIGHT
             // 
             this.ImagePdfPageSIze_RIGHT.Location = new System.Drawing.Point(143, 45);
-            this.ImagePdfPageSIze_RIGHT.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ImagePdfPageSIze_RIGHT.Margin = new System.Windows.Forms.Padding(1);
             this.ImagePdfPageSIze_RIGHT.Name = "ImagePdfPageSIze_RIGHT";
             this.ImagePdfPageSIze_RIGHT.Size = new System.Drawing.Size(68, 21);
             this.ImagePdfPageSIze_RIGHT.TabIndex = 7;
@@ -5688,7 +5854,7 @@ namespace DocumentTools
             // ImagePdfPageSIze_BOTTOM
             // 
             this.ImagePdfPageSIze_BOTTOM.Location = new System.Drawing.Point(33, 45);
-            this.ImagePdfPageSIze_BOTTOM.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ImagePdfPageSIze_BOTTOM.Margin = new System.Windows.Forms.Padding(1);
             this.ImagePdfPageSIze_BOTTOM.Name = "ImagePdfPageSIze_BOTTOM";
             this.ImagePdfPageSIze_BOTTOM.Size = new System.Drawing.Size(68, 21);
             this.ImagePdfPageSIze_BOTTOM.TabIndex = 6;
@@ -5697,7 +5863,7 @@ namespace DocumentTools
             // ImagePdfPageSIze_LEFT
             // 
             this.ImagePdfPageSIze_LEFT.Location = new System.Drawing.Point(143, 17);
-            this.ImagePdfPageSIze_LEFT.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ImagePdfPageSIze_LEFT.Margin = new System.Windows.Forms.Padding(1);
             this.ImagePdfPageSIze_LEFT.Name = "ImagePdfPageSIze_LEFT";
             this.ImagePdfPageSIze_LEFT.Size = new System.Drawing.Size(68, 21);
             this.ImagePdfPageSIze_LEFT.TabIndex = 5;
@@ -5706,7 +5872,7 @@ namespace DocumentTools
             // ImagePdfPageSIze_UP
             // 
             this.ImagePdfPageSIze_UP.Location = new System.Drawing.Point(33, 17);
-            this.ImagePdfPageSIze_UP.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ImagePdfPageSIze_UP.Margin = new System.Windows.Forms.Padding(1);
             this.ImagePdfPageSIze_UP.Name = "ImagePdfPageSIze_UP";
             this.ImagePdfPageSIze_UP.Size = new System.Drawing.Size(68, 21);
             this.ImagePdfPageSIze_UP.TabIndex = 4;
@@ -5760,7 +5926,7 @@ namespace DocumentTools
             // 
             this.Image2PDFCombox.FormattingEnabled = true;
             this.Image2PDFCombox.Location = new System.Drawing.Point(255, 17);
-            this.Image2PDFCombox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Image2PDFCombox.Margin = new System.Windows.Forms.Padding(1);
             this.Image2PDFCombox.Name = "Image2PDFCombox";
             this.Image2PDFCombox.Size = new System.Drawing.Size(83, 24);
             this.Image2PDFCombox.TabIndex = 2;
@@ -5781,7 +5947,7 @@ namespace DocumentTools
             this.ExportSignlePDF.AutoSize = true;
             this.ExportSignlePDF.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ExportSignlePDF.Location = new System.Drawing.Point(7, 21);
-            this.ExportSignlePDF.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ExportSignlePDF.Margin = new System.Windows.Forms.Padding(1);
             this.ExportSignlePDF.Name = "ExportSignlePDF";
             this.ExportSignlePDF.Size = new System.Drawing.Size(114, 16);
             this.ExportSignlePDF.TabIndex = 0;
@@ -5792,7 +5958,7 @@ namespace DocumentTools
             // 
             this.ConvertImage2PDF.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ConvertImage2PDF.Location = new System.Drawing.Point(697, 561);
-            this.ConvertImage2PDF.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ConvertImage2PDF.Margin = new System.Windows.Forms.Padding(1);
             this.ConvertImage2PDF.Name = "ConvertImage2PDF";
             this.ConvertImage2PDF.Size = new System.Drawing.Size(147, 37);
             this.ConvertImage2PDF.TabIndex = 2;
@@ -5805,7 +5971,7 @@ namespace DocumentTools
             // 
             this.SelectConvertImage2PDF.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SelectConvertImage2PDF.Location = new System.Drawing.Point(5, 561);
-            this.SelectConvertImage2PDF.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SelectConvertImage2PDF.Margin = new System.Windows.Forms.Padding(1);
             this.SelectConvertImage2PDF.Name = "SelectConvertImage2PDF";
             this.SelectConvertImage2PDF.Size = new System.Drawing.Size(147, 37);
             this.SelectConvertImage2PDF.TabIndex = 1;
@@ -5818,7 +5984,7 @@ namespace DocumentTools
             // 
             this.ConvertImage2PDFFileList.HideSelection = false;
             this.ConvertImage2PDFFileList.Location = new System.Drawing.Point(4, 4);
-            this.ConvertImage2PDFFileList.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ConvertImage2PDFFileList.Margin = new System.Windows.Forms.Padding(1);
             this.ConvertImage2PDFFileList.Name = "ConvertImage2PDFFileList";
             this.ConvertImage2PDFFileList.Size = new System.Drawing.Size(841, 420);
             this.ConvertImage2PDFFileList.TabIndex = 0;
@@ -5842,7 +6008,7 @@ namespace DocumentTools
             this.TabPage_30.Controls.Add(this.SelectHtml2PDFFiles);
             this.TabPage_30.Controls.Add(this.HTML2PDFFileList);
             this.TabPage_30.Location = new System.Drawing.Point(4, 114);
-            this.TabPage_30.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_30.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_30.Name = "TabPage_30";
             this.TabPage_30.Size = new System.Drawing.Size(882, 621);
             this.TabPage_30.TabIndex = 29;
@@ -5889,9 +6055,9 @@ namespace DocumentTools
             this.groupBox31.Controls.Add(this.html2pdf_textbox_chromepath);
             this.groupBox31.Controls.Add(this.label73);
             this.groupBox31.Location = new System.Drawing.Point(9, 393);
-            this.groupBox31.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox31.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox31.Name = "groupBox31";
-            this.groupBox31.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox31.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox31.Size = new System.Drawing.Size(369, 127);
             this.groupBox31.TabIndex = 23;
             this.groupBox31.TabStop = false;
@@ -5923,7 +6089,7 @@ namespace DocumentTools
             // html2pdf_wait_timeout
             // 
             this.html2pdf_wait_timeout.Location = new System.Drawing.Point(89, 100);
-            this.html2pdf_wait_timeout.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.html2pdf_wait_timeout.Margin = new System.Windows.Forms.Padding(1);
             this.html2pdf_wait_timeout.Maximum = new decimal(new int[] {
             276447231,
             23283,
@@ -5946,7 +6112,7 @@ namespace DocumentTools
             // html2pdf_timeout
             // 
             this.html2pdf_timeout.Location = new System.Drawing.Point(89, 73);
-            this.html2pdf_timeout.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.html2pdf_timeout.Margin = new System.Windows.Forms.Padding(1);
             this.html2pdf_timeout.Maximum = new decimal(new int[] {
             276447231,
             23283,
@@ -5981,7 +6147,7 @@ namespace DocumentTools
             // 
             this.html2pdf_button_set_chrome_path.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.html2pdf_button_set_chrome_path.Location = new System.Drawing.Point(211, 47);
-            this.html2pdf_button_set_chrome_path.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.html2pdf_button_set_chrome_path.Margin = new System.Windows.Forms.Padding(1);
             this.html2pdf_button_set_chrome_path.Name = "html2pdf_button_set_chrome_path";
             this.html2pdf_button_set_chrome_path.Size = new System.Drawing.Size(119, 21);
             this.html2pdf_button_set_chrome_path.TabIndex = 24;
@@ -6016,7 +6182,7 @@ namespace DocumentTools
             // html2pdf_textbox_chromepath
             // 
             this.html2pdf_textbox_chromepath.Location = new System.Drawing.Point(39, 19);
-            this.html2pdf_textbox_chromepath.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.html2pdf_textbox_chromepath.Margin = new System.Windows.Forms.Padding(1);
             this.html2pdf_textbox_chromepath.Name = "html2pdf_textbox_chromepath";
             this.html2pdf_textbox_chromepath.ReadOnly = true;
             this.html2pdf_textbox_chromepath.Size = new System.Drawing.Size(293, 21);
@@ -6045,9 +6211,9 @@ namespace DocumentTools
             this.groupBox30.Controls.Add(this.label70);
             this.groupBox30.Controls.Add(this.label69);
             this.groupBox30.Location = new System.Drawing.Point(617, 393);
-            this.groupBox30.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox30.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox30.Name = "groupBox30";
-            this.groupBox30.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox30.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox30.Size = new System.Drawing.Size(231, 127);
             this.groupBox30.TabIndex = 5;
             this.groupBox30.TabStop = false;
@@ -6057,7 +6223,7 @@ namespace DocumentTools
             // html2pdf_textbox_margin_bottom
             // 
             this.html2pdf_textbox_margin_bottom.Location = new System.Drawing.Point(57, 89);
-            this.html2pdf_textbox_margin_bottom.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.html2pdf_textbox_margin_bottom.Margin = new System.Windows.Forms.Padding(1);
             this.html2pdf_textbox_margin_bottom.Name = "html2pdf_textbox_margin_bottom";
             this.html2pdf_textbox_margin_bottom.Size = new System.Drawing.Size(45, 21);
             this.html2pdf_textbox_margin_bottom.TabIndex = 22;
@@ -6066,7 +6232,7 @@ namespace DocumentTools
             // html2pdf_textbox_margin_top
             // 
             this.html2pdf_textbox_margin_top.Location = new System.Drawing.Point(57, 25);
-            this.html2pdf_textbox_margin_top.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.html2pdf_textbox_margin_top.Margin = new System.Windows.Forms.Padding(1);
             this.html2pdf_textbox_margin_top.Name = "html2pdf_textbox_margin_top";
             this.html2pdf_textbox_margin_top.Size = new System.Drawing.Size(45, 21);
             this.html2pdf_textbox_margin_top.TabIndex = 21;
@@ -6075,7 +6241,7 @@ namespace DocumentTools
             // html2pdf_textbox_margin_right
             // 
             this.html2pdf_textbox_margin_right.Location = new System.Drawing.Point(173, 89);
-            this.html2pdf_textbox_margin_right.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.html2pdf_textbox_margin_right.Margin = new System.Windows.Forms.Padding(1);
             this.html2pdf_textbox_margin_right.Name = "html2pdf_textbox_margin_right";
             this.html2pdf_textbox_margin_right.Size = new System.Drawing.Size(45, 21);
             this.html2pdf_textbox_margin_right.TabIndex = 20;
@@ -6084,7 +6250,7 @@ namespace DocumentTools
             // html2pdf_textbox_margin_left
             // 
             this.html2pdf_textbox_margin_left.Location = new System.Drawing.Point(173, 25);
-            this.html2pdf_textbox_margin_left.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.html2pdf_textbox_margin_left.Margin = new System.Windows.Forms.Padding(1);
             this.html2pdf_textbox_margin_left.Name = "html2pdf_textbox_margin_left";
             this.html2pdf_textbox_margin_left.Size = new System.Drawing.Size(45, 21);
             this.html2pdf_textbox_margin_left.TabIndex = 19;
@@ -6143,9 +6309,9 @@ namespace DocumentTools
             this.groupBox29.Controls.Add(this.label68);
             this.groupBox29.Controls.Add(this.label67);
             this.groupBox29.Location = new System.Drawing.Point(381, 393);
-            this.groupBox29.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox29.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox29.Name = "groupBox29";
-            this.groupBox29.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox29.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox29.Size = new System.Drawing.Size(232, 127);
             this.groupBox29.TabIndex = 22;
             this.groupBox29.TabStop = false;
@@ -6157,7 +6323,7 @@ namespace DocumentTools
             this.html2pdf_wait_all_resource.AutoSize = true;
             this.html2pdf_wait_all_resource.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.html2pdf_wait_all_resource.Location = new System.Drawing.Point(4, 101);
-            this.html2pdf_wait_all_resource.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.html2pdf_wait_all_resource.Margin = new System.Windows.Forms.Padding(1);
             this.html2pdf_wait_all_resource.Name = "html2pdf_wait_all_resource";
             this.html2pdf_wait_all_resource.Size = new System.Drawing.Size(168, 16);
             this.html2pdf_wait_all_resource.TabIndex = 5;
@@ -6168,7 +6334,7 @@ namespace DocumentTools
             // 
             this.html2pdf_combox_pagedirect.FormattingEnabled = true;
             this.html2pdf_combox_pagedirect.Location = new System.Drawing.Point(69, 49);
-            this.html2pdf_combox_pagedirect.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.html2pdf_combox_pagedirect.Margin = new System.Windows.Forms.Padding(1);
             this.html2pdf_combox_pagedirect.Name = "html2pdf_combox_pagedirect";
             this.html2pdf_combox_pagedirect.Size = new System.Drawing.Size(117, 24);
             this.html2pdf_combox_pagedirect.TabIndex = 4;
@@ -6177,7 +6343,7 @@ namespace DocumentTools
             // 
             this.html2pdf_combox_pagesize.FormattingEnabled = true;
             this.html2pdf_combox_pagesize.Location = new System.Drawing.Point(69, 23);
-            this.html2pdf_combox_pagesize.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.html2pdf_combox_pagesize.Margin = new System.Windows.Forms.Padding(1);
             this.html2pdf_combox_pagesize.Name = "html2pdf_combox_pagesize";
             this.html2pdf_combox_pagesize.Size = new System.Drawing.Size(117, 24);
             this.html2pdf_combox_pagesize.TabIndex = 3;
@@ -6187,7 +6353,7 @@ namespace DocumentTools
             this.html2pdf_checkbox_usecss.AutoSize = true;
             this.html2pdf_checkbox_usecss.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.html2pdf_checkbox_usecss.Location = new System.Drawing.Point(4, 73);
-            this.html2pdf_checkbox_usecss.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.html2pdf_checkbox_usecss.Margin = new System.Windows.Forms.Padding(1);
             this.html2pdf_checkbox_usecss.Name = "html2pdf_checkbox_usecss";
             this.html2pdf_checkbox_usecss.Size = new System.Drawing.Size(162, 16);
             this.html2pdf_checkbox_usecss.TabIndex = 2;
@@ -6233,7 +6399,7 @@ namespace DocumentTools
             // 
             this.HTML2PDFFileList_MoveDown.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.HTML2PDFFileList_MoveDown.Location = new System.Drawing.Point(847, 261);
-            this.HTML2PDFFileList_MoveDown.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.HTML2PDFFileList_MoveDown.Margin = new System.Windows.Forms.Padding(1);
             this.HTML2PDFFileList_MoveDown.Name = "HTML2PDFFileList_MoveDown";
             this.HTML2PDFFileList_MoveDown.Size = new System.Drawing.Size(23, 57);
             this.HTML2PDFFileList_MoveDown.TabIndex = 18;
@@ -6245,7 +6411,7 @@ namespace DocumentTools
             // 
             this.HTML2PDFFileList_MoveUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.HTML2PDFFileList_MoveUp.Location = new System.Drawing.Point(847, 19);
-            this.HTML2PDFFileList_MoveUp.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.HTML2PDFFileList_MoveUp.Margin = new System.Windows.Forms.Padding(1);
             this.HTML2PDFFileList_MoveUp.Name = "HTML2PDFFileList_MoveUp";
             this.HTML2PDFFileList_MoveUp.Size = new System.Drawing.Size(23, 57);
             this.HTML2PDFFileList_MoveUp.TabIndex = 17;
@@ -6259,7 +6425,7 @@ namespace DocumentTools
             this.html2pdf_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.html2pdf_clear.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.html2pdf_clear.Location = new System.Drawing.Point(847, 180);
-            this.html2pdf_clear.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.html2pdf_clear.Margin = new System.Windows.Forms.Padding(1);
             this.html2pdf_clear.Name = "html2pdf_clear";
             this.html2pdf_clear.Size = new System.Drawing.Size(23, 57);
             this.html2pdf_clear.TabIndex = 20;
@@ -6272,7 +6438,7 @@ namespace DocumentTools
             this.html2pdf_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.html2pdf_remove.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.html2pdf_remove.Location = new System.Drawing.Point(847, 99);
-            this.html2pdf_remove.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.html2pdf_remove.Margin = new System.Windows.Forms.Padding(1);
             this.html2pdf_remove.Name = "html2pdf_remove";
             this.html2pdf_remove.Size = new System.Drawing.Size(23, 57);
             this.html2pdf_remove.TabIndex = 19;
@@ -6296,7 +6462,7 @@ namespace DocumentTools
             // 
             this.ConvertHtml2Pdf.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ConvertHtml2Pdf.Location = new System.Drawing.Point(697, 561);
-            this.ConvertHtml2Pdf.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ConvertHtml2Pdf.Margin = new System.Windows.Forms.Padding(1);
             this.ConvertHtml2Pdf.Name = "ConvertHtml2Pdf";
             this.ConvertHtml2Pdf.Size = new System.Drawing.Size(147, 37);
             this.ConvertHtml2Pdf.TabIndex = 15;
@@ -6309,7 +6475,7 @@ namespace DocumentTools
             // 
             this.SelectHtml2PDFFiles.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SelectHtml2PDFFiles.Location = new System.Drawing.Point(5, 561);
-            this.SelectHtml2PDFFiles.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SelectHtml2PDFFiles.Margin = new System.Windows.Forms.Padding(1);
             this.SelectHtml2PDFFiles.Name = "SelectHtml2PDFFiles";
             this.SelectHtml2PDFFiles.Size = new System.Drawing.Size(147, 37);
             this.SelectHtml2PDFFiles.TabIndex = 14;
@@ -6322,7 +6488,7 @@ namespace DocumentTools
             // 
             this.HTML2PDFFileList.HideSelection = false;
             this.HTML2PDFFileList.Location = new System.Drawing.Point(4, 4);
-            this.HTML2PDFFileList.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.HTML2PDFFileList.Margin = new System.Windows.Forms.Padding(1);
             this.HTML2PDFFileList.Name = "HTML2PDFFileList";
             this.HTML2PDFFileList.Size = new System.Drawing.Size(841, 335);
             this.HTML2PDFFileList.TabIndex = 13;
@@ -6341,7 +6507,7 @@ namespace DocumentTools
             this.TabPage_24.Controls.Add(this.SelectCompressPDFFiles);
             this.TabPage_24.Controls.Add(this.CompressPdfFileList);
             this.TabPage_24.Location = new System.Drawing.Point(4, 114);
-            this.TabPage_24.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_24.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_24.Name = "TabPage_24";
             this.TabPage_24.Size = new System.Drawing.Size(882, 621);
             this.TabPage_24.TabIndex = 23;
@@ -6352,7 +6518,7 @@ namespace DocumentTools
             // 
             this.CompressPdfFileList_MoveDown.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.CompressPdfFileList_MoveDown.Location = new System.Drawing.Point(847, 307);
-            this.CompressPdfFileList_MoveDown.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.CompressPdfFileList_MoveDown.Margin = new System.Windows.Forms.Padding(1);
             this.CompressPdfFileList_MoveDown.Name = "CompressPdfFileList_MoveDown";
             this.CompressPdfFileList_MoveDown.Size = new System.Drawing.Size(23, 57);
             this.CompressPdfFileList_MoveDown.TabIndex = 6;
@@ -6364,7 +6530,7 @@ namespace DocumentTools
             // 
             this.CompressPdfFileList_MoveUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.CompressPdfFileList_MoveUp.Location = new System.Drawing.Point(847, 65);
-            this.CompressPdfFileList_MoveUp.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.CompressPdfFileList_MoveUp.Margin = new System.Windows.Forms.Padding(1);
             this.CompressPdfFileList_MoveUp.Name = "CompressPdfFileList_MoveUp";
             this.CompressPdfFileList_MoveUp.Size = new System.Drawing.Size(23, 57);
             this.CompressPdfFileList_MoveUp.TabIndex = 5;
@@ -6378,7 +6544,7 @@ namespace DocumentTools
             this.compresspdf_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.compresspdf_clear.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.compresspdf_clear.Location = new System.Drawing.Point(847, 225);
-            this.compresspdf_clear.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.compresspdf_clear.Margin = new System.Windows.Forms.Padding(1);
             this.compresspdf_clear.Name = "compresspdf_clear";
             this.compresspdf_clear.Size = new System.Drawing.Size(23, 57);
             this.compresspdf_clear.TabIndex = 12;
@@ -6391,7 +6557,7 @@ namespace DocumentTools
             this.compresspdf_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.compresspdf_remove.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.compresspdf_remove.Location = new System.Drawing.Point(847, 145);
-            this.compresspdf_remove.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.compresspdf_remove.Margin = new System.Windows.Forms.Padding(1);
             this.compresspdf_remove.Name = "compresspdf_remove";
             this.compresspdf_remove.Size = new System.Drawing.Size(23, 57);
             this.compresspdf_remove.TabIndex = 11;
@@ -6428,9 +6594,9 @@ namespace DocumentTools
             this.groupBox21.Controls.Add(this.CompressPDF_CompressImage);
             this.groupBox21.Controls.Add(this.CompressPDF_WEB);
             this.groupBox21.Location = new System.Drawing.Point(4, 431);
-            this.groupBox21.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox21.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox21.Name = "groupBox21";
-            this.groupBox21.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox21.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox21.Size = new System.Drawing.Size(839, 79);
             this.groupBox21.TabIndex = 3;
             this.groupBox21.TabStop = false;
@@ -6442,7 +6608,7 @@ namespace DocumentTools
             this.CompressPDF_CompressImageFlate.AutoSize = true;
             this.CompressPDF_CompressImageFlate.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.CompressPDF_CompressImageFlate.Location = new System.Drawing.Point(491, 15);
-            this.CompressPDF_CompressImageFlate.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.CompressPDF_CompressImageFlate.Margin = new System.Windows.Forms.Padding(1);
             this.CompressPDF_CompressImageFlate.Name = "CompressPDF_CompressImageFlate";
             this.CompressPDF_CompressImageFlate.Size = new System.Drawing.Size(126, 16);
             this.CompressPDF_CompressImageFlate.TabIndex = 15;
@@ -6454,7 +6620,7 @@ namespace DocumentTools
             this.CompressPDF_RemoveForms.AutoSize = true;
             this.CompressPDF_RemoveForms.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.CompressPDF_RemoveForms.Location = new System.Drawing.Point(379, 52);
-            this.CompressPDF_RemoveForms.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.CompressPDF_RemoveForms.Margin = new System.Windows.Forms.Padding(1);
             this.CompressPDF_RemoveForms.Name = "CompressPDF_RemoveForms";
             this.CompressPDF_RemoveForms.Size = new System.Drawing.Size(84, 16);
             this.CompressPDF_RemoveForms.TabIndex = 14;
@@ -6466,7 +6632,7 @@ namespace DocumentTools
             this.CompressPDF_CancelEmbedFont.AutoSize = true;
             this.CompressPDF_CancelEmbedFont.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.CompressPDF_CancelEmbedFont.Location = new System.Drawing.Point(257, 52);
-            this.CompressPDF_CancelEmbedFont.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.CompressPDF_CancelEmbedFont.Margin = new System.Windows.Forms.Padding(1);
             this.CompressPDF_CancelEmbedFont.Name = "CompressPDF_CancelEmbedFont";
             this.CompressPDF_CancelEmbedFont.Size = new System.Drawing.Size(96, 16);
             this.CompressPDF_CancelEmbedFont.TabIndex = 13;
@@ -6478,7 +6644,7 @@ namespace DocumentTools
             this.CompressPDF_LinkSameStream.AutoSize = true;
             this.CompressPDF_LinkSameStream.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.CompressPDF_LinkSameStream.Location = new System.Drawing.Point(149, 52);
-            this.CompressPDF_LinkSameStream.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.CompressPDF_LinkSameStream.Margin = new System.Windows.Forms.Padding(1);
             this.CompressPDF_LinkSameStream.Name = "CompressPDF_LinkSameStream";
             this.CompressPDF_LinkSameStream.Size = new System.Drawing.Size(84, 16);
             this.CompressPDF_LinkSameStream.TabIndex = 12;
@@ -6490,7 +6656,7 @@ namespace DocumentTools
             this.CompressPDF_RemoveUnuseStream.AutoSize = true;
             this.CompressPDF_RemoveUnuseStream.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.CompressPDF_RemoveUnuseStream.Location = new System.Drawing.Point(4, 52);
-            this.CompressPDF_RemoveUnuseStream.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.CompressPDF_RemoveUnuseStream.Margin = new System.Windows.Forms.Padding(1);
             this.CompressPDF_RemoveUnuseStream.Name = "CompressPDF_RemoveUnuseStream";
             this.CompressPDF_RemoveUnuseStream.Size = new System.Drawing.Size(132, 16);
             this.CompressPDF_RemoveUnuseStream.TabIndex = 11;
@@ -6502,7 +6668,7 @@ namespace DocumentTools
             this.CompressPDF_RemoveUnuseObject.AutoSize = true;
             this.CompressPDF_RemoveUnuseObject.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.CompressPDF_RemoveUnuseObject.Location = new System.Drawing.Point(491, 52);
-            this.CompressPDF_RemoveUnuseObject.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.CompressPDF_RemoveUnuseObject.Margin = new System.Windows.Forms.Padding(1);
             this.CompressPDF_RemoveUnuseObject.Name = "CompressPDF_RemoveUnuseObject";
             this.CompressPDF_RemoveUnuseObject.Size = new System.Drawing.Size(108, 16);
             this.CompressPDF_RemoveUnuseObject.TabIndex = 10;
@@ -6513,7 +6679,7 @@ namespace DocumentTools
             // 
             this.CompressPDF_ImageCompressVersion.FormattingEnabled = true;
             this.CompressPDF_ImageCompressVersion.Location = new System.Drawing.Point(433, 15);
-            this.CompressPDF_ImageCompressVersion.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.CompressPDF_ImageCompressVersion.Margin = new System.Windows.Forms.Padding(1);
             this.CompressPDF_ImageCompressVersion.Name = "CompressPDF_ImageCompressVersion";
             this.CompressPDF_ImageCompressVersion.Size = new System.Drawing.Size(51, 24);
             this.CompressPDF_ImageCompressVersion.TabIndex = 9;
@@ -6533,7 +6699,7 @@ namespace DocumentTools
             // 
             this.CompressPDF_ImageResoution.FormattingEnabled = true;
             this.CompressPDF_ImageResoution.Location = new System.Drawing.Point(323, 15);
-            this.CompressPDF_ImageResoution.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.CompressPDF_ImageResoution.Margin = new System.Windows.Forms.Padding(1);
             this.CompressPDF_ImageResoution.Name = "CompressPDF_ImageResoution";
             this.CompressPDF_ImageResoution.Size = new System.Drawing.Size(51, 24);
             this.CompressPDF_ImageResoution.TabIndex = 7;
@@ -6553,7 +6719,7 @@ namespace DocumentTools
             // 
             this.CompressPDF_ImageQuailty.FormattingEnabled = true;
             this.CompressPDF_ImageQuailty.Location = new System.Drawing.Point(205, 15);
-            this.CompressPDF_ImageQuailty.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.CompressPDF_ImageQuailty.Margin = new System.Windows.Forms.Padding(1);
             this.CompressPDF_ImageQuailty.Name = "CompressPDF_ImageQuailty";
             this.CompressPDF_ImageQuailty.Size = new System.Drawing.Size(47, 24);
             this.CompressPDF_ImageQuailty.TabIndex = 5;
@@ -6574,7 +6740,7 @@ namespace DocumentTools
             this.CompressPDF_CompressImage.AutoSize = true;
             this.CompressPDF_CompressImage.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.CompressPDF_CompressImage.Location = new System.Drawing.Point(73, 17);
-            this.CompressPDF_CompressImage.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.CompressPDF_CompressImage.Margin = new System.Windows.Forms.Padding(1);
             this.CompressPDF_CompressImage.Name = "CompressPDF_CompressImage";
             this.CompressPDF_CompressImage.Size = new System.Drawing.Size(72, 16);
             this.CompressPDF_CompressImage.TabIndex = 1;
@@ -6586,7 +6752,7 @@ namespace DocumentTools
             this.CompressPDF_WEB.AutoSize = true;
             this.CompressPDF_WEB.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.CompressPDF_WEB.Location = new System.Drawing.Point(4, 17);
-            this.CompressPDF_WEB.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.CompressPDF_WEB.Margin = new System.Windows.Forms.Padding(1);
             this.CompressPDF_WEB.Name = "CompressPDF_WEB";
             this.CompressPDF_WEB.Size = new System.Drawing.Size(66, 16);
             this.CompressPDF_WEB.TabIndex = 0;
@@ -6597,7 +6763,7 @@ namespace DocumentTools
             // 
             this.CompressPDF.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.CompressPDF.Location = new System.Drawing.Point(697, 561);
-            this.CompressPDF.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.CompressPDF.Margin = new System.Windows.Forms.Padding(1);
             this.CompressPDF.Name = "CompressPDF";
             this.CompressPDF.Size = new System.Drawing.Size(147, 37);
             this.CompressPDF.TabIndex = 2;
@@ -6610,7 +6776,7 @@ namespace DocumentTools
             // 
             this.SelectCompressPDFFiles.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SelectCompressPDFFiles.Location = new System.Drawing.Point(5, 561);
-            this.SelectCompressPDFFiles.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SelectCompressPDFFiles.Margin = new System.Windows.Forms.Padding(1);
             this.SelectCompressPDFFiles.Name = "SelectCompressPDFFiles";
             this.SelectCompressPDFFiles.Size = new System.Drawing.Size(147, 37);
             this.SelectCompressPDFFiles.TabIndex = 1;
@@ -6623,7 +6789,7 @@ namespace DocumentTools
             // 
             this.CompressPdfFileList.HideSelection = false;
             this.CompressPdfFileList.Location = new System.Drawing.Point(7, 1);
-            this.CompressPdfFileList.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.CompressPdfFileList.Margin = new System.Windows.Forms.Padding(1);
             this.CompressPdfFileList.Name = "CompressPdfFileList";
             this.CompressPdfFileList.Size = new System.Drawing.Size(841, 420);
             this.CompressPdfFileList.TabIndex = 0;
@@ -6632,7 +6798,7 @@ namespace DocumentTools
             // 
             // TabPage_25
             // 
-            this.TabPage_25.Controls.Add(this.Compress_Label_Tips);
+            this.TabPage_25.Controls.Add(this.VoteMssTifHelpFile);
             this.TabPage_25.Controls.Add(this.CompressImageFileList_MoveDown);
             this.TabPage_25.Controls.Add(this.CompressImageFileList_MoveUp);
             this.TabPage_25.Controls.Add(this.compressimage_clear);
@@ -6646,30 +6812,30 @@ namespace DocumentTools
             this.TabPage_25.Controls.Add(this.SelectCompressImageFile);
             this.TabPage_25.Controls.Add(this.CompressImageFileList);
             this.TabPage_25.Location = new System.Drawing.Point(4, 114);
-            this.TabPage_25.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_25.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_25.Name = "TabPage_25";
             this.TabPage_25.Size = new System.Drawing.Size(882, 621);
             this.TabPage_25.TabIndex = 24;
             this.TabPage_25.Text = "压缩图片（格式转换）";
             this.TabPage_25.UseVisualStyleBackColor = true;
             // 
-            // Compress_Label_Tips
+            // VoteMssTifHelpFile
             // 
-            this.Compress_Label_Tips.AutoSize = true;
-            this.Compress_Label_Tips.ForeColor = System.Drawing.Color.Tomato;
-            this.Compress_Label_Tips.Location = new System.Drawing.Point(9, 539);
-            this.Compress_Label_Tips.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.Compress_Label_Tips.Name = "Compress_Label_Tips";
-            this.Compress_Label_Tips.Size = new System.Drawing.Size(797, 12);
-            this.Compress_Label_Tips.TabIndex = 13;
-            this.Compress_Label_Tips.Tag = "anchor_left_bottom";
-            this.Compress_Label_Tips.Text = "选择不执行压缩操作可实现图片格式转换;转换为tif格式只支持8位灰度类型（为选票图片专用tif，选票图片命名为*-1.tif、*-2.tif，必须有1和2）";
+            this.VoteMssTifHelpFile.AutoSize = true;
+            this.VoteMssTifHelpFile.Location = new System.Drawing.Point(699, 539);
+            this.VoteMssTifHelpFile.Name = "VoteMssTifHelpFile";
+            this.VoteMssTifHelpFile.Size = new System.Drawing.Size(143, 12);
+            this.VoteMssTifHelpFile.TabIndex = 13;
+            this.VoteMssTifHelpFile.TabStop = true;
+            this.VoteMssTifHelpFile.Text = "点击查看TIF格式简易说明";
+            this.VoteMssTifHelpFile.Visible = false;
+            this.VoteMssTifHelpFile.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.VoteMssTifHelpFile_LinkClicked);
             // 
             // CompressImageFileList_MoveDown
             // 
             this.CompressImageFileList_MoveDown.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.CompressImageFileList_MoveDown.Location = new System.Drawing.Point(847, 307);
-            this.CompressImageFileList_MoveDown.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.CompressImageFileList_MoveDown.Margin = new System.Windows.Forms.Padding(1);
             this.CompressImageFileList_MoveDown.Name = "CompressImageFileList_MoveDown";
             this.CompressImageFileList_MoveDown.Size = new System.Drawing.Size(23, 57);
             this.CompressImageFileList_MoveDown.TabIndex = 11;
@@ -6681,7 +6847,7 @@ namespace DocumentTools
             // 
             this.CompressImageFileList_MoveUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.CompressImageFileList_MoveUp.Location = new System.Drawing.Point(847, 65);
-            this.CompressImageFileList_MoveUp.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.CompressImageFileList_MoveUp.Margin = new System.Windows.Forms.Padding(1);
             this.CompressImageFileList_MoveUp.Name = "CompressImageFileList_MoveUp";
             this.CompressImageFileList_MoveUp.Size = new System.Drawing.Size(23, 57);
             this.CompressImageFileList_MoveUp.TabIndex = 10;
@@ -6695,7 +6861,7 @@ namespace DocumentTools
             this.compressimage_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.compressimage_clear.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.compressimage_clear.Location = new System.Drawing.Point(847, 225);
-            this.compressimage_clear.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.compressimage_clear.Margin = new System.Windows.Forms.Padding(1);
             this.compressimage_clear.Name = "compressimage_clear";
             this.compressimage_clear.Size = new System.Drawing.Size(23, 57);
             this.compressimage_clear.TabIndex = 12;
@@ -6708,7 +6874,7 @@ namespace DocumentTools
             this.compressimage_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.compressimage_remove.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.compressimage_remove.Location = new System.Drawing.Point(847, 145);
-            this.compressimage_remove.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.compressimage_remove.Margin = new System.Windows.Forms.Padding(1);
             this.compressimage_remove.Name = "compressimage_remove";
             this.compressimage_remove.Size = new System.Drawing.Size(23, 57);
             this.compressimage_remove.TabIndex = 11;
@@ -6735,9 +6901,9 @@ namespace DocumentTools
             this.groupBox25.Controls.Add(this.CompressImage_OutPutImageFormat);
             this.groupBox25.Controls.Add(this.label54);
             this.groupBox25.Location = new System.Drawing.Point(697, 431);
-            this.groupBox25.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox25.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox25.Name = "groupBox25";
-            this.groupBox25.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox25.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox25.Size = new System.Drawing.Size(147, 99);
             this.groupBox25.TabIndex = 8;
             this.groupBox25.TabStop = false;
@@ -6749,7 +6915,7 @@ namespace DocumentTools
             this.CompressIamge_NoCompress.AutoSize = true;
             this.CompressIamge_NoCompress.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.CompressIamge_NoCompress.Location = new System.Drawing.Point(7, 41);
-            this.CompressIamge_NoCompress.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.CompressIamge_NoCompress.Margin = new System.Windows.Forms.Padding(1);
             this.CompressIamge_NoCompress.Name = "CompressIamge_NoCompress";
             this.CompressIamge_NoCompress.Size = new System.Drawing.Size(108, 16);
             this.CompressIamge_NoCompress.TabIndex = 5;
@@ -6762,7 +6928,7 @@ namespace DocumentTools
             this.CompressImage_NotUseSelfExt.AutoSize = true;
             this.CompressImage_NotUseSelfExt.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.CompressImage_NotUseSelfExt.Location = new System.Drawing.Point(7, 21);
-            this.CompressImage_NotUseSelfExt.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.CompressImage_NotUseSelfExt.Margin = new System.Windows.Forms.Padding(1);
             this.CompressImage_NotUseSelfExt.Name = "CompressImage_NotUseSelfExt";
             this.CompressImage_NotUseSelfExt.Size = new System.Drawing.Size(132, 16);
             this.CompressImage_NotUseSelfExt.TabIndex = 4;
@@ -6774,10 +6940,11 @@ namespace DocumentTools
             // 
             this.CompressImage_OutPutImageFormat.FormattingEnabled = true;
             this.CompressImage_OutPutImageFormat.Location = new System.Drawing.Point(63, 65);
-            this.CompressImage_OutPutImageFormat.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.CompressImage_OutPutImageFormat.Margin = new System.Windows.Forms.Padding(1);
             this.CompressImage_OutPutImageFormat.Name = "CompressImage_OutPutImageFormat";
             this.CompressImage_OutPutImageFormat.Size = new System.Drawing.Size(76, 24);
             this.CompressImage_OutPutImageFormat.TabIndex = 3;
+            this.CompressImage_OutPutImageFormat.SelectedIndexChanged += new System.EventHandler(this.CompressImage_OutPutImageFormat_SelectedIndexChanged);
             // 
             // label54
             // 
@@ -6797,9 +6964,9 @@ namespace DocumentTools
             this.groupBox24.Controls.Add(this.label50);
             this.groupBox24.Controls.Add(this.label53);
             this.groupBox24.Location = new System.Drawing.Point(455, 431);
-            this.groupBox24.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox24.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox24.Name = "groupBox24";
-            this.groupBox24.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox24.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox24.Size = new System.Drawing.Size(147, 99);
             this.groupBox24.TabIndex = 7;
             this.groupBox24.TabStop = false;
@@ -6810,7 +6977,7 @@ namespace DocumentTools
             // 
             this.CompressBmpPixeBits_Combox.FormattingEnabled = true;
             this.CompressBmpPixeBits_Combox.Location = new System.Drawing.Point(62, 66);
-            this.CompressBmpPixeBits_Combox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.CompressBmpPixeBits_Combox.Margin = new System.Windows.Forms.Padding(1);
             this.CompressBmpPixeBits_Combox.Name = "CompressBmpPixeBits_Combox";
             this.CompressBmpPixeBits_Combox.Size = new System.Drawing.Size(83, 24);
             this.CompressBmpPixeBits_Combox.TabIndex = 3;
@@ -6819,7 +6986,7 @@ namespace DocumentTools
             // 
             this.CompressBmpMode_Combox.FormattingEnabled = true;
             this.CompressBmpMode_Combox.Location = new System.Drawing.Point(61, 16);
-            this.CompressBmpMode_Combox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.CompressBmpMode_Combox.Margin = new System.Windows.Forms.Padding(1);
             this.CompressBmpMode_Combox.Name = "CompressBmpMode_Combox";
             this.CompressBmpMode_Combox.Size = new System.Drawing.Size(83, 24);
             this.CompressBmpMode_Combox.TabIndex = 2;
@@ -6853,9 +7020,9 @@ namespace DocumentTools
             this.groupBox23.Controls.Add(this.label51);
             this.groupBox23.Controls.Add(this.label52);
             this.groupBox23.Location = new System.Drawing.Point(220, 431);
-            this.groupBox23.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox23.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox23.Name = "groupBox23";
-            this.groupBox23.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox23.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox23.Size = new System.Drawing.Size(147, 99);
             this.groupBox23.TabIndex = 6;
             this.groupBox23.TabStop = false;
@@ -6866,7 +7033,7 @@ namespace DocumentTools
             // 
             this.CompressPngColorMode_Combox.FormattingEnabled = true;
             this.CompressPngColorMode_Combox.Location = new System.Drawing.Point(60, 66);
-            this.CompressPngColorMode_Combox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.CompressPngColorMode_Combox.Margin = new System.Windows.Forms.Padding(1);
             this.CompressPngColorMode_Combox.Name = "CompressPngColorMode_Combox";
             this.CompressPngColorMode_Combox.Size = new System.Drawing.Size(83, 24);
             this.CompressPngColorMode_Combox.TabIndex = 3;
@@ -6875,7 +7042,7 @@ namespace DocumentTools
             // 
             this.CompressPngLevel_Combox.FormattingEnabled = true;
             this.CompressPngLevel_Combox.Location = new System.Drawing.Point(60, 17);
-            this.CompressPngLevel_Combox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.CompressPngLevel_Combox.Margin = new System.Windows.Forms.Padding(1);
             this.CompressPngLevel_Combox.Name = "CompressPngLevel_Combox";
             this.CompressPngLevel_Combox.Size = new System.Drawing.Size(83, 24);
             this.CompressPngLevel_Combox.TabIndex = 2;
@@ -6911,9 +7078,9 @@ namespace DocumentTools
             this.groupBox22.Controls.Add(this.label48);
             this.groupBox22.Controls.Add(this.label47);
             this.groupBox22.Location = new System.Drawing.Point(4, 431);
-            this.groupBox22.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox22.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox22.Name = "groupBox22";
-            this.groupBox22.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox22.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox22.Size = new System.Drawing.Size(147, 99);
             this.groupBox22.TabIndex = 3;
             this.groupBox22.TabStop = false;
@@ -6924,7 +7091,7 @@ namespace DocumentTools
             // 
             this.CompressJpegQuailty_Combox.FormattingEnabled = true;
             this.CompressJpegQuailty_Combox.Location = new System.Drawing.Point(60, 70);
-            this.CompressJpegQuailty_Combox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.CompressJpegQuailty_Combox.Margin = new System.Windows.Forms.Padding(1);
             this.CompressJpegQuailty_Combox.Name = "CompressJpegQuailty_Combox";
             this.CompressJpegQuailty_Combox.Size = new System.Drawing.Size(83, 24);
             this.CompressJpegQuailty_Combox.TabIndex = 5;
@@ -6944,7 +7111,7 @@ namespace DocumentTools
             // 
             this.CompressJpegColorMode_Combox.FormattingEnabled = true;
             this.CompressJpegColorMode_Combox.Location = new System.Drawing.Point(60, 42);
-            this.CompressJpegColorMode_Combox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.CompressJpegColorMode_Combox.Margin = new System.Windows.Forms.Padding(1);
             this.CompressJpegColorMode_Combox.Name = "CompressJpegColorMode_Combox";
             this.CompressJpegColorMode_Combox.Size = new System.Drawing.Size(83, 24);
             this.CompressJpegColorMode_Combox.TabIndex = 3;
@@ -6953,7 +7120,7 @@ namespace DocumentTools
             // 
             this.CompressJpegMode_Combox.FormattingEnabled = true;
             this.CompressJpegMode_Combox.Location = new System.Drawing.Point(60, 15);
-            this.CompressJpegMode_Combox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.CompressJpegMode_Combox.Margin = new System.Windows.Forms.Padding(1);
             this.CompressJpegMode_Combox.Name = "CompressJpegMode_Combox";
             this.CompressJpegMode_Combox.Size = new System.Drawing.Size(83, 24);
             this.CompressJpegMode_Combox.TabIndex = 2;
@@ -6984,7 +7151,7 @@ namespace DocumentTools
             // 
             this.CompressImage.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.CompressImage.Location = new System.Drawing.Point(697, 561);
-            this.CompressImage.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.CompressImage.Margin = new System.Windows.Forms.Padding(1);
             this.CompressImage.Name = "CompressImage";
             this.CompressImage.Size = new System.Drawing.Size(147, 37);
             this.CompressImage.TabIndex = 2;
@@ -6997,7 +7164,7 @@ namespace DocumentTools
             // 
             this.SelectCompressImageFile.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SelectCompressImageFile.Location = new System.Drawing.Point(5, 561);
-            this.SelectCompressImageFile.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SelectCompressImageFile.Margin = new System.Windows.Forms.Padding(1);
             this.SelectCompressImageFile.Name = "SelectCompressImageFile";
             this.SelectCompressImageFile.Size = new System.Drawing.Size(147, 37);
             this.SelectCompressImageFile.TabIndex = 1;
@@ -7010,7 +7177,7 @@ namespace DocumentTools
             // 
             this.CompressImageFileList.HideSelection = false;
             this.CompressImageFileList.Location = new System.Drawing.Point(4, 4);
-            this.CompressImageFileList.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.CompressImageFileList.Margin = new System.Windows.Forms.Padding(1);
             this.CompressImageFileList.Name = "CompressImageFileList";
             this.CompressImageFileList.Size = new System.Drawing.Size(841, 420);
             this.CompressImageFileList.TabIndex = 0;
@@ -7045,7 +7212,7 @@ namespace DocumentTools
             this.TabPage_10.Controls.Add(this.SelectReplaceWordFilesButton);
             this.TabPage_10.Controls.Add(this.ReplaceWordFileList);
             this.TabPage_10.Location = new System.Drawing.Point(4, 114);
-            this.TabPage_10.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_10.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_10.Name = "TabPage_10";
             this.TabPage_10.Size = new System.Drawing.Size(882, 621);
             this.TabPage_10.TabIndex = 9;
@@ -7057,7 +7224,7 @@ namespace DocumentTools
             this.WordTextReplace_SaveSourceBox.AutoSize = true;
             this.WordTextReplace_SaveSourceBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.WordTextReplace_SaveSourceBox.Location = new System.Drawing.Point(749, 457);
-            this.WordTextReplace_SaveSourceBox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.WordTextReplace_SaveSourceBox.Margin = new System.Windows.Forms.Padding(1);
             this.WordTextReplace_SaveSourceBox.Name = "WordTextReplace_SaveSourceBox";
             this.WordTextReplace_SaveSourceBox.Size = new System.Drawing.Size(96, 16);
             this.WordTextReplace_SaveSourceBox.TabIndex = 22;
@@ -7070,7 +7237,7 @@ namespace DocumentTools
             this.WordReplace_UseRegextSub.AutoSize = true;
             this.WordReplace_UseRegextSub.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.WordReplace_UseRegextSub.Location = new System.Drawing.Point(529, 501);
-            this.WordReplace_UseRegextSub.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.WordReplace_UseRegextSub.Margin = new System.Windows.Forms.Padding(1);
             this.WordReplace_UseRegextSub.Name = "WordReplace_UseRegextSub";
             this.WordReplace_UseRegextSub.Size = new System.Drawing.Size(120, 16);
             this.WordReplace_UseRegextSub.TabIndex = 21;
@@ -7083,7 +7250,7 @@ namespace DocumentTools
             this.WordReplace_IgnoreShapes.AutoSize = true;
             this.WordReplace_IgnoreShapes.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.WordReplace_IgnoreShapes.Location = new System.Drawing.Point(529, 481);
-            this.WordReplace_IgnoreShapes.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.WordReplace_IgnoreShapes.Margin = new System.Windows.Forms.Padding(1);
             this.WordReplace_IgnoreShapes.Name = "WordReplace_IgnoreShapes";
             this.WordReplace_IgnoreShapes.Size = new System.Drawing.Size(120, 16);
             this.WordReplace_IgnoreShapes.TabIndex = 20;
@@ -7096,7 +7263,7 @@ namespace DocumentTools
             this.WordReplace_IgnoreInsert.AutoSize = true;
             this.WordReplace_IgnoreInsert.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.WordReplace_IgnoreInsert.Location = new System.Drawing.Point(529, 463);
-            this.WordReplace_IgnoreInsert.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.WordReplace_IgnoreInsert.Margin = new System.Windows.Forms.Padding(1);
             this.WordReplace_IgnoreInsert.Name = "WordReplace_IgnoreInsert";
             this.WordReplace_IgnoreInsert.Size = new System.Drawing.Size(144, 16);
             this.WordReplace_IgnoreInsert.TabIndex = 19;
@@ -7109,7 +7276,7 @@ namespace DocumentTools
             this.WordReplace_IgnoreFileds.AutoSize = true;
             this.WordReplace_IgnoreFileds.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.WordReplace_IgnoreFileds.Location = new System.Drawing.Point(383, 501);
-            this.WordReplace_IgnoreFileds.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.WordReplace_IgnoreFileds.Margin = new System.Windows.Forms.Padding(1);
             this.WordReplace_IgnoreFileds.Name = "WordReplace_IgnoreFileds";
             this.WordReplace_IgnoreFileds.Size = new System.Drawing.Size(120, 16);
             this.WordReplace_IgnoreFileds.TabIndex = 18;
@@ -7122,7 +7289,7 @@ namespace DocumentTools
             this.WordReplace_IgnoreFiledCodes.AutoSize = true;
             this.WordReplace_IgnoreFiledCodes.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.WordReplace_IgnoreFiledCodes.Location = new System.Drawing.Point(383, 481);
-            this.WordReplace_IgnoreFiledCodes.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.WordReplace_IgnoreFiledCodes.Margin = new System.Windows.Forms.Padding(1);
             this.WordReplace_IgnoreFiledCodes.Name = "WordReplace_IgnoreFiledCodes";
             this.WordReplace_IgnoreFiledCodes.Size = new System.Drawing.Size(144, 16);
             this.WordReplace_IgnoreFiledCodes.TabIndex = 17;
@@ -7135,7 +7302,7 @@ namespace DocumentTools
             this.WordReplace_IgnoreDelete.AutoSize = true;
             this.WordReplace_IgnoreDelete.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.WordReplace_IgnoreDelete.Location = new System.Drawing.Point(383, 463);
-            this.WordReplace_IgnoreDelete.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.WordReplace_IgnoreDelete.Margin = new System.Windows.Forms.Padding(1);
             this.WordReplace_IgnoreDelete.Name = "WordReplace_IgnoreDelete";
             this.WordReplace_IgnoreDelete.Size = new System.Drawing.Size(144, 16);
             this.WordReplace_IgnoreDelete.TabIndex = 16;
@@ -7148,7 +7315,7 @@ namespace DocumentTools
             this.WordReplace_MatchWholeWord.AutoSize = true;
             this.WordReplace_MatchWholeWord.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.WordReplace_MatchWholeWord.Location = new System.Drawing.Point(285, 481);
-            this.WordReplace_MatchWholeWord.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.WordReplace_MatchWholeWord.Margin = new System.Windows.Forms.Padding(1);
             this.WordReplace_MatchWholeWord.Name = "WordReplace_MatchWholeWord";
             this.WordReplace_MatchWholeWord.Size = new System.Drawing.Size(96, 16);
             this.WordReplace_MatchWholeWord.TabIndex = 15;
@@ -7160,7 +7327,7 @@ namespace DocumentTools
             // 
             this.WordReplaceRemoveFind.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.WordReplaceRemoveFind.Location = new System.Drawing.Point(285, 520);
-            this.WordReplaceRemoveFind.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.WordReplaceRemoveFind.Margin = new System.Windows.Forms.Padding(2);
             this.WordReplaceRemoveFind.Name = "WordReplaceRemoveFind";
             this.WordReplaceRemoveFind.Size = new System.Drawing.Size(117, 22);
             this.WordReplaceRemoveFind.TabIndex = 2;
@@ -7174,7 +7341,7 @@ namespace DocumentTools
             this.UseNewStyle.AutoSize = true;
             this.UseNewStyle.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.UseNewStyle.Location = new System.Drawing.Point(405, 442);
-            this.UseNewStyle.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.UseNewStyle.Margin = new System.Windows.Forms.Padding(1);
             this.UseNewStyle.Name = "UseNewStyle";
             this.UseNewStyle.Size = new System.Drawing.Size(144, 16);
             this.UseNewStyle.TabIndex = 14;
@@ -7186,7 +7353,7 @@ namespace DocumentTools
             // 
             this.WordReplaceFontSeeting.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.WordReplaceFontSeeting.Location = new System.Drawing.Point(552, 439);
-            this.WordReplaceFontSeeting.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.WordReplaceFontSeeting.Margin = new System.Windows.Forms.Padding(1);
             this.WordReplaceFontSeeting.Name = "WordReplaceFontSeeting";
             this.WordReplaceFontSeeting.Size = new System.Drawing.Size(141, 21);
             this.WordReplaceFontSeeting.TabIndex = 13;
@@ -7199,7 +7366,7 @@ namespace DocumentTools
             // 
             this.WordReplaceAddFind.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.WordReplaceAddFind.Location = new System.Drawing.Point(285, 438);
-            this.WordReplaceAddFind.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.WordReplaceAddFind.Margin = new System.Windows.Forms.Padding(2);
             this.WordReplaceAddFind.Name = "WordReplaceAddFind";
             this.WordReplaceAddFind.Size = new System.Drawing.Size(117, 22);
             this.WordReplaceAddFind.TabIndex = 1;
@@ -7212,7 +7379,7 @@ namespace DocumentTools
             // 
             this.ReplaceWordFileList_MoveDown.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ReplaceWordFileList_MoveDown.Location = new System.Drawing.Point(847, 307);
-            this.ReplaceWordFileList_MoveDown.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ReplaceWordFileList_MoveDown.Margin = new System.Windows.Forms.Padding(1);
             this.ReplaceWordFileList_MoveDown.Name = "ReplaceWordFileList_MoveDown";
             this.ReplaceWordFileList_MoveDown.Size = new System.Drawing.Size(23, 57);
             this.ReplaceWordFileList_MoveDown.TabIndex = 12;
@@ -7224,7 +7391,7 @@ namespace DocumentTools
             // 
             this.ReplaceWordFileList_MoveUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ReplaceWordFileList_MoveUp.Location = new System.Drawing.Point(847, 65);
-            this.ReplaceWordFileList_MoveUp.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ReplaceWordFileList_MoveUp.Margin = new System.Windows.Forms.Padding(1);
             this.ReplaceWordFileList_MoveUp.Name = "ReplaceWordFileList_MoveUp";
             this.ReplaceWordFileList_MoveUp.Size = new System.Drawing.Size(23, 57);
             this.ReplaceWordFileList_MoveUp.TabIndex = 11;
@@ -7238,7 +7405,7 @@ namespace DocumentTools
             this.wordreplace_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.wordreplace_clear.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.wordreplace_clear.Location = new System.Drawing.Point(847, 225);
-            this.wordreplace_clear.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.wordreplace_clear.Margin = new System.Windows.Forms.Padding(1);
             this.wordreplace_clear.Name = "wordreplace_clear";
             this.wordreplace_clear.Size = new System.Drawing.Size(23, 57);
             this.wordreplace_clear.TabIndex = 12;
@@ -7251,7 +7418,7 @@ namespace DocumentTools
             this.wordreplace_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.wordreplace_remove.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.wordreplace_remove.Location = new System.Drawing.Point(847, 145);
-            this.wordreplace_remove.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.wordreplace_remove.Margin = new System.Windows.Forms.Padding(1);
             this.wordreplace_remove.Name = "wordreplace_remove";
             this.wordreplace_remove.Size = new System.Drawing.Size(23, 57);
             this.wordreplace_remove.TabIndex = 11;
@@ -7276,9 +7443,9 @@ namespace DocumentTools
             // 
             this.groupBox10.Controls.Add(this.WordReplaceReplacePanel);
             this.groupBox10.Location = new System.Drawing.Point(147, 431);
-            this.groupBox10.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox10.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox10.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox10.Size = new System.Drawing.Size(129, 114);
             this.groupBox10.TabIndex = 8;
             this.groupBox10.TabStop = false;
@@ -7290,7 +7457,7 @@ namespace DocumentTools
             this.WordReplaceReplacePanel.AutoScroll = true;
             this.WordReplaceReplacePanel.Controls.Add(this.WordReplaceTextBox);
             this.WordReplaceReplacePanel.Location = new System.Drawing.Point(3, 17);
-            this.WordReplaceReplacePanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.WordReplaceReplacePanel.Margin = new System.Windows.Forms.Padding(2);
             this.WordReplaceReplacePanel.Name = "WordReplaceReplacePanel";
             this.WordReplaceReplacePanel.Size = new System.Drawing.Size(123, 94);
             this.WordReplaceReplacePanel.TabIndex = 4;
@@ -7298,7 +7465,7 @@ namespace DocumentTools
             // WordReplaceTextBox
             // 
             this.WordReplaceTextBox.Location = new System.Drawing.Point(7, 9);
-            this.WordReplaceTextBox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.WordReplaceTextBox.Margin = new System.Windows.Forms.Padding(1);
             this.WordReplaceTextBox.Name = "WordReplaceTextBox";
             this.WordReplaceTextBox.Size = new System.Drawing.Size(88, 21);
             this.WordReplaceTextBox.TabIndex = 0;
@@ -7307,9 +7474,9 @@ namespace DocumentTools
             // 
             this.groupBox9.Controls.Add(this.WordReplaceFindPanel);
             this.groupBox9.Location = new System.Drawing.Point(4, 431);
-            this.groupBox9.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox9.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox9.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox9.Size = new System.Drawing.Size(131, 114);
             this.groupBox9.TabIndex = 7;
             this.groupBox9.TabStop = false;
@@ -7321,7 +7488,7 @@ namespace DocumentTools
             this.WordReplaceFindPanel.AutoScroll = true;
             this.WordReplaceFindPanel.Controls.Add(this.WordReplaceFindTextBox);
             this.WordReplaceFindPanel.Location = new System.Drawing.Point(3, 17);
-            this.WordReplaceFindPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.WordReplaceFindPanel.Margin = new System.Windows.Forms.Padding(2);
             this.WordReplaceFindPanel.Name = "WordReplaceFindPanel";
             this.WordReplaceFindPanel.Size = new System.Drawing.Size(123, 94);
             this.WordReplaceFindPanel.TabIndex = 2;
@@ -7329,7 +7496,7 @@ namespace DocumentTools
             // WordReplaceFindTextBox
             // 
             this.WordReplaceFindTextBox.Location = new System.Drawing.Point(7, 9);
-            this.WordReplaceFindTextBox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.WordReplaceFindTextBox.Margin = new System.Windows.Forms.Padding(1);
             this.WordReplaceFindTextBox.Name = "WordReplaceFindTextBox";
             this.WordReplaceFindTextBox.Size = new System.Drawing.Size(88, 21);
             this.WordReplaceFindTextBox.TabIndex = 0;
@@ -7339,7 +7506,7 @@ namespace DocumentTools
             this.IgnoreFootContent.AutoSize = true;
             this.IgnoreFootContent.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.IgnoreFootContent.Location = new System.Drawing.Point(285, 463);
-            this.IgnoreFootContent.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.IgnoreFootContent.Margin = new System.Windows.Forms.Padding(1);
             this.IgnoreFootContent.Name = "IgnoreFootContent";
             this.IgnoreFootContent.Size = new System.Drawing.Size(96, 16);
             this.IgnoreFootContent.TabIndex = 6;
@@ -7352,7 +7519,7 @@ namespace DocumentTools
             this.IgnoreCase.AutoSize = true;
             this.IgnoreCase.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.IgnoreCase.Location = new System.Drawing.Point(285, 501);
-            this.IgnoreCase.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.IgnoreCase.Margin = new System.Windows.Forms.Padding(1);
             this.IgnoreCase.Name = "IgnoreCase";
             this.IgnoreCase.Size = new System.Drawing.Size(84, 16);
             this.IgnoreCase.TabIndex = 5;
@@ -7377,7 +7544,7 @@ namespace DocumentTools
             // 
             this.ReplaceWordContentButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ReplaceWordContentButton.Location = new System.Drawing.Point(697, 561);
-            this.ReplaceWordContentButton.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ReplaceWordContentButton.Margin = new System.Windows.Forms.Padding(1);
             this.ReplaceWordContentButton.Name = "ReplaceWordContentButton";
             this.ReplaceWordContentButton.Size = new System.Drawing.Size(147, 37);
             this.ReplaceWordContentButton.TabIndex = 2;
@@ -7390,7 +7557,7 @@ namespace DocumentTools
             // 
             this.SelectReplaceWordFilesButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SelectReplaceWordFilesButton.Location = new System.Drawing.Point(5, 561);
-            this.SelectReplaceWordFilesButton.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SelectReplaceWordFilesButton.Margin = new System.Windows.Forms.Padding(1);
             this.SelectReplaceWordFilesButton.Name = "SelectReplaceWordFilesButton";
             this.SelectReplaceWordFilesButton.Size = new System.Drawing.Size(147, 37);
             this.SelectReplaceWordFilesButton.TabIndex = 1;
@@ -7403,7 +7570,7 @@ namespace DocumentTools
             // 
             this.ReplaceWordFileList.HideSelection = false;
             this.ReplaceWordFileList.Location = new System.Drawing.Point(4, 4);
-            this.ReplaceWordFileList.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ReplaceWordFileList.Margin = new System.Windows.Forms.Padding(1);
             this.ReplaceWordFileList.Name = "ReplaceWordFileList";
             this.ReplaceWordFileList.Size = new System.Drawing.Size(841, 420);
             this.ReplaceWordFileList.TabIndex = 0;
@@ -7431,7 +7598,7 @@ namespace DocumentTools
             this.TabPage_11.Controls.Add(this.SelectRelaceExcelButton);
             this.TabPage_11.Controls.Add(this.ReplaceExcelFileView);
             this.TabPage_11.Location = new System.Drawing.Point(4, 114);
-            this.TabPage_11.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_11.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_11.Name = "TabPage_11";
             this.TabPage_11.Size = new System.Drawing.Size(882, 621);
             this.TabPage_11.TabIndex = 10;
@@ -7443,7 +7610,7 @@ namespace DocumentTools
             this.ExcelReplace_MatchWholeWord.AutoSize = true;
             this.ExcelReplace_MatchWholeWord.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ExcelReplace_MatchWholeWord.Location = new System.Drawing.Point(373, 471);
-            this.ExcelReplace_MatchWholeWord.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ExcelReplace_MatchWholeWord.Margin = new System.Windows.Forms.Padding(1);
             this.ExcelReplace_MatchWholeWord.Name = "ExcelReplace_MatchWholeWord";
             this.ExcelReplace_MatchWholeWord.Size = new System.Drawing.Size(96, 16);
             this.ExcelReplace_MatchWholeWord.TabIndex = 15;
@@ -7455,7 +7622,7 @@ namespace DocumentTools
             // 
             this.ExcelReplaceFindRemove.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ExcelReplaceFindRemove.Location = new System.Drawing.Point(284, 520);
-            this.ExcelReplaceFindRemove.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ExcelReplaceFindRemove.Margin = new System.Windows.Forms.Padding(2);
             this.ExcelReplaceFindRemove.Name = "ExcelReplaceFindRemove";
             this.ExcelReplaceFindRemove.Size = new System.Drawing.Size(117, 22);
             this.ExcelReplaceFindRemove.TabIndex = 14;
@@ -7468,7 +7635,7 @@ namespace DocumentTools
             // 
             this.ExcelReplaceFindAdd.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ExcelReplaceFindAdd.Location = new System.Drawing.Point(284, 438);
-            this.ExcelReplaceFindAdd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ExcelReplaceFindAdd.Margin = new System.Windows.Forms.Padding(2);
             this.ExcelReplaceFindAdd.Name = "ExcelReplaceFindAdd";
             this.ExcelReplaceFindAdd.Size = new System.Drawing.Size(117, 22);
             this.ExcelReplaceFindAdd.TabIndex = 13;
@@ -7481,7 +7648,7 @@ namespace DocumentTools
             // 
             this.ReplaceExcelFileView_MoveDown.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ReplaceExcelFileView_MoveDown.Location = new System.Drawing.Point(847, 307);
-            this.ReplaceExcelFileView_MoveDown.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ReplaceExcelFileView_MoveDown.Margin = new System.Windows.Forms.Padding(1);
             this.ReplaceExcelFileView_MoveDown.Name = "ReplaceExcelFileView_MoveDown";
             this.ReplaceExcelFileView_MoveDown.Size = new System.Drawing.Size(23, 57);
             this.ReplaceExcelFileView_MoveDown.TabIndex = 11;
@@ -7493,7 +7660,7 @@ namespace DocumentTools
             // 
             this.ReplaceExcelFileView_MoveUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ReplaceExcelFileView_MoveUp.Location = new System.Drawing.Point(847, 65);
-            this.ReplaceExcelFileView_MoveUp.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ReplaceExcelFileView_MoveUp.Margin = new System.Windows.Forms.Padding(1);
             this.ReplaceExcelFileView_MoveUp.Name = "ReplaceExcelFileView_MoveUp";
             this.ReplaceExcelFileView_MoveUp.Size = new System.Drawing.Size(23, 57);
             this.ReplaceExcelFileView_MoveUp.TabIndex = 10;
@@ -7507,7 +7674,7 @@ namespace DocumentTools
             this.excelreplace_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.excelreplace_clear.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.excelreplace_clear.Location = new System.Drawing.Point(847, 225);
-            this.excelreplace_clear.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.excelreplace_clear.Margin = new System.Windows.Forms.Padding(1);
             this.excelreplace_clear.Name = "excelreplace_clear";
             this.excelreplace_clear.Size = new System.Drawing.Size(23, 57);
             this.excelreplace_clear.TabIndex = 12;
@@ -7520,7 +7687,7 @@ namespace DocumentTools
             this.excelreplace_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.excelreplace_remove.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.excelreplace_remove.Location = new System.Drawing.Point(847, 145);
-            this.excelreplace_remove.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.excelreplace_remove.Margin = new System.Windows.Forms.Padding(1);
             this.excelreplace_remove.Name = "excelreplace_remove";
             this.excelreplace_remove.Size = new System.Drawing.Size(23, 57);
             this.excelreplace_remove.TabIndex = 11;
@@ -7546,7 +7713,7 @@ namespace DocumentTools
             this.UseRegex.AutoSize = true;
             this.UseRegex.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.UseRegex.Location = new System.Drawing.Point(287, 495);
-            this.UseRegex.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.UseRegex.Margin = new System.Windows.Forms.Padding(1);
             this.UseRegex.Name = "UseRegex";
             this.UseRegex.Size = new System.Drawing.Size(108, 16);
             this.UseRegex.TabIndex = 7;
@@ -7559,7 +7726,7 @@ namespace DocumentTools
             this.ExcelNoIgnoreCase.AutoSize = true;
             this.ExcelNoIgnoreCase.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ExcelNoIgnoreCase.Location = new System.Drawing.Point(287, 471);
-            this.ExcelNoIgnoreCase.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ExcelNoIgnoreCase.Margin = new System.Windows.Forms.Padding(1);
             this.ExcelNoIgnoreCase.Name = "ExcelNoIgnoreCase";
             this.ExcelNoIgnoreCase.Size = new System.Drawing.Size(84, 16);
             this.ExcelNoIgnoreCase.TabIndex = 6;
@@ -7575,9 +7742,9 @@ namespace DocumentTools
             this.groupBox13.Controls.Add(this.label18);
             this.groupBox13.Controls.Add(this.RemoveRows);
             this.groupBox13.Location = new System.Drawing.Point(527, 426);
-            this.groupBox13.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox13.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox13.Name = "groupBox13";
-            this.groupBox13.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox13.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox13.Size = new System.Drawing.Size(235, 55);
             this.groupBox13.TabIndex = 6;
             this.groupBox13.TabStop = false;
@@ -7587,7 +7754,7 @@ namespace DocumentTools
             // ExcelStartRow
             // 
             this.ExcelStartRow.Location = new System.Drawing.Point(101, 21);
-            this.ExcelStartRow.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ExcelStartRow.Margin = new System.Windows.Forms.Padding(1);
             this.ExcelStartRow.Name = "ExcelStartRow";
             this.ExcelStartRow.Size = new System.Drawing.Size(55, 21);
             this.ExcelStartRow.TabIndex = 5;
@@ -7596,7 +7763,7 @@ namespace DocumentTools
             // ExcelEndRow
             // 
             this.ExcelEndRow.Location = new System.Drawing.Point(177, 23);
-            this.ExcelEndRow.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ExcelEndRow.Margin = new System.Windows.Forms.Padding(1);
             this.ExcelEndRow.Name = "ExcelEndRow";
             this.ExcelEndRow.Size = new System.Drawing.Size(55, 21);
             this.ExcelEndRow.TabIndex = 4;
@@ -7629,7 +7796,7 @@ namespace DocumentTools
             this.RemoveRows.AutoSize = true;
             this.RemoveRows.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.RemoveRows.Location = new System.Drawing.Point(4, 25);
-            this.RemoveRows.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.RemoveRows.Margin = new System.Windows.Forms.Padding(1);
             this.RemoveRows.Name = "RemoveRows";
             this.RemoveRows.Size = new System.Drawing.Size(60, 16);
             this.RemoveRows.TabIndex = 0;
@@ -7640,9 +7807,9 @@ namespace DocumentTools
             // 
             this.groupBox12.Controls.Add(this.ExcelFindReplace_ReplacePanel);
             this.groupBox12.Location = new System.Drawing.Point(153, 431);
-            this.groupBox12.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox12.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox12.Name = "groupBox12";
-            this.groupBox12.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox12.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox12.Size = new System.Drawing.Size(131, 114);
             this.groupBox12.TabIndex = 5;
             this.groupBox12.TabStop = false;
@@ -7654,7 +7821,7 @@ namespace DocumentTools
             this.ExcelFindReplace_ReplacePanel.AutoScroll = true;
             this.ExcelFindReplace_ReplacePanel.Controls.Add(this.ExcelReplaceBox);
             this.ExcelFindReplace_ReplacePanel.Location = new System.Drawing.Point(4, 15);
-            this.ExcelFindReplace_ReplacePanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ExcelFindReplace_ReplacePanel.Margin = new System.Windows.Forms.Padding(2);
             this.ExcelFindReplace_ReplacePanel.Name = "ExcelFindReplace_ReplacePanel";
             this.ExcelFindReplace_ReplacePanel.Size = new System.Drawing.Size(123, 94);
             this.ExcelFindReplace_ReplacePanel.TabIndex = 2;
@@ -7662,7 +7829,7 @@ namespace DocumentTools
             // ExcelReplaceBox
             // 
             this.ExcelReplaceBox.Location = new System.Drawing.Point(7, 7);
-            this.ExcelReplaceBox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ExcelReplaceBox.Margin = new System.Windows.Forms.Padding(1);
             this.ExcelReplaceBox.Name = "ExcelReplaceBox";
             this.ExcelReplaceBox.Size = new System.Drawing.Size(88, 21);
             this.ExcelReplaceBox.TabIndex = 0;
@@ -7671,9 +7838,9 @@ namespace DocumentTools
             // 
             this.groupBox11.Controls.Add(this.ExcelFindReplace_FindPanel);
             this.groupBox11.Location = new System.Drawing.Point(4, 431);
-            this.groupBox11.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox11.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox11.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox11.Size = new System.Drawing.Size(131, 114);
             this.groupBox11.TabIndex = 4;
             this.groupBox11.TabStop = false;
@@ -7685,7 +7852,7 @@ namespace DocumentTools
             this.ExcelFindReplace_FindPanel.AutoScroll = true;
             this.ExcelFindReplace_FindPanel.Controls.Add(this.ExcelFindTextBox);
             this.ExcelFindReplace_FindPanel.Location = new System.Drawing.Point(3, 15);
-            this.ExcelFindReplace_FindPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ExcelFindReplace_FindPanel.Margin = new System.Windows.Forms.Padding(2);
             this.ExcelFindReplace_FindPanel.Name = "ExcelFindReplace_FindPanel";
             this.ExcelFindReplace_FindPanel.Size = new System.Drawing.Size(123, 94);
             this.ExcelFindReplace_FindPanel.TabIndex = 1;
@@ -7693,7 +7860,7 @@ namespace DocumentTools
             // ExcelFindTextBox
             // 
             this.ExcelFindTextBox.Location = new System.Drawing.Point(7, 7);
-            this.ExcelFindTextBox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ExcelFindTextBox.Margin = new System.Windows.Forms.Padding(1);
             this.ExcelFindTextBox.Name = "ExcelFindTextBox";
             this.ExcelFindTextBox.Size = new System.Drawing.Size(88, 21);
             this.ExcelFindTextBox.TabIndex = 0;
@@ -7715,7 +7882,7 @@ namespace DocumentTools
             // 
             this.ReplaceExcelContentButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ReplaceExcelContentButton.Location = new System.Drawing.Point(697, 561);
-            this.ReplaceExcelContentButton.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ReplaceExcelContentButton.Margin = new System.Windows.Forms.Padding(1);
             this.ReplaceExcelContentButton.Name = "ReplaceExcelContentButton";
             this.ReplaceExcelContentButton.Size = new System.Drawing.Size(147, 37);
             this.ReplaceExcelContentButton.TabIndex = 2;
@@ -7728,7 +7895,7 @@ namespace DocumentTools
             // 
             this.SelectRelaceExcelButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SelectRelaceExcelButton.Location = new System.Drawing.Point(5, 561);
-            this.SelectRelaceExcelButton.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SelectRelaceExcelButton.Margin = new System.Windows.Forms.Padding(1);
             this.SelectRelaceExcelButton.Name = "SelectRelaceExcelButton";
             this.SelectRelaceExcelButton.Size = new System.Drawing.Size(147, 37);
             this.SelectRelaceExcelButton.TabIndex = 1;
@@ -7741,7 +7908,7 @@ namespace DocumentTools
             // 
             this.ReplaceExcelFileView.HideSelection = false;
             this.ReplaceExcelFileView.Location = new System.Drawing.Point(4, 4);
-            this.ReplaceExcelFileView.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ReplaceExcelFileView.Margin = new System.Windows.Forms.Padding(1);
             this.ReplaceExcelFileView.Name = "ReplaceExcelFileView";
             this.ReplaceExcelFileView.Size = new System.Drawing.Size(841, 420);
             this.ReplaceExcelFileView.TabIndex = 0;
@@ -7760,7 +7927,7 @@ namespace DocumentTools
             this.TabPage_12.Controls.Add(this.groupBox14);
             this.TabPage_12.Controls.Add(this.DecodeMatrixWordListView);
             this.TabPage_12.Location = new System.Drawing.Point(4, 114);
-            this.TabPage_12.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_12.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_12.Name = "TabPage_12";
             this.TabPage_12.Size = new System.Drawing.Size(882, 621);
             this.TabPage_12.TabIndex = 11;
@@ -7772,7 +7939,7 @@ namespace DocumentTools
             // 
             this.DecodeMatrixWordListView_MoveDown.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.DecodeMatrixWordListView_MoveDown.Location = new System.Drawing.Point(859, 180);
-            this.DecodeMatrixWordListView_MoveDown.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.DecodeMatrixWordListView_MoveDown.Margin = new System.Windows.Forms.Padding(1);
             this.DecodeMatrixWordListView_MoveDown.Name = "DecodeMatrixWordListView_MoveDown";
             this.DecodeMatrixWordListView_MoveDown.Size = new System.Drawing.Size(21, 28);
             this.DecodeMatrixWordListView_MoveDown.TabIndex = 6;
@@ -7784,7 +7951,7 @@ namespace DocumentTools
             // 
             this.DecodeMatrixWordListView_MoveUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.DecodeMatrixWordListView_MoveUp.Location = new System.Drawing.Point(859, 48);
-            this.DecodeMatrixWordListView_MoveUp.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.DecodeMatrixWordListView_MoveUp.Margin = new System.Windows.Forms.Padding(1);
             this.DecodeMatrixWordListView_MoveUp.Name = "DecodeMatrixWordListView_MoveUp";
             this.DecodeMatrixWordListView_MoveUp.Size = new System.Drawing.Size(21, 28);
             this.DecodeMatrixWordListView_MoveUp.TabIndex = 5;
@@ -7798,7 +7965,7 @@ namespace DocumentTools
             this.datamatrix_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.datamatrix_clear.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.datamatrix_clear.Location = new System.Drawing.Point(859, 136);
-            this.datamatrix_clear.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.datamatrix_clear.Margin = new System.Windows.Forms.Padding(1);
             this.datamatrix_clear.Name = "datamatrix_clear";
             this.datamatrix_clear.Size = new System.Drawing.Size(21, 28);
             this.datamatrix_clear.TabIndex = 12;
@@ -7811,7 +7978,7 @@ namespace DocumentTools
             this.datamatrix_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.datamatrix_remove.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.datamatrix_remove.Location = new System.Drawing.Point(859, 92);
-            this.datamatrix_remove.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.datamatrix_remove.Margin = new System.Windows.Forms.Padding(1);
             this.datamatrix_remove.Name = "datamatrix_remove";
             this.datamatrix_remove.Size = new System.Drawing.Size(21, 28);
             this.datamatrix_remove.TabIndex = 11;
@@ -7835,7 +8002,7 @@ namespace DocumentTools
             // 
             this.DecodeDataMarix.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.DecodeDataMarix.Location = new System.Drawing.Point(697, 561);
-            this.DecodeDataMarix.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.DecodeDataMarix.Margin = new System.Windows.Forms.Padding(1);
             this.DecodeDataMarix.Name = "DecodeDataMarix";
             this.DecodeDataMarix.Size = new System.Drawing.Size(147, 37);
             this.DecodeDataMarix.TabIndex = 3;
@@ -7848,7 +8015,7 @@ namespace DocumentTools
             // 
             this.SelectDataMatrixWord.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SelectDataMatrixWord.Location = new System.Drawing.Point(5, 561);
-            this.SelectDataMatrixWord.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SelectDataMatrixWord.Margin = new System.Windows.Forms.Padding(1);
             this.SelectDataMatrixWord.Name = "SelectDataMatrixWord";
             this.SelectDataMatrixWord.Size = new System.Drawing.Size(147, 37);
             this.SelectDataMatrixWord.TabIndex = 2;
@@ -7861,9 +8028,9 @@ namespace DocumentTools
             // 
             this.groupBox14.Controls.Add(this.DecodeDataMatrixView);
             this.groupBox14.Location = new System.Drawing.Point(7, 223);
-            this.groupBox14.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox14.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox14.Name = "groupBox14";
-            this.groupBox14.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox14.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox14.Size = new System.Drawing.Size(848, 289);
             this.groupBox14.TabIndex = 1;
             this.groupBox14.TabStop = false;
@@ -7874,7 +8041,7 @@ namespace DocumentTools
             // 
             this.DecodeDataMatrixView.ItemHeight = 20;
             this.DecodeDataMatrixView.Location = new System.Drawing.Point(4, 17);
-            this.DecodeDataMatrixView.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.DecodeDataMatrixView.Margin = new System.Windows.Forms.Padding(1);
             this.DecodeDataMatrixView.Name = "DecodeDataMatrixView";
             this.DecodeDataMatrixView.Size = new System.Drawing.Size(843, 268);
             this.DecodeDataMatrixView.TabIndex = 0;
@@ -7884,7 +8051,7 @@ namespace DocumentTools
             // 
             this.DecodeMatrixWordListView.HideSelection = false;
             this.DecodeMatrixWordListView.Location = new System.Drawing.Point(7, 4);
-            this.DecodeMatrixWordListView.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.DecodeMatrixWordListView.Margin = new System.Windows.Forms.Padding(1);
             this.DecodeMatrixWordListView.Name = "DecodeMatrixWordListView";
             this.DecodeMatrixWordListView.Size = new System.Drawing.Size(851, 217);
             this.DecodeMatrixWordListView.TabIndex = 0;
@@ -7904,7 +8071,7 @@ namespace DocumentTools
             this.TabPage_33.Controls.Add(this.groupBox35);
             this.TabPage_33.Controls.Add(this.groupBox34);
             this.TabPage_33.Location = new System.Drawing.Point(4, 114);
-            this.TabPage_33.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_33.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_33.Name = "TabPage_33";
             this.TabPage_33.Size = new System.Drawing.Size(882, 621);
             this.TabPage_33.TabIndex = 32;
@@ -7916,7 +8083,7 @@ namespace DocumentTools
             this.barcodeReadStart.Font = new System.Drawing.Font("宋体", 7.5F);
             this.barcodeReadStart.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.barcodeReadStart.Location = new System.Drawing.Point(307, 343);
-            this.barcodeReadStart.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.barcodeReadStart.Margin = new System.Windows.Forms.Padding(1);
             this.barcodeReadStart.Name = "barcodeReadStart";
             this.barcodeReadStart.Size = new System.Drawing.Size(83, 27);
             this.barcodeReadStart.TabIndex = 30;
@@ -7929,7 +8096,7 @@ namespace DocumentTools
             this.CopyBarcodeReadResult.Font = new System.Drawing.Font("宋体", 7.5F);
             this.CopyBarcodeReadResult.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.CopyBarcodeReadResult.Location = new System.Drawing.Point(791, 343);
-            this.CopyBarcodeReadResult.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.CopyBarcodeReadResult.Margin = new System.Windows.Forms.Padding(1);
             this.CopyBarcodeReadResult.Name = "CopyBarcodeReadResult";
             this.CopyBarcodeReadResult.Size = new System.Drawing.Size(83, 27);
             this.CopyBarcodeReadResult.TabIndex = 29;
@@ -7942,7 +8109,7 @@ namespace DocumentTools
             // 
             this.barcodeReaderResultbox.DetectUrls = false;
             this.barcodeReaderResultbox.Location = new System.Drawing.Point(307, 169);
-            this.barcodeReaderResultbox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.barcodeReaderResultbox.Margin = new System.Windows.Forms.Padding(1);
             this.barcodeReaderResultbox.Name = "barcodeReaderResultbox";
             this.barcodeReaderResultbox.Size = new System.Drawing.Size(568, 171);
             this.barcodeReaderResultbox.TabIndex = 28;
@@ -7954,7 +8121,7 @@ namespace DocumentTools
             this.barcodeSelectRegionPicture.Font = new System.Drawing.Font("宋体", 7.5F);
             this.barcodeSelectRegionPicture.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.barcodeSelectRegionPicture.Location = new System.Drawing.Point(201, 349);
-            this.barcodeSelectRegionPicture.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.barcodeSelectRegionPicture.Margin = new System.Windows.Forms.Padding(1);
             this.barcodeSelectRegionPicture.Name = "barcodeSelectRegionPicture";
             this.barcodeSelectRegionPicture.Size = new System.Drawing.Size(101, 19);
             this.barcodeSelectRegionPicture.TabIndex = 27;
@@ -7968,7 +8135,7 @@ namespace DocumentTools
             this.barcodeRegionPicture.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.barcodeRegionPicture.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.barcodeRegionPicture.Location = new System.Drawing.Point(201, 169);
-            this.barcodeRegionPicture.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.barcodeRegionPicture.Margin = new System.Windows.Forms.Padding(1);
             this.barcodeRegionPicture.Name = "barcodeRegionPicture";
             this.barcodeRegionPicture.Size = new System.Drawing.Size(103, 177);
             this.barcodeRegionPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -7983,9 +8150,9 @@ namespace DocumentTools
             this.groupBox36.Controls.Add(this.SaveBarCodePreview);
             this.groupBox36.Controls.Add(this.barcodePreviewBox);
             this.groupBox36.Location = new System.Drawing.Point(665, 3);
-            this.groupBox36.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox36.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox36.Name = "groupBox36";
-            this.groupBox36.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox36.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox36.Size = new System.Drawing.Size(225, 164);
             this.groupBox36.TabIndex = 2;
             this.groupBox36.TabStop = false;
@@ -7996,7 +8163,7 @@ namespace DocumentTools
             // 
             this.barcodeCopyImage.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.barcodeCopyImage.Location = new System.Drawing.Point(77, 125);
-            this.barcodeCopyImage.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.barcodeCopyImage.Margin = new System.Windows.Forms.Padding(1);
             this.barcodeCopyImage.Name = "barcodeCopyImage";
             this.barcodeCopyImage.Size = new System.Drawing.Size(60, 29);
             this.barcodeCopyImage.TabIndex = 3;
@@ -8008,7 +8175,7 @@ namespace DocumentTools
             // 
             this.GenerateBarCode.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.GenerateBarCode.Location = new System.Drawing.Point(4, 127);
-            this.GenerateBarCode.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.GenerateBarCode.Margin = new System.Windows.Forms.Padding(1);
             this.GenerateBarCode.Name = "GenerateBarCode";
             this.GenerateBarCode.Size = new System.Drawing.Size(59, 29);
             this.GenerateBarCode.TabIndex = 2;
@@ -8020,7 +8187,7 @@ namespace DocumentTools
             // 
             this.SaveBarCodePreview.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SaveBarCodePreview.Location = new System.Drawing.Point(147, 125);
-            this.SaveBarCodePreview.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SaveBarCodePreview.Margin = new System.Windows.Forms.Padding(1);
             this.SaveBarCodePreview.Name = "SaveBarCodePreview";
             this.SaveBarCodePreview.Size = new System.Drawing.Size(61, 29);
             this.SaveBarCodePreview.TabIndex = 1;
@@ -8033,7 +8200,7 @@ namespace DocumentTools
             this.barcodePreviewBox.Image = global::DocumentTools.Properties.Resources._1351;
             this.barcodePreviewBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.barcodePreviewBox.Location = new System.Drawing.Point(4, 15);
-            this.barcodePreviewBox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.barcodePreviewBox.Margin = new System.Windows.Forms.Padding(1);
             this.barcodePreviewBox.Name = "barcodePreviewBox";
             this.barcodePreviewBox.Size = new System.Drawing.Size(204, 107);
             this.barcodePreviewBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -8049,9 +8216,9 @@ namespace DocumentTools
             this.groupBox38.Controls.Add(this.barcodeCaptionBox);
             this.groupBox38.Controls.Add(this.label90);
             this.groupBox38.Location = new System.Drawing.Point(489, 3);
-            this.groupBox38.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox38.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox38.Name = "groupBox38";
-            this.groupBox38.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox38.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox38.Size = new System.Drawing.Size(169, 164);
             this.groupBox38.TabIndex = 25;
             this.groupBox38.TabStop = false;
@@ -8062,7 +8229,7 @@ namespace DocumentTools
             // 
             this.barcodeCaptionLocationCombox.FormattingEnabled = true;
             this.barcodeCaptionLocationCombox.Location = new System.Drawing.Point(61, 61);
-            this.barcodeCaptionLocationCombox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.barcodeCaptionLocationCombox.Margin = new System.Windows.Forms.Padding(1);
             this.barcodeCaptionLocationCombox.Name = "barcodeCaptionLocationCombox";
             this.barcodeCaptionLocationCombox.Size = new System.Drawing.Size(105, 24);
             this.barcodeCaptionLocationCombox.TabIndex = 25;
@@ -8081,7 +8248,7 @@ namespace DocumentTools
             // barcodeCaptionFontSizeBox
             // 
             this.barcodeCaptionFontSizeBox.Location = new System.Drawing.Point(61, 111);
-            this.barcodeCaptionFontSizeBox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.barcodeCaptionFontSizeBox.Margin = new System.Windows.Forms.Padding(1);
             this.barcodeCaptionFontSizeBox.Name = "barcodeCaptionFontSizeBox";
             this.barcodeCaptionFontSizeBox.Size = new System.Drawing.Size(105, 21);
             this.barcodeCaptionFontSizeBox.TabIndex = 25;
@@ -8102,7 +8269,7 @@ namespace DocumentTools
             // 
             this.barcodeCaptionBox.AcceptsReturn = true;
             this.barcodeCaptionBox.Location = new System.Drawing.Point(61, 17);
-            this.barcodeCaptionBox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.barcodeCaptionBox.Margin = new System.Windows.Forms.Padding(1);
             this.barcodeCaptionBox.Multiline = true;
             this.barcodeCaptionBox.Name = "barcodeCaptionBox";
             this.barcodeCaptionBox.Size = new System.Drawing.Size(105, 20);
@@ -8126,9 +8293,9 @@ namespace DocumentTools
             this.groupBox37.Controls.Add(this.barcodeTemplateUpload);
             this.groupBox37.Controls.Add(this.barcodeMutilList);
             this.groupBox37.Location = new System.Drawing.Point(1, 373);
-            this.groupBox37.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox37.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox37.Name = "groupBox37";
-            this.groupBox37.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox37.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox37.Size = new System.Drawing.Size(880, 245);
             this.groupBox37.TabIndex = 3;
             this.groupBox37.TabStop = false;
@@ -8139,7 +8306,7 @@ namespace DocumentTools
             // 
             this.ExportBarCodeTempLate.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ExportBarCodeTempLate.Location = new System.Drawing.Point(375, 193);
-            this.ExportBarCodeTempLate.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ExportBarCodeTempLate.Margin = new System.Windows.Forms.Padding(1);
             this.ExportBarCodeTempLate.Name = "ExportBarCodeTempLate";
             this.ExportBarCodeTempLate.Size = new System.Drawing.Size(105, 41);
             this.ExportBarCodeTempLate.TabIndex = 3;
@@ -8152,7 +8319,7 @@ namespace DocumentTools
             // 
             this.barcodeMutilGenerate.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.barcodeMutilGenerate.Location = new System.Drawing.Point(767, 193);
-            this.barcodeMutilGenerate.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.barcodeMutilGenerate.Margin = new System.Windows.Forms.Padding(1);
             this.barcodeMutilGenerate.Name = "barcodeMutilGenerate";
             this.barcodeMutilGenerate.Size = new System.Drawing.Size(105, 41);
             this.barcodeMutilGenerate.TabIndex = 2;
@@ -8165,7 +8332,7 @@ namespace DocumentTools
             // 
             this.barcodeTemplateUpload.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.barcodeTemplateUpload.Location = new System.Drawing.Point(7, 193);
-            this.barcodeTemplateUpload.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.barcodeTemplateUpload.Margin = new System.Windows.Forms.Padding(1);
             this.barcodeTemplateUpload.Name = "barcodeTemplateUpload";
             this.barcodeTemplateUpload.Size = new System.Drawing.Size(105, 41);
             this.barcodeTemplateUpload.TabIndex = 1;
@@ -8178,7 +8345,7 @@ namespace DocumentTools
             // 
             this.barcodeMutilList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.barcodeMutilList.Location = new System.Drawing.Point(7, 17);
-            this.barcodeMutilList.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.barcodeMutilList.Margin = new System.Windows.Forms.Padding(1);
             this.barcodeMutilList.Name = "barcodeMutilList";
             this.barcodeMutilList.RowHeadersWidth = 62;
             this.barcodeMutilList.RowTemplate.Height = 30;
@@ -8205,9 +8372,9 @@ namespace DocumentTools
             this.groupBox35.Controls.Add(this.label79);
             this.groupBox35.Controls.Add(this.barcodeImageHeight);
             this.groupBox35.Location = new System.Drawing.Point(1, 3);
-            this.groupBox35.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox35.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox35.Name = "groupBox35";
-            this.groupBox35.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox35.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox35.Size = new System.Drawing.Size(196, 365);
             this.groupBox35.TabIndex = 1;
             this.groupBox35.TabStop = false;
@@ -8217,7 +8384,7 @@ namespace DocumentTools
             // barcodeImageWidth
             // 
             this.barcodeImageWidth.Location = new System.Drawing.Point(73, 117);
-            this.barcodeImageWidth.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.barcodeImageWidth.Margin = new System.Windows.Forms.Padding(1);
             this.barcodeImageWidth.Name = "barcodeImageWidth";
             this.barcodeImageWidth.Size = new System.Drawing.Size(113, 21);
             this.barcodeImageWidth.TabIndex = 24;
@@ -8226,7 +8393,7 @@ namespace DocumentTools
             // barcodePaddingBox
             // 
             this.barcodePaddingBox.Location = new System.Drawing.Point(73, 199);
-            this.barcodePaddingBox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.barcodePaddingBox.Margin = new System.Windows.Forms.Padding(1);
             this.barcodePaddingBox.Name = "barcodePaddingBox";
             this.barcodePaddingBox.Size = new System.Drawing.Size(113, 21);
             this.barcodePaddingBox.TabIndex = 23;
@@ -8258,7 +8425,7 @@ namespace DocumentTools
             // 
             this.barcodeTypeCombox.FormattingEnabled = true;
             this.barcodeTypeCombox.Location = new System.Drawing.Point(73, 17);
-            this.barcodeTypeCombox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.barcodeTypeCombox.Margin = new System.Windows.Forms.Padding(1);
             this.barcodeTypeCombox.Name = "barcodeTypeCombox";
             this.barcodeTypeCombox.Size = new System.Drawing.Size(113, 24);
             this.barcodeTypeCombox.TabIndex = 1;
@@ -8277,7 +8444,7 @@ namespace DocumentTools
             // barcodeDmiBox
             // 
             this.barcodeDmiBox.Location = new System.Drawing.Point(73, 67);
-            this.barcodeDmiBox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.barcodeDmiBox.Margin = new System.Windows.Forms.Padding(1);
             this.barcodeDmiBox.Name = "barcodeDmiBox";
             this.barcodeDmiBox.Size = new System.Drawing.Size(113, 21);
             this.barcodeDmiBox.TabIndex = 5;
@@ -8297,7 +8464,7 @@ namespace DocumentTools
             // barcodeRotateBox
             // 
             this.barcodeRotateBox.Location = new System.Drawing.Point(73, 91);
-            this.barcodeRotateBox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.barcodeRotateBox.Margin = new System.Windows.Forms.Padding(1);
             this.barcodeRotateBox.Name = "barcodeRotateBox";
             this.barcodeRotateBox.Size = new System.Drawing.Size(113, 21);
             this.barcodeRotateBox.TabIndex = 7;
@@ -8307,7 +8474,7 @@ namespace DocumentTools
             // 
             this.barcodeDpiCombox.FormattingEnabled = true;
             this.barcodeDpiCombox.Location = new System.Drawing.Point(73, 175);
-            this.barcodeDpiCombox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.barcodeDpiCombox.Margin = new System.Windows.Forms.Padding(1);
             this.barcodeDpiCombox.Name = "barcodeDpiCombox";
             this.barcodeDpiCombox.Size = new System.Drawing.Size(113, 24);
             this.barcodeDpiCombox.TabIndex = 14;
@@ -8349,7 +8516,7 @@ namespace DocumentTools
             // 
             this.barcodeAutoSizeCombox.FormattingEnabled = true;
             this.barcodeAutoSizeCombox.Location = new System.Drawing.Point(73, 41);
-            this.barcodeAutoSizeCombox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.barcodeAutoSizeCombox.Margin = new System.Windows.Forms.Padding(1);
             this.barcodeAutoSizeCombox.Name = "barcodeAutoSizeCombox";
             this.barcodeAutoSizeCombox.Size = new System.Drawing.Size(113, 24);
             this.barcodeAutoSizeCombox.TabIndex = 3;
@@ -8368,7 +8535,7 @@ namespace DocumentTools
             // barcodeImageHeight
             // 
             this.barcodeImageHeight.Location = new System.Drawing.Point(73, 145);
-            this.barcodeImageHeight.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.barcodeImageHeight.Margin = new System.Windows.Forms.Padding(1);
             this.barcodeImageHeight.Name = "barcodeImageHeight";
             this.barcodeImageHeight.Size = new System.Drawing.Size(113, 21);
             this.barcodeImageHeight.TabIndex = 11;
@@ -8389,9 +8556,9 @@ namespace DocumentTools
             this.groupBox34.Controls.Add(this.barcodeTextLocationCombox);
             this.groupBox34.Controls.Add(this.label85);
             this.groupBox34.Location = new System.Drawing.Point(201, 3);
-            this.groupBox34.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox34.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox34.Name = "groupBox34";
-            this.groupBox34.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox34.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox34.Size = new System.Drawing.Size(283, 164);
             this.groupBox34.TabIndex = 0;
             this.groupBox34.TabStop = false;
@@ -8403,7 +8570,7 @@ namespace DocumentTools
             this.barcodeScanTypeCombox.Enabled = false;
             this.barcodeScanTypeCombox.FormattingEnabled = true;
             this.barcodeScanTypeCombox.Location = new System.Drawing.Point(67, 39);
-            this.barcodeScanTypeCombox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.barcodeScanTypeCombox.Margin = new System.Windows.Forms.Padding(1);
             this.barcodeScanTypeCombox.Name = "barcodeScanTypeCombox";
             this.barcodeScanTypeCombox.Size = new System.Drawing.Size(213, 24);
             this.barcodeScanTypeCombox.TabIndex = 26;
@@ -8423,7 +8590,7 @@ namespace DocumentTools
             // barcodeTextFontSizeBox
             // 
             this.barcodeTextFontSizeBox.Location = new System.Drawing.Point(67, 139);
-            this.barcodeTextFontSizeBox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.barcodeTextFontSizeBox.Margin = new System.Windows.Forms.Padding(1);
             this.barcodeTextFontSizeBox.Name = "barcodeTextFontSizeBox";
             this.barcodeTextFontSizeBox.Size = new System.Drawing.Size(213, 21);
             this.barcodeTextFontSizeBox.TabIndex = 24;
@@ -8444,7 +8611,7 @@ namespace DocumentTools
             // 
             this.barcodeTextContentBox.AcceptsReturn = true;
             this.barcodeTextContentBox.Location = new System.Drawing.Point(67, 15);
-            this.barcodeTextContentBox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.barcodeTextContentBox.Margin = new System.Windows.Forms.Padding(1);
             this.barcodeTextContentBox.Multiline = true;
             this.barcodeTextContentBox.Name = "barcodeTextContentBox";
             this.barcodeTextContentBox.Size = new System.Drawing.Size(213, 20);
@@ -8465,7 +8632,7 @@ namespace DocumentTools
             // barcodeTextContentSpaceCombox
             // 
             this.barcodeTextContentSpaceCombox.Location = new System.Drawing.Point(67, 113);
-            this.barcodeTextContentSpaceCombox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.barcodeTextContentSpaceCombox.Margin = new System.Windows.Forms.Padding(1);
             this.barcodeTextContentSpaceCombox.Name = "barcodeTextContentSpaceCombox";
             this.barcodeTextContentSpaceCombox.Size = new System.Drawing.Size(213, 21);
             this.barcodeTextContentSpaceCombox.TabIndex = 20;
@@ -8486,7 +8653,7 @@ namespace DocumentTools
             // 
             this.barcodeTextAlignCombox.FormattingEnabled = true;
             this.barcodeTextAlignCombox.Location = new System.Drawing.Point(67, 89);
-            this.barcodeTextAlignCombox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.barcodeTextAlignCombox.Margin = new System.Windows.Forms.Padding(1);
             this.barcodeTextAlignCombox.Name = "barcodeTextAlignCombox";
             this.barcodeTextAlignCombox.Size = new System.Drawing.Size(213, 24);
             this.barcodeTextAlignCombox.TabIndex = 18;
@@ -8506,7 +8673,7 @@ namespace DocumentTools
             // 
             this.barcodeTextLocationCombox.FormattingEnabled = true;
             this.barcodeTextLocationCombox.Location = new System.Drawing.Point(67, 63);
-            this.barcodeTextLocationCombox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.barcodeTextLocationCombox.Margin = new System.Windows.Forms.Padding(1);
             this.barcodeTextLocationCombox.Name = "barcodeTextLocationCombox";
             this.barcodeTextLocationCombox.Size = new System.Drawing.Size(213, 24);
             this.barcodeTextLocationCombox.TabIndex = 16;
@@ -8528,9 +8695,9 @@ namespace DocumentTools
             this.TabPage_34.Controls.Add(this.gen_card_result_group);
             this.TabPage_34.Controls.Add(this.gen_card_id_group);
             this.TabPage_34.Location = new System.Drawing.Point(4, 114);
-            this.TabPage_34.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_34.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_34.Name = "TabPage_34";
-            this.TabPage_34.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_34.Padding = new System.Windows.Forms.Padding(1);
             this.TabPage_34.Size = new System.Drawing.Size(882, 621);
             this.TabPage_34.TabIndex = 33;
             this.TabPage_34.Text = "身份证号码校验";
@@ -8542,9 +8709,9 @@ namespace DocumentTools
             this.groupBox41.Controls.Add(this.ver_card_id_text_box);
             this.groupBox41.Controls.Add(this.label99);
             this.groupBox41.Location = new System.Drawing.Point(319, 119);
-            this.groupBox41.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox41.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox41.Name = "groupBox41";
-            this.groupBox41.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox41.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox41.Size = new System.Drawing.Size(564, 499);
             this.groupBox41.TabIndex = 3;
             this.groupBox41.TabStop = false;
@@ -8562,9 +8729,9 @@ namespace DocumentTools
             this.groupBox42.Controls.Add(this.label101);
             this.groupBox42.Controls.Add(this.label100);
             this.groupBox42.Location = new System.Drawing.Point(7, 57);
-            this.groupBox42.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox42.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox42.Name = "groupBox42";
-            this.groupBox42.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox42.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox42.Size = new System.Drawing.Size(553, 429);
             this.groupBox42.TabIndex = 2;
             this.groupBox42.TabStop = false;
@@ -8681,7 +8848,7 @@ namespace DocumentTools
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ver_card_id_text_box.Font = new System.Drawing.Font("宋体", 10.5F);
             this.ver_card_id_text_box.Location = new System.Drawing.Point(81, 23);
-            this.ver_card_id_text_box.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ver_card_id_text_box.Margin = new System.Windows.Forms.Padding(1);
             this.ver_card_id_text_box.MaxLength = 18;
             this.ver_card_id_text_box.Name = "ver_card_id_text_box";
             this.ver_card_id_text_box.Size = new System.Drawing.Size(480, 23);
@@ -8711,9 +8878,9 @@ namespace DocumentTools
             this.gen_card_result_group.Controls.Add(this.gen_card_id_box);
             this.gen_card_result_group.Controls.Add(this.gen_card_id_name_box);
             this.gen_card_result_group.Location = new System.Drawing.Point(1, 119);
-            this.gen_card_result_group.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.gen_card_result_group.Margin = new System.Windows.Forms.Padding(1);
             this.gen_card_result_group.Name = "gen_card_result_group";
-            this.gen_card_result_group.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.gen_card_result_group.Padding = new System.Windows.Forms.Padding(1);
             this.gen_card_result_group.Size = new System.Drawing.Size(312, 499);
             this.gen_card_result_group.TabIndex = 4;
             this.gen_card_result_group.TabStop = false;
@@ -8724,7 +8891,7 @@ namespace DocumentTools
             // 
             this.gen_card_id_name_copy.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.gen_card_id_name_copy.Location = new System.Drawing.Point(243, 455);
-            this.gen_card_id_name_copy.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.gen_card_id_name_copy.Margin = new System.Windows.Forms.Padding(1);
             this.gen_card_id_name_copy.Name = "gen_card_id_name_copy";
             this.gen_card_id_name_copy.Size = new System.Drawing.Size(61, 27);
             this.gen_card_id_name_copy.TabIndex = 4;
@@ -8737,7 +8904,7 @@ namespace DocumentTools
             // 
             this.copy_gen_card_cliboard.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.copy_gen_card_cliboard.Location = new System.Drawing.Point(165, 455);
-            this.copy_gen_card_cliboard.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.copy_gen_card_cliboard.Margin = new System.Windows.Forms.Padding(1);
             this.copy_gen_card_cliboard.Name = "copy_gen_card_cliboard";
             this.copy_gen_card_cliboard.Size = new System.Drawing.Size(61, 27);
             this.copy_gen_card_cliboard.TabIndex = 2;
@@ -8764,7 +8931,7 @@ namespace DocumentTools
             // 
             this.gen_card_id_box.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.gen_card_id_box.Location = new System.Drawing.Point(7, 19);
-            this.gen_card_id_box.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.gen_card_id_box.Margin = new System.Windows.Forms.Padding(1);
             this.gen_card_id_box.Name = "gen_card_id_box";
             this.gen_card_id_box.Size = new System.Drawing.Size(141, 432);
             this.gen_card_id_box.TabIndex = 0;
@@ -8778,7 +8945,7 @@ namespace DocumentTools
             | System.Windows.Forms.AnchorStyles.Left)));
             this.gen_card_id_name_box.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.gen_card_id_name_box.Location = new System.Drawing.Point(165, 17);
-            this.gen_card_id_name_box.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.gen_card_id_name_box.Margin = new System.Windows.Forms.Padding(1);
             this.gen_card_id_name_box.Name = "gen_card_id_name_box";
             this.gen_card_id_name_box.Size = new System.Drawing.Size(141, 433);
             this.gen_card_id_name_box.TabIndex = 3;
@@ -8799,9 +8966,9 @@ namespace DocumentTools
             this.gen_card_id_group.Controls.Add(this.city_level_3_combox);
             this.gen_card_id_group.Controls.Add(this.city_level_2_combox);
             this.gen_card_id_group.Location = new System.Drawing.Point(4, 4);
-            this.gen_card_id_group.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.gen_card_id_group.Margin = new System.Windows.Forms.Padding(1);
             this.gen_card_id_group.Name = "gen_card_id_group";
-            this.gen_card_id_group.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.gen_card_id_group.Padding = new System.Windows.Forms.Padding(1);
             this.gen_card_id_group.Size = new System.Drawing.Size(879, 111);
             this.gen_card_id_group.TabIndex = 3;
             this.gen_card_id_group.TabStop = false;
@@ -8839,7 +9006,7 @@ namespace DocumentTools
             this.gen_card_id_name_check_box.AutoSize = true;
             this.gen_card_id_name_check_box.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.gen_card_id_name_check_box.Location = new System.Drawing.Point(295, 57);
-            this.gen_card_id_name_check_box.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.gen_card_id_name_check_box.Margin = new System.Windows.Forms.Padding(1);
             this.gen_card_id_name_check_box.Name = "gen_card_id_name_check_box";
             this.gen_card_id_name_check_box.Size = new System.Drawing.Size(120, 16);
             this.gen_card_id_name_check_box.TabIndex = 9;
@@ -8852,7 +9019,7 @@ namespace DocumentTools
             this.ony_gen_18_year.AutoSize = true;
             this.ony_gen_18_year.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ony_gen_18_year.Location = new System.Drawing.Point(149, 57);
-            this.ony_gen_18_year.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ony_gen_18_year.Margin = new System.Windows.Forms.Padding(1);
             this.ony_gen_18_year.Name = "ony_gen_18_year";
             this.ony_gen_18_year.Size = new System.Drawing.Size(144, 16);
             this.ony_gen_18_year.TabIndex = 7;
@@ -8862,7 +9029,7 @@ namespace DocumentTools
             // gen_card_number
             // 
             this.gen_card_number.Location = new System.Drawing.Point(65, 55);
-            this.gen_card_number.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.gen_card_number.Margin = new System.Windows.Forms.Padding(1);
             this.gen_card_number.Maximum = new decimal(new int[] {
             900000,
             0,
@@ -8898,7 +9065,7 @@ namespace DocumentTools
             this.gen_card_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.gen_card_button.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.gen_card_button.Location = new System.Drawing.Point(781, 68);
-            this.gen_card_button.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.gen_card_button.Margin = new System.Windows.Forms.Padding(1);
             this.gen_card_button.Name = "gen_card_button";
             this.gen_card_button.Size = new System.Drawing.Size(89, 39);
             this.gen_card_button.TabIndex = 4;
@@ -8922,7 +9089,7 @@ namespace DocumentTools
             // 
             this.city_level_1_combox.FormattingEnabled = true;
             this.city_level_1_combox.Location = new System.Drawing.Point(63, 27);
-            this.city_level_1_combox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.city_level_1_combox.Margin = new System.Windows.Forms.Padding(1);
             this.city_level_1_combox.Name = "city_level_1_combox";
             this.city_level_1_combox.Size = new System.Drawing.Size(189, 24);
             this.city_level_1_combox.TabIndex = 0;
@@ -8932,7 +9099,7 @@ namespace DocumentTools
             // 
             this.city_level_3_combox.FormattingEnabled = true;
             this.city_level_3_combox.Location = new System.Drawing.Point(447, 27);
-            this.city_level_3_combox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.city_level_3_combox.Margin = new System.Windows.Forms.Padding(1);
             this.city_level_3_combox.Name = "city_level_3_combox";
             this.city_level_3_combox.Size = new System.Drawing.Size(427, 24);
             this.city_level_3_combox.TabIndex = 2;
@@ -8942,7 +9109,7 @@ namespace DocumentTools
             // 
             this.city_level_2_combox.FormattingEnabled = true;
             this.city_level_2_combox.Location = new System.Drawing.Point(255, 27);
-            this.city_level_2_combox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.city_level_2_combox.Margin = new System.Windows.Forms.Padding(1);
             this.city_level_2_combox.Name = "city_level_2_combox";
             this.city_level_2_combox.Size = new System.Drawing.Size(189, 24);
             this.city_level_2_combox.TabIndex = 1;
@@ -8974,7 +9141,7 @@ namespace DocumentTools
             this.TabPage_05.Controls.Add(this.groupBox2);
             this.TabPage_05.Controls.Add(this.groupBox1);
             this.TabPage_05.Location = new System.Drawing.Point(4, 114);
-            this.TabPage_05.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_05.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_05.Name = "TabPage_05";
             this.TabPage_05.Size = new System.Drawing.Size(882, 621);
             this.TabPage_05.TabIndex = 4;
@@ -8985,7 +9152,7 @@ namespace DocumentTools
             // 
             this.GetChinsesHanPinYin_TypeBox.FormattingEnabled = true;
             this.GetChinsesHanPinYin_TypeBox.Location = new System.Drawing.Point(427, 280);
-            this.GetChinsesHanPinYin_TypeBox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.GetChinsesHanPinYin_TypeBox.Margin = new System.Windows.Forms.Padding(1);
             this.GetChinsesHanPinYin_TypeBox.Name = "GetChinsesHanPinYin_TypeBox";
             this.GetChinsesHanPinYin_TypeBox.Size = new System.Drawing.Size(182, 24);
             this.GetChinsesHanPinYin_TypeBox.TabIndex = 24;
@@ -8996,7 +9163,7 @@ namespace DocumentTools
             this.GetChinsesHanPinYin.AutoSize = true;
             this.GetChinsesHanPinYin.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.GetChinsesHanPinYin.Location = new System.Drawing.Point(318, 284);
-            this.GetChinsesHanPinYin.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.GetChinsesHanPinYin.Margin = new System.Windows.Forms.Padding(1);
             this.GetChinsesHanPinYin.Name = "GetChinsesHanPinYin";
             this.GetChinsesHanPinYin.Size = new System.Drawing.Size(108, 16);
             this.GetChinsesHanPinYin.TabIndex = 23;
@@ -9010,7 +9177,7 @@ namespace DocumentTools
             this.DoubleTextClear.AutoSize = true;
             this.DoubleTextClear.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.DoubleTextClear.Location = new System.Drawing.Point(397, 382);
-            this.DoubleTextClear.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.DoubleTextClear.Margin = new System.Windows.Forms.Padding(1);
             this.DoubleTextClear.Name = "DoubleTextClear";
             this.DoubleTextClear.Size = new System.Drawing.Size(72, 16);
             this.DoubleTextClear.TabIndex = 22;
@@ -9022,7 +9189,7 @@ namespace DocumentTools
             // 
             this.NameMarkColor.FormattingEnabled = true;
             this.NameMarkColor.Location = new System.Drawing.Point(470, 341);
-            this.NameMarkColor.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.NameMarkColor.Margin = new System.Windows.Forms.Padding(1);
             this.NameMarkColor.Name = "NameMarkColor";
             this.NameMarkColor.Size = new System.Drawing.Size(88, 24);
             this.NameMarkColor.TabIndex = 21;
@@ -9033,7 +9200,7 @@ namespace DocumentTools
             this.MarkDupName.AutoSize = true;
             this.MarkDupName.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.MarkDupName.Location = new System.Drawing.Point(397, 345);
-            this.MarkDupName.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.MarkDupName.Margin = new System.Windows.Forms.Padding(1);
             this.MarkDupName.Name = "MarkDupName";
             this.MarkDupName.Size = new System.Drawing.Size(72, 16);
             this.MarkDupName.TabIndex = 20;
@@ -9045,7 +9212,7 @@ namespace DocumentTools
             // 
             this.ExportNameTxt.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ExportNameTxt.Location = new System.Drawing.Point(681, 563);
-            this.ExportNameTxt.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ExportNameTxt.Margin = new System.Windows.Forms.Padding(1);
             this.ExportNameTxt.Name = "ExportNameTxt";
             this.ExportNameTxt.Size = new System.Drawing.Size(187, 31);
             this.ExportNameTxt.TabIndex = 19;
@@ -9101,7 +9268,7 @@ namespace DocumentTools
             this.NameAutoCopy.CheckState = System.Windows.Forms.CheckState.Checked;
             this.NameAutoCopy.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.NameAutoCopy.Location = new System.Drawing.Point(397, 363);
-            this.NameAutoCopy.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.NameAutoCopy.Margin = new System.Windows.Forms.Padding(1);
             this.NameAutoCopy.Name = "NameAutoCopy";
             this.NameAutoCopy.Size = new System.Drawing.Size(72, 16);
             this.NameAutoCopy.TabIndex = 15;
@@ -9114,7 +9281,7 @@ namespace DocumentTools
             this.NameReplaceWord.AutoSize = true;
             this.NameReplaceWord.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.NameReplaceWord.Location = new System.Drawing.Point(318, 314);
-            this.NameReplaceWord.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.NameReplaceWord.Margin = new System.Windows.Forms.Padding(1);
             this.NameReplaceWord.Name = "NameReplaceWord";
             this.NameReplaceWord.Size = new System.Drawing.Size(72, 16);
             this.NameReplaceWord.TabIndex = 13;
@@ -9138,7 +9305,7 @@ namespace DocumentTools
             // 
             this.NameReplaceWord_Target.AcceptsReturn = true;
             this.NameReplaceWord_Target.Location = new System.Drawing.Point(452, 312);
-            this.NameReplaceWord_Target.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.NameReplaceWord_Target.Margin = new System.Windows.Forms.Padding(1);
             this.NameReplaceWord_Target.Multiline = true;
             this.NameReplaceWord_Target.Name = "NameReplaceWord_Target";
             this.NameReplaceWord_Target.Size = new System.Drawing.Size(35, 20);
@@ -9149,7 +9316,7 @@ namespace DocumentTools
             // 
             this.NameReplaceWord_Search.AcceptsReturn = true;
             this.NameReplaceWord_Search.Location = new System.Drawing.Point(397, 312);
-            this.NameReplaceWord_Search.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.NameReplaceWord_Search.Margin = new System.Windows.Forms.Padding(1);
             this.NameReplaceWord_Search.Multiline = true;
             this.NameReplaceWord_Search.Name = "NameReplaceWord_Search";
             this.NameReplaceWord_Search.Size = new System.Drawing.Size(31, 20);
@@ -9161,7 +9328,7 @@ namespace DocumentTools
             this.NameStorkeChcek.AutoSize = true;
             this.NameStorkeChcek.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.NameStorkeChcek.Location = new System.Drawing.Point(397, 400);
-            this.NameStorkeChcek.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.NameStorkeChcek.Margin = new System.Windows.Forms.Padding(1);
             this.NameStorkeChcek.Name = "NameStorkeChcek";
             this.NameStorkeChcek.Size = new System.Drawing.Size(72, 16);
             this.NameStorkeChcek.TabIndex = 8;
@@ -9175,7 +9342,7 @@ namespace DocumentTools
             this.MutilLineMode.AutoSize = true;
             this.MutilLineMode.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.MutilLineMode.Location = new System.Drawing.Point(397, 418);
-            this.MutilLineMode.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.MutilLineMode.Margin = new System.Windows.Forms.Padding(1);
             this.MutilLineMode.Name = "MutilLineMode";
             this.MutilLineMode.Size = new System.Drawing.Size(72, 16);
             this.MutilLineMode.TabIndex = 7;
@@ -9191,7 +9358,7 @@ namespace DocumentTools
             this.DoubleTextAlignCheck.CheckState = System.Windows.Forms.CheckState.Checked;
             this.DoubleTextAlignCheck.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.DoubleTextAlignCheck.Location = new System.Drawing.Point(397, 436);
-            this.DoubleTextAlignCheck.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.DoubleTextAlignCheck.Margin = new System.Windows.Forms.Padding(1);
             this.DoubleTextAlignCheck.Name = "DoubleTextAlignCheck";
             this.DoubleTextAlignCheck.Size = new System.Drawing.Size(72, 16);
             this.DoubleTextAlignCheck.TabIndex = 6;
@@ -9204,7 +9371,7 @@ namespace DocumentTools
             this.RemoveNumberCheck.AutoSize = true;
             this.RemoveNumberCheck.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.RemoveNumberCheck.Location = new System.Drawing.Point(397, 454);
-            this.RemoveNumberCheck.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.RemoveNumberCheck.Margin = new System.Windows.Forms.Padding(1);
             this.RemoveNumberCheck.Name = "RemoveNumberCheck";
             this.RemoveNumberCheck.Size = new System.Drawing.Size(72, 16);
             this.RemoveNumberCheck.TabIndex = 5;
@@ -9217,7 +9384,7 @@ namespace DocumentTools
             this.RemoveSquareCheck.AutoSize = true;
             this.RemoveSquareCheck.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.RemoveSquareCheck.Location = new System.Drawing.Point(397, 472);
-            this.RemoveSquareCheck.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.RemoveSquareCheck.Margin = new System.Windows.Forms.Padding(1);
             this.RemoveSquareCheck.Name = "RemoveSquareCheck";
             this.RemoveSquareCheck.Size = new System.Drawing.Size(72, 16);
             this.RemoveSquareCheck.TabIndex = 4;
@@ -9242,7 +9409,7 @@ namespace DocumentTools
             // 
             this.ConvertTextButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ConvertTextButton.Location = new System.Drawing.Point(379, 519);
-            this.ConvertTextButton.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ConvertTextButton.Margin = new System.Windows.Forms.Padding(1);
             this.ConvertTextButton.Name = "ConvertTextButton";
             this.ConvertTextButton.Size = new System.Drawing.Size(127, 29);
             this.ConvertTextButton.TabIndex = 2;
@@ -9256,9 +9423,9 @@ namespace DocumentTools
             this.groupBox2.Controls.Add(this.TargetBoxIndex_number);
             this.groupBox2.Controls.Add(this.TargetTextBox);
             this.groupBox2.Location = new System.Drawing.Point(681, 1);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox2.Size = new System.Drawing.Size(187, 551);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
@@ -9270,7 +9437,7 @@ namespace DocumentTools
             this.TargetBoxIndex_number.Enabled = false;
             this.TargetBoxIndex_number.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.TargetBoxIndex_number.Location = new System.Drawing.Point(4, 17);
-            this.TargetBoxIndex_number.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.TargetBoxIndex_number.Margin = new System.Windows.Forms.Padding(2);
             this.TargetBoxIndex_number.Name = "TargetBoxIndex_number";
             this.TargetBoxIndex_number.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
             this.TargetBoxIndex_number.Size = new System.Drawing.Size(29, 531);
@@ -9281,7 +9448,7 @@ namespace DocumentTools
             // 
             this.TargetTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TargetTextBox.Location = new System.Drawing.Point(36, 15);
-            this.TargetTextBox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TargetTextBox.Margin = new System.Windows.Forms.Padding(1);
             this.TargetTextBox.Name = "TargetTextBox";
             this.TargetTextBox.Size = new System.Drawing.Size(150, 531);
             this.TargetTextBox.TabIndex = 3;
@@ -9294,9 +9461,9 @@ namespace DocumentTools
             // 
             this.groupBox1.Controls.Add(this.SourceTextBox);
             this.groupBox1.Location = new System.Drawing.Point(3, 1);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox1.Size = new System.Drawing.Size(187, 551);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
@@ -9308,7 +9475,7 @@ namespace DocumentTools
             this.SourceTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.SourceTextBox.EnableAutoDragDrop = true;
             this.SourceTextBox.Location = new System.Drawing.Point(3, 16);
-            this.SourceTextBox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SourceTextBox.Margin = new System.Windows.Forms.Padding(1);
             this.SourceTextBox.Name = "SourceTextBox";
             this.SourceTextBox.Size = new System.Drawing.Size(181, 531);
             this.SourceTextBox.TabIndex = 2;
@@ -9328,7 +9495,7 @@ namespace DocumentTools
             this.TabPage_35.Controls.Add(this.webpPictureSelect);
             this.TabPage_35.Controls.Add(this.WebpFileList);
             this.TabPage_35.Location = new System.Drawing.Point(4, 114);
-            this.TabPage_35.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_35.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_35.Name = "TabPage_35";
             this.TabPage_35.Size = new System.Drawing.Size(882, 621);
             this.TabPage_35.TabIndex = 34;
@@ -9340,9 +9507,9 @@ namespace DocumentTools
             this.groupBox39.Controls.Add(this.webp2image_combox);
             this.groupBox39.Controls.Add(this.label98);
             this.groupBox39.Location = new System.Drawing.Point(4, 431);
-            this.groupBox39.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox39.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox39.Name = "groupBox39";
-            this.groupBox39.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox39.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox39.Size = new System.Drawing.Size(147, 63);
             this.groupBox39.TabIndex = 21;
             this.groupBox39.TabStop = false;
@@ -9353,7 +9520,7 @@ namespace DocumentTools
             // 
             this.webp2image_combox.FormattingEnabled = true;
             this.webp2image_combox.Location = new System.Drawing.Point(73, 25);
-            this.webp2image_combox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.webp2image_combox.Margin = new System.Windows.Forms.Padding(1);
             this.webp2image_combox.Name = "webp2image_combox";
             this.webp2image_combox.Size = new System.Drawing.Size(65, 24);
             this.webp2image_combox.TabIndex = 1;
@@ -9373,7 +9540,7 @@ namespace DocumentTools
             // 
             this.WebpFileList_MoveDown.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.WebpFileList_MoveDown.Location = new System.Drawing.Point(847, 317);
-            this.WebpFileList_MoveDown.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.WebpFileList_MoveDown.Margin = new System.Windows.Forms.Padding(1);
             this.WebpFileList_MoveDown.Name = "WebpFileList_MoveDown";
             this.WebpFileList_MoveDown.Size = new System.Drawing.Size(23, 57);
             this.WebpFileList_MoveDown.TabIndex = 18;
@@ -9385,7 +9552,7 @@ namespace DocumentTools
             // 
             this.WebpFileList_MoveUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.WebpFileList_MoveUp.Location = new System.Drawing.Point(847, 107);
-            this.WebpFileList_MoveUp.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.WebpFileList_MoveUp.Margin = new System.Windows.Forms.Padding(1);
             this.WebpFileList_MoveUp.Name = "WebpFileList_MoveUp";
             this.WebpFileList_MoveUp.Size = new System.Drawing.Size(23, 57);
             this.WebpFileList_MoveUp.TabIndex = 17;
@@ -9399,7 +9566,7 @@ namespace DocumentTools
             this.webp2image_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.webp2image_clear.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.webp2image_clear.Location = new System.Drawing.Point(847, 247);
-            this.webp2image_clear.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.webp2image_clear.Margin = new System.Windows.Forms.Padding(1);
             this.webp2image_clear.Name = "webp2image_clear";
             this.webp2image_clear.Size = new System.Drawing.Size(23, 57);
             this.webp2image_clear.TabIndex = 20;
@@ -9412,7 +9579,7 @@ namespace DocumentTools
             this.webp2image_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.webp2image_remove.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.webp2image_remove.Location = new System.Drawing.Point(847, 177);
-            this.webp2image_remove.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.webp2image_remove.Margin = new System.Windows.Forms.Padding(1);
             this.webp2image_remove.Name = "webp2image_remove";
             this.webp2image_remove.Size = new System.Drawing.Size(23, 57);
             this.webp2image_remove.TabIndex = 19;
@@ -9436,7 +9603,7 @@ namespace DocumentTools
             // 
             this.webpPictureStartConvert.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.webpPictureStartConvert.Location = new System.Drawing.Point(717, 551);
-            this.webpPictureStartConvert.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.webpPictureStartConvert.Margin = new System.Windows.Forms.Padding(1);
             this.webpPictureStartConvert.Name = "webpPictureStartConvert";
             this.webpPictureStartConvert.Size = new System.Drawing.Size(147, 37);
             this.webpPictureStartConvert.TabIndex = 15;
@@ -9449,7 +9616,7 @@ namespace DocumentTools
             // 
             this.webpPictureSelect.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.webpPictureSelect.Location = new System.Drawing.Point(5, 561);
-            this.webpPictureSelect.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.webpPictureSelect.Margin = new System.Windows.Forms.Padding(1);
             this.webpPictureSelect.Name = "webpPictureSelect";
             this.webpPictureSelect.Size = new System.Drawing.Size(147, 37);
             this.webpPictureSelect.TabIndex = 14;
@@ -9462,7 +9629,7 @@ namespace DocumentTools
             // 
             this.WebpFileList.HideSelection = false;
             this.WebpFileList.Location = new System.Drawing.Point(4, 4);
-            this.WebpFileList.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.WebpFileList.Margin = new System.Windows.Forms.Padding(1);
             this.WebpFileList.Name = "WebpFileList";
             this.WebpFileList.Size = new System.Drawing.Size(841, 420);
             this.WebpFileList.TabIndex = 13;
@@ -9476,7 +9643,7 @@ namespace DocumentTools
             this.TabPage_09.Controls.Add(this.groupBox6);
             this.TabPage_09.Controls.Add(this.groupBox5);
             this.TabPage_09.Location = new System.Drawing.Point(4, 114);
-            this.TabPage_09.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_09.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_09.Name = "TabPage_09";
             this.TabPage_09.Size = new System.Drawing.Size(882, 621);
             this.TabPage_09.TabIndex = 8;
@@ -9492,9 +9659,9 @@ namespace DocumentTools
             this.groupBox8.Controls.Add(this.NowScanNumber);
             this.groupBox8.Controls.Add(this.ScannTotalNumber);
             this.groupBox8.Location = new System.Drawing.Point(185, 145);
-            this.groupBox8.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox8.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox8.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox8.Size = new System.Drawing.Size(691, 443);
             this.groupBox8.TabIndex = 4;
             this.groupBox8.TabStop = false;
@@ -9506,7 +9673,7 @@ namespace DocumentTools
             this.ResetTotalScanNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ResetTotalScanNumber.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ResetTotalScanNumber.Location = new System.Drawing.Point(553, 411);
-            this.ResetTotalScanNumber.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ResetTotalScanNumber.Margin = new System.Windows.Forms.Padding(1);
             this.ResetTotalScanNumber.Name = "ResetTotalScanNumber";
             this.ResetTotalScanNumber.Size = new System.Drawing.Size(133, 27);
             this.ResetTotalScanNumber.TabIndex = 5;
@@ -9520,7 +9687,7 @@ namespace DocumentTools
             this.RemoveAllFiles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.RemoveAllFiles.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.RemoveAllFiles.Location = new System.Drawing.Point(4, 412);
-            this.RemoveAllFiles.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.RemoveAllFiles.Margin = new System.Windows.Forms.Padding(1);
             this.RemoveAllFiles.Name = "RemoveAllFiles";
             this.RemoveAllFiles.Size = new System.Drawing.Size(123, 27);
             this.RemoveAllFiles.TabIndex = 4;
@@ -9578,9 +9745,9 @@ namespace DocumentTools
             this.groupBox7.Controls.Add(this.PreviewPictureBox);
             this.groupBox7.Enabled = false;
             this.groupBox7.Location = new System.Drawing.Point(5, 145);
-            this.groupBox7.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox7.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox7.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox7.Size = new System.Drawing.Size(176, 443);
             this.groupBox7.TabIndex = 3;
             this.groupBox7.TabStop = false;
@@ -9606,7 +9773,7 @@ namespace DocumentTools
             this.PreviewPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PreviewPictureBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.PreviewPictureBox.Location = new System.Drawing.Point(4, 39);
-            this.PreviewPictureBox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.PreviewPictureBox.Margin = new System.Windows.Forms.Padding(1);
             this.PreviewPictureBox.Name = "PreviewPictureBox";
             this.PreviewPictureBox.Size = new System.Drawing.Size(169, 399);
             this.PreviewPictureBox.TabIndex = 2;
@@ -9636,9 +9803,9 @@ namespace DocumentTools
             this.groupBox6.Controls.Add(this.ScanPictureSavePathBox);
             this.groupBox6.Controls.Add(this.label14);
             this.groupBox6.Location = new System.Drawing.Point(83, 1);
-            this.groupBox6.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox6.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox6.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox6.Size = new System.Drawing.Size(797, 131);
             this.groupBox6.TabIndex = 1;
             this.groupBox6.TabStop = false;
@@ -9660,7 +9827,7 @@ namespace DocumentTools
             // ScanSerialNumberTextBox
             // 
             this.ScanSerialNumberTextBox.Location = new System.Drawing.Point(52, 97);
-            this.ScanSerialNumberTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ScanSerialNumberTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.ScanSerialNumberTextBox.Name = "ScanSerialNumberTextBox";
             this.ScanSerialNumberTextBox.ReadOnly = true;
             this.ScanSerialNumberTextBox.Size = new System.Drawing.Size(224, 21);
@@ -9671,7 +9838,7 @@ namespace DocumentTools
             this.TwainSetDeviceSaveTime.Enabled = false;
             this.TwainSetDeviceSaveTime.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.TwainSetDeviceSaveTime.Location = new System.Drawing.Point(175, 45);
-            this.TwainSetDeviceSaveTime.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TwainSetDeviceSaveTime.Margin = new System.Windows.Forms.Padding(1);
             this.TwainSetDeviceSaveTime.Name = "TwainSetDeviceSaveTime";
             this.TwainSetDeviceSaveTime.Size = new System.Drawing.Size(100, 21);
             this.TwainSetDeviceSaveTime.TabIndex = 16;
@@ -9685,7 +9852,7 @@ namespace DocumentTools
             this.ExportCaps.AutoSize = true;
             this.ExportCaps.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ExportCaps.Location = new System.Drawing.Point(677, 99);
-            this.ExportCaps.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ExportCaps.Margin = new System.Windows.Forms.Padding(1);
             this.ExportCaps.Name = "ExportCaps";
             this.ExportCaps.Size = new System.Drawing.Size(78, 16);
             this.ExportCaps.TabIndex = 15;
@@ -9697,7 +9864,7 @@ namespace DocumentTools
             // TwainScanNumberSet
             // 
             this.TwainScanNumberSet.Location = new System.Drawing.Point(569, 97);
-            this.TwainScanNumberSet.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TwainScanNumberSet.Margin = new System.Windows.Forms.Padding(1);
             this.TwainScanNumberSet.Name = "TwainScanNumberSet";
             this.TwainScanNumberSet.Size = new System.Drawing.Size(105, 21);
             this.TwainScanNumberSet.TabIndex = 14;
@@ -9721,7 +9888,7 @@ namespace DocumentTools
             this.UseInterfaceUi.AutoSize = true;
             this.UseInterfaceUi.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.UseInterfaceUi.Location = new System.Drawing.Point(677, 75);
-            this.UseInterfaceUi.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.UseInterfaceUi.Margin = new System.Windows.Forms.Padding(1);
             this.UseInterfaceUi.Name = "UseInterfaceUi";
             this.UseInterfaceUi.Size = new System.Drawing.Size(84, 16);
             this.UseInterfaceUi.TabIndex = 13;
@@ -9734,7 +9901,7 @@ namespace DocumentTools
             this.TwainPaperSizeBox.Enabled = false;
             this.TwainPaperSizeBox.FormattingEnabled = true;
             this.TwainPaperSizeBox.Location = new System.Drawing.Point(569, 76);
-            this.TwainPaperSizeBox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TwainPaperSizeBox.Margin = new System.Windows.Forms.Padding(1);
             this.TwainPaperSizeBox.Name = "TwainPaperSizeBox";
             this.TwainPaperSizeBox.Size = new System.Drawing.Size(105, 24);
             this.TwainPaperSizeBox.TabIndex = 12;
@@ -9759,7 +9926,7 @@ namespace DocumentTools
             this.SkipBlankPage.AutoSize = true;
             this.SkipBlankPage.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SkipBlankPage.Location = new System.Drawing.Point(89, 76);
-            this.SkipBlankPage.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SkipBlankPage.Margin = new System.Windows.Forms.Padding(1);
             this.SkipBlankPage.Name = "SkipBlankPage";
             this.SkipBlankPage.Size = new System.Drawing.Size(84, 16);
             this.SkipBlankPage.TabIndex = 10;
@@ -9782,7 +9949,7 @@ namespace DocumentTools
             this.DoubleScanBox.AutoSize = true;
             this.DoubleScanBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.DoubleScanBox.Location = new System.Drawing.Point(7, 77);
-            this.DoubleScanBox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.DoubleScanBox.Margin = new System.Windows.Forms.Padding(1);
             this.DoubleScanBox.Name = "DoubleScanBox";
             this.DoubleScanBox.Size = new System.Drawing.Size(72, 16);
             this.DoubleScanBox.TabIndex = 9;
@@ -9793,7 +9960,7 @@ namespace DocumentTools
             // 
             this.TwainDpi.FormattingEnabled = true;
             this.TwainDpi.Location = new System.Drawing.Point(569, 49);
-            this.TwainDpi.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TwainDpi.Margin = new System.Windows.Forms.Padding(1);
             this.TwainDpi.Name = "TwainDpi";
             this.TwainDpi.Size = new System.Drawing.Size(105, 24);
             this.TwainDpi.TabIndex = 7;
@@ -9815,7 +9982,7 @@ namespace DocumentTools
             // 
             this.TwainSleepTimeSet.FormattingEnabled = true;
             this.TwainSleepTimeSet.Location = new System.Drawing.Point(61, 47);
-            this.TwainSleepTimeSet.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TwainSleepTimeSet.Margin = new System.Windows.Forms.Padding(1);
             this.TwainSleepTimeSet.Name = "TwainSleepTimeSet";
             this.TwainSleepTimeSet.Size = new System.Drawing.Size(112, 24);
             this.TwainSleepTimeSet.TabIndex = 5;
@@ -9835,7 +10002,7 @@ namespace DocumentTools
             // 
             this.SelectScanPath.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SelectScanPath.Location = new System.Drawing.Point(636, 17);
-            this.SelectScanPath.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SelectScanPath.Margin = new System.Windows.Forms.Padding(1);
             this.SelectScanPath.Name = "SelectScanPath";
             this.SelectScanPath.Size = new System.Drawing.Size(81, 22);
             this.SelectScanPath.TabIndex = 3;
@@ -9848,7 +10015,7 @@ namespace DocumentTools
             // 
             this.StartScanButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.StartScanButton.Location = new System.Drawing.Point(677, 47);
-            this.StartScanButton.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.StartScanButton.Margin = new System.Windows.Forms.Padding(1);
             this.StartScanButton.Name = "StartScanButton";
             this.StartScanButton.Size = new System.Drawing.Size(79, 21);
             this.StartScanButton.TabIndex = 2;
@@ -9860,7 +10027,7 @@ namespace DocumentTools
             // ScanPictureSavePathBox
             // 
             this.ScanPictureSavePathBox.Location = new System.Drawing.Point(87, 19);
-            this.ScanPictureSavePathBox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ScanPictureSavePathBox.Margin = new System.Windows.Forms.Padding(1);
             this.ScanPictureSavePathBox.Name = "ScanPictureSavePathBox";
             this.ScanPictureSavePathBox.Size = new System.Drawing.Size(547, 21);
             this.ScanPictureSavePathBox.TabIndex = 1;
@@ -9882,9 +10049,9 @@ namespace DocumentTools
             this.groupBox5.Controls.Add(this.SetTwainDevice);
             this.groupBox5.Controls.Add(this.SelectTwainDevice);
             this.groupBox5.Location = new System.Drawing.Point(1, 1);
-            this.groupBox5.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox5.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox5.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox5.Size = new System.Drawing.Size(77, 131);
             this.groupBox5.TabIndex = 0;
             this.groupBox5.TabStop = false;
@@ -9926,7 +10093,7 @@ namespace DocumentTools
             this.TabPage_13.Controls.Add(this.groupBox16);
             this.TabPage_13.Controls.Add(this.groupBox15);
             this.TabPage_13.Location = new System.Drawing.Point(4, 114);
-            this.TabPage_13.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_13.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_13.Name = "TabPage_13";
             this.TabPage_13.Size = new System.Drawing.Size(882, 621);
             this.TabPage_13.TabIndex = 12;
@@ -9938,9 +10105,9 @@ namespace DocumentTools
             this.groupBox64.Controls.Add(this.ReleaseRenamerReplaceConfig);
             this.groupBox64.Controls.Add(this.ReleaseRenamerApp);
             this.groupBox64.Location = new System.Drawing.Point(595, 1);
-            this.groupBox64.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox64.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox64.Name = "groupBox64";
-            this.groupBox64.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox64.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox64.Size = new System.Drawing.Size(200, 77);
             this.groupBox64.TabIndex = 0;
             this.groupBox64.TabStop = false;
@@ -9951,7 +10118,7 @@ namespace DocumentTools
             // 
             this.ReleaseRenamerReplaceConfig.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ReleaseRenamerReplaceConfig.Location = new System.Drawing.Point(111, 25);
-            this.ReleaseRenamerReplaceConfig.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ReleaseRenamerReplaceConfig.Margin = new System.Windows.Forms.Padding(1);
             this.ReleaseRenamerReplaceConfig.Name = "ReleaseRenamerReplaceConfig";
             this.ReleaseRenamerReplaceConfig.Size = new System.Drawing.Size(87, 27);
             this.ReleaseRenamerReplaceConfig.TabIndex = 0;
@@ -9963,7 +10130,7 @@ namespace DocumentTools
             // 
             this.ReleaseRenamerApp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ReleaseRenamerApp.Location = new System.Drawing.Point(4, 25);
-            this.ReleaseRenamerApp.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ReleaseRenamerApp.Margin = new System.Windows.Forms.Padding(1);
             this.ReleaseRenamerApp.Name = "ReleaseRenamerApp";
             this.ReleaseRenamerApp.Size = new System.Drawing.Size(87, 27);
             this.ReleaseRenamerApp.TabIndex = 1;
@@ -9975,9 +10142,9 @@ namespace DocumentTools
             // 
             this.groupBox63.Controls.Add(this.ReleaseKMSAIO);
             this.groupBox63.Location = new System.Drawing.Point(475, 1);
-            this.groupBox63.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox63.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox63.Name = "groupBox63";
-            this.groupBox63.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox63.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox63.Size = new System.Drawing.Size(115, 77);
             this.groupBox63.TabIndex = 1;
             this.groupBox63.TabStop = false;
@@ -9988,7 +10155,7 @@ namespace DocumentTools
             // 
             this.ReleaseKMSAIO.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ReleaseKMSAIO.Location = new System.Drawing.Point(11, 25);
-            this.ReleaseKMSAIO.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ReleaseKMSAIO.Margin = new System.Windows.Forms.Padding(1);
             this.ReleaseKMSAIO.Name = "ReleaseKMSAIO";
             this.ReleaseKMSAIO.Size = new System.Drawing.Size(87, 27);
             this.ReleaseKMSAIO.TabIndex = 0;
@@ -10022,9 +10189,9 @@ namespace DocumentTools
             this.groupBox17.Controls.Add(this.SelectFilesIco);
             this.groupBox17.Controls.Add(this.IcoFileView);
             this.groupBox17.Location = new System.Drawing.Point(7, 84);
-            this.groupBox17.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox17.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox17.Name = "groupBox17";
-            this.groupBox17.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox17.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox17.Size = new System.Drawing.Size(871, 487);
             this.groupBox17.TabIndex = 3;
             this.groupBox17.TabStop = false;
@@ -10038,7 +10205,7 @@ namespace DocumentTools
             this.image2ico_remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.image2ico_remove.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.image2ico_remove.Location = new System.Drawing.Point(841, 147);
-            this.image2ico_remove.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.image2ico_remove.Margin = new System.Windows.Forms.Padding(1);
             this.image2ico_remove.Name = "image2ico_remove";
             this.image2ico_remove.Size = new System.Drawing.Size(23, 57);
             this.image2ico_remove.TabIndex = 13;
@@ -10049,7 +10216,7 @@ namespace DocumentTools
             this.IcoFileView_MoveDown.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.IcoFileView_MoveDown.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.IcoFileView_MoveDown.Location = new System.Drawing.Point(841, 312);
-            this.IcoFileView_MoveDown.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.IcoFileView_MoveDown.Margin = new System.Windows.Forms.Padding(1);
             this.IcoFileView_MoveDown.Name = "IcoFileView_MoveDown";
             this.IcoFileView_MoveDown.Size = new System.Drawing.Size(23, 57);
             this.IcoFileView_MoveDown.TabIndex = 7;
@@ -10062,7 +10229,7 @@ namespace DocumentTools
             this.IcoFileView_MoveUp.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.IcoFileView_MoveUp.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.IcoFileView_MoveUp.Location = new System.Drawing.Point(841, 72);
-            this.IcoFileView_MoveUp.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.IcoFileView_MoveUp.Margin = new System.Windows.Forms.Padding(1);
             this.IcoFileView_MoveUp.Name = "IcoFileView_MoveUp";
             this.IcoFileView_MoveUp.Size = new System.Drawing.Size(23, 57);
             this.IcoFileView_MoveUp.TabIndex = 6;
@@ -10077,7 +10244,7 @@ namespace DocumentTools
             this.image2ico_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.image2ico_clear.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.image2ico_clear.Location = new System.Drawing.Point(841, 228);
-            this.image2ico_clear.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.image2ico_clear.Margin = new System.Windows.Forms.Padding(1);
             this.image2ico_clear.Name = "image2ico_clear";
             this.image2ico_clear.Size = new System.Drawing.Size(23, 57);
             this.image2ico_clear.TabIndex = 12;
@@ -10089,7 +10256,7 @@ namespace DocumentTools
             this.IcoSizeDrop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.IcoSizeDrop.FormattingEnabled = true;
             this.IcoSizeDrop.Location = new System.Drawing.Point(439, 429);
-            this.IcoSizeDrop.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.IcoSizeDrop.Margin = new System.Windows.Forms.Padding(1);
             this.IcoSizeDrop.Name = "IcoSizeDrop";
             this.IcoSizeDrop.Size = new System.Drawing.Size(92, 24);
             this.IcoSizeDrop.TabIndex = 5;
@@ -10127,7 +10294,7 @@ namespace DocumentTools
             this.ConvertImage2Ico.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ConvertImage2Ico.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ConvertImage2Ico.Location = new System.Drawing.Point(775, 447);
-            this.ConvertImage2Ico.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ConvertImage2Ico.Margin = new System.Windows.Forms.Padding(1);
             this.ConvertImage2Ico.Name = "ConvertImage2Ico";
             this.ConvertImage2Ico.Size = new System.Drawing.Size(91, 29);
             this.ConvertImage2Ico.TabIndex = 2;
@@ -10141,7 +10308,7 @@ namespace DocumentTools
             this.SelectFilesIco.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.SelectFilesIco.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SelectFilesIco.Location = new System.Drawing.Point(1, 447);
-            this.SelectFilesIco.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SelectFilesIco.Margin = new System.Windows.Forms.Padding(1);
             this.SelectFilesIco.Name = "SelectFilesIco";
             this.SelectFilesIco.Size = new System.Drawing.Size(91, 29);
             this.SelectFilesIco.TabIndex = 1;
@@ -10157,7 +10324,7 @@ namespace DocumentTools
             | System.Windows.Forms.AnchorStyles.Right)));
             this.IcoFileView.HideSelection = false;
             this.IcoFileView.Location = new System.Drawing.Point(4, 17);
-            this.IcoFileView.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.IcoFileView.Margin = new System.Windows.Forms.Padding(1);
             this.IcoFileView.Name = "IcoFileView";
             this.IcoFileView.Size = new System.Drawing.Size(837, 408);
             this.IcoFileView.TabIndex = 0;
@@ -10168,9 +10335,9 @@ namespace DocumentTools
             // 
             this.groupBox16.Controls.Add(this.ReleaseRegistry);
             this.groupBox16.Location = new System.Drawing.Point(372, 1);
-            this.groupBox16.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox16.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox16.Name = "groupBox16";
-            this.groupBox16.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox16.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox16.Size = new System.Drawing.Size(99, 77);
             this.groupBox16.TabIndex = 1;
             this.groupBox16.TabStop = false;
@@ -10181,7 +10348,7 @@ namespace DocumentTools
             // 
             this.ReleaseRegistry.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ReleaseRegistry.Location = new System.Drawing.Point(4, 25);
-            this.ReleaseRegistry.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ReleaseRegistry.Margin = new System.Windows.Forms.Padding(1);
             this.ReleaseRegistry.Name = "ReleaseRegistry";
             this.ReleaseRegistry.Size = new System.Drawing.Size(87, 27);
             this.ReleaseRegistry.TabIndex = 0;
@@ -10196,9 +10363,9 @@ namespace DocumentTools
             this.groupBox15.Controls.Add(this.Downloadfx35Progress);
             this.groupBox15.Controls.Add(this.DownloadNetfx35);
             this.groupBox15.Location = new System.Drawing.Point(3, 1);
-            this.groupBox15.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox15.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox15.Name = "groupBox15";
-            this.groupBox15.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox15.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox15.Size = new System.Drawing.Size(364, 77);
             this.groupBox15.TabIndex = 0;
             this.groupBox15.TabStop = false;
@@ -10233,7 +10400,7 @@ namespace DocumentTools
             // 
             this.Downloadfx35Progress.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.Downloadfx35Progress.Location = new System.Drawing.Point(4, 47);
-            this.Downloadfx35Progress.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Downloadfx35Progress.Margin = new System.Windows.Forms.Padding(1);
             this.Downloadfx35Progress.Name = "Downloadfx35Progress";
             this.Downloadfx35Progress.Size = new System.Drawing.Size(237, 25);
             this.Downloadfx35Progress.TabIndex = 1;
@@ -10242,7 +10409,7 @@ namespace DocumentTools
             // 
             this.DownloadNetfx35.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.DownloadNetfx35.Location = new System.Drawing.Point(4, 17);
-            this.DownloadNetfx35.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.DownloadNetfx35.Margin = new System.Windows.Forms.Padding(1);
             this.DownloadNetfx35.Name = "DownloadNetfx35";
             this.DownloadNetfx35.Size = new System.Drawing.Size(149, 25);
             this.DownloadNetfx35.TabIndex = 0;
@@ -10256,7 +10423,7 @@ namespace DocumentTools
             this.TabPage_26.Controls.Add(this.groupBox27);
             this.TabPage_26.Controls.Add(this.groupBox26);
             this.TabPage_26.Location = new System.Drawing.Point(4, 114);
-            this.TabPage_26.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_26.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_26.Name = "TabPage_26";
             this.TabPage_26.Size = new System.Drawing.Size(882, 621);
             this.TabPage_26.TabIndex = 25;
@@ -10271,9 +10438,9 @@ namespace DocumentTools
             this.blockgroup.Controls.Add(this.label153);
             this.blockgroup.Font = new System.Drawing.Font("宋体", 9F);
             this.blockgroup.Location = new System.Drawing.Point(587, 1);
-            this.blockgroup.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.blockgroup.Margin = new System.Windows.Forms.Padding(1);
             this.blockgroup.Name = "blockgroup";
-            this.blockgroup.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.blockgroup.Padding = new System.Windows.Forms.Padding(1);
             this.blockgroup.Size = new System.Drawing.Size(281, 137);
             this.blockgroup.TabIndex = 5;
             this.blockgroup.TabStop = false;
@@ -10283,7 +10450,7 @@ namespace DocumentTools
             // 
             this.OpenSystemUpdate.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.OpenSystemUpdate.Location = new System.Drawing.Point(7, 99);
-            this.OpenSystemUpdate.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.OpenSystemUpdate.Margin = new System.Windows.Forms.Padding(1);
             this.OpenSystemUpdate.Name = "OpenSystemUpdate";
             this.OpenSystemUpdate.Size = new System.Drawing.Size(97, 29);
             this.OpenSystemUpdate.TabIndex = 3;
@@ -10295,7 +10462,7 @@ namespace DocumentTools
             // 
             this.SetPauseTime.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SetPauseTime.Location = new System.Drawing.Point(173, 97);
-            this.SetPauseTime.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SetPauseTime.Margin = new System.Windows.Forms.Padding(1);
             this.SetPauseTime.Name = "SetPauseTime";
             this.SetPauseTime.Size = new System.Drawing.Size(97, 29);
             this.SetPauseTime.TabIndex = 2;
@@ -10307,7 +10474,7 @@ namespace DocumentTools
             // 
             this.PauseUpdateYears.FormattingEnabled = true;
             this.PauseUpdateYears.Location = new System.Drawing.Point(129, 37);
-            this.PauseUpdateYears.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.PauseUpdateYears.Margin = new System.Windows.Forms.Padding(1);
             this.PauseUpdateYears.Name = "PauseUpdateYears";
             this.PauseUpdateYears.Size = new System.Drawing.Size(143, 20);
             this.PauseUpdateYears.TabIndex = 1;
@@ -10331,9 +10498,9 @@ namespace DocumentTools
             this.groupBox27.Controls.Add(this.RemoveShort);
             this.groupBox27.Font = new System.Drawing.Font("宋体", 9F);
             this.groupBox27.Location = new System.Drawing.Point(291, 1);
-            this.groupBox27.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox27.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox27.Name = "groupBox27";
-            this.groupBox27.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox27.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox27.Size = new System.Drawing.Size(292, 137);
             this.groupBox27.TabIndex = 3;
             this.groupBox27.TabStop = false;
@@ -10344,7 +10511,7 @@ namespace DocumentTools
             this.AutoRestartExplorer.AutoSize = true;
             this.AutoRestartExplorer.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.AutoRestartExplorer.Location = new System.Drawing.Point(157, 105);
-            this.AutoRestartExplorer.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.AutoRestartExplorer.Margin = new System.Windows.Forms.Padding(1);
             this.AutoRestartExplorer.Name = "AutoRestartExplorer";
             this.AutoRestartExplorer.Size = new System.Drawing.Size(132, 16);
             this.AutoRestartExplorer.TabIndex = 3;
@@ -10371,7 +10538,7 @@ namespace DocumentTools
             this.RestoreShort.Font = new System.Drawing.Font("宋体", 9F);
             this.RestoreShort.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.RestoreShort.Location = new System.Drawing.Point(163, 39);
-            this.RestoreShort.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.RestoreShort.Margin = new System.Windows.Forms.Padding(1);
             this.RestoreShort.Name = "RestoreShort";
             this.RestoreShort.Size = new System.Drawing.Size(103, 41);
             this.RestoreShort.TabIndex = 1;
@@ -10385,7 +10552,7 @@ namespace DocumentTools
             this.RemoveShort.Font = new System.Drawing.Font("宋体", 9F);
             this.RemoveShort.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.RemoveShort.Location = new System.Drawing.Point(9, 39);
-            this.RemoveShort.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.RemoveShort.Margin = new System.Windows.Forms.Padding(1);
             this.RemoveShort.Name = "RemoveShort";
             this.RemoveShort.Size = new System.Drawing.Size(103, 41);
             this.RemoveShort.TabIndex = 0;
@@ -10400,9 +10567,9 @@ namespace DocumentTools
             this.groupBox26.Controls.Add(this.LockKeyBoard);
             this.groupBox26.Font = new System.Drawing.Font("宋体", 9F);
             this.groupBox26.Location = new System.Drawing.Point(5, 1);
-            this.groupBox26.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox26.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox26.Name = "groupBox26";
-            this.groupBox26.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox26.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox26.Size = new System.Drawing.Size(281, 137);
             this.groupBox26.TabIndex = 0;
             this.groupBox26.TabStop = false;
@@ -10428,7 +10595,7 @@ namespace DocumentTools
             this.UnlockKeyBoard.Font = new System.Drawing.Font("宋体", 9F);
             this.UnlockKeyBoard.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.UnlockKeyBoard.Location = new System.Drawing.Point(159, 39);
-            this.UnlockKeyBoard.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.UnlockKeyBoard.Margin = new System.Windows.Forms.Padding(1);
             this.UnlockKeyBoard.Name = "UnlockKeyBoard";
             this.UnlockKeyBoard.Size = new System.Drawing.Size(103, 41);
             this.UnlockKeyBoard.TabIndex = 1;
@@ -10442,7 +10609,7 @@ namespace DocumentTools
             this.LockKeyBoard.Font = new System.Drawing.Font("宋体", 9F);
             this.LockKeyBoard.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.LockKeyBoard.Location = new System.Drawing.Point(3, 39);
-            this.LockKeyBoard.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.LockKeyBoard.Margin = new System.Windows.Forms.Padding(1);
             this.LockKeyBoard.Name = "LockKeyBoard";
             this.LockKeyBoard.Size = new System.Drawing.Size(103, 41);
             this.LockKeyBoard.TabIndex = 0;
@@ -10454,9 +10621,9 @@ namespace DocumentTools
             // 
             this.TabPage_32.Controls.Add(this.groupBox32);
             this.TabPage_32.Location = new System.Drawing.Point(4, 114);
-            this.TabPage_32.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_32.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_32.Name = "TabPage_32";
-            this.TabPage_32.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_32.Padding = new System.Windows.Forms.Padding(1);
             this.TabPage_32.Size = new System.Drawing.Size(882, 621);
             this.TabPage_32.TabIndex = 31;
             this.TabPage_32.Text = "MSS3模板修改";
@@ -10464,6 +10631,7 @@ namespace DocumentTools
             // 
             // groupBox32
             // 
+            this.groupBox32.Controls.Add(this.ClickTurnImageConv);
             this.groupBox32.Controls.Add(this.groupBox40);
             this.groupBox32.Controls.Add(this.linkLabel6);
             this.groupBox32.Controls.Add(this.groupBox33);
@@ -10475,22 +10643,33 @@ namespace DocumentTools
             this.groupBox32.Controls.Add(this.Mss3Path);
             this.groupBox32.Controls.Add(this.label75);
             this.groupBox32.Location = new System.Drawing.Point(5, 4);
-            this.groupBox32.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox32.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox32.Name = "groupBox32";
-            this.groupBox32.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox32.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox32.Size = new System.Drawing.Size(879, 648);
             this.groupBox32.TabIndex = 0;
             this.groupBox32.TabStop = false;
             this.groupBox32.Tag = "anchor_full_fill";
             this.groupBox32.Text = "系统配置";
             // 
+            // ClickTurnImageConv
+            // 
+            this.ClickTurnImageConv.AutoSize = true;
+            this.ClickTurnImageConv.Location = new System.Drawing.Point(483, 596);
+            this.ClickTurnImageConv.Name = "ClickTurnImageConv";
+            this.ClickTurnImageConv.Size = new System.Drawing.Size(215, 12);
+            this.ClickTurnImageConv.TabIndex = 18;
+            this.ClickTurnImageConv.TabStop = true;
+            this.ClickTurnImageConv.Text = "点击前往[图片格式转换]可转换TIF图片";
+            this.ClickTurnImageConv.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.ClickTurnImageConv_LinkClicked);
+            // 
             // groupBox40
             // 
             this.groupBox40.Controls.Add(this.votedataview);
             this.groupBox40.Location = new System.Drawing.Point(193, 59);
-            this.groupBox40.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox40.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox40.Name = "groupBox40";
-            this.groupBox40.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox40.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox40.Size = new System.Drawing.Size(671, 325);
             this.groupBox40.TabIndex = 10;
             this.groupBox40.TabStop = false;
@@ -10501,7 +10680,7 @@ namespace DocumentTools
             // 
             this.votedataview.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.votedataview.Location = new System.Drawing.Point(4, 17);
-            this.votedataview.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.votedataview.Margin = new System.Windows.Forms.Padding(1);
             this.votedataview.Name = "votedataview";
             this.votedataview.RowHeadersWidth = 62;
             this.votedataview.RowTemplate.Height = 30;
@@ -10525,6 +10704,8 @@ namespace DocumentTools
             // 
             // groupBox33
             // 
+            this.groupBox33.Controls.Add(this.ResetMssItemColumn);
+            this.groupBox33.Controls.Add(this.ChangeMssItemColumn);
             this.groupBox33.Controls.Add(this.votepageIndexCombox);
             this.groupBox33.Controls.Add(this.votepage_type_combox);
             this.groupBox33.Controls.Add(this.label105);
@@ -10536,19 +10717,45 @@ namespace DocumentTools
             this.groupBox33.Controls.Add(this.label76);
             this.groupBox33.Controls.Add(this.voteid);
             this.groupBox33.Location = new System.Drawing.Point(7, 59);
-            this.groupBox33.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox33.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox33.Name = "groupBox33";
-            this.groupBox33.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
-            this.groupBox33.Size = new System.Drawing.Size(184, 167);
+            this.groupBox33.Padding = new System.Windows.Forms.Padding(1);
+            this.groupBox33.Size = new System.Drawing.Size(184, 219);
             this.groupBox33.TabIndex = 9;
             this.groupBox33.TabStop = false;
             this.groupBox33.Text = "参数设置";
+            // 
+            // ResetMssItemColumn
+            // 
+            this.ResetMssItemColumn.AutoSize = true;
+            this.ResetMssItemColumn.ForeColor = System.Drawing.Color.Red;
+            this.ResetMssItemColumn.Location = new System.Drawing.Point(9, 195);
+            this.ResetMssItemColumn.Name = "ResetMssItemColumn";
+            this.ResetMssItemColumn.Size = new System.Drawing.Size(156, 16);
+            this.ResetMssItemColumn.TabIndex = 18;
+            this.ResetMssItemColumn.Text = "恢复项目列字段结构长度";
+            this.MainToolsTip.SetToolTip(this.ResetMssItemColumn, "*【功能处于测试阶段，谨慎使用】此功能可将数据包内和项目名称（候选人姓名）相关的字段长度重置为初始化状态\r\n");
+            this.ResetMssItemColumn.UseVisualStyleBackColor = true;
+            this.ResetMssItemColumn.CheckedChanged += new System.EventHandler(this.ResetMssItemColumn_CheckedChanged);
+            // 
+            // ChangeMssItemColumn
+            // 
+            this.ChangeMssItemColumn.AutoSize = true;
+            this.ChangeMssItemColumn.ForeColor = System.Drawing.Color.Red;
+            this.ChangeMssItemColumn.Location = new System.Drawing.Point(9, 173);
+            this.ChangeMssItemColumn.Name = "ChangeMssItemColumn";
+            this.ChangeMssItemColumn.Size = new System.Drawing.Size(156, 16);
+            this.ChangeMssItemColumn.TabIndex = 17;
+            this.ChangeMssItemColumn.Text = "修改项目列字段结构长度";
+            this.MainToolsTip.SetToolTip(this.ChangeMssItemColumn, "*【功能处于测试阶段，谨慎使用】此功能可将数据包内和项目名称（候选人姓名）相关的字段长度修改为长文本类型（理论可存放无限长数据）\r\n");
+            this.ChangeMssItemColumn.UseVisualStyleBackColor = true;
+            this.ChangeMssItemColumn.CheckedChanged += new System.EventHandler(this.ChangeMssItemColumn_CheckedChanged);
             // 
             // votepageIndexCombox
             // 
             this.votepageIndexCombox.FormattingEnabled = true;
             this.votepageIndexCombox.Location = new System.Drawing.Point(61, 83);
-            this.votepageIndexCombox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.votepageIndexCombox.Margin = new System.Windows.Forms.Padding(1);
             this.votepageIndexCombox.Name = "votepageIndexCombox";
             this.votepageIndexCombox.Size = new System.Drawing.Size(120, 24);
             this.votepageIndexCombox.TabIndex = 11;
@@ -10557,7 +10764,7 @@ namespace DocumentTools
             // 
             this.votepage_type_combox.FormattingEnabled = true;
             this.votepage_type_combox.Location = new System.Drawing.Point(61, 140);
-            this.votepage_type_combox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.votepage_type_combox.Margin = new System.Windows.Forms.Padding(1);
             this.votepage_type_combox.Name = "votepage_type_combox";
             this.votepage_type_combox.Size = new System.Drawing.Size(120, 24);
             this.votepage_type_combox.TabIndex = 16;
@@ -10587,7 +10794,7 @@ namespace DocumentTools
             // voteindex
             // 
             this.voteindex.Location = new System.Drawing.Point(61, 111);
-            this.voteindex.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.voteindex.Margin = new System.Windows.Forms.Padding(1);
             this.voteindex.MaxLength = 2;
             this.voteindex.Name = "voteindex";
             this.voteindex.Size = new System.Drawing.Size(120, 21);
@@ -10608,7 +10815,7 @@ namespace DocumentTools
             // votename
             // 
             this.votename.Location = new System.Drawing.Point(61, 49);
-            this.votename.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.votename.Margin = new System.Windows.Forms.Padding(1);
             this.votename.MaxLength = 50;
             this.votename.Name = "votename";
             this.votename.Size = new System.Drawing.Size(120, 21);
@@ -10639,7 +10846,7 @@ namespace DocumentTools
             // voteid
             // 
             this.voteid.Location = new System.Drawing.Point(61, 19);
-            this.voteid.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.voteid.Margin = new System.Windows.Forms.Padding(1);
             this.voteid.MaxLength = 2;
             this.voteid.Name = "voteid";
             this.voteid.Size = new System.Drawing.Size(120, 21);
@@ -10664,7 +10871,7 @@ namespace DocumentTools
             // 
             this.StartInsert.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.StartInsert.Location = new System.Drawing.Point(716, 583);
-            this.StartInsert.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.StartInsert.Margin = new System.Windows.Forms.Padding(1);
             this.StartInsert.Name = "StartInsert";
             this.StartInsert.Size = new System.Drawing.Size(149, 39);
             this.StartInsert.TabIndex = 5;
@@ -10677,7 +10884,7 @@ namespace DocumentTools
             // 
             this.SelectVotePic.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SelectVotePic.Location = new System.Drawing.Point(4, 583);
-            this.SelectVotePic.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SelectVotePic.Margin = new System.Windows.Forms.Padding(1);
             this.SelectVotePic.Name = "SelectVotePic";
             this.SelectVotePic.Size = new System.Drawing.Size(149, 39);
             this.SelectVotePic.TabIndex = 4;
@@ -10690,10 +10897,10 @@ namespace DocumentTools
             // 
             this.VotePicture.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.VotePicture.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.VotePicture.Location = new System.Drawing.Point(7, 231);
-            this.VotePicture.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.VotePicture.Location = new System.Drawing.Point(7, 280);
+            this.VotePicture.Margin = new System.Windows.Forms.Padding(1);
             this.VotePicture.Name = "VotePicture";
-            this.VotePicture.Size = new System.Drawing.Size(185, 345);
+            this.VotePicture.Size = new System.Drawing.Size(185, 296);
             this.VotePicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.VotePicture.TabIndex = 3;
             this.VotePicture.TabStop = false;
@@ -10703,7 +10910,7 @@ namespace DocumentTools
             // 
             this.SelectMss3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SelectMss3.Location = new System.Drawing.Point(701, 25);
-            this.SelectMss3.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SelectMss3.Margin = new System.Windows.Forms.Padding(1);
             this.SelectMss3.Name = "SelectMss3";
             this.SelectMss3.Size = new System.Drawing.Size(152, 22);
             this.SelectMss3.TabIndex = 2;
@@ -10715,7 +10922,7 @@ namespace DocumentTools
             // Mss3Path
             // 
             this.Mss3Path.Location = new System.Drawing.Point(37, 25);
-            this.Mss3Path.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Mss3Path.Margin = new System.Windows.Forms.Padding(1);
             this.Mss3Path.Name = "Mss3Path";
             this.Mss3Path.ReadOnly = true;
             this.Mss3Path.Size = new System.Drawing.Size(661, 21);
@@ -10742,9 +10949,9 @@ namespace DocumentTools
             this.TabPage_39.Controls.Add(this.SingleDocumentConfigGroupBox);
             this.TabPage_39.Controls.Add(this.groupBox54);
             this.TabPage_39.Location = new System.Drawing.Point(4, 114);
-            this.TabPage_39.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_39.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_39.Name = "TabPage_39";
-            this.TabPage_39.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_39.Padding = new System.Windows.Forms.Padding(1);
             this.TabPage_39.Size = new System.Drawing.Size(882, 621);
             this.TabPage_39.TabIndex = 38;
             this.TabPage_39.Text = "单人表生成";
@@ -10755,7 +10962,7 @@ namespace DocumentTools
             this.pictureBox8.Image = global::DocumentTools.Properties.Resources.QQ截图20240115183157;
             this.pictureBox8.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.pictureBox8.Location = new System.Drawing.Point(635, 315);
-            this.pictureBox8.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.pictureBox8.Margin = new System.Windows.Forms.Padding(1);
             this.pictureBox8.Name = "pictureBox8";
             this.pictureBox8.Size = new System.Drawing.Size(245, 237);
             this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -10796,7 +11003,7 @@ namespace DocumentTools
             this.pictureBox7.Image = global::DocumentTools.Properties.Resources.A;
             this.pictureBox7.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.pictureBox7.Location = new System.Drawing.Point(635, 37);
-            this.pictureBox7.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.pictureBox7.Margin = new System.Windows.Forms.Padding(1);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(245, 235);
             this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -10806,25 +11013,36 @@ namespace DocumentTools
             // 
             // SingleDocumentConfigGroupBox
             // 
+            this.SingleDocumentConfigGroupBox.Controls.Add(this.pictureBox10);
             this.SingleDocumentConfigGroupBox.Controls.Add(this.SignDocumentProgress);
             this.SingleDocumentConfigGroupBox.Controls.Add(this.groupBox55);
             this.SingleDocumentConfigGroupBox.Controls.Add(this.SignDocumentReplaceStart);
             this.SingleDocumentConfigGroupBox.Controls.Add(this.groupBox58);
             this.SingleDocumentConfigGroupBox.Location = new System.Drawing.Point(4, 101);
-            this.SingleDocumentConfigGroupBox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SingleDocumentConfigGroupBox.Margin = new System.Windows.Forms.Padding(1);
             this.SingleDocumentConfigGroupBox.Name = "SingleDocumentConfigGroupBox";
-            this.SingleDocumentConfigGroupBox.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SingleDocumentConfigGroupBox.Padding = new System.Windows.Forms.Padding(1);
             this.SingleDocumentConfigGroupBox.Size = new System.Drawing.Size(627, 451);
             this.SingleDocumentConfigGroupBox.TabIndex = 1;
             this.SingleDocumentConfigGroupBox.TabStop = false;
             this.SingleDocumentConfigGroupBox.Tag = "anchor_full_fill";
             this.SingleDocumentConfigGroupBox.Text = "单人表生成参数配置";
             // 
+            // pictureBox10
+            // 
+            this.pictureBox10.Image = global::DocumentTools.Properties.Resources.红温;
+            this.pictureBox10.Location = new System.Drawing.Point(9, 334);
+            this.pictureBox10.Name = "pictureBox10";
+            this.pictureBox10.Size = new System.Drawing.Size(83, 69);
+            this.pictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox10.TabIndex = 11;
+            this.pictureBox10.TabStop = false;
+            // 
             // SignDocumentProgress
             // 
             this.SignDocumentProgress.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SignDocumentProgress.Location = new System.Drawing.Point(9, 407);
-            this.SignDocumentProgress.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SignDocumentProgress.Margin = new System.Windows.Forms.Padding(1);
             this.SignDocumentProgress.Name = "SignDocumentProgress";
             this.SignDocumentProgress.Size = new System.Drawing.Size(500, 29);
             this.SignDocumentProgress.TabIndex = 10;
@@ -10841,9 +11059,9 @@ namespace DocumentTools
             this.groupBox55.Controls.Add(this.SignDocumentNeedCount);
             this.groupBox55.Controls.Add(this.SignDocumentPicSourceGroupBox);
             this.groupBox55.Location = new System.Drawing.Point(5, 31);
-            this.groupBox55.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox55.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox55.Name = "groupBox55";
-            this.groupBox55.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox55.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox55.Size = new System.Drawing.Size(617, 217);
             this.groupBox55.TabIndex = 8;
             this.groupBox55.TabStop = false;
@@ -10856,7 +11074,7 @@ namespace DocumentTools
             this.SignDocumentUseOnlyNumber.Checked = true;
             this.SignDocumentUseOnlyNumber.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SignDocumentUseOnlyNumber.Location = new System.Drawing.Point(307, 21);
-            this.SignDocumentUseOnlyNumber.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SignDocumentUseOnlyNumber.Margin = new System.Windows.Forms.Padding(1);
             this.SignDocumentUseOnlyNumber.Name = "SignDocumentUseOnlyNumber";
             this.SignDocumentUseOnlyNumber.Size = new System.Drawing.Size(89, 16);
             this.SignDocumentUseOnlyNumber.TabIndex = 20;
@@ -10870,7 +11088,7 @@ namespace DocumentTools
             this.SignDocumentUsePersonNumber.AutoSize = true;
             this.SignDocumentUsePersonNumber.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SignDocumentUsePersonNumber.Location = new System.Drawing.Point(509, 21);
-            this.SignDocumentUsePersonNumber.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SignDocumentUsePersonNumber.Margin = new System.Windows.Forms.Padding(1);
             this.SignDocumentUsePersonNumber.Name = "SignDocumentUsePersonNumber";
             this.SignDocumentUsePersonNumber.Size = new System.Drawing.Size(101, 16);
             this.SignDocumentUsePersonNumber.TabIndex = 19;
@@ -10884,7 +11102,7 @@ namespace DocumentTools
             this.SignDocumentUseOnlyPageNumber.AutoSize = true;
             this.SignDocumentUseOnlyPageNumber.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SignDocumentUseOnlyPageNumber.Location = new System.Drawing.Point(400, 21);
-            this.SignDocumentUseOnlyPageNumber.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SignDocumentUseOnlyPageNumber.Margin = new System.Windows.Forms.Padding(1);
             this.SignDocumentUseOnlyPageNumber.Name = "SignDocumentUseOnlyPageNumber";
             this.SignDocumentUseOnlyPageNumber.Size = new System.Drawing.Size(101, 16);
             this.SignDocumentUseOnlyPageNumber.TabIndex = 18;
@@ -10896,7 +11114,7 @@ namespace DocumentTools
             // SignDocumentFileEndName
             // 
             this.SignDocumentFileEndName.Location = new System.Drawing.Point(217, 19);
-            this.SignDocumentFileEndName.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SignDocumentFileEndName.Margin = new System.Windows.Forms.Padding(1);
             this.SignDocumentFileEndName.Name = "SignDocumentFileEndName";
             this.SignDocumentFileEndName.Size = new System.Drawing.Size(87, 21);
             this.SignDocumentFileEndName.TabIndex = 5;
@@ -10927,14 +11145,14 @@ namespace DocumentTools
             // SignDocumentNeedCount
             // 
             this.SignDocumentNeedCount.Location = new System.Drawing.Point(61, 20);
-            this.SignDocumentNeedCount.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SignDocumentNeedCount.Margin = new System.Windows.Forms.Padding(1);
             this.SignDocumentNeedCount.Maximum = new decimal(new int[] {
-            999,
+            65536,
             0,
             0,
             0});
             this.SignDocumentNeedCount.Minimum = new decimal(new int[] {
-            10,
+            2,
             0,
             0,
             0});
@@ -10942,7 +11160,7 @@ namespace DocumentTools
             this.SignDocumentNeedCount.Size = new System.Drawing.Size(71, 21);
             this.SignDocumentNeedCount.TabIndex = 7;
             this.SignDocumentNeedCount.Value = new decimal(new int[] {
-            10,
+            2,
             0,
             0,
             0});
@@ -10958,9 +11176,9 @@ namespace DocumentTools
             this.SignDocumentPicSourceGroupBox.Controls.Add(this.SignDocumentOnlyUseOnlyImageTextBox);
             this.SignDocumentPicSourceGroupBox.Controls.Add(this.SignDocumentOnlyUseOnlyImageButton);
             this.SignDocumentPicSourceGroupBox.Location = new System.Drawing.Point(7, 45);
-            this.SignDocumentPicSourceGroupBox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SignDocumentPicSourceGroupBox.Margin = new System.Windows.Forms.Padding(1);
             this.SignDocumentPicSourceGroupBox.Name = "SignDocumentPicSourceGroupBox";
-            this.SignDocumentPicSourceGroupBox.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SignDocumentPicSourceGroupBox.Padding = new System.Windows.Forms.Padding(1);
             this.SignDocumentPicSourceGroupBox.Size = new System.Drawing.Size(608, 168);
             this.SignDocumentPicSourceGroupBox.TabIndex = 21;
             this.SignDocumentPicSourceGroupBox.TabStop = false;
@@ -10973,20 +11191,21 @@ namespace DocumentTools
             this.SignDocumentUseEmbedImage.Checked = true;
             this.SignDocumentUseEmbedImage.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SignDocumentUseEmbedImage.Location = new System.Drawing.Point(4, 27);
-            this.SignDocumentUseEmbedImage.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SignDocumentUseEmbedImage.Margin = new System.Windows.Forms.Padding(1);
             this.SignDocumentUseEmbedImage.Name = "SignDocumentUseEmbedImage";
             this.SignDocumentUseEmbedImage.Size = new System.Drawing.Size(131, 16);
             this.SignDocumentUseEmbedImage.TabIndex = 8;
             this.SignDocumentUseEmbedImage.TabStop = true;
             this.SignDocumentUseEmbedImage.Text = "使用内置单人码图片";
             this.SignDocumentUseEmbedImage.UseVisualStyleBackColor = true;
+            this.SignDocumentUseEmbedImage.CheckedChanged += new System.EventHandler(this.SignDocumentUseEmbedImage_CheckedChanged);
             // 
             // SignDocumentUseOutPersonPath
             // 
             this.SignDocumentUseOutPersonPath.AutoSize = true;
             this.SignDocumentUseOutPersonPath.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SignDocumentUseOutPersonPath.Location = new System.Drawing.Point(4, 66);
-            this.SignDocumentUseOutPersonPath.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SignDocumentUseOutPersonPath.Margin = new System.Windows.Forms.Padding(1);
             this.SignDocumentUseOutPersonPath.Name = "SignDocumentUseOutPersonPath";
             this.SignDocumentUseOutPersonPath.Size = new System.Drawing.Size(131, 16);
             this.SignDocumentUseOutPersonPath.TabIndex = 9;
@@ -10998,7 +11217,7 @@ namespace DocumentTools
             // SignDocumentUseOutPersonPathTextBox
             // 
             this.SignDocumentUseOutPersonPathTextBox.Location = new System.Drawing.Point(137, 63);
-            this.SignDocumentUseOutPersonPathTextBox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SignDocumentUseOutPersonPathTextBox.Margin = new System.Windows.Forms.Padding(1);
             this.SignDocumentUseOutPersonPathTextBox.Name = "SignDocumentUseOutPersonPathTextBox";
             this.SignDocumentUseOutPersonPathTextBox.ReadOnly = true;
             this.SignDocumentUseOutPersonPathTextBox.Size = new System.Drawing.Size(303, 21);
@@ -11009,7 +11228,7 @@ namespace DocumentTools
             // 
             this.SignDocumentUseOutPersonPathButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SignDocumentUseOutPersonPathButton.Location = new System.Drawing.Point(443, 63);
-            this.SignDocumentUseOutPersonPathButton.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SignDocumentUseOutPersonPathButton.Margin = new System.Windows.Forms.Padding(1);
             this.SignDocumentUseOutPersonPathButton.Name = "SignDocumentUseOutPersonPathButton";
             this.SignDocumentUseOutPersonPathButton.Size = new System.Drawing.Size(141, 22);
             this.SignDocumentUseOutPersonPathButton.TabIndex = 9;
@@ -11035,7 +11254,7 @@ namespace DocumentTools
             this.SignDocumentOnlyUseOnlyImage.AutoSize = true;
             this.SignDocumentOnlyUseOnlyImage.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SignDocumentOnlyUseOnlyImage.Location = new System.Drawing.Point(4, 102);
-            this.SignDocumentOnlyUseOnlyImage.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SignDocumentOnlyUseOnlyImage.Margin = new System.Windows.Forms.Padding(1);
             this.SignDocumentOnlyUseOnlyImage.Name = "SignDocumentOnlyUseOnlyImage";
             this.SignDocumentOnlyUseOnlyImage.Size = new System.Drawing.Size(131, 16);
             this.SignDocumentOnlyUseOnlyImage.TabIndex = 10;
@@ -11046,7 +11265,7 @@ namespace DocumentTools
             // SignDocumentOnlyUseOnlyImageTextBox
             // 
             this.SignDocumentOnlyUseOnlyImageTextBox.Location = new System.Drawing.Point(137, 99);
-            this.SignDocumentOnlyUseOnlyImageTextBox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SignDocumentOnlyUseOnlyImageTextBox.Margin = new System.Windows.Forms.Padding(1);
             this.SignDocumentOnlyUseOnlyImageTextBox.Name = "SignDocumentOnlyUseOnlyImageTextBox";
             this.SignDocumentOnlyUseOnlyImageTextBox.ReadOnly = true;
             this.SignDocumentOnlyUseOnlyImageTextBox.Size = new System.Drawing.Size(303, 21);
@@ -11057,7 +11276,7 @@ namespace DocumentTools
             // 
             this.SignDocumentOnlyUseOnlyImageButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SignDocumentOnlyUseOnlyImageButton.Location = new System.Drawing.Point(443, 99);
-            this.SignDocumentOnlyUseOnlyImageButton.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SignDocumentOnlyUseOnlyImageButton.Margin = new System.Windows.Forms.Padding(1);
             this.SignDocumentOnlyUseOnlyImageButton.Name = "SignDocumentOnlyUseOnlyImageButton";
             this.SignDocumentOnlyUseOnlyImageButton.Size = new System.Drawing.Size(141, 22);
             this.SignDocumentOnlyUseOnlyImageButton.TabIndex = 12;
@@ -11070,7 +11289,7 @@ namespace DocumentTools
             // 
             this.SignDocumentReplaceStart.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SignDocumentReplaceStart.Location = new System.Drawing.Point(513, 407);
-            this.SignDocumentReplaceStart.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SignDocumentReplaceStart.Margin = new System.Windows.Forms.Padding(1);
             this.SignDocumentReplaceStart.Name = "SignDocumentReplaceStart";
             this.SignDocumentReplaceStart.Size = new System.Drawing.Size(108, 27);
             this.SignDocumentReplaceStart.TabIndex = 6;
@@ -11085,9 +11304,9 @@ namespace DocumentTools
             this.groupBox58.Controls.Add(this.SignDocumentFileSaveBox);
             this.groupBox58.Controls.Add(this.SignDocumentFileSaveButton);
             this.groupBox58.Location = new System.Drawing.Point(5, 253);
-            this.groupBox58.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox58.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox58.Name = "groupBox58";
-            this.groupBox58.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox58.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox58.Size = new System.Drawing.Size(617, 77);
             this.groupBox58.TabIndex = 9;
             this.groupBox58.TabStop = false;
@@ -11108,7 +11327,7 @@ namespace DocumentTools
             // SignDocumentFileSaveBox
             // 
             this.SignDocumentFileSaveBox.Location = new System.Drawing.Point(137, 31);
-            this.SignDocumentFileSaveBox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SignDocumentFileSaveBox.Margin = new System.Windows.Forms.Padding(1);
             this.SignDocumentFileSaveBox.Name = "SignDocumentFileSaveBox";
             this.SignDocumentFileSaveBox.ReadOnly = true;
             this.SignDocumentFileSaveBox.Size = new System.Drawing.Size(315, 21);
@@ -11119,7 +11338,7 @@ namespace DocumentTools
             // 
             this.SignDocumentFileSaveButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SignDocumentFileSaveButton.Location = new System.Drawing.Point(455, 31);
-            this.SignDocumentFileSaveButton.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SignDocumentFileSaveButton.Margin = new System.Windows.Forms.Padding(1);
             this.SignDocumentFileSaveButton.Name = "SignDocumentFileSaveButton";
             this.SignDocumentFileSaveButton.Size = new System.Drawing.Size(157, 22);
             this.SignDocumentFileSaveButton.TabIndex = 5;
@@ -11137,9 +11356,9 @@ namespace DocumentTools
             this.groupBox54.Controls.Add(this.SignPersionDocument);
             this.groupBox54.Controls.Add(this.label152);
             this.groupBox54.Location = new System.Drawing.Point(4, 4);
-            this.groupBox54.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox54.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox54.Name = "groupBox54";
-            this.groupBox54.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox54.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox54.Size = new System.Drawing.Size(627, 93);
             this.groupBox54.TabIndex = 0;
             this.groupBox54.TabStop = false;
@@ -11162,7 +11381,7 @@ namespace DocumentTools
             // SingPersonImageAlt
             // 
             this.SingPersonImageAlt.Location = new System.Drawing.Point(61, 63);
-            this.SingPersonImageAlt.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SingPersonImageAlt.Margin = new System.Windows.Forms.Padding(1);
             this.SingPersonImageAlt.Name = "SingPersonImageAlt";
             this.SingPersonImageAlt.Size = new System.Drawing.Size(397, 21);
             this.SingPersonImageAlt.TabIndex = 4;
@@ -11184,7 +11403,7 @@ namespace DocumentTools
             // 
             this.SignPersionDocumentChooseFile.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SignPersionDocumentChooseFile.Location = new System.Drawing.Point(463, 25);
-            this.SignPersionDocumentChooseFile.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SignPersionDocumentChooseFile.Margin = new System.Windows.Forms.Padding(1);
             this.SignPersionDocumentChooseFile.Name = "SignPersionDocumentChooseFile";
             this.SignPersionDocumentChooseFile.Size = new System.Drawing.Size(159, 22);
             this.SignPersionDocumentChooseFile.TabIndex = 2;
@@ -11196,7 +11415,7 @@ namespace DocumentTools
             // SignPersionDocument
             // 
             this.SignPersionDocument.Location = new System.Drawing.Point(61, 27);
-            this.SignPersionDocument.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SignPersionDocument.Margin = new System.Windows.Forms.Padding(1);
             this.SignPersionDocument.Name = "SignPersionDocument";
             this.SignPersionDocument.ReadOnly = true;
             this.SignPersionDocument.Size = new System.Drawing.Size(397, 21);
@@ -11228,9 +11447,9 @@ namespace DocumentTools
             this.TabPage_40.Controls.Add(this.RefreshVFSOFTREPORT);
             this.TabPage_40.Controls.Add(this.groupBox57);
             this.TabPage_40.Location = new System.Drawing.Point(4, 114);
-            this.TabPage_40.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_40.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_40.Name = "TabPage_40";
-            this.TabPage_40.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_40.Padding = new System.Windows.Forms.Padding(1);
             this.TabPage_40.Size = new System.Drawing.Size(882, 621);
             this.TabPage_40.TabIndex = 39;
             this.TabPage_40.Text = "考评报表修改";
@@ -11253,7 +11472,6 @@ namespace DocumentTools
             // 
             this.groupBox65.Controls.Add(this.ExamReportParaChangeProcessBar);
             this.groupBox65.Controls.Add(this.label183);
-            this.groupBox65.Controls.Add(this.GetAllItemSplit);
             this.groupBox65.Controls.Add(this.ExamReportRowMode_ExamItemInsertSame);
             this.groupBox65.Controls.Add(this.ExamReportRowMode_ExamSelectorInsertSame);
             this.groupBox65.Controls.Add(this.ExamReportColMode_ExamSelectorBox);
@@ -11281,9 +11499,9 @@ namespace DocumentTools
             this.groupBox65.Controls.Add(this.ExamReportPara_ColMode);
             this.groupBox65.Controls.Add(this.ExamReportPara_RowMode);
             this.groupBox65.Location = new System.Drawing.Point(16, 431);
-            this.groupBox65.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox65.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox65.Name = "groupBox65";
-            this.groupBox65.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox65.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox65.Size = new System.Drawing.Size(855, 167);
             this.groupBox65.TabIndex = 17;
             this.groupBox65.TabStop = false;
@@ -11293,7 +11511,7 @@ namespace DocumentTools
             // ExamReportParaChangeProcessBar
             // 
             this.ExamReportParaChangeProcessBar.Location = new System.Drawing.Point(748, 137);
-            this.ExamReportParaChangeProcessBar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ExamReportParaChangeProcessBar.Margin = new System.Windows.Forms.Padding(2);
             this.ExamReportParaChangeProcessBar.Name = "ExamReportParaChangeProcessBar";
             this.ExamReportParaChangeProcessBar.Size = new System.Drawing.Size(95, 25);
             this.ExamReportParaChangeProcessBar.TabIndex = 32;
@@ -11301,31 +11519,21 @@ namespace DocumentTools
             // label183
             // 
             this.label183.AutoSize = true;
+            this.label183.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label183.ForeColor = System.Drawing.Color.Crimson;
-            this.label183.Location = new System.Drawing.Point(7, 116);
+            this.label183.Location = new System.Drawing.Point(7, 111);
             this.label183.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label183.Name = "label183";
-            this.label183.Size = new System.Drawing.Size(497, 24);
+            this.label183.Size = new System.Drawing.Size(539, 42);
             this.label183.TabIndex = 31;
-            this.label183.Text = "注：多个选项和项目都使用|分隔，比如A|B|C；\r\n多项合计类型都使用@连接，比如A@B|C@D；修改完毕且检查完毕后，建议在系统中保存一次。";
-            // 
-            // GetAllItemSplit
-            // 
-            this.GetAllItemSplit.Location = new System.Drawing.Point(561, 111);
-            this.GetAllItemSplit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.GetAllItemSplit.Name = "GetAllItemSplit";
-            this.GetAllItemSplit.Size = new System.Drawing.Size(91, 23);
-            this.GetAllItemSplit.TabIndex = 30;
-            this.GetAllItemSplit.Text = "全部项目获取";
-            this.MainToolsTip.SetToolTip(this.GetAllItemSplit, "使用|分隔符拼接考评表的所有项目到剪贴板");
-            this.GetAllItemSplit.UseVisualStyleBackColor = true;
-            this.GetAllItemSplit.Click += new System.EventHandler(this.GetAllItemSplit_Click);
+            this.label183.Text = "请一定确保手动输入的行、列参数是列表中的数据，否则修改后的报表将会损坏！！！\r\n\r\n请一定确保手动输入的行、列参数是列表中的数据，否则修改后的报表将会损坏！！！\r" +
+    "\n";
             // 
             // ExamReportRowMode_ExamItemInsertSame
             // 
             this.ExamReportRowMode_ExamItemInsertSame.AutoSize = true;
             this.ExamReportRowMode_ExamItemInsertSame.Location = new System.Drawing.Point(561, 83);
-            this.ExamReportRowMode_ExamItemInsertSame.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ExamReportRowMode_ExamItemInsertSame.Margin = new System.Windows.Forms.Padding(2);
             this.ExamReportRowMode_ExamItemInsertSame.Name = "ExamReportRowMode_ExamItemInsertSame";
             this.ExamReportRowMode_ExamItemInsertSame.Size = new System.Drawing.Size(96, 16);
             this.ExamReportRowMode_ExamItemInsertSame.TabIndex = 29;
@@ -11336,7 +11544,7 @@ namespace DocumentTools
             // 
             this.ExamReportRowMode_ExamSelectorInsertSame.AutoSize = true;
             this.ExamReportRowMode_ExamSelectorInsertSame.Location = new System.Drawing.Point(561, 38);
-            this.ExamReportRowMode_ExamSelectorInsertSame.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ExamReportRowMode_ExamSelectorInsertSame.Margin = new System.Windows.Forms.Padding(2);
             this.ExamReportRowMode_ExamSelectorInsertSame.Name = "ExamReportRowMode_ExamSelectorInsertSame";
             this.ExamReportRowMode_ExamSelectorInsertSame.Size = new System.Drawing.Size(96, 16);
             this.ExamReportRowMode_ExamSelectorInsertSame.TabIndex = 18;
@@ -11345,8 +11553,8 @@ namespace DocumentTools
             // 
             // ExamReportColMode_ExamSelectorBox
             // 
-            this.ExamReportColMode_ExamSelectorBox.Location = new System.Drawing.Point(465, 81);
-            this.ExamReportColMode_ExamSelectorBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ExamReportColMode_ExamSelectorBox.Location = new System.Drawing.Point(465, 80);
+            this.ExamReportColMode_ExamSelectorBox.Margin = new System.Windows.Forms.Padding(2);
             this.ExamReportColMode_ExamSelectorBox.Name = "ExamReportColMode_ExamSelectorBox";
             this.ExamReportColMode_ExamSelectorBox.Size = new System.Drawing.Size(94, 21);
             this.ExamReportColMode_ExamSelectorBox.TabIndex = 28;
@@ -11354,7 +11562,7 @@ namespace DocumentTools
             // label196
             // 
             this.label196.AutoSize = true;
-            this.label196.Location = new System.Drawing.Point(443, 84);
+            this.label196.Location = new System.Drawing.Point(444, 85);
             this.label196.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label196.Name = "label196";
             this.label196.Size = new System.Drawing.Size(17, 12);
@@ -11364,7 +11572,7 @@ namespace DocumentTools
             // ExamReportColMode_ExamBox
             // 
             this.ExamReportColMode_ExamBox.Location = new System.Drawing.Point(338, 80);
-            this.ExamReportColMode_ExamBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ExamReportColMode_ExamBox.Margin = new System.Windows.Forms.Padding(2);
             this.ExamReportColMode_ExamBox.Name = "ExamReportColMode_ExamBox";
             this.ExamReportColMode_ExamBox.Size = new System.Drawing.Size(103, 21);
             this.ExamReportColMode_ExamBox.TabIndex = 26;
@@ -11373,7 +11581,7 @@ namespace DocumentTools
             // label190
             // 
             this.label190.AutoSize = true;
-            this.label190.Location = new System.Drawing.Point(257, 84);
+            this.label190.Location = new System.Drawing.Point(258, 86);
             this.label190.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label190.Name = "label190";
             this.label190.Size = new System.Drawing.Size(77, 12);
@@ -11384,7 +11592,7 @@ namespace DocumentTools
             // 
             this.ExamReportColMode_Row_End_Combox.FormattingEnabled = true;
             this.ExamReportColMode_Row_End_Combox.Location = new System.Drawing.Point(219, 82);
-            this.ExamReportColMode_Row_End_Combox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ExamReportColMode_Row_End_Combox.Margin = new System.Windows.Forms.Padding(2);
             this.ExamReportColMode_Row_End_Combox.Name = "ExamReportColMode_Row_End_Combox";
             this.ExamReportColMode_Row_End_Combox.Size = new System.Drawing.Size(36, 24);
             this.ExamReportColMode_Row_End_Combox.TabIndex = 23;
@@ -11393,7 +11601,7 @@ namespace DocumentTools
             // label191
             // 
             this.label191.AutoSize = true;
-            this.label191.Location = new System.Drawing.Point(197, 85);
+            this.label191.Location = new System.Drawing.Point(198, 86);
             this.label191.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label191.Name = "label191";
             this.label191.Size = new System.Drawing.Size(17, 12);
@@ -11404,7 +11612,7 @@ namespace DocumentTools
             // 
             this.ExamReportColMode_Row_Start_Combox.FormattingEnabled = true;
             this.ExamReportColMode_Row_Start_Combox.Location = new System.Drawing.Point(155, 82);
-            this.ExamReportColMode_Row_Start_Combox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ExamReportColMode_Row_Start_Combox.Margin = new System.Windows.Forms.Padding(2);
             this.ExamReportColMode_Row_Start_Combox.Name = "ExamReportColMode_Row_Start_Combox";
             this.ExamReportColMode_Row_Start_Combox.Size = new System.Drawing.Size(40, 24);
             this.ExamReportColMode_Row_Start_Combox.TabIndex = 21;
@@ -11414,7 +11622,7 @@ namespace DocumentTools
             // 
             this.ExamReportColMode_Col_Combox.FormattingEnabled = true;
             this.ExamReportColMode_Col_Combox.Location = new System.Drawing.Point(85, 82);
-            this.ExamReportColMode_Col_Combox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ExamReportColMode_Col_Combox.Margin = new System.Windows.Forms.Padding(2);
             this.ExamReportColMode_Col_Combox.Name = "ExamReportColMode_Col_Combox";
             this.ExamReportColMode_Col_Combox.Size = new System.Drawing.Size(35, 24);
             this.ExamReportColMode_Col_Combox.TabIndex = 20;
@@ -11423,7 +11631,7 @@ namespace DocumentTools
             // label193
             // 
             this.label193.AutoSize = true;
-            this.label193.Location = new System.Drawing.Point(122, 85);
+            this.label193.Location = new System.Drawing.Point(123, 86);
             this.label193.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label193.Name = "label193";
             this.label193.Size = new System.Drawing.Size(29, 12);
@@ -11433,7 +11641,7 @@ namespace DocumentTools
             // label194
             // 
             this.label194.AutoSize = true;
-            this.label194.Location = new System.Drawing.Point(63, 85);
+            this.label194.Location = new System.Drawing.Point(63, 86);
             this.label194.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label194.Name = "label194";
             this.label194.Size = new System.Drawing.Size(17, 12);
@@ -11451,9 +11659,9 @@ namespace DocumentTools
             this.groupBox66.Controls.Add(this.label189);
             this.groupBox66.Controls.Add(this.label188);
             this.groupBox66.Location = new System.Drawing.Point(660, 11);
-            this.groupBox66.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox66.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox66.Name = "groupBox66";
-            this.groupBox66.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox66.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox66.Size = new System.Drawing.Size(183, 124);
             this.groupBox66.TabIndex = 16;
             this.groupBox66.TabStop = false;
@@ -11463,7 +11671,7 @@ namespace DocumentTools
             // 
             this.ExamReportParaDataFormatReverse_Combox.FormattingEnabled = true;
             this.ExamReportParaDataFormatReverse_Combox.Location = new System.Drawing.Point(67, 73);
-            this.ExamReportParaDataFormatReverse_Combox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ExamReportParaDataFormatReverse_Combox.Margin = new System.Windows.Forms.Padding(2);
             this.ExamReportParaDataFormatReverse_Combox.Name = "ExamReportParaDataFormatReverse_Combox";
             this.ExamReportParaDataFormatReverse_Combox.Size = new System.Drawing.Size(113, 24);
             this.ExamReportParaDataFormatReverse_Combox.TabIndex = 34;
@@ -11481,11 +11689,11 @@ namespace DocumentTools
             // ExamReportParaDataFormatFont_Box
             // 
             this.ExamReportParaDataFormatFont_Box.Location = new System.Drawing.Point(67, 47);
-            this.ExamReportParaDataFormatFont_Box.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ExamReportParaDataFormatFont_Box.Margin = new System.Windows.Forms.Padding(2);
             this.ExamReportParaDataFormatFont_Box.Name = "ExamReportParaDataFormatFont_Box";
             this.ExamReportParaDataFormatFont_Box.Size = new System.Drawing.Size(113, 21);
             this.ExamReportParaDataFormatFont_Box.TabIndex = 32;
-            this.ExamReportParaDataFormatFont_Box.Text = "宋体,12,0";
+            this.ExamReportParaDataFormatFont_Box.Text = "宋体,11,0";
             this.MainToolsTip.SetToolTip(this.ExamReportParaDataFormatFont_Box, "注：\r\n设置格式为：字体,大小,加粗\r\n比如：宋体,12,0\r\n第三项为0表示不加粗，1表示加粗\r\n为空则设置为默认值，宋体12号不加粗字体");
             // 
             // label186
@@ -11502,7 +11710,7 @@ namespace DocumentTools
             // 
             this.ExamReportParaRaidInfo_Combox.FormattingEnabled = true;
             this.ExamReportParaRaidInfo_Combox.Location = new System.Drawing.Point(67, 98);
-            this.ExamReportParaRaidInfo_Combox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ExamReportParaRaidInfo_Combox.Margin = new System.Windows.Forms.Padding(2);
             this.ExamReportParaRaidInfo_Combox.Name = "ExamReportParaRaidInfo_Combox";
             this.ExamReportParaRaidInfo_Combox.Size = new System.Drawing.Size(113, 24);
             this.ExamReportParaRaidInfo_Combox.TabIndex = 19;
@@ -11512,10 +11720,11 @@ namespace DocumentTools
             // 
             this.ExamReportParaDataFormat_Combox.FormattingEnabled = true;
             this.ExamReportParaDataFormat_Combox.Location = new System.Drawing.Point(67, 23);
-            this.ExamReportParaDataFormat_Combox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ExamReportParaDataFormat_Combox.Margin = new System.Windows.Forms.Padding(2);
             this.ExamReportParaDataFormat_Combox.Name = "ExamReportParaDataFormat_Combox";
             this.ExamReportParaDataFormat_Combox.Size = new System.Drawing.Size(113, 24);
             this.ExamReportParaDataFormat_Combox.TabIndex = 17;
+            this.ExamReportParaDataFormat_Combox.MouseHover += new System.EventHandler(this.ExamReportParaDataFormat_Combox_MouseHover);
             // 
             // label189
             // 
@@ -11540,7 +11749,7 @@ namespace DocumentTools
             // label187
             // 
             this.label187.AutoSize = true;
-            this.label187.Location = new System.Drawing.Point(443, 40);
+            this.label187.Location = new System.Drawing.Point(444, 41);
             this.label187.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label187.Name = "label187";
             this.label187.Size = new System.Drawing.Size(17, 12);
@@ -11550,7 +11759,7 @@ namespace DocumentTools
             // ExamReportRowMode_ExamSelectorBox
             // 
             this.ExamReportRowMode_ExamSelectorBox.Location = new System.Drawing.Point(465, 36);
-            this.ExamReportRowMode_ExamSelectorBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ExamReportRowMode_ExamSelectorBox.Margin = new System.Windows.Forms.Padding(2);
             this.ExamReportRowMode_ExamSelectorBox.Name = "ExamReportRowMode_ExamSelectorBox";
             this.ExamReportRowMode_ExamSelectorBox.Size = new System.Drawing.Size(94, 21);
             this.ExamReportRowMode_ExamSelectorBox.TabIndex = 14;
@@ -11559,7 +11768,7 @@ namespace DocumentTools
             // ChangeExamReportParaButton
             // 
             this.ChangeExamReportParaButton.Location = new System.Drawing.Point(653, 139);
-            this.ChangeExamReportParaButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ChangeExamReportParaButton.Margin = new System.Windows.Forms.Padding(2);
             this.ChangeExamReportParaButton.Name = "ChangeExamReportParaButton";
             this.ChangeExamReportParaButton.Size = new System.Drawing.Size(91, 23);
             this.ChangeExamReportParaButton.TabIndex = 13;
@@ -11571,7 +11780,7 @@ namespace DocumentTools
             // 
             this.ExamReportRowMode_ExamList.FormattingEnabled = true;
             this.ExamReportRowMode_ExamList.Location = new System.Drawing.Point(338, 37);
-            this.ExamReportRowMode_ExamList.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ExamReportRowMode_ExamList.Margin = new System.Windows.Forms.Padding(2);
             this.ExamReportRowMode_ExamList.Name = "ExamReportRowMode_ExamList";
             this.ExamReportRowMode_ExamList.Size = new System.Drawing.Size(103, 24);
             this.ExamReportRowMode_ExamList.TabIndex = 12;
@@ -11580,7 +11789,7 @@ namespace DocumentTools
             // label185
             // 
             this.label185.AutoSize = true;
-            this.label185.Location = new System.Drawing.Point(257, 39);
+            this.label185.Location = new System.Drawing.Point(258, 41);
             this.label185.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label185.Name = "label185";
             this.label185.Size = new System.Drawing.Size(77, 12);
@@ -11591,7 +11800,7 @@ namespace DocumentTools
             // 
             this.ExamReportRowMode_Col_End_Combox.FormattingEnabled = true;
             this.ExamReportRowMode_Col_End_Combox.Location = new System.Drawing.Point(219, 37);
-            this.ExamReportRowMode_Col_End_Combox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ExamReportRowMode_Col_End_Combox.Margin = new System.Windows.Forms.Padding(2);
             this.ExamReportRowMode_Col_End_Combox.Name = "ExamReportRowMode_Col_End_Combox";
             this.ExamReportRowMode_Col_End_Combox.Size = new System.Drawing.Size(36, 24);
             this.ExamReportRowMode_Col_End_Combox.TabIndex = 9;
@@ -11600,7 +11809,7 @@ namespace DocumentTools
             // label184
             // 
             this.label184.AutoSize = true;
-            this.label184.Location = new System.Drawing.Point(197, 40);
+            this.label184.Location = new System.Drawing.Point(198, 41);
             this.label184.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label184.Name = "label184";
             this.label184.Size = new System.Drawing.Size(17, 12);
@@ -11611,7 +11820,7 @@ namespace DocumentTools
             // 
             this.ExamReportRowMode_Col_Start_Combox.FormattingEnabled = true;
             this.ExamReportRowMode_Col_Start_Combox.Location = new System.Drawing.Point(155, 37);
-            this.ExamReportRowMode_Col_Start_Combox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ExamReportRowMode_Col_Start_Combox.Margin = new System.Windows.Forms.Padding(2);
             this.ExamReportRowMode_Col_Start_Combox.Name = "ExamReportRowMode_Col_Start_Combox";
             this.ExamReportRowMode_Col_Start_Combox.Size = new System.Drawing.Size(40, 24);
             this.ExamReportRowMode_Col_Start_Combox.TabIndex = 7;
@@ -11621,7 +11830,7 @@ namespace DocumentTools
             // 
             this.ExamReportRowMode_Row_Combox.FormattingEnabled = true;
             this.ExamReportRowMode_Row_Combox.Location = new System.Drawing.Point(85, 37);
-            this.ExamReportRowMode_Row_Combox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ExamReportRowMode_Row_Combox.Margin = new System.Windows.Forms.Padding(2);
             this.ExamReportRowMode_Row_Combox.Name = "ExamReportRowMode_Row_Combox";
             this.ExamReportRowMode_Row_Combox.Size = new System.Drawing.Size(35, 24);
             this.ExamReportRowMode_Row_Combox.TabIndex = 6;
@@ -11630,7 +11839,7 @@ namespace DocumentTools
             // label182
             // 
             this.label182.AutoSize = true;
-            this.label182.Location = new System.Drawing.Point(122, 40);
+            this.label182.Location = new System.Drawing.Point(123, 41);
             this.label182.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label182.Name = "label182";
             this.label182.Size = new System.Drawing.Size(29, 12);
@@ -11640,7 +11849,7 @@ namespace DocumentTools
             // label176
             // 
             this.label176.AutoSize = true;
-            this.label176.Location = new System.Drawing.Point(63, 40);
+            this.label176.Location = new System.Drawing.Point(63, 41);
             this.label176.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label176.Name = "label176";
             this.label176.Size = new System.Drawing.Size(17, 12);
@@ -11651,7 +11860,7 @@ namespace DocumentTools
             // 
             this.ExamReportPara_ColMode.AutoSize = true;
             this.ExamReportPara_ColMode.Location = new System.Drawing.Point(4, 84);
-            this.ExamReportPara_ColMode.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ExamReportPara_ColMode.Margin = new System.Windows.Forms.Padding(2);
             this.ExamReportPara_ColMode.Name = "ExamReportPara_ColMode";
             this.ExamReportPara_ColMode.Size = new System.Drawing.Size(59, 16);
             this.ExamReportPara_ColMode.TabIndex = 1;
@@ -11667,7 +11876,7 @@ namespace DocumentTools
             this.ExamReportPara_RowMode.AutoSize = true;
             this.ExamReportPara_RowMode.Checked = true;
             this.ExamReportPara_RowMode.Location = new System.Drawing.Point(4, 39);
-            this.ExamReportPara_RowMode.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ExamReportPara_RowMode.Margin = new System.Windows.Forms.Padding(2);
             this.ExamReportPara_RowMode.Name = "ExamReportPara_RowMode";
             this.ExamReportPara_RowMode.Size = new System.Drawing.Size(59, 16);
             this.ExamReportPara_RowMode.TabIndex = 0;
@@ -11675,6 +11884,7 @@ namespace DocumentTools
             this.ExamReportPara_RowMode.Text = "行模式";
             this.MainToolsTip.SetToolTip(this.ExamReportPara_RowMode, resources.GetString("ExamReportPara_RowMode.ToolTip"));
             this.ExamReportPara_RowMode.UseVisualStyleBackColor = true;
+            this.ExamReportPara_RowMode.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ExamReportPara_RowMode_MouseDown);
             // 
             // linkLabel5
             // 
@@ -11710,9 +11920,9 @@ namespace DocumentTools
             this.groupBox59.Controls.Add(this.label158);
             this.groupBox59.Controls.Add(this.ExamReportDataFormat);
             this.groupBox59.Location = new System.Drawing.Point(331, 215);
-            this.groupBox59.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox59.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox59.Name = "groupBox59";
-            this.groupBox59.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox59.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox59.Size = new System.Drawing.Size(540, 155);
             this.groupBox59.TabIndex = 14;
             this.groupBox59.TabStop = false;
@@ -11724,7 +11934,7 @@ namespace DocumentTools
             this.ExamReportChangeItemDataFormat.AutoSize = true;
             this.ExamReportChangeItemDataFormat.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ExamReportChangeItemDataFormat.Location = new System.Drawing.Point(487, 53);
-            this.ExamReportChangeItemDataFormat.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ExamReportChangeItemDataFormat.Margin = new System.Windows.Forms.Padding(1);
             this.ExamReportChangeItemDataFormat.Name = "ExamReportChangeItemDataFormat";
             this.ExamReportChangeItemDataFormat.Size = new System.Drawing.Size(47, 16);
             this.ExamReportChangeItemDataFormat.TabIndex = 29;
@@ -11737,7 +11947,7 @@ namespace DocumentTools
             this.ExamReportChangeItemName.AutoSize = true;
             this.ExamReportChangeItemName.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ExamReportChangeItemName.Location = new System.Drawing.Point(487, 27);
-            this.ExamReportChangeItemName.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ExamReportChangeItemName.Margin = new System.Windows.Forms.Padding(1);
             this.ExamReportChangeItemName.Name = "ExamReportChangeItemName";
             this.ExamReportChangeItemName.Size = new System.Drawing.Size(47, 16);
             this.ExamReportChangeItemName.TabIndex = 27;
@@ -11765,7 +11975,7 @@ namespace DocumentTools
             this.ExamReportChangeItemDataRaid.AutoSize = true;
             this.ExamReportChangeItemDataRaid.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ExamReportChangeItemDataRaid.Location = new System.Drawing.Point(487, 79);
-            this.ExamReportChangeItemDataRaid.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ExamReportChangeItemDataRaid.Margin = new System.Windows.Forms.Padding(1);
             this.ExamReportChangeItemDataRaid.Name = "ExamReportChangeItemDataRaid";
             this.ExamReportChangeItemDataRaid.Size = new System.Drawing.Size(47, 16);
             this.ExamReportChangeItemDataRaid.TabIndex = 28;
@@ -11777,7 +11987,7 @@ namespace DocumentTools
             // 
             this.ExamReportChangeProgress.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ExamReportChangeProgress.Location = new System.Drawing.Point(5, 125);
-            this.ExamReportChangeProgress.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ExamReportChangeProgress.Margin = new System.Windows.Forms.Padding(1);
             this.ExamReportChangeProgress.Name = "ExamReportChangeProgress";
             this.ExamReportChangeProgress.Size = new System.Drawing.Size(529, 25);
             this.ExamReportChangeProgress.TabIndex = 15;
@@ -11785,7 +11995,7 @@ namespace DocumentTools
             // ExamReplaceRaids
             // 
             this.ExamReplaceRaids.Location = new System.Drawing.Point(273, 77);
-            this.ExamReplaceRaids.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ExamReplaceRaids.Margin = new System.Windows.Forms.Padding(1);
             this.ExamReplaceRaids.Name = "ExamReplaceRaids";
             this.ExamReplaceRaids.Size = new System.Drawing.Size(211, 21);
             this.ExamReplaceRaids.TabIndex = 23;
@@ -11794,7 +12004,7 @@ namespace DocumentTools
             // 
             this.ExamReplaceDataFormat.FormattingEnabled = true;
             this.ExamReplaceDataFormat.Location = new System.Drawing.Point(273, 52);
-            this.ExamReplaceDataFormat.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ExamReplaceDataFormat.Margin = new System.Windows.Forms.Padding(1);
             this.ExamReplaceDataFormat.Name = "ExamReplaceDataFormat";
             this.ExamReplaceDataFormat.Size = new System.Drawing.Size(211, 24);
             this.ExamReplaceDataFormat.TabIndex = 22;
@@ -11802,7 +12012,7 @@ namespace DocumentTools
             // ExamReplaceItemName
             // 
             this.ExamReplaceItemName.Location = new System.Drawing.Point(273, 27);
-            this.ExamReplaceItemName.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ExamReplaceItemName.Margin = new System.Windows.Forms.Padding(1);
             this.ExamReplaceItemName.Name = "ExamReplaceItemName";
             this.ExamReplaceItemName.Size = new System.Drawing.Size(211, 21);
             this.ExamReplaceItemName.TabIndex = 21;
@@ -11844,7 +12054,7 @@ namespace DocumentTools
             // 
             this.ExamReportRaids.FormattingEnabled = true;
             this.ExamReportRaids.Location = new System.Drawing.Point(72, 79);
-            this.ExamReportRaids.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ExamReportRaids.Margin = new System.Windows.Forms.Padding(1);
             this.ExamReportRaids.Name = "ExamReportRaids";
             this.ExamReportRaids.Size = new System.Drawing.Size(155, 24);
             this.ExamReportRaids.TabIndex = 17;
@@ -11876,7 +12086,7 @@ namespace DocumentTools
             // 
             this.ExamReportItems.FormattingEnabled = true;
             this.ExamReportItems.Location = new System.Drawing.Point(72, 27);
-            this.ExamReportItems.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ExamReportItems.Margin = new System.Windows.Forms.Padding(1);
             this.ExamReportItems.Name = "ExamReportItems";
             this.ExamReportItems.Size = new System.Drawing.Size(155, 24);
             this.ExamReportItems.TabIndex = 15;
@@ -11898,7 +12108,7 @@ namespace DocumentTools
             // 
             this.ExamReportDataFormat.FormattingEnabled = true;
             this.ExamReportDataFormat.Location = new System.Drawing.Point(72, 53);
-            this.ExamReportDataFormat.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ExamReportDataFormat.Margin = new System.Windows.Forms.Padding(1);
             this.ExamReportDataFormat.Name = "ExamReportDataFormat";
             this.ExamReportDataFormat.Size = new System.Drawing.Size(155, 24);
             this.ExamReportDataFormat.TabIndex = 13;
@@ -11907,7 +12117,7 @@ namespace DocumentTools
             // 
             this.ExamReportChange.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ExamReportChange.Location = new System.Drawing.Point(741, 372);
-            this.ExamReportChange.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ExamReportChange.Margin = new System.Windows.Forms.Padding(1);
             this.ExamReportChange.Name = "ExamReportChange";
             this.ExamReportChange.Size = new System.Drawing.Size(129, 41);
             this.ExamReportChange.TabIndex = 9;
@@ -11918,6 +12128,7 @@ namespace DocumentTools
             // 
             // groupBox56
             // 
+            this.groupBox56.Controls.Add(this.GetAllItemSplit);
             this.groupBox56.Controls.Add(this.ExamRaidsCopy);
             this.groupBox56.Controls.Add(this.ExamRaidInfoCombox);
             this.groupBox56.Controls.Add(this.label157);
@@ -11926,22 +12137,34 @@ namespace DocumentTools
             this.groupBox56.Controls.Add(this.ExamItemsCombox);
             this.groupBox56.Controls.Add(this.ExamItemsSelectorsCombox);
             this.groupBox56.Location = new System.Drawing.Point(16, 215);
-            this.groupBox56.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox56.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox56.Name = "groupBox56";
-            this.groupBox56.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox56.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox56.Size = new System.Drawing.Size(311, 155);
             this.groupBox56.TabIndex = 7;
             this.groupBox56.TabStop = false;
             this.groupBox56.Tag = "anchor_left_bottom";
             this.groupBox56.Text = "所选考评表信息";
             // 
+            // GetAllItemSplit
+            // 
+            this.GetAllItemSplit.Location = new System.Drawing.Point(9, 123);
+            this.GetAllItemSplit.Margin = new System.Windows.Forms.Padding(2);
+            this.GetAllItemSplit.Name = "GetAllItemSplit";
+            this.GetAllItemSplit.Size = new System.Drawing.Size(154, 24);
+            this.GetAllItemSplit.TabIndex = 31;
+            this.GetAllItemSplit.Text = "获取项目或选项到剪贴板";
+            this.MainToolsTip.SetToolTip(this.GetAllItemSplit, "使用|分隔符拼接考评表的所有项目到剪贴板（本功能用于下面的报表参数批量修改功能）");
+            this.GetAllItemSplit.UseVisualStyleBackColor = true;
+            this.GetAllItemSplit.Click += new System.EventHandler(this.GetAllItemSplit_Click);
+            // 
             // ExamRaidsCopy
             // 
             this.ExamRaidsCopy.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.ExamRaidsCopy.Location = new System.Drawing.Point(73, 129);
-            this.ExamRaidsCopy.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ExamRaidsCopy.Location = new System.Drawing.Point(166, 125);
+            this.ExamRaidsCopy.Margin = new System.Windows.Forms.Padding(1);
             this.ExamRaidsCopy.Name = "ExamRaidsCopy";
-            this.ExamRaidsCopy.Size = new System.Drawing.Size(233, 22);
+            this.ExamRaidsCopy.Size = new System.Drawing.Size(138, 22);
             this.ExamRaidsCopy.TabIndex = 12;
             this.ExamRaidsCopy.Text = "复制评测主体合计身份";
             this.MainToolsTip.SetToolTip(this.ExamRaidsCopy, "提示：\r\n报表的合计身份在数据库用是用逗号拼接的\r\n\r\n以ABC为例，合计身份就是A，B，C");
@@ -11951,8 +12174,8 @@ namespace DocumentTools
             // ExamRaidInfoCombox
             // 
             this.ExamRaidInfoCombox.FormattingEnabled = true;
-            this.ExamRaidInfoCombox.Location = new System.Drawing.Point(73, 105);
-            this.ExamRaidInfoCombox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ExamRaidInfoCombox.Location = new System.Drawing.Point(73, 97);
+            this.ExamRaidInfoCombox.Margin = new System.Windows.Forms.Padding(1);
             this.ExamRaidInfoCombox.Name = "ExamRaidInfoCombox";
             this.ExamRaidInfoCombox.Size = new System.Drawing.Size(235, 24);
             this.ExamRaidInfoCombox.TabIndex = 11;
@@ -11963,7 +12186,7 @@ namespace DocumentTools
             // 
             this.label157.AutoSize = true;
             this.label157.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label157.Location = new System.Drawing.Point(17, 108);
+            this.label157.Location = new System.Drawing.Point(17, 100);
             this.label157.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label157.Name = "label157";
             this.label157.Size = new System.Drawing.Size(53, 12);
@@ -11996,7 +12219,7 @@ namespace DocumentTools
             // 
             this.ExamItemsCombox.FormattingEnabled = true;
             this.ExamItemsCombox.Location = new System.Drawing.Point(73, 33);
-            this.ExamItemsCombox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ExamItemsCombox.Margin = new System.Windows.Forms.Padding(1);
             this.ExamItemsCombox.Name = "ExamItemsCombox";
             this.ExamItemsCombox.Size = new System.Drawing.Size(235, 24);
             this.ExamItemsCombox.TabIndex = 5;
@@ -12007,7 +12230,7 @@ namespace DocumentTools
             // 
             this.ExamItemsSelectorsCombox.FormattingEnabled = true;
             this.ExamItemsSelectorsCombox.Location = new System.Drawing.Point(73, 68);
-            this.ExamItemsSelectorsCombox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ExamItemsSelectorsCombox.Margin = new System.Windows.Forms.Padding(1);
             this.ExamItemsSelectorsCombox.Name = "ExamItemsSelectorsCombox";
             this.ExamItemsSelectorsCombox.Size = new System.Drawing.Size(235, 24);
             this.ExamItemsSelectorsCombox.TabIndex = 6;
@@ -12017,7 +12240,7 @@ namespace DocumentTools
             // 
             this.SelectExamFile.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.SelectExamFile.Location = new System.Drawing.Point(771, 17);
-            this.SelectExamFile.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.SelectExamFile.Margin = new System.Windows.Forms.Padding(1);
             this.SelectExamFile.Name = "SelectExamFile";
             this.SelectExamFile.Size = new System.Drawing.Size(100, 22);
             this.SelectExamFile.TabIndex = 4;
@@ -12029,7 +12252,7 @@ namespace DocumentTools
             // ExamFileText
             // 
             this.ExamFileText.Location = new System.Drawing.Point(115, 17);
-            this.ExamFileText.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ExamFileText.Margin = new System.Windows.Forms.Padding(1);
             this.ExamFileText.Name = "ExamFileText";
             this.ExamFileText.ReadOnly = true;
             this.ExamFileText.Size = new System.Drawing.Size(653, 21);
@@ -12051,7 +12274,7 @@ namespace DocumentTools
             // 
             this.RefreshVFSOFTREPORT.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.RefreshVFSOFTREPORT.Location = new System.Drawing.Point(16, 372);
-            this.RefreshVFSOFTREPORT.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.RefreshVFSOFTREPORT.Margin = new System.Windows.Forms.Padding(1);
             this.RefreshVFSOFTREPORT.Name = "RefreshVFSOFTREPORT";
             this.RefreshVFSOFTREPORT.Size = new System.Drawing.Size(129, 41);
             this.RefreshVFSOFTREPORT.TabIndex = 1;
@@ -12064,9 +12287,9 @@ namespace DocumentTools
             // 
             this.groupBox57.Controls.Add(this.VFSOFT_Report_ListView);
             this.groupBox57.Location = new System.Drawing.Point(16, 43);
-            this.groupBox57.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox57.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox57.Name = "groupBox57";
-            this.groupBox57.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox57.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox57.Size = new System.Drawing.Size(863, 167);
             this.groupBox57.TabIndex = 8;
             this.groupBox57.TabStop = false;
@@ -12077,7 +12300,7 @@ namespace DocumentTools
             // 
             this.VFSOFT_Report_ListView.HideSelection = false;
             this.VFSOFT_Report_ListView.Location = new System.Drawing.Point(8, 17);
-            this.VFSOFT_Report_ListView.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.VFSOFT_Report_ListView.Margin = new System.Windows.Forms.Padding(1);
             this.VFSOFT_Report_ListView.Name = "VFSOFT_Report_ListView";
             this.VFSOFT_Report_ListView.Size = new System.Drawing.Size(848, 141);
             this.VFSOFT_Report_ListView.TabIndex = 0;
@@ -12097,9 +12320,9 @@ namespace DocumentTools
             this.TabPage_38.Controls.Add(this.groupBox50);
             this.TabPage_38.Controls.Add(this.groupBox49);
             this.TabPage_38.Location = new System.Drawing.Point(4, 114);
-            this.TabPage_38.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_38.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_38.Name = "TabPage_38";
-            this.TabPage_38.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_38.Padding = new System.Windows.Forms.Padding(1);
             this.TabPage_38.Size = new System.Drawing.Size(882, 621);
             this.TabPage_38.TabIndex = 37;
             this.TabPage_38.Text = "选举结果报告单样式生成";
@@ -12117,9 +12340,9 @@ namespace DocumentTools
             this.groupBox53.Controls.Add(this.label149);
             this.groupBox53.Controls.Add(this.VoteTable_Random_PageCounts);
             this.groupBox53.Location = new System.Drawing.Point(655, 268);
-            this.groupBox53.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox53.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox53.Name = "groupBox53";
-            this.groupBox53.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox53.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox53.Size = new System.Drawing.Size(220, 167);
             this.groupBox53.TabIndex = 9;
             this.groupBox53.TabStop = false;
@@ -12130,7 +12353,7 @@ namespace DocumentTools
             // 
             this.VoteTable_AnotherTableShow.AutoSize = true;
             this.VoteTable_AnotherTableShow.Location = new System.Drawing.Point(107, 87);
-            this.VoteTable_AnotherTableShow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.VoteTable_AnotherTableShow.Margin = new System.Windows.Forms.Padding(2);
             this.VoteTable_AnotherTableShow.Name = "VoteTable_AnotherTableShow";
             this.VoteTable_AnotherTableShow.Size = new System.Drawing.Size(108, 16);
             this.VoteTable_AnotherTableShow.TabIndex = 0;
@@ -12145,7 +12368,7 @@ namespace DocumentTools
             this.VoteTable_NumberIndex_Keep.CheckState = System.Windows.Forms.CheckState.Checked;
             this.VoteTable_NumberIndex_Keep.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.VoteTable_NumberIndex_Keep.Location = new System.Drawing.Point(9, 113);
-            this.VoteTable_NumberIndex_Keep.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.VoteTable_NumberIndex_Keep.Margin = new System.Windows.Forms.Padding(1);
             this.VoteTable_NumberIndex_Keep.Name = "VoteTable_NumberIndex_Keep";
             this.VoteTable_NumberIndex_Keep.Size = new System.Drawing.Size(84, 16);
             this.VoteTable_NumberIndex_Keep.TabIndex = 14;
@@ -12160,7 +12383,7 @@ namespace DocumentTools
             this.VoteTable_KeepPageFooter.CheckState = System.Windows.Forms.CheckState.Checked;
             this.VoteTable_KeepPageFooter.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.VoteTable_KeepPageFooter.Location = new System.Drawing.Point(9, 88);
-            this.VoteTable_KeepPageFooter.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.VoteTable_KeepPageFooter.Margin = new System.Windows.Forms.Padding(1);
             this.VoteTable_KeepPageFooter.Name = "VoteTable_KeepPageFooter";
             this.VoteTable_KeepPageFooter.Size = new System.Drawing.Size(96, 16);
             this.VoteTable_KeepPageFooter.TabIndex = 13;
@@ -12170,7 +12393,7 @@ namespace DocumentTools
             // VoteTableFontSize
             // 
             this.VoteTableFontSize.Location = new System.Drawing.Point(89, 55);
-            this.VoteTableFontSize.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.VoteTableFontSize.Margin = new System.Windows.Forms.Padding(1);
             this.VoteTableFontSize.Maximum = new decimal(new int[] {
             999999,
             0,
@@ -12221,7 +12444,7 @@ namespace DocumentTools
             0,
             65536});
             this.VoteTableHeight.Location = new System.Drawing.Point(89, 23);
-            this.VoteTableHeight.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.VoteTableHeight.Margin = new System.Windows.Forms.Padding(1);
             this.VoteTableHeight.Maximum = new decimal(new int[] {
             999999,
             0,
@@ -12257,7 +12480,7 @@ namespace DocumentTools
             this.VoteTable_Random_PageCounts.AutoSize = true;
             this.VoteTable_Random_PageCounts.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.VoteTable_Random_PageCounts.Location = new System.Drawing.Point(9, 139);
-            this.VoteTable_Random_PageCounts.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.VoteTable_Random_PageCounts.Margin = new System.Windows.Forms.Padding(1);
             this.VoteTable_Random_PageCounts.Name = "VoteTable_Random_PageCounts";
             this.VoteTable_Random_PageCounts.Size = new System.Drawing.Size(96, 16);
             this.VoteTable_Random_PageCounts.TabIndex = 8;
@@ -12282,7 +12505,7 @@ namespace DocumentTools
             // 
             this.VoteTable_Render.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.VoteTable_Render.Location = new System.Drawing.Point(655, 439);
-            this.VoteTable_Render.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.VoteTable_Render.Margin = new System.Windows.Forms.Padding(1);
             this.VoteTable_Render.Name = "VoteTable_Render";
             this.VoteTable_Render.Size = new System.Drawing.Size(220, 33);
             this.VoteTable_Render.TabIndex = 0;
@@ -12296,9 +12519,9 @@ namespace DocumentTools
             this.报告单生成日期.Controls.Add(this.VoteTableHelpDate);
             this.报告单生成日期.Controls.Add(this.VoteTable_GenDate);
             this.报告单生成日期.Location = new System.Drawing.Point(655, 153);
-            this.报告单生成日期.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.报告单生成日期.Margin = new System.Windows.Forms.Padding(1);
             this.报告单生成日期.Name = "报告单生成日期";
-            this.报告单生成日期.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.报告单生成日期.Padding = new System.Windows.Forms.Padding(1);
             this.报告单生成日期.Size = new System.Drawing.Size(220, 111);
             this.报告单生成日期.TabIndex = 6;
             this.报告单生成日期.TabStop = false;
@@ -12309,7 +12532,7 @@ namespace DocumentTools
             // 
             this.VoteTableHelpDate.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.VoteTableHelpDate.Location = new System.Drawing.Point(81, 73);
-            this.VoteTableHelpDate.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.VoteTableHelpDate.Margin = new System.Windows.Forms.Padding(1);
             this.VoteTableHelpDate.Name = "VoteTableHelpDate";
             this.VoteTableHelpDate.Size = new System.Drawing.Size(89, 25);
             this.VoteTableHelpDate.TabIndex = 2;
@@ -12322,7 +12545,7 @@ namespace DocumentTools
             this.VoteTable_GenDate.AcceptsReturn = true;
             this.VoteTable_GenDate.AcceptsTab = true;
             this.VoteTable_GenDate.Location = new System.Drawing.Point(23, 25);
-            this.VoteTable_GenDate.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.VoteTable_GenDate.Margin = new System.Windows.Forms.Padding(1);
             this.VoteTable_GenDate.Multiline = true;
             this.VoteTable_GenDate.Name = "VoteTable_GenDate";
             this.VoteTable_GenDate.Size = new System.Drawing.Size(195, 37);
@@ -12333,9 +12556,9 @@ namespace DocumentTools
             // 
             this.报告单结束语.Controls.Add(this.VoteTable_End);
             this.报告单结束语.Location = new System.Drawing.Point(431, 5);
-            this.报告单结束语.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.报告单结束语.Margin = new System.Windows.Forms.Padding(1);
             this.报告单结束语.Name = "报告单结束语";
-            this.报告单结束语.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.报告单结束语.Padding = new System.Windows.Forms.Padding(1);
             this.报告单结束语.Size = new System.Drawing.Size(445, 145);
             this.报告单结束语.TabIndex = 5;
             this.报告单结束语.TabStop = false;
@@ -12347,7 +12570,7 @@ namespace DocumentTools
             this.VoteTable_End.AcceptsReturn = true;
             this.VoteTable_End.AcceptsTab = true;
             this.VoteTable_End.Location = new System.Drawing.Point(23, 23);
-            this.VoteTable_End.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.VoteTable_End.Margin = new System.Windows.Forms.Padding(1);
             this.VoteTable_End.Multiline = true;
             this.VoteTable_End.Name = "VoteTable_End";
             this.VoteTable_End.Size = new System.Drawing.Size(419, 111);
@@ -12359,9 +12582,9 @@ namespace DocumentTools
             // 
             this.groupBox52.Controls.Add(this.VoteTable_Start);
             this.groupBox52.Location = new System.Drawing.Point(205, 153);
-            this.groupBox52.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox52.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox52.Name = "groupBox52";
-            this.groupBox52.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox52.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox52.Size = new System.Drawing.Size(447, 281);
             this.groupBox52.TabIndex = 4;
             this.groupBox52.TabStop = false;
@@ -12375,7 +12598,7 @@ namespace DocumentTools
             this.VoteTable_Start.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.VoteTable_Start.Location = new System.Drawing.Point(9, 17);
-            this.VoteTable_Start.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.VoteTable_Start.Margin = new System.Windows.Forms.Padding(1);
             this.VoteTable_Start.Multiline = true;
             this.VoteTable_Start.Name = "VoteTable_Start";
             this.VoteTable_Start.Size = new System.Drawing.Size(435, 225);
@@ -12387,9 +12610,9 @@ namespace DocumentTools
             // 
             this.groupBox51.Controls.Add(this.VoteTable_Title);
             this.groupBox51.Location = new System.Drawing.Point(205, 4);
-            this.groupBox51.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox51.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox51.Name = "groupBox51";
-            this.groupBox51.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox51.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox51.Size = new System.Drawing.Size(221, 145);
             this.groupBox51.TabIndex = 3;
             this.groupBox51.TabStop = false;
@@ -12401,7 +12624,7 @@ namespace DocumentTools
             this.VoteTable_Title.AcceptsReturn = true;
             this.VoteTable_Title.AcceptsTab = true;
             this.VoteTable_Title.Location = new System.Drawing.Point(9, 23);
-            this.VoteTable_Title.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.VoteTable_Title.Margin = new System.Windows.Forms.Padding(1);
             this.VoteTable_Title.Multiline = true;
             this.VoteTable_Title.Name = "VoteTable_Title";
             this.VoteTable_Title.Size = new System.Drawing.Size(203, 112);
@@ -12413,9 +12636,9 @@ namespace DocumentTools
             this.groupBox50.Controls.Add(this.VoteTableName_CountText);
             this.groupBox50.Controls.Add(this.VoteTable_Names);
             this.groupBox50.Location = new System.Drawing.Point(5, 153);
-            this.groupBox50.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox50.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox50.Name = "groupBox50";
-            this.groupBox50.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox50.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox50.Size = new System.Drawing.Size(195, 281);
             this.groupBox50.TabIndex = 2;
             this.groupBox50.TabStop = false;
@@ -12442,7 +12665,7 @@ namespace DocumentTools
             this.VoteTable_Names.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.VoteTable_Names.Location = new System.Drawing.Point(7, 17);
-            this.VoteTable_Names.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.VoteTable_Names.Margin = new System.Windows.Forms.Padding(1);
             this.VoteTable_Names.Name = "VoteTable_Names";
             this.VoteTable_Names.Size = new System.Drawing.Size(187, 220);
             this.VoteTable_Names.TabIndex = 0;
@@ -12461,9 +12684,9 @@ namespace DocumentTools
             this.groupBox49.Controls.Add(this.VoteTable_Name);
             this.groupBox49.Controls.Add(this.label138);
             this.groupBox49.Location = new System.Drawing.Point(5, 5);
-            this.groupBox49.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox49.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox49.Name = "groupBox49";
-            this.groupBox49.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox49.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox49.Size = new System.Drawing.Size(195, 145);
             this.groupBox49.TabIndex = 1;
             this.groupBox49.TabStop = false;
@@ -12473,7 +12696,7 @@ namespace DocumentTools
             // VoteTable_Abdon
             // 
             this.VoteTable_Abdon.Location = new System.Drawing.Point(49, 112);
-            this.VoteTable_Abdon.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.VoteTable_Abdon.Margin = new System.Windows.Forms.Padding(1);
             this.VoteTable_Abdon.Name = "VoteTable_Abdon";
             this.VoteTable_Abdon.Size = new System.Drawing.Size(143, 21);
             this.VoteTable_Abdon.TabIndex = 7;
@@ -12493,7 +12716,7 @@ namespace DocumentTools
             // VoteTable_UnAgree
             // 
             this.VoteTable_UnAgree.Location = new System.Drawing.Point(49, 81);
-            this.VoteTable_UnAgree.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.VoteTable_UnAgree.Margin = new System.Windows.Forms.Padding(1);
             this.VoteTable_UnAgree.Name = "VoteTable_UnAgree";
             this.VoteTable_UnAgree.Size = new System.Drawing.Size(143, 21);
             this.VoteTable_UnAgree.TabIndex = 5;
@@ -12513,7 +12736,7 @@ namespace DocumentTools
             // VoteTable_Agree
             // 
             this.VoteTable_Agree.Location = new System.Drawing.Point(49, 51);
-            this.VoteTable_Agree.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.VoteTable_Agree.Margin = new System.Windows.Forms.Padding(1);
             this.VoteTable_Agree.Name = "VoteTable_Agree";
             this.VoteTable_Agree.Size = new System.Drawing.Size(143, 21);
             this.VoteTable_Agree.TabIndex = 3;
@@ -12533,7 +12756,7 @@ namespace DocumentTools
             // VoteTable_Name
             // 
             this.VoteTable_Name.Location = new System.Drawing.Point(49, 20);
-            this.VoteTable_Name.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.VoteTable_Name.Margin = new System.Windows.Forms.Padding(1);
             this.VoteTable_Name.Name = "VoteTable_Name";
             this.VoteTable_Name.Size = new System.Drawing.Size(143, 21);
             this.VoteTable_Name.TabIndex = 1;
@@ -12552,19 +12775,147 @@ namespace DocumentTools
             // 
             // TabPage_36
             // 
+            this.TabPage_36.Controls.Add(this.groupBox69);
             this.TabPage_36.Controls.Add(this.groupBox67);
             this.TabPage_36.Controls.Add(this.groupBox60);
             this.TabPage_36.Controls.Add(this.groupBox28);
             this.TabPage_36.Controls.Add(this.groupBox46);
             this.TabPage_36.Controls.Add(this.groupBox43);
             this.TabPage_36.Location = new System.Drawing.Point(4, 114);
-            this.TabPage_36.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_36.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_36.Name = "TabPage_36";
-            this.TabPage_36.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_36.Padding = new System.Windows.Forms.Padding(1);
             this.TabPage_36.Size = new System.Drawing.Size(882, 621);
             this.TabPage_36.TabIndex = 35;
             this.TabPage_36.Text = "补充功能";
             this.TabPage_36.UseVisualStyleBackColor = true;
+            // 
+            // groupBox69
+            // 
+            this.groupBox69.Controls.Add(this.WatcherSendNotify);
+            this.groupBox69.Controls.Add(this.WatcherMakeTestFile);
+            this.groupBox69.Controls.Add(this.LatestWatcherFileNameBox);
+            this.groupBox69.Controls.Add(this.SelectWatcherPath);
+            this.groupBox69.Controls.Add(this.PathWatchLatestFile);
+            this.groupBox69.Controls.Add(this.StopPathWatcher);
+            this.groupBox69.Controls.Add(this.StartPathWatcher);
+            this.groupBox69.Controls.Add(this.WatcherPathTextBox);
+            this.groupBox69.Controls.Add(this.label208);
+            this.groupBox69.Location = new System.Drawing.Point(8, 555);
+            this.groupBox69.Name = "groupBox69";
+            this.groupBox69.Size = new System.Drawing.Size(866, 62);
+            this.groupBox69.TabIndex = 5;
+            this.groupBox69.TabStop = false;
+            this.groupBox69.Tag = "anchor_top_left_right";
+            this.groupBox69.Text = "图片目录文件监控";
+            // 
+            // WatcherSendNotify
+            // 
+            this.WatcherSendNotify.AutoSize = true;
+            this.WatcherSendNotify.Location = new System.Drawing.Point(788, 23);
+            this.WatcherSendNotify.Name = "WatcherSendNotify";
+            this.WatcherSendNotify.Size = new System.Drawing.Size(72, 16);
+            this.WatcherSendNotify.TabIndex = 36;
+            this.WatcherSendNotify.Text = "系统通知";
+            this.WatcherSendNotify.UseVisualStyleBackColor = true;
+            // 
+            // WatcherMakeTestFile
+            // 
+            this.WatcherMakeTestFile.Enabled = false;
+            this.WatcherMakeTestFile.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.WatcherMakeTestFile.Location = new System.Drawing.Point(476, 21);
+            this.WatcherMakeTestFile.Margin = new System.Windows.Forms.Padding(1);
+            this.WatcherMakeTestFile.Name = "WatcherMakeTestFile";
+            this.WatcherMakeTestFile.Size = new System.Drawing.Size(86, 23);
+            this.WatcherMakeTestFile.TabIndex = 35;
+            this.WatcherMakeTestFile.Text = "生成测试文件";
+            this.WatcherMakeTestFile.UseVisualStyleBackColor = true;
+            this.WatcherMakeTestFile.Click += new System.EventHandler(this.WatcherMakeTestFile_Click);
+            this.WatcherMakeTestFile.MouseClick += new System.Windows.Forms.MouseEventHandler(this.WatcherMakeTestFile_MouseClick);
+            // 
+            // LatestWatcherFileNameBox
+            // 
+            this.LatestWatcherFileNameBox.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.LatestWatcherFileNameBox.Location = new System.Drawing.Point(622, 21);
+            this.LatestWatcherFileNameBox.Name = "LatestWatcherFileNameBox";
+            this.LatestWatcherFileNameBox.ReadOnly = true;
+            this.LatestWatcherFileNameBox.Size = new System.Drawing.Size(160, 21);
+            this.LatestWatcherFileNameBox.TabIndex = 34;
+            this.LatestWatcherFileNameBox.Text = "未开启监控，等待中...";
+            this.LatestWatcherFileNameBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.LatestWatcherFileNameBox_MouseMove);
+            // 
+            // SelectWatcherPath
+            // 
+            this.SelectWatcherPath.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.SelectWatcherPath.Location = new System.Drawing.Point(231, 21);
+            this.SelectWatcherPath.Margin = new System.Windows.Forms.Padding(1);
+            this.SelectWatcherPath.Name = "SelectWatcherPath";
+            this.SelectWatcherPath.Size = new System.Drawing.Size(85, 23);
+            this.SelectWatcherPath.TabIndex = 33;
+            this.SelectWatcherPath.Text = "选择目录...";
+            this.SelectWatcherPath.UseVisualStyleBackColor = true;
+            this.SelectWatcherPath.Click += new System.EventHandler(this.SelectWatcherPath_Click);
+            // 
+            // PathWatchLatestFile
+            // 
+            this.PathWatchLatestFile.AutoSize = true;
+            this.PathWatchLatestFile.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.PathWatchLatestFile.ForeColor = System.Drawing.Color.Tomato;
+            this.PathWatchLatestFile.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.PathWatchLatestFile.Location = new System.Drawing.Point(565, 26);
+            this.PathWatchLatestFile.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.PathWatchLatestFile.Name = "PathWatchLatestFile";
+            this.PathWatchLatestFile.Size = new System.Drawing.Size(57, 12);
+            this.PathWatchLatestFile.TabIndex = 31;
+            this.PathWatchLatestFile.Tag = "anchor_bottom_left";
+            this.PathWatchLatestFile.Text = "最新文件";
+            this.PathWatchLatestFile.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // StopPathWatcher
+            // 
+            this.StopPathWatcher.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.StopPathWatcher.Location = new System.Drawing.Point(400, 21);
+            this.StopPathWatcher.Margin = new System.Windows.Forms.Padding(1);
+            this.StopPathWatcher.Name = "StopPathWatcher";
+            this.StopPathWatcher.Size = new System.Drawing.Size(74, 23);
+            this.StopPathWatcher.TabIndex = 32;
+            this.StopPathWatcher.Text = "停止";
+            this.StopPathWatcher.UseVisualStyleBackColor = true;
+            this.StopPathWatcher.Click += new System.EventHandler(this.StopPathWatcher_Click);
+            // 
+            // StartPathWatcher
+            // 
+            this.StartPathWatcher.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.StartPathWatcher.Location = new System.Drawing.Point(319, 21);
+            this.StartPathWatcher.Margin = new System.Windows.Forms.Padding(1);
+            this.StartPathWatcher.Name = "StartPathWatcher";
+            this.StartPathWatcher.Size = new System.Drawing.Size(75, 23);
+            this.StartPathWatcher.TabIndex = 31;
+            this.StartPathWatcher.Text = "开始";
+            this.MainToolsTip.SetToolTip(this.StartPathWatcher, "本功能只监控目录中的.jpg和.tif结尾的文件");
+            this.StartPathWatcher.UseVisualStyleBackColor = true;
+            this.StartPathWatcher.Click += new System.EventHandler(this.StartPathWatcher_Click);
+            // 
+            // WatcherPathTextBox
+            // 
+            this.WatcherPathTextBox.Location = new System.Drawing.Point(62, 21);
+            this.WatcherPathTextBox.Margin = new System.Windows.Forms.Padding(1);
+            this.WatcherPathTextBox.MaxLength = 2;
+            this.WatcherPathTextBox.Name = "WatcherPathTextBox";
+            this.WatcherPathTextBox.ReadOnly = true;
+            this.WatcherPathTextBox.Size = new System.Drawing.Size(166, 21);
+            this.WatcherPathTextBox.TabIndex = 31;
+            this.WatcherPathTextBox.Tag = "anchor_top_left_right";
+            this.WatcherPathTextBox.MouseHover += new System.EventHandler(this.WatcherPathTextBox_MouseHover);
+            // 
+            // label208
+            // 
+            this.label208.AutoSize = true;
+            this.label208.Location = new System.Drawing.Point(6, 26);
+            this.label208.Name = "label208";
+            this.label208.Size = new System.Drawing.Size(53, 12);
+            this.label208.TabIndex = 0;
+            this.label208.Text = "监控路径";
             // 
             // groupBox67
             // 
@@ -12580,11 +12931,11 @@ namespace DocumentTools
             this.groupBox67.Controls.Add(this.ExamPicture_Source);
             this.groupBox67.Controls.Add(this.label197);
             this.groupBox67.Controls.Add(this.label195);
-            this.groupBox67.Location = new System.Drawing.Point(7, 455);
-            this.groupBox67.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox67.Location = new System.Drawing.Point(7, 420);
+            this.groupBox67.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox67.Name = "groupBox67";
-            this.groupBox67.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.groupBox67.Size = new System.Drawing.Size(871, 134);
+            this.groupBox67.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox67.Size = new System.Drawing.Size(871, 133);
             this.groupBox67.TabIndex = 4;
             this.groupBox67.TabStop = false;
             this.groupBox67.Tag = "anchor_top_left_right";
@@ -12605,7 +12956,7 @@ namespace DocumentTools
             // 
             this.Exam_Picture_ThreadNumbers.FormattingEnabled = true;
             this.Exam_Picture_ThreadNumbers.Location = new System.Drawing.Point(507, 97);
-            this.Exam_Picture_ThreadNumbers.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Exam_Picture_ThreadNumbers.Margin = new System.Windows.Forms.Padding(2);
             this.Exam_Picture_ThreadNumbers.Name = "Exam_Picture_ThreadNumbers";
             this.Exam_Picture_ThreadNumbers.Size = new System.Drawing.Size(82, 24);
             this.Exam_Picture_ThreadNumbers.TabIndex = 29;
@@ -12629,7 +12980,7 @@ namespace DocumentTools
             // Exam_Picture_Class_ProgressBar
             // 
             this.Exam_Picture_Class_ProgressBar.Location = new System.Drawing.Point(13, 91);
-            this.Exam_Picture_Class_ProgressBar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Exam_Picture_Class_ProgressBar.Margin = new System.Windows.Forms.Padding(2);
             this.Exam_Picture_Class_ProgressBar.Name = "Exam_Picture_Class_ProgressBar";
             this.Exam_Picture_Class_ProgressBar.Size = new System.Drawing.Size(75, 26);
             this.Exam_Picture_Class_ProgressBar.TabIndex = 27;
@@ -12641,7 +12992,7 @@ namespace DocumentTools
             this.Exam_Picture_Source_IncludeSubDir.Checked = true;
             this.Exam_Picture_Source_IncludeSubDir.CheckState = System.Windows.Forms.CheckState.Checked;
             this.Exam_Picture_Source_IncludeSubDir.Location = new System.Drawing.Point(634, 99);
-            this.Exam_Picture_Source_IncludeSubDir.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Exam_Picture_Source_IncludeSubDir.Margin = new System.Windows.Forms.Padding(2);
             this.Exam_Picture_Source_IncludeSubDir.Name = "Exam_Picture_Source_IncludeSubDir";
             this.Exam_Picture_Source_IncludeSubDir.Size = new System.Drawing.Size(120, 16);
             this.Exam_Picture_Source_IncludeSubDir.TabIndex = 26;
@@ -12652,7 +13003,7 @@ namespace DocumentTools
             // 
             this.ExamPicture_Class_Start.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ExamPicture_Class_Start.Location = new System.Drawing.Point(765, 94);
-            this.ExamPicture_Class_Start.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ExamPicture_Class_Start.Margin = new System.Windows.Forms.Padding(1);
             this.ExamPicture_Class_Start.Name = "ExamPicture_Class_Start";
             this.ExamPicture_Class_Start.Size = new System.Drawing.Size(97, 23);
             this.ExamPicture_Class_Start.TabIndex = 22;
@@ -12664,7 +13015,7 @@ namespace DocumentTools
             // 
             this.ExamPicture_Target_Select.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ExamPicture_Target_Select.Location = new System.Drawing.Point(765, 59);
-            this.ExamPicture_Target_Select.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ExamPicture_Target_Select.Margin = new System.Windows.Forms.Padding(1);
             this.ExamPicture_Target_Select.Name = "ExamPicture_Target_Select";
             this.ExamPicture_Target_Select.Size = new System.Drawing.Size(97, 22);
             this.ExamPicture_Target_Select.TabIndex = 25;
@@ -12677,7 +13028,7 @@ namespace DocumentTools
             // 
             this.ExamPicture_Source_Select.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ExamPicture_Source_Select.Location = new System.Drawing.Point(765, 21);
-            this.ExamPicture_Source_Select.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ExamPicture_Source_Select.Margin = new System.Windows.Forms.Padding(1);
             this.ExamPicture_Source_Select.Name = "ExamPicture_Source_Select";
             this.ExamPicture_Source_Select.Size = new System.Drawing.Size(97, 22);
             this.ExamPicture_Source_Select.TabIndex = 22;
@@ -12689,7 +13040,7 @@ namespace DocumentTools
             // ExamPicture_Target
             // 
             this.ExamPicture_Target.Location = new System.Drawing.Point(93, 60);
-            this.ExamPicture_Target.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ExamPicture_Target.Margin = new System.Windows.Forms.Padding(1);
             this.ExamPicture_Target.MaxLength = 2;
             this.ExamPicture_Target.Name = "ExamPicture_Target";
             this.ExamPicture_Target.ReadOnly = true;
@@ -12700,7 +13051,7 @@ namespace DocumentTools
             // ExamPicture_Source
             // 
             this.ExamPicture_Source.Location = new System.Drawing.Point(93, 23);
-            this.ExamPicture_Source.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ExamPicture_Source.Margin = new System.Windows.Forms.Padding(1);
             this.ExamPicture_Source.MaxLength = 2;
             this.ExamPicture_Source.Name = "ExamPicture_Source";
             this.ExamPicture_Source.ReadOnly = true;
@@ -12743,11 +13094,11 @@ namespace DocumentTools
             this.groupBox60.Controls.Add(this.NumberIndexStart);
             this.groupBox60.Controls.Add(this.CopyNumberIndexResult);
             this.groupBox60.Controls.Add(this.NumberIndexResultBox);
-            this.groupBox60.Location = new System.Drawing.Point(393, 144);
-            this.groupBox60.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox60.Location = new System.Drawing.Point(466, 144);
+            this.groupBox60.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox60.Name = "groupBox60";
-            this.groupBox60.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
-            this.groupBox60.Size = new System.Drawing.Size(403, 165);
+            this.groupBox60.Padding = new System.Windows.Forms.Padding(1);
+            this.groupBox60.Size = new System.Drawing.Size(406, 130);
             this.groupBox60.TabIndex = 0;
             this.groupBox60.TabStop = false;
             this.groupBox60.Text = "序号生成";
@@ -12755,7 +13106,7 @@ namespace DocumentTools
             // Number_Suffix
             // 
             this.Number_Suffix.Location = new System.Drawing.Point(214, 66);
-            this.Number_Suffix.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Number_Suffix.Margin = new System.Windows.Forms.Padding(1);
             this.Number_Suffix.MaxLength = 65536;
             this.Number_Suffix.Name = "Number_Suffix";
             this.Number_Suffix.Size = new System.Drawing.Size(75, 21);
@@ -12764,7 +13115,7 @@ namespace DocumentTools
             // Number_Prefix
             // 
             this.Number_Prefix.Location = new System.Drawing.Point(214, 30);
-            this.Number_Prefix.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Number_Prefix.Margin = new System.Windows.Forms.Padding(1);
             this.Number_Prefix.MaxLength = 65536;
             this.Number_Prefix.Name = "Number_Prefix";
             this.Number_Prefix.Size = new System.Drawing.Size(75, 21);
@@ -12817,8 +13168,8 @@ namespace DocumentTools
             // GetNumberIndexList
             // 
             this.GetNumberIndexList.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.GetNumberIndexList.Location = new System.Drawing.Point(21, 135);
-            this.GetNumberIndexList.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.GetNumberIndexList.Location = new System.Drawing.Point(15, 95);
+            this.GetNumberIndexList.Margin = new System.Windows.Forms.Padding(1);
             this.GetNumberIndexList.Name = "GetNumberIndexList";
             this.GetNumberIndexList.Size = new System.Drawing.Size(80, 24);
             this.GetNumberIndexList.TabIndex = 0;
@@ -12829,7 +13180,7 @@ namespace DocumentTools
             // NumberIndexEnd
             // 
             this.NumberIndexEnd.Location = new System.Drawing.Point(76, 67);
-            this.NumberIndexEnd.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.NumberIndexEnd.Margin = new System.Windows.Forms.Padding(1);
             this.NumberIndexEnd.Maximum = new decimal(new int[] {
             999999999,
             0,
@@ -12852,7 +13203,7 @@ namespace DocumentTools
             // NumberIndexStart
             // 
             this.NumberIndexStart.Location = new System.Drawing.Point(76, 32);
-            this.NumberIndexStart.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.NumberIndexStart.Margin = new System.Windows.Forms.Padding(1);
             this.NumberIndexStart.Maximum = new decimal(new int[] {
             99999999,
             0,
@@ -12875,10 +13226,10 @@ namespace DocumentTools
             // CopyNumberIndexResult
             // 
             this.CopyNumberIndexResult.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.CopyNumberIndexResult.Location = new System.Drawing.Point(307, 132);
-            this.CopyNumberIndexResult.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.CopyNumberIndexResult.Location = new System.Drawing.Point(293, 97);
+            this.CopyNumberIndexResult.Margin = new System.Windows.Forms.Padding(1);
             this.CopyNumberIndexResult.Name = "CopyNumberIndexResult";
-            this.CopyNumberIndexResult.Size = new System.Drawing.Size(77, 24);
+            this.CopyNumberIndexResult.Size = new System.Drawing.Size(128, 22);
             this.CopyNumberIndexResult.TabIndex = 23;
             this.CopyNumberIndexResult.Text = "复制结果";
             this.CopyNumberIndexResult.UseVisualStyleBackColor = true;
@@ -12886,15 +13237,23 @@ namespace DocumentTools
             // 
             // NumberIndexResultBox
             // 
-            this.NumberIndexResultBox.Location = new System.Drawing.Point(301, 15);
-            this.NumberIndexResultBox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.NumberIndexResultBox.Location = new System.Drawing.Point(293, 14);
+            this.NumberIndexResultBox.Margin = new System.Windows.Forms.Padding(1);
             this.NumberIndexResultBox.Name = "NumberIndexResultBox";
-            this.NumberIndexResultBox.Size = new System.Drawing.Size(90, 104);
+            this.NumberIndexResultBox.Size = new System.Drawing.Size(106, 78);
             this.NumberIndexResultBox.TabIndex = 24;
             this.NumberIndexResultBox.Text = "";
             // 
             // groupBox28
             // 
+            this.groupBox28.Controls.Add(this.GetComputerNameSelf);
+            this.groupBox28.Controls.Add(this.ChangeExamPicPathSelect);
+            this.groupBox28.Controls.Add(this.ChangeExamCompNameSelect);
+            this.groupBox28.Controls.Add(this.ExamTargetPicPathTextBox);
+            this.groupBox28.Controls.Add(this.label207);
+            this.groupBox28.Controls.Add(this.ExamPicPathCombox);
+            this.groupBox28.Controls.Add(this.label206);
+            this.groupBox28.Controls.Add(this.linkLabel10);
             this.groupBox28.Controls.Add(this.label175);
             this.groupBox28.Controls.Add(this.GetRandomComputerNameRandLength);
             this.groupBox28.Controls.Add(this.GetRandomComputerNameButton);
@@ -12906,21 +13265,113 @@ namespace DocumentTools
             this.groupBox28.Controls.Add(this.ChooseExamFileButton);
             this.groupBox28.Controls.Add(this.ChooseExamFileTextBox);
             this.groupBox28.Controls.Add(this.label5);
-            this.groupBox28.Location = new System.Drawing.Point(7, 311);
-            this.groupBox28.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox28.Location = new System.Drawing.Point(6, 276);
+            this.groupBox28.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox28.Name = "groupBox28";
-            this.groupBox28.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox28.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox28.Size = new System.Drawing.Size(871, 141);
             this.groupBox28.TabIndex = 3;
             this.groupBox28.TabStop = false;
             this.groupBox28.Tag = "anchor_top_left_right";
-            this.groupBox28.Text = "考评系统数据包计算机名称修改";
+            this.groupBox28.Text = "考评系统数据包计算机名和图片路径修改";
+            // 
+            // GetComputerNameSelf
+            // 
+            this.GetComputerNameSelf.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.GetComputerNameSelf.Location = new System.Drawing.Point(769, 83);
+            this.GetComputerNameSelf.Margin = new System.Windows.Forms.Padding(1);
+            this.GetComputerNameSelf.Name = "GetComputerNameSelf";
+            this.GetComputerNameSelf.Size = new System.Drawing.Size(97, 25);
+            this.GetComputerNameSelf.TabIndex = 40;
+            this.GetComputerNameSelf.Tag = "anchor_right_top";
+            this.GetComputerNameSelf.Text = "获取本机名称";
+            this.GetComputerNameSelf.UseVisualStyleBackColor = true;
+            this.GetComputerNameSelf.Click += new System.EventHandler(this.GetComputerNameSelf_Click);
+            // 
+            // ChangeExamPicPathSelect
+            // 
+            this.ChangeExamPicPathSelect.AutoSize = true;
+            this.ChangeExamPicPathSelect.Location = new System.Drawing.Point(13, 87);
+            this.ChangeExamPicPathSelect.Name = "ChangeExamPicPathSelect";
+            this.ChangeExamPicPathSelect.Size = new System.Drawing.Size(95, 16);
+            this.ChangeExamPicPathSelect.TabIndex = 39;
+            this.ChangeExamPicPathSelect.Text = "修改图片路径";
+            this.ChangeExamPicPathSelect.UseVisualStyleBackColor = true;
+            // 
+            // ChangeExamCompNameSelect
+            // 
+            this.ChangeExamCompNameSelect.AutoSize = true;
+            this.ChangeExamCompNameSelect.Checked = true;
+            this.ChangeExamCompNameSelect.Location = new System.Drawing.Point(13, 59);
+            this.ChangeExamCompNameSelect.Name = "ChangeExamCompNameSelect";
+            this.ChangeExamCompNameSelect.Size = new System.Drawing.Size(95, 16);
+            this.ChangeExamCompNameSelect.TabIndex = 38;
+            this.ChangeExamCompNameSelect.TabStop = true;
+            this.ChangeExamCompNameSelect.Text = "修改计算机名";
+            this.ChangeExamCompNameSelect.UseVisualStyleBackColor = true;
+            this.ChangeExamCompNameSelect.CheckedChanged += new System.EventHandler(this.ChangeExamCompNameSelect_CheckedChanged);
+            // 
+            // ExamTargetPicPathTextBox
+            // 
+            this.ExamTargetPicPathTextBox.Location = new System.Drawing.Point(460, 86);
+            this.ExamTargetPicPathTextBox.Margin = new System.Windows.Forms.Padding(1);
+            this.ExamTargetPicPathTextBox.MaxLength = 65536;
+            this.ExamTargetPicPathTextBox.Name = "ExamTargetPicPathTextBox";
+            this.ExamTargetPicPathTextBox.Size = new System.Drawing.Size(300, 21);
+            this.ExamTargetPicPathTextBox.TabIndex = 37;
+            this.ExamTargetPicPathTextBox.Tag = "anchor_top_left_right";
+            // 
+            // label207
+            // 
+            this.label207.AutoSize = true;
+            this.label207.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label207.Location = new System.Drawing.Point(414, 91);
+            this.label207.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label207.Name = "label207";
+            this.label207.Size = new System.Drawing.Size(41, 12);
+            this.label207.TabIndex = 36;
+            this.label207.Text = "修改为";
+            // 
+            // ExamPicPathCombox
+            // 
+            this.ExamPicPathCombox.FormattingEnabled = true;
+            this.ExamPicPathCombox.Location = new System.Drawing.Point(178, 86);
+            this.ExamPicPathCombox.Margin = new System.Windows.Forms.Padding(1);
+            this.ExamPicPathCombox.Name = "ExamPicPathCombox";
+            this.ExamPicPathCombox.Size = new System.Drawing.Size(230, 24);
+            this.ExamPicPathCombox.TabIndex = 35;
+            this.ExamPicPathCombox.SelectedIndexChanged += new System.EventHandler(this.ExamPicPathCombox_SelectedIndexChanged);
+            this.ExamPicPathCombox.MouseHover += new System.EventHandler(this.ExamPicPathCombox_MouseHover);
+            // 
+            // label206
+            // 
+            this.label206.AutoSize = true;
+            this.label206.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.label206.Location = new System.Drawing.Point(120, 90);
+            this.label206.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.label206.Name = "label206";
+            this.label206.Size = new System.Drawing.Size(53, 12);
+            this.label206.TabIndex = 34;
+            this.label206.Text = "图片路径";
+            // 
+            // linkLabel10
+            // 
+            this.linkLabel10.AutoSize = true;
+            this.linkLabel10.Location = new System.Drawing.Point(7, 115);
+            this.linkLabel10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.linkLabel10.Name = "linkLabel10";
+            this.linkLabel10.Size = new System.Drawing.Size(215, 12);
+            this.linkLabel10.TabIndex = 33;
+            this.linkLabel10.TabStop = true;
+            this.linkLabel10.Tag = "anchor_left_bottom";
+            this.linkLabel10.Text = "点击查看功能简易说明手册（离线PDF）";
+            this.linkLabel10.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel10_LinkClicked);
             // 
             // label175
             // 
             this.label175.AutoSize = true;
             this.label175.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label175.Location = new System.Drawing.Point(451, 105);
+            this.label175.Location = new System.Drawing.Point(570, 61);
             this.label175.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label175.Name = "label175";
             this.label175.Size = new System.Drawing.Size(77, 12);
@@ -12929,8 +13380,8 @@ namespace DocumentTools
             // 
             // GetRandomComputerNameRandLength
             // 
-            this.GetRandomComputerNameRandLength.Location = new System.Drawing.Point(533, 101);
-            this.GetRandomComputerNameRandLength.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.GetRandomComputerNameRandLength.Location = new System.Drawing.Point(656, 56);
+            this.GetRandomComputerNameRandLength.Margin = new System.Windows.Forms.Padding(1);
             this.GetRandomComputerNameRandLength.Maximum = new decimal(new int[] {
             30,
             0,
@@ -12942,7 +13393,7 @@ namespace DocumentTools
             0,
             0});
             this.GetRandomComputerNameRandLength.Name = "GetRandomComputerNameRandLength";
-            this.GetRandomComputerNameRandLength.Size = new System.Drawing.Size(80, 21);
+            this.GetRandomComputerNameRandLength.Size = new System.Drawing.Size(98, 21);
             this.GetRandomComputerNameRandLength.TabIndex = 20;
             this.GetRandomComputerNameRandLength.Value = new decimal(new int[] {
             2,
@@ -12953,10 +13404,10 @@ namespace DocumentTools
             // GetRandomComputerNameButton
             // 
             this.GetRandomComputerNameButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.GetRandomComputerNameButton.Location = new System.Drawing.Point(617, 97);
-            this.GetRandomComputerNameButton.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.GetRandomComputerNameButton.Location = new System.Drawing.Point(769, 55);
+            this.GetRandomComputerNameButton.Margin = new System.Windows.Forms.Padding(1);
             this.GetRandomComputerNameButton.Name = "GetRandomComputerNameButton";
-            this.GetRandomComputerNameButton.Size = new System.Drawing.Size(147, 23);
+            this.GetRandomComputerNameButton.Size = new System.Drawing.Size(96, 23);
             this.GetRandomComputerNameButton.TabIndex = 19;
             this.GetRandomComputerNameButton.Text = "生成随机名称";
             this.GetRandomComputerNameButton.UseVisualStyleBackColor = true;
@@ -12965,32 +13416,32 @@ namespace DocumentTools
             // ExamComputerNameChange
             // 
             this.ExamComputerNameChange.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.ExamComputerNameChange.Location = new System.Drawing.Point(769, 73);
-            this.ExamComputerNameChange.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ExamComputerNameChange.Location = new System.Drawing.Point(769, 113);
+            this.ExamComputerNameChange.Margin = new System.Windows.Forms.Padding(1);
             this.ExamComputerNameChange.Name = "ExamComputerNameChange";
-            this.ExamComputerNameChange.Size = new System.Drawing.Size(97, 22);
+            this.ExamComputerNameChange.Size = new System.Drawing.Size(97, 25);
             this.ExamComputerNameChange.TabIndex = 18;
             this.ExamComputerNameChange.Tag = "anchor_right_top";
             this.ExamComputerNameChange.Text = "执行修改";
-            this.MainToolsTip.SetToolTip(this.ExamComputerNameChange, resources.GetString("ExamComputerNameChange.ToolTip"));
             this.ExamComputerNameChange.UseVisualStyleBackColor = true;
             this.ExamComputerNameChange.Click += new System.EventHandler(this.ExamComputerNameChange_Click);
             // 
             // ExamComputerChangeName
             // 
-            this.ExamComputerChangeName.Location = new System.Drawing.Point(453, 73);
-            this.ExamComputerChangeName.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
-            this.ExamComputerChangeName.MaxLength = 2;
+            this.ExamComputerChangeName.Location = new System.Drawing.Point(386, 56);
+            this.ExamComputerChangeName.Margin = new System.Windows.Forms.Padding(1);
+            this.ExamComputerChangeName.MaxLength = 50;
             this.ExamComputerChangeName.Name = "ExamComputerChangeName";
-            this.ExamComputerChangeName.Size = new System.Drawing.Size(312, 21);
+            this.ExamComputerChangeName.Size = new System.Drawing.Size(178, 21);
             this.ExamComputerChangeName.TabIndex = 14;
             this.ExamComputerChangeName.Tag = "anchor_top_left_right";
+            this.ExamComputerChangeName.MouseHover += new System.EventHandler(this.ExamComputerChangeName_MouseHover);
             // 
             // label174
             // 
             this.label174.AutoSize = true;
             this.label174.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label174.Location = new System.Drawing.Point(408, 79);
+            this.label174.Location = new System.Drawing.Point(341, 61);
             this.label174.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label174.Name = "label174";
             this.label174.Size = new System.Drawing.Size(41, 12);
@@ -13000,28 +13451,30 @@ namespace DocumentTools
             // ExamComputerNames
             // 
             this.ExamComputerNames.FormattingEnabled = true;
-            this.ExamComputerNames.Location = new System.Drawing.Point(104, 73);
-            this.ExamComputerNames.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ExamComputerNames.Location = new System.Drawing.Point(178, 56);
+            this.ExamComputerNames.Margin = new System.Windows.Forms.Padding(1);
             this.ExamComputerNames.Name = "ExamComputerNames";
-            this.ExamComputerNames.Size = new System.Drawing.Size(301, 24);
+            this.ExamComputerNames.Size = new System.Drawing.Size(159, 24);
             this.ExamComputerNames.TabIndex = 16;
+            this.ExamComputerNames.SelectedIndexChanged += new System.EventHandler(this.ExamComputerNames_SelectedIndexChanged);
+            this.ExamComputerNames.MouseHover += new System.EventHandler(this.ExamComputerNames_MouseHover);
             // 
             // label58
             // 
             this.label58.AutoSize = true;
             this.label58.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label58.Location = new System.Drawing.Point(11, 77);
+            this.label58.Location = new System.Drawing.Point(121, 60);
             this.label58.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label58.Name = "label58";
-            this.label58.Size = new System.Drawing.Size(89, 12);
+            this.label58.Size = new System.Drawing.Size(53, 12);
             this.label58.TabIndex = 15;
-            this.label58.Text = "计算机名称列表";
+            this.label58.Text = "计算机名";
             // 
             // ChooseExamFileButton
             // 
             this.ChooseExamFileButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ChooseExamFileButton.Location = new System.Drawing.Point(769, 25);
-            this.ChooseExamFileButton.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ChooseExamFileButton.Margin = new System.Windows.Forms.Padding(1);
             this.ChooseExamFileButton.Name = "ChooseExamFileButton";
             this.ChooseExamFileButton.Size = new System.Drawing.Size(97, 22);
             this.ChooseExamFileButton.TabIndex = 14;
@@ -13033,7 +13486,7 @@ namespace DocumentTools
             // ChooseExamFileTextBox
             // 
             this.ChooseExamFileTextBox.Location = new System.Drawing.Point(104, 25);
-            this.ChooseExamFileTextBox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.ChooseExamFileTextBox.Margin = new System.Windows.Forms.Padding(1);
             this.ChooseExamFileTextBox.MaxLength = 2;
             this.ChooseExamFileTextBox.Name = "ChooseExamFileTextBox";
             this.ChooseExamFileTextBox.ReadOnly = true;
@@ -13054,39 +13507,61 @@ namespace DocumentTools
             // 
             // groupBox46
             // 
+            this.groupBox46.Controls.Add(this.pictureBox6);
+            this.groupBox46.Controls.Add(this.pictureBox5);
             this.groupBox46.Controls.Add(this.money_big);
             this.groupBox46.Controls.Add(this.money_small);
             this.groupBox46.Controls.Add(this.label131);
             this.groupBox46.Controls.Add(this.label130);
             this.groupBox46.Controls.Add(this.copy_money_big_result);
             this.groupBox46.Location = new System.Drawing.Point(7, 144);
-            this.groupBox46.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox46.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox46.Name = "groupBox46";
-            this.groupBox46.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
-            this.groupBox46.Size = new System.Drawing.Size(383, 165);
+            this.groupBox46.Padding = new System.Windows.Forms.Padding(1);
+            this.groupBox46.Size = new System.Drawing.Size(457, 130);
             this.groupBox46.TabIndex = 2;
             this.groupBox46.TabStop = false;
             this.groupBox46.Text = "金额大写转换";
             // 
+            // pictureBox6
+            // 
+            this.pictureBox6.Image = global::DocumentTools.Properties.Resources.懒得喷;
+            this.pictureBox6.Location = new System.Drawing.Point(374, 14);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(79, 105);
+            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox6.TabIndex = 19;
+            this.pictureBox6.TabStop = false;
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Image = global::DocumentTools.Properties.Resources.大头儿子;
+            this.pictureBox5.Location = new System.Drawing.Point(291, 14);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(77, 105);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox5.TabIndex = 18;
+            this.pictureBox5.TabStop = false;
+            // 
             // money_big
             // 
             this.money_big.Font = new System.Drawing.Font("宋体", 9F);
-            this.money_big.Location = new System.Drawing.Point(63, 103);
-            this.money_big.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.money_big.Location = new System.Drawing.Point(62, 69);
+            this.money_big.Margin = new System.Windows.Forms.Padding(1);
             this.money_big.Multiline = true;
             this.money_big.Name = "money_big";
-            this.money_big.Size = new System.Drawing.Size(315, 19);
+            this.money_big.Size = new System.Drawing.Size(225, 19);
             this.money_big.TabIndex = 17;
             // 
             // money_small
             // 
             this.money_small.Font = new System.Drawing.Font("宋体", 9F);
-            this.money_small.Location = new System.Drawing.Point(63, 41);
-            this.money_small.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.money_small.Location = new System.Drawing.Point(62, 28);
+            this.money_small.Margin = new System.Windows.Forms.Padding(1);
             this.money_small.MaxLength = 13;
             this.money_small.Multiline = true;
             this.money_small.Name = "money_small";
-            this.money_small.Size = new System.Drawing.Size(315, 19);
+            this.money_small.Size = new System.Drawing.Size(225, 19);
             this.money_small.TabIndex = 16;
             this.money_small.TextChanged += new System.EventHandler(this.money_small_TextChanged);
             // 
@@ -13095,7 +13570,7 @@ namespace DocumentTools
             this.label131.AutoSize = true;
             this.label131.Font = new System.Drawing.Font("宋体", 9F);
             this.label131.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label131.Location = new System.Drawing.Point(7, 107);
+            this.label131.Location = new System.Drawing.Point(6, 73);
             this.label131.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label131.Name = "label131";
             this.label131.Size = new System.Drawing.Size(53, 12);
@@ -13107,7 +13582,7 @@ namespace DocumentTools
             this.label130.AutoSize = true;
             this.label130.Font = new System.Drawing.Font("宋体", 9F);
             this.label130.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label130.Location = new System.Drawing.Point(7, 45);
+            this.label130.Location = new System.Drawing.Point(6, 32);
             this.label130.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label130.Name = "label130";
             this.label130.Size = new System.Drawing.Size(53, 12);
@@ -13117,8 +13592,8 @@ namespace DocumentTools
             // copy_money_big_result
             // 
             this.copy_money_big_result.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.copy_money_big_result.Location = new System.Drawing.Point(273, 135);
-            this.copy_money_big_result.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.copy_money_big_result.Location = new System.Drawing.Point(183, 96);
+            this.copy_money_big_result.Margin = new System.Windows.Forms.Padding(1);
             this.copy_money_big_result.Name = "copy_money_big_result";
             this.copy_money_big_result.Size = new System.Drawing.Size(104, 25);
             this.copy_money_big_result.TabIndex = 0;
@@ -13144,9 +13619,9 @@ namespace DocumentTools
             this.groupBox43.Controls.Add(this.label107);
             this.groupBox43.Controls.Add(this.label106);
             this.groupBox43.Location = new System.Drawing.Point(7, 4);
-            this.groupBox43.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox43.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox43.Name = "groupBox43";
-            this.groupBox43.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox43.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox43.Size = new System.Drawing.Size(872, 138);
             this.groupBox43.TabIndex = 1;
             this.groupBox43.TabStop = false;
@@ -13156,7 +13631,7 @@ namespace DocumentTools
             // copied_number_prefix_count
             // 
             this.copied_number_prefix_count.Location = new System.Drawing.Point(232, 94);
-            this.copied_number_prefix_count.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.copied_number_prefix_count.Margin = new System.Windows.Forms.Padding(1);
             this.copied_number_prefix_count.MaxLength = 2;
             this.copied_number_prefix_count.Name = "copied_number_prefix_count";
             this.copied_number_prefix_count.Size = new System.Drawing.Size(83, 21);
@@ -13190,7 +13665,7 @@ namespace DocumentTools
             // Gen_Copied_Namer
             // 
             this.Gen_Copied_Namer.Location = new System.Drawing.Point(92, 94);
-            this.Gen_Copied_Namer.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Gen_Copied_Namer.Margin = new System.Windows.Forms.Padding(1);
             this.Gen_Copied_Namer.MaxLength = 1000;
             this.Gen_Copied_Namer.Name = "Gen_Copied_Namer";
             this.Gen_Copied_Namer.Size = new System.Drawing.Size(83, 21);
@@ -13224,7 +13699,7 @@ namespace DocumentTools
             // Gen_Copied_Number
             // 
             this.Gen_Copied_Number.Location = new System.Drawing.Point(399, 96);
-            this.Gen_Copied_Number.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Gen_Copied_Number.Margin = new System.Windows.Forms.Padding(1);
             this.Gen_Copied_Number.Maximum = new decimal(new int[] {
             900000000,
             0,
@@ -13248,7 +13723,7 @@ namespace DocumentTools
             // 
             this.CopiedGen.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.CopiedGen.Location = new System.Drawing.Point(725, 105);
-            this.CopiedGen.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.CopiedGen.Margin = new System.Windows.Forms.Padding(1);
             this.CopiedGen.Name = "CopiedGen";
             this.CopiedGen.Size = new System.Drawing.Size(133, 29);
             this.CopiedGen.TabIndex = 0;
@@ -13272,7 +13747,7 @@ namespace DocumentTools
             // 
             this.Gen_Copied_Path.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.Gen_Copied_Path.Location = new System.Drawing.Point(725, 68);
-            this.Gen_Copied_Path.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Gen_Copied_Path.Margin = new System.Windows.Forms.Padding(1);
             this.Gen_Copied_Path.Name = "Gen_Copied_Path";
             this.Gen_Copied_Path.Size = new System.Drawing.Size(133, 22);
             this.Gen_Copied_Path.TabIndex = 5;
@@ -13285,7 +13760,7 @@ namespace DocumentTools
             // 
             this.Gen_Copied_File.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.Gen_Copied_File.Location = new System.Drawing.Point(725, 27);
-            this.Gen_Copied_File.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Gen_Copied_File.Margin = new System.Windows.Forms.Padding(1);
             this.Gen_Copied_File.Name = "Gen_Copied_File";
             this.Gen_Copied_File.Size = new System.Drawing.Size(133, 22);
             this.Gen_Copied_File.TabIndex = 4;
@@ -13297,7 +13772,7 @@ namespace DocumentTools
             // Gen_Copied_TargetPath
             // 
             this.Gen_Copied_TargetPath.Location = new System.Drawing.Point(92, 67);
-            this.Gen_Copied_TargetPath.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Gen_Copied_TargetPath.Margin = new System.Windows.Forms.Padding(1);
             this.Gen_Copied_TargetPath.Name = "Gen_Copied_TargetPath";
             this.Gen_Copied_TargetPath.ReadOnly = true;
             this.Gen_Copied_TargetPath.Size = new System.Drawing.Size(631, 21);
@@ -13307,7 +13782,7 @@ namespace DocumentTools
             // Gen_Copied_SourceFileBox
             // 
             this.Gen_Copied_SourceFileBox.Location = new System.Drawing.Point(92, 27);
-            this.Gen_Copied_SourceFileBox.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Gen_Copied_SourceFileBox.Margin = new System.Windows.Forms.Padding(1);
             this.Gen_Copied_SourceFileBox.Name = "Gen_Copied_SourceFileBox";
             this.Gen_Copied_SourceFileBox.ReadOnly = true;
             this.Gen_Copied_SourceFileBox.Size = new System.Drawing.Size(631, 21);
@@ -13343,9 +13818,9 @@ namespace DocumentTools
             this.TabPage_37.Controls.Add(this.groupBox45);
             this.TabPage_37.Controls.Add(this.groupBox44);
             this.TabPage_37.Location = new System.Drawing.Point(4, 114);
-            this.TabPage_37.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_37.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_37.Name = "TabPage_37";
-            this.TabPage_37.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_37.Padding = new System.Windows.Forms.Padding(1);
             this.TabPage_37.Size = new System.Drawing.Size(882, 621);
             this.TabPage_37.TabIndex = 36;
             this.TabPage_37.Text = "网卡设置";
@@ -13386,9 +13861,9 @@ namespace DocumentTools
             this.groupBox45.Controls.Add(this.set_interface_name_list);
             this.groupBox45.Controls.Add(this.label116);
             this.groupBox45.Location = new System.Drawing.Point(533, 4);
-            this.groupBox45.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox45.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox45.Name = "groupBox45";
-            this.groupBox45.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox45.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox45.Size = new System.Drawing.Size(329, 311);
             this.groupBox45.TabIndex = 1;
             this.groupBox45.TabStop = false;
@@ -13399,7 +13874,7 @@ namespace DocumentTools
             // 
             this.set_interface_load.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.set_interface_load.Location = new System.Drawing.Point(171, 265);
-            this.set_interface_load.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.set_interface_load.Margin = new System.Windows.Forms.Padding(1);
             this.set_interface_load.Name = "set_interface_load";
             this.set_interface_load.Size = new System.Drawing.Size(85, 35);
             this.set_interface_load.TabIndex = 27;
@@ -13411,7 +13886,7 @@ namespace DocumentTools
             // 
             this.set_interface_export.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.set_interface_export.Location = new System.Drawing.Point(67, 265);
-            this.set_interface_export.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.set_interface_export.Margin = new System.Windows.Forms.Padding(1);
             this.set_interface_export.Name = "set_interface_export";
             this.set_interface_export.Size = new System.Drawing.Size(93, 35);
             this.set_interface_export.TabIndex = 26;
@@ -13423,7 +13898,7 @@ namespace DocumentTools
             // 
             this.set_interface_reset.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.set_interface_reset.Location = new System.Drawing.Point(7, 265);
-            this.set_interface_reset.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.set_interface_reset.Margin = new System.Windows.Forms.Padding(1);
             this.set_interface_reset.Name = "set_interface_reset";
             this.set_interface_reset.Size = new System.Drawing.Size(51, 35);
             this.set_interface_reset.TabIndex = 25;
@@ -13435,7 +13910,7 @@ namespace DocumentTools
             // 
             this.set_interface_start.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.set_interface_start.Location = new System.Drawing.Point(265, 265);
-            this.set_interface_start.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.set_interface_start.Margin = new System.Windows.Forms.Padding(1);
             this.set_interface_start.Name = "set_interface_start";
             this.set_interface_start.Size = new System.Drawing.Size(53, 35);
             this.set_interface_start.TabIndex = 24;
@@ -13449,7 +13924,7 @@ namespace DocumentTools
             this.set_interface_mode_static.Checked = true;
             this.set_interface_mode_static.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.set_interface_mode_static.Location = new System.Drawing.Point(249, 57);
-            this.set_interface_mode_static.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.set_interface_mode_static.Margin = new System.Windows.Forms.Padding(1);
             this.set_interface_mode_static.Name = "set_interface_mode_static";
             this.set_interface_mode_static.Size = new System.Drawing.Size(71, 16);
             this.set_interface_mode_static.TabIndex = 18;
@@ -13462,7 +13937,7 @@ namespace DocumentTools
             this.set_interface_mode_auto.AutoSize = true;
             this.set_interface_mode_auto.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.set_interface_mode_auto.Location = new System.Drawing.Point(7, 57);
-            this.set_interface_mode_auto.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.set_interface_mode_auto.Margin = new System.Windows.Forms.Padding(1);
             this.set_interface_mode_auto.Name = "set_interface_mode_auto";
             this.set_interface_mode_auto.Size = new System.Drawing.Size(71, 16);
             this.set_interface_mode_auto.TabIndex = 17;
@@ -13529,7 +14004,7 @@ namespace DocumentTools
             // 
             this.set_interface_name_list.FormattingEnabled = true;
             this.set_interface_name_list.Location = new System.Drawing.Point(61, 24);
-            this.set_interface_name_list.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.set_interface_name_list.Margin = new System.Windows.Forms.Padding(1);
             this.set_interface_name_list.Name = "set_interface_name_list";
             this.set_interface_name_list.Size = new System.Drawing.Size(259, 24);
             this.set_interface_name_list.TabIndex = 12;
@@ -13570,9 +14045,9 @@ namespace DocumentTools
             this.groupBox44.Controls.Add(this.label111);
             this.groupBox44.Controls.Add(this.label110);
             this.groupBox44.Location = new System.Drawing.Point(7, 4);
-            this.groupBox44.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox44.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox44.Name = "groupBox44";
-            this.groupBox44.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox44.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox44.Size = new System.Drawing.Size(333, 311);
             this.groupBox44.TabIndex = 0;
             this.groupBox44.TabStop = false;
@@ -13582,7 +14057,7 @@ namespace DocumentTools
             // 
             this.copy_network_info_ip_address.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.copy_network_info_ip_address.Location = new System.Drawing.Point(269, 56);
-            this.copy_network_info_ip_address.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.copy_network_info_ip_address.Margin = new System.Windows.Forms.Padding(1);
             this.copy_network_info_ip_address.Name = "copy_network_info_ip_address";
             this.copy_network_info_ip_address.Size = new System.Drawing.Size(60, 22);
             this.copy_network_info_ip_address.TabIndex = 20;
@@ -13594,7 +14069,7 @@ namespace DocumentTools
             // 
             this.copy_network_info_mac_address.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.copy_network_info_mac_address.Location = new System.Drawing.Point(269, 209);
-            this.copy_network_info_mac_address.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.copy_network_info_mac_address.Margin = new System.Windows.Forms.Padding(1);
             this.copy_network_info_mac_address.Name = "copy_network_info_mac_address";
             this.copy_network_info_mac_address.Size = new System.Drawing.Size(60, 22);
             this.copy_network_info_mac_address.TabIndex = 19;
@@ -13606,7 +14081,7 @@ namespace DocumentTools
             // 
             this.network_info_mac_address.FormattingEnabled = true;
             this.network_info_mac_address.Location = new System.Drawing.Point(91, 209);
-            this.network_info_mac_address.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.network_info_mac_address.Margin = new System.Windows.Forms.Padding(1);
             this.network_info_mac_address.Name = "network_info_mac_address";
             this.network_info_mac_address.Size = new System.Drawing.Size(175, 24);
             this.network_info_mac_address.TabIndex = 18;
@@ -13626,7 +14101,7 @@ namespace DocumentTools
             // 
             this.network_open_ncap.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.network_open_ncap.Location = new System.Drawing.Point(197, 267);
-            this.network_open_ncap.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.network_open_ncap.Margin = new System.Windows.Forms.Padding(1);
             this.network_open_ncap.Name = "network_open_ncap";
             this.network_open_ncap.Size = new System.Drawing.Size(132, 33);
             this.network_open_ncap.TabIndex = 16;
@@ -13638,7 +14113,7 @@ namespace DocumentTools
             // 
             this.update_network_info.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.update_network_info.Location = new System.Drawing.Point(97, 267);
-            this.update_network_info.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.update_network_info.Margin = new System.Windows.Forms.Padding(1);
             this.update_network_info.Name = "update_network_info";
             this.update_network_info.Size = new System.Drawing.Size(95, 33);
             this.update_network_info.TabIndex = 15;
@@ -13653,7 +14128,7 @@ namespace DocumentTools
             this.network_info_show_normal.CheckState = System.Windows.Forms.CheckState.Checked;
             this.network_info_show_normal.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.network_info_show_normal.Location = new System.Drawing.Point(7, 237);
-            this.network_info_show_normal.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.network_info_show_normal.Margin = new System.Windows.Forms.Padding(1);
             this.network_info_show_normal.Name = "network_info_show_normal";
             this.network_info_show_normal.Size = new System.Drawing.Size(276, 16);
             this.network_info_show_normal.TabIndex = 14;
@@ -13665,7 +14140,7 @@ namespace DocumentTools
             // 
             this.Disable_NetworkCard.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.Disable_NetworkCard.Location = new System.Drawing.Point(53, 267);
-            this.Disable_NetworkCard.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Disable_NetworkCard.Margin = new System.Windows.Forms.Padding(1);
             this.Disable_NetworkCard.Name = "Disable_NetworkCard";
             this.Disable_NetworkCard.Size = new System.Drawing.Size(41, 33);
             this.Disable_NetworkCard.TabIndex = 13;
@@ -13677,7 +14152,7 @@ namespace DocumentTools
             // 
             this.Enable_NetworkCard.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.Enable_NetworkCard.Location = new System.Drawing.Point(7, 267);
-            this.Enable_NetworkCard.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Enable_NetworkCard.Margin = new System.Windows.Forms.Padding(1);
             this.Enable_NetworkCard.Name = "Enable_NetworkCard";
             this.Enable_NetworkCard.Size = new System.Drawing.Size(41, 33);
             this.Enable_NetworkCard.TabIndex = 12;
@@ -13689,7 +14164,7 @@ namespace DocumentTools
             // 
             this.network_info_dns2.FormattingEnabled = true;
             this.network_info_dns2.Location = new System.Drawing.Point(91, 181);
-            this.network_info_dns2.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.network_info_dns2.Margin = new System.Windows.Forms.Padding(1);
             this.network_info_dns2.Name = "network_info_dns2";
             this.network_info_dns2.Size = new System.Drawing.Size(239, 24);
             this.network_info_dns2.TabIndex = 11;
@@ -13698,7 +14173,7 @@ namespace DocumentTools
             // 
             this.network_info_dns1.FormattingEnabled = true;
             this.network_info_dns1.Location = new System.Drawing.Point(91, 151);
-            this.network_info_dns1.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.network_info_dns1.Margin = new System.Windows.Forms.Padding(1);
             this.network_info_dns1.Name = "network_info_dns1";
             this.network_info_dns1.Size = new System.Drawing.Size(239, 24);
             this.network_info_dns1.TabIndex = 10;
@@ -13707,7 +14182,7 @@ namespace DocumentTools
             // 
             this.network_info_gateway.FormattingEnabled = true;
             this.network_info_gateway.Location = new System.Drawing.Point(61, 119);
-            this.network_info_gateway.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.network_info_gateway.Margin = new System.Windows.Forms.Padding(1);
             this.network_info_gateway.Name = "network_info_gateway";
             this.network_info_gateway.Size = new System.Drawing.Size(269, 24);
             this.network_info_gateway.TabIndex = 9;
@@ -13716,7 +14191,7 @@ namespace DocumentTools
             // 
             this.network_info_mask.FormattingEnabled = true;
             this.network_info_mask.Location = new System.Drawing.Point(61, 87);
-            this.network_info_mask.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.network_info_mask.Margin = new System.Windows.Forms.Padding(1);
             this.network_info_mask.Name = "network_info_mask";
             this.network_info_mask.Size = new System.Drawing.Size(269, 24);
             this.network_info_mask.TabIndex = 8;
@@ -13725,7 +14200,7 @@ namespace DocumentTools
             // 
             this.network_info_ipv4.FormattingEnabled = true;
             this.network_info_ipv4.Location = new System.Drawing.Point(61, 56);
-            this.network_info_ipv4.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.network_info_ipv4.Margin = new System.Windows.Forms.Padding(1);
             this.network_info_ipv4.Name = "network_info_ipv4";
             this.network_info_ipv4.Size = new System.Drawing.Size(205, 24);
             this.network_info_ipv4.TabIndex = 7;
@@ -13734,7 +14209,7 @@ namespace DocumentTools
             // 
             this.network_info_card_list.FormattingEnabled = true;
             this.network_info_card_list.Location = new System.Drawing.Point(61, 25);
-            this.network_info_card_list.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.network_info_card_list.Margin = new System.Windows.Forms.Padding(1);
             this.network_info_card_list.Name = "network_info_card_list";
             this.network_info_card_list.Size = new System.Drawing.Size(269, 24);
             this.network_info_card_list.TabIndex = 6;
@@ -13815,7 +14290,7 @@ namespace DocumentTools
             this.TabPage_08.Controls.Add(this.groupBox4);
             this.TabPage_08.Controls.Add(this.groupBox3);
             this.TabPage_08.Location = new System.Drawing.Point(4, 114);
-            this.TabPage_08.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.TabPage_08.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_08.Name = "TabPage_08";
             this.TabPage_08.Size = new System.Drawing.Size(882, 621);
             this.TabPage_08.TabIndex = 7;
@@ -13827,7 +14302,7 @@ namespace DocumentTools
             this.pictureBox4.Image = global::DocumentTools.Properties.Resources._6f258af2c19c9c3cdb97517573506c11ce48ff98;
             this.pictureBox4.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.pictureBox4.Location = new System.Drawing.Point(5, 408);
-            this.pictureBox4.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.pictureBox4.Margin = new System.Windows.Forms.Padding(1);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(221, 209);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -13840,7 +14315,7 @@ namespace DocumentTools
             this.pictureBox3.Image = global::DocumentTools.Properties.Resources._6f258af2c19c9c3cdb97517573506c11ce48ff98;
             this.pictureBox3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.pictureBox3.Location = new System.Drawing.Point(231, 408);
-            this.pictureBox3.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(1);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(221, 209);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -13853,7 +14328,7 @@ namespace DocumentTools
             this.pictureBox2.Image = global::DocumentTools.Properties.Resources._6f258af2c19c9c3cdb97517573506c11ce48ff98;
             this.pictureBox2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.pictureBox2.Location = new System.Drawing.Point(456, 408);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(1);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(221, 209);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -13866,7 +14341,7 @@ namespace DocumentTools
             this.pictureBox9.Image = global::DocumentTools.Properties.Resources._6f258af2c19c9c3cdb97517573506c11ce48ff98;
             this.pictureBox9.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.pictureBox9.Location = new System.Drawing.Point(681, 408);
-            this.pictureBox9.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.pictureBox9.Margin = new System.Windows.Forms.Padding(1);
             this.pictureBox9.Name = "pictureBox9";
             this.pictureBox9.Size = new System.Drawing.Size(197, 209);
             this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -13886,9 +14361,9 @@ namespace DocumentTools
             this.groupBox4.Controls.Add(this.label10);
             this.groupBox4.Controls.Add(this.label9);
             this.groupBox4.Location = new System.Drawing.Point(3, 127);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox4.Size = new System.Drawing.Size(875, 277);
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
@@ -13902,7 +14377,7 @@ namespace DocumentTools
             this.ManW.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ManW.Font = new System.Drawing.Font("幼圆", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ManW.Location = new System.Drawing.Point(471, 225);
-            this.ManW.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ManW.Margin = new System.Windows.Forms.Padding(2);
             this.ManW.Name = "ManW";
             this.ManW.Size = new System.Drawing.Size(121, 40);
             this.ManW.TabIndex = 10;
@@ -13916,7 +14391,7 @@ namespace DocumentTools
             // 
             this.Man_WhatCanISay.Image = global::DocumentTools.Properties.Resources.微信图片_20240401192428;
             this.Man_WhatCanISay.Location = new System.Drawing.Point(460, 45);
-            this.Man_WhatCanISay.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Man_WhatCanISay.Margin = new System.Windows.Forms.Padding(2);
             this.Man_WhatCanISay.Name = "Man_WhatCanISay";
             this.Man_WhatCanISay.Size = new System.Drawing.Size(143, 220);
             this.Man_WhatCanISay.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -13928,7 +14403,7 @@ namespace DocumentTools
             // 
             this.PlayCXKMusic.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.PlayCXKMusic.Location = new System.Drawing.Point(607, 45);
-            this.PlayCXKMusic.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.PlayCXKMusic.Margin = new System.Windows.Forms.Padding(1);
             this.PlayCXKMusic.Name = "PlayCXKMusic";
             this.PlayCXKMusic.Size = new System.Drawing.Size(261, 37);
             this.PlayCXKMusic.TabIndex = 8;
@@ -13942,7 +14417,7 @@ namespace DocumentTools
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.pictureBox1.Location = new System.Drawing.Point(607, 87);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(1);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(261, 179);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -14019,9 +14494,9 @@ namespace DocumentTools
             this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Location = new System.Drawing.Point(3, 1);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(1);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(1);
             this.groupBox3.Size = new System.Drawing.Size(879, 121);
             this.groupBox3.TabIndex = 0;
             this.groupBox3.TabStop = false;
@@ -14032,7 +14507,7 @@ namespace DocumentTools
             // 
             this.DisableAdminBehavior.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.DisableAdminBehavior.Location = new System.Drawing.Point(711, 45);
-            this.DisableAdminBehavior.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.DisableAdminBehavior.Margin = new System.Windows.Forms.Padding(1);
             this.DisableAdminBehavior.Name = "DisableAdminBehavior";
             this.DisableAdminBehavior.Size = new System.Drawing.Size(165, 35);
             this.DisableAdminBehavior.TabIndex = 11;
@@ -14046,7 +14521,7 @@ namespace DocumentTools
             // 
             this.DontateMe.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.DontateMe.Location = new System.Drawing.Point(711, 81);
-            this.DontateMe.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.DontateMe.Margin = new System.Windows.Forms.Padding(1);
             this.DontateMe.Name = "DontateMe";
             this.DontateMe.Size = new System.Drawing.Size(165, 35);
             this.DontateMe.TabIndex = 10;
@@ -14059,7 +14534,7 @@ namespace DocumentTools
             // 
             this.UseLibList.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.UseLibList.Location = new System.Drawing.Point(711, 9);
-            this.UseLibList.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.UseLibList.Margin = new System.Windows.Forms.Padding(1);
             this.UseLibList.Name = "UseLibList";
             this.UseLibList.Size = new System.Drawing.Size(165, 35);
             this.UseLibList.TabIndex = 9;
@@ -15136,6 +15611,210 @@ namespace DocumentTools
             this.UpdateCheckText.Size = new System.Drawing.Size(56, 25);
             this.UpdateCheckText.Text = "程序版本";
             // 
+            // MainNotify
+            // 
+            this.MainNotify.ContextMenuStrip = this.MainContextMenu;
+            this.MainNotify.Icon = ((System.Drawing.Icon)(resources.GetObject("MainNotify.Icon")));
+            this.MainNotify.Visible = true;
+            this.MainNotify.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.MainNotify_MouseDoubleClick);
+            // 
+            // MainContextMenu
+            // 
+            this.MainContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.OpenMainForm,
+            this.ExitApplication});
+            this.MainContextMenu.Name = "MainContextMenu";
+            this.MainContextMenu.Size = new System.Drawing.Size(137, 48);
+            // 
+            // OpenMainForm
+            // 
+            this.OpenMainForm.Name = "OpenMainForm";
+            this.OpenMainForm.Size = new System.Drawing.Size(136, 22);
+            this.OpenMainForm.Text = "打开主界面";
+            this.OpenMainForm.Click += new System.EventHandler(this.OpenMainForm_Click);
+            // 
+            // ExitApplication
+            // 
+            this.ExitApplication.Name = "ExitApplication";
+            this.ExitApplication.Size = new System.Drawing.Size(136, 22);
+            this.ExitApplication.Text = "退出程序";
+            this.ExitApplication.Click += new System.EventHandler(this.ExitApplication_Click);
+            // 
+            // WatcherMakeTestFileMenu
+            // 
+            this.WatcherMakeTestFileMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MakeJPGTestFile,
+            this.MakeJPGErrTestFile,
+            this.MakeJPGHanTestFile,
+            this.MakeTIFTestFile,
+            this.MakeTIFErrTestFile,
+            this.MakeTIFHanTestFile,
+            this.MakeALLFiles});
+            this.WatcherMakeTestFileMenu.Name = "WatcherMakeTestFileMenu";
+            this.WatcherMakeTestFileMenu.Size = new System.Drawing.Size(219, 158);
+            // 
+            // MakeJPGTestFile
+            // 
+            this.MakeJPGTestFile.Name = "MakeJPGTestFile";
+            this.MakeJPGTestFile.Size = new System.Drawing.Size(218, 22);
+            this.MakeJPGTestFile.Text = "生成测试文件（.jpg）";
+            this.MakeJPGTestFile.Click += new System.EventHandler(this.MakeJPGTestFile_Click);
+            // 
+            // MakeJPGErrTestFile
+            // 
+            this.MakeJPGErrTestFile.Name = "MakeJPGErrTestFile";
+            this.MakeJPGErrTestFile.Size = new System.Drawing.Size(218, 22);
+            this.MakeJPGErrTestFile.Text = "生成测试文件（.jpg.err）";
+            this.MakeJPGErrTestFile.Click += new System.EventHandler(this.MakeJPGErrTestFile_Click);
+            // 
+            // MakeJPGHanTestFile
+            // 
+            this.MakeJPGHanTestFile.Name = "MakeJPGHanTestFile";
+            this.MakeJPGHanTestFile.Size = new System.Drawing.Size(218, 22);
+            this.MakeJPGHanTestFile.Text = "生成测试文件（.jpg.han）";
+            this.MakeJPGHanTestFile.Click += new System.EventHandler(this.MakeJPGHanTestFile_Click);
+            // 
+            // MakeTIFTestFile
+            // 
+            this.MakeTIFTestFile.Name = "MakeTIFTestFile";
+            this.MakeTIFTestFile.Size = new System.Drawing.Size(218, 22);
+            this.MakeTIFTestFile.Text = "生成测试文件（.tif）";
+            this.MakeTIFTestFile.Click += new System.EventHandler(this.MakeTIFTestFile_Click);
+            // 
+            // MakeTIFErrTestFile
+            // 
+            this.MakeTIFErrTestFile.Name = "MakeTIFErrTestFile";
+            this.MakeTIFErrTestFile.Size = new System.Drawing.Size(218, 22);
+            this.MakeTIFErrTestFile.Text = "生成测试文件（.tif.err）";
+            this.MakeTIFErrTestFile.Click += new System.EventHandler(this.MakeTIFErrTestFile_Click);
+            // 
+            // MakeTIFHanTestFile
+            // 
+            this.MakeTIFHanTestFile.Name = "MakeTIFHanTestFile";
+            this.MakeTIFHanTestFile.Size = new System.Drawing.Size(218, 22);
+            this.MakeTIFHanTestFile.Text = "生成测试文件（.tif.han）";
+            this.MakeTIFHanTestFile.Click += new System.EventHandler(this.MakeTIFHanTestFile_Click);
+            // 
+            // MakeALLFiles
+            // 
+            this.MakeALLFiles.Name = "MakeALLFiles";
+            this.MakeALLFiles.Size = new System.Drawing.Size(218, 22);
+            this.MakeALLFiles.Text = "生成全部类型文件";
+            this.MakeALLFiles.Click += new System.EventHandler(this.MakeALLFiles_Click);
+            // 
+            // GetExamNameAndSelectorMenu
+            // 
+            this.GetExamNameAndSelectorMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.GetAllExamName,
+            this.GetAllExamSelector});
+            this.GetExamNameAndSelectorMenu.Name = "GetExamNameAndSelectorMenu";
+            this.GetExamNameAndSelectorMenu.Size = new System.Drawing.Size(185, 48);
+            // 
+            // GetAllExamName
+            // 
+            this.GetAllExamName.Name = "GetAllExamName";
+            this.GetAllExamName.Size = new System.Drawing.Size(184, 22);
+            this.GetAllExamName.Text = "获取全部项目名称";
+            this.GetAllExamName.Click += new System.EventHandler(this.GetAllExamName_Click);
+            // 
+            // GetAllExamSelector
+            // 
+            this.GetAllExamSelector.Name = "GetAllExamSelector";
+            this.GetAllExamSelector.Size = new System.Drawing.Size(184, 22);
+            this.GetAllExamSelector.Text = "获取所选项目的选项";
+            this.GetAllExamSelector.Click += new System.EventHandler(this.GetAllExamSelector_Click);
+            // 
+            // AddPdfWater_GetSelectPdfPointInfo
+            // 
+            this.AddPdfWater_GetSelectPdfPointInfo.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.AddPdfWater_GetSelectPdfPointInfo.Location = new System.Drawing.Point(5, 108);
+            this.AddPdfWater_GetSelectPdfPointInfo.Margin = new System.Windows.Forms.Padding(1);
+            this.AddPdfWater_GetSelectPdfPointInfo.Name = "AddPdfWater_GetSelectPdfPointInfo";
+            this.AddPdfWater_GetSelectPdfPointInfo.Size = new System.Drawing.Size(142, 21);
+            this.AddPdfWater_GetSelectPdfPointInfo.TabIndex = 33;
+            this.AddPdfWater_GetSelectPdfPointInfo.Text = "获取所选PDF页面信息";
+            this.MainToolsTip.SetToolTip(this.AddPdfWater_GetSelectPdfPointInfo, "注：只获取文件中第1页的信息");
+            this.AddPdfWater_GetSelectPdfPointInfo.UseVisualStyleBackColor = true;
+            this.AddPdfWater_GetSelectPdfPointInfo.Click += new System.EventHandler(this.AddPdfWater_GetSelectPdfPointInfo_Click);
+            // 
+            // PdfWaterSetPreCustomMenu
+            // 
+            this.PdfWaterSetPreCustomMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.PdfWaterMarkPrePostion_TopLeft,
+            this.PdfWaterMarkPrePostion_TopMiddle,
+            this.PdfWaterMarkPrePostion_TopRight,
+            this.PdfWaterMarkPrePostion_CenterLeft,
+            this.PdfWaterMarkPrePostion_CenterMiddle,
+            this.PdfWaterMarkPrePostion_CenterRight,
+            this.PdfWaterMarkPrePostion_BottomLeft,
+            this.PdfWaterMarkPrePostion_BottomMiddle,
+            this.PdfWaterMarkPrePostion_BottomRight});
+            this.PdfWaterSetPreCustomMenu.Name = "GetExamNameAndSelectorMenu";
+            this.PdfWaterSetPreCustomMenu.Size = new System.Drawing.Size(185, 202);
+            // 
+            // PdfWaterMarkPrePostion_TopLeft
+            // 
+            this.PdfWaterMarkPrePostion_TopLeft.Name = "PdfWaterMarkPrePostion_TopLeft";
+            this.PdfWaterMarkPrePostion_TopLeft.Size = new System.Drawing.Size(184, 22);
+            this.PdfWaterMarkPrePostion_TopLeft.Text = "获取左上角坐标值";
+            this.PdfWaterMarkPrePostion_TopLeft.Click += new System.EventHandler(this.PdfWaterMarkPrePostion_TopLeft_Click);
+            // 
+            // PdfWaterMarkPrePostion_TopMiddle
+            // 
+            this.PdfWaterMarkPrePostion_TopMiddle.Name = "PdfWaterMarkPrePostion_TopMiddle";
+            this.PdfWaterMarkPrePostion_TopMiddle.Size = new System.Drawing.Size(184, 22);
+            this.PdfWaterMarkPrePostion_TopMiddle.Text = "获取顶部居中坐标值";
+            this.PdfWaterMarkPrePostion_TopMiddle.Click += new System.EventHandler(this.PdfWaterMarkPrePostion_TopMiddle_Click);
+            // 
+            // PdfWaterMarkPrePostion_TopRight
+            // 
+            this.PdfWaterMarkPrePostion_TopRight.Name = "PdfWaterMarkPrePostion_TopRight";
+            this.PdfWaterMarkPrePostion_TopRight.Size = new System.Drawing.Size(184, 22);
+            this.PdfWaterMarkPrePostion_TopRight.Text = "获取右上角坐标值";
+            this.PdfWaterMarkPrePostion_TopRight.Click += new System.EventHandler(this.PdfWaterMarkPrePostion_TopRight_Click);
+            // 
+            // PdfWaterMarkPrePostion_CenterLeft
+            // 
+            this.PdfWaterMarkPrePostion_CenterLeft.Name = "PdfWaterMarkPrePostion_CenterLeft";
+            this.PdfWaterMarkPrePostion_CenterLeft.Size = new System.Drawing.Size(184, 22);
+            this.PdfWaterMarkPrePostion_CenterLeft.Text = "获取居中靠左坐标值";
+            this.PdfWaterMarkPrePostion_CenterLeft.Click += new System.EventHandler(this.PdfWaterMarkPrePostion_CenterLeft_Click);
+            // 
+            // PdfWaterMarkPrePostion_CenterMiddle
+            // 
+            this.PdfWaterMarkPrePostion_CenterMiddle.Name = "PdfWaterMarkPrePostion_CenterMiddle";
+            this.PdfWaterMarkPrePostion_CenterMiddle.Size = new System.Drawing.Size(184, 22);
+            this.PdfWaterMarkPrePostion_CenterMiddle.Text = "获取垂直居中坐标值";
+            this.PdfWaterMarkPrePostion_CenterMiddle.Click += new System.EventHandler(this.PdfWaterMarkPrePostion_CenterMiddle_Click);
+            // 
+            // PdfWaterMarkPrePostion_CenterRight
+            // 
+            this.PdfWaterMarkPrePostion_CenterRight.Name = "PdfWaterMarkPrePostion_CenterRight";
+            this.PdfWaterMarkPrePostion_CenterRight.Size = new System.Drawing.Size(184, 22);
+            this.PdfWaterMarkPrePostion_CenterRight.Text = "获取居中靠右坐标值";
+            this.PdfWaterMarkPrePostion_CenterRight.Click += new System.EventHandler(this.PdfWaterMarkPrePostion_CenterRight_Click);
+            // 
+            // PdfWaterMarkPrePostion_BottomLeft
+            // 
+            this.PdfWaterMarkPrePostion_BottomLeft.Name = "PdfWaterMarkPrePostion_BottomLeft";
+            this.PdfWaterMarkPrePostion_BottomLeft.Size = new System.Drawing.Size(184, 22);
+            this.PdfWaterMarkPrePostion_BottomLeft.Text = "获取左下角坐标值";
+            this.PdfWaterMarkPrePostion_BottomLeft.Click += new System.EventHandler(this.PdfWaterMarkPrePostion_BottomLeft_Click);
+            // 
+            // PdfWaterMarkPrePostion_BottomMiddle
+            // 
+            this.PdfWaterMarkPrePostion_BottomMiddle.Name = "PdfWaterMarkPrePostion_BottomMiddle";
+            this.PdfWaterMarkPrePostion_BottomMiddle.Size = new System.Drawing.Size(184, 22);
+            this.PdfWaterMarkPrePostion_BottomMiddle.Text = "获取底部居中坐标值";
+            this.PdfWaterMarkPrePostion_BottomMiddle.Click += new System.EventHandler(this.PdfWaterMarkPrePostion_BottomMiddle_Click);
+            // 
+            // PdfWaterMarkPrePostion_BottomRight
+            // 
+            this.PdfWaterMarkPrePostion_BottomRight.Name = "PdfWaterMarkPrePostion_BottomRight";
+            this.PdfWaterMarkPrePostion_BottomRight.Size = new System.Drawing.Size(184, 22);
+            this.PdfWaterMarkPrePostion_BottomRight.Text = "获取右下角坐标值";
+            this.PdfWaterMarkPrePostion_BottomRight.Click += new System.EventHandler(this.PdfWaterMarkPrePostion_BottomRight_Click);
+            // 
             // set_interface_dns2
             // 
             this.set_interface_dns2.Location = new System.Drawing.Point(91, 228);
@@ -15210,7 +15889,7 @@ namespace DocumentTools
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("宋体", 9F);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Margin = new System.Windows.Forms.Padding(1);
             this.Name = "BodyForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "文档工具";
@@ -15258,6 +15937,8 @@ namespace DocumentTools
             this.TabPage_18.PerformLayout();
             this.groupBox18.ResumeLayout(false);
             this.groupBox18.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.AddPdfWater_CustomPostion_Y)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AddPdfWater_CustomPostion_X)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AddPdfWaterMark_FullScren_VerDmi)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AddPdfWaterMark_FullScren_HorDmi)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.WaterMarkImage)).EndInit();
@@ -15397,6 +16078,7 @@ namespace DocumentTools
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             this.SingleDocumentConfigGroupBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
             this.groupBox55.ResumeLayout(false);
             this.groupBox55.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SignDocumentNeedCount)).EndInit();
@@ -15435,6 +16117,8 @@ namespace DocumentTools
             this.groupBox49.ResumeLayout(false);
             this.groupBox49.PerformLayout();
             this.TabPage_36.ResumeLayout(false);
+            this.groupBox69.ResumeLayout(false);
+            this.groupBox69.PerformLayout();
             this.groupBox67.ResumeLayout(false);
             this.groupBox67.PerformLayout();
             this.groupBox60.ResumeLayout(false);
@@ -15446,6 +16130,8 @@ namespace DocumentTools
             ((System.ComponentModel.ISupportInitialize)(this.GetRandomComputerNameRandLength)).EndInit();
             this.groupBox46.ResumeLayout(false);
             this.groupBox46.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.groupBox43.ResumeLayout(false);
             this.groupBox43.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Gen_Copied_Number)).EndInit();
@@ -15473,6 +16159,10 @@ namespace DocumentTools
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.MainContextMenu.ResumeLayout(false);
+            this.WatcherMakeTestFileMenu.ResumeLayout(false);
+            this.GetExamNameAndSelectorMenu.ResumeLayout(false);
+            this.PdfWaterSetPreCustomMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -16521,7 +17211,6 @@ namespace DocumentTools
         private TextBox ExamReportColMode_ExamSelectorBox;
         private CheckBox ExamReportRowMode_ExamSelectorInsertSame;
         private CheckBox ExamReportRowMode_ExamItemInsertSame;
-        private Button GetAllItemSplit;
         private Label label183;
         private LinkLabel linkLabel7;
         private Label label186;
@@ -16551,7 +17240,6 @@ namespace DocumentTools
         private TextBox Number_Suffix;
         private TextBox Number_Prefix;
         private LinkLabel linkLabel9;
-        private Label Compress_Label_Tips;
         private Button WordReplaceAddFind;
         private Button WordReplaceRemoveFind;
         internal GroupBox groupBox9;
@@ -16596,6 +17284,64 @@ namespace DocumentTools
         internal CheckBox WordTextReplace_SaveSourceBox;
         private ComboBox GetChinsesHanPinYin_TypeBox;
         private CheckBox GetChinsesHanPinYin;
+        private LinkLabel ClickTurnImageConv;
+        private LinkLabel linkLabel10;
+        private Label label206;
+        private RadioButton ChangeExamPicPathSelect;
+        private RadioButton ChangeExamCompNameSelect;
+        private TextBox ExamTargetPicPathTextBox;
+        private Label label207;
+        private ComboBox ExamPicPathCombox;
+        private Button GetComputerNameSelf;
+        private GroupBox groupBox69;
+        private Label label208;
+        private Button StartPathWatcher;
+        private TextBox WatcherPathTextBox;
+        private Button StopPathWatcher;
+        private Label PathWatchLatestFile;
+        private Button SelectWatcherPath;
+        private TextBox LatestWatcherFileNameBox;
+        private Button WatcherMakeTestFile;
+        private NotifyIcon MainNotify;
+        private CheckBox WatcherSendNotify;
+        private ContextMenuStrip MainContextMenu;
+        private ToolStripMenuItem OpenMainForm;
+        private ToolStripMenuItem ExitApplication;
+        private ContextMenuStrip WatcherMakeTestFileMenu;
+        private ToolStripMenuItem MakeJPGTestFile;
+        private ToolStripMenuItem MakeJPGErrTestFile;
+        private ToolStripMenuItem MakeJPGHanTestFile;
+        private ToolStripMenuItem MakeTIFTestFile;
+        private ToolStripMenuItem MakeTIFErrTestFile;
+        private ToolStripMenuItem MakeTIFHanTestFile;
+        private ToolStripMenuItem MakeALLFiles;
+        private CheckBox ChangeMssItemColumn;
+        private CheckBox ResetMssItemColumn;
+        private LinkLabel MoveToConvertTif;
+        private LinkLabel VoteMssTifHelpFile;
+        private ContextMenuStrip GetExamNameAndSelectorMenu;
+        private ToolStripMenuItem GetAllExamName;
+        private ToolStripMenuItem GetAllExamSelector;
+        private Button GetAllItemSplit;
+        private PictureBox pictureBox6;
+        private PictureBox pictureBox5;
+        private PictureBox pictureBox10;
+        internal NumericUpDown AddPdfWater_CustomPostion_Y;
+        private Label label210;
+        internal NumericUpDown AddPdfWater_CustomPostion_X;
+        private Label label209;
+        internal CheckBox AddPdfWater_CustomPostion;
+        private Button AddPdfWater_GetSelectPdfPointInfo;
+        private ContextMenuStrip PdfWaterSetPreCustomMenu;
+        private ToolStripMenuItem PdfWaterMarkPrePostion_TopLeft;
+        private ToolStripMenuItem PdfWaterMarkPrePostion_TopMiddle;
+        private ToolStripMenuItem PdfWaterMarkPrePostion_TopRight;
+        private ToolStripMenuItem PdfWaterMarkPrePostion_CenterLeft;
+        private ToolStripMenuItem PdfWaterMarkPrePostion_CenterMiddle;
+        private ToolStripMenuItem PdfWaterMarkPrePostion_CenterRight;
+        private ToolStripMenuItem PdfWaterMarkPrePostion_BottomLeft;
+        private ToolStripMenuItem PdfWaterMarkPrePostion_BottomMiddle;
+        private ToolStripMenuItem PdfWaterMarkPrePostion_BottomRight;
     }
 }
 

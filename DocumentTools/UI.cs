@@ -474,7 +474,11 @@ namespace DocumentTools
                                     BodyForm.MainForm.WaterMarkImageWidth.Text,
                                     BodyForm.MainForm.AddPdfWaterMark_FullScren.Checked,
                                     (int)BodyForm.MainForm.AddPdfWaterMark_FullScren_HorDmi.Value,
-                                    (int)BodyForm.MainForm.AddPdfWaterMark_FullScren_VerDmi.Value);
+                                    (int)BodyForm.MainForm.AddPdfWaterMark_FullScren_VerDmi.Value,
+                                    BodyForm.MainForm.AddPdfWater_CustomPostion.Checked,
+                                    (double)BodyForm.MainForm.AddPdfWater_CustomPostion_X.Value,
+                                    (double)BodyForm.MainForm.AddPdfWater_CustomPostion_Y.Value
+                                    );
                                 break;
                             // pdf移除水印
                             case ConvertFileType.RemovePdfWaterMark:
