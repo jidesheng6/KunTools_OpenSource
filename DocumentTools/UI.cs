@@ -638,6 +638,7 @@ namespace DocumentTools
                                 break;
                         }
                         ListViewControl.Items[TempIndex].SubItems.Add(ConvertedFileName);
+                        ListViewControl.Items[TempIndex].SubItems[2].Text = ConvertedFileName;
                         ListViewControl.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
 
                         if(File.Exists(ConvertedFileName))

@@ -1,5 +1,6 @@
 ﻿using AutoUpdaterDotNET;
 using Gma.System.MouseKeyHook;
+using Microsoft.Toolkit.Uwp.Notifications;
 using Newtonsoft.Json.Linq;
 using NPinyin;
 using NTwain;
@@ -21,6 +22,8 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 //using System.Web.UI.WebControls;
 using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace DocumentTools
 {
@@ -39,6 +42,9 @@ namespace DocumentTools
         private readonly List<Bitmap> TempScannedImageBmpList = new List<Bitmap>();
         private readonly IKeyboardEvents GlobalHook = Hook.GlobalEvents();//全局钩子事件
         private readonly ImageList TempImageList = new ImageList() { ImageSize = new Size(1, 25) };
+
+        private List<string> TempExamReportItemLists = new List<string>();
+        private List<string> TempExamReportItemLists_NoSort = new List<string>();
 
         public FileDropHandler FileDropper; //全局的
 
@@ -61,6 +67,10 @@ namespace DocumentTools
         private int TabMenPagePreIndex = -1;
         private int TabMenPageCurrentIndex = -1;
 
+        private bool IsClickEmojiClick = true;
+
+        private bool RuntimeControl_SendMessage_Status = false;
+
         private (int PdfWaterCustomPos_TopLeft_X, int PdfWaterCustomPos_TopLeft_Y,
                  int PdfWaterCustomPos_TopCenter_X, int PdfWaterCustomPos_TopCenter_Y,
                  int PdfWaterCustomPos_TopRight_X, int PdfWaterCustomPos_TopRight_Y,
@@ -72,17 +82,34 @@ namespace DocumentTools
                  int PdfWaterCustomPos_BottomRight_X, int PdfWaterCustomPos_BottomRight_Y) PdfWaterMarkPreCustomPostionValue;
 
         public int FormWidth = 906;
-        public int FormHeight = 834;
+        public int FormHeight = 872;
 
         public JArray City_Json;//城市的json字符串数据
 
         bool TwainInitState;
-        
+
         bool ExamReportMiddleClickStatus = false;
 
         private string ChangeReportItemTempHelpPdfFile = string.Empty;
         private string ChangeExamComputerNameHelpPdfFile = string.Empty;
         private string VoteMssTifHelpPdfFile = string.Empty;
+
+        [Obsolete]
+        private void SetDpiScalePercentScale()
+        {
+            float TempDpiX, TempDpiY;
+
+            Graphics TempGraph = this.CreateGraphics();
+
+            TempDpiX = TempGraph.DpiX;
+
+            TempDpiY = TempGraph.DpiY;
+
+            int TempScalePercent = (TempDpiX == 96) ? 100 : (TempDpiX == 120) ? 125 : 150;
+
+            this.Width = this.Width * TempScalePercent / 100;
+            this.Height = this.Height * TempScalePercent / 100;
+        }
 
         private void OutPutListViewIndex()
         {
@@ -234,6 +261,7 @@ namespace DocumentTools
                 FormWidth = width;
                 FormHeight = height;
             }
+
 
             this.Width = FormWidth;
             this.Height = FormHeight;
@@ -421,16 +449,33 @@ namespace DocumentTools
             votedataview.ReadOnly = true;
             votedataview.Font = new System.Drawing.Font("宋体", 10);
             votedataview.BackgroundColor = Color.AliceBlue;
+            votedataview.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            votedataview.MultiSelect = false;
+
+            InsertExamTableView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            InsertExamTableView.MultiSelect = false;
+            InsertExamTableView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            InsertExamTableView.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            InsertExamTableView.RowsDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            InsertExamTableView.AllowUserToDeleteRows = false;
+            InsertExamTableView.AllowUserToAddRows = false;
+            InsertExamTableView.AllowUserToOrderColumns = false;
+            InsertExamTableView.RowHeadersVisible = true;
+            InsertExamTableView.ReadOnly = true;
+            InsertExamTableView.Font = new System.Drawing.Font("宋体", 9);
+            InsertExamTableView.BackgroundColor = Color.AliceBlue;
         }
 
 
         public BodyForm()
         {
+            this.AutoScaleMode = AutoScaleMode.Dpi;
             InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
             MainForm = this;
-
-
+            
+            money_small.Enabled = !IsClickEmojiClick;
+            money_big.Enabled = !IsClickEmojiClick;
             //this.AutoScaleMode = AutoScaleMode.Font;
         }
 
@@ -454,6 +499,9 @@ namespace DocumentTools
 
         private void BodyForm_Load(object sender, EventArgs e)
         {
+            //判断程序是否可以打开
+            Task.Run(async () => await GetApplicationStartLimit());
+
             //判断内部版本
             //Util.paint_1();
             AutoUpdater.InstalledVersion = new Version(VersionInfo.VersionNumber);
@@ -464,13 +512,13 @@ namespace DocumentTools
             //初始化
             this.Text = VersionInfo.VersionTitle;
             this.UpdateCheckText.Text = $"当前版本为：{VersionInfo.VersionNumber}，没有检测到新版本";
-            this.AutoScaleMode = AutoScaleMode.Dpi;
             this.AutoSize = false;
             this.MainNotify.Text = VersionInfo.VersionTitle;
             City_Json = JArray.Parse((string)Util.GetEmbedResourceObj("china_level"));
             InitDataGridView();
             InitComboxValue();
             InitConfigSettings();
+            //SetDpiScalePercentScale();
             InitListView();
             InitMoveItemButtonHandler();
             InitRemoveItemHandler();
@@ -622,7 +670,13 @@ namespace DocumentTools
                 }
             };
 
+            //从仓库获取按钮状态，如果网络失败或者其他问题，默认隐藏按钮
+            Task.Run(async () => await SetLimitControl());
             //AutoSize = new AutoAdaptWindowsSize(this);
+
+            DynamicAddControlParams.TempBaseInsertItemLocationY = InsertExam_ExamName.Location.Y;
+
+            DynamicAddControlParams.TempBaseInsertItemSelectorLocationY = InsertExam_ExamSelector.Location.Y;
         }
 
 
@@ -1095,7 +1149,7 @@ namespace DocumentTools
             this.PauseUpdateYears.ValueMember = "RealValue";
 
 
-            string[] ExamDataFormatList = new string[] { "该人得票数", "该人得票率", "该人得分", "该人得分率","该人得票数|该人得票率" };
+            string[] ExamDataFormatList = new string[] { "该人得票数", "该人得票率", "该人得分", "该人得分率", "该人得票数|该人得票率" };
 
             this.ExamReplaceDataFormat.DataSource = ExamDataFormatList;
             this.ExamReportParaDataFormat_Combox.DataSource = ExamDataFormatList.Clone();
@@ -1145,6 +1199,8 @@ namespace DocumentTools
                 "小写拼音（带空格）",
                 "小写拼音（不带空格）",
             };
+
+            InserExamBaseInfo_FlowClassCombox.DataSource = new string[] { "人员纵排", "人员纵排2", "人员横排", "单人标识" };
 
 
             //加载城市数据到combox中
@@ -1659,6 +1715,9 @@ namespace DocumentTools
                             } else if(TabPageCaption.Contains("拆分PPT"))
                             {
                                 TempPage.ImageIndex = 3;
+                            } else if(TabPageCaption.Contains("考评表信息插入"))
+                            {
+                                TempPage.ImageIndex = 22;
                             }
                         }
                     });
@@ -2332,7 +2391,7 @@ namespace DocumentTools
         }
 
         private void DownloadFrameWorkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        { Process.Start("https://dotnet.microsoft.com/zh-cn/download/dotnet-framework/net48"); }
+        { Process.Start(Util.GetEmbedResourceObj("Link_Download_Net48").ToString()); }
 
         #region Twain设备的初始化和扫描事件订阅过程代码
         private void InitTwain()
@@ -2432,9 +2491,9 @@ namespace DocumentTools
         {
             dataSource ??= twainSession.DefaultSource;
 
-            if(dataSource.Open() == ReturnCode.Success)
+            if(dataSource?.Open() == ReturnCode.Success)
             {
-                dataSource.Enable(SourceEnableMode.ShowUIOnly, false, IntPtr.Zero);
+                dataSource?.Enable(SourceEnableMode.ShowUIOnly, false, IntPtr.Zero);
             }
         }
 
@@ -2558,7 +2617,7 @@ namespace DocumentTools
             }
         }
 
-        private void MemoryTimer_Tick(object sender, EventArgs e)
+        private async void MemoryTimer_Tick(object sender, EventArgs e)
         {
             try
             {
@@ -2566,12 +2625,19 @@ namespace DocumentTools
 
                 double MemoryUsedPercent = Math.Round((Util.Byte2GB((long)MemoryInfo.PUM) / MemoryInfo.MTM) * 100.0, 2);
 
-                this.MemoryStatusLabel.Text = $"占用内存：{MemoryInfo.PUM / 1024.0 / 1024.0:f2}MB|可用内存：{MemoryInfo.MFM:f2}GB|总内存：{MemoryInfo.MTM:f2}GB|程序占用比例（{MemoryUsedPercent}%）";
+                this.Invoke(
+                    new Action(
+                        () =>
+                        {
+                            this.MemoryStatusLabel.Text = $"占用内存：{MemoryInfo.PUM / 1024.0 / 1024.0:f2}MB|可用内存：{MemoryInfo.MFM:f2}GB|总内存：{MemoryInfo.MTM:f2}GB|程序占用比例（{MemoryUsedPercent}%）";
 
-                this.MemoryProgressBar.Maximum = (int)MemoryInfo.MTM;
-                this.MemoryProgressBar.Value = (int)(Util.Byte2GB((long)MemoryInfo.PUM));
+                            this.MemoryProgressBar.Maximum = (int)MemoryInfo.MTM;
+                            this.MemoryProgressBar.Value = (int)(Util.Byte2GB((long)MemoryInfo.PUM));
 
-                this.MemoryProgressBar.ToolTipText = $"程序占用比例：{MemoryUsedPercent}%";
+                            this.MemoryProgressBar.ToolTipText = $"程序占用比例：{MemoryUsedPercent}%";
+                        }));
+
+                await GetOnlineApplicationCMD();
             } catch(Exception ex)
             {
                 Debug.WriteLine(ex.ToString());
@@ -2737,7 +2803,7 @@ namespace DocumentTools
         }
 
         private void LanzouNetfx_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        { Process.Start("https://www.123pan.com/s/JXY5Vv-hX8wd.html"); }
+        { Process.Start(Util.GetEmbedResourceObj("Link_NetPan_Download_NetFx35").ToString()); }
 
         private void ReleaseRegistry_Click(object sender, EventArgs e)
         {
@@ -2808,7 +2874,8 @@ namespace DocumentTools
             {
                 File.Delete(VoteMssTifHelpPdfFile);
             }
-
+            MainNotify.Visible = false;
+            MainNotify.Icon = null;
             MainNotify.Dispose();
 
             Environment.Exit(0);
@@ -2830,7 +2897,7 @@ namespace DocumentTools
         }
 
         private void LinkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        { Process.Start("https://www.52pojie.cn/thread-1769111-1-1.html"); }
+        { Process.Start(Util.GetEmbedResourceObj("Link_52Pojie").ToString()); }
 
 
         private void SelectMergeWordFiles_Click(object sender, EventArgs e) { UI.AddMergeWordFiles(); }
@@ -3840,10 +3907,7 @@ namespace DocumentTools
         }
 
         private void LinkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Process.Start(
-                "https://commondatastorage.googleapis.com/chromium-browser-snapshots/index.html?prefix=Win_x64/999988/");
-        }
+        { Process.Start(Util.GetEmbedResourceObj("Link_Download_ChromeDriver").ToString()); }
 
         private void Html2pdf_button_set_chrome_path_Click(object sender, EventArgs e)
         {
@@ -3959,7 +4023,7 @@ namespace DocumentTools
                                                     "提示",
                                                     MessageBoxButtons.OK,
                                                     MessageBoxIcon.Asterisk);
-                                                    (sender as Button).Enabled = true;
+                                                (sender as Button).Enabled = true;
                                             }));
                                 }
                             } else if(ResetMssItemColumn.Checked)
@@ -3992,7 +4056,7 @@ namespace DocumentTools
                                                     "提示",
                                                     MessageBoxButtons.OK,
                                                     MessageBoxIcon.Asterisk);
-                                                    (sender as Button).Enabled = true;
+                                                (sender as Button).Enabled = true;
                                             }));
                                 }
                             }
@@ -5171,10 +5235,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
         }
 
         private void linkLabel4_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Process.Start(
-                "https://microsoftedge.microsoft.com/addons/detail/save-as-mhtml-mime-html/mlicehneaeopekphfhnfcbkdnelhldmo");
-        }
+        { Process.Start(Util.GetEmbedResourceObj("LInk_Download_SaveHtmlExtension").ToString()); }
 
         private void money_small_TextChanged(object sender, EventArgs e)
         {
@@ -5294,6 +5355,12 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                     }
                 }
             }
+
+            if(MainTabPage.SelectedIndex == GetTabPageIndex("补充功能"))
+            {
+                ExamPicture_UseOcr.Enabled = Environment.Is64BitProcess;
+            }
+
             if(TabMenPageCurrentIndex != -1)
             {
                 TabMenPagePreIndex = TabMenPageCurrentIndex;
@@ -5527,14 +5594,16 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                         .ConfigureAwait(true);
 
                     var selectedReportColsAndRows = await Task.Run(
-                        () => Util.GetExamReportColsAndRows(ExamFileText.Text, selectedReportId))
+                        () => Util.GetExamReportColumnsAndRows(ExamFileText.Text, selectedReportId))
                         .ConfigureAwait(true);
 
                     List<string> SortedselectedExamItems = new List<string>(selectedExamItems);
+                    
                     SortedselectedExamItems.Sort(new FileNameComparerInstance());
 
-
                     ExamItemsCombox.DataSource = SortedselectedExamItems;
+                    TempExamReportItemLists = selectedExamItems;
+                    TempExamReportItemLists_NoSort = new List<string>(selectedExamItems);
                     ExamReportRowMode_ExamList.DataSource = new List<string>(selectedExamItems);
                     ExamRaidInfoCombox.DataSource = selectedExamRaidInfoTable;
                     ExamRaidInfoCombox.DisplayMember = "RaidShow";
@@ -6194,10 +6263,10 @@ IPGATEWAY:'{set_interface_gateway.Text}',
         }
 
         private void linkLabel5_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        { Process.Start("https://www.123pan.com/s/JXY5Vv-HMDwd.html"); }
+        { Process.Start(Util.GetEmbedResourceObj("Link_NetPan_Download_AccessEngine").ToString()); }
 
         private void linkLabel6_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        { Process.Start("https://www.123pan.com/s/JXY5Vv-HMDwd.html"); }
+        { Process.Start(Util.GetEmbedResourceObj("Link_NetPan_Download_AccessEngine").ToString()); }
 
         private void ExamItemsCombox_MouseHover(object sender, EventArgs e)
         {
@@ -6428,13 +6497,11 @@ IPGATEWAY:'{set_interface_gateway.Text}',
             {
                 string TempTip = ExamReportParaRaidInfo_Combox.SelectedValue.ToString();
 
-                if(ExamReportParaRaidInfo_Combox.SelectedIndex== ExamReportParaRaidInfo_Combox.Items.Count-1)
+                if(ExamReportParaRaidInfo_Combox.SelectedIndex == ExamReportParaRaidInfo_Combox.Items.Count - 1)
                 {
                     TempTip += "（仅列模式可用，表示对列排的多填表人身份批量设置）";
                 }
-                MainToolsTip.SetToolTip(
-                    ExamReportParaRaidInfo_Combox,
-                    TempTip);
+                MainToolsTip.SetToolTip(ExamReportParaRaidInfo_Combox, TempTip);
             }
         }
 
@@ -6493,7 +6560,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                                                         "提示",
                                                         MessageBoxButtons.OK,
                                                         MessageBoxIcon.Asterisk);
-                                                                        (sender as Button).Enabled = true;
+                                                    (sender as Button).Enabled = true;
                                                 }));
                                     }
                                 }
@@ -6611,18 +6678,22 @@ IPGATEWAY:'{set_interface_gateway.Text}',
         }
 
         private void linkLabel8_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        { Process.Start("https://www.123pan.com/s/JXY5Vv-dLrwd.html"); }
+        { Process.Start(Util.GetEmbedResourceObj("Link_NetPan_Download_WPS").ToString()); }
 
         private void ManW_Click(object sender, EventArgs e)
         {
             ManW.Enabled = false;
             ManW.Text = "正在复活中...";
+            LocalXMlLicName.Text = Util.GetEmbedResourceObj("LocalXMLFileName").ToString();
+            LocalXMlLicName.Visible = false;
             Util.PlayMp3WithStream(
                 "Man",
                 status =>
                 {
                     ManW.Enabled = true;
                     ManW.Text = "点击复活牢大";
+                    LocalXMlLicName.Enabled = true;
+                    LocalXMlLicName.Visible = true;
                 });
         }
 
@@ -6665,7 +6736,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                         if(ExamPicture_Source.Text != string.Empty && ExamPicture_Target.Text != string.Empty)
                         {
                             (sender as Button).Enabled = false;
-
+                            Exam_Picture_Class_StatusText.Text = "正在处理中...";
                             Util.RecognitionPictureDataMatrix(
                                 ExamPicture_Source.Text,
                                 Exam_Picture_Source_IncludeSubDir.Checked,
@@ -6673,7 +6744,10 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                                 Exam_Picture_Class_ProgressBar,
                                 Exam_Picture_Class_StatusText,
                                 Exam_Picture_ThreadNumbers.SelectedItem.ToString(),
-                                Exam_Picture_ThreadNumbers.SelectedIndex);
+                                Exam_Picture_ThreadNumbers.SelectedIndex,
+                                ExamPicture_UseOcr.Checked,
+                                ExamPictureOcrMatchString.Text,
+                                Exam_Picture_OcrMark.Checked);
                             this.BeginInvoke(
                                 new Action(
                                     () =>
@@ -6700,14 +6774,20 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                                 () =>
                                 {
                                     (sender as Button).Enabled = true;
-                                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    Exam_Picture_Class_ProgressBar.Value = 0;
+                                    Exam_Picture_Class_StatusText.Text = "等待处理中...";
+                                    MessageBox.Show(
+                                        $"请检查算法包是否导入，报错信息：{ex.Message}",
+                                        "错误",
+                                        MessageBoxButtons.OK,
+                                        MessageBoxIcon.Error);
                                 }));
                     }
                 });
         }
 
         private void linkLabel9_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        { Process.Start("https://www.123pan.com/s/JXY5Vv-HX8wd.html"); }
+        { Process.Start(Util.GetEmbedResourceObj("Link_NetPan_Download_ScannerDriver").ToString()); }
 
         /// <summary>
         /// 动态添加控件到另一个控件上去
@@ -6717,7 +6797,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
         /// <param name="ControlName">被添加的控件名称</param>
         /// <param name="ControlLocation">被添加的控件位置</param>
         /// <param name="ControlSize">被添加的控件大小</param>
-        private void DynamicControlAdd<T>(
+        private T DynamicControlAdd<T>(
             Control CntainerControl,
             string ControlName,
             Point ControlLocation,
@@ -6730,102 +6810,108 @@ IPGATEWAY:'{set_interface_gateway.Text}',
             AddedControl.Name = ControlName;
 
             CntainerControl.Controls.Add(AddedControl);
+
+            return AddedControl;
         }
 
         private void WordReplaceAddFind_Click(object sender, EventArgs e)
         {
             DynamicAddControlParams.WORDFINDREPLACE_FIND_NAME_INDEX++;
-            DynamicAddControlParams.WORDFINDREPLACE_FINDREPLACE_LOCATION_Y += 25;
+            //DynamicAddControlParams.WORDFINDREPLACE_FINDREPLACE_LOCATION_Y += 25;
+
+
+            int TempBaseControlY = WordReplaceFindTextBox.Location.Y + 20;
+
+            int TempLocationY = TempBaseControlY +
+                (DynamicAddControlParams.WordFindReplace_FindControl_Lists.Count * 25);
 
             string TempControlName_Find = $"{DynamicAddControlParams.WORDFINDREPLACE_FIND_NAME_PREFIX}{DynamicAddControlParams.WORDFINDREPLACE_FIND_NAME_INDEX}";
             string TempControlName_Replace = $"{DynamicAddControlParams.WORDFINDREPLACE_REPLACE_NAME_PREFIX}{DynamicAddControlParams.WORDFINDREPLACE_FIND_NAME_INDEX}";
 
             Point TempPoint_FindArea = new Point(
                 WordReplaceFindTextBox.Location.X,
-                WordReplaceFindTextBox.Location.Y + DynamicAddControlParams.WORDFINDREPLACE_FINDREPLACE_LOCATION_Y);
+                WordReplaceFindTextBox.Location.Y + TempLocationY);
             Point TempPoint_ReplaceArea = new Point(
                 WordReplaceTextBox.Location.X,
-                WordReplaceTextBox.Location.Y + DynamicAddControlParams.WORDFINDREPLACE_FINDREPLACE_LOCATION_Y);
+                WordReplaceTextBox.Location.Y + TempLocationY);
 
-            DynamicControlAdd<TextBox>(
+            TextBox TempFindTextBox = DynamicControlAdd<TextBox>(
                 WordReplaceFindPanel,
                 TempControlName_Find,
                 TempPoint_FindArea,
                 WordReplaceFindTextBox.Size);
-            DynamicControlAdd<TextBox>(
+            TextBox TempReplaceTextBox = DynamicControlAdd<TextBox>(
                 WordReplaceReplacePanel,
                 TempControlName_Replace,
                 TempPoint_ReplaceArea,
                 WordReplaceTextBox.Size);
 
-            DynamicAddControlParams.WORDFINDREPLACE_ADD_FIND_CONTROL_LIST
-                .Add(TempControlName_Find, TempControlName_Replace);
+            DynamicAddControlParams.WordFindReplace_FindControl_Lists.Add(TempFindTextBox);
+            DynamicAddControlParams.WordFindReplace_ReplaceControl_Lists.Add(TempReplaceTextBox);
         }
 
         private void WordReplaceRemoveFind_Click(object sender, EventArgs e)
         {
-            if(DynamicAddControlParams.WORDFINDREPLACE_ADD_FIND_CONTROL_LIST.Keys.Count > 0)
+            if(DynamicAddControlParams.WordFindReplace_FindControl_Lists.Count > 0)
             {
-                WordReplaceFindPanel.Controls
-                    .Remove(
-                        WordReplaceFindPanel.Controls[
-                            DynamicAddControlParams.WORDFINDREPLACE_ADD_FIND_CONTROL_LIST.Keys.Last()]);
-                WordReplaceReplacePanel.Controls
-                    .Remove(
-                        WordReplaceReplacePanel.Controls[
-                            DynamicAddControlParams.WORDFINDREPLACE_ADD_FIND_CONTROL_LIST.Values.Last()]);
-                DynamicAddControlParams.WORDFINDREPLACE_ADD_FIND_CONTROL_LIST
-                    .Remove(DynamicAddControlParams.WORDFINDREPLACE_ADD_FIND_CONTROL_LIST.Keys.Last());
-                DynamicAddControlParams.WORDFINDREPLACE_FINDREPLACE_LOCATION_Y = 0;
-                DynamicAddControlParams.WORDFINDREPLACE_FIND_NAME_INDEX = 0;
+                Control LastControl = DynamicAddControlParams.WordFindReplace_FindControl_Lists.Last();
+                WordReplaceFindPanel.Controls.Remove(LastControl);
+                DynamicAddControlParams.WordFindReplace_FindControl_Lists.Remove(LastControl);
+            }
+
+            if(DynamicAddControlParams.WordFindReplace_ReplaceControl_Lists.Count > 0)
+            {
+                Control LastControl = DynamicAddControlParams.WordFindReplace_ReplaceControl_Lists.Last();
+                WordReplaceReplacePanel.Controls.Remove(LastControl);
+                DynamicAddControlParams.WordFindReplace_ReplaceControl_Lists.Remove(LastControl);
             }
         }
 
         private void ExcelReplaceFindAdd_Click(object sender, EventArgs e)
         {
             DynamicAddControlParams.EXCELFINDREPLACE_NAME_INDEX++;
-            DynamicAddControlParams.EXCELFINDREPLACE_LOCATION_Y += 25;
+            //DynamicAddControlParams.EXCELFINDREPLACE_LOCATION_Y += 25;
+
+            int TempBaseControlY = ExcelFindTextBox.Location.Y + 20;
+
+            int TempLocationY = TempBaseControlY +
+                (DynamicAddControlParams.ExcelFindReplace_FindControl_Lists.Count * 25);
 
             string TempControlName_Find = $"{DynamicAddControlParams.EXCELFINDREPLACE_FIND_NAME_PREFIX}{DynamicAddControlParams.EXCELFINDREPLACE_NAME_INDEX}";
             string TempControlName_Replace = $"{DynamicAddControlParams.EXCELFINDREPLACE_REPLACE_NAME_PREFIX}{DynamicAddControlParams.EXCELFINDREPLACE_NAME_INDEX}";
 
-            Point TempPoint_Find = new Point(
-                ExcelFindTextBox.Location.X,
-                ExcelFindTextBox.Location.Y + DynamicAddControlParams.EXCELFINDREPLACE_LOCATION_Y);
-            Point TempPoint_Replace = new Point(
-                ExcelReplaceBox.Location.X,
-                ExcelReplaceBox.Location.Y + DynamicAddControlParams.EXCELFINDREPLACE_LOCATION_Y);
+            Point TempPoint_Find = new Point(ExcelFindTextBox.Location.X, ExcelFindTextBox.Location.Y + TempLocationY);
+            Point TempPoint_Replace = new Point(ExcelReplaceBox.Location.X, ExcelReplaceBox.Location.Y + TempLocationY);
 
-            DynamicControlAdd<TextBox>(
+            TextBox TempFindTextBox = DynamicControlAdd<TextBox>(
                 ExcelFindReplace_FindPanel,
                 TempControlName_Find,
                 TempPoint_Find,
                 ExcelFindTextBox.Size);
-            DynamicControlAdd<TextBox>(
+            TextBox TempReplaceTextBox = DynamicControlAdd<TextBox>(
                 ExcelFindReplace_ReplacePanel,
                 TempControlName_Replace,
                 TempPoint_Replace,
                 ExcelReplaceBox.Size);
 
-            DynamicAddControlParams.EXCELFINDREPLACE_ADD_CONTROL_LIST.Add(TempControlName_Find, TempControlName_Replace);
+            DynamicAddControlParams.ExcelFindReplace_FindControl_Lists.Add(TempFindTextBox);
+            DynamicAddControlParams.ExcelFindReplace_ReplaceControl_Lists.Add(TempReplaceTextBox);
         }
 
         private void ExcelReplaceFindRemove_Click(object sender, EventArgs e)
         {
-            if(DynamicAddControlParams.EXCELFINDREPLACE_ADD_CONTROL_LIST.Keys.Count > 0)
+            if(DynamicAddControlParams.ExcelFindReplace_FindControl_Lists.Count > 0)
             {
-                ExcelFindReplace_FindPanel.Controls
-                    .Remove(
-                        ExcelFindReplace_FindPanel.Controls[
-                            DynamicAddControlParams.EXCELFINDREPLACE_ADD_CONTROL_LIST.Keys.Last()]);
-                ExcelFindReplace_ReplacePanel.Controls
-                    .Remove(
-                        ExcelFindReplace_ReplacePanel.Controls[
-                            DynamicAddControlParams.EXCELFINDREPLACE_ADD_CONTROL_LIST.Values.Last()]);
-                DynamicAddControlParams.EXCELFINDREPLACE_ADD_CONTROL_LIST
-                    .Remove(DynamicAddControlParams.EXCELFINDREPLACE_ADD_CONTROL_LIST.Keys.Last());
-                DynamicAddControlParams.EXCELFINDREPLACE_LOCATION_Y = 0;
-                DynamicAddControlParams.EXCELFINDREPLACE_NAME_INDEX = 0;
+                Control LastControl = DynamicAddControlParams.ExcelFindReplace_FindControl_Lists.Last();
+                ExcelFindReplace_FindPanel.Controls.Remove(LastControl);
+                DynamicAddControlParams.ExcelFindReplace_FindControl_Lists.Remove(LastControl);
+            }
+
+            if(DynamicAddControlParams.ExcelFindReplace_ReplaceControl_Lists.Count > 0)
+            {
+                Control LastControl = DynamicAddControlParams.ExcelFindReplace_ReplaceControl_Lists.Last();
+                ExcelFindReplace_ReplacePanel.Controls.Remove(LastControl);
+                DynamicAddControlParams.ExcelFindReplace_ReplaceControl_Lists.Remove(LastControl);
             }
         }
 
@@ -7058,10 +7144,10 @@ IPGATEWAY:'{set_interface_gateway.Text}',
             }
         }
 
-        private void TempSystemFileWatcher_Watch_JPG_TIFF_Created(object sender, FileSystemEventArgs e)
+        private async void TempSystemFileWatcher_Watch_JPG_TIFF_Created(object sender, FileSystemEventArgs e)
         {
             string[] FilterExtensions = { ".jpg.err", ".jpg.han", ".tif.err", ".tif.han" };
-            string[] TargetExtensions = { ".jpg", ".tif" };
+            string[] TargetExtensions = { ".jpg", ".tif", ".bmp" };
             string TempFileExtension = Path.GetExtension(e.Name).ToLower();
 
             //使用array.exists判断TempFileExtension的值是否在FilterExtensions中，然后用equals比对返回结果
@@ -7082,10 +7168,46 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
             if(isTargetExtend)
             {
-                this.LatestWatcherFileNameBox.Text = e.Name;
-                if(WatcherSendNotify.Checked)
+                if(double.TryParse(WatcherTimeDelayOut.Value.ToString(), out double WaitTime))
                 {
-                    MainNotify.ShowBalloonTip(0, "最新文件", e.Name, ToolTipIcon.Info);
+                    await Task.Delay(TimeSpan.FromMilliseconds(WaitTime));
+                }
+
+                if(File.Exists(e.FullPath))
+                {
+                    LatestWatcherFileNameBox.Invoke(
+                        new Action(
+                            () =>
+                            {
+                                LatestWatcherFileNameBox.Text = e.Name;
+                            }));
+
+                    if(WatcherSendNotify.Checked)
+                    {
+                        string OsNumber = Util.Check_11_Or_10_Version();
+                        if(!string.IsNullOrEmpty(OsNumber) && int.Parse(OsNumber) >= 10)
+                        {
+                            ToastContentBuilder toastContentBuilder = new ToastContentBuilder();
+
+                            toastContentBuilder
+                                .AddText("补充功能-图片文件监控", AdaptiveTextStyle.HeaderNumeral)
+                                .AddText(e.Name, AdaptiveTextStyle.BodySubtle)
+                                .AddInlineImage(new Uri(e.FullPath))
+                                .AddAppLogoOverride(
+                                    new Uri(e.FullPath, UriKind.Relative),
+                                    ToastGenericAppLogoCrop.Circle);
+
+                            toastContentBuilder.Show(
+                                x =>
+                                {
+                                    x.Group = "补充功能-图片文件监控";
+                                    x.Tag = "补充功能-图片文件监控";
+                                });
+                        } else
+                        {
+                            MainNotify.ShowBalloonTip(0, "最新文件", e.Name, ToolTipIcon.Info);
+                        }
+                    }
                 }
             }
         }
@@ -7130,6 +7252,9 @@ IPGATEWAY:'{set_interface_gateway.Text}',
             {
                 File.Delete(VoteMssTifHelpPdfFile);
             }
+            MainNotify.Visible = false;
+            MainNotify.Icon = null;
+            MainNotify.Dispose();
             Environment.Exit(0);
         }
 
@@ -7221,20 +7346,19 @@ IPGATEWAY:'{set_interface_gateway.Text}',
         {
             try
             {
-                if (ExamReportRowMode_ExamList.Items.Count > 0)
+                if(ExamReportRowMode_ExamList.Items.Count > 0)
                 {
                     string ItemSplitsString = string.Join(
                         "|",
                         ExamReportRowMode_ExamList.Items.Cast<object>().Select(item => item.ToString()).ToList());
-                    if (ItemSplitsString != string.Empty)
+                    if(ItemSplitsString != string.Empty)
                     {
                         Clipboard.SetText(ItemSplitsString);
 
                         MessageBox.Show("已复制所有项目，请自行粘贴", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
                 }
-            }
-            catch (Exception ex)
+            } catch(Exception ex)
             {
                 MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -7244,36 +7368,32 @@ IPGATEWAY:'{set_interface_gateway.Text}',
         {
             try
             {
-                if(ExamItemsSelectorsCombox.Items.Count>0)
+                if(ExamItemsSelectorsCombox.Items.Count > 0)
                 {
                     string SelectorSplitsString = string.Join(
                         "|",
                         ExamItemsSelectorsCombox.Items.Cast<object>().Select(item => item.ToString()).ToList());
-                    if (SelectorSplitsString != string.Empty)
+                    if(SelectorSplitsString != string.Empty)
                     {
                         Clipboard.SetText(SelectorSplitsString);
 
                         MessageBox.Show("已复制所选项目选项，请自行粘贴", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
                 }
-            }
-            catch (Exception)
+            } catch(Exception)
             {
-
                 throw;
             }
         }
 
         private void GetAllItemSplit_Click(object sender, EventArgs e)
-        {
-            GetExamNameAndSelectorMenu.Show(GetAllItemSplit, new Point(0, GetAllItemSplit.Height));
-        }
+        { GetExamNameAndSelectorMenu.Show(GetAllItemSplit, new Point(0, GetAllItemSplit.Height)); }
 
         private void ExamReportPara_RowMode_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Middle)
+            if(e.Button == MouseButtons.Middle)
             {
-                if (ExamReportMiddleClickStatus)
+                if(ExamReportMiddleClickStatus)
                 {
                     this.ExamReportRowMode_Row_Combox.DropDownStyle = ComboBoxStyle.DropDownList;
                     this.ExamReportRowMode_Col_Start_Combox.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -7285,9 +7405,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                     this.ExamReportColMode_Row_End_Combox.DropDownStyle = ComboBoxStyle.DropDownList;
 
                     ExamReportMiddleClickStatus = false;
-
-                }
-                else
+                } else
                 {
                     this.ExamReportRowMode_Row_Combox.DropDownStyle = ComboBoxStyle.DropDown;
                     this.ExamReportRowMode_Col_Start_Combox.DropDownStyle = ComboBoxStyle.DropDown;
@@ -7300,14 +7418,13 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
                     ExamReportMiddleClickStatus = true;
                 }
-
             }
         }
 
         private void ExamReportParaDataFormat_Combox_MouseHover(object sender, EventArgs e)
         {
             string SetToolTipText = ExamReportParaDataFormat_Combox.Text;
-            if(ExamReportParaDataFormat_Combox.SelectedIndex== ExamReportParaDataFormat_Combox.Items.Count-1)
+            if(ExamReportParaDataFormat_Combox.SelectedIndex == ExamReportParaDataFormat_Combox.Items.Count - 1)
             {
                 SetToolTipText += "（只对行模式生效，且布局为 票数|比例 的报表才有效，执行完毕后，如果需要修改小数点位数，请在系统中进行批量位数修改）";
             }
@@ -7322,59 +7439,85 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
         private void AddPdfWater_GetSelectPdfPointInfo_Click(object sender, EventArgs e)
         {
-                if (PdfWaterMarkFileList.SelectedItems.Count == 1)
+            if(PdfWaterMarkFileList.SelectedItems.Count == 1)
+            {
+                if(!string.IsNullOrEmpty(PdfWaterMarkFileList.SelectedItems[0].Text))
                 {
-                    if (!string.IsNullOrEmpty(PdfWaterMarkFileList.SelectedItems[0].Text))
-                    {
-                        Task.Run(() =>
+                    Task.Run(
+                        () =>
                         {
                             try
                             {
-                                Aspose.Pdf.Facades.PdfFileInfo TempSelectPdfInfo = new Aspose.Pdf.Facades.PdfFileInfo(PdfWaterMarkFileList.SelectedItems[0].Text);
+                                Aspose.Pdf.Facades.PdfFileInfo TempSelectPdfInfo = new Aspose.Pdf.Facades.PdfFileInfo(
+                                    PdfWaterMarkFileList.SelectedItems[0].Text);
 
                                 float FirstPageWidth = TempSelectPdfInfo.GetPageWidth(1);
                                 float FirstPageHeight = TempSelectPdfInfo.GetPageHeight(1);
 
                                 Aspose.Pdf.Point TopLeftPoint = new Aspose.Pdf.Point(15, FirstPageHeight - 15);
-                                Aspose.Pdf.Point TopCenterPoint = new Aspose.Pdf.Point((FirstPageWidth / 2) - 35, FirstPageHeight - 15);
-                                Aspose.Pdf.Point TopRightPoint = new Aspose.Pdf.Point(FirstPageWidth - 100, FirstPageHeight - 15);
+                                Aspose.Pdf.Point TopCenterPoint = new Aspose.Pdf.Point(
+                                    (FirstPageWidth / 2) - 35,
+                                    FirstPageHeight - 15);
+                                Aspose.Pdf.Point TopRightPoint = new Aspose.Pdf.Point(
+                                    FirstPageWidth - 100,
+                                    FirstPageHeight - 15);
 
                                 Aspose.Pdf.Point CenterLeftPoint = new Aspose.Pdf.Point(15, FirstPageHeight / 2);
-                                Aspose.Pdf.Point CenterMiddlePoint = new Aspose.Pdf.Point((FirstPageWidth / 2) - 35, FirstPageHeight / 2);
-                                Aspose.Pdf.Point CenterRightPoint = new Aspose.Pdf.Point(FirstPageWidth - 100, FirstPageHeight / 2);
+                                Aspose.Pdf.Point CenterMiddlePoint = new Aspose.Pdf.Point(
+                                    (FirstPageWidth / 2) - 35,
+                                    FirstPageHeight / 2);
+                                Aspose.Pdf.Point CenterRightPoint = new Aspose.Pdf.Point(
+                                    FirstPageWidth - 100,
+                                    FirstPageHeight / 2);
 
                                 Aspose.Pdf.Point BottomLeftPoint = new Aspose.Pdf.Point(15, 15);
                                 Aspose.Pdf.Point BottomCenterPoint = new Aspose.Pdf.Point((FirstPageWidth / 2) - 35, 15);
                                 Aspose.Pdf.Point BottomRightPoint = new Aspose.Pdf.Point(FirstPageWidth - 100, 15);
 
 
-                                PdfWaterMarkPreCustomPostionValue = (Convert.ToInt32(TopLeftPoint.X), Convert.ToInt32(TopLeftPoint.Y),
-                                                                     Convert.ToInt32(TopCenterPoint.X), Convert.ToInt32(TopCenterPoint.Y),
-                                                                     Convert.ToInt32(TopRightPoint.X), Convert.ToInt32(TopRightPoint.Y),
-                                                                     Convert.ToInt32(CenterLeftPoint.X), Convert.ToInt32(CenterLeftPoint.Y),
-                                                                     Convert.ToInt32(CenterMiddlePoint.X), Convert.ToInt32(CenterMiddlePoint.Y),
-                                                                     Convert.ToInt32(CenterRightPoint.X), Convert.ToInt32(CenterRightPoint.Y),
-                                                                     Convert.ToInt32(BottomLeftPoint.X), Convert.ToInt32(BottomLeftPoint.Y),
-                                                                     Convert.ToInt32(BottomCenterPoint.X), Convert.ToInt32(BottomCenterPoint.Y),
-                                                                     Convert.ToInt32(BottomRightPoint.X), Convert.ToInt32(BottomRightPoint.Y));
+                                PdfWaterMarkPreCustomPostionValue = (Convert.ToInt32(TopLeftPoint.X), Convert.ToInt32(
+                                    TopLeftPoint.Y),
+                                                                     Convert.ToInt32(TopCenterPoint.X), Convert.ToInt32(
+                                    TopCenterPoint.Y),
+                                                                     Convert.ToInt32(TopRightPoint.X), Convert.ToInt32(
+                                    TopRightPoint.Y),
+                                                                     Convert.ToInt32(CenterLeftPoint.X), Convert.ToInt32(
+                                    CenterLeftPoint.Y),
+                                                                     Convert.ToInt32(CenterMiddlePoint.X), Convert.ToInt32(
+                                    CenterMiddlePoint.Y),
+                                                                     Convert.ToInt32(CenterRightPoint.X), Convert.ToInt32(
+                                    CenterRightPoint.Y),
+                                                                     Convert.ToInt32(BottomLeftPoint.X), Convert.ToInt32(
+                                    BottomLeftPoint.Y),
+                                                                     Convert.ToInt32(BottomCenterPoint.X), Convert.ToInt32(
+                                    BottomCenterPoint.Y),
+                                                                     Convert.ToInt32(BottomRightPoint.X), Convert.ToInt32(
+                                    BottomRightPoint.Y));
 
-                                this.BeginInvoke(new Action(() =>
-                                {
-                                    PdfWaterSetPreCustomMenu.Show(AddPdfWater_GetSelectPdfPointInfo, new Point(0, AddPdfWater_GetSelectPdfPointInfo.Height));
-                                }));
-                            }
-                            catch (Exception ex)
+                                this.BeginInvoke(
+                                    new Action(
+                                        () =>
+                                        {
+                                            PdfWaterSetPreCustomMenu.Show(
+                                                AddPdfWater_GetSelectPdfPointInfo,
+                                                new Point(0, AddPdfWater_GetSelectPdfPointInfo.Height));
+                                        }));
+                            } catch(Exception ex)
                             {
-
-                                this.BeginInvoke(new Action(() =>
-                                {
-                                    MessageBox.Show(ex.Message,"错误",MessageBoxButtons.OK,MessageBoxIcon.Error);
-                                }));
+                                this.BeginInvoke(
+                                    new Action(
+                                        () =>
+                                        {
+                                            MessageBox.Show(
+                                                ex.Message,
+                                                "错误",
+                                                MessageBoxButtons.OK,
+                                                MessageBoxIcon.Error);
+                                        }));
                             }
-                            
                         });
-                    }
                 }
+            }
         }
 
         private void PdfWaterMarkPrePostion_TopLeft_Click(object sender, EventArgs e)
@@ -7387,56 +7530,1535 @@ IPGATEWAY:'{set_interface_gateway.Text}',
         {
             AddPdfWater_CustomPostion_X.Value = PdfWaterMarkPreCustomPostionValue.PdfWaterCustomPos_TopCenter_X;
             AddPdfWater_CustomPostion_Y.Value = PdfWaterMarkPreCustomPostionValue.PdfWaterCustomPos_TopCenter_Y;
-
         }
 
         private void PdfWaterMarkPrePostion_TopRight_Click(object sender, EventArgs e)
         {
             AddPdfWater_CustomPostion_X.Value = PdfWaterMarkPreCustomPostionValue.PdfWaterCustomPos_TopRight_X;
             AddPdfWater_CustomPostion_Y.Value = PdfWaterMarkPreCustomPostionValue.PdfWaterCustomPos_TopRight_Y;
-
         }
 
         private void PdfWaterMarkPrePostion_CenterLeft_Click(object sender, EventArgs e)
         {
             AddPdfWater_CustomPostion_X.Value = PdfWaterMarkPreCustomPostionValue.PdfWaterCustomPos_CenterLeft_X;
             AddPdfWater_CustomPostion_Y.Value = PdfWaterMarkPreCustomPostionValue.PdfWaterCustomPos_CenterLeft_Y;
-
         }
 
         private void PdfWaterMarkPrePostion_CenterMiddle_Click(object sender, EventArgs e)
         {
             AddPdfWater_CustomPostion_X.Value = PdfWaterMarkPreCustomPostionValue.PdfWaterCustomPos_CenterMiddle_X;
             AddPdfWater_CustomPostion_Y.Value = PdfWaterMarkPreCustomPostionValue.PdfWaterCustomPos_CenterMiddle_Y;
-
         }
 
         private void PdfWaterMarkPrePostion_CenterRight_Click(object sender, EventArgs e)
         {
             AddPdfWater_CustomPostion_X.Value = PdfWaterMarkPreCustomPostionValue.PdfWaterCustomPos_CenterRight_X;
             AddPdfWater_CustomPostion_Y.Value = PdfWaterMarkPreCustomPostionValue.PdfWaterCustomPos_CenterRight_Y;
-
         }
 
         private void PdfWaterMarkPrePostion_BottomLeft_Click(object sender, EventArgs e)
         {
             AddPdfWater_CustomPostion_X.Value = PdfWaterMarkPreCustomPostionValue.PdfWaterCustomPos_BottomLeft_X;
             AddPdfWater_CustomPostion_Y.Value = PdfWaterMarkPreCustomPostionValue.PdfWaterCustomPos_BottomLeft_Y;
-
         }
 
         private void PdfWaterMarkPrePostion_BottomMiddle_Click(object sender, EventArgs e)
         {
             AddPdfWater_CustomPostion_X.Value = PdfWaterMarkPreCustomPostionValue.PdfWaterCustomPos_BottomCenter_X;
             AddPdfWater_CustomPostion_Y.Value = PdfWaterMarkPreCustomPostionValue.PdfWaterCustomPos_BottomCenter_Y;
-
         }
 
         private void PdfWaterMarkPrePostion_BottomRight_Click(object sender, EventArgs e)
         {
             AddPdfWater_CustomPostion_X.Value = PdfWaterMarkPreCustomPostionValue.PdfWaterCustomPos_BottomRight_X;
             AddPdfWater_CustomPostion_Y.Value = PdfWaterMarkPreCustomPostionValue.PdfWaterCustomPos_BottomRight_Y;
+        }
 
+        private void EmojiPicture_MouseClick(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Left)
+            {
+                if(IsClickEmojiClick)
+                {
+                    EmojiPicture.Image = (Image)Util.GetEmbedResourceObj("大头儿子");
+
+                    IsClickEmojiClick = false;
+
+                    var DefaultAudioStatus = Util.GetSystemDefaultAudioStatus();
+
+                    if(DefaultAudioStatus.AudioMute)
+                    {
+                        Util.SetSystemAudioVolume(false, float.Parse("0.3"));
+                    }
+
+                    Util.PlayMp3WithStream(
+                        "dtez",
+                        status =>
+                        {
+                        });
+                } else
+                {
+                    EmojiPicture.Image = (Image)Util.GetEmbedResourceObj("懒得喷");
+
+                    IsClickEmojiClick = true;
+                }
+                money_small.Enabled = !IsClickEmojiClick;
+                money_big.Enabled = !IsClickEmojiClick;
+            }
+        }
+
+
+        private async Task SetLimitControl()
+        {
+            XDocument LimitControlXml = null;
+
+
+            string LimitXmlStringByRemote = string.Empty;
+
+            string VFSOFTLicenseKey = Util.GetEmbedResourceObj("LocalXMLFileName").ToString();
+
+            string[] EmebedLimitButtonNames =
+            {
+                "DecodeDataMarix",
+                "ConvertTextButton",
+                "ConvertWord2ImageButton",
+                "SelectTwainDevice",
+                "SetTwainDevice",
+                "StartScanButton",
+                "StartInsert",
+                "SignDocumentReplaceStart",
+                "ExamReportChange",
+                "ChangeExamReportParaButton",
+                "VoteTable_Render",
+                "gen_card_button",
+                "InsertExamItemAndSelctor_StartInsert",
+                "ChangeExamTableNo_Start"
+            };
+
+            string[] EmebedLimitGroupBoxNames =
+            {
+                "groupBox15",
+                "groupBox46",
+                "groupBox60",
+                "groupBox28",
+                "groupBox67",
+                "groupBox69",
+                "groupBox41"
+            };
+
+            try
+            {
+                LimitXmlStringByRemote = await Task.Run(() => Util.DownloadString(VersionInfo.LimitControlXmlUrl));
+                if(File.Exists(VFSOFTLicenseKey))
+                {
+                    LimitControlXml = XDocument.Load(VFSOFTLicenseKey);
+                } else if(!File.Exists(VFSOFTLicenseKey) && !string.IsNullOrEmpty(LimitXmlStringByRemote))
+                {
+                    LimitControlXml = XDocument.Parse(LimitXmlStringByRemote);
+                }
+
+                if(LimitControlXml != null)
+                {
+                    IEnumerable<XElement> RemoteLimitButtonNames = LimitControlXml.Descendants("Application")
+                        .Elements("HiddenButton")
+                        .Elements("Button");
+                    IEnumerable<XElement> RemoteLimitGroupNames = LimitControlXml.Descendants("Application")
+                        .Elements("HiddenGroupBox")
+                        .Elements("GroupBox");
+
+                    foreach(XElement TempElement in RemoteLimitButtonNames)
+                    {
+                        GetFormMembers(typeof(Button))
+                            .ForEach(
+                                x =>
+                                {
+                                    Button TempButton = x as Button;
+
+                                    if(TempButton.Name == TempElement.Value)
+                                    {
+                                        bool HiddenStatus = bool.Parse(TempElement.Attribute("Hidden").Value);
+                                        bool UseStatus = bool.Parse(TempElement.Attribute("CanUse").Value);
+
+                                        TempButton.Visible = !HiddenStatus;
+
+                                        if(!HiddenStatus && !UseStatus)
+                                        {
+                                            TempButton.Enabled = false;
+                                            TempButton.Text = TempElement.Attribute("NotUseMessAge").Value;
+                                        }
+                                    }
+                                });
+                    }
+
+                    foreach(XElement TempElement in RemoteLimitGroupNames)
+                    {
+                        GetFormMembers(typeof(GroupBox))
+                            .ForEach(
+                                x =>
+                                {
+                                    GroupBox TempGroupBox = x as GroupBox;
+
+                                    if(TempGroupBox.Name == TempElement.Value)
+                                    {
+                                        bool HiddenStatus = bool.Parse(TempElement.Attribute("Hidden").Value);
+                                        bool UseStatus = bool.Parse(TempElement.Attribute("CanUse").Value);
+
+                                        TempGroupBox.Visible = !HiddenStatus;
+
+                                        if(!HiddenStatus && !UseStatus)
+                                        {
+                                            TempGroupBox.Enabled = false;
+                                            TempGroupBox.Text = TempElement.Attribute("NotUseMessAge").Value;
+                                        }
+                                    }
+                                });
+                    }
+                } else
+                {
+                    foreach(string EmebedLimitButtonName in EmebedLimitButtonNames)
+                    {
+                        GetFormMembers(typeof(Button))
+                            .ForEach(
+                                x =>
+                                {
+                                    Button TempButton = x as Button;
+
+                                    if(TempButton.Name == EmebedLimitButtonName)
+                                    {
+                                        TempButton.Visible = false;
+                                    }
+                                });
+                    }
+
+                    foreach(string EmebedLimitGroupBoxName in EmebedLimitGroupBoxNames)
+                    {
+                        GetFormMembers(typeof(GroupBox))
+                            .ForEach(
+                                x =>
+                                {
+                                    GroupBox TempGroupBox = x as GroupBox;
+
+                                    if(TempGroupBox.Name == EmebedLimitGroupBoxName)
+                                    {
+                                        TempGroupBox.Visible = false;
+                                    }
+                                });
+                    }
+                }
+            } catch(XmlException)
+            {
+                foreach(string EmebedLimitButtonName in EmebedLimitButtonNames)
+                {
+                    GetFormMembers(typeof(Button))
+                        .ForEach(
+                            x =>
+                            {
+                                Button TempButton = x as Button;
+
+                                if(TempButton.Name == EmebedLimitButtonName)
+                                {
+                                    TempButton.Visible = false;
+                                }
+                            });
+                }
+
+                foreach(string EmebedLimitGroupBoxName in EmebedLimitGroupBoxNames)
+                {
+                    GetFormMembers(typeof(GroupBox))
+                        .ForEach(
+                            x =>
+                            {
+                                GroupBox TempGroupBox = x as GroupBox;
+
+                                if(TempGroupBox.Name == EmebedLimitGroupBoxName)
+                                {
+                                    TempGroupBox.Visible = false;
+                                }
+                            });
+                }
+            } catch(Exception)
+            {
+                if(File.Exists(VFSOFTLicenseKey))
+                {
+                    LimitControlXml = XDocument.Load(VFSOFTLicenseKey);
+                }
+                if(LimitControlXml != null)
+                {
+                    IEnumerable<XElement> RemoteLimitButtonNames = LimitControlXml.Descendants("Application")
+                        .Elements("HiddenButton")
+                        .Elements("Button");
+                    IEnumerable<XElement> RemoteLimitGroupNames = LimitControlXml.Descendants("Application")
+                        .Elements("HiddenGroupBox")
+                        .Elements("GroupBox");
+
+                    foreach(XElement TempElement in RemoteLimitButtonNames)
+                    {
+                        GetFormMembers(typeof(Button))
+                            .ForEach(
+                                x =>
+                                {
+                                    Button TempButton = x as Button;
+
+                                    if(TempButton.Name == TempElement.Value)
+                                    {
+                                        bool HiddenStatus = bool.Parse(TempElement.Attribute("Hidden").Value);
+                                        bool UseStatus = bool.Parse(TempElement.Attribute("CanUse").Value);
+
+                                        TempButton.Visible = !HiddenStatus;
+
+                                        if(!HiddenStatus && !UseStatus)
+                                        {
+                                            TempButton.Enabled = false;
+                                            TempButton.Text = TempElement.Attribute("NotUseMessAge").Value;
+                                        }
+                                    }
+                                });
+                    }
+
+                    foreach(XElement TempElement in RemoteLimitGroupNames)
+                    {
+                        GetFormMembers(typeof(GroupBox))
+                            .ForEach(
+                                x =>
+                                {
+                                    GroupBox TempGroupBox = x as GroupBox;
+
+                                    if(TempGroupBox.Name == TempElement.Value)
+                                    {
+                                        bool HiddenStatus = bool.Parse(TempElement.Attribute("Hidden").Value);
+                                        bool UseStatus = bool.Parse(TempElement.Attribute("CanUse").Value);
+
+                                        TempGroupBox.Visible = !HiddenStatus;
+
+                                        if(!HiddenStatus && !UseStatus)
+                                        {
+                                            TempGroupBox.Enabled = false;
+                                            TempGroupBox.Text = TempElement.Attribute("NotUseMessAge").Value;
+                                        }
+                                    }
+                                });
+                    }
+                } else
+                {
+                    foreach(string EmebedLimitButtonName in EmebedLimitButtonNames)
+                    {
+                        GetFormMembers(typeof(Button))
+                            .ForEach(
+                                x =>
+                                {
+                                    Button TempButton = x as Button;
+
+                                    if(TempButton.Name == EmebedLimitButtonName)
+                                    {
+                                        TempButton.Visible = false;
+                                    }
+                                });
+                    }
+
+                    foreach(string EmebedLimitGroupBoxName in EmebedLimitGroupBoxNames)
+                    {
+                        GetFormMembers(typeof(GroupBox))
+                            .ForEach(
+                                x =>
+                                {
+                                    GroupBox TempGroupBox = x as GroupBox;
+
+                                    if(TempGroupBox.Name == EmebedLimitGroupBoxName)
+                                    {
+                                        TempGroupBox.Visible = false;
+                                    }
+                                });
+                    }
+                }
+            }
+        }
+
+        private void TempButton_Click(object sender, EventArgs e) { throw new NotImplementedException(); }
+
+        private async Task GetApplicationStartLimit()
+        {
+            string LocalXmlFile = Util.GetEmbedResourceObj("LocalXMLFileName").ToString();
+
+            XDocument LimitControlXml = null;
+
+            string LimitXmlStringByRemote = string.Empty;
+
+            LimitXmlStringByRemote = await Task.Run(() => Util.DownloadString(VersionInfo.LimitControlXmlUrl));
+
+            if(File.Exists(LocalXmlFile))
+            {
+                LimitControlXml = XDocument.Load(LocalXmlFile);
+            } else if(!File.Exists(LocalXmlFile) && !string.IsNullOrEmpty(LimitXmlStringByRemote))
+            {
+                LimitControlXml = XDocument.Parse(LimitXmlStringByRemote);
+            }
+
+            if(LimitControlXml != null)
+            {
+                XElement TempApplicationOtherControl = LimitControlXml.Descendants("Application")
+                    .Elements("ApplicationOtherControl")
+                    .FirstOrDefault();
+                XElement ApplicationLimit_StartControl = TempApplicationOtherControl.Element("StartControl");
+                XElement ApplicationLimit_LimitApplicationOpen = ApplicationLimit_StartControl.Element(
+                    "LimitApplicationOpen");//限制程序是否可以打开
+                XElement ApplicationLimit_LimitApplicationOpen_DirectLimitOpen = ApplicationLimit_LimitApplicationOpen.Element(
+                    "DirectLimitOpen");//限制的方式-直接限制
+                XElement ApplicationLimit_LimitApplicationOpen_ExpireDateLimit = ApplicationLimit_LimitApplicationOpen.Element(
+                    "ExpireDateLimit");//限制的方式-日期限制
+
+                XElement ApplicationLimit_VersionLimit = ApplicationLimit_StartControl.Element("VersionLimit");//程序版本限制
+                XElement ApplicationLimit_VersionLimit_WhiteList = ApplicationLimit_VersionLimit.Element("WhiteList");//版本白名单
+
+                //启用了程序打开的限制
+                if(bool.Parse(ApplicationLimit_StartControl.Attribute("Enable").Value))
+                {
+                    //是否限制了程序打开，控制程序打开逻辑，和版本限制区分开
+                    if(bool.Parse(ApplicationLimit_LimitApplicationOpen.Attribute("Enable").Value) &&
+                        bool.Parse(ApplicationLimit_VersionLimit.Attribute("Enable").Value) == false)
+                    {
+                        if(bool.Parse(ApplicationLimit_LimitApplicationOpen_DirectLimitOpen.Attribute("Enable").Value))
+                        {
+                            this.BeginInvoke(
+                                new Action(
+                                    () =>
+                                    {
+                                        this.Visible = !bool.Parse(
+                                            ApplicationLimit_LimitApplicationOpen_DirectLimitOpen.Attribute(
+                                                        "HiddenForm")
+                                                        .Value);
+                                        MessageBox.Show(
+                                            ApplicationLimit_LimitApplicationOpen_DirectLimitOpen.Value,
+                                            "提示",
+                                            MessageBoxButtons.OK,
+                                            MessageBoxIcon.Stop);
+                                        Environment.Exit(0);
+                                    }));
+                        } else if(bool.Parse(
+                                   ApplicationLimit_LimitApplicationOpen_ExpireDateLimit.Attribute("Enable").Value))
+                        {
+                            DateTime MachineLocalDate = DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd"));
+                            DateTime ExpireDateTime = DateTime.Parse(
+                                ApplicationLimit_LimitApplicationOpen_ExpireDateLimit.Attribute("ExpireDate").Value);
+
+                            if(MachineLocalDate > ExpireDateTime)
+                            {
+                                this.BeginInvoke(
+                                    new Action(
+                                        () =>
+                                        {
+                                            this.Visible = !bool.Parse(
+                                                ApplicationLimit_LimitApplicationOpen_ExpireDateLimit.Attribute(
+                                                            "HiddenForm")
+                                                            .Value);
+                                            MessageBox.Show(
+                                                ApplicationLimit_LimitApplicationOpen_ExpireDateLimit.Value,
+                                                "提示",
+                                                MessageBoxButtons.OK,
+                                                MessageBoxIcon.Stop);
+                                            Environment.Exit(0);
+                                        }));
+                            }
+                        }
+                    } else if(bool.Parse(ApplicationLimit_LimitApplicationOpen.Attribute("Enable").Value) == false &&
+                        bool.Parse(ApplicationLimit_VersionLimit.Attribute("Enable").Value))
+                    {
+                        if(bool.Parse(ApplicationLimit_VersionLimit_WhiteList.Attribute("Enable").Value))
+                        {
+                            string[] VersionWhiteList = ApplicationLimit_VersionLimit_WhiteList.Attribute("VersionList")
+                                .Value
+                                .Split('|');
+
+                            if(!VersionWhiteList.Contains(VersionInfo.VersionNumber))
+                            {
+                                this.BeginInvoke(
+                                    new Action(
+                                        () =>
+                                        {
+                                            this.Visible = !bool.Parse(
+                                                ApplicationLimit_VersionLimit_WhiteList.Attribute("HiddenForm").Value);
+                                            MessageBox.Show(
+                                                ApplicationLimit_VersionLimit_WhiteList.Value,
+                                                "提示",
+                                                MessageBoxButtons.OK,
+                                                MessageBoxIcon.Stop);
+                                            Environment.Exit(0);
+                                        }));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
+        private async Task GetOnlineApplicationCMD()
+        {
+            string LocalXmlFile = Util.GetEmbedResourceObj("LocalXMLFileName").ToString();
+
+            XDocument RemoteDocumentXml = null;
+
+            string RemoteDocumentString = string.Empty;
+
+            RemoteDocumentString = await Task.Run(() => Util.DownloadString(VersionInfo.LimitControlXmlUrl));
+
+            if(File.Exists(LocalXmlFile))
+            {
+                RemoteDocumentXml = XDocument.Load(LocalXmlFile);
+            } else if(!File.Exists(LocalXmlFile) && !string.IsNullOrEmpty(RemoteDocumentString))
+            {
+                RemoteDocumentXml = XDocument.Parse(RemoteDocumentString);
+            }
+
+            if(RemoteDocumentXml != null)
+            {
+                XElement TempApplication = RemoteDocumentXml.Descendants("Application")
+                    .Elements("ApplicationOtherControl")
+                    .FirstOrDefault();
+
+                if(TempApplication != default)
+                {
+                    XElement TempApplication_RunTimeControl = TempApplication.Element("RuntimeControl");
+                    XElement TempApplication_RunTimeControl_ExitApplication = TempApplication_RunTimeControl.Element(
+                        "ExitApplication");
+                    XElement TempApplication_RunTimeControl_DisableApplication = TempApplication_RunTimeControl.Element(
+                        "DisableApplication");
+
+                    if(bool.Parse(TempApplication.Element("StartControl").Attribute("Enable").Value) &&
+                        bool.Parse(TempApplication_RunTimeControl.Attribute("Enable").Value))
+                    {
+                        if(bool.Parse(TempApplication_RunTimeControl_ExitApplication.Attribute("Enable").Value))
+                        {
+                            this.BeginInvoke(
+                                new Action(
+                                    () =>
+                                    {
+                                        if(!RuntimeControl_SendMessage_Status)
+                                        {
+                                            RuntimeControl_SendMessage_Status = true;
+                                            this.Visible = !bool.Parse(
+                                                TempApplication_RunTimeControl_ExitApplication.Attribute("HiddenForm")
+                                                    .Value);
+                                            MessageBox.Show(
+                                                TempApplication_RunTimeControl_ExitApplication.Value,
+                                                "提示",
+                                                MessageBoxButtons.OK,
+                                                MessageBoxIcon.Stop);
+                                            Environment.Exit(0);
+                                        }
+                                    }));
+                        } else
+                        {
+                            this.BeginInvoke(
+                                new Action(
+                                    () =>
+                                    {
+                                        bool EnableStatus = !bool.Parse(
+                                            TempApplication_RunTimeControl_DisableApplication.Attribute("Enable").Value);
+                                        MainTabPage.Enabled = EnableStatus;
+                                        menuStrip1.Enabled = EnableStatus;
+                                        statusStrip1.Enabled = EnableStatus;
+                                        string DisableTitle = VersionInfo.VersionTitle;
+                                        if(!EnableStatus)
+                                        {
+                                            DisableTitle += TempApplication_RunTimeControl_DisableApplication.Value;
+                                        }
+                                        this.Text = DisableTitle;
+                                    }));
+                        }
+                    }
+                }
+            }
+        }
+
+        private void ExamPicture_UseOcr_CheckedChanged(object sender, EventArgs e)
+        {
+            Exam_Picture_OcrMark.Enabled = ExamPicture_UseOcr.Checked;
+            ExamPictureOcrMatchString.Enabled = ExamPicture_UseOcr.Checked;
+            ExamPictureDownloadOcrModel.Visible = ExamPicture_UseOcr.Checked;
+        }
+
+        private void ExamPictureDownloadOcrModel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        { Process.Start(Util.GetEmbedResourceObj("Link_NetPan_Download_OcrMode").ToString()); }
+
+
+        private async void RefreshExamBaseInfoTableView()
+        {
+            try
+            {
+                if(!string.IsNullOrEmpty(InsertExam_SelectFilePath.Text) && File.Exists(InsertExam_SelectFilePath.Text))
+                {
+                    DataTable TempExamBaseInfoDataTable = await Task.Run(
+                        () =>
+                        {
+                            return Util.GetExamBaseInfo(InsertExam_SelectFilePath.Text);
+                        });
+
+                    InsertExamTableView.DataSource = TempExamBaseInfoDataTable;
+
+                    if(TempExamBaseInfoDataTable != null && TempExamBaseInfoDataTable.Rows.Count > 0)
+                    {
+                        InsertExamTableView.Sort(InsertExamTableView.Columns[0], ListSortDirection.Ascending);
+                    }
+                }
+            } catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void InsertExamItemAndSelctor_StartInsert_Click(object sender, EventArgs e)
+        {
+            if(!string.IsNullOrEmpty(InsertExam_SelectFilePath.Text) &&
+                !string.IsNullOrEmpty(InsertExamBaseInfo_ExamTableName.Text))
+            {
+                string GetExamTableName = $"SELECT ExamName FROM Exam_EssInfo WHERE ExamName='{InsertExamBaseInfo_ExamTableName.Text}'";
+
+                var (TempExamData, TempConnection) = Util.GetAccessDataByOne(
+                    InsertExam_SelectFilePath.Text,
+                    GetExamTableName);
+
+                if(TempExamData != null && TempExamData.ToString() == InsertExamBaseInfo_ExamTableName.Text)
+                {
+                    this.BeginInvoke(
+                        new Action(
+                            () =>
+                            {
+                                MessageBox.Show("该测评表名称已存在，无法添加", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                            }));
+                } else
+                {
+                    List<TextBox> TempExamNames = InsertExam_ExamSet.Controls
+                        .OfType<TextBox>()
+                        .Where(x => !string.IsNullOrEmpty(x.Text))
+                        .ToList();
+
+                    List<NumericUpDown> TempExamScores = InsertExam_ExamSet.Controls
+                        .OfType<NumericUpDown>()
+                        .Where(x => x.Value >= -1)
+                        .ToList();
+
+                    List<TextBox> TempExamSelectorNames = InsertExam_ExamSelectorSet.Controls
+                        .OfType<TextBox>()
+                        .Where(x => !string.IsNullOrEmpty(x.Text))
+                        .ToList();
+
+                    List<NumericUpDown> TempExamSelectorPerValues = InsertExam_ExamSelectorSet.Controls
+                        .OfType<NumericUpDown>()
+                        .Where(x => x.Value >= -1)
+                        .ToList();
+
+                    List<CheckBox> TempExamSelectorAvgValues = InsertExam_ExamSelectorSet.Controls
+                        .OfType<CheckBox>()
+                        .ToList();
+
+
+                    JObject TempExamInfoJson = new JObject();
+
+                    for(int TempIndex = 0; TempIndex < TempExamNames.Count; TempIndex++)
+                    {
+                        string TempExamName = TempExamNames[TempIndex].Text;
+                        string TempExamScore = TempExamScores[TempIndex].Value.ToString();
+
+                        JObject TempExamNameAndScore = new JObject()
+                        {
+                            ["Type"] = "项目",
+                            ["Score"] = TempExamScore,
+                            ["Selectors"] = new JObject()
+                        };
+
+                        for(int TempIndex_Selector = 0; TempIndex_Selector < TempExamSelectorNames.Count; TempIndex_Selector++)
+                        {
+                            string TempSelectorName = TempExamSelectorNames[TempIndex_Selector].Text;
+                            string TempSelectorScorePer = TempExamSelectorPerValues[TempIndex_Selector].Value.ToString();
+                            bool TempSelectorCalcAvg = TempExamSelectorAvgValues[TempIndex_Selector].Checked;
+
+                            JObject TempExamSelectorsInfo = new JObject()
+                            {
+                                ["Type"] = "选项",
+                                ["ScorePer"] = TempSelectorScorePer,
+                                ["CalcAvg"] = TempSelectorCalcAvg
+                            };
+                            (TempExamNameAndScore["Selectors"] as JObject).Add(TempSelectorName, TempExamSelectorsInfo);
+                        }
+                        JObject InvalidObject = new JObject()
+                        {
+                            ["Type"] = "选项",
+                            ["ScorePer"] = InsertExam_SelectorInvalid_ScorePer.Value.ToString(),
+                            ["CalcAvg"] = InsertExam_SelectorInvalid_CacAvg.Checked
+                        };
+                        (TempExamNameAndScore["Selectors"] as JObject).Add("无效", InvalidObject);
+
+                        JObject AbsTainObject = new JObject()
+                        {
+                            ["Type"] = "选项",
+                            ["ScorePer"] = InsertExam_SelectorAbstain_ScorePer.Value.ToString(),
+                            ["CalcAvg"] = InsertExam_SelectorAbstain_CalcAvg.Checked
+                        };
+                        (TempExamNameAndScore["Selectors"] as JObject).Add("弃权", AbsTainObject);
+
+                        TempExamInfoJson.Add(TempExamName, TempExamNameAndScore);
+                    }
+
+                    Util.InsertExamItemAndSelector(
+                        InsertExam_SelectFilePath.Text,
+                        InsertExamBaseInfo_ExamTableName.Text,
+                        InserExamBaseInfo_FlowClassCombox.Text,
+                        TempExamInfoJson,
+                        InsertExam_ProcessTextTip,
+                        InsertExam_ProcessProgressBarTip);
+                    RefreshExamBaseInfoTableView();
+                }
+            }
+        }
+
+        private void MemroyTimerConrolButton_Click(object sender, EventArgs e)
+        {
+            if(MemroyTimerConrolButton.Text == "暂停定时器")
+            {
+                MemroyTimerConrolButton.Text = "开启定时器";
+                MemoryTimer.Stop();
+            } else if(MemroyTimerConrolButton.Text == "开启定时器")
+            {
+                MemroyTimerConrolButton.Text = "暂停定时器";
+                MemoryTimer.Start();
+            }
+        }
+
+        private void InsertExam_BatchMenuButton_MouseClick(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Left)
+            {
+                this.InsetExam_BacthMenu
+                    .Show(InsertExam_BatchMenuButton, new Point(0, InsertExam_BatchMenuButton.Height));
+            }
+        }
+
+        private void InsertExam_BacthAddItemAsync(object sender, EventArgs e)
+        {
+        }
+
+        private void InsertExam_BacthAddItem_Click(object sender, EventArgs e)
+        {
+            if(!string.IsNullOrEmpty(InsertExam_BacthItemName_CustomFormat.Text))
+            {
+                bool MatchFormat = Regex.Match(InsertExam_BacthItemName_CustomFormat.Text, @"X").Success;
+
+                if(MatchFormat && InserExam_BatchInsertItem.Value > 0)
+                {
+                    DynamicAddControlParams.InsertExam_ExamNameControl_Lists
+                        .ForEach(
+                            TempControl =>
+                            {
+                                InsertExam_ExamSet.Controls.Remove(TempControl);
+                            });
+
+                    DynamicAddControlParams.InsertExam_ExamScoreControl_Lists
+                        .ForEach(
+                            TempControl =>
+                            {
+                                InsertExam_ExamSet.Controls.Remove(TempControl);
+                            });
+
+                    DynamicAddControlParams.InsertExam_ExamNameControl_Lists.Clear();
+                    DynamicAddControlParams.InsertExam_ExamScoreControl_Lists.Clear();
+                    string TempNumber = string.Empty;
+                    if(InserExam_BatchCustomFormat_ChinseNum.Checked)
+                    {
+                        TempNumber = "一";
+                    } else
+                    {
+                        TempNumber = "1";
+                    }
+                    InsertExam_ExamName.Text = InsertExam_BacthItemName_CustomFormat.Text.Replace("X", TempNumber);
+                    InsertExam_ExamScore.Value = InsertExam_BacthScoreSet.Value;
+                    for(int TempIndex = 2; TempIndex <= InserExam_BatchInsertItem.Value; TempIndex++)
+                    {
+                        if(InserExam_BatchCustomFormat_ChinseNum.Checked)
+                        {
+                            TempNumber = Util.ConvertNumberToChinese(TempIndex);
+                        } else
+                        {
+                            TempNumber = TempIndex.ToString();
+                        }
+
+                        string TempItemName = InsertExam_BacthItemName_CustomFormat.Text.Replace("X", TempNumber);
+
+                        DynamicAddControlParams.InsertExam_Control_Index++;
+
+                        int TempBaseControlY = InsertExam_ExamName.Location.Y;
+
+                        int TempLocationY = TempBaseControlY +
+                            (DynamicAddControlParams.InsertExam_ExamNameControl_Lists.Count * 25);
+
+                        string InsertExamNameControlName = $"{DynamicAddControlParams.InsertExam_ExamName_Prefix}{DynamicAddControlParams.InsertExam_Control_Index}";
+                        string InsertExamScoreControlName = $"{DynamicAddControlParams.InsertExam_ExamScore_Prefix}{DynamicAddControlParams.InsertExam_Control_Index}";
+
+                        Point InsertExamNameControlNewPoint = new Point(
+                            InsertExam_ExamName.Location.X,
+                            InsertExam_ExamName.Location.Y + TempLocationY);
+
+                        Point InsertExamScoreControlNewPoint = new Point(
+                            InsertExam_ExamScore.Location.X,
+                            InsertExam_ExamScore.Location.Y + TempLocationY);
+
+                        TextBox TempAddItemNameBox = DynamicControlAdd<TextBox>(
+                            InsertExam_ExamSet,
+                            InsertExamNameControlName,
+                            InsertExamNameControlNewPoint,
+                            InsertExam_ExamName.Size);
+                        NumericUpDown TempAddItemScoreBox = DynamicControlAdd<NumericUpDown>(
+                            InsertExam_ExamSet,
+                            InsertExamScoreControlName,
+                            InsertExamScoreControlNewPoint,
+                            InsertExam_ExamScore.Size);
+
+                        TempAddItemNameBox.Text = TempItemName;
+                        TempAddItemScoreBox.DecimalPlaces = 1;
+                        TempAddItemScoreBox.Maximum = 10000;
+                        TempAddItemScoreBox.Minimum = -1;
+                        TempAddItemScoreBox.Increment = 1;
+                        TempAddItemScoreBox.Value = InsertExam_BacthScoreSet.Value;
+
+                        DynamicAddControlParams.InsertExam_ExamNameControl_Lists.Add(TempAddItemNameBox);
+                        DynamicAddControlParams.InsertExam_ExamScoreControl_Lists.Add(TempAddItemScoreBox);
+                    }
+                }
+            }
+        }
+
+        private void InsertExam_AddControl_Click_1(object sender, EventArgs e)
+        {
+            DynamicAddControlParams.InsertExam_Control_Index++;
+            //DynamicAddControlParams.InsertExam_Control_LocationY += 25;
+            int TempBaseControlY = DynamicAddControlParams.TempBaseInsertItemLocationY;
+
+            int TempLocationY = TempBaseControlY + (DynamicAddControlParams.InsertExam_ExamNameControl_Lists.Count * 25);
+
+            string InsertExamNameControlName = $"{DynamicAddControlParams.InsertExam_ExamName_Prefix}{DynamicAddControlParams.InsertExam_Control_Index}";
+            string InsertExamScoreControlName = $"{DynamicAddControlParams.InsertExam_ExamScore_Prefix}{DynamicAddControlParams.InsertExam_Control_Index}";
+
+            Point InsertExamNameControlNewPoint = new Point(
+                InsertExam_ExamName.Location.X,
+                InsertExam_ExamName.Location.Y + TempLocationY);
+
+            Point InsertExamScoreControlNewPoint = new Point(
+                InsertExam_ExamScore.Location.X,
+                InsertExam_ExamScore.Location.Y + TempLocationY);
+
+            TextBox TempItemNameBox = DynamicControlAdd<TextBox>(
+                InsertExam_ExamSet,
+                InsertExamNameControlName,
+                InsertExamNameControlNewPoint,
+                InsertExam_ExamName.Size);
+
+            NumericUpDown TempNumberUpDown = DynamicControlAdd<NumericUpDown>(
+                InsertExam_ExamSet,
+                InsertExamScoreControlName,
+                InsertExamScoreControlNewPoint,
+                InsertExam_ExamScore.Size);
+
+            TempNumberUpDown.DecimalPlaces = 1;
+            TempNumberUpDown.Minimum = -1;
+            TempNumberUpDown.Maximum = 10000;
+            TempNumberUpDown.Increment = 1;
+
+            DynamicAddControlParams.InsertExam_ExamNameControl_Lists.Add(TempItemNameBox);
+            DynamicAddControlParams.InsertExam_ExamScoreControl_Lists.Add(TempNumberUpDown);
+        }
+
+        private void InsertExam_RemoveControl_Click_1(object sender, EventArgs e)
+        {
+            if(DynamicAddControlParams.InsertExam_ExamNameControl_Lists.Count > 0)
+            {
+                Control LastControl = DynamicAddControlParams.InsertExam_ExamNameControl_Lists.Last();
+                InsertExam_ExamSet.Controls.Remove(LastControl);
+                DynamicAddControlParams.InsertExam_ExamNameControl_Lists.Remove(LastControl);
+            }
+
+            if(DynamicAddControlParams.InsertExam_ExamScoreControl_Lists.Count > 0)
+            {
+                Control LastControl = DynamicAddControlParams.InsertExam_ExamScoreControl_Lists.Last();
+                InsertExam_ExamSet.Controls.Remove(LastControl);
+                DynamicAddControlParams.InsertExam_ExamScoreControl_Lists.Remove(LastControl);
+            }
+        }
+
+        private void InsertExam_ExamSelector_AddControl_Click_1(object sender, EventArgs e)
+        {
+            DynamicAddControlParams.InsertExamSelector_Control_Index++;
+            //DynamicAddControlParams.InsertExamSelector_Control_LocationY += 25;
+
+            int TempBaseControlY = DynamicAddControlParams.TempBaseInsertItemLocationY;
+
+            int TempLocationY = TempBaseControlY +
+                (DynamicAddControlParams.InsertExam_ExamSelectorControl_Lists.Count * 25);
+
+
+            string InsertExamSelectorNameControlName = $"{DynamicAddControlParams.InsertExam_ExamSelector_Prefix}{DynamicAddControlParams.InsertExamSelector_Control_Index}";
+            string InsertExamSelectorPerControlName = $"{DynamicAddControlParams.InsertExam_ExamSelectorPer_Prefix}{DynamicAddControlParams.InsertExamSelector_Control_Index}";
+            string InsertExamSelectorAvgControlName = $"{DynamicAddControlParams.InsertExam_ExamSelectorAvg_Prefix}{DynamicAddControlParams.InsertExamSelector_Control_Index}";
+
+            Point InsertExamSelectorNameControlNewPoint = new Point(
+                InsertExam_ExamSelector.Location.X,
+                InsertExam_ExamSelector.Location.Y + TempLocationY);
+
+            Point InsertExamSelectorPerControlNewPoint = new Point(
+                InsertExam_ExamSelectorPerCent.Location.X,
+                InsertExam_ExamSelectorPerCent.Location.Y + TempLocationY);
+
+            Point InsertExamSelectorAvgControlNewPoint = new Point(
+                InsertExam_ExamSelector_AVG.Location.X,
+                InsertExam_ExamSelector_AVG.Location.Y + TempLocationY);
+
+            Control TempExamSelectorNameControl = DynamicControlAdd<TextBox>(
+                InsertExam_ExamSelectorSet,
+                InsertExamSelectorNameControlName,
+                InsertExamSelectorNameControlNewPoint,
+                InsertExam_ExamSelector.Size);
+
+            Control TempExamSelectorPerControl = DynamicControlAdd<NumericUpDown>(
+                InsertExam_ExamSelectorSet,
+                InsertExamSelectorPerControlName,
+                InsertExamSelectorPerControlNewPoint,
+                InsertExam_ExamSelectorPerCent.Size);
+
+            Control TempExamSelectorAvgControl = DynamicControlAdd<CheckBox>(
+                InsertExam_ExamSelectorSet,
+                InsertExamSelectorAvgControlName,
+                InsertExamSelectorAvgControlNewPoint,
+                InsertExam_ExamSelector_AVG.Size);
+
+            NumericUpDown TempPerNumberic = TempExamSelectorPerControl as NumericUpDown;
+
+            TempPerNumberic.DecimalPlaces = 1;
+            TempPerNumberic.Maximum = 10000;
+            TempPerNumberic.Minimum = -1;
+            TempPerNumberic.Increment = 1;
+
+            (TempExamSelectorAvgControl as CheckBox).Checked = true;
+
+            DynamicAddControlParams.InsertExam_ExamSelectorControl_Lists.Add(TempExamSelectorNameControl);
+            DynamicAddControlParams.InsertExam_ExamSelectorPerControl_Lists.Add(TempExamSelectorPerControl);
+            DynamicAddControlParams.InsertExam_ExamSelectorAvgControl_Lists.Add(TempExamSelectorAvgControl);
+        }
+
+        private void InsertExam_ExamSelector_RemoveControl_Click_1(object sender, EventArgs e)
+        {
+            if(DynamicAddControlParams.InsertExam_ExamSelectorControl_Lists.Count > 0)
+            {
+                InsertExam_ExamSelectorSet.Controls
+                    .Remove(DynamicAddControlParams.InsertExam_ExamSelectorControl_Lists.Last());
+                DynamicAddControlParams.InsertExam_ExamSelectorControl_Lists
+                    .Remove(DynamicAddControlParams.InsertExam_ExamSelectorControl_Lists.Last());
+            }
+
+            if(DynamicAddControlParams.InsertExam_ExamSelectorPerControl_Lists.Count > 0)
+            {
+                InsertExam_ExamSelectorSet.Controls
+                    .Remove(DynamicAddControlParams.InsertExam_ExamSelectorPerControl_Lists.Last());
+                DynamicAddControlParams.InsertExam_ExamSelectorPerControl_Lists
+                    .Remove(DynamicAddControlParams.InsertExam_ExamSelectorPerControl_Lists.Last());
+            }
+
+            if(DynamicAddControlParams.InsertExam_ExamSelectorAvgControl_Lists.Count > 0)
+            {
+                InsertExam_ExamSelectorSet.Controls
+                    .Remove(DynamicAddControlParams.InsertExam_ExamSelectorAvgControl_Lists.Last());
+                DynamicAddControlParams.InsertExam_ExamSelectorAvgControl_Lists
+                    .Remove(DynamicAddControlParams.InsertExam_ExamSelectorAvgControl_Lists.Last());
+            }
+        }
+
+        private void MemroyTimerConrolButton_Click_1(object sender, EventArgs e)
+        {
+            if(MemroyTimerConrolButton.Text == "暂停定时器")
+            {
+                MemroyTimerConrolButton.Text = "开启定时器";
+                MemoryTimer.Stop();
+            } else if(MemroyTimerConrolButton.Text == "开启定时器")
+            {
+                MemroyTimerConrolButton.Text = "暂停定时器";
+                MemoryTimer.Start();
+            }
+        }
+
+        private void InsertExamItemAndSelctor_StartInsert_Click_1(object sender, EventArgs e)
+        {
+            if(!string.IsNullOrEmpty(InsertExam_SelectFilePath.Text) &&
+                !string.IsNullOrEmpty(InsertExamBaseInfo_ExamTableName.Text))
+            {
+                DialogResult TempAskResult = MessageBox.Show(
+                    "确认要插入考评表数据吗？",
+                    "提示",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Asterisk);
+
+                if(TempAskResult == DialogResult.Yes)
+                {
+                    if(!Util.CheckInsertExamSpecialChar(InsertExamBaseInfo_ExamTableName.Text))
+                    {
+                        List<string> TempSpecialExamName = new List<string>();
+
+                        List<string> TempSpecialExamSelectorName = new List<string>();
+
+                        HashSet<string> TempExamFourNameHashSet = new HashSet<string>();
+
+                        List<string> TempDupliFourNameExamName = new List<string>();
+
+
+                        List<TextBox> TempExamNames = InsertExam_ExamSet.Controls
+                            .OfType<TextBox>()
+                            .Where(x => !string.IsNullOrEmpty(x.Text))
+                            .ToList();
+
+                        List<NumericUpDown> TempExamScores = InsertExam_ExamSet.Controls
+                            .OfType<NumericUpDown>()
+                            .Where(x => x.Value >= -1)
+                            .ToList();
+
+                        List<TextBox> TempExamSelectorNames = InsertExam_ExamSelectorSet.Controls
+                            .OfType<TextBox>()
+                            .Where(x => !string.IsNullOrEmpty(x.Text))
+                            .ToList();
+
+                        List<NumericUpDown> TempExamSelectorPerValues = InsertExam_ExamSelectorSet.Controls
+                            .OfType<NumericUpDown>()
+                            .Where(x => x.Value >= -1)
+                            .ToList();
+
+
+                        List<CheckBox> TempExamSelectorAvgValues = InsertExam_ExamSelectorSet.Controls
+                            .OfType<CheckBox>()
+                            .ToList();
+
+                        TempExamNames.ForEach(
+                            TempExamNameBox =>
+                            {
+                                if(TempExamNameBox.Text.Length >= 4)
+                                {
+                                    //项目名称前四位一样的数据不允许插入
+                                    string TempExamName_Front4 = TempExamNameBox.Text.Substring(0, 4);
+
+                                    if(!TempExamFourNameHashSet.Add(TempExamName_Front4))
+                                    {
+                                        TempDupliFourNameExamName.Add(TempExamNameBox.Text);
+                                    }
+                                }
+                                if(Util.CheckInsertExamSpecialChar(TempExamNameBox.Text))
+                                {
+                                    TempSpecialExamName.Add(TempExamNameBox.Text);
+                                }
+                            });
+
+                        TempExamSelectorNames.ForEach(
+                            TempExamSelectorNameBox =>
+                            {
+                                if(Util.CheckInsertExamSpecialChar(TempExamSelectorNameBox.Text))
+                                {
+                                    TempSpecialExamSelectorName.Add(TempExamSelectorNameBox.Text);
+                                }
+                            });
+
+                        if(TempSpecialExamName.Count == 0 &&
+                            TempSpecialExamSelectorName.Count == 0 &&
+                            TempDupliFourNameExamName.Count == 0)
+                        {
+                            JObject TempExamInfoJson = new JObject();
+
+                            for(int TempIndex = 0; TempIndex < TempExamNames.Count; TempIndex++)
+                            {
+                                string TempExamName = TempExamNames[TempIndex].Text;
+                                string TempExamScore = TempExamScores[TempIndex].Value.ToString();
+
+                                JObject TempExamNameAndScore = new JObject()
+                                {
+                                    ["Type"] = "项目",
+                                    ["Score"] = TempExamScore,
+                                    ["Selectors"] = new JObject()
+                                };
+
+                                for(int TempIndex_Selector = 0; TempIndex_Selector < TempExamSelectorNames.Count; TempIndex_Selector++)
+                                {
+                                    string TempSelectorName = TempExamSelectorNames[TempIndex_Selector].Text;
+                                    string TempSelectorScorePer = TempExamSelectorPerValues[TempIndex_Selector].Value
+                                        .ToString();
+                                    bool TempSelectorCalcAvg = TempExamSelectorAvgValues[TempIndex_Selector].Checked;
+
+                                    JObject TempExamSelectorsInfo = new JObject()
+                                    {
+                                        ["Type"] = "选项",
+                                        ["ScorePer"] = TempSelectorScorePer,
+                                        ["CalcAvg"] = TempSelectorCalcAvg
+                                    };
+                                        (TempExamNameAndScore["Selectors"] as JObject).Add(
+                                            TempSelectorName,
+                                            TempExamSelectorsInfo);
+                                }
+                                JObject InvalidObject = new JObject()
+                                {
+                                    ["Type"] = "选项",
+                                    ["ScorePer"] = InsertExam_SelectorInvalid_ScorePer.Value.ToString(),
+                                    ["CalcAvg"] = InsertExam_SelectorInvalid_CacAvg.Checked
+                                };
+                                    (TempExamNameAndScore["Selectors"] as JObject).Add("无效", InvalidObject);
+
+                                JObject AbsTainObject = new JObject()
+                                {
+                                    ["Type"] = "选项",
+                                    ["ScorePer"] = InsertExam_SelectorAbstain_ScorePer.Value.ToString(),
+                                    ["CalcAvg"] = InsertExam_SelectorAbstain_CalcAvg.Checked
+                                };
+                                    (TempExamNameAndScore["Selectors"] as JObject).Add("弃权", AbsTainObject);
+
+                                TempExamInfoJson.Add(TempExamName, TempExamNameAndScore);
+                            }
+                            Task.Run(
+                                () =>
+                                {
+                                    try
+                                    {
+                                        (sender as Button).Enabled = false;
+
+                                        ChangeExamTableNo_Start.Enabled = false;
+
+                                        Util.InsertExamItemAndSelector(
+                                            InsertExam_SelectFilePath.Text,
+                                            InsertExamBaseInfo_ExamTableName.Text,
+                                            InserExamBaseInfo_FlowClassCombox.Text,
+                                            TempExamInfoJson,
+                                            InsertExam_ProcessTextTip,
+                                            InsertExam_ProcessProgressBarTip);
+
+                                        BeginInvoke(
+                                            new Action(
+                                                () =>
+                                                {
+                                                    MessageBox.Show(
+                                                        "执行完毕",
+                                                        "提示",
+                                                        MessageBoxButtons.OK,
+                                                        MessageBoxIcon.Asterisk);
+
+                                                            (sender as Button).Enabled = true;
+                                                    RefreshExamBaseInfoTableView();
+                                                    ChangeExamTableNo_Start.Enabled = true;
+                                                }));
+                                    } catch(Exception ex)
+                                    {
+                                        BeginInvoke(
+                                            new Action(
+                                                () =>
+                                                {
+                                                    MessageBox.Show(
+                                                        ex.Message,
+                                                        "错误",
+                                                        MessageBoxButtons.OK,
+                                                        MessageBoxIcon.Error);
+                                                (sender as Button).Enabled = true;
+                                                    ChangeExamTableNo_Start.Enabled = true;
+                                                    ExceptionParamter.ExceptionCount = 0;
+                                                }));
+                                    }
+                                });
+                        } else
+                        {
+                            StringBuilder TempTipMessage = new StringBuilder();
+
+                            if(TempSpecialExamName.Count > 0)
+                            {
+                                TempTipMessage.AppendLine("====以下项目名称存在特殊字符，请修改====");
+                                TempSpecialExamName.ForEach(TempExamName => TempTipMessage.AppendLine(TempExamName));
+                            }
+
+                            if(TempSpecialExamSelectorName.Count > 0)
+                            {
+                                TempTipMessage.AppendLine("====以下选项名称存在特殊字符，请修改====");
+                                TempSpecialExamSelectorName.ForEach(
+                                    TempExamSelectorName => TempTipMessage.AppendLine(TempExamSelectorName));
+                            }
+
+                            if(TempDupliFourNameExamName.Count > 0)
+                            {
+                                TempTipMessage.AppendLine("====以下项目名称前四位名称相同，请修改====");
+                                TempDupliFourNameExamName.ForEach(
+                                    TempDupliFourName => TempTipMessage.AppendLine(TempDupliFourName));
+                            }
+
+                            TempTipMessage.AppendLine();
+
+                            BeginInvoke(
+                                new Action(
+                                    () =>
+                                    {
+                                        MessageBox.Show(
+                                            TempTipMessage.ToString(),
+                                            "提示",
+                                            MessageBoxButtons.OK,
+                                            MessageBoxIcon.Asterisk);
+                                    }));
+                        }
+                    }
+                } else
+                {
+                    BeginInvoke(
+                        new Action(
+                            () =>
+                            {
+                                MessageBox.Show(
+                                    "考评表名称中存在非法字符，无法插入",
+                                    "提示",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Asterisk);
+                            }));
+                }
+
+                RefreshExamBaseInfoTableView();
+            }
+        }
+
+        private void InsertExamTable_SelectExamFile_Click_1(object sender, EventArgs e)
+        {
+            string TempMdbFilePathName = Util.ShowSelectDialog(
+                false,
+                false,
+                "mdb文件",
+                "*.mdb",
+                vfsoft_examdata_path_textbox.Text)
+                .FirstOrDefault();
+
+            if(!string.IsNullOrEmpty(TempMdbFilePathName) && TempMdbFilePathName != default)
+            {
+                InsertExam_SelectFilePath.Text = TempMdbFilePathName;
+                RefreshExamBaseInfoTableView();
+            }
+        }
+
+        private void InsertExam_BatchSelector_Click(object sender, EventArgs e)
+        {
+            if(!string.IsNullOrEmpty(InsertExam_BacthItemName_CustomFormat.Text))
+            {
+                bool MatchFormat = Regex.Match(InsertExam_BacthItemName_CustomFormat.Text, @"X").Success;
+
+                if(MatchFormat && InserExam_BatchInsertItem.Value > 1)
+                {
+                    DynamicAddControlParams.InsertExam_ExamSelectorControl_Lists
+                        .ForEach(
+                            TempControl =>
+                            {
+                                InsertExam_ExamSelectorSet.Controls.Remove(TempControl);
+                            });
+
+                    DynamicAddControlParams.InsertExam_ExamSelectorPerControl_Lists
+                        .ForEach(
+                            TempControl =>
+                            {
+                                InsertExam_ExamSelectorSet.Controls.Remove(TempControl);
+                            });
+
+                    DynamicAddControlParams.InsertExam_ExamSelectorAvgControl_Lists
+                        .ForEach(
+                            TempControl =>
+                            {
+                                InsertExam_ExamSelectorSet.Controls.Remove(TempControl);
+                            });
+
+                    DynamicAddControlParams.InsertExam_ExamSelectorControl_Lists.Clear();
+                    DynamicAddControlParams.InsertExam_ExamSelectorPerControl_Lists.Clear();
+                    DynamicAddControlParams.InsertExam_ExamSelectorAvgControl_Lists.Clear();
+
+                    string TempNumber = string.Empty;
+                    if(InserExam_BatchCustomFormat_ChinseNum.Checked)
+                    {
+                        TempNumber = "一";
+                    } else
+                    {
+                        TempNumber = "1";
+                    }
+
+                    InsertExam_ExamSelector.Text = InsertExam_BacthItemName_CustomFormat.Text.Replace("X", TempNumber);
+                    InsertExam_ExamSelectorPerCent.Value = InsertExam_BacthScoreSet.Value;
+                    for(int TempIndex = 2; TempIndex <= InserExam_BatchInsertItem.Value; TempIndex++)
+                    {
+                        if(InserExam_BatchCustomFormat_ChinseNum.Checked)
+                        {
+                            TempNumber = Util.ConvertNumberToChinese(TempIndex);
+                        } else
+                        {
+                            TempNumber = TempIndex.ToString();
+                        }
+                        string TempSelectorName = InsertExam_BacthItemName_CustomFormat.Text.Replace("X", TempNumber);
+
+                        DynamicAddControlParams.InsertExamSelector_Control_Index++;
+
+                        int TempBaseControlY = InsertExam_ExamSelector.Location.Y;
+
+                        int TempLocationY = TempBaseControlY +
+                            (DynamicAddControlParams.InsertExam_ExamSelectorControl_Lists.Count * 25);
+
+                        string InsertExamSelectorNameControlName = $"{DynamicAddControlParams.InsertExam_ExamSelector_Prefix}{DynamicAddControlParams.InsertExamSelector_Control_Index}";
+                        string InsertExamSelectorPerControlName = $"{DynamicAddControlParams.InsertExam_ExamSelectorPer_Prefix}{DynamicAddControlParams.InsertExamSelector_Control_Index}";
+                        string InsertExamSelectorAvgControlName = $"{DynamicAddControlParams.InsertExam_ExamSelectorAvg_Prefix}{DynamicAddControlParams.InsertExamSelector_Control_Index}";
+
+                        Point InsertExamSelectorNameControlNewPoint = new Point(
+                            InsertExam_ExamSelector.Location.X,
+                            InsertExam_ExamSelector.Location.Y + TempLocationY);
+
+                        Point InsertExamSelectorPerControlNewPoint = new Point(
+                            InsertExam_ExamSelectorPerCent.Location.X,
+                            InsertExam_ExamSelectorPerCent.Location.Y + TempLocationY);
+
+                        Point InsertExamSelectorAvgControlNewPoint = new Point(
+                            InsertExam_ExamSelector_AVG.Location.X,
+                            InsertExam_ExamSelector_AVG.Location.Y + TempLocationY);
+
+                        TextBox TempExamSelectorNameControl = DynamicControlAdd<TextBox>(
+                            InsertExam_ExamSelectorSet,
+                            InsertExamSelectorNameControlName,
+                            InsertExamSelectorNameControlNewPoint,
+                            InsertExam_ExamSelector.Size);
+
+                        NumericUpDown TempExamSelectorPerControl = DynamicControlAdd<NumericUpDown>(
+                            InsertExam_ExamSelectorSet,
+                            InsertExamSelectorPerControlName,
+                            InsertExamSelectorPerControlNewPoint,
+                            InsertExam_ExamSelectorPerCent.Size);
+
+                        CheckBox TempExamSelectorAvgControl = DynamicControlAdd<CheckBox>(
+                            InsertExam_ExamSelectorSet,
+                            InsertExamSelectorAvgControlName,
+                            InsertExamSelectorAvgControlNewPoint,
+                            InsertExam_ExamSelector_AVG.Size);
+
+                        TempExamSelectorNameControl.Text = TempSelectorName;
+                        TempExamSelectorPerControl.Value = InsertExam_BacthScoreSet.Value;
+                        TempExamSelectorPerControl.DecimalPlaces = 1;
+                        TempExamSelectorPerControl.Maximum = 10000;
+                        TempExamSelectorPerControl.Minimum = -1;
+                        TempExamSelectorPerControl.Increment = 1;
+                        TempExamSelectorAvgControl.Checked = true;
+
+
+                        DynamicAddControlParams.InsertExam_ExamSelectorControl_Lists.Add(TempExamSelectorNameControl);
+                        DynamicAddControlParams.InsertExam_ExamSelectorPerControl_Lists.Add(TempExamSelectorPerControl);
+                        DynamicAddControlParams.InsertExam_ExamSelectorAvgControl_Lists.Add(TempExamSelectorAvgControl);
+                    }
+                }
+            }
+        }
+
+        private void InsertExam_BatchRemoveItem_Click(object sender, EventArgs e)
+        {
+            DynamicAddControlParams.InsertExam_ExamNameControl_Lists
+                .ForEach(
+                    TempControl =>
+                    {
+                        InsertExam_ExamSet.Controls.Remove(TempControl);
+                    });
+
+            DynamicAddControlParams.InsertExam_ExamScoreControl_Lists
+                .ForEach(
+                    TempControl =>
+                    {
+                        InsertExam_ExamSet.Controls.Remove(TempControl);
+                    });
+
+            DynamicAddControlParams.InsertExam_ExamNameControl_Lists.Clear();
+            DynamicAddControlParams.InsertExam_ExamScoreControl_Lists.Clear();
+        }
+
+        private void InsertExam_BatchRemoveSelector_Click(object sender, EventArgs e)
+        {
+            DynamicAddControlParams.InsertExam_ExamSelectorControl_Lists
+                .ForEach(
+                    TempControl =>
+                    {
+                        InsertExam_ExamSelectorSet.Controls.Remove(TempControl);
+                    });
+
+            DynamicAddControlParams.InsertExam_ExamSelectorPerControl_Lists
+                .ForEach(
+                    TempControl =>
+                    {
+                        InsertExam_ExamSelectorSet.Controls.Remove(TempControl);
+                    });
+
+            DynamicAddControlParams.InsertExam_ExamSelectorAvgControl_Lists
+                .ForEach(
+                    TempControl =>
+                    {
+                        InsertExam_ExamSelectorSet.Controls.Remove(TempControl);
+                    });
+
+            DynamicAddControlParams.InsertExam_ExamSelectorControl_Lists.Clear();
+            DynamicAddControlParams.InsertExam_ExamSelectorPerControl_Lists.Clear();
+            DynamicAddControlParams.InsertExam_ExamSelectorAvgControl_Lists.Clear();
+        }
+
+        private void InsertExam_RefreshExamInfo_Click(object sender, EventArgs e) { RefreshExamBaseInfoTableView(); }
+
+        private void InsertExam_BatchSelectorSetCalcAvg_Click(object sender, EventArgs e)
+        {
+            List<CheckBox> TempExamSelectorAvgValues = InsertExam_ExamSelectorSet.Controls.OfType<CheckBox>().ToList();
+
+            TempExamSelectorAvgValues.ForEach(
+                TempControl =>
+                {
+                    TempControl.Checked = true;
+                });
+        }
+
+        private void InsertExam_BatchSelectorSetNoCalcAvg_Click(object sender, EventArgs e)
+        {
+            List<CheckBox> TempExamSelectorAvgValues = InsertExam_ExamSelectorSet.Controls.OfType<CheckBox>().ToList();
+
+            TempExamSelectorAvgValues.ForEach(
+                TempControl =>
+                {
+                    TempControl.Checked = false;
+                });
+        }
+
+        private void linkLabel11_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        { Process.Start(Util.GetEmbedResourceObj("Link_NetPan_Download_AccessEngine").ToString()); }
+
+        private void InsertExamTableView_SelectionChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if(InsertExamTableView.SelectedRows.Count > 0)
+                {
+                    string SelectTableExamId = InsertExamTableView.SelectedRows[0].Cells["考评表ID"]?.Value?.ToString();
+                    string SelectTableExamName = InsertExamTableView.SelectedRows[0].Cells["考评表名称"]?.Value?.ToString();
+
+                    if(!string.IsNullOrEmpty(SelectTableExamId) && !string.IsNullOrEmpty(SelectTableExamName))
+                    {
+                        ChangeExamTableNo_OrginTableName.Text = SelectTableExamName;
+
+                        ChangeExamTableNo_OrginTableIndex.Text = SelectTableExamId;
+                    }
+                }
+            } catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ChangeExamTableNo_Start_Click(object sender, EventArgs e)
+        {
+            if(!string.IsNullOrEmpty(InsertExam_SelectFilePath.Text) &&
+                !string.IsNullOrEmpty(ChangeExamTableNo_OrginTableIndex.Text))
+            {
+                DialogResult TempAskResult = MessageBox.Show(
+                    "确认要进行修改吗？",
+                    "提示",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Asterisk);
+
+                if(TempAskResult == DialogResult.Yes)
+                {
+                    StringBuilder TempMessAgeBuilder = new StringBuilder();
+
+                    MessageBoxIcon TempTipMessageIcon = MessageBoxIcon.Asterisk;
+
+                    Task.Run(
+                        () =>
+                        {
+                            try
+                            {
+                                    (sender as Button).Enabled = false;
+                                InsertExamItemAndSelctor_StartInsert.Enabled = false;
+                                    (sender as Button).Text = "修改中...";
+                                var (TableChangeStatus, TableChangeRecommendExamId) = Util.ChangeTableIndex(
+                                    InsertExam_SelectFilePath.Text,
+                                    ChangeExamTableNo_OrginTableIndex.Text,
+                                    ChangeExamTableNo_OrginTableNewIndex.Value.ToString(),
+                                    InsertExam_ProcessTextTip);
+
+                                if(TableChangeStatus)
+                                {
+                                    TempMessAgeBuilder.Append("修改成功");
+                                } else
+                                {
+                                    TempTipMessageIcon = MessageBoxIcon.Error;
+
+                                    TempMessAgeBuilder.Append($"修改失败，表序号已存在，推荐设置序号为{TableChangeRecommendExamId}");
+                                }
+
+                                BeginInvoke(
+                                    new Action(
+                                        () =>
+                                        {
+                                            MessageBox.Show(
+                                                TempMessAgeBuilder.ToString(),
+                                                "提示",
+                                                MessageBoxButtons.OK,
+                                                TempTipMessageIcon);
+                                                    (sender as Button).Enabled = true;
+                                                    (sender as Button).Text = "执行修改";
+                                            RefreshExamBaseInfoTableView();
+                                            InsertExamItemAndSelctor_StartInsert.Enabled = true;
+                                        }));
+                            } catch(Exception ex)
+                            {
+                                BeginInvoke(
+                                    new Action(
+                                        () =>
+                                        {
+                                            MessageBox.Show(
+                                                ex.Message,
+                                                "错误",
+                                                MessageBoxButtons.OK,
+                                                MessageBoxIcon.Error);
+                                        (sender as Button).Enabled = true;
+                                        (sender as Button).Text = "执行修改";
+                                            InsertExamItemAndSelctor_StartInsert.Enabled = true;
+                                        }));
+                            }
+                        });
+                }
+            }
+        }
+
+        private void 考评表信息插入ToolStripMenuItem_Click(object sender, EventArgs e)
+        { MainTabPage.SelectedIndex = GetTabPageIndex("考评表信息插入"); }
+
+        private void GetAllExamName_ExamBox_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if(ExamItemsCombox.Items.Count > 0)
+                {
+                    string ItemSplitsString = string.Join(
+                        "|",
+                        ExamItemsCombox.Items.Cast<object>().Select(item => item.ToString()).ToList());
+                    if(ItemSplitsString != string.Empty)
+                    {
+                        Clipboard.SetText(ItemSplitsString);
+
+                        MessageBox.Show("已复制所有项目，请自行粘贴", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    }
+                }
+            } catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ExamReportList_Sort_Click(object sender, EventArgs e)
+        {
+            if(ExamReportRowMode_ExamList.Items.Count>0 && TempExamReportItemLists.Count > 0)
+            {
+                TempExamReportItemLists.Sort(new FileNameComparerInstance());
+                ExamReportRowMode_ExamList.DataSource = new List<string>(TempExamReportItemLists);
+            }
+        }
+
+        private void ExamReportList_NoSort_Click(object sender, EventArgs e)
+        {
+            if (ExamReportRowMode_ExamList.Items.Count > 0 && TempExamReportItemLists.Count > 0)
+            {
+                ExamReportRowMode_ExamList.DataSource = new List<string>(TempExamReportItemLists_NoSort);
+            }
         }
     }
 }

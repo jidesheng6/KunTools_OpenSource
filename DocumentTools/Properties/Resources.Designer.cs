@@ -63,6 +63,26 @@ namespace DocumentTools.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap _12_插入数据源 {
+            get {
+                object obj = ResourceManager.GetObject("12-插入数据源", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap _12_插入数据源__1_ {
+            get {
+                object obj = ResourceManager.GetObject("12-插入数据源 (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap _1351 {
             get {
                 object obj = ResourceManager.GetObject("1351", resourceCulture);
@@ -117,6 +137,15 @@ namespace DocumentTools.Properties {
             get {
                 object obj = ResourceManager.GetObject("access", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 a00fc52925bbae0cfaedd113fc438e2c 的本地化字符串。
+        /// </summary>
+        internal static string AccessTokenGite {
+            get {
+                return ResourceManager.GetString("AccessTokenGite", resourceCulture);
             }
         }
         
@@ -258,6 +287,16 @@ namespace DocumentTools.Properties {
         }
         
         /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] dtez {
+            get {
+                object obj = ResourceManager.GetObject("dtez", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
         internal static System.Drawing.Bitmap Epub_Local_default {
@@ -348,6 +387,105 @@ namespace DocumentTools.Properties {
         internal static string KMSAIO {
             get {
                 return ResourceManager.GetString("KMSAIO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 https://www.52pojie.cn/thread-1909757-1-1.html 的本地化字符串。
+        /// </summary>
+        internal static string Link_52Pojie {
+            get {
+                return ResourceManager.GetString("Link_52Pojie", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 https://commondatastorage.googleapis.com/chromium-browser-snapshots/index.html?prefix=Win_x64/999988/ 的本地化字符串。
+        /// </summary>
+        internal static string Link_Download_ChromeDriver {
+            get {
+                return ResourceManager.GetString("Link_Download_ChromeDriver", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 https://dotnet.microsoft.com/zh-cn/download/dotnet-framework/net48 的本地化字符串。
+        /// </summary>
+        internal static string Link_Download_Net48 {
+            get {
+                return ResourceManager.GetString("Link_Download_Net48", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 http://jdsnmsl.tpddns.cn:3002/directlink/default/Windows%E8%BD%AF%E4%BB%B6/GorunTime%E8%BF%90%E8%A1%8C%E5%BA%93%E5%90%88%E9%9B%86/GoRuntime_DotNetFramework_3.x.zip 的本地化字符串。
+        /// </summary>
+        internal static string Link_Download_NetFx35_Private {
+            get {
+                return ResourceManager.GetString("Link_Download_NetFx35_Private", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 https://microsoftedge.microsoft.com/addons/detail/save-as-mhtml-mime-html/mlicehneaeopekphfhnfcbkdnelhldmo 的本地化字符串。
+        /// </summary>
+        internal static string LInk_Download_SaveHtmlExtension {
+            get {
+                return ResourceManager.GetString("LInk_Download_SaveHtmlExtension", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 https://www.123pan.com/s/JXY5Vv-HMDwd.html 的本地化字符串。
+        /// </summary>
+        internal static string Link_NetPan_Download_AccessEngine {
+            get {
+                return ResourceManager.GetString("Link_NetPan_Download_AccessEngine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 https://www.123pan.com/s/JXY5Vv-hX8wd.html 的本地化字符串。
+        /// </summary>
+        internal static string Link_NetPan_Download_NetFx35 {
+            get {
+                return ResourceManager.GetString("Link_NetPan_Download_NetFx35", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 https://www.123684.com/s/JXY5Vv-aCSwd 的本地化字符串。
+        /// </summary>
+        internal static string Link_NetPan_Download_OcrMode {
+            get {
+                return ResourceManager.GetString("Link_NetPan_Download_OcrMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 https://www.123pan.com/s/JXY5Vv-HX8wd.html 的本地化字符串。
+        /// </summary>
+        internal static string Link_NetPan_Download_ScannerDriver {
+            get {
+                return ResourceManager.GetString("Link_NetPan_Download_ScannerDriver", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 https://www.123pan.com/s/JXY5Vv-dLrwd.html 的本地化字符串。
+        /// </summary>
+        internal static string Link_NetPan_Download_WPS {
+            get {
+                return ResourceManager.GetString("Link_NetPan_Download_WPS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 iU8!mV1(nP.cU3+qS1_xQ 的本地化字符串。
+        /// </summary>
+        internal static string LocalXMLFileName {
+            get {
+                return ResourceManager.GetString("LocalXMLFileName", resourceCulture);
             }
         }
         
@@ -564,6 +702,26 @@ namespace DocumentTools.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap 刷新 {
+            get {
+                object obj = ResourceManager.GetObject("刷新", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 刷新__1_ {
+            get {
+                object obj = ResourceManager.GetObject("刷新 (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap 功能 {
             get {
                 object obj = ResourceManager.GetObject("功能", resourceCulture);
@@ -594,9 +752,59 @@ namespace DocumentTools.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap 右上方 {
+            get {
+                object obj = ResourceManager.GetObject("右上方", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 右下角箭头 {
+            get {
+                object obj = ResourceManager.GetObject("右下角箭头", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap 图片 {
             get {
                 object obj = ResourceManager.GetObject("图片", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 垂直居中 {
+            get {
+                object obj = ResourceManager.GetObject("垂直居中", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 复制 {
+            get {
+                object obj = ResourceManager.GetObject("复制", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 复制__1_ {
+            get {
+                object obj = ResourceManager.GetObject("复制 (1)", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -644,9 +852,59 @@ namespace DocumentTools.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap 展开 {
+            get {
+                object obj = ResourceManager.GetObject("展开", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 展开__1_ {
+            get {
+                object obj = ResourceManager.GetObject("展开 (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 左上方 {
+            get {
+                object obj = ResourceManager.GetObject("左上方", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 左下角 {
+            get {
+                object obj = ResourceManager.GetObject("左下角", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap 布局 {
             get {
                 object obj = ResourceManager.GetObject("布局", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 底部居中 {
+            get {
+                object obj = ResourceManager.GetObject("底部居中", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -694,6 +952,76 @@ namespace DocumentTools.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap 批量添加 {
+            get {
+                object obj = ResourceManager.GetObject("批量添加", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 批量添加__1_ {
+            get {
+                object obj = ResourceManager.GetObject("批量添加 (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 批量移除蓝色 {
+            get {
+                object obj = ResourceManager.GetObject("批量移除蓝色", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 批量移除蓝色__1_ {
+            get {
+                object obj = ResourceManager.GetObject("批量移除蓝色 (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 批量设置 {
+            get {
+                object obj = ResourceManager.GetObject("批量设置", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 批量设置__1_ {
+            get {
+                object obj = ResourceManager.GetObject("批量设置 (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 折叠 {
+            get {
+                object obj = ResourceManager.GetObject("折叠", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap 报告单 {
             get {
                 object obj = ResourceManager.GetObject("报告单", resourceCulture);
@@ -707,6 +1035,16 @@ namespace DocumentTools.Properties {
         internal static System.Drawing.Bitmap 拆分 {
             get {
                 object obj = ResourceManager.GetObject("拆分", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 排序 {
+            get {
+                object obj = ResourceManager.GetObject("排序", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -925,9 +1263,59 @@ namespace DocumentTools.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap 重置 {
+            get {
+                object obj = ResourceManager.GetObject("重置", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 靠右 {
+            get {
+                object obj = ResourceManager.GetObject("靠右", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 靠左 {
+            get {
+                object obj = ResourceManager.GetObject("靠左", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 顶部居中 {
+            get {
+                object obj = ResourceManager.GetObject("顶部居中", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap 高度 {
             get {
                 object obj = ResourceManager.GetObject("高度", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 默认_折叠 {
+            get {
+                object obj = ResourceManager.GetObject("默认_折叠", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

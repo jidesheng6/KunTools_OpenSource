@@ -6,7 +6,7 @@
         /// <summary>
         /// 程序的版本号，格式为：主版本号.次版本号.修订版本号
         /// </summary>
-        public static string VersionNumber = "0.4.5";
+        public static string VersionNumber = "0.4.6";
 
         /// <summary>
         /// 软件名称
@@ -27,5 +27,10 @@
         /// 程序的公告信息
         /// </summary>
         public static string VersionNoticeMessageUrl = "https://jipkqhufibk.feishu.cn/wiki/AoxswyndqiO169kvpZ8cPxbtncb";
+
+        /// <summary>
+        /// 程序限制
+        /// </summary>
+        public static string LimitControlXmlUrl = $"https://gitee.com/api/v5/repos/jidesheng666/kun-tools-application-control/raw/xml_config/App.xml?access_token={Util.GetEmbedResourceObj("AccessTokenGite")}";
     }
 }

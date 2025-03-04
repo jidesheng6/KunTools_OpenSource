@@ -41,6 +41,16 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Color = System.Drawing.Color;
+using Sdcb.PaddleOCR.Models;
+using Sdcb.PaddleOCR.Models.Local;
+using OpenCvSharp;
+using Sdcb.PaddleOCR;
+using Sdcb.PaddleInference;
+using NAudio;
+using NAudio.CoreAudioApi;
+using NAudio.MediaFoundation;
+using Newtonsoft.Json.Linq;
+using Windows.Storage.Streams;
 
 namespace DocumentTools
 {
@@ -161,6 +171,21 @@ namespace DocumentTools
             return (TempDataReader, TempConnection);
         }
 
+        public static (object, OleDbConnection) GetAccessDataByOne(
+            string DataBaseFile,
+            string QuerySqlString)
+        {
+            OleDbConnection TempConnection = OpenAccessConnection(DataBaseFile);
+
+            TempConnection.Open();
+
+            OleDbCommand TempCommand = new OleDbCommand(QuerySqlString, TempConnection);
+
+            object TempDataResult = TempCommand.ExecuteScalar();
+
+            return (TempDataResult, TempConnection);
+        }
+
         private static Aspose.Pdf.Facades.Bookmark GetPdfNextBookMark(
             Aspose.Pdf.Facades.Bookmarks TempBookMarks,
             Aspose.Pdf.Facades.Bookmark TempCurrentMark)
@@ -191,7 +216,20 @@ namespace DocumentTools
 
             return RandomString;
         }
+        /// <summary>
+        /// 检查是否有测评表不能出现的字符在里面，存在返回True，不存在返回False
+        /// </summary>
+        /// <param name="CheckString"></param>
+        /// <returns></returns>
+        public static bool CheckInsertExamSpecialChar(string CheckString)
+        {
+            string SpecialChars = @"[""/&\:\*\?\,\<\>\|\.\+\-\=\^\%\$\#\@\!\~\`\;\'\,]";
 
+            bool IsSpecalInStr =  Regex.IsMatch(CheckString, SpecialChars);
+
+            return IsSpecalInStr;
+
+        }
         /// <summary>
         /// 获取注册表键值
         /// </summary>
@@ -592,9 +630,9 @@ namespace DocumentTools
             bool FullScreenMode = false,
             int WaterDmi_Hor = 25,
             int WaterDmi_Ver = 25,
-            bool CustomPostion=false,
-            double CustomPostion_X=0,
-            double CustomPostion_Y=0)
+            bool CustomPostion = false,
+            double CustomPostion_X = 0,
+            double CustomPostion_Y = 0)
         {
             using Aspose.Pdf.Document TempLoadDocument = new Aspose.Pdf.Document(DocuementFileName);
             #region foreach添加水印
@@ -673,12 +711,12 @@ namespace DocumentTools
                         TempAddArtifact.Opacity = WaterMarkOpactiyNum;
                         TempAddArtifact.IsBackground = false;
 
-                        if (CustomPostion)
+                        if(CustomPostion)
                         {
                             TempAddArtifact.Position = new Aspose.Pdf.Point(CustomPostion_X, CustomPostion_Y);
                         }
 
-                        lock (TempAddArtifact)
+                        lock(TempAddArtifact)
                         {
                             if(FullScreenMode)
                             {
@@ -1765,7 +1803,45 @@ namespace DocumentTools
                 BuilderDocument.Save(SavedDocumentFileName);
             }
         }
+        public static string ConvertNumberToChinese(int number)
+        {
+            if (number == 0)
+            {
+                return "零";
+            }
 
+            string[] digits = { "零", "一", "二", "三", "四", "五", "六", "七", "八", "九" };
+            string[] units = { "", "十", "百" };
+
+            string result = "";
+            int unitIndex = 0;
+
+            while (number > 0)
+            {
+                int digit = number % 10;
+                if (digit != 0)
+                {
+                    result = digits[digit] + units[unitIndex] + result;
+                }
+                else if (!string.IsNullOrEmpty(result) && !result.StartsWith("零"))
+                {
+                    result = "零" + result;
+                }
+                number /= 10;
+                unitIndex++;
+            }
+
+            // 处理末尾的零
+            result = result.TrimEnd('零');
+
+            // 处理 "一十" 开头的特殊情况
+            if (result.StartsWith("一十"))
+            {
+                result = result.Substring(1);
+            }
+
+            return result;
+        }
         public static string ConvertMoney2ChineseYulan(decimal num)
         {
             string str1 = "零壹贰叁肆伍陆柒捌玖";            //0-9所对应的汉字 
@@ -2533,17 +2609,18 @@ namespace DocumentTools
             } else
             {
                 // 使用本机的Office来转换PDF，速度略慢
-                Microsoft.Office.Interop.Word.Application TempWordApplication = new Microsoft.Office.Interop.Word.Application(
+
+                Word.Application TempWordApplication = new Word.Application(
                     );
 
-                Microsoft.Office.Interop.Word.Document TempLocalDocument = TempWordApplication.Documents
+                Word.Document TempLocalDocument = TempWordApplication.Documents
                     .Open(documentFileName, PasswordDocument: DocumentPassword);
 
                 TempLocalDocument.ExportAsFixedFormat(
                     SavePdfName,
-                    ExportFormat: Microsoft.Office.Interop.Word.WdExportFormat.wdExportFormatPDF,
-                    OptimizeFor: Microsoft.Office.Interop.Word.WdExportOptimizeFor.wdExportOptimizeForPrint,
-                    CreateBookmarks: Microsoft.Office.Interop.Word.WdExportCreateBookmarks.wdExportCreateWordBookmarks);
+                    ExportFormat: Word.WdExportFormat.wdExportFormatPDF,
+                    OptimizeFor: Word.WdExportOptimizeFor.wdExportOptimizeForPrint,
+                    CreateBookmarks: Word.WdExportCreateBookmarks.wdExportCreateWordBookmarks);
 
                 TempLocalDocument.Close();
 
@@ -3339,10 +3416,15 @@ namespace DocumentTools
         /// </summary>
         /// <param name="ResourceName">资源名称，不需要带后缀</param>
         /// <returns></returns>
-        public static object GetEmbedResourceObj(string ResourceName)
+        public static object GetEmbedResourceObj(string ResourceName,string ResouceSubFolder="")
         {
             Assembly SelfAssmbly = Assembly.GetExecutingAssembly();
-            ResourceManager TempManager = new ResourceManager("DocumentTools.Properties.Resources", SelfAssmbly);
+            string ResoucePath = "DocumentTools.Properties.Resources";
+            if(!string.IsNullOrEmpty(ResouceSubFolder))
+            {
+                ResoucePath += $".{ResouceSubFolder}";
+            }
+            ResourceManager TempManager = new ResourceManager(ResoucePath, SelfAssmbly);
             return TempManager.GetObject(ResourceName);
         }
 
@@ -3367,6 +3449,314 @@ namespace DocumentTools
             DataConnection.Close();
 
             return TemoExamDataTable;
+        }
+        /// <summary>
+        /// 获取考评表基本信息
+        /// </summary>
+        /// <param name="DataBaseFile"></param>
+        /// <returns></returns>
+        public static DataTable GetExamBaseInfo(string DataBaseFile)
+        {
+            DataTable TempExamBaseTable = new DataTable();
+
+            string TempQueryString = "SELECT Exam_EssInfo.ExamId AS 考评表ID,Exam_EssInfo.ExamName AS 考评表名称,Exam_EssInfo.TypeMode AS 排版类型 FROM Exam_EssInfo";
+
+            var (DataAdap, DataConnection) = GetAccessDataAdapter(DataBaseFile, TempQueryString);
+
+            DataAdap.Fill(TempExamBaseTable);
+
+            DataConnection.Close();
+
+            return TempExamBaseTable;
+
+        }
+
+        /// <summary>
+        /// 获取数据库中某个表中字段的最大值
+        /// </summary>
+        /// <param name="DataBaseFile"></param>
+        /// <param name="FieldName"></param>
+        /// <param name="TableName"></param>
+        /// <param name="LimitQueryString"></param>
+        /// <returns></returns>
+        public static int GetAccessFieldMaxValue(string DataBaseFile,string FieldName,string TableName,string LimitQueryString="")
+        {
+            string TempQueryString = $"SELECT MAX({FieldName}) FROM {TableName} ";
+
+            if(!string.IsNullOrEmpty(LimitQueryString))
+            {
+                TempQueryString += LimitQueryString;
+            }
+            var(TempResult,TempConnection) = GetAccessDataByOne(DataBaseFile, TempQueryString);
+
+            TempConnection.Close();
+
+            return string.IsNullOrEmpty(TempResult.ToString()) ? 0 : int.Parse(TempResult.ToString());
+        }
+
+        /// <summary>
+        /// 插入考评表基本信息
+        /// </summary>
+        /// <param name="DataBaseFile"></param>
+        /// <param name="ExamTableName"></param>
+        /// <param name="ExamTypeMode"></param>
+        /// <returns></returns>
+        public static int InsertExamEssInfo(string DataBaseFile,string ExamTableName,string ExamTypeMode)
+        {
+            //1、首先查询库中Exam_Essinfo的ExamId最大值
+
+            string ExamEssInfoName = "Exam_EssInfo";
+
+            int MaxExamId = GetAccessFieldMaxValue(DataBaseFile,"ExamId", ExamEssInfoName);
+
+            string GetExamTableNameById = $"SELECT ExamId FROM {ExamEssInfoName} WHERE ExamID={MaxExamId}";
+
+            var (TempInUseExamId, TempInUseExamId_Conn) = GetAccessDataByOne(DataBaseFile, GetExamTableNameById);
+
+            if(TempInUseExamId!=null && int.Parse(TempInUseExamId.ToString())>=0)
+            {
+                MaxExamId++;
+            }
+            else if(TempInUseExamId==null)
+            {
+                MaxExamId = MaxExamId + 1;
+            }
+
+            string AddExamInfoString = $"INSERT INTO {ExamEssInfoName} (ExamId,ExamName,TypeMode) Values ('{MaxExamId}','{ExamTableName}','{ExamTypeMode}')";
+
+            var(TempResult,TempConnection) = ExecuteAccessSql(DataBaseFile, AddExamInfoString);
+
+            TempInUseExamId_Conn.Close();
+            TempConnection.Close();
+
+            return MaxExamId;
+
+        }
+        /// <summary>
+        /// 向指定ExamId的考评表中插入默认规则
+        /// </summary>
+        /// <param name="DatabaseFile"></param>
+        /// <param name="ExamId"></param>
+        public static void InsertExamRuler(string DatabaseFile,int ExamId)
+        {
+            int DefaultRulerOrder = 2;
+
+            Dictionary<string,string> ExamDefaultRuler = new Dictionary<string, string>() 
+            {
+                { "单项不填规则", "自动当作弃权"},
+                { "单项多填规则", "只记录最前被选项后再交给人工"},
+                { "多项不填规则", "自动当作弃权"},
+                { "全部无效规则", "无效票False"},
+                { "全部弃权规则", "无效票False"}
+            };
+            
+            foreach(var ExamSignleRuler in ExamDefaultRuler)
+            {
+                string TempInsertRulerString = $"INSERT INTO Exam_Ruler (ExamId,RulerKind,RulerPara,RulerOrder) VALUES ('{ExamId}','{ExamSignleRuler.Key}','{ExamSignleRuler.Value}','{DefaultRulerOrder++}')";
+
+                var(TempResult,TempConnection)  =  ExecuteAccessSql(DatabaseFile, TempInsertRulerString);
+
+                TempConnection.Close();
+            }
+
+        }
+
+        public static (bool,int) ChangeTableIndex(string DataBaseFile,string OrginTableIndex,string ChangeTableIndex,TextBox ChangeProgressTextBox)
+        {
+            bool ChangeStatus = false;
+            List<string> BindExamIdTableNames = new List<string>()
+            {
+                "Exam_BoolItem",
+                "Exam_CharItem",
+                "Exam_EssInfo",
+                "Exam_People",
+                "Exam_PeopleDes",
+                "Exam_RaidInfo",
+                "Exam_Ruler",
+                "Exam_Score",
+                "Exam_VerifyCode",
+                "Report_Ess"
+            };
+            //查询数据库中是否存在要修改的表ID，没有才允许修改
+
+            string SelectExamIdByEssInfoSql = $"SELECT ExamName FROM {BindExamIdTableNames[2]} WHERE ExamID={int.Parse(ChangeTableIndex)}";
+
+            var (TempExamIdValue,TempExamIdConn) = GetAccessDataByOne(DataBaseFile, SelectExamIdByEssInfoSql);
+
+            int RecommendExamIdValue = -1;
+
+            if(TempExamIdValue==null)
+            {
+                BindExamIdTableNames.ForEach(TempTableName =>
+                {
+                    string UpdateTableIndexSql = $"UPDATE {TempTableName} SET ExamID={int.Parse(ChangeTableIndex)} WHERE ExamID={int.Parse(OrginTableIndex)}";
+
+                    ExecuteAccessSql(DataBaseFile, UpdateTableIndexSql);
+                });
+                ChangeStatus = true;
+            }
+            else
+            {
+                int GetMaxExamIdValue = GetAccessFieldMaxValue(DataBaseFile, "ExamID", BindExamIdTableNames[2]);
+
+                int TempUpdateMaxId = GetMaxExamIdValue + 1;
+
+                ChangeProgressTextBox.BackColor = SystemColors.Control;
+
+                BindExamIdTableNames.ForEach(TempTableName =>
+                {
+                    ChangeProgressTextBox.ForeColor = Color.Red;
+                    ChangeProgressTextBox.Text = $"正在修改数据表<{TempTableName}>...";
+                    //1、将已存在的ExamId更改为TempUpdateMaxId
+                    string UpdateTagretId2TempMaxIdSql = $"UPDATE {TempTableName} SET ExamID={TempUpdateMaxId} WHERE ExamID={int.Parse(ChangeTableIndex)}";
+
+                    ExecuteAccessSql(DataBaseFile, UpdateTagretId2TempMaxIdSql);
+
+                    //2、将原来的ExamId更改为要设置的目标值
+
+                    string UpdateOrginId2TargetIdSql = $"UPDATE {TempTableName} SET ExamID={int.Parse(ChangeTableIndex)} WHERE ExamID={int.Parse(OrginTableIndex)}";
+
+                    ExecuteAccessSql(DataBaseFile, UpdateOrginId2TargetIdSql);
+                    //3、将TempUpdateMaxId更改为原始值
+
+                    string UpdateTempMaxId2OrginIdSql = $"UPDATE {TempTableName} SET ExamID={int.Parse(OrginTableIndex)} WHERE ExamID={TempUpdateMaxId}";
+
+                    ExecuteAccessSql(DataBaseFile, UpdateTempMaxId2OrginIdSql);
+
+                    ChangeProgressTextBox.ForeColor = Color.ForestGreen;
+
+                    ChangeProgressTextBox.Text = $"数据表<{TempTableName}>修改完毕";
+
+                });
+
+                ChangeProgressTextBox.Text = $"执行完毕，等待操作中...";
+
+                RecommendExamIdValue = GetMaxExamIdValue + 1;
+                
+                ChangeStatus = true;
+            }
+
+            TempExamIdConn.Close();
+
+            return (ChangeStatus, RecommendExamIdValue);
+
+        }
+
+
+        /// <summary>
+        /// 插入考评表项目和选项
+        /// </summary>
+        /// <param name="DataBaseFile"></param>
+        /// <param name="ExamTableName"></param>
+        /// <param name="TableFlowClass"></param>
+        /// <param name="ExamJsonInfo"></param>
+        /// <param name="ProgressTextBox"></param>
+        /// <param name="ProgressBarTip"></param>
+        public static void InsertExamItemAndSelector(string DataBaseFile,string ExamTableName,string TableFlowClass,JObject ExamJsonInfo,TextBox ProgressTextBox,ProgressBar ProgressBarTip)
+        {
+            int ExamId = -1;
+
+            string GetExamTableName = $"SELECT ExamID FROM Exam_EssInfo WHERE ExamName='{ExamTableName}'";
+
+            var (TempExamData, TempGetExamTableNameConnection) = GetAccessDataByOne(DataBaseFile, GetExamTableName);
+
+            if (TempExamData!=null)
+            {
+                int TempExamId = int.Parse(TempExamData.ToString());
+                
+                ExamId = TempExamId;
+            }
+            else
+            {
+                ExamId = InsertExamEssInfo(DataBaseFile, ExamTableName, TableFlowClass);
+
+                InsertExamRuler(DataBaseFile, ExamId);
+            }
+            
+            TempGetExamTableNameConnection.Close();
+           
+            int MaxItemOrder = GetAccessFieldMaxValue(DataBaseFile, "itemorder", "Exam_BoolItem",$"WHERE ExamId={ExamId}");
+           
+            foreach(var TempExam in ExamJsonInfo)
+            {
+                //项目名称
+                string TempItemName = TempExam.Key;
+                
+                JObject TempItemValueInfo = TempExam.Value as JObject;
+                
+                //项目类型
+                string TempType = ExamJsonInfo[TempItemName]["Type"].Value<string>();
+                
+                string TempItemScore = ExamJsonInfo[TempItemName]["Score"].Value<string>();
+
+                //获取选项的数据
+                JObject TempSelectorData = TempItemValueInfo["Selectors"] as JObject;
+
+                string TempInsertExamItemNameScoreSql = $"INSERT INTO Exam_Score (ExamId,Kind,ItemName,SelName,Score) VALUES ('{ExamId}','{TempType}','{TempItemName}','{TempItemName}','{TempItemScore}')";
+
+                foreach (var TempSelector in TempSelectorData)
+                {
+                    string TempSelectorName = TempSelector.Key;
+
+                    if (TempSelectorName != "无效" && TempSelectorName != "弃权")
+                    {
+                        MaxItemOrder++;
+                    }
+
+                    JObject TempSelectorValue = TempSelector.Value as JObject;
+
+                    string TempSelectorType = TempSelectorValue["Type"].Value<string>();
+
+                    string TempSelectorScorePer = TempSelectorValue["ScorePer"].Value<string>();
+
+                    bool TempSelectorCalcAvg = TempSelectorValue["CalcAvg"].Value<bool>();
+
+                    string TempInsertExamAndItemSql = $"INSERT INTO Exam_BoolItem (ExamId,AtKind,ItemName,SelName,ItemOrder) VALUES ('{ExamId}','测评','{TempItemName}','{TempSelectorName}','{MaxItemOrder}')";
+
+                    //计入得票率
+                    string TempInsertExamSelectorScore_CalcAvg_Sql = $"INSERT INTO Exam_Score (ExamId,Kind,ItemName,SelName,Score) VALUES ('{ExamId}','{TempSelectorType}','{TempItemName}','{TempSelectorName}','{TempSelectorScorePer}')";
+
+                    //不计入得票率
+                    string TempInsertExamSelectorScore_NoCalcAvg_Sql = $"INSERT INTO Exam_Score (ExamId,Kind,ItemName,SelName,Score) VALUES ('{ExamId}','选项不计入得票率','{TempItemName}','{TempSelectorName}','1')";
+
+                    //进度提示
+                    ProgressBarTip.PerformStep();
+                    ProgressTextBox.BackColor = SystemColors.Control;
+                    ProgressTextBox.ForeColor = Color.Red;
+                    ProgressTextBox.Text = $"正在将<{TempSelectorName}>添加到<{TempItemName}>中...";
+
+                    //插入项目名称和选项到ExamBoolItem表
+                    if (TempSelectorName!="无效" && TempSelectorName!="弃权")
+                    {
+                        var (TempResult, TempConnection) = ExecuteAccessSql(DataBaseFile, TempInsertExamAndItemSql);
+                        TempConnection.Close();
+                    }
+
+                    if (TempSelectorCalcAvg)
+                    {
+                        var (TempSelectorResult, TempSelectorConn) = ExecuteAccessSql(DataBaseFile, TempInsertExamSelectorScore_CalcAvg_Sql);
+                        TempSelectorConn.Close();
+                    }
+                    else
+                    {
+                        var (TempSelectorResult_Calc, TempSelectorConn_Calc) = ExecuteAccessSql(DataBaseFile, TempInsertExamSelectorScore_CalcAvg_Sql);
+                        var (TempSelectorResult_NoCalc, TempSelectorConn_NoCalc) = ExecuteAccessSql(DataBaseFile, TempInsertExamSelectorScore_NoCalcAvg_Sql);
+                        
+                        TempSelectorConn_Calc.Close();
+                        TempSelectorConn_NoCalc.Close();
+                    }
+                    var (TempInserItemScoreResult, TempInserItemScoreResultConn) = ExecuteAccessSql(DataBaseFile, TempInsertExamItemNameScoreSql);
+
+                    TempInserItemScoreResultConn.Close();
+                }
+                ProgressTextBox.ForeColor = Color.ForestGreen;
+                ProgressTextBox.Text = $"<{TempItemName}>添加完毕";
+                ProgressBarTip.Value = 0;
+            }
+
+            ProgressTextBox.Text = $"执行完毕，等待操作中...";
+            ProgressBarTip.Value = 0;
+
         }
 
         /// <summary>
@@ -3462,8 +3852,8 @@ namespace DocumentTools
 
             string RaidMultValue = string.Join("|", ExamRaidInfoLists) + "|" + RaidInfoSum;
             string RaidMultShow = "批量设置全部身份";
-            
-            if(string.IsNullOrEmpty(RaidInfoSum)|| string.IsNullOrEmpty(RaidMultValue))
+
+            if(string.IsNullOrEmpty(RaidInfoSum) || string.IsNullOrEmpty(RaidMultValue))
             {
                 RaidInfoShow = "无测评身份";
             }
@@ -3481,9 +3871,11 @@ namespace DocumentTools
         /// <param name="DataBaseFile">数据库文件</param>
         /// <param name="ExamReportId">报表ID</param>
         /// <returns></returns>
-        public static (List<int> report_cols, List<int> report_rows) GetExamReportColsAndRows(
+        public static (List<int> report_cols, List<int> report_rows) GetExamReportColumnsAndRows
+            (
             string DataBaseFile,
-            string ExamReportId)
+            string ExamReportId
+            )
         {
             int Report_Cols = 0, Report_Rows = 0;
 
@@ -3866,7 +4258,9 @@ namespace DocumentTools
                     .Replace("Item=", string.Empty);
 
                 if(!ReportCurrentItems.Contains(ItemName) && ItemName != string.Empty)
+                {
                     ReportCurrentItems.Add(ItemName);
+                }
             }
             DataConnection.Close();
 
@@ -4400,6 +4794,7 @@ namespace DocumentTools
             bool UseRegexSub = false,
             bool ExcelReplace_MatchWholeWord = false)
         {
+            
             if(string.Compare(RelaceDocumentType, "WORD", StringComparison.Ordinal) == 0)
             {
                 Aspose.Words.Loading.LoadOptions DocuemntLoadOption = new Aspose.Words.Loading.LoadOptions()
@@ -4437,6 +4832,7 @@ namespace DocumentTools
                 {
                     Regex DocuemntRegex = new Regex(FindReplaceObj.Item1, RegexOptions.Multiline);
                     TempWordDocument.Range.Replace(DocuemntRegex, FindReplaceObj.Item2, TempWordFindReplaceOption);
+                    //TempWordDocument.Save(SavedDoucmentFileName, DocumentSaveOption);
                 }
                 TempWordDocument.Save(SavedDoucmentFileName, DocumentSaveOption);
             } else
@@ -5165,6 +5561,7 @@ namespace DocumentTools
             return card_id_ver_result;
         }
 
+        // 20250210记录：这块前台不能实时更新label文本和progressbar，需要修复
         public static void RecognitionPictureDataMatrix(
             string ImageDirectoryName,
             bool RecognSubDirectory,
@@ -5172,7 +5569,11 @@ namespace DocumentTools
             ProgressBar ProcessControl,
             Label ProgressLabelControl,
             string ThreadNumbers,
-            int ThreadNumbers_SelectIndex)
+            int ThreadNumbers_SelectIndex,
+            bool UseOcr = false,
+            string MatchOcrString = "",
+            bool MatchOcrMark = false,
+            bool SaveSrcFile=true)
         {
             int FileCount = 0;
 
@@ -5194,66 +5595,198 @@ namespace DocumentTools
 
             parallelOptions.MaxDegreeOfParallelism = ThreadNumbers_SelectIndex == 0 ? -1 : int.Parse(ThreadNumbers);
 
-            Parallel.ForEach(
-                ImageFilesName,
-                parallelOptions,
-                fileName =>
+            ProcessControl.Maximum = ImageFilesName.Count;
+            //进行ocr识别的时候不进行图片分类
+            if(UseOcr && !string.IsNullOrEmpty(MatchOcrString))
+            {
+                FullOcrModel TempOcrMode = LocalFullModels.ChineseV3;
+
+                using(PaddleOcrAll TempPaddleEngine = new PaddleOcrAll(TempOcrMode,PaddleDevice.Mkldnn()))
                 {
-                    ProcessControl.PerformStep();
+                    TempPaddleEngine.AllowRotateDetection = true;
+                    TempPaddleEngine.Enable180Classification = true;
+                    
+                    Parallel.ForEach(
+                        ImageFilesName,
+                        parallelOptions,
+                        TempImageFileName =>
+                        {
+                            ProcessControl.Increment(1);
 
-                    using BarCodeReader TempBarcodeReader = new BarCodeReader(fileName, DecodeType.DataMatrix);
-                    foreach(BarCodeResult TempReadResult in TempBarcodeReader.ReadBarCodes())
+                            using(Mat ImageSrc = Cv2.ImRead(TempImageFileName))
+                            {
+                                lock (TempPaddleEngine)
+                                {
+                                    PaddleOcrResult TempResult = TempPaddleEngine.Run(ImageSrc);
+                                    foreach (PaddleOcrResultRegion TempResultRegion in TempResult.Regions)
+                                    {
+                                        if (!string.IsNullOrEmpty(TempResultRegion.Text))
+                                        {
+                                            if (Regex.IsMatch(TempResultRegion.Text, MatchOcrString))
+                                            {
+                                                string ImagePartenName = Directory.GetParent(TempImageFileName).FullName
+                                                    .Replace(Directory.GetDirectoryRoot(TempImageFileName), string.Empty);
+
+                                                string PictureCopyDirectory = Path.Combine(
+                                                    TargetSaveDirectory,
+                                                    MatchOcrString);
+
+
+                                                if (RecognSubDirectory)
+                                                {
+                                                    PictureCopyDirectory = Path.Combine(
+                                                        TargetSaveDirectory,
+                                                        ImagePartenName,
+                                                        MatchOcrString);
+                                                }
+
+                                                string TargetImageFileName = Path.Combine(
+                                                    PictureCopyDirectory,
+                                                    Path.GetFileName(TempImageFileName));
+
+
+                                                if (!Directory.Exists(PictureCopyDirectory))
+                                                {
+                                                    Directory.CreateDirectory(PictureCopyDirectory);
+                                                }
+                                                if (MatchOcrMark)
+                                                {
+                                                    Cv2.Rectangle(
+                                                        ImageSrc,
+                                                        TempResultRegion.Rect.BoundingRect(),
+                                                        Scalar.OrangeRed,
+                                                        thickness: 2);
+                                                    Cv2.ImWrite(TargetImageFileName, ImageSrc);
+                                                    if(!SaveSrcFile && File.Exists(TargetImageFileName))
+                                                    {
+                                                        File.Delete(TempImageFileName);
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    if(SaveSrcFile)
+                                                    {
+                                                        File.Copy(TempImageFileName, TargetImageFileName, true);
+                                                    }
+                                                    else
+                                                    {
+                                                        File.Move(TempImageFileName, TargetImageFileName);
+
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            ProgressLabelControl.Text = $"共{ImageFilesName.Count}个文件，已处理{++FileCount}个文件";
+                        });
+                }
+            } else
+            {
+                Parallel.ForEach(
+                    ImageFilesName,
+                    parallelOptions,
+                    fileName =>
                     {
-                        string CodeText = TempReadResult.CodeText;
+                        ProcessControl.Increment(1);
 
-                        if(CodeText.StartsWith("T"))
+                        using BarCodeReader TempBarcodeReader = new BarCodeReader(fileName, DecodeType.DataMatrix);
+                        foreach(BarCodeResult TempReadResult in TempBarcodeReader.ReadBarCodes())
                         {
-                            string ImagePartenName = Directory.GetParent(fileName).FullName
-                                .Replace(Directory.GetDirectoryRoot(fileName), string.Empty);
+                            string CodeText = TempReadResult.CodeText;
 
-                            string PageNumberText = CodeText.Split('T')[1]; //测评图片的页码标志为TXX开头，XX表示纯数字页码
-
-                            string PictureCopyDirectory = Path.Combine(TargetSaveDirectory, $"页码-{PageNumberText}");
-
-
-                            if(RecognSubDirectory)
+                            if(CodeText.StartsWith("T"))
                             {
-                                PictureCopyDirectory = Path.Combine(
-                                    TargetSaveDirectory,
-                                    ImagePartenName,
-                                    $"页码-{PageNumberText}");
+                                string ImagePartenName = Directory.GetParent(fileName).FullName
+                                    .Replace(Directory.GetDirectoryRoot(fileName), string.Empty);
+
+                                string PageNumberText = CodeText.Split('T')[1]; //测评图片的页码标志为TXX开头，XX表示纯数字页码
+
+                                string PictureCopyDirectory = Path.Combine(TargetSaveDirectory, $"页码-{PageNumberText}");
+
+
+                                if(RecognSubDirectory)
+                                {
+                                    PictureCopyDirectory = Path.Combine(
+                                        TargetSaveDirectory,
+                                        ImagePartenName,
+                                        $"页码-{PageNumberText}");
+                                }
+
+                                string TargetImageFileName = Path.Combine(
+                                    PictureCopyDirectory,
+                                    Path.GetFileName(fileName));
+
+
+                                if(!Directory.Exists(PictureCopyDirectory))
+                                {
+                                    Directory.CreateDirectory(PictureCopyDirectory);
+                                }
+                                if(SaveSrcFile)
+                                {
+                                    File.Copy(fileName, TargetImageFileName, true);
+                                }
+                                else
+                                {
+                                    File.Move(fileName, TargetImageFileName);
+                                }
                             }
 
-                            string TargetImageFileName = Path.Combine(PictureCopyDirectory, Path.GetFileName(fileName));
-
-
-                            if(!Directory.Exists(PictureCopyDirectory))
+                            if(TempBarcodeReader.FoundCount == 0)
                             {
-                                Directory.CreateDirectory(PictureCopyDirectory);
-                            }
+                                string NoInfoDirctoryName = Path.Combine(TargetSaveDirectory, "异常-无法识别的图片");
 
-                            File.Copy(fileName, TargetImageFileName, true);
+                                string ErrorImageFileName = Path.Combine(NoInfoDirctoryName, Path.GetFileName(fileName));
+
+
+                                if(!Directory.Exists(NoInfoDirctoryName))
+                                {
+                                    Directory.CreateDirectory(NoInfoDirctoryName);
+                                }
+                                if (SaveSrcFile)
+                                {
+                                    File.Copy(fileName, ErrorImageFileName, true);
+                                }
+                                else
+                                {
+                                    File.Move(fileName, ErrorImageFileName);
+                                }
+                            }
                         }
+                        ProgressLabelControl.Text = $"共{ImageFilesName.Count}个文件，已处理{++FileCount}个文件";
+                    });
+            }
+        }
 
-                        if(TempBarcodeReader.FoundCount == 0)
-                        {
-                            string NoInfoDirctoryName = Path.Combine(TargetSaveDirectory, "异常-无法识别的图片");
+        /// <summary>
+        /// 控制系统扬声器是否静音
+        /// </summary>
+        /// <param name="isSetMute"></param>
+        /// <param name="AudioVolumeValue"></param>
+        public static void SetSystemAudioVolume(bool isSetMute,float AudioVolumeValue)
+        {
+            using(MMDeviceEnumerator TempMdeviceEnum =  new MMDeviceEnumerator())
+            {
+                using (MMDevice TempDefaultDevice =  TempMdeviceEnum.GetDefaultAudioEndpoint(DataFlow.Render,Role.Console))
+                {
+                    TempDefaultDevice.AudioEndpointVolume.Mute = isSetMute;
+                    TempDefaultDevice.AudioEndpointVolume.MasterVolumeLevelScalar = AudioVolumeValue;
+                }
+            }
+        }
 
-                            string ErrorImageFileName = Path.Combine(NoInfoDirctoryName, Path.GetFileName(fileName));
+        public static (bool AudioMute,float AudioPer) GetSystemDefaultAudioStatus()
+        {
+            using (MMDeviceEnumerator TempMdeviceEnum = new MMDeviceEnumerator())
+            {
+                using (MMDevice TempDefaultDevice = TempMdeviceEnum.GetDefaultAudioEndpoint(DataFlow.Render, Role.Console))
+                {
+                    var DefaultAudioStatus = (Audio_Mute:TempDefaultDevice.AudioEndpointVolume.Mute, Audio_Volume_Per:TempDefaultDevice.AudioEndpointVolume.MasterVolumeLevelScalar);
+                    return DefaultAudioStatus;
+                }
+            }
 
-
-                            if(!Directory.Exists(NoInfoDirctoryName))
-                            {
-                                Directory.CreateDirectory(NoInfoDirctoryName);
-                            }
-
-                            File.Copy(fileName, ErrorImageFileName, true);
-                        }
-
-                        ProcessControl.Value = 0;
-                    }
-                    ProgressLabelControl.Text = $"共{ImageFilesName.Count}个文件，已处理{FileCount++}个文件";
-                });
         }
 
         /// <summary>
