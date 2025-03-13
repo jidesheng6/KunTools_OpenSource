@@ -199,6 +199,8 @@
   <ItemGroup>
     <Compile Include="AspWordsWarningCallBack.cs" />
     <Compile Include="ConvertFileType.cs" />
+    <Compile Include="DataBaseFactory.cs" />
+    <Compile Include="DataBaseHelper.cs" />
     <Compile Include="DonateMeFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -215,6 +217,7 @@
       <DependentUpon>BodyForm.cs</DependentUpon>
     </Compile>
     <Compile Include="FileNameComapreInstance.cs" />
+    <Compile Include="InsertExamBacthCustomSelectors.cs" />
     <Compile Include="IPAddressInputTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -331,6 +334,25 @@
     </EmbeddedResource>
     <None Include="Resources\12-插入数据源.png" />
     <None Include="Resources\12-插入数据源 %281%29.png" />
+    <None Include="Resources\1.png" />
+    <None Include="Resources\2.png" />
+    <None Include="Resources\3.png" />
+    <None Include="Resources\4.png" />
+    <None Include="Resources\5.png" />
+    <None Include="Resources\6.png" />
+    <None Include="Resources\7.png" />
+    <None Include="Resources\8.png" />
+    <None Include="Resources\8 %281%29.png" />
+    <None Include="Resources\1 %281%29.png" />
+    <None Include="Resources\1 %282%29.png" />
+    <None Include="Resources\1 %283%29.png" />
+    <None Include="Resources\2 %281%29.png" />
+    <None Include="Resources\3 黄色.png" />
+    <None Include="Resources\9.png" />
+    <None Include="Resources\10.png" />
+    <None Include="Resources\11.png" />
+    <None Include="Resources\12.png" />
+    <None Include="Resources\13.png" />
     <Content Include="Resources\wzdsny.mp3" />
     <None Include="Resources\功能.png" />
     <None Include="Resources\关于.png" />
@@ -403,6 +425,12 @@
     <None Include="Resources\刷新 %281%29.png" />
     <None Include="Resources\重置.png" />
     <None Include="Resources\排序.png" />
+    <None Include="Resources\表单预设6.png" />
+    <None Include="Resources\表单预设6 %281%29.png" />
+    <None Include="Resources\表单预设6 %282%29.png" />
+    <None Include="Resources\粘贴.png" />
+    <None Include="Resources\加.png" />
+    <None Include="Resources\xtbb.jpg" />
     <Content Include="TWAINDSM.dll" />
     <Content Include="v2-30675d7656fcb8e2cc959cedd8b8db19_r.ico" />
     <Content Include="WebView2Loader.dll" />
@@ -428,10 +456,10 @@
       <Version>25.2.0</Version>
     </PackageReference>
     <PackageReference Include="Aspose.HTML">
-      <Version>25.2.0</Version>
+      <Version>25.3.0</Version>
     </PackageReference>
     <PackageReference Include="Aspose.Imaging">
-      <Version>25.2.0</Version>
+      <Version>25.3.0</Version>
     </PackageReference>
     <PackageReference Include="Aspose.PDF">
       <Version>24.9.0</Version>
@@ -449,6 +477,9 @@
       <Version>6.0.0</Version>
       <!--<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>-->
       <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Dapper">
+      <Version>2.1.66</Version>
     </PackageReference>
     <PackageReference Include="Fody">
       <Version>6.9.1</Version>
@@ -581,6 +612,9 @@
     </PackageReference>
     <PackageReference Include="System.Buffers">
       <Version>4.6.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Data.Sqlite">
+      <Version>1.0.119</Version>
     </PackageReference>
     <PackageReference Include="System.Diagnostics.DiagnosticSource">
       <Version>9.0.2</Version>

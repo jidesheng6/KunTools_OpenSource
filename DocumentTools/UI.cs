@@ -65,7 +65,7 @@ namespace DocumentTools
                     List<ListViewItem> itemsToAdd = new List<ListViewItem>(); // 保存待添加的 ListViewItems
                     try
                     {
-                        foreach(string TempDocumentFileName in TempDocuemntFileNames)
+                        foreach (string TempDocumentFileName in TempDocuemntFileNames)
                         {
                             ListViewItem TempDocuemntFileNamesListView = new ListViewItem
                             {
@@ -80,7 +80,7 @@ namespace DocumentTools
                             new Action(
                                 () =>
                                 {
-                                    if(itemsToAdd.Count > 0)
+                                    if (itemsToAdd.Count > 0)
                                     {
                                         ListViewControl.BeginUpdate();
                                         ListViewControl.Items.AddRange(itemsToAdd.ToArray());
@@ -90,7 +90,8 @@ namespace DocumentTools
                                         //ListViewControl.ListViewItemSorter = new ListViewItemComparer_ASC();
                                     }
                                 }));
-                    } catch(Exception)
+                    }
+                    catch (Exception)
                     {
                     }
                     return itemsToAdd.Count;
@@ -113,17 +114,17 @@ namespace DocumentTools
                 {
                     try
                     {
-                        if(FileList.Length > 0)
+                        if (FileList.Length > 0)
                         {
                             FileList = FileList.OrderBy(x => x, new FileNameComparerInstance()).ToArray();
 
                             List<ListViewItem> itemsToAdd = new List<ListViewItem>(); // 保存待添加的 ListViewItems
 
-                            foreach(string file in FileList)
+                            foreach (string file in FileList)
                             {
                                 FileInfo TempFileInfo = new FileInfo(file);
                                 DirectoryInfo TempDirInfo = new DirectoryInfo(file);
-                                if(Directory.Exists(file) &&
+                                if (Directory.Exists(file) &&
                                     (TempDirInfo.Attributes & FileAttributes.ReparsePoint) !=
                                     FileAttributes.ReparsePoint)
                                 {
@@ -134,13 +135,14 @@ namespace DocumentTools
                                     //通过递归实现获取子目录文件
                                     string[] SubPathFiles = Directory.GetDirectories(file);
                                     AddFilesToListViewWithNotDialog(SubPathFiles, ListviewControl, FileFilters);
-                                } else if(File.Exists(file) &&
+                                }
+                                else if (File.Exists(file) &&
                                     (TempFileInfo.Attributes & FileAttributes.ReparsePoint) !=
                                     FileAttributes.ReparsePoint)
                                 {
-                                    foreach(string FileFilter in FileFilters)
+                                    foreach (string FileFilter in FileFilters)
                                     {
-                                        if(string.Compare(Path.GetExtension(file), FileFilter, StringComparison.Ordinal) ==
+                                        if (string.Compare(Path.GetExtension(file), FileFilter, StringComparison.Ordinal) ==
                                             0)
                                         {
                                             ListViewItem FileListListView = new ListViewItem { Text = file };
@@ -156,7 +158,7 @@ namespace DocumentTools
                                 new Action(
                                     () =>
                                     {
-                                        if(itemsToAdd.Count > 0)
+                                        if (itemsToAdd.Count > 0)
                                         {
                                             ListviewControl.BeginUpdate();
                                             ListviewControl.Items.AddRange(itemsToAdd.ToArray());
@@ -167,7 +169,8 @@ namespace DocumentTools
                                         }
                                     }));
                         }
-                    } catch(Exception)
+                    }
+                    catch (Exception)
                     {
                     }
                 });
@@ -245,11 +248,11 @@ namespace DocumentTools
             bool UseSourcePath = false,
             Button CallButton = null)
         {
-            if(ListViewControl.Items.Count > 0)
+            if (ListViewControl.Items.Count > 0)
             {
                 string TempSaveDocxPathString = string.Empty;
                 string SelectSavePathstring = "A";
-                if(!UseSourcePath)
+                if (!UseSourcePath)
                 {
                     IEnumerable<string> ISelectSavePathstring = Util.ShowSelectDialog(
                         false,
@@ -259,17 +262,17 @@ namespace DocumentTools
                     SelectSavePathstring = ISelectSavePathstring.FirstOrDefault();
                 }
 
-                if(string.Compare(SelectSavePathstring, default, StringComparison.Ordinal) != 0 &&
+                if (string.Compare(SelectSavePathstring, default, StringComparison.Ordinal) != 0 &&
                     SelectSavePathstring != string.Empty &&
                     SelectSavePathstring != null)
                 {
                     CallButton.Enabled = false;
-                    for(int TempIndex = 0; TempIndex < ListViewControl.Items.Count; TempIndex++)
+                    for (int TempIndex = 0; TempIndex < ListViewControl.Items.Count; TempIndex++)
                     {
                         string ListViewFirstColumnText = ListViewControl.Items[TempIndex].Text;
                         string FileNameWithOutExtension = Path.GetFileNameWithoutExtension(ListViewFirstColumnText);//不带后缀的文件名
                         string FileNameSourcePath = Path.GetDirectoryName(ListViewFirstColumnText);//所选文件列表中文件的源目录
-                        if(UseSourcePath)
+                        if (UseSourcePath)
                         {
                             SelectSavePathstring = FileNameSourcePath;
                         }
@@ -279,7 +282,7 @@ namespace DocumentTools
                         StatusLabelControl.Text = $"正在处理第{TempIndex + 1}个文件";
 
                         //根据不同类型调用不同的函数
-                        switch(ConverType)
+                        switch (ConverType)
                         {
                             //word转pdf
                             case ConvertFileType.Word2Pdf:
@@ -327,8 +330,8 @@ namespace DocumentTools
                                     BodyForm.MainForm.Excel2Pdf_ForceContentOnOnePage.Checked,
                                     BodyForm.MainForm.Excel2Pdf_HorPrint.Checked,
                                     BodyForm.MainForm.Excel2Pdf_VerPrint.Checked,
-                                    int.Parse(string.IsNullOrEmpty(BodyForm.MainForm.Excel2Pdf_PrintScale_Row.Text) ? "0": BodyForm.MainForm.Excel2Pdf_PrintScale_Row.Text),
-                                    int.Parse(string.IsNullOrEmpty(BodyForm.MainForm.Excel2Pdf_PrintScale_Col.Text) ? "0": BodyForm.MainForm.Excel2Pdf_PrintScale_Col.Text),
+                                    int.Parse(string.IsNullOrEmpty(BodyForm.MainForm.Excel2Pdf_PrintScale_Row.Text) ? "0" : BodyForm.MainForm.Excel2Pdf_PrintScale_Row.Text),
+                                    int.Parse(string.IsNullOrEmpty(BodyForm.MainForm.Excel2Pdf_PrintScale_Col.Text) ? "0" : BodyForm.MainForm.Excel2Pdf_PrintScale_Col.Text),
                                     BodyForm.MainForm.Excel2Pdf_PrintScalePercent_Enable.Checked,
                                     int.Parse(BodyForm.MainForm.Excel2Pdf_PrintScalePercent_Number.Value.ToString())
                                     );
@@ -352,21 +355,21 @@ namespace DocumentTools
                                 break;
                             //批量替换word内容
                             case ConvertFileType.WordReplace:
-                                if(BodyForm.MainForm.WordReplaceFindTextBox.Text != string.Empty)
+                                if (BodyForm.MainForm.WordReplaceFindTextBox.Text != string.Empty)
                                 {
                                     List<(string, string)> TempFindReplaceList = new List<(string, string)>();
 
                                     List<TextBox> FindTextBoxes = BodyForm.MainForm.WordReplaceFindPanel.Controls
                                         .OfType<TextBox>()
-                                        .Where(x=>!string.IsNullOrEmpty(x.Text))
+                                        .Where(x => !string.IsNullOrEmpty(x.Text))
                                         .ToList();
-                                    
-                                    List<TextBox> ReplaceTextBoxes = BodyForm.MainForm. WordReplaceReplacePanel.Controls
-                                        .OfType<TextBox>()
-                                        .Where (x=>!string.IsNullOrEmpty(x.Text))
-                                        .ToList() ;
 
-                                    for(int i=0;i<Math.Min(FindTextBoxes.Count,ReplaceTextBoxes.Count);i++)
+                                    List<TextBox> ReplaceTextBoxes = BodyForm.MainForm.WordReplaceReplacePanel.Controls
+                                        .OfType<TextBox>()
+                                        .Where(x => !string.IsNullOrEmpty(x.Text))
+                                        .ToList();
+
+                                    for (int i = 0; i < Math.Min(FindTextBoxes.Count, ReplaceTextBoxes.Count); i++)
                                     {
                                         TextBox TempFindTextBox = FindTextBoxes[i];
                                         TextBox TempReplaceTextBox = ReplaceTextBoxes[i];
@@ -375,21 +378,21 @@ namespace DocumentTools
                                     }
 
                                     Util.ReplaceDocumentContent(
-                                       DocumentsFileName:ListViewFirstColumnText,
-                                       SavedDoucmentFileName:ConvertedFileName,
-                                       RelaceDocumentType:"WORD",
-                                       FindReplaceTupleList:TempFindReplaceList,
-                                       IgnoreFootText:BodyForm.MainForm.IgnoreFootContent.Checked,
-                                       NoIgnoreCase:BodyForm.MainForm.IgnoreCase.Checked,
-                                       replace_word_fontName:ReplaceWordFontSetting.FontName,
-                                       replace_word_fontSize:ReplaceWordFontSetting.FontSize,
-                                       WordReplace_FindWholeWord:BodyForm.MainForm.WordReplace_MatchWholeWord.Checked,
-                                       WordReplace_IgnoreDelete:BodyForm.MainForm.WordReplace_IgnoreDelete.Checked,
-                                       WordReplace_IgnoreFiledCodes:BodyForm.MainForm.WordReplace_IgnoreFiledCodes.Checked,
-                                       WordReplace_IgnoreFileds:BodyForm.MainForm.WordReplace_IgnoreFileds.Checked,
-                                       WordReplace_IgnoreInserted:BodyForm.MainForm.WordReplace_IgnoreInsert.Checked,
-                                       WordReplace_IgnoreShapes:BodyForm.MainForm.WordReplace_IgnoreShapes.Checked,
-                                       UseRegexSub:BodyForm.MainForm.WordReplace_UseRegextSub.Checked);
+                                       DocumentsFileName: ListViewFirstColumnText,
+                                       SavedDoucmentFileName: ConvertedFileName,
+                                       RelaceDocumentType: "WORD",
+                                       FindReplaceTupleList: TempFindReplaceList,
+                                       IgnoreFootText: BodyForm.MainForm.IgnoreFootContent.Checked,
+                                       NoIgnoreCase: BodyForm.MainForm.IgnoreCase.Checked,
+                                       replace_word_fontName: ReplaceWordFontSetting.FontName,
+                                       replace_word_fontSize: ReplaceWordFontSetting.FontSize,
+                                       WordReplace_FindWholeWord: BodyForm.MainForm.WordReplace_MatchWholeWord.Checked,
+                                       WordReplace_IgnoreDelete: BodyForm.MainForm.WordReplace_IgnoreDelete.Checked,
+                                       WordReplace_IgnoreFiledCodes: BodyForm.MainForm.WordReplace_IgnoreFiledCodes.Checked,
+                                       WordReplace_IgnoreFileds: BodyForm.MainForm.WordReplace_IgnoreFileds.Checked,
+                                       WordReplace_IgnoreInserted: BodyForm.MainForm.WordReplace_IgnoreInsert.Checked,
+                                       WordReplace_IgnoreShapes: BodyForm.MainForm.WordReplace_IgnoreShapes.Checked,
+                                       UseRegexSub: BodyForm.MainForm.WordReplace_UseRegextSub.Checked);
                                 }
                                 break;
                             //批量替换Excel内容
@@ -416,17 +419,17 @@ namespace DocumentTools
                                 }
 
                                 Util.ReplaceDocumentContent(
-                                    DocumentsFileName:ListViewFirstColumnText,
-                                    SavedDoucmentFileName:ConvertedFileName,
-                                    RelaceDocumentType:"EXCEL",
+                                    DocumentsFileName: ListViewFirstColumnText,
+                                    SavedDoucmentFileName: ConvertedFileName,
+                                    RelaceDocumentType: "EXCEL",
                                     FindReplaceTupleList: TempFindReplaceList_Excel,
-                                    IgnoreFootText:false,
-                                    NoIgnoreCase:BodyForm.MainForm.ExcelNoIgnoreCase.Checked,
-                                    RemoveRowMode:BodyForm.MainForm.RemoveRows.Checked,
-                                    ExcelStartRow:Convert.ToInt32(BodyForm.MainForm.ExcelStartRow.Text),
-                                    ExcelEndRow:Convert.ToInt32(BodyForm.MainForm.ExcelEndRow.Text),
-                                    UseRegex:BodyForm.MainForm.UseRegex.Checked,
-                                    ExcelReplace_MatchWholeWord:BodyForm.MainForm.ExcelReplace_MatchWholeWord.Checked);
+                                    IgnoreFootText: false,
+                                    NoIgnoreCase: BodyForm.MainForm.ExcelNoIgnoreCase.Checked,
+                                    RemoveRowMode: BodyForm.MainForm.RemoveRows.Checked,
+                                    ExcelStartRow: Convert.ToInt32(BodyForm.MainForm.ExcelStartRow.Text),
+                                    ExcelEndRow: Convert.ToInt32(BodyForm.MainForm.ExcelEndRow.Text),
+                                    UseRegex: BodyForm.MainForm.UseRegex.Checked,
+                                    ExcelReplace_MatchWholeWord: BodyForm.MainForm.ExcelReplace_MatchWholeWord.Checked);
                                 break;
                             // 批量图片转为ICO
                             case ConvertFileType.Image2Ico:
@@ -438,7 +441,7 @@ namespace DocumentTools
 
                             // Word批量转换为Excel
                             case ConvertFileType.Word2Excel:
-                                Util.ConvertWord2Excel(ListViewFirstColumnText, ConvertedFileName,BodyForm.MainForm.Word2Excel_ExportSingleSheet.Checked);
+                                Util.ConvertWord2Excel(ListViewFirstColumnText, ConvertedFileName, BodyForm.MainForm.Word2Excel_ExportSingleSheet.Checked);
                                 break;
                             // Excel批量转换为Word
                             case ConvertFileType.Excel2Word:
@@ -539,10 +542,11 @@ namespace DocumentTools
                             case ConvertFileType.CompressImage:
                                 bool UseSelfExt = BodyForm.MainForm.CompressImage_NotUseSelfExt.Checked;//是否不使用源文件后缀名
                                 string SavedFileName = string.Empty;
-                                if(UseSelfExt || BodyForm.MainForm.CompressIamge_NoCompress.Checked)
+                                if (UseSelfExt || BodyForm.MainForm.CompressIamge_NoCompress.Checked)
                                 {
                                     SavedFileName = ConvertedFileName;
-                                } else
+                                }
+                                else
                                 {
                                     string ImageFileExtenString = Path.GetExtension(ListViewFirstColumnText);
 
@@ -590,7 +594,7 @@ namespace DocumentTools
                                 break;
                             case ConvertFileType.Word2EPUB:
                                 int TempImageDpiValue = 100;
-                                if(BodyForm.MainForm.CoverImageDpi.Text != string.Empty)
+                                if (BodyForm.MainForm.CoverImageDpi.Text != string.Empty)
                                 {
                                     TempImageDpiValue = int.Parse(BodyForm.MainForm.CoverImageDpi.Text);
                                 }
@@ -641,7 +645,7 @@ namespace DocumentTools
                         ListViewControl.Items[TempIndex].SubItems[2].Text = ConvertedFileName;
                         ListViewControl.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
 
-                        if(File.Exists(ConvertedFileName))
+                        if (File.Exists(ConvertedFileName))
                         {
                             FileInfo ConverdFileInfo = new FileInfo(ConvertedFileName);
 
@@ -664,10 +668,10 @@ namespace DocumentTools
                     CallButton.Enabled = true;
 
                     //处理完毕后需要做的事情
-                    switch(ConverType)
+                    switch (ConverType)
                     {
                         case ConvertFileType.Word2Pdf:
-                            if(BodyForm.MainForm.OpenPdfOptions.Checked)
+                            if (BodyForm.MainForm.OpenPdfOptions.Checked)
                             {
                                 Task<List<string>> TempPdfFileNames = GetListViewLastItemContentAsync(
                                     BodyForm.MainForm.WordFileListView);
@@ -679,9 +683,9 @@ namespace DocumentTools
                                         });
                             }
 
-                            if(BodyForm.MainForm.RemoveTempDocx.Checked)
+                            if (BodyForm.MainForm.RemoveTempDocx.Checked)
                             {
-                                if(TempSaveDocxPathString != string.Empty)
+                                if (TempSaveDocxPathString != string.Empty)
                                 {
                                     Directory.Delete(TempSaveDocxPathString, true);
                                 }
@@ -697,7 +701,7 @@ namespace DocumentTools
                             new Action(
                                 () =>
                                 {
-                                    if(string.Compare(
+                                    if (string.Compare(
                                             BodyForm.MainForm.ShowOpenTargetDialog,
                                             "on",
                                             StringComparison.Ordinal) ==
@@ -708,7 +712,7 @@ namespace DocumentTools
                                             "提示",
                                             MessageBoxButtons.YesNo,
                                             MessageBoxIcon.Question);
-                                        if(MessageBoxResult == DialogResult.Yes)
+                                        if (MessageBoxResult == DialogResult.Yes)
                                         {
                                             Process.Start(SelectSavePathstring);
                                         }
@@ -731,14 +735,15 @@ namespace DocumentTools
                     List<string> FileNames = new List<string>();
                     try
                     {
-                        if(ListViewControl.Items.Count > 0)
+                        if (ListViewControl.Items.Count > 0)
                         {
-                            for(int Index = 0; Index < ListViewControl.Items.Count; Index++)
+                            for (int Index = 0; Index < ListViewControl.Items.Count; Index++)
                             {
                                 FileNames.Add(ListViewControl.Items[Index].Text);
                             }
                         }
-                    } catch
+                    }
+                    catch
                     {
                     }
                     return FileNames;
@@ -758,14 +763,15 @@ namespace DocumentTools
                     List<string> FileNames = new List<string>();
                     try
                     {
-                        if(ListViewControl.Items.Count > 0)
+                        if (ListViewControl.Items.Count > 0)
                         {
-                            for(int Index = 0; Index < ListViewControl.Items.Count; Index++)
+                            for (int Index = 0; Index < ListViewControl.Items.Count; Index++)
                             {
                                 FileNames.Add(ListViewControl.Items[Index].SubItems[2].Text);
                             }
                         }
-                    } catch
+                    }
+                    catch
                     {
                     }
                     return FileNames;
@@ -783,12 +789,12 @@ namespace DocumentTools
         public static void MoveDownListViewItem(ListView ListViewControl)
         {
             //列表中有项目才响应
-            if(ListViewControl.Items.Count > 0)
+            if (ListViewControl.Items.Count > 0)
             {
                 //获取当前选中项目的索引
                 int NowSelectIndex = ListViewControl.SelectedIndices[0];
 
-                if(NowSelectIndex < ListViewControl.Items.Count - 1)
+                if (NowSelectIndex < ListViewControl.Items.Count - 1)
                 {
                     //项目索引不在第一个时才处理
 
@@ -817,12 +823,12 @@ namespace DocumentTools
         public static void MoveUpListViewItem(ListView ListViewControl)
         {
             //列表中有项目才响应
-            if(ListViewControl.Items.Count > 0)
+            if (ListViewControl.Items.Count > 0)
             {
                 //获取当前选中项目的索引
                 int NowSelectIndex = ListViewControl.SelectedIndices[0];
 
-                if(NowSelectIndex > 0)
+                if (NowSelectIndex > 0)
                 {
                     //项目索引不在第一个时才处理
 
@@ -850,19 +856,20 @@ namespace DocumentTools
         /// <param name="ListViewControl"></param>
         public static void RemoveListViewItem(bool ClearAllItems, ListView ListViewControl)
         {
-            if(ListViewControl.Items.Count != 0)
+            if (ListViewControl.Items.Count != 0)
             {
-                if(ClearAllItems)
+                if (ClearAllItems)
                 {
                     ListViewControl.Items.Clear();
-                } else
+                }
+                else
                 {
-                    if(ListViewControl.FocusedItem != null && ListViewControl.FocusedItem.Index >= 0)
+                    if (ListViewControl.FocusedItem != null && ListViewControl.FocusedItem.Index >= 0)
                     {
                         //删除列表一个项目,先移除，移动到没有项目时，focuseditem会变为null，这时候就不处理了
                         //同时移除后会自动选中临近的item，所以用focuseditem就可以了
                         ListViewControl.Items.RemoveAt(ListViewControl.FocusedItem.Index);
-                        if(ListViewControl.FocusedItem != null)
+                        if (ListViewControl.FocusedItem != null)
                         {
                             ListViewControl.Items[ListViewControl.FocusedItem.Index].Selected = true;
                         }

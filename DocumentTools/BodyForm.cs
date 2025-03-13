@@ -64,6 +64,8 @@ namespace DocumentTools
         private List<string> MenuStringOrign = new List<string>();
         private List<string> MenuStringNew = new List<string>();
 
+        private List<string> InsertExam_BatchSelectorCustomLists = new List<string>();
+
         private int TabMenPagePreIndex = -1;
         private int TabMenPageCurrentIndex = -1;
 
@@ -473,7 +475,7 @@ namespace DocumentTools
             InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
             MainForm = this;
-            
+
             money_small.Enabled = !IsClickEmojiClick;
             money_big.Enabled = !IsClickEmojiClick;
             //this.AutoScaleMode = AutoScaleMode.Font;
@@ -2365,6 +2367,7 @@ namespace DocumentTools
             }
         }
 
+        [Obsolete]
         private void ListviewItemDrag(object sender, ItemDragEventArgs e)
         {
             ListView TempListView = sender as ListView;
@@ -5598,7 +5601,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                         .ConfigureAwait(true);
 
                     List<string> SortedselectedExamItems = new List<string>(selectedExamItems);
-                    
+
                     SortedselectedExamItems.Sort(new FileNameComparerInstance());
 
                     ExamItemsCombox.DataSource = SortedselectedExamItems;
@@ -8233,10 +8236,6 @@ IPGATEWAY:'{set_interface_gateway.Text}',
             }
         }
 
-        private void InsertExam_BacthAddItemAsync(object sender, EventArgs e)
-        {
-        }
-
         private void InsertExam_BacthAddItem_Click(object sender, EventArgs e)
         {
             if(!string.IsNullOrEmpty(InsertExam_BacthItemName_CustomFormat.Text))
@@ -8590,9 +8589,9 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                                         ["ScorePer"] = TempSelectorScorePer,
                                         ["CalcAvg"] = TempSelectorCalcAvg
                                     };
-                                        (TempExamNameAndScore["Selectors"] as JObject).Add(
-                                            TempSelectorName,
-                                            TempExamSelectorsInfo);
+                                    (TempExamNameAndScore["Selectors"] as JObject).Add(
+                                        TempSelectorName,
+                                        TempExamSelectorsInfo);
                                 }
                                 JObject InvalidObject = new JObject()
                                 {
@@ -8600,7 +8599,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                                     ["ScorePer"] = InsertExam_SelectorInvalid_ScorePer.Value.ToString(),
                                     ["CalcAvg"] = InsertExam_SelectorInvalid_CacAvg.Checked
                                 };
-                                    (TempExamNameAndScore["Selectors"] as JObject).Add("无效", InvalidObject);
+                                (TempExamNameAndScore["Selectors"] as JObject).Add("无效", InvalidObject);
 
                                 JObject AbsTainObject = new JObject()
                                 {
@@ -8608,7 +8607,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                                     ["ScorePer"] = InsertExam_SelectorAbstain_ScorePer.Value.ToString(),
                                     ["CalcAvg"] = InsertExam_SelectorAbstain_CalcAvg.Checked
                                 };
-                                    (TempExamNameAndScore["Selectors"] as JObject).Add("弃权", AbsTainObject);
+                                (TempExamNameAndScore["Selectors"] as JObject).Add("弃权", AbsTainObject);
 
                                 TempExamInfoJson.Add(TempExamName, TempExamNameAndScore);
                             }
@@ -8639,7 +8638,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                                                         MessageBoxButtons.OK,
                                                         MessageBoxIcon.Asterisk);
 
-                                                            (sender as Button).Enabled = true;
+                                                    (sender as Button).Enabled = true;
                                                     RefreshExamBaseInfoTableView();
                                                     ChangeExamTableNo_Start.Enabled = true;
                                                 }));
@@ -8654,7 +8653,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                                                         "错误",
                                                         MessageBoxButtons.OK,
                                                         MessageBoxIcon.Error);
-                                                (sender as Button).Enabled = true;
+                                                    (sender as Button).Enabled = true;
                                                     ChangeExamTableNo_Start.Enabled = true;
                                                     ExceptionParamter.ExceptionCount = 0;
                                                 }));
@@ -8697,19 +8696,19 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                                             MessageBoxIcon.Asterisk);
                                     }));
                         }
+                    } else
+                    {
+                        BeginInvoke(
+                            new Action(
+                                () =>
+                                {
+                                    MessageBox.Show(
+                                        "考评表名称中存在非法字符，无法插入",
+                                        "提示",
+                                        MessageBoxButtons.OK,
+                                        MessageBoxIcon.Asterisk);
+                                }));
                     }
-                } else
-                {
-                    BeginInvoke(
-                        new Action(
-                            () =>
-                            {
-                                MessageBox.Show(
-                                    "考评表名称中存在非法字符，无法插入",
-                                    "提示",
-                                    MessageBoxButtons.OK,
-                                    MessageBoxIcon.Asterisk);
-                            }));
                 }
 
                 RefreshExamBaseInfoTableView();
@@ -8730,6 +8729,207 @@ IPGATEWAY:'{set_interface_gateway.Text}',
             {
                 InsertExam_SelectFilePath.Text = TempMdbFilePathName;
                 RefreshExamBaseInfoTableView();
+            }
+        }
+
+        private void InsertExam_BatchCustomItemWithName(
+            List<string> ItemNames,
+            bool IsFromCliboard = false,
+            string PasteStuffixString = "",
+            bool AddonMode=false)
+        {
+            //不是新增模式
+            if(!AddonMode)
+            {
+                DynamicAddControlParams.InsertExam_ExamNameControl_Lists
+                                .ForEach(
+                                    TempControl =>
+                                    {
+                                        InsertExam_ExamSet.Controls.Remove(TempControl);
+                                    });
+
+                DynamicAddControlParams.InsertExam_ExamScoreControl_Lists
+                    .ForEach(
+                        TempControl =>
+                        {
+                            InsertExam_ExamSet.Controls.Remove(TempControl);
+                        });
+
+                DynamicAddControlParams.InsertExam_ExamNameControl_Lists.Clear();
+                DynamicAddControlParams.InsertExam_ExamScoreControl_Lists.Clear();
+            }
+            
+            if(IsFromCliboard && !string.IsNullOrEmpty(Clipboard.GetText()))
+            {
+                ItemNames = Clipboard.GetText()
+                    .Split(new [] { '\t', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
+                    .Where(x => !string.IsNullOrEmpty(x))
+                    .ToList();
+            }
+            if(ItemNames != null && ItemNames.Count > 0)
+            {
+                //不是新增模式
+                if (!AddonMode)
+                {
+                    InsertExam_ExamName.Text = string.IsNullOrEmpty(PasteStuffixString)
+                    ? ItemNames[0]
+                    : $"{ItemNames[0]}{PasteStuffixString}";
+                    ItemNames = ItemNames.Skip(1).ToList();
+                }
+                
+                foreach(string ItemName in ItemNames)
+                {
+                    string TempItemName = string.IsNullOrEmpty(PasteStuffixString)
+                        ? ItemName
+                        : $"{ItemName}{PasteStuffixString}";
+
+                    DynamicAddControlParams.InsertExam_Control_Index++;
+
+                    int TempBaseControlY = InsertExam_ExamName.Location.Y;
+
+                    int TempLocationY = TempBaseControlY +
+                        (DynamicAddControlParams.InsertExam_ExamNameControl_Lists.Count * 25);
+
+                    string InsertExamNameControlName = $"{DynamicAddControlParams.InsertExam_ExamName_Prefix}{DynamicAddControlParams.InsertExam_Control_Index}";
+                    string InsertExamScoreControlName = $"{DynamicAddControlParams.InsertExam_ExamScore_Prefix}{DynamicAddControlParams.InsertExam_Control_Index}";
+
+                    Point InsertExamNameControlNewPoint = new Point(
+                        InsertExam_ExamName.Location.X,
+                        InsertExam_ExamName.Location.Y + TempLocationY);
+
+                    Point InsertExamScoreControlNewPoint = new Point(
+                        InsertExam_ExamScore.Location.X,
+                        InsertExam_ExamScore.Location.Y + TempLocationY);
+
+                    TextBox TempAddItemNameBox = DynamicControlAdd<TextBox>(
+                        InsertExam_ExamSet,
+                        InsertExamNameControlName,
+                        InsertExamNameControlNewPoint,
+                        InsertExam_ExamName.Size);
+                    NumericUpDown TempAddItemScoreBox = DynamicControlAdd<NumericUpDown>(
+                        InsertExam_ExamSet,
+                        InsertExamScoreControlName,
+                        InsertExamScoreControlNewPoint,
+                        InsertExam_ExamScore.Size);
+
+                    TempAddItemNameBox.Text = TempItemName;
+                    TempAddItemScoreBox.DecimalPlaces = 1;
+                    TempAddItemScoreBox.Maximum = 10000;
+                    TempAddItemScoreBox.Minimum = -1;
+                    TempAddItemScoreBox.Increment = 1;
+                    TempAddItemScoreBox.Value = InsertExam_BacthScoreSet.Value;
+
+                    DynamicAddControlParams.InsertExam_ExamNameControl_Lists.Add(TempAddItemNameBox);
+                    DynamicAddControlParams.InsertExam_ExamScoreControl_Lists.Add(TempAddItemScoreBox);
+                }
+            }
+        }
+
+        private void InsertExam_BatchCustomSelectorsWithName(
+            List<string> SelectorNames,
+            bool IsFromCliboard = false,
+            string PasteStuffixString = "")
+        {
+            DynamicAddControlParams.InsertExam_ExamSelectorControl_Lists
+                .ForEach(
+                    TempControl =>
+                    {
+                        InsertExam_ExamSelectorSet.Controls.Remove(TempControl);
+                    });
+
+            DynamicAddControlParams.InsertExam_ExamSelectorPerControl_Lists
+                .ForEach(
+                    TempControl =>
+                    {
+                        InsertExam_ExamSelectorSet.Controls.Remove(TempControl);
+                    });
+
+            DynamicAddControlParams.InsertExam_ExamSelectorAvgControl_Lists
+                .ForEach(
+                    TempControl =>
+                    {
+                        InsertExam_ExamSelectorSet.Controls.Remove(TempControl);
+                    });
+
+            DynamicAddControlParams.InsertExam_ExamSelectorControl_Lists.Clear();
+            DynamicAddControlParams.InsertExam_ExamSelectorPerControl_Lists.Clear();
+            DynamicAddControlParams.InsertExam_ExamSelectorAvgControl_Lists.Clear();
+
+
+            if(IsFromCliboard && !string.IsNullOrEmpty(Clipboard.GetText()))
+            {
+                SelectorNames = Clipboard.GetText()
+                    .Split(new [] { '\t', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
+                    .Where(x => !string.IsNullOrEmpty(x))
+                    .ToList();
+            }
+            if(SelectorNames != null && SelectorNames.Count > 0)
+            {
+                InsertExam_ExamSelector.Text = string.IsNullOrEmpty(PasteStuffixString)
+                    ? SelectorNames[0]
+                    : $"{SelectorNames[0]}{PasteStuffixString}";
+
+                foreach(string SelectorName in SelectorNames.Skip(1))
+                {
+                    string TempSelectorName = string.IsNullOrEmpty(PasteStuffixString)
+                        ? SelectorName
+                        : $"{SelectorName}{PasteStuffixString}";
+
+                    DynamicAddControlParams.InsertExamSelector_Control_Index++;
+
+                    int TempBaseControlY = InsertExam_ExamSelector.Location.Y;
+
+                    int TempLocationY = TempBaseControlY +
+                        (DynamicAddControlParams.InsertExam_ExamSelectorControl_Lists.Count * 25);
+
+                    string InsertExamSelectorNameControlName = $"{DynamicAddControlParams.InsertExam_ExamSelector_Prefix}{DynamicAddControlParams.InsertExamSelector_Control_Index}";
+                    string InsertExamSelectorPerControlName = $"{DynamicAddControlParams.InsertExam_ExamSelectorPer_Prefix}{DynamicAddControlParams.InsertExamSelector_Control_Index}";
+                    string InsertExamSelectorAvgControlName = $"{DynamicAddControlParams.InsertExam_ExamSelectorAvg_Prefix}{DynamicAddControlParams.InsertExamSelector_Control_Index}";
+
+                    Point InsertExamSelectorNameControlNewPoint = new Point(
+                        InsertExam_ExamSelector.Location.X,
+                        InsertExam_ExamSelector.Location.Y + TempLocationY);
+
+                    Point InsertExamSelectorPerControlNewPoint = new Point(
+                        InsertExam_ExamSelectorPerCent.Location.X,
+                        InsertExam_ExamSelectorPerCent.Location.Y + TempLocationY);
+
+                    Point InsertExamSelectorAvgControlNewPoint = new Point(
+                        InsertExam_ExamSelector_AVG.Location.X,
+                        InsertExam_ExamSelector_AVG.Location.Y + TempLocationY);
+
+                    TextBox TempExamSelectorNameControl = DynamicControlAdd<TextBox>(
+                        InsertExam_ExamSelectorSet,
+                        InsertExamSelectorNameControlName,
+                        InsertExamSelectorNameControlNewPoint,
+                        InsertExam_ExamSelector.Size);
+
+                    NumericUpDown TempExamSelectorPerControl = DynamicControlAdd<NumericUpDown>(
+                        InsertExam_ExamSelectorSet,
+                        InsertExamSelectorPerControlName,
+                        InsertExamSelectorPerControlNewPoint,
+                        InsertExam_ExamSelectorPerCent.Size);
+
+                    CheckBox TempExamSelectorAvgControl = DynamicControlAdd<CheckBox>(
+                        InsertExam_ExamSelectorSet,
+                        InsertExamSelectorAvgControlName,
+                        InsertExamSelectorAvgControlNewPoint,
+                        InsertExam_ExamSelector_AVG.Size);
+
+                    TempExamSelectorNameControl.Text = TempSelectorName;
+                    TempExamSelectorPerControl.Value = InsertExam_BacthScoreSet.Value;
+
+                    TempExamSelectorPerControl.DecimalPlaces = 1;
+                    TempExamSelectorPerControl.Maximum = 10000;
+                    TempExamSelectorPerControl.Minimum = -1;
+                    TempExamSelectorPerControl.Increment = 1;
+                    TempExamSelectorAvgControl.Checked = true;
+
+
+                    DynamicAddControlParams.InsertExam_ExamSelectorControl_Lists.Add(TempExamSelectorNameControl);
+                    DynamicAddControlParams.InsertExam_ExamSelectorPerControl_Lists.Add(TempExamSelectorPerControl);
+                    DynamicAddControlParams.InsertExam_ExamSelectorAvgControl_Lists.Add(TempExamSelectorAvgControl);
+                }
             }
         }
 
@@ -8830,6 +9030,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                             InsertExam_ExamSelector_AVG.Size);
 
                         TempExamSelectorNameControl.Text = TempSelectorName;
+
                         TempExamSelectorPerControl.Value = InsertExam_BacthScoreSet.Value;
                         TempExamSelectorPerControl.DecimalPlaces = 1;
                         TempExamSelectorPerControl.Maximum = 10000;
@@ -8864,6 +9065,10 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
             DynamicAddControlParams.InsertExam_ExamNameControl_Lists.Clear();
             DynamicAddControlParams.InsertExam_ExamScoreControl_Lists.Clear();
+
+            InsertExam_ExamName.Text = string.Empty;
+
+            InsertExam_ExamScore.Value = 0;
         }
 
         private void InsertExam_BatchRemoveSelector_Click(object sender, EventArgs e)
@@ -8892,6 +9097,9 @@ IPGATEWAY:'{set_interface_gateway.Text}',
             DynamicAddControlParams.InsertExam_ExamSelectorControl_Lists.Clear();
             DynamicAddControlParams.InsertExam_ExamSelectorPerControl_Lists.Clear();
             DynamicAddControlParams.InsertExam_ExamSelectorAvgControl_Lists.Clear();
+
+            InsertExam_ExamSelector.Text = string.Empty;
+            InsertExam_ExamSelectorPerCent.Value = 0;
         }
 
         private void InsertExam_RefreshExamInfo_Click(object sender, EventArgs e) { RefreshExamBaseInfoTableView(); }
@@ -8965,9 +9173,9 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                         {
                             try
                             {
-                                    (sender as Button).Enabled = false;
+                                (sender as Button).Enabled = false;
                                 InsertExamItemAndSelctor_StartInsert.Enabled = false;
-                                    (sender as Button).Text = "修改中...";
+                                (sender as Button).Text = "修改中...";
                                 var (TableChangeStatus, TableChangeRecommendExamId) = Util.ChangeTableIndex(
                                     InsertExam_SelectFilePath.Text,
                                     ChangeExamTableNo_OrginTableIndex.Text,
@@ -8993,8 +9201,8 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                                                 "提示",
                                                 MessageBoxButtons.OK,
                                                 TempTipMessageIcon);
-                                                    (sender as Button).Enabled = true;
-                                                    (sender as Button).Text = "执行修改";
+                                            (sender as Button).Enabled = true;
+                                            (sender as Button).Text = "执行修改";
                                             RefreshExamBaseInfoTableView();
                                             InsertExamItemAndSelctor_StartInsert.Enabled = true;
                                         }));
@@ -9009,8 +9217,8 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                                                 "错误",
                                                 MessageBoxButtons.OK,
                                                 MessageBoxIcon.Error);
-                                        (sender as Button).Enabled = true;
-                                        (sender as Button).Text = "执行修改";
+                                            (sender as Button).Enabled = true;
+                                            (sender as Button).Text = "执行修改";
                                             InsertExamItemAndSelctor_StartInsert.Enabled = true;
                                         }));
                             }
@@ -9046,7 +9254,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
         private void ExamReportList_Sort_Click(object sender, EventArgs e)
         {
-            if(ExamReportRowMode_ExamList.Items.Count>0 && TempExamReportItemLists.Count > 0)
+            if(ExamReportRowMode_ExamList.Items.Count > 0 && TempExamReportItemLists.Count > 0)
             {
                 TempExamReportItemLists.Sort(new FileNameComparerInstance());
                 ExamReportRowMode_ExamList.DataSource = new List<string>(TempExamReportItemLists);
@@ -9055,10 +9263,284 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
         private void ExamReportList_NoSort_Click(object sender, EventArgs e)
         {
-            if (ExamReportRowMode_ExamList.Items.Count > 0 && TempExamReportItemLists.Count > 0)
+            if(ExamReportRowMode_ExamList.Items.Count > 0 && TempExamReportItemLists.Count > 0)
             {
                 ExamReportRowMode_ExamList.DataSource = new List<string>(TempExamReportItemLists_NoSort);
             }
+        }
+
+        private void InsertExam_BatchSelectors_C1_Click(object sender, EventArgs e)
+        {
+            InsertExam_BatchSelectorCustomLists = new List<string> { "好", "较好", "一般", "差" };
+
+            InsertExam_BatchCustomSelectorsWithName(InsertExam_BatchSelectorCustomLists);
+        }
+
+        private void InsertExam_CustomBatchSelectors_DropDownOpened(object sender, EventArgs e)
+        { InsertExam_BatchSelectorCustomLists.Clear(); }
+
+        private void InsertExam_BatchSelectors_C6_Click(object sender, EventArgs e)
+        {
+            InsertExam_BatchSelectorCustomLists = new List<string> { "好", "较好", "一般", "较差" };
+
+            InsertExam_BatchCustomSelectorsWithName(InsertExam_BatchSelectorCustomLists);
+        }
+
+        private void InsertExam_BatchSelectors_C2_Click(object sender, EventArgs e)
+        {
+            InsertExam_BatchSelectorCustomLists = new List<string> { "优秀", "良好", "一般", "较差" };
+
+            InsertExam_BatchCustomSelectorsWithName(InsertExam_BatchSelectorCustomLists);
+        }
+
+        private void InsertExam_BatchSelectors_C8_Click(object sender, EventArgs e)
+        {
+            InsertExam_BatchSelectorCustomLists = new List<string> { "优秀", "良好", "一般", "差" };
+
+            InsertExam_BatchCustomSelectorsWithName(InsertExam_BatchSelectorCustomLists);
+        }
+
+        private void InsertExam_BatchSelectors_C3_Click(object sender, EventArgs e)
+        {
+            InsertExam_BatchSelectorCustomLists = new List<string> { "优秀", "称职", "基本称职", "不称职" };
+
+            InsertExam_BatchCustomSelectorsWithName(InsertExam_BatchSelectorCustomLists);
+        }
+
+        private void InsertExam_BatchSelectors_C4_Click(object sender, EventArgs e)
+        {
+            InsertExam_BatchSelectorCustomLists = new List<string> { "优秀", "合格", "基本合格", "不合格" };
+
+            InsertExam_BatchCustomSelectorsWithName(InsertExam_BatchSelectorCustomLists);
+        }
+
+        private void InsertExam_BatchSelectors_C5_Click(object sender, EventArgs e)
+        {
+            InsertExam_BatchSelectorCustomLists = new List<string> { "认同", "基本认同", "不认同", "不了解" };
+
+            InsertExam_BatchCustomSelectorsWithName(InsertExam_BatchSelectorCustomLists);
+        }
+
+        private void InsertExam_BatchSelectors_C7_Click(object sender, EventArgs e)
+        {
+            InsertExam_BatchSelectorCustomLists = new List<string> { "好", "一般", "不好", "不了解" };
+
+            InsertExam_BatchCustomSelectorsWithName(InsertExam_BatchSelectorCustomLists);
+        }
+
+        private void InsertExam_BatchSelectors_C9_Click(object sender, EventArgs e)
+        {
+            InsertExam_BatchSelectorCustomLists = new List<string> { "满意", "较满意", "基本满意", "不满意" };
+
+            InsertExam_BatchCustomSelectorsWithName(InsertExam_BatchSelectorCustomLists);
+        }
+
+        private void InsertExam_BatchSelectors_C10_Click(object sender, EventArgs e)
+        {
+            InsertExam_BatchSelectorCustomLists = new List<string> { "A", "B", "C", "D" };
+
+            InsertExam_BatchCustomSelectorsWithName(InsertExam_BatchSelectorCustomLists);
+        }
+
+        private void InsertExam_BatchSelectors_C11_Click(object sender, EventArgs e)
+        {
+            InsertExam_BatchSelectorCustomLists = new List<string> { "a", "b", "c", "d" };
+
+            InsertExam_BatchCustomSelectorsWithName(InsertExam_BatchSelectorCustomLists);
+        }
+
+        private void InsertExam_ExamSelector_PasteSelectorName_Click(object sender, EventArgs e)
+        {
+        }
+
+
+        private void InsertExam_RemoveAllControl_Click(object sender, EventArgs e)
+        {
+            DynamicAddControlParams.InsertExam_ExamNameControl_Lists
+                .ForEach(
+                    TempControl =>
+                    {
+                        InsertExam_ExamSet.Controls.Remove(TempControl);
+                    });
+
+            DynamicAddControlParams.InsertExam_ExamScoreControl_Lists
+                .ForEach(
+                    TempControl =>
+                    {
+                        InsertExam_ExamSet.Controls.Remove(TempControl);
+                    });
+
+            DynamicAddControlParams.InsertExam_ExamNameControl_Lists.Clear();
+            DynamicAddControlParams.InsertExam_ExamScoreControl_Lists.Clear();
+
+            InsertExam_ExamName.Text = string.Empty;
+
+            InsertExam_ExamScore.Value = 0;
+        }
+
+        private void InsertExam_ExamSelector_RemoveAllControl_Click(object sender, EventArgs e)
+        {
+            DynamicAddControlParams.InsertExam_ExamSelectorControl_Lists
+                .ForEach(
+                    TempControl =>
+                    {
+                        InsertExam_ExamSelectorSet.Controls.Remove(TempControl);
+                    });
+
+            DynamicAddControlParams.InsertExam_ExamSelectorPerControl_Lists
+                .ForEach(
+                    TempControl =>
+                    {
+                        InsertExam_ExamSelectorSet.Controls.Remove(TempControl);
+                    });
+
+            DynamicAddControlParams.InsertExam_ExamSelectorAvgControl_Lists
+                .ForEach(
+                    TempControl =>
+                    {
+                        InsertExam_ExamSelectorSet.Controls.Remove(TempControl);
+                    });
+
+            DynamicAddControlParams.InsertExam_ExamSelectorControl_Lists.Clear();
+            DynamicAddControlParams.InsertExam_ExamSelectorPerControl_Lists.Clear();
+            DynamicAddControlParams.InsertExam_ExamSelectorAvgControl_Lists.Clear();
+
+            InsertExam_ExamSelector.Text = string.Empty;
+            InsertExam_ExamSelectorPerCent.Value = 0;
+        }
+
+        private void Insert_ExamItem_PasteButton_Click(object sender, EventArgs e)
+        { InsertExam_BatchCustomItemWithName(null, true, Insert_ExamItem_PasteOption_StuffixTextBox.Text); }
+
+        private void InsertExam_ExamItemName_PasteItemName_MouseClick(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Left)
+            {
+                this.Insert_ExamItem_PasteStuffix
+                    .Show(
+                        InsertExam_ExamItemName_PasteItemName,
+                        new Point(0, InsertExam_ExamItemName_PasteItemName.Height));
+            }
+        }
+
+        private void InsertExam_ExamSelector_PasteSelectorName_MouseClick(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Left)
+            {
+                this.Insert_ExamSelector_PasteStuffix
+                    .Show(
+                        InsertExam_ExamSelector_PasteSelectorName,
+                        new Point(0, InsertExam_ExamSelector_PasteSelectorName.Height));
+            }
+        }
+
+        private void Insert_ExamSelector_PasteButton_Click(object sender, EventArgs e)
+        { InsertExam_BatchCustomSelectorsWithName(null, true, Insert_ExamSelector_PasteStuffixTextBox.Text); }
+
+        private void InsertExam_BactchSelectorsButton_Click(object sender, EventArgs e)
+        {
+            new InsertExamBacthCustomSelectors();
+        }
+
+        private void ExamBacthSelectors_Custom1_Click(object sender, EventArgs e)
+        {
+            InsertExam_BatchCustomSelectorsWithName(InsertExamBacthCustomSelectors.CustomSelectors_1);
+        }
+
+        private void ExamBacthSelectors_Custom2_Click(object sender, EventArgs e)
+        {
+            InsertExam_BatchCustomSelectorsWithName(InsertExamBacthCustomSelectors.CustomSelectors_2);
+
+        }
+
+        private void ExamBacthSelectors_Custom3_Click(object sender, EventArgs e)
+        {
+            InsertExam_BatchCustomSelectorsWithName(InsertExamBacthCustomSelectors.CustomSelectors_3);
+
+        }
+
+        private void ExamBacthSelectors_Custom4_Click(object sender, EventArgs e)
+        {
+            InsertExam_BatchCustomSelectorsWithName(InsertExamBacthCustomSelectors.CustomSelectors_4);
+
+        }
+
+        private void ExamBacthSelectors_Custom5_Click(object sender, EventArgs e)
+        {
+            InsertExam_BatchCustomSelectorsWithName(InsertExamBacthCustomSelectors.CustomSelectors_5);
+
+        }
+
+        private void ExamBacthSelectors_Custom6_Click(object sender, EventArgs e)
+        {
+            InsertExam_BatchCustomSelectorsWithName(InsertExamBacthCustomSelectors.CustomSelectors_6);
+
+        }
+
+        private void ExamBacthSelectors_Custom7_Click(object sender, EventArgs e)
+        {
+            InsertExam_BatchCustomSelectorsWithName(InsertExamBacthCustomSelectors.CustomSelectors_7);
+
+        }
+
+        private void ExamBacthSelectors_Custom8_Click(object sender, EventArgs e)
+        {
+            InsertExam_BatchCustomSelectorsWithName(InsertExamBacthCustomSelectors.CustomSelectors_8);
+
+        }
+
+        private void ExamBacthSelectors_Custom9_Click(object sender, EventArgs e)
+        {
+            InsertExam_BatchCustomSelectorsWithName(InsertExamBacthCustomSelectors.CustomSelectors_9);
+
+        }
+
+        private void ExamBacthSelectors_Custom10_Click(object sender, EventArgs e)
+        {
+            InsertExam_BatchCustomSelectorsWithName(InsertExamBacthCustomSelectors.CustomSelectors_10);
+
+        }
+
+        private void ExamBacthSelectors_Custom11_Click(object sender, EventArgs e)
+        {
+            InsertExam_BatchCustomSelectorsWithName(InsertExamBacthCustomSelectors.CustomSelectors_11);
+        }
+
+        private void InsertExam_BactchSelectorsButton_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                this.InsertExamCustomSelectorsBacthMenu
+                    .Show(
+                        InsertExam_BactchSelectorsButton,
+                        new Point(0, InsertExam_BactchSelectorsButton.Height));
+            }
+        }
+
+        private void pictureBox5_MouseHover(object sender, EventArgs e)
+        {
+        }
+
+        private void pictureBox5_MouseLeave(object sender, EventArgs e)
+        {
+            pictureBox5.Image = (Image)Util.GetEmbedResourceObj("大头儿子");
+        }
+
+        private void pictureBox5_Click(object sender, EventArgs e)
+        {
+            var DefaultAudioStatus = Util.GetSystemDefaultAudioStatus();
+
+            if (DefaultAudioStatus.AudioMute)
+            {
+                Util.SetSystemAudioVolume(false, float.Parse("0.3"));
+            }
+
+            Util.PlayMp3WithStream(
+                "dtez",
+                status =>
+                {
+                });
+            pictureBox5.Image = (Image)Util.GetEmbedResourceObj("xtbb");
         }
     }
 }

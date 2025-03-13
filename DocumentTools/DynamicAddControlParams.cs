@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DocumentTools
@@ -112,7 +110,7 @@ namespace DocumentTools
         /// 选项计入得票率的控件Name集合
         /// </summary>
         public static List<Control> InsertExam_ExamSelectorAvgControl_Lists = new List<Control>();
-        
+
         public static int TempBaseInsertItemSelectorLocationY = 0;
 
         #endregion

@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DocumentTools
 {
     internal static class WatcherMakeTestFileHelper
     {
-        public static string RandomTempFileName {  get; set; }
+        public static string RandomTempFileName { get; set; }
         private static FileStream TempFileStream;
 
         public static void MakeJpgFile()

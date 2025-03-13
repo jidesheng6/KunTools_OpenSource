@@ -27,19 +27,22 @@ namespace DocumentTools
         {
             Bitmap TempBitMap = new Bitmap((Bitmap)Util.GetEmbedResourceObj("F6D781F44F41AAEE77BEA2A8E2F55510"));
 
-            Util.PlayMp3WithStream("amagi", status => { });
-
-            if (WechatDonatePicture.Image.Width != TempBitMap.Width)
+            Util.PlayMp3WithStream("amagi", status => 
             {
-                WechatDonatePicture.Image = TempBitMap;
-                WechatDonatePicture.SizeMode = PictureBoxSizeMode.AutoSize;
-                groupBox1.AutoSize = true;
-                this.AutoSize = true;
-                this.AutoScroll = true;
-                this.MaximizeBox = true;
-                this.CenterToParent();
-                ShowWechatQR.Hide();
-            }
+                if (WechatDonatePicture.Image.Width != TempBitMap.Width)
+                {
+                    WechatDonatePicture.Image = TempBitMap;
+                    WechatDonatePicture.SizeMode = PictureBoxSizeMode.AutoSize;
+                    groupBox1.AutoSize = true;
+                    this.AutoSize = true;
+                    this.AutoScroll = true;
+                    this.MaximizeBox = true;
+                    this.CenterToParent();
+                    ShowWechatQR.Hide();
+                }
+            });
+
+
         }
 
         private void RandomButtonPoint(object sender, EventArgs e)
@@ -67,6 +70,24 @@ namespace DocumentTools
                 };
             }
 
+        }
+
+        private void DonateMeFrm_KeyDown(object sender, KeyEventArgs e)
+        {
+            //if(e.KeyCode == Keys.Escape)
+            //{
+            //    Close();
+            //    Dispose();
+            //}
+        }
+
+        private void DonateMeFrm_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                Close();
+                Dispose();
+            }
         }
     }
 }
