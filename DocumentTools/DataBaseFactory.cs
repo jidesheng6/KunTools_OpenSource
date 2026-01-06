@@ -19,9 +19,15 @@ namespace DocumentTools
 
             DbCommand CreateCommand(string QueryString, DbConnection Connection);
 
-            DbDataAdapter CreateDataAdapter(DbCommand Command);
+            (DbDataAdapter, DbConnection) CreateDataAdapter(string DataBaseFile, string QueryString);
 
-            DbDataReader CreateDataReader(DbCommand Command);
+            (DbDataReader, DbConnection) CreateDataReader(string DataBaseFile, string QueryString);
+
+            (int, DbConnection) ExecuteDataBaseSql(string DataBaseFile, string ExecuteSqlString);
+
+            (object, DbConnection) GetDataBaseDataByOne(string DataBaseFile, string QuerySqlString);
+
+            void CreateCommandParameter(DbCommand TempCommand, string ParameterName,object ParameterValue);
         }
     }
 
@@ -39,14 +45,64 @@ namespace DocumentTools
             return new OleDbCommand(QueryString, (OleDbConnection)Connection);
         }
 
-        public DbDataAdapter CreateDataAdapter(DbCommand Command)
+        public (DbDataAdapter, DbConnection) CreateDataAdapter(string DataBaseFile,string QueryString)
         {
-            return new OleDbDataAdapter((OleDbCommand)Command);
+          DbConnection TempConnection = CreateConnection(DataBaseFile);
+
+          TempConnection.Open();
+
+          DbCommand TempCommand = CreateCommand(QueryString, TempConnection);
+
+          DbDataAdapter TempDataAdapter = new OleDbDataAdapter((OleDbCommand)TempCommand);
+          
+          return (TempDataAdapter, TempConnection);
         }
 
-        public DbDataReader CreateDataReader(DbCommand Command)
+        public (DbDataReader, DbConnection) CreateDataReader(string DataBaseFile, string QueryString)
         {
-            return ((OleDbCommand)Command).ExecuteReader();
+            DbConnection TempConnection = CreateConnection(DataBaseFile);
+
+            TempConnection.Open();
+
+            DbCommand TempCommand = CreateCommand(QueryString, TempConnection);
+
+            DbDataReader TempDataReader = TempCommand.ExecuteReader();
+
+            return (TempDataReader, TempConnection);
+        }
+
+        public (int, DbConnection) ExecuteDataBaseSql(string DataBaseFile, string ExecuteSqlString)
+        {
+            DbConnection TempConnection = CreateConnection(DataBaseFile);
+
+            TempConnection.Open();
+
+            DbCommand TempCommand = CreateCommand(ExecuteSqlString, TempConnection);
+
+            int AffRows = TempCommand.ExecuteNonQuery();
+
+            return (AffRows, TempConnection);
+        }
+
+        public (object, DbConnection) GetDataBaseDataByOne(string DataBaseFile, string QuerySqlString)
+        {
+            DbConnection TempConnection = CreateConnection(DataBaseFile);
+
+            TempConnection.Open();
+
+            DbCommand TempCommand = CreateCommand(QuerySqlString, TempConnection);
+
+            object TempResult = TempCommand.ExecuteScalar();
+
+            return (TempResult, TempConnection);
+        }
+
+        public void CreateCommandParameter(DbCommand TempCommand, string ParameterName, object ParameterValue)
+        {
+            if(TempCommand is OleDbCommand TempOledCommand)
+            {
+                TempOledCommand.Parameters.AddWithValue(ParameterName, ParameterValue);
+            }
         }
     }
 
@@ -64,14 +120,63 @@ namespace DocumentTools
             return new SQLiteCommand(QueryString, (SQLiteConnection)Connection);
         }
 
-        public DbDataAdapter CreateDataAdapter(DbCommand Command)
+        public (DbDataAdapter, DbConnection) CreateDataAdapter(string DataBaseFile, string QueryString)
         {
-            return new SQLiteDataAdapter((SQLiteCommand)Command);
+            DbConnection TempConnection = CreateConnection(DataBaseFile);
+
+            TempConnection.Open();
+
+            DbCommand TempCommand = CreateCommand(QueryString, TempConnection);
+
+            DbDataAdapter TempDataAdapter = new SQLiteDataAdapter((SQLiteCommand)TempCommand);
+
+            return (TempDataAdapter, TempConnection);
         }
 
-        public DbDataReader CreateDataReader(DbCommand Command)
+        public (DbDataReader, DbConnection) CreateDataReader(string DataBaseFile, string QueryString)
         {
-            return ((SQLiteCommand)Command).ExecuteReader();
+            DbConnection TempConnection = CreateConnection(DataBaseFile);
+
+            TempConnection.Open();
+
+            DbCommand TempCommand = CreateCommand(QueryString, TempConnection);
+
+            DbDataReader TempDataReader = TempCommand.ExecuteReader();
+
+            return (TempDataReader, TempConnection);
+        }
+
+        public (int, DbConnection) ExecuteDataBaseSql(string DataBaseFile, string ExecuteSqlString)
+        {
+            DbConnection TempConnection = CreateConnection(DataBaseFile);
+
+            TempConnection.Open();
+
+            DbCommand TempCommand = CreateCommand(ExecuteSqlString, TempConnection);
+
+            int AffRows = TempCommand.ExecuteNonQuery();
+
+            return (AffRows, TempConnection);
+        }
+        public (object, DbConnection) GetDataBaseDataByOne(string DataBaseFile, string QuerySqlString)
+        {
+            DbConnection TempConnection = CreateConnection(DataBaseFile);
+
+            TempConnection.Open();
+
+            DbCommand TempCommand = CreateCommand(QuerySqlString, TempConnection);
+
+            object TempResult = TempCommand.ExecuteScalar();
+
+            return (TempResult, TempConnection);
+        }
+
+        public void CreateCommandParameter(DbCommand TempCommand, string ParameterName, object ParameterValue)
+        {
+            if (TempCommand is SQLiteCommand TempSqliteCommand)
+            {
+                TempSqliteCommand.Parameters.AddWithValue(ParameterName, ParameterValue);
+            }
         }
     }
 }

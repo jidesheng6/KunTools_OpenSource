@@ -9,10 +9,12 @@
   OpenCvSharpExtern
   </ExcludeAssemblies>
   <Unmanaged32Assemblies>
+    SQLite.Interop
     WebView2Loader
     TWAINDSM
   </Unmanaged32Assemblies>
   <Unmanaged64Assemblies>
+    SQLite.Interop
     WebView2Loader
     TWAINDSM
   </Unmanaged64Assemblies>

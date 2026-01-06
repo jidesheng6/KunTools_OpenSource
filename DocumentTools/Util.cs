@@ -28,6 +28,7 @@ using Sdcb.PaddleOCR.Models.Local;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
 using System.Data.OleDb;
 using System.Diagnostics;
 using System.Drawing;
@@ -140,49 +141,28 @@ namespace DocumentTools
             TempRootRegistryKey.Dispose();
         }
 
-        private static (OleDbDataAdapter, OleDbConnection) GetAccessDataAdapter(
+        private static (DbDataAdapter, DbConnection) GetAccessDataAdapter(
             string DataBaseFile,
-            string QuerySqlString)
+            string QuerySqlString,
+            IDatabaseMethodFactory Factory)
         {
-            OleDbConnection TempConnection = OpenAccessConnection(DataBaseFile);
-
-            TempConnection.Open();
-
-            OleDbCommand TempCommand = new OleDbCommand(QuerySqlString, TempConnection);
-
-            OleDbDataAdapter TempDataAdapter = new OleDbDataAdapter(TempCommand);
-
-            return (TempDataAdapter, TempConnection);
+          return Factory.CreateDataAdapter(DataBaseFile, QuerySqlString);
         }
 
-        private static (OleDbDataReader, OleDbConnection) GetAccessDataReader(
+        private static (DbDataReader, DbConnection) GetAccessDataReader(
             string DataBaseFile,
-            string QuerySqlString)
+            string QuerySqlString,
+            IDatabaseMethodFactory Factory)
         {
-            OleDbConnection TempConnection = OpenAccessConnection(DataBaseFile);
-
-            TempConnection.Open();
-
-            OleDbCommand TempCommand = new OleDbCommand(QuerySqlString, TempConnection);
-
-            OleDbDataReader TempDataReader = TempCommand.ExecuteReader();
-
-            return (TempDataReader, TempConnection);
+            return Factory.CreateDataReader(DataBaseFile, QuerySqlString);
         }
 
-        public static (object, OleDbConnection) GetAccessDataByOne(
+        public static (object, DbConnection) GetAccessDataByOne(
             string DataBaseFile,
-            string QuerySqlString)
+            string QuerySqlString,
+            IDatabaseMethodFactory Factory)
         {
-            OleDbConnection TempConnection = OpenAccessConnection(DataBaseFile);
-
-            TempConnection.Open();
-
-            OleDbCommand TempCommand = new OleDbCommand(QuerySqlString, TempConnection);
-
-            object TempDataResult = TempCommand.ExecuteScalar();
-
-            return (TempDataResult, TempConnection);
+            return Factory.GetDataBaseDataByOne(DataBaseFile, QuerySqlString);
         }
 
         private static Aspose.Pdf.Facades.Bookmark GetPdfNextBookMark(
@@ -636,7 +616,9 @@ namespace DocumentTools
             int WaterDmi_Ver = 25,
             bool CustomPostion = false,
             double CustomPostion_X = 0,
-            double CustomPostion_Y = 0)
+            double CustomPostion_Y = 0,
+            bool UseFileNameAsMark=false,
+            bool IsWaterMarkAsBackground=false)
         {
             using Aspose.Pdf.Document TempLoadDocument = new Aspose.Pdf.Document(DocuementFileName);
             #region foreach添加水印
@@ -666,7 +648,7 @@ namespace DocumentTools
                                         WaterMarkVerAlignIndex);
                                     TempAddArtifact.Rotation = Convert.ToInt32(WaterMarkRotateDegNum);
                                     TempAddArtifact.Opacity = WaterMarkOpactiyNum;
-                                    TempAddArtifact.IsBackground = false;
+                                    TempAddArtifact.IsBackground = IsWaterMarkAsBackground;
                                     TempAddArtifact.SetImage(AddImageFileName);
                                     TempAddArtifact.Position = new Aspose.Pdf.Point(j * WaterDmi_Hor, i * WaterDmi_Ver);
                                     lock (TempAddArtifact)
@@ -709,12 +691,17 @@ namespace DocumentTools
                                     .FromArgb(WaterMarkFontColor.R, WaterMarkFontColor.G, WaterMarkFontColor.B)
                         };
 
+                        if(UseFileNameAsMark)
+                        {
+                            WaterMarkContent = Path.GetFileNameWithoutExtension(DocuementFileName);
+                        }
+
                         TempAddArtifact.SetTextAndState(WaterMarkContent, TempTextState);
                         TempAddArtifact.ArtifactHorizontalAlignment = GetHorizontalAlignment(WaterMarkHorAlignIndex);
                         TempAddArtifact.ArtifactVerticalAlignment = GetVerticalAlignment(WaterMarkVerAlignIndex);
                         TempAddArtifact.Rotation = Convert.ToInt32(WaterMarkRotateDegNum);
                         TempAddArtifact.Opacity = WaterMarkOpactiyNum;
-                        TempAddArtifact.IsBackground = false;
+                        TempAddArtifact.IsBackground = IsWaterMarkAsBackground; //设置放在前面还是后面
 
                         if (CustomPostion)
                         {
@@ -795,16 +782,30 @@ namespace DocumentTools
             string ItemDataFormatText = "",
             string ItemRaidText = "")
         {
+            string DataBaseFileExtension = Path.GetExtension(DataBaseFile);
+
             List<string> UpdateSqlStrings = new List<string>();
 
 
             List<string> SearchContentTexts = new List<string>();
 
-            var (DataReader, DataConnection) = GetAccessDataReader(DataBaseFile, VF_Report.QueryContent(ReportId));
+            (DbDataReader DataReader, DbConnection DataConnection) TempDataBaseEnty = (null,null);
 
-            while (DataReader.Read())
+            if (DataBaseFileExtension==".mdb")
             {
-                string TempContent = DataReader["Content"].ToString();
+                TempDataBaseEnty = GetAccessDataReader(DataBaseFile, VF_Report.QueryContent(ReportId),new AccessDatabaseFactory());
+            }
+            else if(DataBaseFileExtension==".db")
+            {
+                TempDataBaseEnty = GetAccessDataReader(DataBaseFile, VF_Report.QueryContent(ReportId), new SqliteDatabaseFactory());
+
+            }
+
+            //var (DataReader, DataConnection) = GetAccessDataReader(DataBaseFile, VF_Report.QueryContent(ReportId));
+
+            while (TempDataBaseEnty.DataReader.Read())
+            {
+                string TempContent = TempDataBaseEnty.DataReader["Content"].ToString();
 
                 if (string.Compare(ChangeType, "所有项目", StringComparison.Ordinal) == 0)
                 {
@@ -857,7 +858,7 @@ namespace DocumentTools
                     }
                 }
             }
-            DataConnection.Close();
+            TempDataBaseEnty.DataConnection.Close();
 
             return UpdateSqlStrings;
         }
@@ -882,15 +883,17 @@ namespace DocumentTools
             string ColMode_ItemName,
             string ColMode_ItemSelector,
             bool ColMode_InsertSameItemItem,
-            ProgressBar ChangeExamReporParaProgressBar)
+            ProgressBar ChangeExamReporParaProgressBar,
+            IDatabaseMethodFactory Factory)
         {
+
             string InsertReportContentSql = $@"INSERT INTO Report_Detail (ReportID,Kind,Item,Content) Values (?,?,?,?)";
 
-            using OleDbConnection TempConnection = OpenAccessConnection(DataBaseFile);
+            using DbConnection TempConnection = Factory.CreateConnection(DataBaseFile);
 
             TempConnection.Open();
 
-            using OleDbCommand TempInsertSql = new OleDbCommand(InsertReportContentSql, TempConnection);
+            using DbCommand TempInsertSql = Factory.CreateCommand(InsertReportContentSql, TempConnection);
 
             string Report_Para_ReportID = "@ReportID";
             string Report_Para_Kind = "@Kind";
@@ -944,11 +947,21 @@ namespace DocumentTools
             //使用行模式
             if (isRowMode)
             {
+                
                 for (int Col = int.Parse(RowMode_Col_Start); Col <= int.Parse(RowMode_Col_End); Col++)
                 {
                     ChangeExamReporParaProgressBar.PerformStep();
 
                     string currentItemKey = $"{RowMode_Row}|{Col}";//item表示的行和列
+
+                    //新版本测评的报表数据库层面逻辑还是有点问题，只能先删除原来的item，然后再插入，暂时先这么解决
+                    //后期还是要和开发反馈下新测评系统里面报表保存逻辑的问题
+                    if(Factory is SqliteDatabaseFactory)
+                    {
+                        string DeleteReportItemSql = $@"DELETE FROM Report_Detail WHERE Item='{currentItemKey}'";
+
+                        Factory.ExecuteDataBaseSql(DataBaseFile, DeleteReportItemSql);
+                    }
 
                     // 使用 | 来区分多个选项，比如优秀|良好|一般|较差|弃权
                     string[] ItemSelectors = RowMode_ItemSelector.Split('|');
@@ -1018,36 +1031,61 @@ namespace DocumentTools
                         }
                     }
                     //插入999数字
-                    TempInsertSql.Parameters.AddWithValue(Report_Para_ReportID, ReportId);
-                    TempInsertSql.Parameters.AddWithValue(Report_Para_Kind, "GridFormatText");
-                    TempInsertSql.Parameters.AddWithValue(Report_Para_Item, $"{RowMode_Row}|{Col}");
-                    TempInsertSql.Parameters.AddWithValue(Report_Para_Content, Report_Para_ValueDisplayText);
+                    Factory.CreateCommandParameter(TempInsertSql, Report_Para_ReportID, ReportId);
+                    Factory.CreateCommandParameter(TempInsertSql, Report_Para_Kind, "GridFormatText");
+                    Factory.CreateCommandParameter(TempInsertSql, Report_Para_Item, $"{RowMode_Row}|{Col}");
+                    Factory.CreateCommandParameter(TempInsertSql, Report_Para_Content, Report_Para_ValueDisplayText);
+                    //Factory.CreateCommandParameter(TempInsertSql, Report_Para_ReportID, ReportId);
+                    //TempInsertSql.Parameters.AddWithValue(Report_Para_ReportID, ReportId);
+                    //TempInsertSql.Parameters.AddWithValue(Report_Para_Kind, "GridFormatText");
+                    //TempInsertSql.Parameters.AddWithValue(Report_Para_Item, $"{RowMode_Row}|{Col}");
+                    //TempInsertSql.Parameters.AddWithValue(Report_Para_Content, Report_Para_ValueDisplayText);
                     TempInsertSql.ExecuteNonQuery();
                     TempInsertSql.Parameters.Clear();
 
 
                     //插入字体
-                    TempInsertSql.Parameters.AddWithValue(Report_Para_ReportID, ReportId);
-                    TempInsertSql.Parameters.AddWithValue(Report_Para_Kind, "GridFormatFont");
-                    TempInsertSql.Parameters.AddWithValue(Report_Para_Item, $"{RowMode_Row}|{Col}");
-                    TempInsertSql.Parameters.AddWithValue(Report_Para_Content, DataFormatFontSetString);
+                    Factory.CreateCommandParameter(TempInsertSql, Report_Para_ReportID, ReportId);
+                    Factory.CreateCommandParameter(TempInsertSql, Report_Para_Kind, "GridFormatFont");
+                    Factory.CreateCommandParameter(TempInsertSql, Report_Para_Item, $"{RowMode_Row}|{Col}");
+                    Factory.CreateCommandParameter(TempInsertSql, Report_Para_Content, DataFormatFontSetString);
+
+                    //TempInsertSql.Parameters.AddWithValue(Report_Para_ReportID, ReportId);
+                    //TempInsertSql.Parameters.AddWithValue(Report_Para_Kind, "GridFormatFont");
+                    //TempInsertSql.Parameters.AddWithValue(Report_Para_Item, $"{RowMode_Row}|{Col}");
+                    //TempInsertSql.Parameters.AddWithValue(Report_Para_Content, DataFormatFontSetString);
+                    
                     TempInsertSql.ExecuteNonQuery();
                     TempInsertSql.Parameters.Clear();
 
 
                     //设置居中
-                    TempInsertSql.Parameters.AddWithValue(Report_Para_ReportID, ReportId);
-                    TempInsertSql.Parameters.AddWithValue(Report_Para_Kind, "GridFormatTextAlign");
-                    TempInsertSql.Parameters.AddWithValue(Report_Para_Item, $"{RowMode_Row}|{Col}");
-                    TempInsertSql.Parameters.AddWithValue(Report_Para_Content, $"4");
+                    Factory.CreateCommandParameter(TempInsertSql, Report_Para_ReportID, ReportId);
+                    Factory.CreateCommandParameter(TempInsertSql, Report_Para_Kind, "GridFormatTextAlign");
+                    Factory.CreateCommandParameter(TempInsertSql, Report_Para_Item, $"{RowMode_Row}|{Col}");
+                    Factory.CreateCommandParameter(TempInsertSql, Report_Para_Content, $"4");
+
+                    //TempInsertSql.Parameters.AddWithValue(Report_Para_ReportID, ReportId);
+                    //TempInsertSql.Parameters.AddWithValue(Report_Para_Kind, "GridFormatTextAlign");
+                    //TempInsertSql.Parameters.AddWithValue(Report_Para_Item, $"{RowMode_Row}|{Col}");
+                    //TempInsertSql.Parameters.AddWithValue(Report_Para_Content, $"4");
+                    
                     TempInsertSql.ExecuteNonQuery();
                     TempInsertSql.Parameters.Clear();
 
                     //设置边框
-                    TempInsertSql.Parameters.AddWithValue(Report_Para_ReportID, ReportId);
-                    TempInsertSql.Parameters.AddWithValue(Report_Para_Kind, "GridFormatBorder");
-                    TempInsertSql.Parameters.AddWithValue(Report_Para_Item, $"{RowMode_Row}|{Col}");
-                    TempInsertSql.Parameters.AddWithValue(Report_Para_Content, string.Empty);
+
+                    Factory.CreateCommandParameter(TempInsertSql, Report_Para_ReportID, ReportId);
+                    Factory.CreateCommandParameter(TempInsertSql, Report_Para_Kind, "GridFormatBorder");
+                    Factory.CreateCommandParameter(TempInsertSql, Report_Para_Item, $"{RowMode_Row}|{Col}");
+                    Factory.CreateCommandParameter(TempInsertSql, Report_Para_Content, string.Empty);
+
+
+                    //TempInsertSql.Parameters.AddWithValue(Report_Para_ReportID, ReportId);
+                    //TempInsertSql.Parameters.AddWithValue(Report_Para_Kind, "GridFormatBorder");
+                    //TempInsertSql.Parameters.AddWithValue(Report_Para_Item, $"{RowMode_Row}|{Col}");
+                    //TempInsertSql.Parameters.AddWithValue(Report_Para_Content, string.Empty);
+                    
                     TempInsertSql.ExecuteNonQuery();
                     TempInsertSql.Parameters.Clear();
                 }
@@ -1087,10 +1125,16 @@ namespace DocumentTools
                     ChangeExamReporParaProgressBar.PerformStep();
 
                     //插入数据
-                    TempInsertSql.Parameters.AddWithValue(Report_Para_ReportID, ReportId);
-                    TempInsertSql.Parameters.AddWithValue(Report_Para_Kind, "GridFormatData");
-                    TempInsertSql.Parameters.AddWithValue(Report_Para_Item, ReportItem_Content.Key);
-                    TempInsertSql.Parameters.AddWithValue(Report_Para_Content, ReportItem_Content.Value);
+                    Factory.CreateCommandParameter(TempInsertSql, Report_Para_ReportID, ReportId);
+                    Factory.CreateCommandParameter(TempInsertSql, Report_Para_Kind, "GridFormatData");
+                    Factory.CreateCommandParameter(TempInsertSql, Report_Para_Item, ReportItem_Content.Key);
+                    Factory.CreateCommandParameter(TempInsertSql, Report_Para_Content, ReportItem_Content.Value);
+
+                    //TempInsertSql.Parameters.AddWithValue(Report_Para_ReportID, ReportId);
+                    //TempInsertSql.Parameters.AddWithValue(Report_Para_Kind, "GridFormatData");
+                    //TempInsertSql.Parameters.AddWithValue(Report_Para_Item, ReportItem_Content.Key);
+                    //TempInsertSql.Parameters.AddWithValue(Report_Para_Content, ReportItem_Content.Value);
+                    
                     TempInsertSql.ExecuteNonQuery();
                     TempInsertSql.Parameters.Clear();
                 }
@@ -1146,36 +1190,63 @@ namespace DocumentTools
                         }
                     }
                     //插入999数字
-                    TempInsertSql.Parameters.AddWithValue(Report_Para_ReportID, ReportId);
-                    TempInsertSql.Parameters.AddWithValue(Report_Para_Kind, "GridFormatText");
-                    TempInsertSql.Parameters.AddWithValue(Report_Para_Item, CurrentItemKey);
-                    TempInsertSql.Parameters.AddWithValue(Report_Para_Content, Report_Para_ValueDisplayText);
+                    Factory.CreateCommandParameter(TempInsertSql, Report_Para_ReportID, ReportId);
+                    Factory.CreateCommandParameter(TempInsertSql, Report_Para_Kind, "GridFormatText");
+                    Factory.CreateCommandParameter(TempInsertSql, Report_Para_Item, CurrentItemKey);
+                    Factory.CreateCommandParameter(TempInsertSql, Report_Para_Content, Report_Para_ValueDisplayText);
+
+                    //TempInsertSql.Parameters.AddWithValue(Report_Para_ReportID, ReportId);
+                    //TempInsertSql.Parameters.AddWithValue(Report_Para_Kind, "GridFormatText");
+                    //TempInsertSql.Parameters.AddWithValue(Report_Para_Item, CurrentItemKey);
+                    //TempInsertSql.Parameters.AddWithValue(Report_Para_Content, Report_Para_ValueDisplayText);
+                    
                     TempInsertSql.ExecuteNonQuery();
                     TempInsertSql.Parameters.Clear();
 
 
                     //插入字体
-                    TempInsertSql.Parameters.AddWithValue(Report_Para_ReportID, ReportId);
-                    TempInsertSql.Parameters.AddWithValue(Report_Para_Kind, "GridFormatFont");
-                    TempInsertSql.Parameters.AddWithValue(Report_Para_Item, CurrentItemKey);
-                    TempInsertSql.Parameters.AddWithValue(Report_Para_Content, DataFormatFontSetString);
+
+                    Factory.CreateCommandParameter(TempInsertSql, Report_Para_ReportID, ReportId);
+                    Factory.CreateCommandParameter(TempInsertSql, Report_Para_Kind, "GridFormatFont");
+                    Factory.CreateCommandParameter(TempInsertSql, Report_Para_Item, CurrentItemKey);
+                    Factory.CreateCommandParameter(TempInsertSql, Report_Para_Content, DataFormatFontSetString);
+
+                    //TempInsertSql.Parameters.AddWithValue(Report_Para_ReportID, ReportId);
+                    //TempInsertSql.Parameters.AddWithValue(Report_Para_Kind, "GridFormatFont");
+                    //TempInsertSql.Parameters.AddWithValue(Report_Para_Item, CurrentItemKey);
+                    //TempInsertSql.Parameters.AddWithValue(Report_Para_Content, DataFormatFontSetString);
+                    
                     TempInsertSql.ExecuteNonQuery();
                     TempInsertSql.Parameters.Clear();
 
 
                     //设置居中
-                    TempInsertSql.Parameters.AddWithValue(Report_Para_ReportID, ReportId);
-                    TempInsertSql.Parameters.AddWithValue(Report_Para_Kind, "GridFormatTextAlign");
-                    TempInsertSql.Parameters.AddWithValue(Report_Para_Item, CurrentItemKey);
-                    TempInsertSql.Parameters.AddWithValue(Report_Para_Content, $"4");
+
+                    Factory.CreateCommandParameter(TempInsertSql, Report_Para_ReportID, ReportId);
+                    Factory.CreateCommandParameter(TempInsertSql, Report_Para_Kind, "GridFormatTextAlign");
+                    Factory.CreateCommandParameter(TempInsertSql, Report_Para_Item, CurrentItemKey);
+                    Factory.CreateCommandParameter(TempInsertSql, Report_Para_Content, $"4");
+
+                    //TempInsertSql.Parameters.AddWithValue(Report_Para_ReportID, ReportId);
+                    //TempInsertSql.Parameters.AddWithValue(Report_Para_Kind, "GridFormatTextAlign");
+                    //TempInsertSql.Parameters.AddWithValue(Report_Para_Item, CurrentItemKey);
+                    //TempInsertSql.Parameters.AddWithValue(Report_Para_Content, $"4");
+                    
                     TempInsertSql.ExecuteNonQuery();
                     TempInsertSql.Parameters.Clear();
 
                     //设置边框
-                    TempInsertSql.Parameters.AddWithValue(Report_Para_ReportID, ReportId);
-                    TempInsertSql.Parameters.AddWithValue(Report_Para_Kind, "GridFormatBorder");
-                    TempInsertSql.Parameters.AddWithValue(Report_Para_Item, CurrentItemKey);
-                    TempInsertSql.Parameters.AddWithValue(Report_Para_Content, string.Empty);
+
+                    Factory.CreateCommandParameter(TempInsertSql, Report_Para_ReportID, ReportId);
+                    Factory.CreateCommandParameter(TempInsertSql, Report_Para_Kind, "GridFormatBorder");
+                    Factory.CreateCommandParameter(TempInsertSql, Report_Para_Item, CurrentItemKey);
+                    Factory.CreateCommandParameter(TempInsertSql, Report_Para_Content, string.Empty);
+
+                    //TempInsertSql.Parameters.AddWithValue(Report_Para_ReportID, ReportId);
+                    //TempInsertSql.Parameters.AddWithValue(Report_Para_Kind, "GridFormatBorder");
+                    //TempInsertSql.Parameters.AddWithValue(Report_Para_Item, CurrentItemKey);
+                    //TempInsertSql.Parameters.AddWithValue(Report_Para_Content, string.Empty);
+                    
                     TempInsertSql.ExecuteNonQuery();
                     TempInsertSql.Parameters.Clear();
                 }
@@ -1213,10 +1284,17 @@ namespace DocumentTools
                     ChangeExamReporParaProgressBar.PerformStep();
 
                     //插入数据
-                    TempInsertSql.Parameters.AddWithValue(Report_Para_ReportID, ReportId);
-                    TempInsertSql.Parameters.AddWithValue(Report_Para_Kind, "GridFormatData");
-                    TempInsertSql.Parameters.AddWithValue(Report_Para_Item, ReportItem_Content.Key);
-                    TempInsertSql.Parameters.AddWithValue(Report_Para_Content, ReportItem_Content.Value);
+
+                    Factory.CreateCommandParameter(TempInsertSql, Report_Para_ReportID, ReportId);
+                    Factory.CreateCommandParameter(TempInsertSql, Report_Para_Kind, "GridFormatData");
+                    Factory.CreateCommandParameter(TempInsertSql, Report_Para_Item, ReportItem_Content.Key);
+                    Factory.CreateCommandParameter(TempInsertSql, Report_Para_Content, ReportItem_Content.Value);
+
+                    //TempInsertSql.Parameters.AddWithValue(Report_Para_ReportID, ReportId);
+                    //TempInsertSql.Parameters.AddWithValue(Report_Para_Kind, "GridFormatData");
+                    //TempInsertSql.Parameters.AddWithValue(Report_Para_Item, ReportItem_Content.Key);
+                    //TempInsertSql.Parameters.AddWithValue(Report_Para_Content, ReportItem_Content.Value);
+                    
                     TempInsertSql.ExecuteNonQuery();
                     TempInsertSql.Parameters.Clear();
                 }
@@ -1435,7 +1513,7 @@ namespace DocumentTools
 
             TempComressOption.ImageCompressionOptions.Version = CompressPDF_CompressImageVersion;
             TempComressOption.RemoveUnusedStreams = CompressPDF_RemoveUnUseStream;
-            TempComressOption.LinkDuplcateStreams = CompressPDF_LinkeSameStream;
+            TempComressOption.LinkDuplicateStreams = CompressPDF_LinkeSameStream;
             TempComressOption.RemoveUnusedObjects = CompressPDF_RemoveUnUseObject;
             TempComressOption.UnembedFonts = CompressPDF_CancelEmbedFont;
 
@@ -1745,7 +1823,7 @@ namespace DocumentTools
                 RemoveUnusedObjects = true,
                 RemoveUnusedStreams = true,
                 AllowReusePageContent = true,
-                LinkDuplcateStreams = true
+                LinkDuplicateStreams = true
             };
 
             if (CompressPdfImage)
@@ -2439,10 +2517,11 @@ namespace DocumentTools
                     };
                     TempWordDocument.Save(TempSvgFile, TempWordImageSaveOption);
                     using Aspose.Imaging.Image TempLoadImage = Aspose.Imaging.Image.Load(TempSvgFile);
-                    using SvgRasterizationOptions TempSvgOption = new SvgRasterizationOptions();
+                    SvgRasterizationOptions TempSvgOption = new SvgRasterizationOptions();
                     TempSvgOption.PageHeight = TempLoadImage.Height;
                     TempSvgOption.PageWidth = TempLoadImage.Width;
-                    TempSvgOption.ResolutionSettings = new ResolutionSetting(DpiValue, DpiValue);
+                    TempSvgOption.ScaleX = DpiValue;
+                    TempSvgOption.ScaleY = DpiValue;
                     TempSvgOption.TextRenderingHint = TextRenderingHint.AntiAlias;
                     //using Aspose.Imaging.ImageOptions.VectorRasterizationOptions TempRasterOption = new VectorRasterizationOptions();
                     //TempRasterOption.PageWidth = TempLoadImage.Width;
@@ -2732,17 +2811,10 @@ namespace DocumentTools
         /// <param name="DataBaseFile"></param>
         /// <param name="ExecuteSqlString"></param>
         /// <returns></returns>
-        public static (int, OleDbConnection) ExecuteAccessSql(string DataBaseFile, string ExecuteSqlString)
+        public static (int, DbConnection) ExecuteAccessSql(string DataBaseFile, string ExecuteSqlString,IDatabaseMethodFactory Factory)
         {
-            OleDbConnection TempConnection = OpenAccessConnection(DataBaseFile);
 
-            TempConnection.Open();
-
-            OleDbCommand TempCommand = new OleDbCommand(ExecuteSqlString, TempConnection);
-
-            int ExecuteRows = TempCommand.ExecuteNonQuery();
-
-            return (ExecuteRows, TempConnection);
+            return Factory.ExecuteDataBaseSql(DataBaseFile, ExecuteSqlString);
         }
 
         /// <summary>
@@ -2944,7 +3016,8 @@ namespace DocumentTools
             string barcodeCaptionContent,
             int barcodeCaptionLocationIndex,
             float barcodeCaptionFontSize,
-            int barcodeGenTypeIndex)
+            int barcodeGenTypeIndex,
+            System.Drawing.Image barcodeLogoImage)
         {
             Aspose.BarCode.Generation.BarcodeGenerator TempGenerate = null;
             MemoryStream TempStream = new MemoryStream();
@@ -3045,6 +3118,31 @@ namespace DocumentTools
                 }
             }
 
+            if(barcodeLogoImage!=null)
+            {
+                MemoryStream TempStreamWithLogo = new MemoryStream();
+
+                TempGenerate.Save(TempStreamWithLogo,BarCodeImageFormat.Bmp);
+
+                Bitmap TempBarcodeImage = new Bitmap(TempStreamWithLogo);
+
+                using (System.Drawing.Graphics TempGraph = System.Drawing.Graphics.FromImage(TempBarcodeImage))
+                {
+                    int TempLogoWidth = TempBarcodeImage.Width / 6;
+                    int TempLogoHeight = barcodeLogoImage.Height * TempLogoWidth / barcodeLogoImage.Width;
+
+                    int TempLogoPostion_X = (TempBarcodeImage.Width - TempLogoWidth) / 2;
+                    int TempLogoPostion_Y = (TempBarcodeImage.Height - TempLogoHeight) / 2;
+
+                    TempGraph.DrawImage(barcodeLogoImage, TempLogoPostion_X, TempLogoPostion_Y, TempLogoWidth, TempLogoHeight);
+                }
+                
+                TempBarcodeImage.Save(TempStreamWithLogo,System.Drawing.Imaging.ImageFormat.Bmp);
+
+                TempStream = TempStreamWithLogo;
+            }
+
+
             switch (useState)
             {
                 case "barcode_preview":
@@ -3056,8 +3154,6 @@ namespace DocumentTools
                 default:
                     break;
             }
-
-
             return TempStream;
         }
 
@@ -3472,17 +3568,15 @@ namespace DocumentTools
         /// </summary>
         /// <param name="DataBaseFile"></param>
         /// <returns></returns>
-        public static System.Data.DataTable GetExamInfo(string DataBaseFile)
+        public static System.Data.DataTable GetExamInfo(string DataBaseFile,IDatabaseMethodFactory Factory)
         {
             System.Data.DataTable TemoExamDataTable = new System.Data.DataTable();
 
             string QueryCommand = $"SELECT Report_Ess.ReportID AS 报表ID, Report_Ess.ReportName AS 报表名称,Exam_EssInfo.ExamID AS 考评表ID,Exam_EssInfo.ExamName AS 所属考评表 FROM Report_Ess INNER JOIN Exam_EssInfo ON Report_Ess.ExamID = Exam_EssInfo.ExamID";
 
-            var (DataAdap, DataConnection) = GetAccessDataAdapter(DataBaseFile, QueryCommand);
+            var (DataAdap, DataConnection) = Factory.CreateDataAdapter(DataBaseFile, QueryCommand);
 
-            using OleDbDataAdapter ExamAdapter = DataAdap;
-
-            ExamAdapter.Fill(TemoExamDataTable);
+            DataAdap.Fill(TemoExamDataTable);
 
             DataConnection.Close();
 
@@ -3493,13 +3587,13 @@ namespace DocumentTools
         /// </summary>
         /// <param name="DataBaseFile"></param>
         /// <returns></returns>
-        public static DataTable GetExamBaseInfo(string DataBaseFile)
+        public static DataTable GetExamBaseInfo(string DataBaseFile,IDatabaseMethodFactory Factory)
         {
             DataTable TempExamBaseTable = new DataTable();
 
             string TempQueryString = "SELECT Exam_EssInfo.ExamId AS 考评表ID,Exam_EssInfo.ExamName AS 考评表名称,Exam_EssInfo.TypeMode AS 排版类型 FROM Exam_EssInfo";
 
-            var (DataAdap, DataConnection) = GetAccessDataAdapter(DataBaseFile, TempQueryString);
+            var (DataAdap, DataConnection) = GetAccessDataAdapter(DataBaseFile, TempQueryString, Factory);
 
             DataAdap.Fill(TempExamBaseTable);
 
@@ -3517,7 +3611,7 @@ namespace DocumentTools
         /// <param name="TableName"></param>
         /// <param name="LimitQueryString"></param>
         /// <returns></returns>
-        public static int GetAccessFieldMaxValue(string DataBaseFile, string FieldName, string TableName, string LimitQueryString = "")
+        public static int GetAccessFieldMaxValue(string DataBaseFile, string FieldName, string TableName, IDatabaseMethodFactory Factory,string LimitQueryString = "")
         {
             string TempQueryString = $"SELECT MAX({FieldName}) FROM {TableName} ";
 
@@ -3525,7 +3619,7 @@ namespace DocumentTools
             {
                 TempQueryString += LimitQueryString;
             }
-            var (TempResult, TempConnection) = GetAccessDataByOne(DataBaseFile, TempQueryString);
+            var (TempResult, TempConnection) = GetAccessDataByOne(DataBaseFile, TempQueryString, Factory);
 
             TempConnection.Close();
 
@@ -3539,17 +3633,17 @@ namespace DocumentTools
         /// <param name="ExamTableName"></param>
         /// <param name="ExamTypeMode"></param>
         /// <returns></returns>
-        public static int InsertExamEssInfo(string DataBaseFile, string ExamTableName, string ExamTypeMode)
+        public static int InsertExamEssInfo(string DataBaseFile, string ExamTableName, string ExamTypeMode,IDatabaseMethodFactory Factory)
         {
             //1、首先查询库中Exam_Essinfo的ExamId最大值
 
             string ExamEssInfoName = "Exam_EssInfo";
 
-            int MaxExamId = GetAccessFieldMaxValue(DataBaseFile, "ExamId", ExamEssInfoName);
+            int MaxExamId = GetAccessFieldMaxValue(DataBaseFile, "ExamId", ExamEssInfoName,Factory: Factory);
 
             string GetExamTableNameById = $"SELECT ExamId FROM {ExamEssInfoName} WHERE ExamID={MaxExamId}";
 
-            var (TempInUseExamId, TempInUseExamId_Conn) = GetAccessDataByOne(DataBaseFile, GetExamTableNameById);
+            var (TempInUseExamId, TempInUseExamId_Conn) = GetAccessDataByOne(DataBaseFile, GetExamTableNameById, Factory);
 
             if (TempInUseExamId != null && int.Parse(TempInUseExamId.ToString()) >= 0)
             {
@@ -3562,7 +3656,7 @@ namespace DocumentTools
 
             string AddExamInfoString = $"INSERT INTO {ExamEssInfoName} (ExamId,ExamName,TypeMode) Values ('{MaxExamId}','{ExamTableName}','{ExamTypeMode}')";
 
-            var (TempResult, TempConnection) = ExecuteAccessSql(DataBaseFile, AddExamInfoString);
+            var (TempResult, TempConnection) = ExecuteAccessSql(DataBaseFile, AddExamInfoString, Factory);
 
             TempInUseExamId_Conn.Close();
             TempConnection.Close();
@@ -3575,31 +3669,45 @@ namespace DocumentTools
         /// </summary>
         /// <param name="DatabaseFile"></param>
         /// <param name="ExamId"></param>
-        public static void InsertExamRuler(string DatabaseFile, int ExamId)
+        public static void InsertExamRuler(string DatabaseFile, int ExamId,IDatabaseMethodFactory Factory)
         {
             int DefaultRulerOrder = 2;
 
-            Dictionary<string, string> ExamDefaultRuler = new Dictionary<string, string>()
+            Dictionary<string, string> ExamDefaultRuler = new Dictionary<string, string>();
+
+            if(Factory is AccessDatabaseFactory)
             {
-                { "单项不填规则", "自动当作弃权"},
-                { "单项多填规则", "只记录最前被选项后再交给人工"},
-                { "多项不填规则", "自动当作弃权"},
-                { "全部无效规则", "无效票False"},
-                { "全部弃权规则", "无效票False"}
-            };
+                ExamDefaultRuler = new Dictionary<string, string>
+                {
+                    { "单项不填规则", "自动当作弃权"},
+                    { "单项多填规则", "只记录最前被选项后再交给人工"},
+                    { "多项不填规则", "自动当作弃权"},
+                    { "全部无效规则", "无效票False"},
+                    { "全部弃权规则", "无效票False"}
+                };
+            }
+            else if(Factory is SqliteDatabaseFactory)
+            {
+                ExamDefaultRuler = new Dictionary<string, string>
+                {
+                    { "单项不填规则", "自动当作弃权"},
+                    { "单项多填规则", "当作靠前选项后再交给人工处理"},
+                    { "多项不填规则", "自动当作弃权"}
+                };
+            }
 
             foreach (var ExamSignleRuler in ExamDefaultRuler)
             {
                 string TempInsertRulerString = $"INSERT INTO Exam_Ruler (ExamId,RulerKind,RulerPara,RulerOrder) VALUES ('{ExamId}','{ExamSignleRuler.Key}','{ExamSignleRuler.Value}','{DefaultRulerOrder++}')";
 
-                var (TempResult, TempConnection) = ExecuteAccessSql(DatabaseFile, TempInsertRulerString);
+                var (TempResult, TempConnection) = ExecuteAccessSql(DatabaseFile, TempInsertRulerString, Factory);
 
                 TempConnection.Close();
             }
 
         }
 
-        public static (bool, int) ChangeTableIndex(string DataBaseFile, string OrginTableIndex, string ChangeTableIndex, TextBox ChangeProgressTextBox)
+        public static (bool, int) ChangeTableIndex(string DataBaseFile, string OrginTableIndex, string ChangeTableIndex, TextBox ChangeProgressTextBox,IDatabaseMethodFactory Factory)
         {
             bool ChangeStatus = false;
             List<string> BindExamIdTableNames = new List<string>()
@@ -3619,7 +3727,7 @@ namespace DocumentTools
 
             string SelectExamIdByEssInfoSql = $"SELECT ExamName FROM {BindExamIdTableNames[2]} WHERE ExamID={int.Parse(ChangeTableIndex)}";
 
-            var (TempExamIdValue, TempExamIdConn) = GetAccessDataByOne(DataBaseFile, SelectExamIdByEssInfoSql);
+            var (TempExamIdValue, TempExamIdConn) = GetAccessDataByOne(DataBaseFile, SelectExamIdByEssInfoSql, Factory);
 
             int RecommendExamIdValue = -1;
 
@@ -3629,13 +3737,13 @@ namespace DocumentTools
                 {
                     string UpdateTableIndexSql = $"UPDATE {TempTableName} SET ExamID={int.Parse(ChangeTableIndex)} WHERE ExamID={int.Parse(OrginTableIndex)}";
 
-                    ExecuteAccessSql(DataBaseFile, UpdateTableIndexSql);
+                    ExecuteAccessSql(DataBaseFile, UpdateTableIndexSql, Factory);
                 });
                 ChangeStatus = true;
             }
             else
             {
-                int GetMaxExamIdValue = GetAccessFieldMaxValue(DataBaseFile, "ExamID", BindExamIdTableNames[2]);
+                int GetMaxExamIdValue = GetAccessFieldMaxValue(DataBaseFile, "ExamID", BindExamIdTableNames[2], Factory: Factory);
 
                 int TempUpdateMaxId = GetMaxExamIdValue + 1;
 
@@ -3648,18 +3756,18 @@ namespace DocumentTools
                     //1、将已存在的ExamId更改为TempUpdateMaxId
                     string UpdateTagretId2TempMaxIdSql = $"UPDATE {TempTableName} SET ExamID={TempUpdateMaxId} WHERE ExamID={int.Parse(ChangeTableIndex)}";
 
-                    ExecuteAccessSql(DataBaseFile, UpdateTagretId2TempMaxIdSql);
+                    ExecuteAccessSql(DataBaseFile, UpdateTagretId2TempMaxIdSql, Factory);
 
                     //2、将原来的ExamId更改为要设置的目标值
 
                     string UpdateOrginId2TargetIdSql = $"UPDATE {TempTableName} SET ExamID={int.Parse(ChangeTableIndex)} WHERE ExamID={int.Parse(OrginTableIndex)}";
 
-                    ExecuteAccessSql(DataBaseFile, UpdateOrginId2TargetIdSql);
+                    ExecuteAccessSql(DataBaseFile, UpdateOrginId2TargetIdSql, Factory);
                     //3、将TempUpdateMaxId更改为原始值
 
                     string UpdateTempMaxId2OrginIdSql = $"UPDATE {TempTableName} SET ExamID={int.Parse(OrginTableIndex)} WHERE ExamID={TempUpdateMaxId}";
 
-                    ExecuteAccessSql(DataBaseFile, UpdateTempMaxId2OrginIdSql);
+                    ExecuteAccessSql(DataBaseFile, UpdateTempMaxId2OrginIdSql, Factory);
 
                     ChangeProgressTextBox.ForeColor = Color.ForestGreen;
 
@@ -3690,13 +3798,13 @@ namespace DocumentTools
         /// <param name="ExamJsonInfo"></param>
         /// <param name="ProgressTextBox"></param>
         /// <param name="ProgressBarTip"></param>
-        public static void InsertExamItemAndSelector(string DataBaseFile, string ExamTableName, string TableFlowClass, JObject ExamJsonInfo, TextBox ProgressTextBox, ProgressBar ProgressBarTip)
+        public static void InsertExamItemAndSelector(string DataBaseFile, string ExamTableName, string TableFlowClass, JObject ExamJsonInfo, TextBox ProgressTextBox, ProgressBar ProgressBarTip,IDatabaseMethodFactory Factory)
         {
             int ExamId = -1;
 
             string GetExamTableName = $"SELECT ExamID FROM Exam_EssInfo WHERE ExamName='{ExamTableName}'";
 
-            var (TempExamData, TempGetExamTableNameConnection) = GetAccessDataByOne(DataBaseFile, GetExamTableName);
+            var (TempExamData, TempGetExamTableNameConnection) = GetAccessDataByOne(DataBaseFile, GetExamTableName,Factory);
 
             if (TempExamData != null)
             {
@@ -3706,14 +3814,14 @@ namespace DocumentTools
             }
             else
             {
-                ExamId = InsertExamEssInfo(DataBaseFile, ExamTableName, TableFlowClass);
+                ExamId = InsertExamEssInfo(DataBaseFile, ExamTableName, TableFlowClass, Factory);
 
-                InsertExamRuler(DataBaseFile, ExamId);
+                InsertExamRuler(DataBaseFile, ExamId, Factory);
             }
 
             TempGetExamTableNameConnection.Close();
 
-            int MaxItemOrder = GetAccessFieldMaxValue(DataBaseFile, "itemorder", "Exam_BoolItem", $"WHERE ExamId={ExamId}");
+            int MaxItemOrder = GetAccessFieldMaxValue(DataBaseFile, "itemorder", "Exam_BoolItem",Factory: Factory, $"WHERE ExamId={ExamId}");
 
             foreach (var TempExam in ExamJsonInfo)
             {
@@ -3730,7 +3838,20 @@ namespace DocumentTools
                 //获取选项的数据
                 JObject TempSelectorData = TempItemValueInfo["Selectors"] as JObject;
 
-                string TempInsertExamItemNameScoreSql = $"INSERT INTO Exam_Score (ExamId,Kind,ItemName,SelName,Score) VALUES ('{ExamId}','{TempType}','{TempItemName}','{TempItemName}','{TempItemScore}')";
+                string TempInsertExamItemNameScoreSql = string.Empty;
+
+                if(Factory is AccessDatabaseFactory)
+                {
+                    TempInsertExamItemNameScoreSql = $"INSERT INTO Exam_Score (ExamId,Kind,ItemName,SelName,Score) VALUES ('{ExamId}','{TempType}','{TempItemName}','{TempItemName}','{TempItemScore}')";
+                }
+                else if(Factory is SqliteDatabaseFactory)
+                {
+                    TempInsertExamItemNameScoreSql = $"INSERT INTO Exam_Score (ExamId,Type,Kind,ItemName,SelName,Score) VALUES ('{ExamId}','{TempType}','测评','{TempItemName}','',{TempItemScore})";
+                }
+
+                var (TempInserItemScoreResult, TempInserItemScoreResultConn) = ExecuteAccessSql(DataBaseFile, TempInsertExamItemNameScoreSql, Factory);
+
+                TempInserItemScoreResultConn.Close();
 
                 foreach (var TempSelector in TempSelectorData)
                 {
@@ -3749,13 +3870,38 @@ namespace DocumentTools
 
                     bool TempSelectorCalcAvg = TempSelectorValue["CalcAvg"].Value<bool>();
 
-                    string TempInsertExamAndItemSql = $"INSERT INTO Exam_BoolItem (ExamId,AtKind,ItemName,SelName,ItemOrder) VALUES ('{ExamId}','测评','{TempItemName}','{TempSelectorName}','{MaxItemOrder}')";
+                    string TempInsertExamAndItemSql = string.Empty;
 
-                    //计入得票率
-                    string TempInsertExamSelectorScore_CalcAvg_Sql = $"INSERT INTO Exam_Score (ExamId,Kind,ItemName,SelName,Score) VALUES ('{ExamId}','{TempSelectorType}','{TempItemName}','{TempSelectorName}','{TempSelectorScorePer}')";
+                    if (Factory is AccessDatabaseFactory)
+                    {
+                        TempInsertExamAndItemSql = $"INSERT INTO Exam_BoolItem (ExamId,AtKind,ItemName,SelName,ItemOrder) VALUES ('{ExamId}','测评','{TempItemName}','{TempSelectorName}','{MaxItemOrder}')";
+                    }
+                    else if (Factory is SqliteDatabaseFactory)
+                    {
+                        TempInsertExamAndItemSql = $"INSERT INTO Exam_BoolItem (ExamId,AtKind,ItemName,SelName,ItemOrder,AllowMuti) VALUES ('{ExamId}','测评','{TempItemName}','{TempSelectorName}','{MaxItemOrder}',0)";
+                    }
 
-                    //不计入得票率
-                    string TempInsertExamSelectorScore_NoCalcAvg_Sql = $"INSERT INTO Exam_Score (ExamId,Kind,ItemName,SelName,Score) VALUES ('{ExamId}','选项不计入得票率','{TempItemName}','{TempSelectorName}','1')";
+
+                    string TempInsertExamSelectorScore_CalcAvg_Sql = string.Empty;
+
+                    string TempInsertExamSelectorScore_NoCalcAvg_Sql = string.Empty;
+
+                    if (Factory is AccessDatabaseFactory)
+                    {
+                        //计入得票率
+                        TempInsertExamSelectorScore_CalcAvg_Sql = $"INSERT INTO Exam_Score (ExamId,Kind,ItemName,SelName,Score) VALUES ('{ExamId}','{TempSelectorType}','{TempItemName}','{TempSelectorName}','{TempSelectorScorePer}')";
+
+                        //不计入得票率
+                        TempInsertExamSelectorScore_NoCalcAvg_Sql = $"INSERT INTO Exam_Score (ExamId,Kind,ItemName,SelName,Score) VALUES ('{ExamId}','选项不计入得票率','{TempItemName}','{TempSelectorName}','1')";
+                    }
+                    else if(Factory is SqliteDatabaseFactory)
+                    {
+                        //计入得票率
+                        TempInsertExamSelectorScore_CalcAvg_Sql = $"INSERT INTO Exam_Score (ExamId,Type,Kind,ItemName,SelName,Score) VALUES ('{ExamId}','{TempSelectorType}','测评','{TempItemName}','{TempSelectorName}','{TempSelectorScorePer}')";
+
+                        //不计入得票率
+                        TempInsertExamSelectorScore_NoCalcAvg_Sql = $"INSERT INTO Exam_Score (ExamId,Type,Kind,ItemName,SelName,Score) VALUES ('{ExamId}','选项不计入得票率','测评','{TempItemName}','{TempSelectorName}','1')";
+                    }
 
                     //进度提示
                     ProgressBarTip.PerformStep();
@@ -3766,27 +3912,25 @@ namespace DocumentTools
                     //插入项目名称和选项到ExamBoolItem表
                     if (TempSelectorName != "无效" && TempSelectorName != "弃权")
                     {
-                        var (TempResult, TempConnection) = ExecuteAccessSql(DataBaseFile, TempInsertExamAndItemSql);
+                        var (TempResult, TempConnection) = ExecuteAccessSql(DataBaseFile, TempInsertExamAndItemSql, Factory);
                         TempConnection.Close();
                     }
 
                     if (TempSelectorCalcAvg)
                     {
-                        var (TempSelectorResult, TempSelectorConn) = ExecuteAccessSql(DataBaseFile, TempInsertExamSelectorScore_CalcAvg_Sql);
+                        var (TempSelectorResult, TempSelectorConn) = ExecuteAccessSql(DataBaseFile, TempInsertExamSelectorScore_CalcAvg_Sql, Factory);
                         TempSelectorConn.Close();
                     }
                     else
                     {
-                        var (TempSelectorResult_Calc, TempSelectorConn_Calc) = ExecuteAccessSql(DataBaseFile, TempInsertExamSelectorScore_CalcAvg_Sql);
-                        var (TempSelectorResult_NoCalc, TempSelectorConn_NoCalc) = ExecuteAccessSql(DataBaseFile, TempInsertExamSelectorScore_NoCalcAvg_Sql);
+                        var (TempSelectorResult_Calc, TempSelectorConn_Calc) = ExecuteAccessSql(DataBaseFile, TempInsertExamSelectorScore_CalcAvg_Sql, Factory);
+                        var (TempSelectorResult_NoCalc, TempSelectorConn_NoCalc) = ExecuteAccessSql(DataBaseFile, TempInsertExamSelectorScore_NoCalcAvg_Sql, Factory);
 
                         TempSelectorConn_Calc.Close();
                         TempSelectorConn_NoCalc.Close();
                     }
-                    var (TempInserItemScoreResult, TempInserItemScoreResultConn) = ExecuteAccessSql(DataBaseFile, TempInsertExamItemNameScoreSql);
-
-                    TempInserItemScoreResultConn.Close();
                 }
+
                 ProgressTextBox.ForeColor = Color.ForestGreen;
                 ProgressTextBox.Text = $"<{TempItemName}>添加完毕";
                 ProgressBarTip.Value = 0;
@@ -3804,19 +3948,27 @@ namespace DocumentTools
         /// <param name="ExamId"></param>
         /// <param name="ExamText"></param>
         /// <returns></returns>
-        public static List<string> GetExamItems_Selectors(string DataBaseFile, string ExamId, string ExamText)
+        public static List<string> GetExamItems_Selectors(string DataBaseFile, string ExamId, string ExamText,IDatabaseMethodFactory Factory)
         {
             List<string> ItemsSelectorLists = new List<string>();
 
-            string QueryExamItemsSelector = $"SELECT SelName FROM Exam_Score WHERE ExamID = {ExamId} AND ItemName = \"{ExamText}\" AND Kind = \"选项\"";
+            string QueryExamItemsSelector = string.Empty;
 
-            var (DataReader, DataConnection) = GetAccessDataReader(DataBaseFile, QueryExamItemsSelector);
-
-            using OleDbDataReader QueryExamSelector_Reader = DataReader;
-
-            while (QueryExamSelector_Reader.Read())
+            if(Factory is AccessDatabaseFactory)
             {
-                string QueryExamItemSelecorName = QueryExamSelector_Reader["SelName"].ToString();
+                QueryExamItemsSelector = $"SELECT SelName FROM Exam_Score WHERE ExamID = {ExamId} AND ItemName = \"{ExamText}\" AND Kind = \"选项\"";
+            }
+            else if(Factory is SqliteDatabaseFactory)
+            {
+                QueryExamItemsSelector = $"SELECT SelName FROM Exam_Score WHERE ExamID = {ExamId} AND ItemName = \"{ExamText}\" AND Type = \"选项\"";
+            }
+
+            var (DataReader, DataConnection) = GetAccessDataReader(DataBaseFile, QueryExamItemsSelector, Factory);
+
+
+            while (DataReader.Read())
+            {
+                string QueryExamItemSelecorName = DataReader["SelName"].ToString();
 
                 if (string.Compare(QueryExamItemSelecorName, "无效", StringComparison.Ordinal) != 0)
                 {
@@ -3834,23 +3986,31 @@ namespace DocumentTools
         /// <param name="DataBaseFile"></param>
         /// <param name="ExamId"></param>
         /// <returns></returns>
-        public static List<string> GetExamItemsAndExamSelectors(string DataBaseFile, string ExamId)
+        public static List<string> GetExamItemsAndExamSelectors(string DataBaseFile, string ExamId,IDatabaseMethodFactory Factory)
         {
             List<string> ItemsLists = new List<string>();
 
-            string QueryExamItems = $"SELECT ItemName FROM Exam_Score WHERE ExamID = {ExamId} AND Kind = \"项目\"";
+            string QueryExamItems = string.Empty;
 
-            var (DataReader, DataConnection) = GetAccessDataReader(DataBaseFile, QueryExamItems);
-
-            using OleDbDataReader QueryExam_Items_Reader = DataReader;
-
-            while (QueryExam_Items_Reader.Read())
+            if (Factory is AccessDatabaseFactory)
             {
-                string QueryExamItemName = QueryExam_Items_Reader["ItemName"].ToString();
+                QueryExamItems = $"SELECT ItemName FROM Exam_Score WHERE ExamID = {ExamId} AND Kind = \"项目\"";
+            }
+            else if(Factory is SqliteDatabaseFactory)
+            {
+                QueryExamItems = $"SELECT ItemName FROM Exam_Score WHERE ExamID = {ExamId} AND Type = \"项目\"";
+            }
+
+            var (DataReader, DataConnection) = GetAccessDataReader(DataBaseFile, QueryExamItems,Factory);
+
+            while (DataReader.Read())
+            {
+                string QueryExamItemName = DataReader["ItemName"].ToString();
 
                 ItemsLists.Add(QueryExamItemName);
             }
             DataConnection.Close();
+            
             return ItemsLists;
         }
 
@@ -3861,7 +4021,7 @@ namespace DocumentTools
         /// <param name="DataBaseFile"></param>
         /// <param name="ExamId"></param>
         /// <returns></returns>
-        public static System.Data.DataTable GetExamRaidInfo(string DataBaseFile, string ExamId)
+        public static System.Data.DataTable GetExamRaidInfo(string DataBaseFile, string ExamId,IDatabaseMethodFactory Factory)
         {
             System.Data.DataTable ExamRaidInfoDataTable = new System.Data.DataTable();
             ExamRaidInfoDataTable.Columns.Add("RaidShow");
@@ -3871,21 +4031,25 @@ namespace DocumentTools
 
             string QueryExamRaidInfo = $"SELECT RaidName FROM Exam_RaidInfo WHERE ExamID = {ExamId}";
 
-            var (DataReader, DataConnection) = GetAccessDataReader(DataBaseFile, QueryExamRaidInfo);
+            var (DataReader, DataConnection) = GetAccessDataReader(DataBaseFile, QueryExamRaidInfo, Factory);
 
-
-            using OleDbDataReader QueryExamRaidInfoReader = DataReader;
-
-            while (QueryExamRaidInfoReader.Read())
+            while (DataReader.Read())
             {
-                string RaidInfo = QueryExamRaidInfoReader["RaidName"].ToString();
+                string RaidInfo = DataReader["RaidName"].ToString();
 
                 ExamRaidInfoDataTable.Rows.Add(RaidInfo, RaidInfo);
 
                 ExamRaidInfoLists.Add(RaidInfo);
             }
 
-            string RaidInfoSum = string.Join("，", ExamRaidInfoLists);
+            string RaidSplitChar = "，";
+
+            if(Factory is SqliteDatabaseFactory)
+            {
+                RaidSplitChar = ",";
+            }
+            
+            string RaidInfoSum = string.Join(RaidSplitChar, ExamRaidInfoLists);
             string RaidInfoShow = "合计";
 
             string RaidMultValue = string.Join("|", ExamRaidInfoLists) + "|" + RaidInfoSum;
@@ -3912,19 +4076,29 @@ namespace DocumentTools
         public static (List<int> report_cols, List<int> report_rows) GetExamReportColumnsAndRows
             (
             string DataBaseFile,
-            string ExamReportId
+            string ExamReportId,
+            IDatabaseMethodFactory Factory
             )
         {
             int Report_Cols = 0, Report_Rows = 0;
 
             string QueryCommand = $"SELECT ColWidthStr,RowHeightStr FROM Report_Ess WHERE ReportId={ExamReportId}";
 
-            var (DataReader, DataConnection) = GetAccessDataReader(DataBaseFile, QueryCommand);
+            var (DataReader, DataConnection) = GetAccessDataReader(DataBaseFile, QueryCommand, Factory);
 
             while (DataReader.Read())
             {
-                Report_Cols = DataReader["ColWidthStr"].ToString().Split('，').Length - 1;
-                Report_Rows = DataReader["RowHeightStr"].ToString().Split('，').Length - 1;
+                if(Factory is AccessDatabaseFactory)
+                {
+                    //老版的系统把最后一列隐藏了
+                    Report_Cols = DataReader["ColWidthStr"].ToString().Split(new[] { ",", "，" }, StringSplitOptions.None).Length - 1;
+                    Report_Rows = DataReader["RowHeightStr"].ToString().Split(new[] { ",", "，" }, StringSplitOptions.None).Length - 1;
+                }
+                else if(Factory is SqliteDatabaseFactory)
+                {
+                    Report_Cols = DataReader["ColWidthStr"].ToString().Split(new[] { ",", "，" }, StringSplitOptions.None).Length;
+                    Report_Rows = DataReader["RowHeightStr"].ToString().Split(new[] { ",", "，" }, StringSplitOptions.None).Length;
+                }
             }
 
             DataConnection.Close();
@@ -4201,11 +4375,24 @@ namespace DocumentTools
         {
             List<string> ReportCurrentItemsInfos = new List<string>();
 
-            var (DataReader, DataConnection) = GetAccessDataReader(DataBaseFile, VF_Report.QueryContent(ReportId));
+            string ExamFileExtension = Path.GetExtension(DataBaseFile);
+            
+            (DbDataReader DataReader, DbConnection DataConnection) TempDataBaseEnty = (null, null);
 
-            while (DataReader.Read())
+            if (ExamFileExtension==".mdb")
             {
-                string TempContent = DataReader["Content"].ToString();
+                TempDataBaseEnty = GetAccessDataReader(DataBaseFile, VF_Report.QueryContent(ReportId),new AccessDatabaseFactory());
+            }
+            else if(ExamFileExtension==".db")
+            {
+                TempDataBaseEnty = GetAccessDataReader(DataBaseFile, VF_Report.QueryContent(ReportId), new SqliteDatabaseFactory());
+
+            }
+            //var (DataReader, DataConnection) = GetAccessDataReader(DataBaseFile, VF_Report.QueryContent(ReportId));
+
+            while (TempDataBaseEnty.DataReader.Read())
+            {
+                string TempContent = TempDataBaseEnty.DataReader["Content"].ToString();
 
                 string TempExamName = GetReportContentText(VF_Report.ExamItemFormat_Regex, TempContent)
                     .Replace("Item=", string.Empty);
@@ -4275,7 +4462,7 @@ namespace DocumentTools
                         break;
                 }
             }
-            DataConnection.Close();
+            TempDataBaseEnty.DataConnection.Close();
 
             return ReportCurrentItemsInfos;
         }
@@ -4285,11 +4472,11 @@ namespace DocumentTools
         /// </summary>
         /// <param name="DataBaseFile"></param>
         /// <param name="ReportId"></param>
-        public static List<string> GetReportItems(string DataBaseFile, string ReportId)
+        public static List<string> GetReportItems(string DataBaseFile, string ReportId,IDatabaseMethodFactory Factory)
         {
             List<string> ReportCurrentItems = new List<string>();
 
-            var (DataReader, DataConnection) = GetAccessDataReader(DataBaseFile, VF_Report.QueryContent(ReportId));
+            var (DataReader, DataConnection) = GetAccessDataReader(DataBaseFile, VF_Report.QueryContent(ReportId), Factory);
 
             while (DataReader.Read())
             {
@@ -4357,11 +4544,12 @@ namespace DocumentTools
         /// 查询单位数据包中的扫描计算机名称
         /// </summary>
         /// <param name="DataBaseFile"></param>
-        public static List<string> GetUnitExamComputerName(string DataBaseFile)
+        public static List<string> GetUnitExamComputerName(string DataBaseFile,IDatabaseMethodFactory Factory)
         {
             List<string> UnitComputerNames = new List<string>();
             string QueryUnitComputerString = @"SELECT DISTINCT CompName from Result_Essinfo;";
-            var (DataReader, DataConnection) = GetAccessDataReader(DataBaseFile, QueryUnitComputerString);
+            
+            var (DataReader, DataConnection) = GetAccessDataReader(DataBaseFile, QueryUnitComputerString, Factory);
 
             while (DataReader.Read())
             {
@@ -4376,11 +4564,12 @@ namespace DocumentTools
         /// 查询单位数据包中的扫描图片路径
         /// </summary>
         /// <param name="DataBaseFile"></param>
-        public static List<string> GetUnitExamPicPath(string DataBaseFile)
+        public static List<string> GetUnitExamPicPath(string DataBaseFile,IDatabaseMethodFactory Factory)
         {
             List<string> UnitPicPaths = new List<string>();
             string QueryUnitPicPathString = @"SELECT DISTINCT PicPath from Result_Essinfo;";
-            var (DataReader, DataConnection) = GetAccessDataReader(DataBaseFile, QueryUnitPicPathString);
+            
+            var (DataReader, DataConnection) = GetAccessDataReader(DataBaseFile, QueryUnitPicPathString, Factory);
 
             while (DataReader.Read())
             {
@@ -5204,10 +5393,14 @@ namespace DocumentTools
             string Range_End,
             int SplitPageCount,
             bool SplitByBookMark,
-            bool SplitSignle)
+            bool SplitSignle,
+            bool DeletePdfPages,
+            int DeletePdfPages_Start,
+            int DeletePdfPages_End)
         {
             using Aspose.Pdf.Document TempLoadDocument = new Aspose.Pdf.Document(DocumentFileName);
             PdfFileEditor TempPdfEditor = new PdfFileEditor();
+
 
             if (SplitSignle)
             {
@@ -5262,6 +5455,22 @@ namespace DocumentTools
                     TempBookMarkSplitDocument.Save(ExportPdfFileName);
                     Start_Page = End_Page + 1;
                 }
+            }
+
+            //删除PDF页面
+            if (DeletePdfPages)
+            {
+                int TempLoadDocuemtMaxPages = TempLoadDocument.Pages.Count;
+
+                DeletePdfPages_End = Math.Min(DeletePdfPages_End, TempLoadDocuemtMaxPages);
+
+                int[] TempPageDeleteArray = Enumerable.Range(DeletePdfPages_Start, DeletePdfPages_End - DeletePdfPages_Start+1).ToArray();
+
+                TempLoadDocument.Pages.Delete(TempPageDeleteArray);
+
+                string ExportPdfFileName = $"{Path.Combine(SavedPath, Path.GetFileNameWithoutExtension(DocumentFileName))}.pdf";
+                
+                TempLoadDocument.Save(ExportPdfFileName);
             }
         }
 

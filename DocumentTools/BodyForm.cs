@@ -1,6 +1,7 @@
 ﻿using AutoUpdaterDotNET;
 using Gma.System.MouseKeyHook;
 using Microsoft.Toolkit.Uwp.Notifications;
+using Microsoft.VisualBasic.Logging;
 using Newtonsoft.Json.Linq;
 using NPinyin;
 using NTwain;
@@ -11,6 +12,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Data;
+using System.Data.Common;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -1151,10 +1153,11 @@ namespace DocumentTools
             this.PauseUpdateYears.ValueMember = "RealValue";
 
 
-            string[] ExamDataFormatList = new string[] { "该人得票数", "该人得票率", "该人得分", "该人得分率", "该人得票数|该人得票率" };
+            List<string> ExamDataFormatList = new List<string> { "该人得票数", "该人得票率", "该人得分", "该人得分率", "该人得票数|该人得票率" };
 
-            this.ExamReplaceDataFormat.DataSource = ExamDataFormatList;
-            this.ExamReportParaDataFormat_Combox.DataSource = ExamDataFormatList.Clone();
+            this.ExamReplaceDataFormat.DataSource = ExamDataFormatList.Take(ExamDataFormatList.Count - 1).ToList();
+            
+            this.ExamReportParaDataFormat_Combox.DataSource = new List<string> (ExamDataFormatList);
 
 
             this.SplitPdfSizeCombox.DataSource = Enum.GetValues(typeof(Aspose.Slides.SlideSizeType));
@@ -3075,7 +3078,7 @@ namespace DocumentTools
                 {
                     try
                     {
-                        if(!string.IsNullOrEmpty(PdfWaterMarkText.Text) ||
+                        if((!string.IsNullOrEmpty(PdfWaterMarkText.Text)||AddPdfWaterMark_UseFileNameAsMark.Checked) ||
                             !string.IsNullOrEmpty(AddWaterMarkBackGroundImageFileName))
                         {
                             UI.ConvertStart(
@@ -4013,7 +4016,7 @@ namespace DocumentTools
                                 {
                                     string TempExcuteSql = $"ALTER TABLE {TableName} ALTER COLUMN Item Memo";
 
-                                    Util.ExecuteAccessSql(this.Mss3Path.Text, TempExcuteSql);
+                                    Util.ExecuteAccessSql(this.Mss3Path.Text, TempExcuteSql,new  AccessDatabaseFactory());
                                 }
                                 if(ReturnStatusCode != 0)
                                 {
@@ -4046,7 +4049,7 @@ namespace DocumentTools
                                         TempExcuteSql = $"ALTER TABLE {TableName} ALTER COLUMN Item TEXT(50)";
                                     }
 
-                                    Util.ExecuteAccessSql(this.Mss3Path.Text, TempExcuteSql);
+                                    Util.ExecuteAccessSql(this.Mss3Path.Text, TempExcuteSql,new AccessDatabaseFactory());
                                 }
                                 if(ReturnStatusCode != 0)
                                 {
@@ -4316,7 +4319,8 @@ namespace DocumentTools
                                 barcodeCaptionBox.Text,
                                 barcodeCaptionLocationCombox.SelectedIndex,
                                 float.Parse(barcodeCaptionFontSizeBox.Text),
-                                barcodeScanTypeCombox.SelectedIndex);
+                                barcodeScanTypeCombox.SelectedIndex,
+                                barcodeLogoImage: BarCodLogoImageBox.Image);
                             barcodePreviewBox.Image = new Bitmap(tempstream);
                         }
                     } catch(Exception ex)
@@ -4430,7 +4434,8 @@ namespace DocumentTools
                                             barcodeParam_Caption,
                                             barcodeCaptionLocationCombox.SelectedIndex,
                                             float.Parse(barcodeCaptionFontSizeBox.Text),
-                                            barcodeScanTypeCombox.SelectedIndex);
+                                            barcodeScanTypeCombox.SelectedIndex,
+                                            barcodeLogoImage: BarCodLogoImageBox.Image);
                                     }
                                 }
 
@@ -5513,12 +5518,21 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                 {
                     if(ExamFileText.Text != string.Empty)
                     {
+                        string ExamFileExtension = Path.GetExtension(ExamFileText.Text);
                         try
                         {
+                            DataTable TempTable = new DataTable();
                             //获取数据库内的报表和考评表信息
-                            DataTable TempTable = Util.GetExamInfo(ExamFileText.Text);
+                            if (ExamFileExtension==".mdb")
+                            {
+                                TempTable = Util.GetExamInfo(ExamFileText.Text,new AccessDatabaseFactory());
+                            }
+                            else if(ExamFileExtension==".db")
+                            {
+                                TempTable = Util.GetExamInfo(ExamFileText.Text, new SqliteDatabaseFactory());
+                            }
 
-                            if(TempTable != null && TempTable.Rows.Count > 0)
+                            if (TempTable != null && TempTable.Rows.Count > 0)
                             {
                                 VFSOFT_Report_ListView.Items.Clear();//加载之前先清除数据
                                 foreach(DataRow row in TempTable.Rows)
@@ -5563,7 +5577,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
         private void SelectExamFile_Click(object sender, EventArgs e)
         {
-            string ExamFile = Util.ShowSelectDialog(false, false, "MDB文件", "*.mdb", vfsoft_examdata_path_textbox.Text)
+            string ExamFile = Util.ShowSelectDialog(false, false, "数据库文件", "*.mdb;*.db", vfsoft_examdata_path_textbox.Text)
                 .FirstOrDefault();
 
             if(string.Compare(ExamFile, default, StringComparison.Ordinal) != 0 && ExamFile != string.Empty)
@@ -5584,20 +5598,81 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
                 if(ExamFileText.Text != string.Empty && selectedExamId != string.Empty)
                 {
+                    string ExamFileExtension = Path.GetExtension(ExamFileText.Text);
+                    
                     List<string> selectedExamItems = await Task.Run(
-                        () => Util.GetExamItemsAndExamSelectors(ExamFileText.Text, selectedExamId))
+                        () =>
+                        {
+                            List<string> TempLists = new List<string>();
+
+                            if(ExamFileExtension==".mdb")
+                            {
+                                TempLists = Util.GetExamItemsAndExamSelectors(ExamFileText.Text, selectedExamId,new AccessDatabaseFactory());
+                                
+                            }
+                            else if(ExamFileExtension==".db")
+                            {
+                                TempLists = Util.GetExamItemsAndExamSelectors(ExamFileText.Text, selectedExamId, new SqliteDatabaseFactory());
+                            }
+
+                            return TempLists;
+                        })
                         .ConfigureAwait(true);
 
                     DataTable selectedExamRaidInfoTable = await Task.Run(
-                        () => Util.GetExamRaidInfo(ExamFileText.Text, selectedExamId))
+                        () =>
+                        {
+                            DataTable TempDataTable = new DataTable();
+
+                            if (ExamFileExtension == ".mdb")
+                            {
+                                TempDataTable = Util.GetExamRaidInfo(ExamFileText.Text, selectedExamId,new AccessDatabaseFactory());
+
+                            }
+                            else if (ExamFileExtension == ".db")
+                            {
+                                TempDataTable = Util.GetExamRaidInfo(ExamFileText.Text, selectedExamId, new SqliteDatabaseFactory());
+
+                            }
+
+                            return TempDataTable;
+                        })
                         .ConfigureAwait(true);
 
                     List<string> selectedReportItems = await Task.Run(
-                        () => Util.GetReportItems(ExamFileText.Text, selectedReportId))
+                        () =>
+                        {
+                            List<string> TempLists = new List<string>();
+
+                            if (ExamFileExtension == ".mdb")
+                            {
+                                TempLists = Util.GetReportItems(ExamFileText.Text, selectedReportId, new AccessDatabaseFactory());
+                            }
+                            else if (ExamFileExtension == ".db")
+                            {
+                                TempLists = Util.GetReportItems(ExamFileText.Text, selectedReportId, new SqliteDatabaseFactory());
+                            }
+
+                            return TempLists;
+                        })
                         .ConfigureAwait(true);
 
                     var selectedReportColsAndRows = await Task.Run(
-                        () => Util.GetExamReportColumnsAndRows(ExamFileText.Text, selectedReportId))
+                        () =>
+                        {
+                            (List<int> report_cols, List<int> report_rows) TempTuple = (null,null);
+
+                            if(ExamFileExtension==".mdb")
+                            {
+                                TempTuple = Util.GetExamReportColumnsAndRows(ExamFileText.Text, selectedReportId,new AccessDatabaseFactory());
+                                
+                            }
+                            else if(ExamFileExtension==".db")
+                            {
+                                TempTuple = Util.GetExamReportColumnsAndRows(ExamFileText.Text, selectedReportId, new SqliteDatabaseFactory());
+                            }
+                            return TempTuple;
+                        })
                         .ConfigureAwait(true);
 
                     List<string> SortedselectedExamItems = new List<string>(selectedExamItems);
@@ -5608,7 +5683,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                     TempExamReportItemLists = selectedExamItems;
                     TempExamReportItemLists_NoSort = new List<string>(selectedExamItems);
                     ExamReportRowMode_ExamList.DataSource = new List<string>(selectedExamItems);
-                    ExamRaidInfoCombox.DataSource = selectedExamRaidInfoTable;
+                    ExamRaidInfoCombox.DataSource = selectedExamRaidInfoTable.AsEnumerable().Take(selectedExamRaidInfoTable.Rows.Count - 1).CopyToDataTable();
                     ExamRaidInfoCombox.DisplayMember = "RaidShow";
                     ExamRaidInfoCombox.ValueMember = "RaidValue";
                     ExamReportParaRaidInfo_Combox.DataSource = selectedExamRaidInfoTable.Copy();
@@ -5638,9 +5713,25 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
                 if(ExamFileText.Text != string.Empty && selectedExamId != string.Empty)
                 {
+                    string ExamFileExtension = Path.GetExtension(ExamFileText.Text);
                     List<string> selectedExamItemsSelectors = await Task.Run(
-                        () => Util.GetExamItems_Selectors(ExamFileText.Text, selectedExamId, ExamItemsCombox.Text))
+                        () =>
+                        {
+                            List<string> TempLists = new List<string>();
+
+                            if(ExamFileExtension==".mdb")
+                            {
+                                TempLists = Util.GetExamItems_Selectors(ExamFileText.Text, selectedExamId, ExamItemsCombox.Text,new AccessDatabaseFactory());
+                            }
+                            else if(ExamFileExtension==".db")
+                            {
+                                TempLists = Util.GetExamItems_Selectors(ExamFileText.Text, selectedExamId, ExamItemsCombox.Text, new SqliteDatabaseFactory());
+                            }
+                            return TempLists;
+                        }
+                        )
                         .ConfigureAwait(true);
+                    
                     ExamItemsSelectorsCombox.DataSource = selectedExamItemsSelectors;
 
                     if(ExamReportItems.SelectedIndex != 0)
@@ -5683,6 +5774,8 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
                                 if(ExamFileText.Text != string.Empty && selectedReportId != string.Empty)
                                 {
+                                    string ExamFileExtension = Path.GetExtension(ExamFileText.Text);
+
                                     if(ExamReportItems.SelectedIndex == 0)
                                     {
                                         SqlStrings = Util.ChangeExamReportContent(
@@ -5718,9 +5811,19 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                                         foreach(string UpdateString in SqlStrings)
                                         {
                                             Debug.WriteLine(UpdateString);
-                                            var (_, Connection) = Util.ExecuteAccessSql(ExamFileText.Text, UpdateString);
 
-                                            Connection.Close();
+                                            (int TempRows, DbConnection TempConnection) TempBaseEnty = (0,null);
+
+                                            if(ExamFileExtension==".mdb")
+                                            {
+                                                TempBaseEnty = Util.ExecuteAccessSql(ExamFileText.Text, UpdateString,new AccessDatabaseFactory());
+                                            }
+                                            else if(ExamFileExtension==".db")
+                                            {
+                                                TempBaseEnty = Util.ExecuteAccessSql(ExamFileText.Text, UpdateString, new SqliteDatabaseFactory());
+                                            }
+
+                                            TempBaseEnty.TempConnection.Close();
 
                                             ExamReportChangeProgress.PerformStep();
                                         }
@@ -6136,14 +6239,44 @@ IPGATEWAY:'{set_interface_gateway.Text}',
             {
                 if(ChooseExamFileTextBox.Text != string.Empty)
                 {
+                    string ExamFileExtension = Path.GetExtension(ChooseExamFileTextBox.Text);
                     List<string> UnitComputerNames = await Task.Run(
-                        () => Util.GetUnitExamComputerName(ChooseExamFileTextBox.Text))
+                        () => 
+                        {
+                            List<string> TempLists = new List<string>();
+
+                            if(ExamFileExtension==".mdb" || ExamFileExtension==".exam")
+                            {
+                                TempLists = Util.GetUnitExamComputerName(ChooseExamFileTextBox.Text,new AccessDatabaseFactory());
+                            }
+                            else if(ExamFileExtension==".db")
+                            {
+                                TempLists = Util.GetUnitExamComputerName(ChooseExamFileTextBox.Text, new SqliteDatabaseFactory());
+                            }
+
+                            return TempLists;
+
+                        })
                         .ConfigureAwait(true);
 
                     ExamComputerNames.DataSource = UnitComputerNames;
 
                     List<string> UnitPicPaths = await Task.Run(
-                        () => Util.GetUnitExamPicPath(ChooseExamFileTextBox.Text))
+                        () => 
+                        {
+                            List<string> TempLists = new List<string>();
+
+                            if (ExamFileExtension == ".mdb" || ExamFileExtension == ".exam")
+                            {
+                                TempLists = Util.GetUnitExamPicPath(ChooseExamFileTextBox.Text, new AccessDatabaseFactory());
+                            }
+                            else if (ExamFileExtension == ".db")
+                            {
+                                TempLists = Util.GetUnitExamPicPath(ChooseExamFileTextBox.Text, new SqliteDatabaseFactory());
+                            }
+
+                            return TempLists;
+                        })
                         .ConfigureAwait(true);
 
                     ExamPicPathCombox.DataSource = UnitPicPaths;
@@ -6176,18 +6309,33 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                             try
                             {
                                 (sender as Button).Enabled = false;
+                                string ExamFileExtension = Path.GetExtension(ChooseExamFileTextBox.Text);
 
-                                if(ChangeExamCompNameSelect.Checked)
+                                if (ChangeExamCompNameSelect.Checked)
                                 {
                                     string UpdateString = Util.ChangeUnitExamComputerName(
                                         ExamComputerNames.SelectedItem.ToString(),
                                         ExamComputerChangeName.Text);
 
-                                    var (_, Connection) = Util.ExecuteAccessSql(
-                                        ChooseExamFileTextBox.Text,
-                                        UpdateString);
+                                    (int TempRow, DbConnection TempConnection) TempBaseEnty = (0,null);
 
-                                    Connection.Close();
+                                    if(ExamFileExtension==".mdb")
+                                    {
+                                        TempBaseEnty = Util.ExecuteAccessSql(
+                                        ChooseExamFileTextBox.Text,
+                                        UpdateString,
+                                        new AccessDatabaseFactory());
+                                    }
+                                    else if(ExamFileExtension==".db")
+                                    {
+                                        TempBaseEnty = Util.ExecuteAccessSql(
+                                        ChooseExamFileTextBox.Text,
+                                        UpdateString,
+                                        new SqliteDatabaseFactory());
+                                    }
+
+                                    TempBaseEnty.TempConnection.Close();
+
                                     this.BeginInvoke(
                                         new Action(
                                             () =>
@@ -6214,11 +6362,25 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                                             ExamPicPathCombox.SelectedItem.ToString(),
                                             TempModifyPicPath);
 
-                                        var (_, Connection) = Util.ExecuteAccessSql(
-                                            ChooseExamFileTextBox.Text,
-                                            UpdateString);
+                                        (int TempRow, DbConnection TempConnection) TempBaseEnty = (0, null);
 
-                                        Connection.Close();
+                                        if (ExamFileExtension == ".mdb")
+                                        {
+                                            TempBaseEnty = Util.ExecuteAccessSql(
+                                            ChooseExamFileTextBox.Text,
+                                            UpdateString,
+                                            new AccessDatabaseFactory());
+                                        }
+                                        else if (ExamFileExtension == ".db")
+                                        {
+                                            TempBaseEnty = Util.ExecuteAccessSql(
+                                            ChooseExamFileTextBox.Text,
+                                            UpdateString,
+                                            new SqliteDatabaseFactory());
+                                        }
+
+                                        TempBaseEnty.TempConnection.Close();
+
                                         this.BeginInvoke(
                                             new Action(
                                                 () =>
@@ -6291,7 +6453,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
         {
             if(ExamRaidInfoCombox.Items.Count > 0)
             {
-                MainToolsTip.SetToolTip(ExamRaidInfoCombox, $"[共有{ExamRaidInfoCombox.Items.Count}个主体]");
+                MainToolsTip.SetToolTip(ExamRaidInfoCombox, $"[共有{ExamRaidInfoCombox.Items.Count - 1}个主体]");
             }
         }
 
@@ -6532,7 +6694,11 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
                                     if(ExamFileText.Text != string.Empty && ExamReportId != string.Empty)
                                     {
-                                        Util.ChangeExamReportParaContent(
+                                        string ExamFileExtension = Path.GetExtension(ExamFileText.Text);
+
+                                        if (ExamFileExtension == ".mdb")
+                                        {
+                                            Util.ChangeExamReportParaContent(
                                             ExamFileText.Text,
                                             ExamReportId,
                                             ExamReportPara_RowMode.Checked,
@@ -6552,7 +6718,36 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                                             ExamReportColMode_ExamBox.Text,
                                             ExamReportColMode_ExamSelectorBox.Text,
                                             ExamReportRowMode_ExamItemInsertSame.Checked,
-                                            ExamReportParaChangeProcessBar);
+                                            ExamReportParaChangeProcessBar,
+                                            new AccessDatabaseFactory());
+                                        }
+                                        else if(ExamFileExtension==".db")
+                                        {
+                                            Util.ChangeExamReportParaContent(
+                                            ExamFileText.Text,
+                                            ExamReportId,
+                                            ExamReportPara_RowMode.Checked,
+                                            ExamReportParaDataFormat_Combox.SelectedItem.ToString(),
+                                            ExamReportParaRaidInfo_Combox.SelectedValue.ToString(),
+                                            ExamReportParaDataFormatReverse_Combox.SelectedIndex.ToString(),
+                                            ExamReportParaDataFormatFont_Box.Text,
+                                            ExamReportRowMode_Row_Combox.Text,
+                                            ExamReportRowMode_Col_Start_Combox.Text,
+                                            ExamReportRowMode_Col_End_Combox.Text,
+                                            ExamReportRowMode_ExamList.Text,
+                                            ExamReportRowMode_ExamSelectorBox.Text,
+                                            ExamReportRowMode_ExamSelectorInsertSame.Checked,
+                                            ExamReportColMode_Col_Combox.Text,
+                                            ExamReportColMode_Row_Start_Combox.Text,
+                                            ExamReportColMode_Row_End_Combox.Text,
+                                            ExamReportColMode_ExamBox.Text,
+                                            ExamReportColMode_ExamSelectorBox.Text,
+                                            ExamReportRowMode_ExamItemInsertSame.Checked,
+                                            ExamReportParaChangeProcessBar,
+                                            new SqliteDatabaseFactory());
+                                        }
+
+                                        
 
                                         this.BeginInvoke(
                                             new Action(
@@ -8090,10 +8285,22 @@ IPGATEWAY:'{set_interface_gateway.Text}',
             {
                 if(!string.IsNullOrEmpty(InsertExam_SelectFilePath.Text) && File.Exists(InsertExam_SelectFilePath.Text))
                 {
+                    string ExamFileExtension = Path.GetExtension(InsertExam_SelectFilePath.Text);
                     DataTable TempExamBaseInfoDataTable = await Task.Run(
                         () =>
                         {
-                            return Util.GetExamBaseInfo(InsertExam_SelectFilePath.Text);
+                            DataTable TempDataTable = new DataTable();
+
+                            if(ExamFileExtension==".mdb")
+                            {
+                                TempDataTable =  Util.GetExamBaseInfo(InsertExam_SelectFilePath.Text,new AccessDatabaseFactory());
+                            }
+                            else if(ExamFileExtension==".db")
+                            {
+                                TempDataTable = Util.GetExamBaseInfo(InsertExam_SelectFilePath.Text, new SqliteDatabaseFactory());
+                            }
+
+                            return TempDataTable;
                         });
 
                     InsertExamTableView.DataSource = TempExamBaseInfoDataTable;
@@ -8109,110 +8316,128 @@ IPGATEWAY:'{set_interface_gateway.Text}',
             }
         }
 
-        private void InsertExamItemAndSelctor_StartInsert_Click(object sender, EventArgs e)
-        {
-            if(!string.IsNullOrEmpty(InsertExam_SelectFilePath.Text) &&
-                !string.IsNullOrEmpty(InsertExamBaseInfo_ExamTableName.Text))
-            {
-                string GetExamTableName = $"SELECT ExamName FROM Exam_EssInfo WHERE ExamName='{InsertExamBaseInfo_ExamTableName.Text}'";
+        //private void InsertExamItemAndSelctor_StartInsert_Click(object sender, EventArgs e)
+        //{
+        //    if(!string.IsNullOrEmpty(InsertExam_SelectFilePath.Text) &&
+        //        !string.IsNullOrEmpty(InsertExamBaseInfo_ExamTableName.Text))
+        //    {
+        //        string ExamFileExtension = Path.GetExtension(InsertExam_SelectFilePath.Text);
+        //        string GetExamTableName = $"SELECT ExamName FROM Exam_EssInfo WHERE ExamName='{InsertExamBaseInfo_ExamTableName.Text}'";
 
-                var (TempExamData, TempConnection) = Util.GetAccessDataByOne(
-                    InsertExam_SelectFilePath.Text,
-                    GetExamTableName);
+        //        var (TempExamData, TempConnection) = Util.GetAccessDataByOne(
+        //            InsertExam_SelectFilePath.Text,
+        //            GetExamTableName);
 
-                if(TempExamData != null && TempExamData.ToString() == InsertExamBaseInfo_ExamTableName.Text)
-                {
-                    this.BeginInvoke(
-                        new Action(
-                            () =>
-                            {
-                                MessageBox.Show("该测评表名称已存在，无法添加", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                            }));
-                } else
-                {
-                    List<TextBox> TempExamNames = InsertExam_ExamSet.Controls
-                        .OfType<TextBox>()
-                        .Where(x => !string.IsNullOrEmpty(x.Text))
-                        .ToList();
+        //        if(TempExamData != null && TempExamData.ToString() == InsertExamBaseInfo_ExamTableName.Text)
+        //        {
+        //            this.BeginInvoke(
+        //                new Action(
+        //                    () =>
+        //                    {
+        //                        MessageBox.Show("该测评表名称已存在，无法添加", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+        //                    }));
+        //        } else
+        //        {
+        //            List<TextBox> TempExamNames = InsertExam_ExamSet.Controls
+        //                .OfType<TextBox>()
+        //                .Where(x => !string.IsNullOrEmpty(x.Text))
+        //                .ToList();
 
-                    List<NumericUpDown> TempExamScores = InsertExam_ExamSet.Controls
-                        .OfType<NumericUpDown>()
-                        .Where(x => x.Value >= -1)
-                        .ToList();
+        //            List<NumericUpDown> TempExamScores = InsertExam_ExamSet.Controls
+        //                .OfType<NumericUpDown>()
+        //                .Where(x => x.Value >= -1)
+        //                .ToList();
 
-                    List<TextBox> TempExamSelectorNames = InsertExam_ExamSelectorSet.Controls
-                        .OfType<TextBox>()
-                        .Where(x => !string.IsNullOrEmpty(x.Text))
-                        .ToList();
+        //            List<TextBox> TempExamSelectorNames = InsertExam_ExamSelectorSet.Controls
+        //                .OfType<TextBox>()
+        //                .Where(x => !string.IsNullOrEmpty(x.Text))
+        //                .ToList();
 
-                    List<NumericUpDown> TempExamSelectorPerValues = InsertExam_ExamSelectorSet.Controls
-                        .OfType<NumericUpDown>()
-                        .Where(x => x.Value >= -1)
-                        .ToList();
+        //            List<NumericUpDown> TempExamSelectorPerValues = InsertExam_ExamSelectorSet.Controls
+        //                .OfType<NumericUpDown>()
+        //                .Where(x => x.Value >= -1)
+        //                .ToList();
 
-                    List<CheckBox> TempExamSelectorAvgValues = InsertExam_ExamSelectorSet.Controls
-                        .OfType<CheckBox>()
-                        .ToList();
+        //            List<CheckBox> TempExamSelectorAvgValues = InsertExam_ExamSelectorSet.Controls
+        //                .OfType<CheckBox>()
+        //                .ToList();
 
 
-                    JObject TempExamInfoJson = new JObject();
+        //            JObject TempExamInfoJson = new JObject();
 
-                    for(int TempIndex = 0; TempIndex < TempExamNames.Count; TempIndex++)
-                    {
-                        string TempExamName = TempExamNames[TempIndex].Text;
-                        string TempExamScore = TempExamScores[TempIndex].Value.ToString();
+        //            for(int TempIndex = 0; TempIndex < TempExamNames.Count; TempIndex++)
+        //            {
+        //                string TempExamName = TempExamNames[TempIndex].Text;
+        //                string TempExamScore = TempExamScores[TempIndex].Value.ToString();
 
-                        JObject TempExamNameAndScore = new JObject()
-                        {
-                            ["Type"] = "项目",
-                            ["Score"] = TempExamScore,
-                            ["Selectors"] = new JObject()
-                        };
+        //                JObject TempExamNameAndScore = new JObject()
+        //                {
+        //                    ["Type"] = "项目",
+        //                    ["Score"] = TempExamScore,
+        //                    ["Selectors"] = new JObject()
+        //                };
 
-                        for(int TempIndex_Selector = 0; TempIndex_Selector < TempExamSelectorNames.Count; TempIndex_Selector++)
-                        {
-                            string TempSelectorName = TempExamSelectorNames[TempIndex_Selector].Text;
-                            string TempSelectorScorePer = TempExamSelectorPerValues[TempIndex_Selector].Value.ToString();
-                            bool TempSelectorCalcAvg = TempExamSelectorAvgValues[TempIndex_Selector].Checked;
+        //                for(int TempIndex_Selector = 0; TempIndex_Selector < TempExamSelectorNames.Count; TempIndex_Selector++)
+        //                {
+        //                    string TempSelectorName = TempExamSelectorNames[TempIndex_Selector].Text;
+        //                    string TempSelectorScorePer = TempExamSelectorPerValues[TempIndex_Selector].Value.ToString();
+        //                    bool TempSelectorCalcAvg = TempExamSelectorAvgValues[TempIndex_Selector].Checked;
 
-                            JObject TempExamSelectorsInfo = new JObject()
-                            {
-                                ["Type"] = "选项",
-                                ["ScorePer"] = TempSelectorScorePer,
-                                ["CalcAvg"] = TempSelectorCalcAvg
-                            };
-                            (TempExamNameAndScore["Selectors"] as JObject).Add(TempSelectorName, TempExamSelectorsInfo);
-                        }
-                        JObject InvalidObject = new JObject()
-                        {
-                            ["Type"] = "选项",
-                            ["ScorePer"] = InsertExam_SelectorInvalid_ScorePer.Value.ToString(),
-                            ["CalcAvg"] = InsertExam_SelectorInvalid_CacAvg.Checked
-                        };
-                        (TempExamNameAndScore["Selectors"] as JObject).Add("无效", InvalidObject);
+        //                    JObject TempExamSelectorsInfo = new JObject()
+        //                    {
+        //                        ["Type"] = "选项",
+        //                        ["ScorePer"] = TempSelectorScorePer,
+        //                        ["CalcAvg"] = TempSelectorCalcAvg
+        //                    };
+        //                    (TempExamNameAndScore["Selectors"] as JObject).Add(TempSelectorName, TempExamSelectorsInfo);
+        //                }
+        //                JObject InvalidObject = new JObject()
+        //                {
+        //                    ["Type"] = "选项",
+        //                    ["ScorePer"] = InsertExam_SelectorInvalid_ScorePer.Value.ToString(),
+        //                    ["CalcAvg"] = InsertExam_SelectorInvalid_CacAvg.Checked
+        //                };
+        //                (TempExamNameAndScore["Selectors"] as JObject).Add("无效", InvalidObject);
 
-                        JObject AbsTainObject = new JObject()
-                        {
-                            ["Type"] = "选项",
-                            ["ScorePer"] = InsertExam_SelectorAbstain_ScorePer.Value.ToString(),
-                            ["CalcAvg"] = InsertExam_SelectorAbstain_CalcAvg.Checked
-                        };
-                        (TempExamNameAndScore["Selectors"] as JObject).Add("弃权", AbsTainObject);
+        //                JObject AbsTainObject = new JObject()
+        //                {
+        //                    ["Type"] = "选项",
+        //                    ["ScorePer"] = InsertExam_SelectorAbstain_ScorePer.Value.ToString(),
+        //                    ["CalcAvg"] = InsertExam_SelectorAbstain_CalcAvg.Checked
+        //                };
+        //                (TempExamNameAndScore["Selectors"] as JObject).Add("弃权", AbsTainObject);
 
-                        TempExamInfoJson.Add(TempExamName, TempExamNameAndScore);
-                    }
+        //                TempExamInfoJson.Add(TempExamName, TempExamNameAndScore);
+        //            }
 
-                    Util.InsertExamItemAndSelector(
-                        InsertExam_SelectFilePath.Text,
-                        InsertExamBaseInfo_ExamTableName.Text,
-                        InserExamBaseInfo_FlowClassCombox.Text,
-                        TempExamInfoJson,
-                        InsertExam_ProcessTextTip,
-                        InsertExam_ProcessProgressBarTip);
-                    RefreshExamBaseInfoTableView();
-                }
-            }
-        }
+        //            if(ExamFileExtension==".mdb")
+        //            {
+        //                Util.InsertExamItemAndSelector(
+        //                    InsertExam_SelectFilePath.Text,
+        //                    InsertExamBaseInfo_ExamTableName.Text,
+        //                    InserExamBaseInfo_FlowClassCombox.Text,
+        //                    TempExamInfoJson,
+        //                    InsertExam_ProcessTextTip,
+        //                    InsertExam_ProcessProgressBarTip,
+        //                    new AccessDatabaseFactory());
+        //            }
+        //            else if(ExamFileExtension==".db")
+        //            {
+        //                Util.InsertExamItemAndSelector(
+        //                    InsertExam_SelectFilePath.Text,
+        //                    InsertExamBaseInfo_ExamTableName.Text,
+        //                    InserExamBaseInfo_FlowClassCombox.Text,
+        //                    TempExamInfoJson,
+        //                    InsertExam_ProcessTextTip,
+        //                    InsertExam_ProcessProgressBarTip,
+        //                    new SqliteDatabaseFactory());
+        //            }
+
+
+        //            RefreshExamBaseInfoTableView();
+        //        }
+        //    }
+        //}
 
         private void MemroyTimerConrolButton_Click(object sender, EventArgs e)
         {
@@ -8486,6 +8711,8 @@ IPGATEWAY:'{set_interface_gateway.Text}',
             if(!string.IsNullOrEmpty(InsertExam_SelectFilePath.Text) &&
                 !string.IsNullOrEmpty(InsertExamBaseInfo_ExamTableName.Text))
             {
+                string ExamFileExtension = Path.GetExtension(InsertExam_SelectFilePath.Text);
+                
                 DialogResult TempAskResult = MessageBox.Show(
                     "确认要插入考评表数据吗？",
                     "提示",
@@ -8620,13 +8847,28 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
                                         ChangeExamTableNo_Start.Enabled = false;
 
-                                        Util.InsertExamItemAndSelector(
-                                            InsertExam_SelectFilePath.Text,
-                                            InsertExamBaseInfo_ExamTableName.Text,
-                                            InserExamBaseInfo_FlowClassCombox.Text,
-                                            TempExamInfoJson,
-                                            InsertExam_ProcessTextTip,
-                                            InsertExam_ProcessProgressBarTip);
+                                        if (ExamFileExtension == ".mdb")
+                                        {
+                                            Util.InsertExamItemAndSelector(
+                                                InsertExam_SelectFilePath.Text,
+                                                InsertExamBaseInfo_ExamTableName.Text,
+                                                InserExamBaseInfo_FlowClassCombox.Text,
+                                                TempExamInfoJson,
+                                                InsertExam_ProcessTextTip,
+                                                InsertExam_ProcessProgressBarTip,
+                                                new AccessDatabaseFactory());
+                                        }
+                                        else if (ExamFileExtension == ".db")
+                                        {
+                                            Util.InsertExamItemAndSelector(
+                                                InsertExam_SelectFilePath.Text,
+                                                InsertExamBaseInfo_ExamTableName.Text,
+                                                InserExamBaseInfo_FlowClassCombox.Text,
+                                                TempExamInfoJson,
+                                                InsertExam_ProcessTextTip,
+                                                InsertExam_ProcessProgressBarTip,
+                                                new SqliteDatabaseFactory());
+                                        }
 
                                         BeginInvoke(
                                             new Action(
@@ -8720,8 +8962,8 @@ IPGATEWAY:'{set_interface_gateway.Text}',
             string TempMdbFilePathName = Util.ShowSelectDialog(
                 false,
                 false,
-                "mdb文件",
-                "*.mdb",
+                "数据库文件",
+                "*.mdb;*.db",
                 vfsoft_examdata_path_textbox.Text)
                 .FirstOrDefault();
 
@@ -9162,6 +9404,9 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Asterisk);
 
+
+                string ExamFileExtension = Path.GetExtension(InsertExam_SelectFilePath.Text);
+
                 if(TempAskResult == DialogResult.Yes)
                 {
                     StringBuilder TempMessAgeBuilder = new StringBuilder();
@@ -9176,20 +9421,38 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                                 (sender as Button).Enabled = false;
                                 InsertExamItemAndSelctor_StartInsert.Enabled = false;
                                 (sender as Button).Text = "修改中...";
-                                var (TableChangeStatus, TableChangeRecommendExamId) = Util.ChangeTableIndex(
+
+                                (bool TableChangeStatus, int TableChangeRecommendExamId) TempBaseEnty = (false,0);
+
+                                if(ExamFileExtension==".mdb")
+                                {
+                                        TempBaseEnty = Util.ChangeTableIndex(
+                                        InsertExam_SelectFilePath.Text,
+                                        ChangeExamTableNo_OrginTableIndex.Text,
+                                        ChangeExamTableNo_OrginTableNewIndex.Value.ToString(),
+                                        InsertExam_ProcessTextTip,
+                                        new AccessDatabaseFactory());
+                                }
+                                else if(ExamFileExtension==".db")
+                                {
+                                    TempBaseEnty = Util.ChangeTableIndex(
                                     InsertExam_SelectFilePath.Text,
                                     ChangeExamTableNo_OrginTableIndex.Text,
                                     ChangeExamTableNo_OrginTableNewIndex.Value.ToString(),
-                                    InsertExam_ProcessTextTip);
+                                    InsertExam_ProcessTextTip,
+                                    new SqliteDatabaseFactory());
+                                }
 
-                                if(TableChangeStatus)
+
+
+                                if(TempBaseEnty.TableChangeStatus)
                                 {
                                     TempMessAgeBuilder.Append("修改成功");
                                 } else
                                 {
                                     TempTipMessageIcon = MessageBoxIcon.Error;
 
-                                    TempMessAgeBuilder.Append($"修改失败，表序号已存在，推荐设置序号为{TableChangeRecommendExamId}");
+                                    TempMessAgeBuilder.Append($"修改失败，表序号已存在，推荐设置序号为{TempBaseEnty.TableChangeRecommendExamId}");
                                 }
 
                                 BeginInvoke(
@@ -9541,6 +9804,30 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                 {
                 });
             pictureBox5.Image = (Image)Util.GetEmbedResourceObj("xtbb");
+        }
+
+        private void BarCodeLogoImageOpen_Click(object sender, EventArgs e)
+        {
+            IEnumerable<string> LogoImageFile = Util.ShowSelectDialog(false, false, "图片文件","*.jpg;*.jpeg:*.png;*.bmp");
+            
+            string LogoImagePath = LogoImageFile.FirstOrDefault();
+
+            if(!string.IsNullOrEmpty(LogoImagePath))
+            {
+                Bitmap TempLogoImage = new Bitmap(LogoImagePath);
+
+                BarCodLogoImageBox.Image = TempLogoImage;
+            }
+        }
+
+        private void ClearBarcodeLogoImage_Click(object sender, EventArgs e)
+        {
+            BarCodLogoImageBox.Image = null;
+        }
+
+        private void AddPdfWaterMark_UseFileNameAsMark_CheckedChanged(object sender, EventArgs e)
+        {
+            PdfWaterMarkText.Enabled = !AddPdfWaterMark_UseFileNameAsMark.Checked;
         }
     }
 }

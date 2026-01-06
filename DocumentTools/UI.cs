@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -377,11 +377,25 @@ namespace DocumentTools
                                         TempFindReplaceList.Add((TempFindTextBox.Text, TempReplaceTextBox.Text));
                                     }
 
+                                    List<(string, string)> FinalFindReplaceList = new List<(string, string)>();
+
+                                    if (BodyForm.MainForm.WordReplace_OneToOneMode.Checked)
+                                    {
+                                        if (TempIndex < TempFindReplaceList.Count)
+                                        {
+                                            FinalFindReplaceList.Add(TempFindReplaceList[TempIndex]);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        FinalFindReplaceList = TempFindReplaceList;
+                                    }
+
                                     Util.ReplaceDocumentContent(
                                        DocumentsFileName: ListViewFirstColumnText,
                                        SavedDoucmentFileName: ConvertedFileName,
                                        RelaceDocumentType: "WORD",
-                                       FindReplaceTupleList: TempFindReplaceList,
+                                       FindReplaceTupleList: FinalFindReplaceList,
                                        IgnoreFootText: BodyForm.MainForm.IgnoreFootContent.Checked,
                                        NoIgnoreCase: BodyForm.MainForm.IgnoreCase.Checked,
                                        replace_word_fontName: ReplaceWordFontSetting.FontName,
@@ -457,7 +471,11 @@ namespace DocumentTools
                                     BodyForm.MainForm.SplitPdfRange_End.Text.Trim(),
                                     int.Parse(BodyForm.MainForm.SplitPdf_PerPageCount.Value.ToString()),
                                     BodyForm.MainForm.SplitPdf_ByBookMark.Checked,
-                                    BodyForm.MainForm.SplitPdf_Single.Checked);
+                                    BodyForm.MainForm.SplitPdf_Single.Checked,
+                                    BodyForm.MainForm.SplitePdf_DeletePdfPages.Checked,
+                                    int.Parse(BodyForm.MainForm.SplitePdf_DeletePdfPages_Start.Text),
+                                    int.Parse(BodyForm.MainForm.SplitePdf_DeletePdfPages_End.Text)
+                                    );
                                 break;
                             // pdf添加水印
                             case ConvertFileType.AddWaterMarkPdf:
@@ -480,7 +498,9 @@ namespace DocumentTools
                                     (int)BodyForm.MainForm.AddPdfWaterMark_FullScren_VerDmi.Value,
                                     BodyForm.MainForm.AddPdfWater_CustomPostion.Checked,
                                     (double)BodyForm.MainForm.AddPdfWater_CustomPostion_X.Value,
-                                    (double)BodyForm.MainForm.AddPdfWater_CustomPostion_Y.Value
+                                    (double)BodyForm.MainForm.AddPdfWater_CustomPostion_Y.Value,
+                                    BodyForm.MainForm.AddPdfWaterMark_UseFileNameAsMark.Checked,
+                                    BodyForm.MainForm.AddPdfWaterMark_WaterMarkUnderContent.Checked
                                     );
                                 break;
                             // pdf移除水印
