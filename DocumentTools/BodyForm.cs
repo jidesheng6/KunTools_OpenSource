@@ -7012,7 +7012,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
             return AddedControl;
         }
 
-        private void WordReplaceAddFind_Click(object sender, EventArgs e)
+        private void AddSingleWordFindReplaceControl()
         {
             DynamicAddControlParams.WORDFINDREPLACE_FIND_NAME_INDEX++;
             //DynamicAddControlParams.WORDFINDREPLACE_FINDREPLACE_LOCATION_Y += 25;
@@ -7048,20 +7048,102 @@ IPGATEWAY:'{set_interface_gateway.Text}',
             DynamicAddControlParams.WordFindReplace_ReplaceControl_Lists.Add(TempReplaceTextBox);
         }
 
-        private void WordReplaceRemoveFind_Click(object sender, EventArgs e)
+        private void RemoveSingleWordFindReplaceControl()
         {
-            if(DynamicAddControlParams.WordFindReplace_FindControl_Lists.Count > 0)
+            if (DynamicAddControlParams.WordFindReplace_FindControl_Lists.Count > 0)
             {
                 Control LastControl = DynamicAddControlParams.WordFindReplace_FindControl_Lists.Last();
                 WordReplaceFindPanel.Controls.Remove(LastControl);
                 DynamicAddControlParams.WordFindReplace_FindControl_Lists.Remove(LastControl);
             }
 
-            if(DynamicAddControlParams.WordFindReplace_ReplaceControl_Lists.Count > 0)
+            if (DynamicAddControlParams.WordFindReplace_ReplaceControl_Lists.Count > 0)
             {
                 Control LastControl = DynamicAddControlParams.WordFindReplace_ReplaceControl_Lists.Last();
                 WordReplaceReplacePanel.Controls.Remove(LastControl);
                 DynamicAddControlParams.WordFindReplace_ReplaceControl_Lists.Remove(LastControl);
+            }
+        }
+
+        private void WordReplaceAddFind_Click(object sender, EventArgs e)
+        {
+            if (WordReplace_OneToOneMode.Checked)
+            {
+                ContextMenuStrip cms = new ContextMenuStrip();
+
+                cms.Items.Add("粘贴查找替换内容(双列文本)", null, (s, ev) =>
+                {
+                    string text = Clipboard.GetText();
+                    if (string.IsNullOrEmpty(text)) return;
+                    string[] lines = text.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+
+                    int fileCount = ReplaceWordFileList.Items.Count;
+                    // Limit processing to the number of files
+                    int processCount = Math.Min(lines.Length, fileCount);
+
+                    for (int i = 0; i < processCount; i++)
+                    {
+                        string line = lines[i];
+                        // Ignore lines that do not have at least two columns separated by tab
+                        if (!line.Contains("\t")) continue;
+
+                        string[] parts = line.Split(new[] { '\t' }, 2);
+                        string findText = parts[0];
+                        string replaceText = parts.Length > 1 ? parts[1] : "";
+
+                        if (i == 0)
+                        {
+                            WordReplaceFindTextBox.Text = findText;
+                            WordReplaceTextBox.Text = replaceText;
+                        }
+                        else
+                        {
+                            int dynamicIndex = i - 1;
+
+                            // Add control if needed
+                            if (dynamicIndex >= DynamicAddControlParams.WordFindReplace_FindControl_Lists.Count)
+                            {
+                                AddSingleWordFindReplaceControl();
+                            }
+
+                            DynamicAddControlParams.WordFindReplace_FindControl_Lists[dynamicIndex].Text = findText;
+                            DynamicAddControlParams.WordFindReplace_ReplaceControl_Lists[dynamicIndex].Text = replaceText;
+                        }
+                    }
+                });
+
+                cms.Show(WordReplaceAddFind, new Point(WordReplaceAddFind.Width, 0));
+            }
+            else
+            {
+                AddSingleWordFindReplaceControl();
+            }
+        }
+
+        private void WordReplaceRemoveFind_Click(object sender, EventArgs e)
+        {
+            if (WordReplace_OneToOneMode.Checked)
+            {
+                ContextMenuStrip cms = new ContextMenuStrip();
+
+                cms.Items.Add("批量移除(全部)", null, (s, ev) =>
+                {
+                    while (DynamicAddControlParams.WordFindReplace_FindControl_Lists.Count > 0)
+                    {
+                        RemoveSingleWordFindReplaceControl();
+                    }
+                });
+
+                cms.Items.Add("移除最后一个", null, (s, ev) =>
+                {
+                    RemoveSingleWordFindReplaceControl();
+                });
+
+                cms.Show(WordReplaceRemoveFind, new Point(WordReplaceRemoveFind.Width, 0));
+            }
+            else
+            {
+                RemoveSingleWordFindReplaceControl();
             }
         }
 
