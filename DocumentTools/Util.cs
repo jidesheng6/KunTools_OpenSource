@@ -1,4 +1,4 @@
-﻿using Aspose.BarCode.BarCodeRecognition;
+using Aspose.BarCode.BarCodeRecognition;
 using Aspose.BarCode.Generation;
 using Aspose.Cells;
 using Aspose.Cells.Rendering;
@@ -497,13 +497,31 @@ namespace DocumentTools
             if (NameStorke)
             {
                 //按照姓氏笔画排序
-                CultureInfo cultureInfo = new CultureInfo(133124);
-                Thread.CurrentThread.CurrentCulture = cultureInfo;
-                Array.Sort(ReturnTextList);
+                //使用 0x00020804 (zh-CN 笔画排序)
+                Array.Sort(ReturnTextList, new ChineseStrokeComparer());
             }
 
 
             return ReturnTextList;
+        }
+
+        /// <summary>
+        /// 中文笔画排序比较器
+        /// </summary>
+        private class ChineseStrokeComparer : IComparer<string>
+        {
+            private readonly CompareInfo _compareInfo;
+
+            public ChineseStrokeComparer()
+            {
+                // 0x00020804 是中文(简体，中国) 笔画排序的 LCID
+                _compareInfo = new CultureInfo(0x00020804).CompareInfo;
+            }
+
+            public int Compare(string x, string y)
+            {
+                return _compareInfo.Compare(x, y);
+            }
         }
 
         /// <summary>

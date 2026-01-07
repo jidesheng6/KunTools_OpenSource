@@ -7670,7 +7670,7 @@ namespace DocumentTools
             this.WordReplaceAddFind.Size = new System.Drawing.Size(117, 22);
             this.WordReplaceAddFind.TabIndex = 1;
             this.WordReplaceAddFind.Tag = "anchor_left_bottom";
-            this.WordReplaceAddFind.Text = "新增查找替换内容";
+            this.WordReplaceAddFind.Text = " ";
             this.WordReplaceAddFind.UseVisualStyleBackColor = true;
             this.WordReplaceAddFind.Click += new System.EventHandler(this.WordReplaceAddFind_Click);
             // 

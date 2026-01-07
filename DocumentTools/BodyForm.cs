@@ -533,6 +533,9 @@ namespace DocumentTools
 
             //设置功能搜索直达的自动完成数据源
             InitMenuNameAutoCompleteSource();
+            //自动绑定菜单到TabPage
+            BindMenuToTabPages();
+
             //this.MenuSearchTextBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             //this.MenuSearchTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
             //this.MenuSearchTextBox.AutoCompleteCustomSource = MenuStringSource;
@@ -5315,6 +5318,48 @@ IPGATEWAY:'{set_interface_gateway.Text}',
             return PageIndex;
         }
 
+        private void BindMenuToTabPages()
+        {
+            foreach (ToolStripItem item in menuStrip1.Items)
+            {
+                BindMenuItemRecursive(item);
+            }
+        }
+
+        private void BindMenuItemRecursive(ToolStripItem item)
+        {
+            if (item is ToolStripMenuItem menuItem)
+            {
+                // Check if a TabPage with the same text exists
+                // Strip '&' which is used for accelerator keys in menus
+                string menuText = menuItem.Text.Replace("&", "");
+                
+                foreach (TabPage page in MainTabPage.TabPages)
+                {
+                    if (string.Compare(page.Text, menuText, StringComparison.OrdinalIgnoreCase) == 0)
+                    {
+                        // Bind click event
+                        // We use += so if there are existing handlers, they still run.
+                        // But since SelectedTab assignment is idempotent, it's safe.
+                        menuItem.Click += (s, e) => 
+                        { 
+                            MainTabPage.SelectedTab = page; 
+                        };
+                        break;
+                    }
+                }
+
+                // Recursively check dropdown items
+                if (menuItem.HasDropDownItems)
+                {
+                    foreach (ToolStripItem subItem in menuItem.DropDownItems)
+                    {
+                        BindMenuItemRecursive(subItem);
+                    }
+                }
+            }
+        }
+
         private void BodyForm_Resize(object sender, EventArgs e)
         {
             bodyform_width.Text = this.Width.ToString();
@@ -5323,6 +5368,19 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
         private void MainTabPage_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // 自动调用初始化逻辑：OnTabSelected_{TabPage.Name}
+            // 这样新增页面时，只需要定义一个 OnTabSelected_页面控件名 的方法即可，无需在此处添加 if 判断
+            if (MainTabPage.SelectedTab != null && !string.IsNullOrEmpty(MainTabPage.SelectedTab.Name))
+            {
+                string methodName = $"OnTabSelected_{MainTabPage.SelectedTab.Name}";
+                MethodInfo method = this.GetType().GetMethod(methodName, 
+                    BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+                if (method != null)
+                {
+                    method.Invoke(this, null);
+                }
+            }
+
             if(MainTabPage.SelectedIndex == GetTabPageIndex("网卡设置"))
             {
                 UpdateNetworkList();
