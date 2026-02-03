@@ -1,6 +1,6 @@
 ﻿namespace DocumentTools
 {
-    internal enum ConvertFileType
+    public  enum ConvertFileType
     {
         Word2Pdf,
         Pdf2Word,

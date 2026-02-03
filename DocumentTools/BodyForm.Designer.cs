@@ -497,6 +497,7 @@ namespace DocumentTools
             this.CompressImageFileList = new System.Windows.Forms.ListView();
             this.TabPage_10 = new System.Windows.Forms.TabPage();
             this.WordTextReplace_SaveSourceBox = new System.Windows.Forms.CheckBox();
+            this.WordReplace_OneToOneMode = new System.Windows.Forms.CheckBox();
             this.WordReplace_UseRegextSub = new System.Windows.Forms.CheckBox();
             this.WordReplace_IgnoreShapes = new System.Windows.Forms.CheckBox();
             this.WordReplace_IgnoreInsert = new System.Windows.Forms.CheckBox();
@@ -520,7 +521,6 @@ namespace DocumentTools
             this.WordReplaceFindPanel = new System.Windows.Forms.Panel();
             this.WordReplaceFindTextBox = new System.Windows.Forms.TextBox();
             this.IgnoreFootContent = new System.Windows.Forms.CheckBox();
-            this.WordReplace_OneToOneMode = new System.Windows.Forms.CheckBox();
             this.IgnoreCase = new System.Windows.Forms.CheckBox();
             this.ReplaceWordContentStatusText = new System.Windows.Forms.Label();
             this.ReplaceWordContentButton = new System.Windows.Forms.Button();
@@ -1163,6 +1163,30 @@ namespace DocumentTools
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.TabPage_43 = new System.Windows.Forms.TabPage();
+            this.ExamDataPakOrder_UnitList = new System.Windows.Forms.GroupBox();
+            this.ExamDataPakOrder_UnitListView = new System.Windows.Forms.DataGridView();
+            this.ExamDataPackUnitOrder_Up = new System.Windows.Forms.Button();
+            this.ExamDataPackUnitOrder_Down = new System.Windows.Forms.Button();
+            this.ExamDataPakOrder_Modify = new System.Windows.Forms.Button();
+            this.ExamDataPakOrder_Select = new System.Windows.Forms.Button();
+            this.ExamDataPakOrder_Path = new System.Windows.Forms.TextBox();
+            this.label235 = new System.Windows.Forms.Label();
+            this.groupBox80 = new System.Windows.Forms.GroupBox();
+            this.ExamMergeDataPak_CopyExam = new System.Windows.Forms.CheckBox();
+            this.ExamMergeDataPak_TargetSelect = new System.Windows.Forms.Button();
+            this.ExamMergeDataPak_TargetPath = new System.Windows.Forms.TextBox();
+            this.label237 = new System.Windows.Forms.Label();
+            this.ExamMergeDataPak_MergeButton = new System.Windows.Forms.Button();
+            this.ExamMergeDataPak_SourceSelect = new System.Windows.Forms.Button();
+            this.ExamMergeDataPak_SourcePath = new System.Windows.Forms.TextBox();
+            this.label236 = new System.Windows.Forms.Label();
+            this.groupBox79 = new System.Windows.Forms.GroupBox();
+            this.ExamRestDataPakReset = new System.Windows.Forms.Button();
+            this.label234 = new System.Windows.Forms.Label();
+            this.ExamRestDataPakSelect = new System.Windows.Forms.Button();
+            this.ExamRestDataPakPath = new System.Windows.Forms.TextBox();
+            this.label233 = new System.Windows.Forms.Label();
             this.SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.ListViewRightMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.列表操作ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1375,6 +1399,7 @@ namespace DocumentTools
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem12 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem13 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ExamDataPakOrder_Refresh = new System.Windows.Forms.Button();
             this.MainTabPage.SuspendLayout();
             this.TabPage_01.SuspendLayout();
             this.TabPage_02.SuspendLayout();
@@ -1556,6 +1581,11 @@ namespace DocumentTools
             ((System.ComponentModel.ISupportInitialize)(this.Man_WhatCanISay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox3.SuspendLayout();
+            this.TabPage_43.SuspendLayout();
+            this.ExamDataPakOrder_UnitList.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ExamDataPakOrder_UnitListView)).BeginInit();
+            this.groupBox80.SuspendLayout();
+            this.groupBox79.SuspendLayout();
             this.ListViewRightMenu.SuspendLayout();
             this.TreeViewContentMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainFormError)).BeginInit();
@@ -1615,6 +1645,7 @@ namespace DocumentTools
             this.MainTabPage.Controls.Add(this.TabPage_36);
             this.MainTabPage.Controls.Add(this.TabPage_37);
             this.MainTabPage.Controls.Add(this.TabPage_08);
+            this.MainTabPage.Controls.Add(this.TabPage_43);
             this.MainTabPage.ItemSize = new System.Drawing.Size(70, 20);
             this.MainTabPage.Location = new System.Drawing.Point(0, 27);
             this.MainTabPage.Margin = new System.Windows.Forms.Padding(1);
@@ -1654,11 +1685,11 @@ namespace DocumentTools
             this.TabPage_01.Controls.Add(this.ConvertButton);
             this.TabPage_01.Controls.Add(this.ChooseDocButton);
             this.TabPage_01.Controls.Add(this.WordFileListView);
-            this.TabPage_01.Location = new System.Drawing.Point(4, 84);
+            this.TabPage_01.Location = new System.Drawing.Point(4, 104);
             this.TabPage_01.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_01.Name = "TabPage_01";
             this.TabPage_01.Padding = new System.Windows.Forms.Padding(1);
-            this.TabPage_01.Size = new System.Drawing.Size(882, 688);
+            this.TabPage_01.Size = new System.Drawing.Size(882, 668);
             this.TabPage_01.TabIndex = 0;
             this.TabPage_01.Text = "WORD转PDF";
             this.TabPage_01.UseVisualStyleBackColor = true;
@@ -1964,11 +1995,11 @@ namespace DocumentTools
             this.TabPage_02.Controls.Add(this.Convert2DocButton);
             this.TabPage_02.Controls.Add(this.SelectPdfButton);
             this.TabPage_02.Controls.Add(this.PdfFileListView);
-            this.TabPage_02.Location = new System.Drawing.Point(4, 84);
+            this.TabPage_02.Location = new System.Drawing.Point(4, 104);
             this.TabPage_02.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_02.Name = "TabPage_02";
             this.TabPage_02.Padding = new System.Windows.Forms.Padding(1);
-            this.TabPage_02.Size = new System.Drawing.Size(882, 688);
+            this.TabPage_02.Size = new System.Drawing.Size(882, 668);
             this.TabPage_02.TabIndex = 1;
             this.TabPage_02.Text = "PDF转WORD";
             this.TabPage_02.UseVisualStyleBackColor = true;
@@ -2194,10 +2225,10 @@ namespace DocumentTools
             this.TabPage_03.Controls.Add(this.ConvertExcel2PdfButton);
             this.TabPage_03.Controls.Add(this.SelectExcelFileButton);
             this.TabPage_03.Controls.Add(this.ExcelFileListView);
-            this.TabPage_03.Location = new System.Drawing.Point(4, 84);
+            this.TabPage_03.Location = new System.Drawing.Point(4, 104);
             this.TabPage_03.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_03.Name = "TabPage_03";
-            this.TabPage_03.Size = new System.Drawing.Size(882, 688);
+            this.TabPage_03.Size = new System.Drawing.Size(882, 668);
             this.TabPage_03.TabIndex = 2;
             this.TabPage_03.Text = "EXCEL转PDF";
             this.TabPage_03.UseVisualStyleBackColor = true;
@@ -2445,10 +2476,10 @@ namespace DocumentTools
             this.TabPage_07.Controls.Add(this.ConvertPDF2Excel);
             this.TabPage_07.Controls.Add(this.SelectPDF2ExcelButton);
             this.TabPage_07.Controls.Add(this.PDF2ExcelFileView);
-            this.TabPage_07.Location = new System.Drawing.Point(4, 84);
+            this.TabPage_07.Location = new System.Drawing.Point(4, 104);
             this.TabPage_07.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_07.Name = "TabPage_07";
-            this.TabPage_07.Size = new System.Drawing.Size(882, 688);
+            this.TabPage_07.Size = new System.Drawing.Size(882, 668);
             this.TabPage_07.TabIndex = 6;
             this.TabPage_07.Text = "PDF转EXCEL";
             this.TabPage_07.UseVisualStyleBackColor = true;
@@ -2583,11 +2614,11 @@ namespace DocumentTools
             this.TabPage_20.Controls.Add(this.ConvertPPT2PDF);
             this.TabPage_20.Controls.Add(this.SelectPPT2PdfFile);
             this.TabPage_20.Controls.Add(this.PPT2PdfFileList);
-            this.TabPage_20.Location = new System.Drawing.Point(4, 84);
+            this.TabPage_20.Location = new System.Drawing.Point(4, 104);
             this.TabPage_20.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_20.Name = "TabPage_20";
             this.TabPage_20.Padding = new System.Windows.Forms.Padding(1);
-            this.TabPage_20.Size = new System.Drawing.Size(882, 688);
+            this.TabPage_20.Size = new System.Drawing.Size(882, 668);
             this.TabPage_20.TabIndex = 19;
             this.TabPage_20.Tag = "anchor_left_bottom";
             this.TabPage_20.Text = "PPT转PDF";
@@ -2789,10 +2820,10 @@ namespace DocumentTools
             this.TabPage_21.Controls.Add(this.ConvertPDF2PPT);
             this.TabPage_21.Controls.Add(this.SelectConvertPDF2PPT);
             this.TabPage_21.Controls.Add(this.PDF2PPTFileList);
-            this.TabPage_21.Location = new System.Drawing.Point(4, 84);
+            this.TabPage_21.Location = new System.Drawing.Point(4, 104);
             this.TabPage_21.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_21.Name = "TabPage_21";
-            this.TabPage_21.Size = new System.Drawing.Size(882, 688);
+            this.TabPage_21.Size = new System.Drawing.Size(882, 668);
             this.TabPage_21.TabIndex = 20;
             this.TabPage_21.Text = "PDF转PPT";
             this.TabPage_21.UseVisualStyleBackColor = true;
@@ -2961,11 +2992,11 @@ namespace DocumentTools
             this.TabPage_14.Controls.Add(this.MergeWordFile);
             this.TabPage_14.Controls.Add(this.SelectMergeWordFiles);
             this.TabPage_14.Controls.Add(this.MergeWordFileList);
-            this.TabPage_14.Location = new System.Drawing.Point(4, 84);
+            this.TabPage_14.Location = new System.Drawing.Point(4, 104);
             this.TabPage_14.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_14.Name = "TabPage_14";
             this.TabPage_14.Padding = new System.Windows.Forms.Padding(1);
-            this.TabPage_14.Size = new System.Drawing.Size(882, 688);
+            this.TabPage_14.Size = new System.Drawing.Size(882, 668);
             this.TabPage_14.TabIndex = 13;
             this.TabPage_14.Text = "合并WORD";
             this.TabPage_14.UseVisualStyleBackColor = true;
@@ -3039,7 +3070,7 @@ namespace DocumentTools
             this.label23.AutoSize = true;
             this.label23.ForeColor = System.Drawing.Color.Tomato;
             this.label23.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label23.Location = new System.Drawing.Point(6, 721);
+            this.label23.Location = new System.Drawing.Point(6, 781);
             this.label23.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(437, 12);
@@ -3095,10 +3126,10 @@ namespace DocumentTools
             this.TabPage_31.Controls.Add(this.StartSplitWord);
             this.TabPage_31.Controls.Add(this.SelectSplitWordFiles);
             this.TabPage_31.Controls.Add(this.SplitWordFileList);
-            this.TabPage_31.Location = new System.Drawing.Point(4, 84);
+            this.TabPage_31.Location = new System.Drawing.Point(4, 104);
             this.TabPage_31.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_31.Name = "TabPage_31";
-            this.TabPage_31.Size = new System.Drawing.Size(882, 688);
+            this.TabPage_31.Size = new System.Drawing.Size(882, 668);
             this.TabPage_31.TabIndex = 30;
             this.TabPage_31.Text = "拆分WORD";
             this.TabPage_31.UseVisualStyleBackColor = true;
@@ -3371,10 +3402,10 @@ namespace DocumentTools
             this.TabPage_06.Controls.Add(this.meregepdf_clear);
             this.TabPage_06.Controls.Add(this.meregepdf_remove);
             this.TabPage_06.Controls.Add(this.MergePdfFileView);
-            this.TabPage_06.Location = new System.Drawing.Point(4, 84);
+            this.TabPage_06.Location = new System.Drawing.Point(4, 104);
             this.TabPage_06.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_06.Name = "TabPage_06";
-            this.TabPage_06.Size = new System.Drawing.Size(882, 688);
+            this.TabPage_06.Size = new System.Drawing.Size(882, 668);
             this.TabPage_06.TabIndex = 5;
             this.TabPage_06.Text = "合并PDF";
             this.TabPage_06.UseVisualStyleBackColor = true;
@@ -3503,11 +3534,11 @@ namespace DocumentTools
             this.TabPage_17.Controls.Add(this.StartSplitPdf);
             this.TabPage_17.Controls.Add(this.SelectSplitPdf);
             this.TabPage_17.Controls.Add(this.SplitPdfFileList);
-            this.TabPage_17.Location = new System.Drawing.Point(4, 84);
+            this.TabPage_17.Location = new System.Drawing.Point(4, 104);
             this.TabPage_17.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_17.Name = "TabPage_17";
             this.TabPage_17.Padding = new System.Windows.Forms.Padding(1);
-            this.TabPage_17.Size = new System.Drawing.Size(882, 688);
+            this.TabPage_17.Size = new System.Drawing.Size(882, 668);
             this.TabPage_17.TabIndex = 16;
             this.TabPage_17.Text = "拆分PDF";
             this.TabPage_17.UseVisualStyleBackColor = true;
@@ -3850,10 +3881,10 @@ namespace DocumentTools
             this.TabPage_41.Controls.Add(this.SplitPPT_Button);
             this.TabPage_41.Controls.Add(this.SplitPPT_SelectFiles);
             this.TabPage_41.Controls.Add(this.SplitPPTFilesList);
-            this.TabPage_41.Location = new System.Drawing.Point(4, 84);
+            this.TabPage_41.Location = new System.Drawing.Point(4, 104);
             this.TabPage_41.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_41.Name = "TabPage_41";
-            this.TabPage_41.Size = new System.Drawing.Size(882, 688);
+            this.TabPage_41.Size = new System.Drawing.Size(882, 668);
             this.TabPage_41.TabIndex = 31;
             this.TabPage_41.Text = "拆分PPT";
             this.TabPage_41.UseVisualStyleBackColor = true;
@@ -4123,10 +4154,10 @@ namespace DocumentTools
             this.TabPage_18.Controls.Add(this.SelectWaterMarkPdfFiles);
             this.TabPage_18.Controls.Add(this.groupBox18);
             this.TabPage_18.Controls.Add(this.PdfWaterMarkFileList);
-            this.TabPage_18.Location = new System.Drawing.Point(4, 84);
+            this.TabPage_18.Location = new System.Drawing.Point(4, 104);
             this.TabPage_18.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_18.Name = "TabPage_18";
-            this.TabPage_18.Size = new System.Drawing.Size(882, 688);
+            this.TabPage_18.Size = new System.Drawing.Size(882, 668);
             this.TabPage_18.TabIndex = 17;
             this.TabPage_18.Text = "添加PDF水印";
             this.TabPage_18.UseVisualStyleBackColor = true;
@@ -4200,7 +4231,7 @@ namespace DocumentTools
             this.label31.AutoSize = true;
             this.label31.ForeColor = System.Drawing.Color.Tomato;
             this.label31.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.label31.Location = new System.Drawing.Point(273, 1311);
+            this.label31.Location = new System.Drawing.Point(273, 1371);
             this.label31.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(161, 36);
@@ -4739,10 +4770,10 @@ namespace DocumentTools
             this.TabPage_19.Controls.Add(this.RemovePdfWaterMark);
             this.TabPage_19.Controls.Add(this.SelectRemovePdfWaterMarkFiles);
             this.TabPage_19.Controls.Add(this.RemovePdfWaterMarkFileList);
-            this.TabPage_19.Location = new System.Drawing.Point(4, 84);
+            this.TabPage_19.Location = new System.Drawing.Point(4, 104);
             this.TabPage_19.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_19.Name = "TabPage_19";
-            this.TabPage_19.Size = new System.Drawing.Size(882, 688);
+            this.TabPage_19.Size = new System.Drawing.Size(882, 668);
             this.TabPage_19.TabIndex = 18;
             this.TabPage_19.Text = "移除PDF水印";
             this.TabPage_19.UseVisualStyleBackColor = true;
@@ -4859,10 +4890,10 @@ namespace DocumentTools
             this.TabPage_22.Controls.Add(this.ConvertPdfCompliance);
             this.TabPage_22.Controls.Add(this.SelectConvertComplaincePdf);
             this.TabPage_22.Controls.Add(this.ConvertPdfComplianceFileList);
-            this.TabPage_22.Location = new System.Drawing.Point(4, 84);
+            this.TabPage_22.Location = new System.Drawing.Point(4, 104);
             this.TabPage_22.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_22.Name = "TabPage_22";
-            this.TabPage_22.Size = new System.Drawing.Size(882, 688);
+            this.TabPage_22.Size = new System.Drawing.Size(882, 668);
             this.TabPage_22.TabIndex = 21;
             this.TabPage_22.Text = "PDF版本转换";
             this.TabPage_22.UseVisualStyleBackColor = true;
@@ -5001,10 +5032,10 @@ namespace DocumentTools
             this.TabPage_15.Controls.Add(this.ConvertWord2Excel);
             this.TabPage_15.Controls.Add(this.SelectWord2ExcelFiles);
             this.TabPage_15.Controls.Add(this.Word2ExcelFileList);
-            this.TabPage_15.Location = new System.Drawing.Point(4, 84);
+            this.TabPage_15.Location = new System.Drawing.Point(4, 104);
             this.TabPage_15.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_15.Name = "TabPage_15";
-            this.TabPage_15.Size = new System.Drawing.Size(882, 688);
+            this.TabPage_15.Size = new System.Drawing.Size(882, 668);
             this.TabPage_15.TabIndex = 14;
             this.TabPage_15.Text = "WORD转EXCEL";
             this.TabPage_15.UseVisualStyleBackColor = true;
@@ -5144,10 +5175,10 @@ namespace DocumentTools
             this.TabPage_16.Controls.Add(this.ConvertExcel2Word);
             this.TabPage_16.Controls.Add(this.SelectExcel2WordFiles);
             this.TabPage_16.Controls.Add(this.Excel2WordFileList);
-            this.TabPage_16.Location = new System.Drawing.Point(4, 84);
+            this.TabPage_16.Location = new System.Drawing.Point(4, 104);
             this.TabPage_16.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_16.Name = "TabPage_16";
-            this.TabPage_16.Size = new System.Drawing.Size(882, 688);
+            this.TabPage_16.Size = new System.Drawing.Size(882, 668);
             this.TabPage_16.TabIndex = 15;
             this.TabPage_16.Text = "EXCEL转WORD";
             this.TabPage_16.UseVisualStyleBackColor = true;
@@ -5296,10 +5327,10 @@ namespace DocumentTools
             this.TabPage_04.Controls.Add(this.ConvertWord2ImageButton);
             this.TabPage_04.Controls.Add(this.ConvertImageList);
             this.TabPage_04.Controls.Add(this.DocumentsListView);
-            this.TabPage_04.Location = new System.Drawing.Point(4, 84);
+            this.TabPage_04.Location = new System.Drawing.Point(4, 104);
             this.TabPage_04.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_04.Name = "TabPage_04";
-            this.TabPage_04.Size = new System.Drawing.Size(882, 688);
+            this.TabPage_04.Size = new System.Drawing.Size(882, 668);
             this.TabPage_04.TabIndex = 3;
             this.TabPage_04.Text = "WORD/PDF/EXCEL转图片";
             this.TabPage_04.UseVisualStyleBackColor = true;
@@ -5533,10 +5564,10 @@ namespace DocumentTools
             this.TabPage_27.Controls.Add(this.ConvertWord2Epub);
             this.TabPage_27.Controls.Add(this.SelectWord2EpubFiles);
             this.TabPage_27.Controls.Add(this.Word2EPUBFileList);
-            this.TabPage_27.Location = new System.Drawing.Point(4, 84);
+            this.TabPage_27.Location = new System.Drawing.Point(4, 104);
             this.TabPage_27.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_27.Name = "TabPage_27";
-            this.TabPage_27.Size = new System.Drawing.Size(882, 688);
+            this.TabPage_27.Size = new System.Drawing.Size(882, 668);
             this.TabPage_27.TabIndex = 26;
             this.TabPage_27.Text = "WORD转EPUB";
             this.TabPage_27.UseVisualStyleBackColor = true;
@@ -5744,10 +5775,10 @@ namespace DocumentTools
             this.TabPage_28.Controls.Add(this.ConvertEpub2Word);
             this.TabPage_28.Controls.Add(this.SelectEpub2WordFiles);
             this.TabPage_28.Controls.Add(this.EPUB2WORDFileList);
-            this.TabPage_28.Location = new System.Drawing.Point(4, 84);
+            this.TabPage_28.Location = new System.Drawing.Point(4, 104);
             this.TabPage_28.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_28.Name = "TabPage_28";
-            this.TabPage_28.Size = new System.Drawing.Size(882, 688);
+            this.TabPage_28.Size = new System.Drawing.Size(882, 668);
             this.TabPage_28.TabIndex = 27;
             this.TabPage_28.Text = "EPUB转WORD";
             this.TabPage_28.UseVisualStyleBackColor = true;
@@ -5876,10 +5907,10 @@ namespace DocumentTools
             this.TabPage_29.Controls.Add(this.ConvertEPUB2PDF);
             this.TabPage_29.Controls.Add(this.SelectEPUB2PDFFiles);
             this.TabPage_29.Controls.Add(this.EPUB2PDFFileList);
-            this.TabPage_29.Location = new System.Drawing.Point(4, 84);
+            this.TabPage_29.Location = new System.Drawing.Point(4, 104);
             this.TabPage_29.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_29.Name = "TabPage_29";
-            this.TabPage_29.Size = new System.Drawing.Size(882, 688);
+            this.TabPage_29.Size = new System.Drawing.Size(882, 668);
             this.TabPage_29.TabIndex = 28;
             this.TabPage_29.Text = "EPUB转PDF";
             this.TabPage_29.UseVisualStyleBackColor = true;
@@ -6008,10 +6039,10 @@ namespace DocumentTools
             this.TabPage_23.Controls.Add(this.ConvertImage2PDF);
             this.TabPage_23.Controls.Add(this.SelectConvertImage2PDF);
             this.TabPage_23.Controls.Add(this.ConvertImage2PDFFileList);
-            this.TabPage_23.Location = new System.Drawing.Point(4, 84);
+            this.TabPage_23.Location = new System.Drawing.Point(4, 104);
             this.TabPage_23.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_23.Name = "TabPage_23";
-            this.TabPage_23.Size = new System.Drawing.Size(882, 688);
+            this.TabPage_23.Size = new System.Drawing.Size(882, 668);
             this.TabPage_23.TabIndex = 22;
             this.TabPage_23.Text = "图片转PDF";
             this.TabPage_23.UseVisualStyleBackColor = true;
@@ -6305,10 +6336,10 @@ namespace DocumentTools
             this.TabPage_30.Controls.Add(this.ConvertHtml2Pdf);
             this.TabPage_30.Controls.Add(this.SelectHtml2PDFFiles);
             this.TabPage_30.Controls.Add(this.HTML2PDFFileList);
-            this.TabPage_30.Location = new System.Drawing.Point(4, 84);
+            this.TabPage_30.Location = new System.Drawing.Point(4, 104);
             this.TabPage_30.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_30.Name = "TabPage_30";
-            this.TabPage_30.Size = new System.Drawing.Size(882, 688);
+            this.TabPage_30.Size = new System.Drawing.Size(882, 668);
             this.TabPage_30.TabIndex = 29;
             this.TabPage_30.Text = "HTML转PDF";
             this.TabPage_30.UseVisualStyleBackColor = true;
@@ -6804,10 +6835,10 @@ namespace DocumentTools
             this.TabPage_24.Controls.Add(this.CompressPDF);
             this.TabPage_24.Controls.Add(this.SelectCompressPDFFiles);
             this.TabPage_24.Controls.Add(this.CompressPdfFileList);
-            this.TabPage_24.Location = new System.Drawing.Point(4, 84);
+            this.TabPage_24.Location = new System.Drawing.Point(4, 104);
             this.TabPage_24.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_24.Name = "TabPage_24";
-            this.TabPage_24.Size = new System.Drawing.Size(882, 688);
+            this.TabPage_24.Size = new System.Drawing.Size(882, 668);
             this.TabPage_24.TabIndex = 23;
             this.TabPage_24.Text = "压缩PDF";
             this.TabPage_24.UseVisualStyleBackColor = true;
@@ -7109,10 +7140,10 @@ namespace DocumentTools
             this.TabPage_25.Controls.Add(this.CompressImage);
             this.TabPage_25.Controls.Add(this.SelectCompressImageFile);
             this.TabPage_25.Controls.Add(this.CompressImageFileList);
-            this.TabPage_25.Location = new System.Drawing.Point(4, 84);
+            this.TabPage_25.Location = new System.Drawing.Point(4, 104);
             this.TabPage_25.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_25.Name = "TabPage_25";
-            this.TabPage_25.Size = new System.Drawing.Size(882, 688);
+            this.TabPage_25.Size = new System.Drawing.Size(882, 668);
             this.TabPage_25.TabIndex = 24;
             this.TabPage_25.Text = "压缩图片（格式转换）";
             this.TabPage_25.UseVisualStyleBackColor = true;
@@ -7485,6 +7516,7 @@ namespace DocumentTools
             // TabPage_10
             // 
             this.TabPage_10.Controls.Add(this.WordTextReplace_SaveSourceBox);
+            this.TabPage_10.Controls.Add(this.WordReplace_OneToOneMode);
             this.TabPage_10.Controls.Add(this.WordReplace_UseRegextSub);
             this.TabPage_10.Controls.Add(this.WordReplace_IgnoreShapes);
             this.TabPage_10.Controls.Add(this.WordReplace_IgnoreInsert);
@@ -7504,16 +7536,15 @@ namespace DocumentTools
             this.TabPage_10.Controls.Add(this.groupBox10);
             this.TabPage_10.Controls.Add(this.groupBox9);
             this.TabPage_10.Controls.Add(this.IgnoreFootContent);
-            this.TabPage_10.Controls.Add(this.WordReplace_OneToOneMode);
             this.TabPage_10.Controls.Add(this.IgnoreCase);
             this.TabPage_10.Controls.Add(this.ReplaceWordContentStatusText);
             this.TabPage_10.Controls.Add(this.ReplaceWordContentButton);
             this.TabPage_10.Controls.Add(this.SelectReplaceWordFilesButton);
             this.TabPage_10.Controls.Add(this.ReplaceWordFileList);
-            this.TabPage_10.Location = new System.Drawing.Point(4, 84);
+            this.TabPage_10.Location = new System.Drawing.Point(4, 104);
             this.TabPage_10.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_10.Name = "TabPage_10";
-            this.TabPage_10.Size = new System.Drawing.Size(882, 688);
+            this.TabPage_10.Size = new System.Drawing.Size(882, 668);
             this.TabPage_10.TabIndex = 9;
             this.TabPage_10.Text = "WORD内容批量替换";
             this.TabPage_10.UseVisualStyleBackColor = true;
@@ -7530,6 +7561,21 @@ namespace DocumentTools
             this.WordTextReplace_SaveSourceBox.Tag = "anchor_right_bottom";
             this.WordTextReplace_SaveSourceBox.Text = "保存到源目录";
             this.WordTextReplace_SaveSourceBox.UseVisualStyleBackColor = true;
+            // 
+            // WordReplace_OneToOneMode
+            // 
+            this.WordReplace_OneToOneMode.AutoSize = true;
+            this.WordReplace_OneToOneMode.ForeColor = System.Drawing.Color.Red;
+            this.WordReplace_OneToOneMode.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.WordReplace_OneToOneMode.Location = new System.Drawing.Point(749, 481);
+            this.WordReplace_OneToOneMode.Margin = new System.Windows.Forms.Padding(1);
+            this.WordReplace_OneToOneMode.Name = "WordReplace_OneToOneMode";
+            this.WordReplace_OneToOneMode.Size = new System.Drawing.Size(96, 16);
+            this.WordReplace_OneToOneMode.TabIndex = 23;
+            this.WordReplace_OneToOneMode.Tag = "anchor_left_bottom";
+            this.WordReplace_OneToOneMode.Text = "顺序替换内容";
+            this.MainToolsTip.SetToolTip(this.WordReplace_OneToOneMode, "提示：根据查找替换内容顺序，依次对文档进行查找替换");
+            this.WordReplace_OneToOneMode.UseVisualStyleBackColor = true;
             // 
             // WordReplace_UseRegextSub
             // 
@@ -7625,7 +7671,7 @@ namespace DocumentTools
             // WordReplaceRemoveFind
             // 
             this.WordReplaceRemoveFind.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.WordReplaceRemoveFind.Location = new System.Drawing.Point(285, 541);
+            this.WordReplaceRemoveFind.Location = new System.Drawing.Point(285, 520);
             this.WordReplaceRemoveFind.Margin = new System.Windows.Forms.Padding(2);
             this.WordReplaceRemoveFind.Name = "WordReplaceRemoveFind";
             this.WordReplaceRemoveFind.Size = new System.Drawing.Size(117, 22);
@@ -7670,7 +7716,7 @@ namespace DocumentTools
             this.WordReplaceAddFind.Size = new System.Drawing.Size(117, 22);
             this.WordReplaceAddFind.TabIndex = 1;
             this.WordReplaceAddFind.Tag = "anchor_left_bottom";
-            this.WordReplaceAddFind.Text = " ";
+            this.WordReplaceAddFind.Text = "新增查找替换内容";
             this.WordReplaceAddFind.UseVisualStyleBackColor = true;
             this.WordReplaceAddFind.Click += new System.EventHandler(this.WordReplaceAddFind_Click);
             // 
@@ -7813,20 +7859,6 @@ namespace DocumentTools
             this.IgnoreFootContent.Text = "忽略脚注文本";
             this.IgnoreFootContent.UseVisualStyleBackColor = true;
             // 
-            // WordReplace_OneToOneMode
-            // 
-            this.WordReplace_OneToOneMode.AutoSize = true;
-            this.WordReplace_OneToOneMode.ForeColor = System.Drawing.Color.Red;
-            this.WordReplace_OneToOneMode.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.WordReplace_OneToOneMode.Location = new System.Drawing.Point(285, 522);
-            this.WordReplace_OneToOneMode.Margin = new System.Windows.Forms.Padding(1);
-            this.WordReplace_OneToOneMode.Name = "WordReplace_OneToOneMode";
-            this.WordReplace_OneToOneMode.Size = new System.Drawing.Size(108, 16);
-            this.WordReplace_OneToOneMode.TabIndex = 6;
-            this.WordReplace_OneToOneMode.Tag = "anchor_left_bottom";
-            this.WordReplace_OneToOneMode.Text = "按顺序对应替换";
-            this.WordReplace_OneToOneMode.UseVisualStyleBackColor = true;
-            // 
             // IgnoreCase
             // 
             this.IgnoreCase.AutoSize = true;
@@ -7910,10 +7942,10 @@ namespace DocumentTools
             this.TabPage_11.Controls.Add(this.ReplaceExcelContentButton);
             this.TabPage_11.Controls.Add(this.SelectRelaceExcelButton);
             this.TabPage_11.Controls.Add(this.ReplaceExcelFileView);
-            this.TabPage_11.Location = new System.Drawing.Point(4, 84);
+            this.TabPage_11.Location = new System.Drawing.Point(4, 104);
             this.TabPage_11.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_11.Name = "TabPage_11";
-            this.TabPage_11.Size = new System.Drawing.Size(882, 688);
+            this.TabPage_11.Size = new System.Drawing.Size(882, 668);
             this.TabPage_11.TabIndex = 10;
             this.TabPage_11.Text = "EXCEL内容批量替换";
             this.TabPage_11.UseVisualStyleBackColor = true;
@@ -8239,10 +8271,10 @@ namespace DocumentTools
             this.TabPage_12.Controls.Add(this.SelectDataMatrixWord);
             this.TabPage_12.Controls.Add(this.groupBox14);
             this.TabPage_12.Controls.Add(this.DecodeMatrixWordListView);
-            this.TabPage_12.Location = new System.Drawing.Point(4, 84);
+            this.TabPage_12.Location = new System.Drawing.Point(4, 104);
             this.TabPage_12.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_12.Name = "TabPage_12";
-            this.TabPage_12.Size = new System.Drawing.Size(882, 688);
+            this.TabPage_12.Size = new System.Drawing.Size(882, 668);
             this.TabPage_12.TabIndex = 11;
             this.TabPage_12.Text = "特殊二维码校验";
             this.TabPage_12.UseVisualStyleBackColor = true;
@@ -8383,10 +8415,10 @@ namespace DocumentTools
             this.TabPage_33.Controls.Add(this.groupBox37);
             this.TabPage_33.Controls.Add(this.groupBox35);
             this.TabPage_33.Controls.Add(this.groupBox34);
-            this.TabPage_33.Location = new System.Drawing.Point(4, 84);
+            this.TabPage_33.Location = new System.Drawing.Point(4, 104);
             this.TabPage_33.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_33.Name = "TabPage_33";
-            this.TabPage_33.Size = new System.Drawing.Size(882, 688);
+            this.TabPage_33.Size = new System.Drawing.Size(882, 668);
             this.TabPage_33.TabIndex = 32;
             this.TabPage_33.Text = "简易二维码生成";
             this.TabPage_33.UseVisualStyleBackColor = true;
@@ -9050,11 +9082,11 @@ namespace DocumentTools
             this.TabPage_34.Controls.Add(this.groupBox41);
             this.TabPage_34.Controls.Add(this.gen_card_result_group);
             this.TabPage_34.Controls.Add(this.gen_card_id_group);
-            this.TabPage_34.Location = new System.Drawing.Point(4, 84);
+            this.TabPage_34.Location = new System.Drawing.Point(4, 104);
             this.TabPage_34.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_34.Name = "TabPage_34";
             this.TabPage_34.Padding = new System.Windows.Forms.Padding(1);
-            this.TabPage_34.Size = new System.Drawing.Size(882, 688);
+            this.TabPage_34.Size = new System.Drawing.Size(882, 668);
             this.TabPage_34.TabIndex = 33;
             this.TabPage_34.Text = "身份证号码校验";
             this.TabPage_34.UseVisualStyleBackColor = true;
@@ -9496,10 +9528,10 @@ namespace DocumentTools
             this.TabPage_05.Controls.Add(this.ConvertTextButton);
             this.TabPage_05.Controls.Add(this.groupBox2);
             this.TabPage_05.Controls.Add(this.groupBox1);
-            this.TabPage_05.Location = new System.Drawing.Point(4, 84);
+            this.TabPage_05.Location = new System.Drawing.Point(4, 104);
             this.TabPage_05.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_05.Name = "TabPage_05";
-            this.TabPage_05.Size = new System.Drawing.Size(882, 688);
+            this.TabPage_05.Size = new System.Drawing.Size(882, 668);
             this.TabPage_05.TabIndex = 4;
             this.TabPage_05.Text = "姓名横转竖列";
             this.TabPage_05.UseVisualStyleBackColor = true;
@@ -9593,7 +9625,6 @@ namespace DocumentTools
             // NameReplaceRegexMode
             // 
             this.NameReplaceRegexMode.AutoSize = true;
-            this.NameReplaceRegexMode.Cursor = System.Windows.Forms.Cursors.Hand;
             this.NameReplaceRegexMode.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Underline);
             this.NameReplaceRegexMode.ForeColor = System.Drawing.Color.Red;
             this.NameReplaceRegexMode.ImeMode = System.Windows.Forms.ImeMode.NoControl;
@@ -9850,10 +9881,10 @@ namespace DocumentTools
             this.TabPage_35.Controls.Add(this.webpPictureStartConvert);
             this.TabPage_35.Controls.Add(this.webpPictureSelect);
             this.TabPage_35.Controls.Add(this.WebpFileList);
-            this.TabPage_35.Location = new System.Drawing.Point(4, 84);
+            this.TabPage_35.Location = new System.Drawing.Point(4, 104);
             this.TabPage_35.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_35.Name = "TabPage_35";
-            this.TabPage_35.Size = new System.Drawing.Size(882, 688);
+            this.TabPage_35.Size = new System.Drawing.Size(882, 668);
             this.TabPage_35.TabIndex = 34;
             this.TabPage_35.Text = "WEBP图片格式转换";
             this.TabPage_35.UseVisualStyleBackColor = true;
@@ -9998,10 +10029,10 @@ namespace DocumentTools
             this.TabPage_09.Controls.Add(this.groupBox7);
             this.TabPage_09.Controls.Add(this.groupBox6);
             this.TabPage_09.Controls.Add(this.groupBox5);
-            this.TabPage_09.Location = new System.Drawing.Point(4, 84);
+            this.TabPage_09.Location = new System.Drawing.Point(4, 104);
             this.TabPage_09.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_09.Name = "TabPage_09";
-            this.TabPage_09.Size = new System.Drawing.Size(882, 688);
+            this.TabPage_09.Size = new System.Drawing.Size(882, 668);
             this.TabPage_09.TabIndex = 8;
             this.TabPage_09.Text = "Twain扫描仪调试";
             this.TabPage_09.UseVisualStyleBackColor = true;
@@ -10448,10 +10479,10 @@ namespace DocumentTools
             this.TabPage_13.Controls.Add(this.groupBox17);
             this.TabPage_13.Controls.Add(this.groupBox16);
             this.TabPage_13.Controls.Add(this.groupBox15);
-            this.TabPage_13.Location = new System.Drawing.Point(4, 84);
+            this.TabPage_13.Location = new System.Drawing.Point(4, 104);
             this.TabPage_13.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_13.Name = "TabPage_13";
-            this.TabPage_13.Size = new System.Drawing.Size(882, 688);
+            this.TabPage_13.Size = new System.Drawing.Size(882, 668);
             this.TabPage_13.TabIndex = 12;
             this.TabPage_13.Text = "其他功能";
             this.TabPage_13.UseVisualStyleBackColor = true;
@@ -10778,10 +10809,10 @@ namespace DocumentTools
             this.TabPage_26.Controls.Add(this.blockgroup);
             this.TabPage_26.Controls.Add(this.groupBox27);
             this.TabPage_26.Controls.Add(this.groupBox26);
-            this.TabPage_26.Location = new System.Drawing.Point(4, 84);
+            this.TabPage_26.Location = new System.Drawing.Point(4, 104);
             this.TabPage_26.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_26.Name = "TabPage_26";
-            this.TabPage_26.Size = new System.Drawing.Size(882, 688);
+            this.TabPage_26.Size = new System.Drawing.Size(882, 668);
             this.TabPage_26.TabIndex = 25;
             this.TabPage_26.Text = "系统工具";
             this.TabPage_26.UseVisualStyleBackColor = true;
@@ -10976,11 +11007,11 @@ namespace DocumentTools
             // TabPage_32
             // 
             this.TabPage_32.Controls.Add(this.groupBox32);
-            this.TabPage_32.Location = new System.Drawing.Point(4, 84);
+            this.TabPage_32.Location = new System.Drawing.Point(4, 104);
             this.TabPage_32.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_32.Name = "TabPage_32";
             this.TabPage_32.Padding = new System.Windows.Forms.Padding(1);
-            this.TabPage_32.Size = new System.Drawing.Size(882, 688);
+            this.TabPage_32.Size = new System.Drawing.Size(882, 668);
             this.TabPage_32.TabIndex = 31;
             this.TabPage_32.Text = "MSS3模板修改";
             this.TabPage_32.UseVisualStyleBackColor = true;
@@ -11304,11 +11335,11 @@ namespace DocumentTools
             this.TabPage_39.Controls.Add(this.pictureBox7);
             this.TabPage_39.Controls.Add(this.SingleDocumentConfigGroupBox);
             this.TabPage_39.Controls.Add(this.groupBox54);
-            this.TabPage_39.Location = new System.Drawing.Point(4, 84);
+            this.TabPage_39.Location = new System.Drawing.Point(4, 104);
             this.TabPage_39.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_39.Name = "TabPage_39";
             this.TabPage_39.Padding = new System.Windows.Forms.Padding(1);
-            this.TabPage_39.Size = new System.Drawing.Size(882, 688);
+            this.TabPage_39.Size = new System.Drawing.Size(882, 668);
             this.TabPage_39.TabIndex = 38;
             this.TabPage_39.Text = "单人表生成";
             this.TabPage_39.UseVisualStyleBackColor = true;
@@ -11792,9 +11823,9 @@ namespace DocumentTools
             // TabPage_42
             // 
             this.TabPage_42.Controls.Add(this.groupBox70);
-            this.TabPage_42.Location = new System.Drawing.Point(4, 84);
+            this.TabPage_42.Location = new System.Drawing.Point(4, 104);
             this.TabPage_42.Name = "TabPage_42";
-            this.TabPage_42.Size = new System.Drawing.Size(882, 688);
+            this.TabPage_42.Size = new System.Drawing.Size(882, 668);
             this.TabPage_42.TabIndex = 40;
             this.TabPage_42.Text = "考评表信息插入";
             this.TabPage_42.UseVisualStyleBackColor = true;
@@ -12613,11 +12644,11 @@ namespace DocumentTools
             this.TabPage_40.Controls.Add(this.label154);
             this.TabPage_40.Controls.Add(this.RefreshVFSOFTREPORT);
             this.TabPage_40.Controls.Add(this.groupBox57);
-            this.TabPage_40.Location = new System.Drawing.Point(4, 84);
+            this.TabPage_40.Location = new System.Drawing.Point(4, 104);
             this.TabPage_40.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_40.Name = "TabPage_40";
             this.TabPage_40.Padding = new System.Windows.Forms.Padding(1);
-            this.TabPage_40.Size = new System.Drawing.Size(882, 688);
+            this.TabPage_40.Size = new System.Drawing.Size(882, 668);
             this.TabPage_40.TabIndex = 39;
             this.TabPage_40.Text = "考评报表修改";
             this.TabPage_40.UseVisualStyleBackColor = true;
@@ -13512,11 +13543,11 @@ namespace DocumentTools
             this.TabPage_38.Controls.Add(this.groupBox51);
             this.TabPage_38.Controls.Add(this.groupBox50);
             this.TabPage_38.Controls.Add(this.groupBox49);
-            this.TabPage_38.Location = new System.Drawing.Point(4, 84);
+            this.TabPage_38.Location = new System.Drawing.Point(4, 104);
             this.TabPage_38.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_38.Name = "TabPage_38";
             this.TabPage_38.Padding = new System.Windows.Forms.Padding(1);
-            this.TabPage_38.Size = new System.Drawing.Size(882, 688);
+            this.TabPage_38.Size = new System.Drawing.Size(882, 668);
             this.TabPage_38.TabIndex = 37;
             this.TabPage_38.Text = "选举结果报告单样式生成";
             this.TabPage_38.UseVisualStyleBackColor = true;
@@ -13974,11 +14005,11 @@ namespace DocumentTools
             this.TabPage_36.Controls.Add(this.groupBox28);
             this.TabPage_36.Controls.Add(this.groupBox46);
             this.TabPage_36.Controls.Add(this.groupBox43);
-            this.TabPage_36.Location = new System.Drawing.Point(4, 84);
+            this.TabPage_36.Location = new System.Drawing.Point(4, 104);
             this.TabPage_36.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_36.Name = "TabPage_36";
             this.TabPage_36.Padding = new System.Windows.Forms.Padding(1);
-            this.TabPage_36.Size = new System.Drawing.Size(882, 688);
+            this.TabPage_36.Size = new System.Drawing.Size(882, 668);
             this.TabPage_36.TabIndex = 35;
             this.TabPage_36.Text = "补充功能";
             this.TabPage_36.UseVisualStyleBackColor = true;
@@ -15120,11 +15151,11 @@ namespace DocumentTools
             this.TabPage_37.Controls.Add(this.label123);
             this.TabPage_37.Controls.Add(this.groupBox45);
             this.TabPage_37.Controls.Add(this.groupBox44);
-            this.TabPage_37.Location = new System.Drawing.Point(4, 84);
+            this.TabPage_37.Location = new System.Drawing.Point(4, 104);
             this.TabPage_37.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_37.Name = "TabPage_37";
             this.TabPage_37.Padding = new System.Windows.Forms.Padding(1);
-            this.TabPage_37.Size = new System.Drawing.Size(882, 688);
+            this.TabPage_37.Size = new System.Drawing.Size(882, 668);
             this.TabPage_37.TabIndex = 36;
             this.TabPage_37.Text = "网卡设置";
             this.TabPage_37.UseVisualStyleBackColor = true;
@@ -15652,10 +15683,10 @@ namespace DocumentTools
             this.TabPage_08.Controls.Add(this.pictureBox9);
             this.TabPage_08.Controls.Add(this.groupBox4);
             this.TabPage_08.Controls.Add(this.groupBox3);
-            this.TabPage_08.Location = new System.Drawing.Point(4, 84);
+            this.TabPage_08.Location = new System.Drawing.Point(4, 104);
             this.TabPage_08.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_08.Name = "TabPage_08";
-            this.TabPage_08.Size = new System.Drawing.Size(882, 688);
+            this.TabPage_08.Size = new System.Drawing.Size(882, 668);
             this.TabPage_08.TabIndex = 7;
             this.TabPage_08.Text = "关于软件";
             this.TabPage_08.UseVisualStyleBackColor = true;
@@ -15964,6 +15995,250 @@ namespace DocumentTools
             this.label6.Size = new System.Drawing.Size(77, 12);
             this.label6.TabIndex = 0;
             this.label6.Text = "开发语言：C#";
+            // 
+            // TabPage_43
+            // 
+            this.TabPage_43.Controls.Add(this.ExamDataPakOrder_UnitList);
+            this.TabPage_43.Controls.Add(this.groupBox80);
+            this.TabPage_43.Controls.Add(this.groupBox79);
+            this.TabPage_43.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_43.Name = "TabPage_43";
+            this.TabPage_43.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_43.TabIndex = 41;
+            this.TabPage_43.Text = "考评系统数据包管理";
+            this.TabPage_43.UseVisualStyleBackColor = true;
+            // 
+            // ExamDataPakOrder_UnitList
+            // 
+            this.ExamDataPakOrder_UnitList.Controls.Add(this.ExamDataPakOrder_Refresh);
+            this.ExamDataPakOrder_UnitList.Controls.Add(this.ExamDataPakOrder_UnitListView);
+            this.ExamDataPakOrder_UnitList.Controls.Add(this.ExamDataPackUnitOrder_Up);
+            this.ExamDataPakOrder_UnitList.Controls.Add(this.ExamDataPackUnitOrder_Down);
+            this.ExamDataPakOrder_UnitList.Controls.Add(this.ExamDataPakOrder_Modify);
+            this.ExamDataPakOrder_UnitList.Controls.Add(this.ExamDataPakOrder_Select);
+            this.ExamDataPakOrder_UnitList.Controls.Add(this.ExamDataPakOrder_Path);
+            this.ExamDataPakOrder_UnitList.Controls.Add(this.label235);
+            this.ExamDataPakOrder_UnitList.Location = new System.Drawing.Point(8, 251);
+            this.ExamDataPakOrder_UnitList.Name = "ExamDataPakOrder_UnitList";
+            this.ExamDataPakOrder_UnitList.Size = new System.Drawing.Size(866, 386);
+            this.ExamDataPakOrder_UnitList.TabIndex = 9;
+            this.ExamDataPakOrder_UnitList.TabStop = false;
+            this.ExamDataPakOrder_UnitList.Text = "数据包单位顺序修改";
+            // 
+            // ExamDataPakOrder_UnitListView
+            // 
+            this.ExamDataPakOrder_UnitListView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ExamDataPakOrder_UnitListView.Location = new System.Drawing.Point(8, 51);
+            this.ExamDataPakOrder_UnitListView.Name = "ExamDataPakOrder_UnitListView";
+            this.ExamDataPakOrder_UnitListView.RowTemplate.Height = 23;
+            this.ExamDataPakOrder_UnitListView.Size = new System.Drawing.Size(817, 290);
+            this.ExamDataPakOrder_UnitListView.TabIndex = 13;
+            // 
+            // ExamDataPackUnitOrder_Up
+            // 
+            this.ExamDataPackUnitOrder_Up.Location = new System.Drawing.Point(831, 51);
+            this.ExamDataPackUnitOrder_Up.Name = "ExamDataPackUnitOrder_Up";
+            this.ExamDataPackUnitOrder_Up.Size = new System.Drawing.Size(25, 131);
+            this.ExamDataPackUnitOrder_Up.TabIndex = 14;
+            this.ExamDataPackUnitOrder_Up.Text = "△";
+            this.ExamDataPackUnitOrder_Up.UseVisualStyleBackColor = true;
+            this.ExamDataPackUnitOrder_Up.Click += new System.EventHandler(this.ExamDataPackUnitOrder_Up_Click);
+            // 
+            // ExamDataPackUnitOrder_Down
+            // 
+            this.ExamDataPackUnitOrder_Down.Location = new System.Drawing.Point(831, 210);
+            this.ExamDataPackUnitOrder_Down.Name = "ExamDataPackUnitOrder_Down";
+            this.ExamDataPackUnitOrder_Down.Size = new System.Drawing.Size(25, 131);
+            this.ExamDataPackUnitOrder_Down.TabIndex = 15;
+            this.ExamDataPackUnitOrder_Down.Text = "▽";
+            this.ExamDataPackUnitOrder_Down.UseVisualStyleBackColor = true;
+            this.ExamDataPackUnitOrder_Down.Click += new System.EventHandler(this.ExamDataPackUnitOrder_Down_Click);
+            // 
+            // ExamDataPakOrder_Modify
+            // 
+            this.ExamDataPakOrder_Modify.Location = new System.Drawing.Point(714, 347);
+            this.ExamDataPakOrder_Modify.Name = "ExamDataPakOrder_Modify";
+            this.ExamDataPakOrder_Modify.Size = new System.Drawing.Size(111, 33);
+            this.ExamDataPakOrder_Modify.TabIndex = 12;
+            this.ExamDataPakOrder_Modify.Text = "开始修改";
+            this.ExamDataPakOrder_Modify.UseVisualStyleBackColor = true;
+            this.ExamDataPakOrder_Modify.Click += new System.EventHandler(this.ExamDataPakOrder_Modify_Click);
+            // 
+            // ExamDataPakOrder_Select
+            // 
+            this.ExamDataPakOrder_Select.Location = new System.Drawing.Point(725, 23);
+            this.ExamDataPakOrder_Select.Name = "ExamDataPakOrder_Select";
+            this.ExamDataPakOrder_Select.Size = new System.Drawing.Size(100, 23);
+            this.ExamDataPakOrder_Select.TabIndex = 11;
+            this.ExamDataPakOrder_Select.Text = "选择文件...";
+            this.ExamDataPakOrder_Select.UseVisualStyleBackColor = true;
+            this.ExamDataPakOrder_Select.Click += new System.EventHandler(this.ExamDataPakOrder_Select_Click);
+            // 
+            // ExamDataPakOrder_Path
+            // 
+            this.ExamDataPakOrder_Path.Location = new System.Drawing.Point(77, 24);
+            this.ExamDataPakOrder_Path.Name = "ExamDataPakOrder_Path";
+            this.ExamDataPakOrder_Path.ReadOnly = true;
+            this.ExamDataPakOrder_Path.Size = new System.Drawing.Size(642, 21);
+            this.ExamDataPakOrder_Path.TabIndex = 10;
+            // 
+            // label235
+            // 
+            this.label235.AutoSize = true;
+            this.label235.Location = new System.Drawing.Point(6, 28);
+            this.label235.Name = "label235";
+            this.label235.Size = new System.Drawing.Size(65, 12);
+            this.label235.TabIndex = 9;
+            this.label235.Text = "数据包路径";
+            // 
+            // groupBox80
+            // 
+            this.groupBox80.Controls.Add(this.ExamMergeDataPak_CopyExam);
+            this.groupBox80.Controls.Add(this.ExamMergeDataPak_TargetSelect);
+            this.groupBox80.Controls.Add(this.ExamMergeDataPak_TargetPath);
+            this.groupBox80.Controls.Add(this.label237);
+            this.groupBox80.Controls.Add(this.ExamMergeDataPak_MergeButton);
+            this.groupBox80.Controls.Add(this.ExamMergeDataPak_SourceSelect);
+            this.groupBox80.Controls.Add(this.ExamMergeDataPak_SourcePath);
+            this.groupBox80.Controls.Add(this.label236);
+            this.groupBox80.Location = new System.Drawing.Point(8, 115);
+            this.groupBox80.Name = "groupBox80";
+            this.groupBox80.Size = new System.Drawing.Size(866, 130);
+            this.groupBox80.TabIndex = 5;
+            this.groupBox80.TabStop = false;
+            this.groupBox80.Text = "数据包单位人员数据合并";
+            // 
+            // ExamMergeDataPak_CopyExam
+            // 
+            this.ExamMergeDataPak_CopyExam.AutoSize = true;
+            this.ExamMergeDataPak_CopyExam.Location = new System.Drawing.Point(8, 98);
+            this.ExamMergeDataPak_CopyExam.Name = "ExamMergeDataPak_CopyExam";
+            this.ExamMergeDataPak_CopyExam.Size = new System.Drawing.Size(180, 16);
+            this.ExamMergeDataPak_CopyExam.TabIndex = 8;
+            this.ExamMergeDataPak_CopyExam.Text = "复制单位数据包（exam文件）";
+            this.ExamMergeDataPak_CopyExam.UseVisualStyleBackColor = true;
+            // 
+            // ExamMergeDataPak_TargetSelect
+            // 
+            this.ExamMergeDataPak_TargetSelect.Location = new System.Drawing.Point(757, 53);
+            this.ExamMergeDataPak_TargetSelect.Name = "ExamMergeDataPak_TargetSelect";
+            this.ExamMergeDataPak_TargetSelect.Size = new System.Drawing.Size(103, 23);
+            this.ExamMergeDataPak_TargetSelect.TabIndex = 7;
+            this.ExamMergeDataPak_TargetSelect.Text = "选择文件...";
+            this.ExamMergeDataPak_TargetSelect.UseVisualStyleBackColor = true;
+            this.ExamMergeDataPak_TargetSelect.Click += new System.EventHandler(this.ExamMergeDataPak_TargetSelect_Click);
+            // 
+            // ExamMergeDataPak_TargetPath
+            // 
+            this.ExamMergeDataPak_TargetPath.Location = new System.Drawing.Point(101, 53);
+            this.ExamMergeDataPak_TargetPath.Name = "ExamMergeDataPak_TargetPath";
+            this.ExamMergeDataPak_TargetPath.ReadOnly = true;
+            this.ExamMergeDataPak_TargetPath.Size = new System.Drawing.Size(650, 21);
+            this.ExamMergeDataPak_TargetPath.TabIndex = 6;
+            // 
+            // label237
+            // 
+            this.label237.AutoSize = true;
+            this.label237.Location = new System.Drawing.Point(6, 57);
+            this.label237.Name = "label237";
+            this.label237.Size = new System.Drawing.Size(89, 12);
+            this.label237.TabIndex = 5;
+            this.label237.Text = "目标数据包路径";
+            // 
+            // ExamMergeDataPak_MergeButton
+            // 
+            this.ExamMergeDataPak_MergeButton.Location = new System.Drawing.Point(757, 94);
+            this.ExamMergeDataPak_MergeButton.Name = "ExamMergeDataPak_MergeButton";
+            this.ExamMergeDataPak_MergeButton.Size = new System.Drawing.Size(103, 23);
+            this.ExamMergeDataPak_MergeButton.TabIndex = 4;
+            this.ExamMergeDataPak_MergeButton.Text = "开始合并";
+            this.ExamMergeDataPak_MergeButton.UseVisualStyleBackColor = true;
+            //this.ExamMergeDataPak_MergeButton.Click += new System.EventHandler(this.ExamMergeDataPak_MergeButton_Click);
+            // 
+            // ExamMergeDataPak_SourceSelect
+            // 
+            this.ExamMergeDataPak_SourceSelect.Location = new System.Drawing.Point(757, 23);
+            this.ExamMergeDataPak_SourceSelect.Name = "ExamMergeDataPak_SourceSelect";
+            this.ExamMergeDataPak_SourceSelect.Size = new System.Drawing.Size(103, 23);
+            this.ExamMergeDataPak_SourceSelect.TabIndex = 2;
+            this.ExamMergeDataPak_SourceSelect.Text = "选择文件...";
+            this.ExamMergeDataPak_SourceSelect.UseVisualStyleBackColor = true;
+            this.ExamMergeDataPak_SourceSelect.Click += new System.EventHandler(this.ExamMergeDataPak_SourceSelect_Click);
+            // 
+            // ExamMergeDataPak_SourcePath
+            // 
+            this.ExamMergeDataPak_SourcePath.Location = new System.Drawing.Point(101, 23);
+            this.ExamMergeDataPak_SourcePath.Name = "ExamMergeDataPak_SourcePath";
+            this.ExamMergeDataPak_SourcePath.ReadOnly = true;
+            this.ExamMergeDataPak_SourcePath.Size = new System.Drawing.Size(650, 21);
+            this.ExamMergeDataPak_SourcePath.TabIndex = 1;
+            // 
+            // label236
+            // 
+            this.label236.AutoSize = true;
+            this.label236.Location = new System.Drawing.Point(6, 27);
+            this.label236.Name = "label236";
+            this.label236.Size = new System.Drawing.Size(89, 12);
+            this.label236.TabIndex = 0;
+            this.label236.Text = "原始数据包路径";
+            // 
+            // groupBox79
+            // 
+            this.groupBox79.Controls.Add(this.ExamRestDataPakReset);
+            this.groupBox79.Controls.Add(this.label234);
+            this.groupBox79.Controls.Add(this.ExamRestDataPakSelect);
+            this.groupBox79.Controls.Add(this.ExamRestDataPakPath);
+            this.groupBox79.Controls.Add(this.label233);
+            this.groupBox79.Location = new System.Drawing.Point(8, 12);
+            this.groupBox79.Name = "groupBox79";
+            this.groupBox79.Size = new System.Drawing.Size(866, 97);
+            this.groupBox79.TabIndex = 0;
+            this.groupBox79.TabStop = false;
+            this.groupBox79.Text = "数据包重置";
+            // 
+            // ExamRestDataPakReset
+            // 
+            this.ExamRestDataPakReset.Location = new System.Drawing.Point(757, 62);
+            this.ExamRestDataPakReset.Name = "ExamRestDataPakReset";
+            this.ExamRestDataPakReset.Size = new System.Drawing.Size(103, 23);
+            this.ExamRestDataPakReset.TabIndex = 4;
+            this.ExamRestDataPakReset.Text = "开始重置";
+            this.ExamRestDataPakReset.UseVisualStyleBackColor = true;
+            // 
+            // label234
+            // 
+            this.label234.AutoSize = true;
+            this.label234.Location = new System.Drawing.Point(6, 67);
+            this.label234.Name = "label234";
+            this.label234.Size = new System.Drawing.Size(545, 12);
+            this.label234.TabIndex = 3;
+            this.label234.Text = "注：将会删除数据包中所有单位、人员、模板、结果数据，恢复为初始化状态，不可恢复，请谨慎操作";
+            // 
+            // ExamRestDataPakSelect
+            // 
+            this.ExamRestDataPakSelect.Location = new System.Drawing.Point(757, 23);
+            this.ExamRestDataPakSelect.Name = "ExamRestDataPakSelect";
+            this.ExamRestDataPakSelect.Size = new System.Drawing.Size(103, 23);
+            this.ExamRestDataPakSelect.TabIndex = 2;
+            this.ExamRestDataPakSelect.Text = "选择文件...";
+            this.ExamRestDataPakSelect.UseVisualStyleBackColor = true;
+            // 
+            // ExamRestDataPakPath
+            // 
+            this.ExamRestDataPakPath.Location = new System.Drawing.Point(77, 23);
+            this.ExamRestDataPakPath.Name = "ExamRestDataPakPath";
+            this.ExamRestDataPakPath.ReadOnly = true;
+            this.ExamRestDataPakPath.Size = new System.Drawing.Size(674, 21);
+            this.ExamRestDataPakPath.TabIndex = 1;
+            // 
+            // label233
+            // 
+            this.label233.AutoSize = true;
+            this.label233.Location = new System.Drawing.Point(6, 27);
+            this.label233.Name = "label233";
+            this.label233.Size = new System.Drawing.Size(65, 12);
+            this.label233.TabIndex = 0;
+            this.label233.Text = "数据包路径";
             // 
             // ListViewRightMenu
             // 
@@ -17735,6 +18010,16 @@ namespace DocumentTools
             this.toolStripMenuItem13.Size = new System.Drawing.Size(352, 22);
             this.toolStripMenuItem13.Text = "批量添加选项（a、b、c、d）";
             // 
+            // ExamDataPakOrder_Refresh
+            // 
+            this.ExamDataPakOrder_Refresh.Location = new System.Drawing.Point(8, 347);
+            this.ExamDataPakOrder_Refresh.Name = "ExamDataPakOrder_Refresh";
+            this.ExamDataPakOrder_Refresh.Size = new System.Drawing.Size(111, 33);
+            this.ExamDataPakOrder_Refresh.TabIndex = 16;
+            this.ExamDataPakOrder_Refresh.Text = "刷新表数据";
+            this.ExamDataPakOrder_Refresh.UseVisualStyleBackColor = true;
+            this.ExamDataPakOrder_Refresh.Click += new System.EventHandler(this.ExamDataPakOrder_Refresh_Click);
+            // 
             // BodyForm
             // 
             this.AllowDrop = true;
@@ -18045,6 +18330,14 @@ namespace DocumentTools
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.TabPage_43.ResumeLayout(false);
+            this.ExamDataPakOrder_UnitList.ResumeLayout(false);
+            this.ExamDataPakOrder_UnitList.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ExamDataPakOrder_UnitListView)).EndInit();
+            this.groupBox80.ResumeLayout(false);
+            this.groupBox80.PerformLayout();
+            this.groupBox79.ResumeLayout(false);
+            this.groupBox79.PerformLayout();
             this.ListViewRightMenu.ResumeLayout(false);
             this.TreeViewContentMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.MainFormError)).EndInit();
@@ -18172,7 +18465,6 @@ namespace DocumentTools
         internal System.Windows.Forms.TextBox WordReplaceFindTextBox;
         internal System.Windows.Forms.TextBox WordReplaceTextBox;
         internal System.Windows.Forms.CheckBox IgnoreFootContent;
-        internal System.Windows.Forms.CheckBox WordReplace_OneToOneMode;
         internal System.Windows.Forms.CheckBox IgnoreCase;
         private System.Windows.Forms.LinkLabel OnlineRegextTool;
         private System.Windows.Forms.Button SelectRelaceExcelButton;
@@ -19154,6 +19446,7 @@ namespace DocumentTools
         internal CheckBox WordReplace_IgnoreInsert;
         internal CheckBox WordReplace_IgnoreShapes;
         internal CheckBox WordReplace_UseRegextSub;
+        internal CheckBox WordReplace_OneToOneMode;
         internal CheckBox ExcelReplace_MatchWholeWord;
         internal CheckBox CompressIamge_NoCompress;
         private GroupBox groupBox68;
@@ -19401,6 +19694,31 @@ namespace DocumentTools
         internal TextBox SplitePdf_DeletePdfPages_Start;
         private Label label232;
         internal RadioButton SplitePdf_DeletePdfPages;
+        private TabPage TabPage_43;
+        private GroupBox groupBox79;
+        private Button ExamRestDataPakSelect;
+        private TextBox ExamRestDataPakPath;
+        private Label label233;
+        private GroupBox groupBox80;
+        private Button ExamMergeDataPak_MergeButton;
+        private Button ExamMergeDataPak_SourceSelect;
+        private TextBox ExamMergeDataPak_SourcePath;
+        private Label label236;
+        private Button ExamRestDataPakReset;
+        private Label label234;
+        private Button ExamMergeDataPak_TargetSelect;
+        private TextBox ExamMergeDataPak_TargetPath;
+        private Label label237;
+        private CheckBox ExamMergeDataPak_CopyExam;
+        private GroupBox ExamDataPakOrder_UnitList;
+        private Button ExamDataPakOrder_Select;
+        private TextBox ExamDataPakOrder_Path;
+        private Label label235;
+        private Button ExamDataPakOrder_Modify;
+        private DataGridView ExamDataPakOrder_UnitListView;
+        private Button ExamDataPackUnitOrder_Up;
+        private Button ExamDataPackUnitOrder_Down;
+        private Button ExamDataPakOrder_Refresh;
     }
 }
 

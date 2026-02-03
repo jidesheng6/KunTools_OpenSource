@@ -19,6 +19,7 @@ using Microsoft.WindowsAPICodePack.Dialogs;
 using NAudio.CoreAudioApi;
 using NAudio.Wave;
 using Newtonsoft.Json.Linq;
+using Microsoft.International.Converters.PinYinConverter;
 using OpenCvSharp;
 using PuppeteerSharp.Media;
 using Sdcb.PaddleInference;
@@ -496,32 +497,12 @@ namespace DocumentTools
 
             if (NameStorke)
             {
-                //按照姓氏笔画排序
-                //使用 0x00020804 (zh-CN 笔画排序)
-                Array.Sort(ReturnTextList, new ChineseStrokeComparer());
+                //按照姓氏笔画排序（选举会议常用规则）：复姓整体笔画 -> 名字笔画 -> 稳定兜底
+               // ReturnTextList = SortNamesByStroke(ReturnTextList);
             }
 
 
             return ReturnTextList;
-        }
-
-        /// <summary>
-        /// 中文笔画排序比较器
-        /// </summary>
-        private class ChineseStrokeComparer : IComparer<string>
-        {
-            private readonly CompareInfo _compareInfo;
-
-            public ChineseStrokeComparer()
-            {
-                // 0x00020804 是中文(简体，中国) 笔画排序的 LCID
-                _compareInfo = new CultureInfo(0x00020804).CompareInfo;
-            }
-
-            public int Compare(string x, string y)
-            {
-                return _compareInfo.Compare(x, y);
-            }
         }
 
         /// <summary>
@@ -3610,6 +3591,22 @@ namespace DocumentTools
             DataTable TempExamBaseTable = new DataTable();
 
             string TempQueryString = "SELECT Exam_EssInfo.ExamId AS 考评表ID,Exam_EssInfo.ExamName AS 考评表名称,Exam_EssInfo.TypeMode AS 排版类型 FROM Exam_EssInfo";
+
+            var (DataAdap, DataConnection) = GetAccessDataAdapter(DataBaseFile, TempQueryString, Factory);
+
+            DataAdap.Fill(TempExamBaseTable);
+
+            DataConnection.Close();
+
+            return TempExamBaseTable;
+
+        }
+
+        public static DataTable GetExamUnitInfo(string DataBaseFile, IDatabaseMethodFactory Factory)
+        {
+            DataTable TempExamBaseTable = new DataTable();
+
+            string TempQueryString = "SELECT Unit_Ess.AtOrder AS 单位序号,Unit_Ess.Unit AS 单位名称,Unit_Ess.UnitCode AS 单位编码,Unit_Ess.AtKind AS 单位速记码 FROM Unit_Ess ORDER BY Unit_Ess.AtOrder ASC";
 
             var (DataAdap, DataConnection) = GetAccessDataAdapter(DataBaseFile, TempQueryString, Factory);
 

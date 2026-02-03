@@ -1,4 +1,4 @@
-﻿using AutoUpdaterDotNET;
+using AutoUpdaterDotNET;
 using Gma.System.MouseKeyHook;
 using Microsoft.Toolkit.Uwp.Notifications;
 using Microsoft.VisualBasic.Logging;
@@ -468,6 +468,19 @@ namespace DocumentTools
             InsertExamTableView.ReadOnly = true;
             InsertExamTableView.Font = new System.Drawing.Font("宋体", 9);
             InsertExamTableView.BackgroundColor = Color.AliceBlue;
+
+            ExamDataPakOrder_UnitListView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            ExamDataPakOrder_UnitListView.MultiSelect = false;
+            ExamDataPakOrder_UnitListView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            ExamDataPakOrder_UnitListView.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            ExamDataPakOrder_UnitListView.RowsDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            ExamDataPakOrder_UnitListView.AllowUserToDeleteRows = false;
+            ExamDataPakOrder_UnitListView.AllowUserToAddRows = false;
+            ExamDataPakOrder_UnitListView.AllowUserToOrderColumns = false;
+            ExamDataPakOrder_UnitListView.RowHeadersVisible = false;
+            ExamDataPakOrder_UnitListView.ReadOnly = true;
+            ExamDataPakOrder_UnitListView.Font = new System.Drawing.Font("宋体", 12);
+            ExamDataPakOrder_UnitListView.BackgroundColor = Color.AliceBlue;
         }
 
 
@@ -533,9 +546,6 @@ namespace DocumentTools
 
             //设置功能搜索直达的自动完成数据源
             InitMenuNameAutoCompleteSource();
-            //自动绑定菜单到TabPage
-            BindMenuToTabPages();
-
             //this.MenuSearchTextBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             //this.MenuSearchTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
             //this.MenuSearchTextBox.AutoCompleteCustomSource = MenuStringSource;
@@ -5318,48 +5328,6 @@ IPGATEWAY:'{set_interface_gateway.Text}',
             return PageIndex;
         }
 
-        private void BindMenuToTabPages()
-        {
-            foreach (ToolStripItem item in menuStrip1.Items)
-            {
-                BindMenuItemRecursive(item);
-            }
-        }
-
-        private void BindMenuItemRecursive(ToolStripItem item)
-        {
-            if (item is ToolStripMenuItem menuItem)
-            {
-                // Check if a TabPage with the same text exists
-                // Strip '&' which is used for accelerator keys in menus
-                string menuText = menuItem.Text.Replace("&", "");
-                
-                foreach (TabPage page in MainTabPage.TabPages)
-                {
-                    if (string.Compare(page.Text, menuText, StringComparison.OrdinalIgnoreCase) == 0)
-                    {
-                        // Bind click event
-                        // We use += so if there are existing handlers, they still run.
-                        // But since SelectedTab assignment is idempotent, it's safe.
-                        menuItem.Click += (s, e) => 
-                        { 
-                            MainTabPage.SelectedTab = page; 
-                        };
-                        break;
-                    }
-                }
-
-                // Recursively check dropdown items
-                if (menuItem.HasDropDownItems)
-                {
-                    foreach (ToolStripItem subItem in menuItem.DropDownItems)
-                    {
-                        BindMenuItemRecursive(subItem);
-                    }
-                }
-            }
-        }
-
         private void BodyForm_Resize(object sender, EventArgs e)
         {
             bodyform_width.Text = this.Width.ToString();
@@ -5368,19 +5336,6 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
         private void MainTabPage_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // 自动调用初始化逻辑：OnTabSelected_{TabPage.Name}
-            // 这样新增页面时，只需要定义一个 OnTabSelected_页面控件名 的方法即可，无需在此处添加 if 判断
-            if (MainTabPage.SelectedTab != null && !string.IsNullOrEmpty(MainTabPage.SelectedTab.Name))
-            {
-                string methodName = $"OnTabSelected_{MainTabPage.SelectedTab.Name}";
-                MethodInfo method = this.GetType().GetMethod(methodName, 
-                    BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-                if (method != null)
-                {
-                    method.Invoke(this, null);
-                }
-            }
-
             if(MainTabPage.SelectedIndex == GetTabPageIndex("网卡设置"))
             {
                 UpdateNetworkList();
@@ -6377,7 +6332,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
                                     (int TempRow, DbConnection TempConnection) TempBaseEnty = (0,null);
 
-                                    if(ExamFileExtension==".mdb")
+                                    if(ExamFileExtension==".exam")
                                     {
                                         TempBaseEnty = Util.ExecuteAccessSql(
                                         ChooseExamFileTextBox.Text,
@@ -6409,12 +6364,10 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                                 {
                                     if(Directory.Exists(ExamTargetPicPathTextBox.Text))
                                     {
-                                        string TempModifyPicPath = string.Empty;
-                                        if(!ExamTargetPicPathTextBox.Text
-                                            .EndsWith(Path.DirectorySeparatorChar.ToString()))
+                                        string TempModifyPicPath = ExamTargetPicPathTextBox.Text;
+                                        if (!TempModifyPicPath.EndsWith(Path.DirectorySeparatorChar.ToString()))
                                         {
-                                            TempModifyPicPath = ExamTargetPicPathTextBox.Text +
-                                                Path.DirectorySeparatorChar.ToString();
+                                            TempModifyPicPath += Path.DirectorySeparatorChar.ToString();
                                         }
                                         string UpdateString = Util.ChangeUnitExamPicPath(
                                             ExamPicPathCombox.SelectedItem.ToString(),
@@ -6422,7 +6375,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
                                         (int TempRow, DbConnection TempConnection) TempBaseEnty = (0, null);
 
-                                        if (ExamFileExtension == ".mdb")
+                                        if (ExamFileExtension == ".exam")
                                         {
                                             TempBaseEnty = Util.ExecuteAccessSql(
                                             ChooseExamFileTextBox.Text,
@@ -7070,7 +7023,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
             return AddedControl;
         }
 
-        private void AddSingleWordFindReplaceControl()
+        private void WordReplaceAddFind_Click(object sender, EventArgs e)
         {
             DynamicAddControlParams.WORDFINDREPLACE_FIND_NAME_INDEX++;
             //DynamicAddControlParams.WORDFINDREPLACE_FINDREPLACE_LOCATION_Y += 25;
@@ -7106,102 +7059,20 @@ IPGATEWAY:'{set_interface_gateway.Text}',
             DynamicAddControlParams.WordFindReplace_ReplaceControl_Lists.Add(TempReplaceTextBox);
         }
 
-        private void RemoveSingleWordFindReplaceControl()
+        private void WordReplaceRemoveFind_Click(object sender, EventArgs e)
         {
-            if (DynamicAddControlParams.WordFindReplace_FindControl_Lists.Count > 0)
+            if(DynamicAddControlParams.WordFindReplace_FindControl_Lists.Count > 0)
             {
                 Control LastControl = DynamicAddControlParams.WordFindReplace_FindControl_Lists.Last();
                 WordReplaceFindPanel.Controls.Remove(LastControl);
                 DynamicAddControlParams.WordFindReplace_FindControl_Lists.Remove(LastControl);
             }
 
-            if (DynamicAddControlParams.WordFindReplace_ReplaceControl_Lists.Count > 0)
+            if(DynamicAddControlParams.WordFindReplace_ReplaceControl_Lists.Count > 0)
             {
                 Control LastControl = DynamicAddControlParams.WordFindReplace_ReplaceControl_Lists.Last();
                 WordReplaceReplacePanel.Controls.Remove(LastControl);
                 DynamicAddControlParams.WordFindReplace_ReplaceControl_Lists.Remove(LastControl);
-            }
-        }
-
-        private void WordReplaceAddFind_Click(object sender, EventArgs e)
-        {
-            if (WordReplace_OneToOneMode.Checked)
-            {
-                ContextMenuStrip cms = new ContextMenuStrip();
-
-                cms.Items.Add("粘贴查找替换内容(双列文本)", null, (s, ev) =>
-                {
-                    string text = Clipboard.GetText();
-                    if (string.IsNullOrEmpty(text)) return;
-                    string[] lines = text.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
-
-                    int fileCount = ReplaceWordFileList.Items.Count;
-                    // Limit processing to the number of files
-                    int processCount = Math.Min(lines.Length, fileCount);
-
-                    for (int i = 0; i < processCount; i++)
-                    {
-                        string line = lines[i];
-                        // Ignore lines that do not have at least two columns separated by tab
-                        if (!line.Contains("\t")) continue;
-
-                        string[] parts = line.Split(new[] { '\t' }, 2);
-                        string findText = parts[0];
-                        string replaceText = parts.Length > 1 ? parts[1] : "";
-
-                        if (i == 0)
-                        {
-                            WordReplaceFindTextBox.Text = findText;
-                            WordReplaceTextBox.Text = replaceText;
-                        }
-                        else
-                        {
-                            int dynamicIndex = i - 1;
-
-                            // Add control if needed
-                            if (dynamicIndex >= DynamicAddControlParams.WordFindReplace_FindControl_Lists.Count)
-                            {
-                                AddSingleWordFindReplaceControl();
-                            }
-
-                            DynamicAddControlParams.WordFindReplace_FindControl_Lists[dynamicIndex].Text = findText;
-                            DynamicAddControlParams.WordFindReplace_ReplaceControl_Lists[dynamicIndex].Text = replaceText;
-                        }
-                    }
-                });
-
-                cms.Show(WordReplaceAddFind, new Point(WordReplaceAddFind.Width, 0));
-            }
-            else
-            {
-                AddSingleWordFindReplaceControl();
-            }
-        }
-
-        private void WordReplaceRemoveFind_Click(object sender, EventArgs e)
-        {
-            if (WordReplace_OneToOneMode.Checked)
-            {
-                ContextMenuStrip cms = new ContextMenuStrip();
-
-                cms.Items.Add("批量移除(全部)", null, (s, ev) =>
-                {
-                    while (DynamicAddControlParams.WordFindReplace_FindControl_Lists.Count > 0)
-                    {
-                        RemoveSingleWordFindReplaceControl();
-                    }
-                });
-
-                cms.Items.Add("移除最后一个", null, (s, ev) =>
-                {
-                    RemoveSingleWordFindReplaceControl();
-                });
-
-                cms.Show(WordReplaceRemoveFind, new Point(WordReplaceRemoveFind.Width, 0));
-            }
-            else
-            {
-                RemoveSingleWordFindReplaceControl();
             }
         }
 
@@ -8442,7 +8313,6 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
                             return TempDataTable;
                         });
-
                     InsertExamTableView.DataSource = TempExamBaseInfoDataTable;
 
                     if(TempExamBaseInfoDataTable != null && TempExamBaseInfoDataTable.Rows.Count > 0)
@@ -8451,6 +8321,58 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                     }
                 }
             } catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async void RefreshExamUnitInfoTableView()
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(ExamDataPakOrder_Path.Text) && File.Exists(ExamDataPakOrder_Path.Text))
+                {
+                    string ExamFileExtension = Path.GetExtension(ExamDataPakOrder_Path.Text);
+                    DataTable TempExamBaseInfoDataTable = await Task.Run(
+                        () =>
+                        {
+                            DataTable TempDataTable = new DataTable();
+
+                            if (ExamFileExtension == ".mdb")
+                            {
+                                TempDataTable = Util.GetExamUnitInfo(ExamDataPakOrder_Path.Text, new AccessDatabaseFactory());
+                            }
+                            else if (ExamFileExtension == ".db")
+                            {
+                                TempDataTable = Util.GetExamUnitInfo(ExamDataPakOrder_Path.Text, new SqliteDatabaseFactory());
+                            }
+
+                            return TempDataTable;
+                        });
+
+                    ExamDataPakOrder_UnitListView.DataSource = TempExamBaseInfoDataTable;
+
+                    if (TempExamBaseInfoDataTable != null && TempExamBaseInfoDataTable.Rows.Count > 0)
+                    {
+                        // 记录原始顺序，用于高亮“已调整过顺序”的行
+                        if (!TempExamBaseInfoDataTable.Columns.Contains("__orig_order"))
+                        {
+                            TempExamBaseInfoDataTable.Columns.Add("__orig_order", typeof(int));
+                        }
+                        for (int i = 0; i < TempExamBaseInfoDataTable.Rows.Count; i++)
+                        {
+                            TempExamBaseInfoDataTable.Rows[i]["__orig_order"] = i + 1;
+                        }
+
+                        ExamDataPakOrder_MarkChangedRows();
+                        if (ExamDataPakOrder_UnitListView.Columns.Contains("__orig_order"))
+                        {
+                            ExamDataPakOrder_UnitListView.Columns["__orig_order"].Visible = false;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -9968,6 +9890,228 @@ IPGATEWAY:'{set_interface_gateway.Text}',
         private void AddPdfWaterMark_UseFileNameAsMark_CheckedChanged(object sender, EventArgs e)
         {
             PdfWaterMarkText.Enabled = !AddPdfWaterMark_UseFileNameAsMark.Checked;
+        }
+
+        private void ExamDataPakOrder_Select_Click(object sender, EventArgs e)
+        {
+           ExamDataPakOrder_Path.Text  =  Util.ShowSelectDialog(false, false,"数据库文件", "*.mdb;*.db").FirstOrDefault();
+
+            if(!string.IsNullOrEmpty(ExamDataPakOrder_Path.Text) && ExamDataPakOrder_Path.Text != string.Empty )
+            {
+                RefreshExamUnitInfoTableView();
+            }
+        }
+
+        private void ExamDataPakOrder_MarkChangedRows()
+        {
+            try
+            {
+                var dgv = ExamDataPakOrder_UnitListView;
+                if (dgv == null) return;
+                if (!(dgv.DataSource is System.Data.DataTable dt)) return;
+
+                foreach (DataGridViewRow r in dgv.Rows)
+                {
+                    r.DefaultCellStyle.BackColor = System.Drawing.Color.Empty;
+                }
+
+                if (!dt.Columns.Contains("__orig_order")) return;
+                if (!dt.Columns.Contains("单位编码")) return;
+
+                var origCol = dt.Columns["__orig_order"];
+
+                for (int i = 0; i < dt.Rows.Count && i < dgv.Rows.Count; i++)
+                {
+                    var unitCode = dt.Rows[i]["单位编码"]?.ToString();
+                    var origOrderObj = dt.Rows[i][origCol];
+                    int origOrder;
+                    if (origOrderObj != null && int.TryParse(origOrderObj.ToString(), out origOrder))
+                    {
+                        if (origOrder != i + 1)
+                        {
+                            dgv.Rows[i].DefaultCellStyle.BackColor = System.Drawing.Color.LemonChiffon;
+                        }
+                    }
+                }
+            }
+            catch { }
+        }
+
+        private void ExamDataPackUnitOrder_Up_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var dgv = ExamDataPakOrder_UnitListView;
+                if (dgv == null || dgv.DataSource == null) return;
+                if (dgv.CurrentRow == null) return;
+
+                int rowIndex = dgv.CurrentRow.Index;
+                if (rowIndex <= 0) return;
+
+                if (!(dgv.DataSource is System.Data.DataTable dt)) return;
+
+                // 交换当前行与上一行
+                var curArr = (object[])dt.Rows[rowIndex].ItemArray.Clone();
+                var prevArr = (object[])dt.Rows[rowIndex - 1].ItemArray.Clone();
+
+                dt.Rows[rowIndex].ItemArray = prevArr;
+                dt.Rows[rowIndex - 1].ItemArray = curArr;
+
+                // 重新按当前位置生成序号（1..N），保证序号与当前位置一致
+                for (int k = 0; k < dt.Rows.Count; k++)
+                {
+                    dt.Rows[k][0] = k + 1;
+                }
+
+                ExamDataPakOrder_MarkChangedRows();
+
+                dgv.ClearSelection();
+                dgv.CurrentCell = dgv.Rows[rowIndex - 1].Cells[0];
+                dgv.Rows[rowIndex - 1].Selected = true;
+            }
+            catch { }
+        }
+
+        private void ExamDataPackUnitOrder_Down_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var dgv = ExamDataPakOrder_UnitListView;
+                if (dgv == null || dgv.DataSource == null) return;
+                if (dgv.CurrentRow == null) return;
+
+                int rowIndex = dgv.CurrentRow.Index;
+                if (!(dgv.DataSource is System.Data.DataTable dt)) return;
+                if (rowIndex < 0 || rowIndex >= dt.Rows.Count - 1) return;
+
+                // 交换当前行与下一行
+                var curArr = (object[])dt.Rows[rowIndex].ItemArray.Clone();
+                var nextArr = (object[])dt.Rows[rowIndex + 1].ItemArray.Clone();
+
+                dt.Rows[rowIndex].ItemArray = nextArr;
+                dt.Rows[rowIndex + 1].ItemArray = curArr;
+
+                // 重新按当前位置生成序号（1..N），保证序号与当前位置一致
+                for (int k = 0; k < dt.Rows.Count; k++)
+                {
+                    dt.Rows[k][0] = k + 1;
+                }
+
+                ExamDataPakOrder_MarkChangedRows();
+
+                dgv.ClearSelection();
+                dgv.CurrentCell = dgv.Rows[rowIndex + 1].Cells[0];
+                dgv.Rows[rowIndex + 1].Selected = true;
+            }
+            catch { }
+        }
+
+        private void ExamDataPakOrder_Modify_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(ExamDataPakOrder_Path.Text) || File.Exists(ExamDataPakOrder_Path.Text))
+            {
+                var confirm = MessageBox.Show(
+                 "修改后无法复原，请谨慎操作，确定继续吗？",
+                 "提示",
+                 MessageBoxButtons.YesNo,
+                 MessageBoxIcon.Warning);
+                if (confirm != DialogResult.Yes) return;
+
+                if (!(ExamDataPakOrder_UnitListView?.DataSource is System.Data.DataTable dt) || dt.Rows.Count <= 0)
+                {
+                    return;
+                }
+
+                string ext = Path.GetExtension(ExamDataPakOrder_Path.Text)?.ToLowerInvariant();
+
+                var callButton = sender as Button;
+                if (callButton != null) callButton.Enabled = false;
+                try { ExamDataPackUnitOrder_Up.Enabled = false; } catch { }
+                try { ExamDataPackUnitOrder_Down.Enabled = false; } catch { }
+
+                Task.Run(
+                    () =>
+                    {
+                        try
+                        {
+                            // 按当前 DataGridView 顺序写回 Unit_Ess.AtOrder
+                            // 约定：dt 第一列为“单位序号”，第三列为“单位编码”
+                            var factory = new AccessDatabaseFactory();
+
+                            for (int i = 0; i < dt.Rows.Count; i++)
+                            {
+                                var unitCodeObj = dt.Rows[i][2];
+                                var unitCode = unitCodeObj?.ToString();
+                                if (string.IsNullOrEmpty(unitCode)) continue;
+
+                                int atOrder;
+                                if (!int.TryParse(dt.Rows[i][0]?.ToString(), out atOrder))
+                                {
+                                    atOrder = i + 1;
+                                }
+
+                                string sql = $"UPDATE Unit_Ess SET AtOrder={atOrder} WHERE UnitCode='{unitCode.Replace("'", "''")}'";
+                                var (_, conn) = Util.ExecuteAccessSql(ExamDataPakOrder_Path.Text, sql, factory);
+                                conn.Close();
+                            }
+
+                            this.BeginInvoke(
+                                new Action(
+                                    () =>
+                                    {
+                                        RefreshExamUnitInfoTableView();
+                                        MessageBox.Show("修改完毕", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    }));
+                        }
+                        catch (Exception ex)
+                        {
+                            this.BeginInvoke(
+                                new Action(
+                                    () =>
+                                    {
+                                        MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }));
+                        }
+                        finally
+                        {
+                            if (callButton != null)
+                            {
+                                try
+                                {
+                                    callButton.BeginInvoke(new Action(() => callButton.Enabled = true));
+                                }
+                                catch { }
+                            }
+
+                            try
+                            {
+                                ExamDataPackUnitOrder_Up.BeginInvoke(new Action(() => ExamDataPackUnitOrder_Up.Enabled = true));
+                            }
+                            catch { }
+
+                            try
+                            {
+                                ExamDataPackUnitOrder_Down.BeginInvoke(new Action(() => ExamDataPackUnitOrder_Down.Enabled = true));
+                            }
+                            catch { }
+                        }
+                    });
+            }
+        }
+
+        private void ExamDataPakOrder_Refresh_Click(object sender, EventArgs e)
+        {
+            RefreshExamUnitInfoTableView();
+        }
+
+        private void ExamMergeDataPak_SourceSelect_Click(object sender, EventArgs e)
+        {
+            ExamMergeDataPak_SourcePath.Text = Util.ShowSelectDialog(false, true, "数据包目录", string.Empty).FirstOrDefault();
+        }
+
+        private void ExamMergeDataPak_TargetSelect_Click(object sender, EventArgs e)
+        {
+            ExamMergeDataPak_TargetPath.Text = Util.ShowSelectDialog(false, true, "数据包目录", string.Empty).FirstOrDefault();
         }
     }
 }
