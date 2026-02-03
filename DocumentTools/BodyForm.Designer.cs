@@ -1103,11 +1103,6 @@ namespace DocumentTools
             this.set_interface_export = new System.Windows.Forms.Button();
             this.set_interface_reset = new System.Windows.Forms.Button();
             this.set_interface_start = new System.Windows.Forms.Button();
-            this.set_interface_dns2 = new DocumentTools.IPAddressInputTextBox();
-            this.set_interface_dns1 = new DocumentTools.IPAddressInputTextBox();
-            this.set_interface_gateway = new DocumentTools.IPAddressInputTextBox();
-            this.set_interface_mask = new DocumentTools.IPAddressInputTextBox();
-            this.set_interface_ipaddress = new DocumentTools.IPAddressInputTextBox();
             this.set_interface_mode_static = new System.Windows.Forms.RadioButton();
             this.set_interface_mode_auto = new System.Windows.Forms.RadioButton();
             this.label121 = new System.Windows.Forms.Label();
@@ -1165,6 +1160,7 @@ namespace DocumentTools
             this.label6 = new System.Windows.Forms.Label();
             this.TabPage_43 = new System.Windows.Forms.TabPage();
             this.ExamDataPakOrder_UnitList = new System.Windows.Forms.GroupBox();
+            this.ExamDataPakUnitOrder_ProgressBar = new System.Windows.Forms.ProgressBar();
             this.ExamDataPakOrder_Refresh = new System.Windows.Forms.Button();
             this.ExamDataPakOrder_UnitListView = new System.Windows.Forms.DataGridView();
             this.ExamDataPackUnitOrder_Up = new System.Windows.Forms.Button();
@@ -1400,7 +1396,13 @@ namespace DocumentTools
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem12 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem13 = new System.Windows.Forms.ToolStripMenuItem();
-            this.ExamDataPakUnitOrder_ProgressBar = new System.Windows.Forms.ProgressBar();
+            this.set_interface_dns2 = new DocumentTools.IPAddressInputTextBox();
+            this.set_interface_dns1 = new DocumentTools.IPAddressInputTextBox();
+            this.set_interface_gateway = new DocumentTools.IPAddressInputTextBox();
+            this.set_interface_mask = new DocumentTools.IPAddressInputTextBox();
+            this.set_interface_ipaddress = new DocumentTools.IPAddressInputTextBox();
+            this.label238 = new System.Windows.Forms.Label();
+            this.ExamDataPakUnitOrder_QuickFind = new System.Windows.Forms.TextBox();
             this.MainTabPage.SuspendLayout();
             this.TabPage_01.SuspendLayout();
             this.TabPage_02.SuspendLayout();
@@ -1686,11 +1688,11 @@ namespace DocumentTools
             this.TabPage_01.Controls.Add(this.ConvertButton);
             this.TabPage_01.Controls.Add(this.ChooseDocButton);
             this.TabPage_01.Controls.Add(this.WordFileListView);
-            this.TabPage_01.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_01.Location = new System.Drawing.Point(4, 124);
             this.TabPage_01.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_01.Name = "TabPage_01";
             this.TabPage_01.Padding = new System.Windows.Forms.Padding(1);
-            this.TabPage_01.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_01.Size = new System.Drawing.Size(882, 648);
             this.TabPage_01.TabIndex = 0;
             this.TabPage_01.Text = "WORD转PDF";
             this.TabPage_01.UseVisualStyleBackColor = true;
@@ -1763,7 +1765,7 @@ namespace DocumentTools
             this.word2pdf_colorMode.Location = new System.Drawing.Point(763, 461);
             this.word2pdf_colorMode.Margin = new System.Windows.Forms.Padding(1);
             this.word2pdf_colorMode.Name = "word2pdf_colorMode";
-            this.word2pdf_colorMode.Size = new System.Drawing.Size(83, 20);
+            this.word2pdf_colorMode.Size = new System.Drawing.Size(83, 24);
             this.word2pdf_colorMode.TabIndex = 18;
             this.word2pdf_colorMode.Tag = "anchor_right_bottom";
             // 
@@ -1811,7 +1813,7 @@ namespace DocumentTools
             this.Word2PDFOptimizCombox.Location = new System.Drawing.Point(763, 433);
             this.Word2PDFOptimizCombox.Margin = new System.Windows.Forms.Padding(1);
             this.Word2PDFOptimizCombox.Name = "Word2PDFOptimizCombox";
-            this.Word2PDFOptimizCombox.Size = new System.Drawing.Size(83, 20);
+            this.Word2PDFOptimizCombox.Size = new System.Drawing.Size(83, 24);
             this.Word2PDFOptimizCombox.TabIndex = 14;
             this.Word2PDFOptimizCombox.Tag = "anchor_right_bottom";
             // 
@@ -1895,7 +1897,7 @@ namespace DocumentTools
             this.PDFComplianceBox.Location = new System.Drawing.Point(489, 433);
             this.PDFComplianceBox.Margin = new System.Windows.Forms.Padding(1);
             this.PDFComplianceBox.Name = "PDFComplianceBox";
-            this.PDFComplianceBox.Size = new System.Drawing.Size(117, 20);
+            this.PDFComplianceBox.Size = new System.Drawing.Size(117, 24);
             this.PDFComplianceBox.TabIndex = 7;
             this.PDFComplianceBox.Tag = "anchor_right_bottom";
             // 
@@ -1996,11 +1998,11 @@ namespace DocumentTools
             this.TabPage_02.Controls.Add(this.Convert2DocButton);
             this.TabPage_02.Controls.Add(this.SelectPdfButton);
             this.TabPage_02.Controls.Add(this.PdfFileListView);
-            this.TabPage_02.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_02.Location = new System.Drawing.Point(4, 124);
             this.TabPage_02.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_02.Name = "TabPage_02";
             this.TabPage_02.Padding = new System.Windows.Forms.Padding(1);
-            this.TabPage_02.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_02.Size = new System.Drawing.Size(882, 648);
             this.TabPage_02.TabIndex = 1;
             this.TabPage_02.Text = "PDF转WORD";
             this.TabPage_02.UseVisualStyleBackColor = true;
@@ -2058,7 +2060,7 @@ namespace DocumentTools
             this.PDF2WORD_Mode.Location = new System.Drawing.Point(379, 432);
             this.PDF2WORD_Mode.Margin = new System.Windows.Forms.Padding(1);
             this.PDF2WORD_Mode.Name = "PDF2WORD_Mode";
-            this.PDF2WORD_Mode.Size = new System.Drawing.Size(293, 20);
+            this.PDF2WORD_Mode.Size = new System.Drawing.Size(293, 24);
             this.PDF2WORD_Mode.TabIndex = 11;
             this.PDF2WORD_Mode.Tag = "anchor_right_bottom";
             // 
@@ -2226,10 +2228,10 @@ namespace DocumentTools
             this.TabPage_03.Controls.Add(this.ConvertExcel2PdfButton);
             this.TabPage_03.Controls.Add(this.SelectExcelFileButton);
             this.TabPage_03.Controls.Add(this.ExcelFileListView);
-            this.TabPage_03.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_03.Location = new System.Drawing.Point(4, 124);
             this.TabPage_03.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_03.Name = "TabPage_03";
-            this.TabPage_03.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_03.Size = new System.Drawing.Size(882, 648);
             this.TabPage_03.TabIndex = 2;
             this.TabPage_03.Text = "EXCEL转PDF";
             this.TabPage_03.UseVisualStyleBackColor = true;
@@ -2477,10 +2479,10 @@ namespace DocumentTools
             this.TabPage_07.Controls.Add(this.ConvertPDF2Excel);
             this.TabPage_07.Controls.Add(this.SelectPDF2ExcelButton);
             this.TabPage_07.Controls.Add(this.PDF2ExcelFileView);
-            this.TabPage_07.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_07.Location = new System.Drawing.Point(4, 124);
             this.TabPage_07.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_07.Name = "TabPage_07";
-            this.TabPage_07.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_07.Size = new System.Drawing.Size(882, 648);
             this.TabPage_07.TabIndex = 6;
             this.TabPage_07.Text = "PDF转EXCEL";
             this.TabPage_07.UseVisualStyleBackColor = true;
@@ -2615,11 +2617,11 @@ namespace DocumentTools
             this.TabPage_20.Controls.Add(this.ConvertPPT2PDF);
             this.TabPage_20.Controls.Add(this.SelectPPT2PdfFile);
             this.TabPage_20.Controls.Add(this.PPT2PdfFileList);
-            this.TabPage_20.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_20.Location = new System.Drawing.Point(4, 124);
             this.TabPage_20.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_20.Name = "TabPage_20";
             this.TabPage_20.Padding = new System.Windows.Forms.Padding(1);
-            this.TabPage_20.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_20.Size = new System.Drawing.Size(882, 648);
             this.TabPage_20.TabIndex = 19;
             this.TabPage_20.Tag = "anchor_left_bottom";
             this.TabPage_20.Text = "PPT转PDF";
@@ -2727,7 +2729,7 @@ namespace DocumentTools
             this.ExportNotePageCombox.Location = new System.Drawing.Point(284, 427);
             this.ExportNotePageCombox.Margin = new System.Windows.Forms.Padding(1);
             this.ExportNotePageCombox.Name = "ExportNotePageCombox";
-            this.ExportNotePageCombox.Size = new System.Drawing.Size(83, 20);
+            this.ExportNotePageCombox.Size = new System.Drawing.Size(83, 24);
             this.ExportNotePageCombox.TabIndex = 6;
             this.ExportNotePageCombox.Tag = "anchor_left_bottom";
             // 
@@ -2821,10 +2823,10 @@ namespace DocumentTools
             this.TabPage_21.Controls.Add(this.ConvertPDF2PPT);
             this.TabPage_21.Controls.Add(this.SelectConvertPDF2PPT);
             this.TabPage_21.Controls.Add(this.PDF2PPTFileList);
-            this.TabPage_21.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_21.Location = new System.Drawing.Point(4, 124);
             this.TabPage_21.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_21.Name = "TabPage_21";
-            this.TabPage_21.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_21.Size = new System.Drawing.Size(882, 648);
             this.TabPage_21.TabIndex = 20;
             this.TabPage_21.Text = "PDF转PPT";
             this.TabPage_21.UseVisualStyleBackColor = true;
@@ -2993,11 +2995,11 @@ namespace DocumentTools
             this.TabPage_14.Controls.Add(this.MergeWordFile);
             this.TabPage_14.Controls.Add(this.SelectMergeWordFiles);
             this.TabPage_14.Controls.Add(this.MergeWordFileList);
-            this.TabPage_14.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_14.Location = new System.Drawing.Point(4, 124);
             this.TabPage_14.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_14.Name = "TabPage_14";
             this.TabPage_14.Padding = new System.Windows.Forms.Padding(1);
-            this.TabPage_14.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_14.Size = new System.Drawing.Size(882, 648);
             this.TabPage_14.TabIndex = 13;
             this.TabPage_14.Text = "合并WORD";
             this.TabPage_14.UseVisualStyleBackColor = true;
@@ -3127,10 +3129,10 @@ namespace DocumentTools
             this.TabPage_31.Controls.Add(this.StartSplitWord);
             this.TabPage_31.Controls.Add(this.SelectSplitWordFiles);
             this.TabPage_31.Controls.Add(this.SplitWordFileList);
-            this.TabPage_31.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_31.Location = new System.Drawing.Point(4, 124);
             this.TabPage_31.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_31.Name = "TabPage_31";
-            this.TabPage_31.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_31.Size = new System.Drawing.Size(882, 648);
             this.TabPage_31.TabIndex = 30;
             this.TabPage_31.Text = "拆分WORD";
             this.TabPage_31.UseVisualStyleBackColor = true;
@@ -3403,10 +3405,10 @@ namespace DocumentTools
             this.TabPage_06.Controls.Add(this.meregepdf_clear);
             this.TabPage_06.Controls.Add(this.meregepdf_remove);
             this.TabPage_06.Controls.Add(this.MergePdfFileView);
-            this.TabPage_06.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_06.Location = new System.Drawing.Point(4, 124);
             this.TabPage_06.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_06.Name = "TabPage_06";
-            this.TabPage_06.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_06.Size = new System.Drawing.Size(882, 648);
             this.TabPage_06.TabIndex = 5;
             this.TabPage_06.Text = "合并PDF";
             this.TabPage_06.UseVisualStyleBackColor = true;
@@ -3535,11 +3537,11 @@ namespace DocumentTools
             this.TabPage_17.Controls.Add(this.StartSplitPdf);
             this.TabPage_17.Controls.Add(this.SelectSplitPdf);
             this.TabPage_17.Controls.Add(this.SplitPdfFileList);
-            this.TabPage_17.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_17.Location = new System.Drawing.Point(4, 124);
             this.TabPage_17.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_17.Name = "TabPage_17";
             this.TabPage_17.Padding = new System.Windows.Forms.Padding(1);
-            this.TabPage_17.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_17.Size = new System.Drawing.Size(882, 648);
             this.TabPage_17.TabIndex = 16;
             this.TabPage_17.Text = "拆分PDF";
             this.TabPage_17.UseVisualStyleBackColor = true;
@@ -3882,10 +3884,10 @@ namespace DocumentTools
             this.TabPage_41.Controls.Add(this.SplitPPT_Button);
             this.TabPage_41.Controls.Add(this.SplitPPT_SelectFiles);
             this.TabPage_41.Controls.Add(this.SplitPPTFilesList);
-            this.TabPage_41.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_41.Location = new System.Drawing.Point(4, 124);
             this.TabPage_41.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_41.Name = "TabPage_41";
-            this.TabPage_41.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_41.Size = new System.Drawing.Size(882, 648);
             this.TabPage_41.TabIndex = 31;
             this.TabPage_41.Text = "拆分PPT";
             this.TabPage_41.UseVisualStyleBackColor = true;
@@ -3934,7 +3936,7 @@ namespace DocumentTools
             this.SplitPdfScaleCombox.Location = new System.Drawing.Point(61, 47);
             this.SplitPdfScaleCombox.Margin = new System.Windows.Forms.Padding(1);
             this.SplitPdfScaleCombox.Name = "SplitPdfScaleCombox";
-            this.SplitPdfScaleCombox.Size = new System.Drawing.Size(123, 20);
+            this.SplitPdfScaleCombox.Size = new System.Drawing.Size(123, 24);
             this.SplitPdfScaleCombox.TabIndex = 1;
             // 
             // SplitPdfSizeCombox
@@ -3943,7 +3945,7 @@ namespace DocumentTools
             this.SplitPdfSizeCombox.Location = new System.Drawing.Point(61, 19);
             this.SplitPdfSizeCombox.Margin = new System.Windows.Forms.Padding(1);
             this.SplitPdfSizeCombox.Name = "SplitPdfSizeCombox";
-            this.SplitPdfSizeCombox.Size = new System.Drawing.Size(123, 20);
+            this.SplitPdfSizeCombox.Size = new System.Drawing.Size(123, 24);
             this.SplitPdfSizeCombox.TabIndex = 0;
             // 
             // groupBox61
@@ -4155,10 +4157,10 @@ namespace DocumentTools
             this.TabPage_18.Controls.Add(this.SelectWaterMarkPdfFiles);
             this.TabPage_18.Controls.Add(this.groupBox18);
             this.TabPage_18.Controls.Add(this.PdfWaterMarkFileList);
-            this.TabPage_18.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_18.Location = new System.Drawing.Point(4, 124);
             this.TabPage_18.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_18.Name = "TabPage_18";
-            this.TabPage_18.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_18.Size = new System.Drawing.Size(882, 648);
             this.TabPage_18.TabIndex = 17;
             this.TabPage_18.Text = "添加PDF水印";
             this.TabPage_18.UseVisualStyleBackColor = true;
@@ -4611,7 +4613,7 @@ namespace DocumentTools
             this.PdfWaterMarkOpcityNumber.Location = new System.Drawing.Point(570, 20);
             this.PdfWaterMarkOpcityNumber.Margin = new System.Windows.Forms.Padding(1);
             this.PdfWaterMarkOpcityNumber.Name = "PdfWaterMarkOpcityNumber";
-            this.PdfWaterMarkOpcityNumber.Size = new System.Drawing.Size(83, 20);
+            this.PdfWaterMarkOpcityNumber.Size = new System.Drawing.Size(83, 24);
             this.PdfWaterMarkOpcityNumber.TabIndex = 14;
             // 
             // label30
@@ -4651,7 +4653,7 @@ namespace DocumentTools
             this.PDFWaterMarkVerSetting.Location = new System.Drawing.Point(266, 51);
             this.PDFWaterMarkVerSetting.Margin = new System.Windows.Forms.Padding(1);
             this.PDFWaterMarkVerSetting.Name = "PDFWaterMarkVerSetting";
-            this.PDFWaterMarkVerSetting.Size = new System.Drawing.Size(83, 20);
+            this.PDFWaterMarkVerSetting.Size = new System.Drawing.Size(83, 24);
             this.PDFWaterMarkVerSetting.TabIndex = 10;
             // 
             // PdfWaterMarkHorSetting
@@ -4660,7 +4662,7 @@ namespace DocumentTools
             this.PdfWaterMarkHorSetting.Location = new System.Drawing.Point(266, 24);
             this.PdfWaterMarkHorSetting.Margin = new System.Windows.Forms.Padding(1);
             this.PdfWaterMarkHorSetting.Name = "PdfWaterMarkHorSetting";
-            this.PdfWaterMarkHorSetting.Size = new System.Drawing.Size(83, 20);
+            this.PdfWaterMarkHorSetting.Size = new System.Drawing.Size(83, 24);
             this.PdfWaterMarkHorSetting.TabIndex = 9;
             // 
             // label28
@@ -4771,10 +4773,10 @@ namespace DocumentTools
             this.TabPage_19.Controls.Add(this.RemovePdfWaterMark);
             this.TabPage_19.Controls.Add(this.SelectRemovePdfWaterMarkFiles);
             this.TabPage_19.Controls.Add(this.RemovePdfWaterMarkFileList);
-            this.TabPage_19.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_19.Location = new System.Drawing.Point(4, 124);
             this.TabPage_19.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_19.Name = "TabPage_19";
-            this.TabPage_19.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_19.Size = new System.Drawing.Size(882, 648);
             this.TabPage_19.TabIndex = 18;
             this.TabPage_19.Text = "移除PDF水印";
             this.TabPage_19.UseVisualStyleBackColor = true;
@@ -4891,10 +4893,10 @@ namespace DocumentTools
             this.TabPage_22.Controls.Add(this.ConvertPdfCompliance);
             this.TabPage_22.Controls.Add(this.SelectConvertComplaincePdf);
             this.TabPage_22.Controls.Add(this.ConvertPdfComplianceFileList);
-            this.TabPage_22.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_22.Location = new System.Drawing.Point(4, 124);
             this.TabPage_22.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_22.Name = "TabPage_22";
-            this.TabPage_22.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_22.Size = new System.Drawing.Size(882, 648);
             this.TabPage_22.TabIndex = 21;
             this.TabPage_22.Text = "PDF版本转换";
             this.TabPage_22.UseVisualStyleBackColor = true;
@@ -4955,7 +4957,7 @@ namespace DocumentTools
             this.ConvertPdfComplianceVersion.Location = new System.Drawing.Point(61, 427);
             this.ConvertPdfComplianceVersion.Margin = new System.Windows.Forms.Padding(1);
             this.ConvertPdfComplianceVersion.Name = "ConvertPdfComplianceVersion";
-            this.ConvertPdfComplianceVersion.Size = new System.Drawing.Size(147, 20);
+            this.ConvertPdfComplianceVersion.Size = new System.Drawing.Size(147, 24);
             this.ConvertPdfComplianceVersion.TabIndex = 5;
             this.ConvertPdfComplianceVersion.Tag = "anchor_left_bottom";
             // 
@@ -5033,10 +5035,10 @@ namespace DocumentTools
             this.TabPage_15.Controls.Add(this.ConvertWord2Excel);
             this.TabPage_15.Controls.Add(this.SelectWord2ExcelFiles);
             this.TabPage_15.Controls.Add(this.Word2ExcelFileList);
-            this.TabPage_15.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_15.Location = new System.Drawing.Point(4, 124);
             this.TabPage_15.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_15.Name = "TabPage_15";
-            this.TabPage_15.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_15.Size = new System.Drawing.Size(882, 648);
             this.TabPage_15.TabIndex = 14;
             this.TabPage_15.Text = "WORD转EXCEL";
             this.TabPage_15.UseVisualStyleBackColor = true;
@@ -5176,10 +5178,10 @@ namespace DocumentTools
             this.TabPage_16.Controls.Add(this.ConvertExcel2Word);
             this.TabPage_16.Controls.Add(this.SelectExcel2WordFiles);
             this.TabPage_16.Controls.Add(this.Excel2WordFileList);
-            this.TabPage_16.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_16.Location = new System.Drawing.Point(4, 124);
             this.TabPage_16.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_16.Name = "TabPage_16";
-            this.TabPage_16.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_16.Size = new System.Drawing.Size(882, 648);
             this.TabPage_16.TabIndex = 15;
             this.TabPage_16.Text = "EXCEL转WORD";
             this.TabPage_16.UseVisualStyleBackColor = true;
@@ -5328,10 +5330,10 @@ namespace DocumentTools
             this.TabPage_04.Controls.Add(this.ConvertWord2ImageButton);
             this.TabPage_04.Controls.Add(this.ConvertImageList);
             this.TabPage_04.Controls.Add(this.DocumentsListView);
-            this.TabPage_04.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_04.Location = new System.Drawing.Point(4, 124);
             this.TabPage_04.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_04.Name = "TabPage_04";
-            this.TabPage_04.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_04.Size = new System.Drawing.Size(882, 648);
             this.TabPage_04.TabIndex = 3;
             this.TabPage_04.Text = "WORD/PDF/EXCEL转图片";
             this.TabPage_04.UseVisualStyleBackColor = true;
@@ -5455,7 +5457,7 @@ namespace DocumentTools
             this.DpiItemList.Location = new System.Drawing.Point(284, 427);
             this.DpiItemList.Margin = new System.Windows.Forms.Padding(1);
             this.DpiItemList.Name = "DpiItemList";
-            this.DpiItemList.Size = new System.Drawing.Size(83, 20);
+            this.DpiItemList.Size = new System.Drawing.Size(83, 24);
             this.DpiItemList.TabIndex = 7;
             this.DpiItemList.Tag = "anchor_left_bottom";
             this.DpiItemList.SelectedIndexChanged += new System.EventHandler(this.DpiItemList_SelectedIndexChanged);
@@ -5531,7 +5533,7 @@ namespace DocumentTools
             this.ConvertImageList.Location = new System.Drawing.Point(433, 427);
             this.ConvertImageList.Margin = new System.Windows.Forms.Padding(1);
             this.ConvertImageList.Name = "ConvertImageList";
-            this.ConvertImageList.Size = new System.Drawing.Size(83, 20);
+            this.ConvertImageList.Size = new System.Drawing.Size(83, 24);
             this.ConvertImageList.TabIndex = 1;
             this.ConvertImageList.Tag = "anchor_left_bottom";
             this.ConvertImageList.SelectedIndexChanged += new System.EventHandler(this.ConvertImageList_SelectedIndexChanged);
@@ -5565,10 +5567,10 @@ namespace DocumentTools
             this.TabPage_27.Controls.Add(this.ConvertWord2Epub);
             this.TabPage_27.Controls.Add(this.SelectWord2EpubFiles);
             this.TabPage_27.Controls.Add(this.Word2EPUBFileList);
-            this.TabPage_27.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_27.Location = new System.Drawing.Point(4, 124);
             this.TabPage_27.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_27.Name = "TabPage_27";
-            this.TabPage_27.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_27.Size = new System.Drawing.Size(882, 648);
             this.TabPage_27.TabIndex = 26;
             this.TabPage_27.Text = "WORD转EPUB";
             this.TabPage_27.UseVisualStyleBackColor = true;
@@ -5776,10 +5778,10 @@ namespace DocumentTools
             this.TabPage_28.Controls.Add(this.ConvertEpub2Word);
             this.TabPage_28.Controls.Add(this.SelectEpub2WordFiles);
             this.TabPage_28.Controls.Add(this.EPUB2WORDFileList);
-            this.TabPage_28.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_28.Location = new System.Drawing.Point(4, 124);
             this.TabPage_28.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_28.Name = "TabPage_28";
-            this.TabPage_28.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_28.Size = new System.Drawing.Size(882, 648);
             this.TabPage_28.TabIndex = 27;
             this.TabPage_28.Text = "EPUB转WORD";
             this.TabPage_28.UseVisualStyleBackColor = true;
@@ -5908,10 +5910,10 @@ namespace DocumentTools
             this.TabPage_29.Controls.Add(this.ConvertEPUB2PDF);
             this.TabPage_29.Controls.Add(this.SelectEPUB2PDFFiles);
             this.TabPage_29.Controls.Add(this.EPUB2PDFFileList);
-            this.TabPage_29.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_29.Location = new System.Drawing.Point(4, 124);
             this.TabPage_29.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_29.Name = "TabPage_29";
-            this.TabPage_29.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_29.Size = new System.Drawing.Size(882, 648);
             this.TabPage_29.TabIndex = 28;
             this.TabPage_29.Text = "EPUB转PDF";
             this.TabPage_29.UseVisualStyleBackColor = true;
@@ -6040,10 +6042,10 @@ namespace DocumentTools
             this.TabPage_23.Controls.Add(this.ConvertImage2PDF);
             this.TabPage_23.Controls.Add(this.SelectConvertImage2PDF);
             this.TabPage_23.Controls.Add(this.ConvertImage2PDFFileList);
-            this.TabPage_23.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_23.Location = new System.Drawing.Point(4, 124);
             this.TabPage_23.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_23.Name = "TabPage_23";
-            this.TabPage_23.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_23.Size = new System.Drawing.Size(882, 648);
             this.TabPage_23.TabIndex = 22;
             this.TabPage_23.Text = "图片转PDF";
             this.TabPage_23.UseVisualStyleBackColor = true;
@@ -6258,7 +6260,7 @@ namespace DocumentTools
             this.Image2PDFCombox.Location = new System.Drawing.Point(255, 17);
             this.Image2PDFCombox.Margin = new System.Windows.Forms.Padding(1);
             this.Image2PDFCombox.Name = "Image2PDFCombox";
-            this.Image2PDFCombox.Size = new System.Drawing.Size(83, 20);
+            this.Image2PDFCombox.Size = new System.Drawing.Size(83, 24);
             this.Image2PDFCombox.TabIndex = 2;
             // 
             // label38
@@ -6337,10 +6339,10 @@ namespace DocumentTools
             this.TabPage_30.Controls.Add(this.ConvertHtml2Pdf);
             this.TabPage_30.Controls.Add(this.SelectHtml2PDFFiles);
             this.TabPage_30.Controls.Add(this.HTML2PDFFileList);
-            this.TabPage_30.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_30.Location = new System.Drawing.Point(4, 124);
             this.TabPage_30.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_30.Name = "TabPage_30";
-            this.TabPage_30.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_30.Size = new System.Drawing.Size(882, 648);
             this.TabPage_30.TabIndex = 29;
             this.TabPage_30.Text = "HTML转PDF";
             this.TabPage_30.UseVisualStyleBackColor = true;
@@ -6666,7 +6668,7 @@ namespace DocumentTools
             this.html2pdf_combox_pagedirect.Location = new System.Drawing.Point(69, 49);
             this.html2pdf_combox_pagedirect.Margin = new System.Windows.Forms.Padding(1);
             this.html2pdf_combox_pagedirect.Name = "html2pdf_combox_pagedirect";
-            this.html2pdf_combox_pagedirect.Size = new System.Drawing.Size(117, 20);
+            this.html2pdf_combox_pagedirect.Size = new System.Drawing.Size(117, 24);
             this.html2pdf_combox_pagedirect.TabIndex = 4;
             // 
             // html2pdf_combox_pagesize
@@ -6675,7 +6677,7 @@ namespace DocumentTools
             this.html2pdf_combox_pagesize.Location = new System.Drawing.Point(69, 23);
             this.html2pdf_combox_pagesize.Margin = new System.Windows.Forms.Padding(1);
             this.html2pdf_combox_pagesize.Name = "html2pdf_combox_pagesize";
-            this.html2pdf_combox_pagesize.Size = new System.Drawing.Size(117, 20);
+            this.html2pdf_combox_pagesize.Size = new System.Drawing.Size(117, 24);
             this.html2pdf_combox_pagesize.TabIndex = 3;
             // 
             // html2pdf_checkbox_usecss
@@ -6836,10 +6838,10 @@ namespace DocumentTools
             this.TabPage_24.Controls.Add(this.CompressPDF);
             this.TabPage_24.Controls.Add(this.SelectCompressPDFFiles);
             this.TabPage_24.Controls.Add(this.CompressPdfFileList);
-            this.TabPage_24.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_24.Location = new System.Drawing.Point(4, 124);
             this.TabPage_24.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_24.Name = "TabPage_24";
-            this.TabPage_24.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_24.Size = new System.Drawing.Size(882, 648);
             this.TabPage_24.TabIndex = 23;
             this.TabPage_24.Text = "压缩PDF";
             this.TabPage_24.UseVisualStyleBackColor = true;
@@ -7011,7 +7013,7 @@ namespace DocumentTools
             this.CompressPDF_ImageCompressVersion.Location = new System.Drawing.Point(433, 15);
             this.CompressPDF_ImageCompressVersion.Margin = new System.Windows.Forms.Padding(1);
             this.CompressPDF_ImageCompressVersion.Name = "CompressPDF_ImageCompressVersion";
-            this.CompressPDF_ImageCompressVersion.Size = new System.Drawing.Size(51, 20);
+            this.CompressPDF_ImageCompressVersion.Size = new System.Drawing.Size(51, 24);
             this.CompressPDF_ImageCompressVersion.TabIndex = 9;
             // 
             // label46
@@ -7031,7 +7033,7 @@ namespace DocumentTools
             this.CompressPDF_ImageResoution.Location = new System.Drawing.Point(323, 15);
             this.CompressPDF_ImageResoution.Margin = new System.Windows.Forms.Padding(1);
             this.CompressPDF_ImageResoution.Name = "CompressPDF_ImageResoution";
-            this.CompressPDF_ImageResoution.Size = new System.Drawing.Size(51, 20);
+            this.CompressPDF_ImageResoution.Size = new System.Drawing.Size(51, 24);
             this.CompressPDF_ImageResoution.TabIndex = 7;
             // 
             // label45
@@ -7051,7 +7053,7 @@ namespace DocumentTools
             this.CompressPDF_ImageQuailty.Location = new System.Drawing.Point(205, 15);
             this.CompressPDF_ImageQuailty.Margin = new System.Windows.Forms.Padding(1);
             this.CompressPDF_ImageQuailty.Name = "CompressPDF_ImageQuailty";
-            this.CompressPDF_ImageQuailty.Size = new System.Drawing.Size(47, 20);
+            this.CompressPDF_ImageQuailty.Size = new System.Drawing.Size(47, 24);
             this.CompressPDF_ImageQuailty.TabIndex = 5;
             // 
             // label44
@@ -7141,10 +7143,10 @@ namespace DocumentTools
             this.TabPage_25.Controls.Add(this.CompressImage);
             this.TabPage_25.Controls.Add(this.SelectCompressImageFile);
             this.TabPage_25.Controls.Add(this.CompressImageFileList);
-            this.TabPage_25.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_25.Location = new System.Drawing.Point(4, 124);
             this.TabPage_25.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_25.Name = "TabPage_25";
-            this.TabPage_25.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_25.Size = new System.Drawing.Size(882, 648);
             this.TabPage_25.TabIndex = 24;
             this.TabPage_25.Text = "压缩图片（格式转换）";
             this.TabPage_25.UseVisualStyleBackColor = true;
@@ -7272,7 +7274,7 @@ namespace DocumentTools
             this.CompressImage_OutPutImageFormat.Location = new System.Drawing.Point(63, 65);
             this.CompressImage_OutPutImageFormat.Margin = new System.Windows.Forms.Padding(1);
             this.CompressImage_OutPutImageFormat.Name = "CompressImage_OutPutImageFormat";
-            this.CompressImage_OutPutImageFormat.Size = new System.Drawing.Size(76, 20);
+            this.CompressImage_OutPutImageFormat.Size = new System.Drawing.Size(76, 24);
             this.CompressImage_OutPutImageFormat.TabIndex = 3;
             this.CompressImage_OutPutImageFormat.SelectedIndexChanged += new System.EventHandler(this.CompressImage_OutPutImageFormat_SelectedIndexChanged);
             // 
@@ -7309,7 +7311,7 @@ namespace DocumentTools
             this.CompressBmpPixeBits_Combox.Location = new System.Drawing.Point(62, 66);
             this.CompressBmpPixeBits_Combox.Margin = new System.Windows.Forms.Padding(1);
             this.CompressBmpPixeBits_Combox.Name = "CompressBmpPixeBits_Combox";
-            this.CompressBmpPixeBits_Combox.Size = new System.Drawing.Size(83, 20);
+            this.CompressBmpPixeBits_Combox.Size = new System.Drawing.Size(83, 24);
             this.CompressBmpPixeBits_Combox.TabIndex = 3;
             // 
             // CompressBmpMode_Combox
@@ -7318,7 +7320,7 @@ namespace DocumentTools
             this.CompressBmpMode_Combox.Location = new System.Drawing.Point(61, 16);
             this.CompressBmpMode_Combox.Margin = new System.Windows.Forms.Padding(1);
             this.CompressBmpMode_Combox.Name = "CompressBmpMode_Combox";
-            this.CompressBmpMode_Combox.Size = new System.Drawing.Size(83, 20);
+            this.CompressBmpMode_Combox.Size = new System.Drawing.Size(83, 24);
             this.CompressBmpMode_Combox.TabIndex = 2;
             // 
             // label50
@@ -7365,7 +7367,7 @@ namespace DocumentTools
             this.CompressPngColorMode_Combox.Location = new System.Drawing.Point(60, 66);
             this.CompressPngColorMode_Combox.Margin = new System.Windows.Forms.Padding(1);
             this.CompressPngColorMode_Combox.Name = "CompressPngColorMode_Combox";
-            this.CompressPngColorMode_Combox.Size = new System.Drawing.Size(83, 20);
+            this.CompressPngColorMode_Combox.Size = new System.Drawing.Size(83, 24);
             this.CompressPngColorMode_Combox.TabIndex = 3;
             // 
             // CompressPngLevel_Combox
@@ -7374,7 +7376,7 @@ namespace DocumentTools
             this.CompressPngLevel_Combox.Location = new System.Drawing.Point(60, 17);
             this.CompressPngLevel_Combox.Margin = new System.Windows.Forms.Padding(1);
             this.CompressPngLevel_Combox.Name = "CompressPngLevel_Combox";
-            this.CompressPngLevel_Combox.Size = new System.Drawing.Size(83, 20);
+            this.CompressPngLevel_Combox.Size = new System.Drawing.Size(83, 24);
             this.CompressPngLevel_Combox.TabIndex = 2;
             // 
             // label51
@@ -7423,7 +7425,7 @@ namespace DocumentTools
             this.CompressJpegQuailty_Combox.Location = new System.Drawing.Point(60, 70);
             this.CompressJpegQuailty_Combox.Margin = new System.Windows.Forms.Padding(1);
             this.CompressJpegQuailty_Combox.Name = "CompressJpegQuailty_Combox";
-            this.CompressJpegQuailty_Combox.Size = new System.Drawing.Size(83, 20);
+            this.CompressJpegQuailty_Combox.Size = new System.Drawing.Size(83, 24);
             this.CompressJpegQuailty_Combox.TabIndex = 5;
             // 
             // label49
@@ -7443,7 +7445,7 @@ namespace DocumentTools
             this.CompressJpegColorMode_Combox.Location = new System.Drawing.Point(60, 42);
             this.CompressJpegColorMode_Combox.Margin = new System.Windows.Forms.Padding(1);
             this.CompressJpegColorMode_Combox.Name = "CompressJpegColorMode_Combox";
-            this.CompressJpegColorMode_Combox.Size = new System.Drawing.Size(83, 20);
+            this.CompressJpegColorMode_Combox.Size = new System.Drawing.Size(83, 24);
             this.CompressJpegColorMode_Combox.TabIndex = 3;
             // 
             // CompressJpegMode_Combox
@@ -7452,7 +7454,7 @@ namespace DocumentTools
             this.CompressJpegMode_Combox.Location = new System.Drawing.Point(60, 15);
             this.CompressJpegMode_Combox.Margin = new System.Windows.Forms.Padding(1);
             this.CompressJpegMode_Combox.Name = "CompressJpegMode_Combox";
-            this.CompressJpegMode_Combox.Size = new System.Drawing.Size(83, 20);
+            this.CompressJpegMode_Combox.Size = new System.Drawing.Size(83, 24);
             this.CompressJpegMode_Combox.TabIndex = 2;
             // 
             // label48
@@ -7542,10 +7544,10 @@ namespace DocumentTools
             this.TabPage_10.Controls.Add(this.ReplaceWordContentButton);
             this.TabPage_10.Controls.Add(this.SelectReplaceWordFilesButton);
             this.TabPage_10.Controls.Add(this.ReplaceWordFileList);
-            this.TabPage_10.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_10.Location = new System.Drawing.Point(4, 124);
             this.TabPage_10.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_10.Name = "TabPage_10";
-            this.TabPage_10.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_10.Size = new System.Drawing.Size(882, 648);
             this.TabPage_10.TabIndex = 9;
             this.TabPage_10.Text = "WORD内容批量替换";
             this.TabPage_10.UseVisualStyleBackColor = true;
@@ -7943,10 +7945,10 @@ namespace DocumentTools
             this.TabPage_11.Controls.Add(this.ReplaceExcelContentButton);
             this.TabPage_11.Controls.Add(this.SelectRelaceExcelButton);
             this.TabPage_11.Controls.Add(this.ReplaceExcelFileView);
-            this.TabPage_11.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_11.Location = new System.Drawing.Point(4, 124);
             this.TabPage_11.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_11.Name = "TabPage_11";
-            this.TabPage_11.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_11.Size = new System.Drawing.Size(882, 648);
             this.TabPage_11.TabIndex = 10;
             this.TabPage_11.Text = "EXCEL内容批量替换";
             this.TabPage_11.UseVisualStyleBackColor = true;
@@ -8272,10 +8274,10 @@ namespace DocumentTools
             this.TabPage_12.Controls.Add(this.SelectDataMatrixWord);
             this.TabPage_12.Controls.Add(this.groupBox14);
             this.TabPage_12.Controls.Add(this.DecodeMatrixWordListView);
-            this.TabPage_12.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_12.Location = new System.Drawing.Point(4, 124);
             this.TabPage_12.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_12.Name = "TabPage_12";
-            this.TabPage_12.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_12.Size = new System.Drawing.Size(882, 648);
             this.TabPage_12.TabIndex = 11;
             this.TabPage_12.Text = "特殊二维码校验";
             this.TabPage_12.UseVisualStyleBackColor = true;
@@ -8416,10 +8418,10 @@ namespace DocumentTools
             this.TabPage_33.Controls.Add(this.groupBox37);
             this.TabPage_33.Controls.Add(this.groupBox35);
             this.TabPage_33.Controls.Add(this.groupBox34);
-            this.TabPage_33.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_33.Location = new System.Drawing.Point(4, 124);
             this.TabPage_33.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_33.Name = "TabPage_33";
-            this.TabPage_33.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_33.Size = new System.Drawing.Size(882, 648);
             this.TabPage_33.TabIndex = 32;
             this.TabPage_33.Text = "简易二维码生成";
             this.TabPage_33.UseVisualStyleBackColor = true;
@@ -8577,7 +8579,7 @@ namespace DocumentTools
             this.barcodeCaptionLocationCombox.Location = new System.Drawing.Point(61, 61);
             this.barcodeCaptionLocationCombox.Margin = new System.Windows.Forms.Padding(1);
             this.barcodeCaptionLocationCombox.Name = "barcodeCaptionLocationCombox";
-            this.barcodeCaptionLocationCombox.Size = new System.Drawing.Size(105, 20);
+            this.barcodeCaptionLocationCombox.Size = new System.Drawing.Size(105, 24);
             this.barcodeCaptionLocationCombox.TabIndex = 25;
             // 
             // label93
@@ -8816,7 +8818,7 @@ namespace DocumentTools
             this.barcodeTypeCombox.Location = new System.Drawing.Point(73, 17);
             this.barcodeTypeCombox.Margin = new System.Windows.Forms.Padding(1);
             this.barcodeTypeCombox.Name = "barcodeTypeCombox";
-            this.barcodeTypeCombox.Size = new System.Drawing.Size(113, 20);
+            this.barcodeTypeCombox.Size = new System.Drawing.Size(113, 24);
             this.barcodeTypeCombox.TabIndex = 1;
             // 
             // label80
@@ -8865,7 +8867,7 @@ namespace DocumentTools
             this.barcodeDpiCombox.Location = new System.Drawing.Point(73, 175);
             this.barcodeDpiCombox.Margin = new System.Windows.Forms.Padding(1);
             this.barcodeDpiCombox.Name = "barcodeDpiCombox";
-            this.barcodeDpiCombox.Size = new System.Drawing.Size(113, 20);
+            this.barcodeDpiCombox.Size = new System.Drawing.Size(113, 24);
             this.barcodeDpiCombox.TabIndex = 14;
             // 
             // label82
@@ -8907,7 +8909,7 @@ namespace DocumentTools
             this.barcodeAutoSizeCombox.Location = new System.Drawing.Point(73, 41);
             this.barcodeAutoSizeCombox.Margin = new System.Windows.Forms.Padding(1);
             this.barcodeAutoSizeCombox.Name = "barcodeAutoSizeCombox";
-            this.barcodeAutoSizeCombox.Size = new System.Drawing.Size(113, 20);
+            this.barcodeAutoSizeCombox.Size = new System.Drawing.Size(113, 24);
             this.barcodeAutoSizeCombox.TabIndex = 3;
             // 
             // label79
@@ -8961,7 +8963,7 @@ namespace DocumentTools
             this.barcodeScanTypeCombox.Location = new System.Drawing.Point(67, 39);
             this.barcodeScanTypeCombox.Margin = new System.Windows.Forms.Padding(1);
             this.barcodeScanTypeCombox.Name = "barcodeScanTypeCombox";
-            this.barcodeScanTypeCombox.Size = new System.Drawing.Size(213, 20);
+            this.barcodeScanTypeCombox.Size = new System.Drawing.Size(213, 24);
             this.barcodeScanTypeCombox.TabIndex = 26;
             // 
             // label94
@@ -9044,7 +9046,7 @@ namespace DocumentTools
             this.barcodeTextAlignCombox.Location = new System.Drawing.Point(67, 89);
             this.barcodeTextAlignCombox.Margin = new System.Windows.Forms.Padding(1);
             this.barcodeTextAlignCombox.Name = "barcodeTextAlignCombox";
-            this.barcodeTextAlignCombox.Size = new System.Drawing.Size(213, 20);
+            this.barcodeTextAlignCombox.Size = new System.Drawing.Size(213, 24);
             this.barcodeTextAlignCombox.TabIndex = 18;
             // 
             // label86
@@ -9064,7 +9066,7 @@ namespace DocumentTools
             this.barcodeTextLocationCombox.Location = new System.Drawing.Point(67, 63);
             this.barcodeTextLocationCombox.Margin = new System.Windows.Forms.Padding(1);
             this.barcodeTextLocationCombox.Name = "barcodeTextLocationCombox";
-            this.barcodeTextLocationCombox.Size = new System.Drawing.Size(213, 20);
+            this.barcodeTextLocationCombox.Size = new System.Drawing.Size(213, 24);
             this.barcodeTextLocationCombox.TabIndex = 16;
             // 
             // label85
@@ -9083,11 +9085,11 @@ namespace DocumentTools
             this.TabPage_34.Controls.Add(this.groupBox41);
             this.TabPage_34.Controls.Add(this.gen_card_result_group);
             this.TabPage_34.Controls.Add(this.gen_card_id_group);
-            this.TabPage_34.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_34.Location = new System.Drawing.Point(4, 124);
             this.TabPage_34.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_34.Name = "TabPage_34";
             this.TabPage_34.Padding = new System.Windows.Forms.Padding(1);
-            this.TabPage_34.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_34.Size = new System.Drawing.Size(882, 648);
             this.TabPage_34.TabIndex = 33;
             this.TabPage_34.Text = "身份证号码校验";
             this.TabPage_34.UseVisualStyleBackColor = true;
@@ -9480,7 +9482,7 @@ namespace DocumentTools
             this.city_level_1_combox.Location = new System.Drawing.Point(63, 27);
             this.city_level_1_combox.Margin = new System.Windows.Forms.Padding(1);
             this.city_level_1_combox.Name = "city_level_1_combox";
-            this.city_level_1_combox.Size = new System.Drawing.Size(189, 20);
+            this.city_level_1_combox.Size = new System.Drawing.Size(189, 24);
             this.city_level_1_combox.TabIndex = 0;
             this.city_level_1_combox.SelectedIndexChanged += new System.EventHandler(this.city_level_1_combox_TextChanged);
             // 
@@ -9490,7 +9492,7 @@ namespace DocumentTools
             this.city_level_3_combox.Location = new System.Drawing.Point(447, 27);
             this.city_level_3_combox.Margin = new System.Windows.Forms.Padding(1);
             this.city_level_3_combox.Name = "city_level_3_combox";
-            this.city_level_3_combox.Size = new System.Drawing.Size(427, 20);
+            this.city_level_3_combox.Size = new System.Drawing.Size(427, 24);
             this.city_level_3_combox.TabIndex = 2;
             this.city_level_3_combox.Tag = "anchor_left_right";
             // 
@@ -9500,7 +9502,7 @@ namespace DocumentTools
             this.city_level_2_combox.Location = new System.Drawing.Point(255, 27);
             this.city_level_2_combox.Margin = new System.Windows.Forms.Padding(1);
             this.city_level_2_combox.Name = "city_level_2_combox";
-            this.city_level_2_combox.Size = new System.Drawing.Size(189, 20);
+            this.city_level_2_combox.Size = new System.Drawing.Size(189, 24);
             this.city_level_2_combox.TabIndex = 1;
             this.city_level_2_combox.SelectedIndexChanged += new System.EventHandler(this.city_level_2_combox_TextChanged);
             // 
@@ -9529,10 +9531,10 @@ namespace DocumentTools
             this.TabPage_05.Controls.Add(this.ConvertTextButton);
             this.TabPage_05.Controls.Add(this.groupBox2);
             this.TabPage_05.Controls.Add(this.groupBox1);
-            this.TabPage_05.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_05.Location = new System.Drawing.Point(4, 124);
             this.TabPage_05.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_05.Name = "TabPage_05";
-            this.TabPage_05.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_05.Size = new System.Drawing.Size(882, 648);
             this.TabPage_05.TabIndex = 4;
             this.TabPage_05.Text = "姓名横转竖列";
             this.TabPage_05.UseVisualStyleBackColor = true;
@@ -9543,7 +9545,7 @@ namespace DocumentTools
             this.GetChinsesHanPinYin_TypeBox.Location = new System.Drawing.Point(427, 280);
             this.GetChinsesHanPinYin_TypeBox.Margin = new System.Windows.Forms.Padding(1);
             this.GetChinsesHanPinYin_TypeBox.Name = "GetChinsesHanPinYin_TypeBox";
-            this.GetChinsesHanPinYin_TypeBox.Size = new System.Drawing.Size(182, 20);
+            this.GetChinsesHanPinYin_TypeBox.Size = new System.Drawing.Size(182, 24);
             this.GetChinsesHanPinYin_TypeBox.TabIndex = 24;
             this.GetChinsesHanPinYin_TypeBox.Tag = "anchor_bottom";
             // 
@@ -9580,7 +9582,7 @@ namespace DocumentTools
             this.NameMarkColor.Location = new System.Drawing.Point(470, 341);
             this.NameMarkColor.Margin = new System.Windows.Forms.Padding(1);
             this.NameMarkColor.Name = "NameMarkColor";
-            this.NameMarkColor.Size = new System.Drawing.Size(88, 20);
+            this.NameMarkColor.Size = new System.Drawing.Size(88, 24);
             this.NameMarkColor.TabIndex = 21;
             this.NameMarkColor.Tag = "anchor_bottom";
             // 
@@ -9882,10 +9884,10 @@ namespace DocumentTools
             this.TabPage_35.Controls.Add(this.webpPictureStartConvert);
             this.TabPage_35.Controls.Add(this.webpPictureSelect);
             this.TabPage_35.Controls.Add(this.WebpFileList);
-            this.TabPage_35.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_35.Location = new System.Drawing.Point(4, 124);
             this.TabPage_35.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_35.Name = "TabPage_35";
-            this.TabPage_35.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_35.Size = new System.Drawing.Size(882, 648);
             this.TabPage_35.TabIndex = 34;
             this.TabPage_35.Text = "WEBP图片格式转换";
             this.TabPage_35.UseVisualStyleBackColor = true;
@@ -9910,7 +9912,7 @@ namespace DocumentTools
             this.webp2image_combox.Location = new System.Drawing.Point(73, 25);
             this.webp2image_combox.Margin = new System.Windows.Forms.Padding(1);
             this.webp2image_combox.Name = "webp2image_combox";
-            this.webp2image_combox.Size = new System.Drawing.Size(65, 20);
+            this.webp2image_combox.Size = new System.Drawing.Size(65, 24);
             this.webp2image_combox.TabIndex = 1;
             // 
             // label98
@@ -10030,10 +10032,10 @@ namespace DocumentTools
             this.TabPage_09.Controls.Add(this.groupBox7);
             this.TabPage_09.Controls.Add(this.groupBox6);
             this.TabPage_09.Controls.Add(this.groupBox5);
-            this.TabPage_09.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_09.Location = new System.Drawing.Point(4, 124);
             this.TabPage_09.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_09.Name = "TabPage_09";
-            this.TabPage_09.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_09.Size = new System.Drawing.Size(882, 648);
             this.TabPage_09.TabIndex = 8;
             this.TabPage_09.Text = "Twain扫描仪调试";
             this.TabPage_09.UseVisualStyleBackColor = true;
@@ -10291,7 +10293,7 @@ namespace DocumentTools
             this.TwainPaperSizeBox.Location = new System.Drawing.Point(569, 76);
             this.TwainPaperSizeBox.Margin = new System.Windows.Forms.Padding(1);
             this.TwainPaperSizeBox.Name = "TwainPaperSizeBox";
-            this.TwainPaperSizeBox.Size = new System.Drawing.Size(105, 20);
+            this.TwainPaperSizeBox.Size = new System.Drawing.Size(105, 24);
             this.TwainPaperSizeBox.TabIndex = 12;
             this.TwainPaperSizeBox.Tag = "anchor_right_top";
             this.MainToolsTip.SetToolTip(this.TwainPaperSizeBox, "程序不会应用此处纸张尺寸设置");
@@ -10350,7 +10352,7 @@ namespace DocumentTools
             this.TwainDpi.Location = new System.Drawing.Point(569, 49);
             this.TwainDpi.Margin = new System.Windows.Forms.Padding(1);
             this.TwainDpi.Name = "TwainDpi";
-            this.TwainDpi.Size = new System.Drawing.Size(105, 20);
+            this.TwainDpi.Size = new System.Drawing.Size(105, 24);
             this.TwainDpi.TabIndex = 7;
             this.TwainDpi.Tag = "anchor_right_top";
             // 
@@ -10372,7 +10374,7 @@ namespace DocumentTools
             this.TwainSleepTimeSet.Location = new System.Drawing.Point(61, 47);
             this.TwainSleepTimeSet.Margin = new System.Windows.Forms.Padding(1);
             this.TwainSleepTimeSet.Name = "TwainSleepTimeSet";
-            this.TwainSleepTimeSet.Size = new System.Drawing.Size(112, 20);
+            this.TwainSleepTimeSet.Size = new System.Drawing.Size(112, 24);
             this.TwainSleepTimeSet.TabIndex = 5;
             // 
             // label15
@@ -10480,10 +10482,10 @@ namespace DocumentTools
             this.TabPage_13.Controls.Add(this.groupBox17);
             this.TabPage_13.Controls.Add(this.groupBox16);
             this.TabPage_13.Controls.Add(this.groupBox15);
-            this.TabPage_13.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_13.Location = new System.Drawing.Point(4, 124);
             this.TabPage_13.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_13.Name = "TabPage_13";
-            this.TabPage_13.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_13.Size = new System.Drawing.Size(882, 648);
             this.TabPage_13.TabIndex = 12;
             this.TabPage_13.Text = "其他功能";
             this.TabPage_13.UseVisualStyleBackColor = true;
@@ -10646,7 +10648,7 @@ namespace DocumentTools
             this.IcoSizeDrop.Location = new System.Drawing.Point(439, 429);
             this.IcoSizeDrop.Margin = new System.Windows.Forms.Padding(1);
             this.IcoSizeDrop.Name = "IcoSizeDrop";
-            this.IcoSizeDrop.Size = new System.Drawing.Size(92, 20);
+            this.IcoSizeDrop.Size = new System.Drawing.Size(92, 24);
             this.IcoSizeDrop.TabIndex = 5;
             this.IcoSizeDrop.Tag = "anchor_left_bottom";
             // 
@@ -10810,10 +10812,10 @@ namespace DocumentTools
             this.TabPage_26.Controls.Add(this.blockgroup);
             this.TabPage_26.Controls.Add(this.groupBox27);
             this.TabPage_26.Controls.Add(this.groupBox26);
-            this.TabPage_26.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_26.Location = new System.Drawing.Point(4, 124);
             this.TabPage_26.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_26.Name = "TabPage_26";
-            this.TabPage_26.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_26.Size = new System.Drawing.Size(882, 648);
             this.TabPage_26.TabIndex = 25;
             this.TabPage_26.Text = "系统工具";
             this.TabPage_26.UseVisualStyleBackColor = true;
@@ -11008,11 +11010,11 @@ namespace DocumentTools
             // TabPage_32
             // 
             this.TabPage_32.Controls.Add(this.groupBox32);
-            this.TabPage_32.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_32.Location = new System.Drawing.Point(4, 124);
             this.TabPage_32.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_32.Name = "TabPage_32";
             this.TabPage_32.Padding = new System.Windows.Forms.Padding(1);
-            this.TabPage_32.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_32.Size = new System.Drawing.Size(882, 648);
             this.TabPage_32.TabIndex = 31;
             this.TabPage_32.Text = "MSS3模板修改";
             this.TabPage_32.UseVisualStyleBackColor = true;
@@ -11145,7 +11147,7 @@ namespace DocumentTools
             this.votepageIndexCombox.Location = new System.Drawing.Point(61, 83);
             this.votepageIndexCombox.Margin = new System.Windows.Forms.Padding(1);
             this.votepageIndexCombox.Name = "votepageIndexCombox";
-            this.votepageIndexCombox.Size = new System.Drawing.Size(120, 20);
+            this.votepageIndexCombox.Size = new System.Drawing.Size(120, 24);
             this.votepageIndexCombox.TabIndex = 11;
             // 
             // votepage_type_combox
@@ -11154,7 +11156,7 @@ namespace DocumentTools
             this.votepage_type_combox.Location = new System.Drawing.Point(61, 140);
             this.votepage_type_combox.Margin = new System.Windows.Forms.Padding(1);
             this.votepage_type_combox.Name = "votepage_type_combox";
-            this.votepage_type_combox.Size = new System.Drawing.Size(120, 20);
+            this.votepage_type_combox.Size = new System.Drawing.Size(120, 24);
             this.votepage_type_combox.TabIndex = 16;
             // 
             // label105
@@ -11336,11 +11338,11 @@ namespace DocumentTools
             this.TabPage_39.Controls.Add(this.pictureBox7);
             this.TabPage_39.Controls.Add(this.SingleDocumentConfigGroupBox);
             this.TabPage_39.Controls.Add(this.groupBox54);
-            this.TabPage_39.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_39.Location = new System.Drawing.Point(4, 124);
             this.TabPage_39.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_39.Name = "TabPage_39";
             this.TabPage_39.Padding = new System.Windows.Forms.Padding(1);
-            this.TabPage_39.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_39.Size = new System.Drawing.Size(882, 648);
             this.TabPage_39.TabIndex = 38;
             this.TabPage_39.Text = "单人表生成";
             this.TabPage_39.UseVisualStyleBackColor = true;
@@ -11824,9 +11826,9 @@ namespace DocumentTools
             // TabPage_42
             // 
             this.TabPage_42.Controls.Add(this.groupBox70);
-            this.TabPage_42.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_42.Location = new System.Drawing.Point(4, 124);
             this.TabPage_42.Name = "TabPage_42";
-            this.TabPage_42.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_42.Size = new System.Drawing.Size(882, 648);
             this.TabPage_42.TabIndex = 40;
             this.TabPage_42.Text = "考评表信息插入";
             this.TabPage_42.UseVisualStyleBackColor = true;
@@ -12167,7 +12169,7 @@ namespace DocumentTools
             this.InserExamBaseInfo_FlowClassCombox.FormattingEnabled = true;
             this.InserExamBaseInfo_FlowClassCombox.Location = new System.Drawing.Point(644, 24);
             this.InserExamBaseInfo_FlowClassCombox.Name = "InserExamBaseInfo_FlowClassCombox";
-            this.InserExamBaseInfo_FlowClassCombox.Size = new System.Drawing.Size(160, 20);
+            this.InserExamBaseInfo_FlowClassCombox.Size = new System.Drawing.Size(160, 24);
             this.InserExamBaseInfo_FlowClassCombox.TabIndex = 3;
             // 
             // label221
@@ -12645,11 +12647,11 @@ namespace DocumentTools
             this.TabPage_40.Controls.Add(this.label154);
             this.TabPage_40.Controls.Add(this.RefreshVFSOFTREPORT);
             this.TabPage_40.Controls.Add(this.groupBox57);
-            this.TabPage_40.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_40.Location = new System.Drawing.Point(4, 124);
             this.TabPage_40.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_40.Name = "TabPage_40";
             this.TabPage_40.Padding = new System.Windows.Forms.Padding(1);
-            this.TabPage_40.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_40.Size = new System.Drawing.Size(882, 648);
             this.TabPage_40.TabIndex = 39;
             this.TabPage_40.Text = "考评报表修改";
             this.TabPage_40.UseVisualStyleBackColor = true;
@@ -12793,7 +12795,7 @@ namespace DocumentTools
             this.ExamReportColMode_Row_End_Combox.Location = new System.Drawing.Point(219, 82);
             this.ExamReportColMode_Row_End_Combox.Margin = new System.Windows.Forms.Padding(2);
             this.ExamReportColMode_Row_End_Combox.Name = "ExamReportColMode_Row_End_Combox";
-            this.ExamReportColMode_Row_End_Combox.Size = new System.Drawing.Size(36, 20);
+            this.ExamReportColMode_Row_End_Combox.Size = new System.Drawing.Size(36, 24);
             this.ExamReportColMode_Row_End_Combox.TabIndex = 23;
             this.ExamReportColMode_Row_End_Combox.MouseHover += new System.EventHandler(this.ExamReportColMode_Row_End_Combox_MouseHover);
             // 
@@ -12813,7 +12815,7 @@ namespace DocumentTools
             this.ExamReportColMode_Row_Start_Combox.Location = new System.Drawing.Point(155, 82);
             this.ExamReportColMode_Row_Start_Combox.Margin = new System.Windows.Forms.Padding(2);
             this.ExamReportColMode_Row_Start_Combox.Name = "ExamReportColMode_Row_Start_Combox";
-            this.ExamReportColMode_Row_Start_Combox.Size = new System.Drawing.Size(40, 20);
+            this.ExamReportColMode_Row_Start_Combox.Size = new System.Drawing.Size(40, 24);
             this.ExamReportColMode_Row_Start_Combox.TabIndex = 21;
             this.ExamReportColMode_Row_Start_Combox.MouseHover += new System.EventHandler(this.ExamReportColMode_Row_Start_Combox_MouseHover);
             // 
@@ -12823,7 +12825,7 @@ namespace DocumentTools
             this.ExamReportColMode_Col_Combox.Location = new System.Drawing.Point(85, 82);
             this.ExamReportColMode_Col_Combox.Margin = new System.Windows.Forms.Padding(2);
             this.ExamReportColMode_Col_Combox.Name = "ExamReportColMode_Col_Combox";
-            this.ExamReportColMode_Col_Combox.Size = new System.Drawing.Size(35, 20);
+            this.ExamReportColMode_Col_Combox.Size = new System.Drawing.Size(35, 24);
             this.ExamReportColMode_Col_Combox.TabIndex = 20;
             this.ExamReportColMode_Col_Combox.MouseHover += new System.EventHandler(this.ExamReportColMode_Col_Combox_MouseHover);
             // 
@@ -12872,7 +12874,7 @@ namespace DocumentTools
             this.ExamReportParaDataFormatReverse_Combox.Location = new System.Drawing.Point(67, 73);
             this.ExamReportParaDataFormatReverse_Combox.Margin = new System.Windows.Forms.Padding(2);
             this.ExamReportParaDataFormatReverse_Combox.Name = "ExamReportParaDataFormatReverse_Combox";
-            this.ExamReportParaDataFormatReverse_Combox.Size = new System.Drawing.Size(113, 20);
+            this.ExamReportParaDataFormatReverse_Combox.Size = new System.Drawing.Size(113, 24);
             this.ExamReportParaDataFormatReverse_Combox.TabIndex = 34;
             // 
             // label192
@@ -12911,7 +12913,7 @@ namespace DocumentTools
             this.ExamReportParaRaidInfo_Combox.Location = new System.Drawing.Point(67, 98);
             this.ExamReportParaRaidInfo_Combox.Margin = new System.Windows.Forms.Padding(2);
             this.ExamReportParaRaidInfo_Combox.Name = "ExamReportParaRaidInfo_Combox";
-            this.ExamReportParaRaidInfo_Combox.Size = new System.Drawing.Size(113, 20);
+            this.ExamReportParaRaidInfo_Combox.Size = new System.Drawing.Size(113, 24);
             this.ExamReportParaRaidInfo_Combox.TabIndex = 19;
             this.ExamReportParaRaidInfo_Combox.MouseHover += new System.EventHandler(this.ExamReportParaRaidInfo_Combox_MouseHover);
             // 
@@ -12921,7 +12923,7 @@ namespace DocumentTools
             this.ExamReportParaDataFormat_Combox.Location = new System.Drawing.Point(67, 23);
             this.ExamReportParaDataFormat_Combox.Margin = new System.Windows.Forms.Padding(2);
             this.ExamReportParaDataFormat_Combox.Name = "ExamReportParaDataFormat_Combox";
-            this.ExamReportParaDataFormat_Combox.Size = new System.Drawing.Size(113, 20);
+            this.ExamReportParaDataFormat_Combox.Size = new System.Drawing.Size(113, 24);
             this.ExamReportParaDataFormat_Combox.TabIndex = 17;
             this.ExamReportParaDataFormat_Combox.MouseHover += new System.EventHandler(this.ExamReportParaDataFormat_Combox_MouseHover);
             // 
@@ -12982,7 +12984,7 @@ namespace DocumentTools
             this.ExamReportRowMode_ExamList.Location = new System.Drawing.Point(338, 36);
             this.ExamReportRowMode_ExamList.Margin = new System.Windows.Forms.Padding(2);
             this.ExamReportRowMode_ExamList.Name = "ExamReportRowMode_ExamList";
-            this.ExamReportRowMode_ExamList.Size = new System.Drawing.Size(103, 20);
+            this.ExamReportRowMode_ExamList.Size = new System.Drawing.Size(103, 24);
             this.ExamReportRowMode_ExamList.TabIndex = 12;
             this.ExamReportRowMode_ExamList.MouseHover += new System.EventHandler(this.ExamReportRowMode_ExamList_MouseHover);
             // 
@@ -13027,7 +13029,7 @@ namespace DocumentTools
             this.ExamReportRowMode_Col_End_Combox.Location = new System.Drawing.Point(219, 37);
             this.ExamReportRowMode_Col_End_Combox.Margin = new System.Windows.Forms.Padding(2);
             this.ExamReportRowMode_Col_End_Combox.Name = "ExamReportRowMode_Col_End_Combox";
-            this.ExamReportRowMode_Col_End_Combox.Size = new System.Drawing.Size(36, 20);
+            this.ExamReportRowMode_Col_End_Combox.Size = new System.Drawing.Size(36, 24);
             this.ExamReportRowMode_Col_End_Combox.TabIndex = 9;
             this.ExamReportRowMode_Col_End_Combox.MouseHover += new System.EventHandler(this.ExamReportRowMode_Col_End_Combox_MouseHover);
             // 
@@ -13047,7 +13049,7 @@ namespace DocumentTools
             this.ExamReportRowMode_Col_Start_Combox.Location = new System.Drawing.Point(155, 37);
             this.ExamReportRowMode_Col_Start_Combox.Margin = new System.Windows.Forms.Padding(2);
             this.ExamReportRowMode_Col_Start_Combox.Name = "ExamReportRowMode_Col_Start_Combox";
-            this.ExamReportRowMode_Col_Start_Combox.Size = new System.Drawing.Size(40, 20);
+            this.ExamReportRowMode_Col_Start_Combox.Size = new System.Drawing.Size(40, 24);
             this.ExamReportRowMode_Col_Start_Combox.TabIndex = 7;
             this.ExamReportRowMode_Col_Start_Combox.MouseHover += new System.EventHandler(this.ExamReportRowMode_Col_Start_Combox_MouseHover);
             // 
@@ -13057,7 +13059,7 @@ namespace DocumentTools
             this.ExamReportRowMode_Row_Combox.Location = new System.Drawing.Point(85, 37);
             this.ExamReportRowMode_Row_Combox.Margin = new System.Windows.Forms.Padding(2);
             this.ExamReportRowMode_Row_Combox.Name = "ExamReportRowMode_Row_Combox";
-            this.ExamReportRowMode_Row_Combox.Size = new System.Drawing.Size(35, 20);
+            this.ExamReportRowMode_Row_Combox.Size = new System.Drawing.Size(35, 24);
             this.ExamReportRowMode_Row_Combox.TabIndex = 6;
             this.ExamReportRowMode_Row_Combox.MouseHover += new System.EventHandler(this.ExamReportRowMode_Row_Combox_MouseHover);
             // 
@@ -13231,7 +13233,7 @@ namespace DocumentTools
             this.ExamReplaceDataFormat.Location = new System.Drawing.Point(273, 52);
             this.ExamReplaceDataFormat.Margin = new System.Windows.Forms.Padding(1);
             this.ExamReplaceDataFormat.Name = "ExamReplaceDataFormat";
-            this.ExamReplaceDataFormat.Size = new System.Drawing.Size(211, 20);
+            this.ExamReplaceDataFormat.Size = new System.Drawing.Size(211, 24);
             this.ExamReplaceDataFormat.TabIndex = 22;
             // 
             // ExamReplaceItemName
@@ -13281,7 +13283,7 @@ namespace DocumentTools
             this.ExamReportRaids.Location = new System.Drawing.Point(72, 79);
             this.ExamReportRaids.Margin = new System.Windows.Forms.Padding(1);
             this.ExamReportRaids.Name = "ExamReportRaids";
-            this.ExamReportRaids.Size = new System.Drawing.Size(155, 20);
+            this.ExamReportRaids.Size = new System.Drawing.Size(155, 24);
             this.ExamReportRaids.TabIndex = 17;
             this.ExamReportRaids.SelectedIndexChanged += new System.EventHandler(this.ExamReportRaids_SelectedIndexChanged);
             // 
@@ -13313,7 +13315,7 @@ namespace DocumentTools
             this.ExamReportItems.Location = new System.Drawing.Point(72, 27);
             this.ExamReportItems.Margin = new System.Windows.Forms.Padding(1);
             this.ExamReportItems.Name = "ExamReportItems";
-            this.ExamReportItems.Size = new System.Drawing.Size(155, 20);
+            this.ExamReportItems.Size = new System.Drawing.Size(155, 24);
             this.ExamReportItems.TabIndex = 15;
             this.ExamReportItems.SelectedIndexChanged += new System.EventHandler(this.ExamReportItems_SelectedIndexChangedAsync);
             this.ExamReportItems.MouseHover += new System.EventHandler(this.ExamReportItems_MouseHover);
@@ -13335,7 +13337,7 @@ namespace DocumentTools
             this.ExamReportDataFormat.Location = new System.Drawing.Point(72, 53);
             this.ExamReportDataFormat.Margin = new System.Windows.Forms.Padding(1);
             this.ExamReportDataFormat.Name = "ExamReportDataFormat";
-            this.ExamReportDataFormat.Size = new System.Drawing.Size(155, 20);
+            this.ExamReportDataFormat.Size = new System.Drawing.Size(155, 24);
             this.ExamReportDataFormat.TabIndex = 13;
             // 
             // ExamReportChange
@@ -13402,7 +13404,7 @@ namespace DocumentTools
             this.ExamRaidInfoCombox.Location = new System.Drawing.Point(73, 97);
             this.ExamRaidInfoCombox.Margin = new System.Windows.Forms.Padding(1);
             this.ExamRaidInfoCombox.Name = "ExamRaidInfoCombox";
-            this.ExamRaidInfoCombox.Size = new System.Drawing.Size(235, 20);
+            this.ExamRaidInfoCombox.Size = new System.Drawing.Size(235, 24);
             this.ExamRaidInfoCombox.TabIndex = 11;
             this.ExamRaidInfoCombox.SelectedIndexChanged += new System.EventHandler(this.ExamRaidInfoCombox_SelectedIndexChanged);
             this.ExamRaidInfoCombox.MouseHover += new System.EventHandler(this.ExamRaidInfoCombox_MouseHover);
@@ -13446,7 +13448,7 @@ namespace DocumentTools
             this.ExamItemsCombox.Location = new System.Drawing.Point(73, 33);
             this.ExamItemsCombox.Margin = new System.Windows.Forms.Padding(1);
             this.ExamItemsCombox.Name = "ExamItemsCombox";
-            this.ExamItemsCombox.Size = new System.Drawing.Size(235, 20);
+            this.ExamItemsCombox.Size = new System.Drawing.Size(235, 24);
             this.ExamItemsCombox.TabIndex = 5;
             this.ExamItemsCombox.SelectedIndexChanged += new System.EventHandler(this.ExamItemsCombox_SelectedIndexChangedAsync);
             this.ExamItemsCombox.MouseHover += new System.EventHandler(this.ExamItemsCombox_MouseHover);
@@ -13457,7 +13459,7 @@ namespace DocumentTools
             this.ExamItemsSelectorsCombox.Location = new System.Drawing.Point(73, 66);
             this.ExamItemsSelectorsCombox.Margin = new System.Windows.Forms.Padding(1);
             this.ExamItemsSelectorsCombox.Name = "ExamItemsSelectorsCombox";
-            this.ExamItemsSelectorsCombox.Size = new System.Drawing.Size(235, 20);
+            this.ExamItemsSelectorsCombox.Size = new System.Drawing.Size(235, 24);
             this.ExamItemsSelectorsCombox.TabIndex = 6;
             this.ExamItemsSelectorsCombox.MouseHover += new System.EventHandler(this.ExamItemsSelectorsCombox_MouseHover);
             // 
@@ -13544,11 +13546,11 @@ namespace DocumentTools
             this.TabPage_38.Controls.Add(this.groupBox51);
             this.TabPage_38.Controls.Add(this.groupBox50);
             this.TabPage_38.Controls.Add(this.groupBox49);
-            this.TabPage_38.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_38.Location = new System.Drawing.Point(4, 124);
             this.TabPage_38.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_38.Name = "TabPage_38";
             this.TabPage_38.Padding = new System.Windows.Forms.Padding(1);
-            this.TabPage_38.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_38.Size = new System.Drawing.Size(882, 648);
             this.TabPage_38.TabIndex = 37;
             this.TabPage_38.Text = "选举结果报告单样式生成";
             this.TabPage_38.UseVisualStyleBackColor = true;
@@ -14006,11 +14008,11 @@ namespace DocumentTools
             this.TabPage_36.Controls.Add(this.groupBox28);
             this.TabPage_36.Controls.Add(this.groupBox46);
             this.TabPage_36.Controls.Add(this.groupBox43);
-            this.TabPage_36.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_36.Location = new System.Drawing.Point(4, 124);
             this.TabPage_36.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_36.Name = "TabPage_36";
             this.TabPage_36.Padding = new System.Windows.Forms.Padding(1);
-            this.TabPage_36.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_36.Size = new System.Drawing.Size(882, 648);
             this.TabPage_36.TabIndex = 35;
             this.TabPage_36.Text = "补充功能";
             this.TabPage_36.UseVisualStyleBackColor = true;
@@ -14305,7 +14307,7 @@ namespace DocumentTools
             this.Exam_Picture_ThreadNumbers.Location = new System.Drawing.Point(533, 96);
             this.Exam_Picture_ThreadNumbers.Margin = new System.Windows.Forms.Padding(2);
             this.Exam_Picture_ThreadNumbers.Name = "Exam_Picture_ThreadNumbers";
-            this.Exam_Picture_ThreadNumbers.Size = new System.Drawing.Size(82, 20);
+            this.Exam_Picture_ThreadNumbers.Size = new System.Drawing.Size(82, 24);
             this.Exam_Picture_ThreadNumbers.TabIndex = 29;
             this.MainToolsTip.SetToolTip(this.Exam_Picture_ThreadNumbers, "提示：\r\n请根据自己电脑性能来决定数量，建议使用自动模式\r\n\r\n尽量使用X64程序执行本功能，X86可能会因为内存分配问题自动退出\r\n\r\n如果确实不放心，可以直接" +
         "设置为1，单线程运行。");
@@ -14683,7 +14685,7 @@ namespace DocumentTools
             this.ExamPicPathCombox.Location = new System.Drawing.Point(178, 86);
             this.ExamPicPathCombox.Margin = new System.Windows.Forms.Padding(1);
             this.ExamPicPathCombox.Name = "ExamPicPathCombox";
-            this.ExamPicPathCombox.Size = new System.Drawing.Size(230, 20);
+            this.ExamPicPathCombox.Size = new System.Drawing.Size(230, 24);
             this.ExamPicPathCombox.TabIndex = 35;
             this.ExamPicPathCombox.SelectedIndexChanged += new System.EventHandler(this.ExamPicPathCombox_SelectedIndexChanged);
             this.ExamPicPathCombox.MouseHover += new System.EventHandler(this.ExamPicPathCombox_MouseHover);
@@ -14799,7 +14801,7 @@ namespace DocumentTools
             this.ExamComputerNames.Location = new System.Drawing.Point(178, 56);
             this.ExamComputerNames.Margin = new System.Windows.Forms.Padding(1);
             this.ExamComputerNames.Name = "ExamComputerNames";
-            this.ExamComputerNames.Size = new System.Drawing.Size(159, 20);
+            this.ExamComputerNames.Size = new System.Drawing.Size(159, 24);
             this.ExamComputerNames.TabIndex = 16;
             this.ExamComputerNames.SelectedIndexChanged += new System.EventHandler(this.ExamComputerNames_SelectedIndexChanged);
             this.ExamComputerNames.MouseHover += new System.EventHandler(this.ExamComputerNames_MouseHover);
@@ -15152,11 +15154,11 @@ namespace DocumentTools
             this.TabPage_37.Controls.Add(this.label123);
             this.TabPage_37.Controls.Add(this.groupBox45);
             this.TabPage_37.Controls.Add(this.groupBox44);
-            this.TabPage_37.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_37.Location = new System.Drawing.Point(4, 124);
             this.TabPage_37.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_37.Name = "TabPage_37";
             this.TabPage_37.Padding = new System.Windows.Forms.Padding(1);
-            this.TabPage_37.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_37.Size = new System.Drawing.Size(882, 648);
             this.TabPage_37.TabIndex = 36;
             this.TabPage_37.Text = "网卡设置";
             this.TabPage_37.UseVisualStyleBackColor = true;
@@ -15253,66 +15255,6 @@ namespace DocumentTools
             this.set_interface_start.UseVisualStyleBackColor = true;
             this.set_interface_start.Click += new System.EventHandler(this.set_interface_start_Click);
             // 
-            // set_interface_dns2
-            // 
-            this.set_interface_dns2.Location = new System.Drawing.Point(91, 228);
-            this.set_interface_dns2.Margin = new System.Windows.Forms.Padding(1);
-            this.set_interface_dns2.MaxLength = 12;
-            this.set_interface_dns2.Name = "set_interface_dns2";
-            this.set_interface_dns2.Size = new System.Drawing.Size(229, 21);
-            this.set_interface_dns2.TabIndex = 4;
-            this.set_interface_dns2.Text = "0.0.0.0";
-            this.set_interface_dns2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.set_interface_dns2.WordWrap = false;
-            // 
-            // set_interface_dns1
-            // 
-            this.set_interface_dns1.Location = new System.Drawing.Point(91, 197);
-            this.set_interface_dns1.Margin = new System.Windows.Forms.Padding(1);
-            this.set_interface_dns1.MaxLength = 12;
-            this.set_interface_dns1.Name = "set_interface_dns1";
-            this.set_interface_dns1.Size = new System.Drawing.Size(229, 21);
-            this.set_interface_dns1.TabIndex = 22;
-            this.set_interface_dns1.Text = "0.0.0.0";
-            this.set_interface_dns1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.set_interface_dns1.WordWrap = false;
-            // 
-            // set_interface_gateway
-            // 
-            this.set_interface_gateway.Location = new System.Drawing.Point(61, 160);
-            this.set_interface_gateway.Margin = new System.Windows.Forms.Padding(1);
-            this.set_interface_gateway.MaxLength = 12;
-            this.set_interface_gateway.Name = "set_interface_gateway";
-            this.set_interface_gateway.Size = new System.Drawing.Size(259, 21);
-            this.set_interface_gateway.TabIndex = 21;
-            this.set_interface_gateway.Text = "0.0.0.0";
-            this.set_interface_gateway.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.set_interface_gateway.WordWrap = false;
-            // 
-            // set_interface_mask
-            // 
-            this.set_interface_mask.Location = new System.Drawing.Point(61, 129);
-            this.set_interface_mask.Margin = new System.Windows.Forms.Padding(1);
-            this.set_interface_mask.MaxLength = 12;
-            this.set_interface_mask.Name = "set_interface_mask";
-            this.set_interface_mask.Size = new System.Drawing.Size(259, 21);
-            this.set_interface_mask.TabIndex = 20;
-            this.set_interface_mask.Text = "0.0.0.0";
-            this.set_interface_mask.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.set_interface_mask.WordWrap = false;
-            // 
-            // set_interface_ipaddress
-            // 
-            this.set_interface_ipaddress.Location = new System.Drawing.Point(61, 91);
-            this.set_interface_ipaddress.Margin = new System.Windows.Forms.Padding(1);
-            this.set_interface_ipaddress.MaxLength = 12;
-            this.set_interface_ipaddress.Name = "set_interface_ipaddress";
-            this.set_interface_ipaddress.Size = new System.Drawing.Size(259, 21);
-            this.set_interface_ipaddress.TabIndex = 19;
-            this.set_interface_ipaddress.Text = "0.0.0.0";
-            this.set_interface_ipaddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.set_interface_ipaddress.WordWrap = false;
-            // 
             // set_interface_mode_static
             // 
             this.set_interface_mode_static.AutoSize = true;
@@ -15401,7 +15343,7 @@ namespace DocumentTools
             this.set_interface_name_list.Location = new System.Drawing.Point(61, 24);
             this.set_interface_name_list.Margin = new System.Windows.Forms.Padding(1);
             this.set_interface_name_list.Name = "set_interface_name_list";
-            this.set_interface_name_list.Size = new System.Drawing.Size(259, 20);
+            this.set_interface_name_list.Size = new System.Drawing.Size(259, 24);
             this.set_interface_name_list.TabIndex = 12;
             this.set_interface_name_list.SelectedIndexChanged += new System.EventHandler(this.set_interface_name_list_SelectedIndexChanged);
             // 
@@ -15478,7 +15420,7 @@ namespace DocumentTools
             this.network_info_mac_address.Location = new System.Drawing.Point(91, 209);
             this.network_info_mac_address.Margin = new System.Windows.Forms.Padding(1);
             this.network_info_mac_address.Name = "network_info_mac_address";
-            this.network_info_mac_address.Size = new System.Drawing.Size(175, 20);
+            this.network_info_mac_address.Size = new System.Drawing.Size(175, 24);
             this.network_info_mac_address.TabIndex = 18;
             // 
             // label122
@@ -15561,7 +15503,7 @@ namespace DocumentTools
             this.network_info_dns2.Location = new System.Drawing.Point(91, 181);
             this.network_info_dns2.Margin = new System.Windows.Forms.Padding(1);
             this.network_info_dns2.Name = "network_info_dns2";
-            this.network_info_dns2.Size = new System.Drawing.Size(239, 20);
+            this.network_info_dns2.Size = new System.Drawing.Size(239, 24);
             this.network_info_dns2.TabIndex = 11;
             // 
             // network_info_dns1
@@ -15570,7 +15512,7 @@ namespace DocumentTools
             this.network_info_dns1.Location = new System.Drawing.Point(91, 151);
             this.network_info_dns1.Margin = new System.Windows.Forms.Padding(1);
             this.network_info_dns1.Name = "network_info_dns1";
-            this.network_info_dns1.Size = new System.Drawing.Size(239, 20);
+            this.network_info_dns1.Size = new System.Drawing.Size(239, 24);
             this.network_info_dns1.TabIndex = 10;
             // 
             // network_info_gateway
@@ -15579,7 +15521,7 @@ namespace DocumentTools
             this.network_info_gateway.Location = new System.Drawing.Point(61, 119);
             this.network_info_gateway.Margin = new System.Windows.Forms.Padding(1);
             this.network_info_gateway.Name = "network_info_gateway";
-            this.network_info_gateway.Size = new System.Drawing.Size(269, 20);
+            this.network_info_gateway.Size = new System.Drawing.Size(269, 24);
             this.network_info_gateway.TabIndex = 9;
             // 
             // network_info_mask
@@ -15588,7 +15530,7 @@ namespace DocumentTools
             this.network_info_mask.Location = new System.Drawing.Point(61, 87);
             this.network_info_mask.Margin = new System.Windows.Forms.Padding(1);
             this.network_info_mask.Name = "network_info_mask";
-            this.network_info_mask.Size = new System.Drawing.Size(269, 20);
+            this.network_info_mask.Size = new System.Drawing.Size(269, 24);
             this.network_info_mask.TabIndex = 8;
             // 
             // network_info_ipv4
@@ -15597,7 +15539,7 @@ namespace DocumentTools
             this.network_info_ipv4.Location = new System.Drawing.Point(61, 56);
             this.network_info_ipv4.Margin = new System.Windows.Forms.Padding(1);
             this.network_info_ipv4.Name = "network_info_ipv4";
-            this.network_info_ipv4.Size = new System.Drawing.Size(205, 20);
+            this.network_info_ipv4.Size = new System.Drawing.Size(205, 24);
             this.network_info_ipv4.TabIndex = 7;
             // 
             // network_info_card_list
@@ -15606,7 +15548,7 @@ namespace DocumentTools
             this.network_info_card_list.Location = new System.Drawing.Point(61, 25);
             this.network_info_card_list.Margin = new System.Windows.Forms.Padding(1);
             this.network_info_card_list.Name = "network_info_card_list";
-            this.network_info_card_list.Size = new System.Drawing.Size(269, 20);
+            this.network_info_card_list.Size = new System.Drawing.Size(269, 24);
             this.network_info_card_list.TabIndex = 6;
             this.network_info_card_list.SelectedIndexChanged += new System.EventHandler(this.network_info_card_list_SelectedIndexChanged);
             // 
@@ -15684,10 +15626,10 @@ namespace DocumentTools
             this.TabPage_08.Controls.Add(this.pictureBox9);
             this.TabPage_08.Controls.Add(this.groupBox4);
             this.TabPage_08.Controls.Add(this.groupBox3);
-            this.TabPage_08.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_08.Location = new System.Drawing.Point(4, 124);
             this.TabPage_08.Margin = new System.Windows.Forms.Padding(1);
             this.TabPage_08.Name = "TabPage_08";
-            this.TabPage_08.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_08.Size = new System.Drawing.Size(882, 648);
             this.TabPage_08.TabIndex = 7;
             this.TabPage_08.Text = "关于软件";
             this.TabPage_08.UseVisualStyleBackColor = true;
@@ -16002,15 +15944,17 @@ namespace DocumentTools
             this.TabPage_43.Controls.Add(this.ExamDataPakOrder_UnitList);
             this.TabPage_43.Controls.Add(this.groupBox80);
             this.TabPage_43.Controls.Add(this.groupBox79);
-            this.TabPage_43.Location = new System.Drawing.Point(4, 104);
+            this.TabPage_43.Location = new System.Drawing.Point(4, 124);
             this.TabPage_43.Name = "TabPage_43";
-            this.TabPage_43.Size = new System.Drawing.Size(882, 668);
+            this.TabPage_43.Size = new System.Drawing.Size(882, 648);
             this.TabPage_43.TabIndex = 41;
             this.TabPage_43.Text = "考评系统数据包管理";
             this.TabPage_43.UseVisualStyleBackColor = true;
             // 
             // ExamDataPakOrder_UnitList
             // 
+            this.ExamDataPakOrder_UnitList.Controls.Add(this.ExamDataPakUnitOrder_QuickFind);
+            this.ExamDataPakOrder_UnitList.Controls.Add(this.label238);
             this.ExamDataPakOrder_UnitList.Controls.Add(this.ExamDataPakUnitOrder_ProgressBar);
             this.ExamDataPakOrder_UnitList.Controls.Add(this.ExamDataPakOrder_Refresh);
             this.ExamDataPakOrder_UnitList.Controls.Add(this.ExamDataPakOrder_UnitListView);
@@ -16027,6 +15971,13 @@ namespace DocumentTools
             this.ExamDataPakOrder_UnitList.TabStop = false;
             this.ExamDataPakOrder_UnitList.Text = "数据包单位顺序修改";
             // 
+            // ExamDataPakUnitOrder_ProgressBar
+            // 
+            this.ExamDataPakUnitOrder_ProgressBar.Location = new System.Drawing.Point(589, 347);
+            this.ExamDataPakUnitOrder_ProgressBar.Name = "ExamDataPakUnitOrder_ProgressBar";
+            this.ExamDataPakUnitOrder_ProgressBar.Size = new System.Drawing.Size(119, 33);
+            this.ExamDataPakUnitOrder_ProgressBar.TabIndex = 17;
+            // 
             // ExamDataPakOrder_Refresh
             // 
             this.ExamDataPakOrder_Refresh.Location = new System.Drawing.Point(8, 347);
@@ -16040,10 +15991,10 @@ namespace DocumentTools
             // ExamDataPakOrder_UnitListView
             // 
             this.ExamDataPakOrder_UnitListView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ExamDataPakOrder_UnitListView.Location = new System.Drawing.Point(8, 51);
+            this.ExamDataPakOrder_UnitListView.Location = new System.Drawing.Point(8, 85);
             this.ExamDataPakOrder_UnitListView.Name = "ExamDataPakOrder_UnitListView";
             this.ExamDataPakOrder_UnitListView.RowTemplate.Height = 23;
-            this.ExamDataPakOrder_UnitListView.Size = new System.Drawing.Size(817, 290);
+            this.ExamDataPakOrder_UnitListView.Size = new System.Drawing.Size(817, 256);
             this.ExamDataPakOrder_UnitListView.TabIndex = 13;
             // 
             // ExamDataPackUnitOrder_Up
@@ -16142,26 +16093,26 @@ namespace DocumentTools
             // 
             // ExamMergeDataPak_TargetPath
             // 
-            this.ExamMergeDataPak_TargetPath.Location = new System.Drawing.Point(101, 53);
+            this.ExamMergeDataPak_TargetPath.Location = new System.Drawing.Point(207, 53);
             this.ExamMergeDataPak_TargetPath.Name = "ExamMergeDataPak_TargetPath";
             this.ExamMergeDataPak_TargetPath.ReadOnly = true;
-            this.ExamMergeDataPak_TargetPath.Size = new System.Drawing.Size(650, 21);
+            this.ExamMergeDataPak_TargetPath.Size = new System.Drawing.Size(544, 21);
             this.ExamMergeDataPak_TargetPath.TabIndex = 6;
             // 
             // label237
             // 
             this.label237.AutoSize = true;
-            this.label237.Location = new System.Drawing.Point(6, 57);
+            this.label237.Location = new System.Drawing.Point(4, 58);
             this.label237.Name = "label237";
-            this.label237.Size = new System.Drawing.Size(89, 12);
+            this.label237.Size = new System.Drawing.Size(185, 12);
             this.label237.TabIndex = 5;
-            this.label237.Text = "目标数据包路径";
+            this.label237.Text = "被合并的数据包路径（自己电脑）";
             // 
             // ExamMergeDataPak_MergeButton
             // 
-            this.ExamMergeDataPak_MergeButton.Location = new System.Drawing.Point(757, 94);
+            this.ExamMergeDataPak_MergeButton.Location = new System.Drawing.Point(757, 89);
             this.ExamMergeDataPak_MergeButton.Name = "ExamMergeDataPak_MergeButton";
-            this.ExamMergeDataPak_MergeButton.Size = new System.Drawing.Size(103, 23);
+            this.ExamMergeDataPak_MergeButton.Size = new System.Drawing.Size(103, 33);
             this.ExamMergeDataPak_MergeButton.TabIndex = 4;
             this.ExamMergeDataPak_MergeButton.Text = "开始合并";
             this.ExamMergeDataPak_MergeButton.UseVisualStyleBackColor = true;
@@ -16179,20 +16130,20 @@ namespace DocumentTools
             // 
             // ExamMergeDataPak_SourcePath
             // 
-            this.ExamMergeDataPak_SourcePath.Location = new System.Drawing.Point(101, 23);
+            this.ExamMergeDataPak_SourcePath.Location = new System.Drawing.Point(207, 22);
             this.ExamMergeDataPak_SourcePath.Name = "ExamMergeDataPak_SourcePath";
             this.ExamMergeDataPak_SourcePath.ReadOnly = true;
-            this.ExamMergeDataPak_SourcePath.Size = new System.Drawing.Size(650, 21);
+            this.ExamMergeDataPak_SourcePath.Size = new System.Drawing.Size(544, 21);
             this.ExamMergeDataPak_SourcePath.TabIndex = 1;
             // 
             // label236
             // 
             this.label236.AutoSize = true;
-            this.label236.Location = new System.Drawing.Point(6, 27);
+            this.label236.Location = new System.Drawing.Point(3, 27);
             this.label236.Name = "label236";
-            this.label236.Size = new System.Drawing.Size(89, 12);
+            this.label236.Size = new System.Drawing.Size(185, 12);
             this.label236.TabIndex = 0;
-            this.label236.Text = "原始数据包路径";
+            this.label236.Text = "待合并的数据包路径（别人电脑）";
             // 
             // groupBox79
             // 
@@ -16210,16 +16161,18 @@ namespace DocumentTools
             // 
             // ExamRestDataPakReset
             // 
-            this.ExamRestDataPakReset.Location = new System.Drawing.Point(757, 62);
+            this.ExamRestDataPakReset.Location = new System.Drawing.Point(757, 52);
             this.ExamRestDataPakReset.Name = "ExamRestDataPakReset";
-            this.ExamRestDataPakReset.Size = new System.Drawing.Size(103, 23);
+            this.ExamRestDataPakReset.Size = new System.Drawing.Size(103, 33);
             this.ExamRestDataPakReset.TabIndex = 4;
             this.ExamRestDataPakReset.Text = "开始重置";
             this.ExamRestDataPakReset.UseVisualStyleBackColor = true;
+            this.ExamRestDataPakReset.Click += new System.EventHandler(this.ExamRestDataPakReset_Click);
             // 
             // label234
             // 
             this.label234.AutoSize = true;
+            this.label234.ForeColor = System.Drawing.Color.Red;
             this.label234.Location = new System.Drawing.Point(6, 67);
             this.label234.Name = "label234";
             this.label234.Size = new System.Drawing.Size(545, 12);
@@ -16234,6 +16187,7 @@ namespace DocumentTools
             this.ExamRestDataPakSelect.TabIndex = 2;
             this.ExamRestDataPakSelect.Text = "选择文件...";
             this.ExamRestDataPakSelect.UseVisualStyleBackColor = true;
+            this.ExamRestDataPakSelect.Click += new System.EventHandler(this.ExamRestDataPakSelect_Click);
             // 
             // ExamRestDataPakPath
             // 
@@ -16453,14 +16407,14 @@ namespace DocumentTools
             this.wORD内容批量替换ToolStripMenuItem});
             this.wORD功能ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.word;
             this.wORD功能ToolStripMenuItem.Name = "wORD功能ToolStripMenuItem";
-            this.wORD功能ToolStripMenuItem.Size = new System.Drawing.Size(161, 30);
+            this.wORD功能ToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.wORD功能ToolStripMenuItem.Text = "WORD功能";
             // 
             // wORD转PDFToolStripMenuItem
             // 
             this.wORD转PDFToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.pdf;
             this.wORD转PDFToolStripMenuItem.Name = "wORD转PDFToolStripMenuItem";
-            this.wORD转PDFToolStripMenuItem.Size = new System.Drawing.Size(195, 30);
+            this.wORD转PDFToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.wORD转PDFToolStripMenuItem.Text = "WORD转PDF";
             this.wORD转PDFToolStripMenuItem.Click += new System.EventHandler(this.wORD转PDFToolStripMenuItem_Click);
             // 
@@ -16468,7 +16422,7 @@ namespace DocumentTools
             // 
             this.wORD转EXCELToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.excel;
             this.wORD转EXCELToolStripMenuItem.Name = "wORD转EXCELToolStripMenuItem";
-            this.wORD转EXCELToolStripMenuItem.Size = new System.Drawing.Size(195, 30);
+            this.wORD转EXCELToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.wORD转EXCELToolStripMenuItem.Text = "WORD转EXCEL";
             this.wORD转EXCELToolStripMenuItem.Click += new System.EventHandler(this.wORD转EXCELToolStripMenuItem_Click);
             // 
@@ -16476,7 +16430,7 @@ namespace DocumentTools
             // 
             this.wORDToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.Epub_Local_default;
             this.wORDToolStripMenuItem.Name = "wORDToolStripMenuItem";
-            this.wORDToolStripMenuItem.Size = new System.Drawing.Size(195, 30);
+            this.wORDToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.wORDToolStripMenuItem.Text = "WORD转EPUB";
             this.wORDToolStripMenuItem.Click += new System.EventHandler(this.wORDToolStripMenuItem_Click);
             // 
@@ -16484,7 +16438,7 @@ namespace DocumentTools
             // 
             this.wORD内容批量替换ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.查找替换_replace_线;
             this.wORD内容批量替换ToolStripMenuItem.Name = "wORD内容批量替换ToolStripMenuItem";
-            this.wORD内容批量替换ToolStripMenuItem.Size = new System.Drawing.Size(195, 30);
+            this.wORD内容批量替换ToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.wORD内容批量替换ToolStripMenuItem.Text = "WORD内容批量替换";
             this.wORD内容批量替换ToolStripMenuItem.Click += new System.EventHandler(this.wORD内容批量替换ToolStripMenuItem_Click);
             // 
@@ -16496,14 +16450,14 @@ namespace DocumentTools
             this.eXCEL内容批量替换ToolStripMenuItem});
             this.eXCEL功能ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.excel;
             this.eXCEL功能ToolStripMenuItem.Name = "eXCEL功能ToolStripMenuItem";
-            this.eXCEL功能ToolStripMenuItem.Size = new System.Drawing.Size(161, 30);
+            this.eXCEL功能ToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.eXCEL功能ToolStripMenuItem.Text = "EXCEL功能";
             // 
             // eXCEL转PDFToolStripMenuItem
             // 
             this.eXCEL转PDFToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.pdf;
             this.eXCEL转PDFToolStripMenuItem.Name = "eXCEL转PDFToolStripMenuItem";
-            this.eXCEL转PDFToolStripMenuItem.Size = new System.Drawing.Size(192, 30);
+            this.eXCEL转PDFToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.eXCEL转PDFToolStripMenuItem.Text = "EXCEL转PDF";
             this.eXCEL转PDFToolStripMenuItem.Click += new System.EventHandler(this.eXCEL转PDFToolStripMenuItem_Click);
             // 
@@ -16511,7 +16465,7 @@ namespace DocumentTools
             // 
             this.eXCEL转WORDToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.word;
             this.eXCEL转WORDToolStripMenuItem.Name = "eXCEL转WORDToolStripMenuItem";
-            this.eXCEL转WORDToolStripMenuItem.Size = new System.Drawing.Size(192, 30);
+            this.eXCEL转WORDToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.eXCEL转WORDToolStripMenuItem.Text = "EXCEL转WORD";
             this.eXCEL转WORDToolStripMenuItem.Click += new System.EventHandler(this.eXCEL转WORDToolStripMenuItem_Click);
             // 
@@ -16519,7 +16473,7 @@ namespace DocumentTools
             // 
             this.eXCEL内容批量替换ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.查找替换_replace_线;
             this.eXCEL内容批量替换ToolStripMenuItem.Name = "eXCEL内容批量替换ToolStripMenuItem";
-            this.eXCEL内容批量替换ToolStripMenuItem.Size = new System.Drawing.Size(192, 30);
+            this.eXCEL内容批量替换ToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.eXCEL内容批量替换ToolStripMenuItem.Text = "EXCEL内容批量替换";
             this.eXCEL内容批量替换ToolStripMenuItem.Click += new System.EventHandler(this.eXCEL内容批量替换ToolStripMenuItem_Click);
             // 
@@ -16529,14 +16483,14 @@ namespace DocumentTools
             this.pPT转PDFToolStripMenuItem});
             this.pPT功能ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.ppt;
             this.pPT功能ToolStripMenuItem.Name = "pPT功能ToolStripMenuItem";
-            this.pPT功能ToolStripMenuItem.Size = new System.Drawing.Size(161, 30);
+            this.pPT功能ToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.pPT功能ToolStripMenuItem.Text = "PPT功能";
             // 
             // pPT转PDFToolStripMenuItem
             // 
             this.pPT转PDFToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.pdf;
             this.pPT转PDFToolStripMenuItem.Name = "pPT转PDFToolStripMenuItem";
-            this.pPT转PDFToolStripMenuItem.Size = new System.Drawing.Size(139, 30);
+            this.pPT转PDFToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.pPT转PDFToolStripMenuItem.Text = "PPT转PDF";
             this.pPT转PDFToolStripMenuItem.Click += new System.EventHandler(this.pPT转PDFToolStripMenuItem_Click);
             // 
@@ -16551,14 +16505,14 @@ namespace DocumentTools
             this.pDF版本转换ToolStripMenuItem});
             this.pDF功能ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.pdf;
             this.pDF功能ToolStripMenuItem.Name = "pDF功能ToolStripMenuItem";
-            this.pDF功能ToolStripMenuItem.Size = new System.Drawing.Size(161, 30);
+            this.pDF功能ToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.pDF功能ToolStripMenuItem.Text = "PDF功能";
             // 
             // pDF转EXCELToolStripMenuItem
             // 
             this.pDF转EXCELToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.word;
             this.pDF转EXCELToolStripMenuItem.Name = "pDF转EXCELToolStripMenuItem";
-            this.pDF转EXCELToolStripMenuItem.Size = new System.Drawing.Size(157, 30);
+            this.pDF转EXCELToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.pDF转EXCELToolStripMenuItem.Text = "PDF转WORD";
             this.pDF转EXCELToolStripMenuItem.Click += new System.EventHandler(this.pDF转EXCELToolStripMenuItem_Click);
             // 
@@ -16566,7 +16520,7 @@ namespace DocumentTools
             // 
             this.pDFToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.excel;
             this.pDFToolStripMenuItem.Name = "pDFToolStripMenuItem";
-            this.pDFToolStripMenuItem.Size = new System.Drawing.Size(157, 30);
+            this.pDFToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.pDFToolStripMenuItem.Text = "PDF转EXCEL";
             this.pDFToolStripMenuItem.Click += new System.EventHandler(this.pDFToolStripMenuItem_Click);
             // 
@@ -16574,7 +16528,7 @@ namespace DocumentTools
             // 
             this.pDF转PPTToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.ppt;
             this.pDF转PPTToolStripMenuItem.Name = "pDF转PPTToolStripMenuItem";
-            this.pDF转PPTToolStripMenuItem.Size = new System.Drawing.Size(157, 30);
+            this.pDF转PPTToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.pDF转PPTToolStripMenuItem.Text = "PDF转PPT";
             this.pDF转PPTToolStripMenuItem.Click += new System.EventHandler(this.pDF转PPTToolStripMenuItem_Click);
             // 
@@ -16582,7 +16536,7 @@ namespace DocumentTools
             // 
             this.添加PDF水印ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.水印;
             this.添加PDF水印ToolStripMenuItem.Name = "添加PDF水印ToolStripMenuItem";
-            this.添加PDF水印ToolStripMenuItem.Size = new System.Drawing.Size(157, 30);
+            this.添加PDF水印ToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.添加PDF水印ToolStripMenuItem.Text = "添加PDF水印";
             this.添加PDF水印ToolStripMenuItem.Click += new System.EventHandler(this.添加PDF水印ToolStripMenuItem_Click);
             // 
@@ -16590,7 +16544,7 @@ namespace DocumentTools
             // 
             this.移除PDF水印ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.去水印;
             this.移除PDF水印ToolStripMenuItem.Name = "移除PDF水印ToolStripMenuItem";
-            this.移除PDF水印ToolStripMenuItem.Size = new System.Drawing.Size(157, 30);
+            this.移除PDF水印ToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.移除PDF水印ToolStripMenuItem.Text = "移除PDF水印";
             this.移除PDF水印ToolStripMenuItem.Click += new System.EventHandler(this.移除PDF水印ToolStripMenuItem_Click);
             // 
@@ -16598,7 +16552,7 @@ namespace DocumentTools
             // 
             this.pDF版本转换ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.pdf;
             this.pDF版本转换ToolStripMenuItem.Name = "pDF版本转换ToolStripMenuItem";
-            this.pDF版本转换ToolStripMenuItem.Size = new System.Drawing.Size(157, 30);
+            this.pDF版本转换ToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.pDF版本转换ToolStripMenuItem.Text = "PDF版本转换";
             this.pDF版本转换ToolStripMenuItem.Click += new System.EventHandler(this.pDF版本转换ToolStripMenuItem_Click);
             // 
@@ -16609,14 +16563,14 @@ namespace DocumentTools
             this.ePUB转PDFToolStripMenuItem});
             this.ePUB功能ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.Epub_Local_default;
             this.ePUB功能ToolStripMenuItem.Name = "ePUB功能ToolStripMenuItem";
-            this.ePUB功能ToolStripMenuItem.Size = new System.Drawing.Size(161, 30);
+            this.ePUB功能ToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.ePUB功能ToolStripMenuItem.Text = "EPUB功能";
             // 
             // ePUB转WORDToolStripMenuItem
             // 
             this.ePUB转WORDToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.word;
             this.ePUB转WORDToolStripMenuItem.Name = "ePUB转WORDToolStripMenuItem";
-            this.ePUB转WORDToolStripMenuItem.Size = new System.Drawing.Size(166, 30);
+            this.ePUB转WORDToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.ePUB转WORDToolStripMenuItem.Text = "EPUB转WORD";
             this.ePUB转WORDToolStripMenuItem.Click += new System.EventHandler(this.ePUB转WORDToolStripMenuItem_Click);
             // 
@@ -16624,7 +16578,7 @@ namespace DocumentTools
             // 
             this.ePUB转PDFToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.pdf;
             this.ePUB转PDFToolStripMenuItem.Name = "ePUB转PDFToolStripMenuItem";
-            this.ePUB转PDFToolStripMenuItem.Size = new System.Drawing.Size(166, 30);
+            this.ePUB转PDFToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.ePUB转PDFToolStripMenuItem.Text = "EPUB转PDF";
             this.ePUB转PDFToolStripMenuItem.Click += new System.EventHandler(this.ePUB转PDFToolStripMenuItem_Click);
             // 
@@ -16634,14 +16588,14 @@ namespace DocumentTools
             this.hTML转PDFToolStripMenuItem});
             this.hTML功能ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.html;
             this.hTML功能ToolStripMenuItem.Name = "hTML功能ToolStripMenuItem";
-            this.hTML功能ToolStripMenuItem.Size = new System.Drawing.Size(161, 30);
+            this.hTML功能ToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.hTML功能ToolStripMenuItem.Text = "HTML功能";
             // 
             // hTML转PDFToolStripMenuItem
             // 
             this.hTML转PDFToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.pdf;
             this.hTML转PDFToolStripMenuItem.Name = "hTML转PDFToolStripMenuItem";
-            this.hTML转PDFToolStripMenuItem.Size = new System.Drawing.Size(152, 30);
+            this.hTML转PDFToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.hTML转PDFToolStripMenuItem.Text = "HTML转PDF";
             this.hTML转PDFToolStripMenuItem.Click += new System.EventHandler(this.hTML转PDFToolStripMenuItem_Click);
             // 
@@ -16655,14 +16609,14 @@ namespace DocumentTools
             this.拆分PPTToolStripMenuItem});
             this.拆分合并功能ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.拆分;
             this.拆分合并功能ToolStripMenuItem.Name = "拆分合并功能ToolStripMenuItem";
-            this.拆分合并功能ToolStripMenuItem.Size = new System.Drawing.Size(161, 30);
+            this.拆分合并功能ToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.拆分合并功能ToolStripMenuItem.Text = "拆分/合并功能";
             // 
             // 拆分WORDToolStripMenuItem
             // 
             this.拆分WORDToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.word;
             this.拆分WORDToolStripMenuItem.Name = "拆分WORDToolStripMenuItem";
-            this.拆分WORDToolStripMenuItem.Size = new System.Drawing.Size(147, 30);
+            this.拆分WORDToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.拆分WORDToolStripMenuItem.Text = "拆分WORD";
             this.拆分WORDToolStripMenuItem.Click += new System.EventHandler(this.拆分WORDToolStripMenuItem_Click);
             // 
@@ -16670,7 +16624,7 @@ namespace DocumentTools
             // 
             this.拆分PDFToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.pdf;
             this.拆分PDFToolStripMenuItem.Name = "拆分PDFToolStripMenuItem";
-            this.拆分PDFToolStripMenuItem.Size = new System.Drawing.Size(147, 30);
+            this.拆分PDFToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.拆分PDFToolStripMenuItem.Text = "拆分PDF";
             this.拆分PDFToolStripMenuItem.Click += new System.EventHandler(this.拆分PDFToolStripMenuItem_Click);
             // 
@@ -16678,7 +16632,7 @@ namespace DocumentTools
             // 
             this.合并WORDToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.word;
             this.合并WORDToolStripMenuItem.Name = "合并WORDToolStripMenuItem";
-            this.合并WORDToolStripMenuItem.Size = new System.Drawing.Size(147, 30);
+            this.合并WORDToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.合并WORDToolStripMenuItem.Text = "合并WORD";
             this.合并WORDToolStripMenuItem.Click += new System.EventHandler(this.合并WORDToolStripMenuItem_Click);
             // 
@@ -16686,7 +16640,7 @@ namespace DocumentTools
             // 
             this.合并PDFToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.pdf;
             this.合并PDFToolStripMenuItem.Name = "合并PDFToolStripMenuItem";
-            this.合并PDFToolStripMenuItem.Size = new System.Drawing.Size(147, 30);
+            this.合并PDFToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.合并PDFToolStripMenuItem.Text = "合并PDF";
             this.合并PDFToolStripMenuItem.Click += new System.EventHandler(this.合并PDFToolStripMenuItem_Click);
             // 
@@ -16694,7 +16648,7 @@ namespace DocumentTools
             // 
             this.拆分PPTToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.ppt;
             this.拆分PPTToolStripMenuItem.Name = "拆分PPTToolStripMenuItem";
-            this.拆分PPTToolStripMenuItem.Size = new System.Drawing.Size(147, 30);
+            this.拆分PPTToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.拆分PPTToolStripMenuItem.Text = "拆分PPT";
             this.拆分PPTToolStripMenuItem.Click += new System.EventHandler(this.拆分PPTToolStripMenuItem_Click);
             // 
@@ -16705,14 +16659,14 @@ namespace DocumentTools
             this.压缩图片ToolStripMenuItem});
             this.压缩功能ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.压缩;
             this.压缩功能ToolStripMenuItem.Name = "压缩功能ToolStripMenuItem";
-            this.压缩功能ToolStripMenuItem.Size = new System.Drawing.Size(161, 30);
+            this.压缩功能ToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.压缩功能ToolStripMenuItem.Text = "压缩功能";
             // 
             // 压缩PDFToolStripMenuItem
             // 
             this.压缩PDFToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.pdf;
             this.压缩PDFToolStripMenuItem.Name = "压缩PDFToolStripMenuItem";
-            this.压缩PDFToolStripMenuItem.Size = new System.Drawing.Size(204, 30);
+            this.压缩PDFToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.压缩PDFToolStripMenuItem.Text = "压缩PDF";
             this.压缩PDFToolStripMenuItem.Click += new System.EventHandler(this.压缩PDFToolStripMenuItem_Click);
             // 
@@ -16720,7 +16674,7 @@ namespace DocumentTools
             // 
             this.压缩图片ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.图片;
             this.压缩图片ToolStripMenuItem.Name = "压缩图片ToolStripMenuItem";
-            this.压缩图片ToolStripMenuItem.Size = new System.Drawing.Size(204, 30);
+            this.压缩图片ToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.压缩图片ToolStripMenuItem.Text = "压缩图片（格式转换）";
             this.压缩图片ToolStripMenuItem.Click += new System.EventHandler(this.压缩图片ToolStripMenuItem_Click);
             // 
@@ -16732,14 +16686,14 @@ namespace DocumentTools
             this.wEBP图片格式转换ToolStripMenuItem});
             this.图片功能ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.图片;
             this.图片功能ToolStripMenuItem.Name = "图片功能ToolStripMenuItem";
-            this.图片功能ToolStripMenuItem.Size = new System.Drawing.Size(161, 30);
+            this.图片功能ToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.图片功能ToolStripMenuItem.Text = "图片功能";
             // 
             // wORDEXCELPDF转图片ToolStripMenuItem
             // 
             this.wORDEXCELPDF转图片ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.图片;
             this.wORDEXCELPDF转图片ToolStripMenuItem.Name = "wORDEXCELPDF转图片ToolStripMenuItem";
-            this.wORDEXCELPDF转图片ToolStripMenuItem.Size = new System.Drawing.Size(227, 30);
+            this.wORDEXCELPDF转图片ToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.wORDEXCELPDF转图片ToolStripMenuItem.Text = "WORD/PDF/EXCEL转图片";
             this.wORDEXCELPDF转图片ToolStripMenuItem.Click += new System.EventHandler(this.wORDEXCELPDF转图片ToolStripMenuItem_Click);
             // 
@@ -16747,7 +16701,7 @@ namespace DocumentTools
             // 
             this.图片转PDFToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.pdf;
             this.图片转PDFToolStripMenuItem.Name = "图片转PDFToolStripMenuItem";
-            this.图片转PDFToolStripMenuItem.Size = new System.Drawing.Size(227, 30);
+            this.图片转PDFToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.图片转PDFToolStripMenuItem.Text = "图片转PDF";
             this.图片转PDFToolStripMenuItem.Click += new System.EventHandler(this.图片转PDFToolStripMenuItem_Click);
             // 
@@ -16755,7 +16709,7 @@ namespace DocumentTools
             // 
             this.wEBP图片格式转换ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.图片;
             this.wEBP图片格式转换ToolStripMenuItem.Name = "wEBP图片格式转换ToolStripMenuItem";
-            this.wEBP图片格式转换ToolStripMenuItem.Size = new System.Drawing.Size(227, 30);
+            this.wEBP图片格式转换ToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
             this.wEBP图片格式转换ToolStripMenuItem.Text = "WEBP图片格式转换";
             this.wEBP图片格式转换ToolStripMenuItem.Click += new System.EventHandler(this.wEBP图片格式转换ToolStripMenuItem_Click);
             // 
@@ -16776,14 +16730,14 @@ namespace DocumentTools
             this.考评表信息插入ToolStripMenuItem});
             this.sYX功能ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.云;
             this.sYX功能ToolStripMenuItem.Name = "sYX功能ToolStripMenuItem";
-            this.sYX功能ToolStripMenuItem.Size = new System.Drawing.Size(161, 30);
+            this.sYX功能ToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.sYX功能ToolStripMenuItem.Text = "特殊功能";
             // 
             // 姓名横转竖列ToolStripMenuItem
             // 
             this.姓名横转竖列ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.姓名;
             this.姓名横转竖列ToolStripMenuItem.Name = "姓名横转竖列ToolStripMenuItem";
-            this.姓名横转竖列ToolStripMenuItem.Size = new System.Drawing.Size(216, 30);
+            this.姓名横转竖列ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.姓名横转竖列ToolStripMenuItem.Text = "姓名横转竖列";
             this.姓名横转竖列ToolStripMenuItem.Click += new System.EventHandler(this.姓名横转竖列ToolStripMenuItem_Click);
             // 
@@ -16791,7 +16745,7 @@ namespace DocumentTools
             // 
             this.特殊二维码校验ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.二维码;
             this.特殊二维码校验ToolStripMenuItem.Name = "特殊二维码校验ToolStripMenuItem";
-            this.特殊二维码校验ToolStripMenuItem.Size = new System.Drawing.Size(216, 30);
+            this.特殊二维码校验ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.特殊二维码校验ToolStripMenuItem.Text = "特殊二维码校验";
             this.特殊二维码校验ToolStripMenuItem.Click += new System.EventHandler(this.特殊二维码校验ToolStripMenuItem_Click);
             // 
@@ -16799,7 +16753,7 @@ namespace DocumentTools
             // 
             this.twain扫描仪调试ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.扫描仪;
             this.twain扫描仪调试ToolStripMenuItem.Name = "twain扫描仪调试ToolStripMenuItem";
-            this.twain扫描仪调试ToolStripMenuItem.Size = new System.Drawing.Size(216, 30);
+            this.twain扫描仪调试ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.twain扫描仪调试ToolStripMenuItem.Text = "Twain扫描仪调试";
             this.twain扫描仪调试ToolStripMenuItem.Click += new System.EventHandler(this.twain扫描仪调试ToolStripMenuItem_Click);
             // 
@@ -16807,7 +16761,7 @@ namespace DocumentTools
             // 
             this.mSS3模板修改ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.access;
             this.mSS3模板修改ToolStripMenuItem.Name = "mSS3模板修改ToolStripMenuItem";
-            this.mSS3模板修改ToolStripMenuItem.Size = new System.Drawing.Size(216, 30);
+            this.mSS3模板修改ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.mSS3模板修改ToolStripMenuItem.Text = "MSS3模板修改";
             this.mSS3模板修改ToolStripMenuItem.Click += new System.EventHandler(this.mSS3模板修改ToolStripMenuItem_Click);
             // 
@@ -16815,7 +16769,7 @@ namespace DocumentTools
             // 
             this.简易二维码生成ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.二维码__1_;
             this.简易二维码生成ToolStripMenuItem.Name = "简易二维码生成ToolStripMenuItem";
-            this.简易二维码生成ToolStripMenuItem.Size = new System.Drawing.Size(216, 30);
+            this.简易二维码生成ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.简易二维码生成ToolStripMenuItem.Text = "简易二维码生成";
             this.简易二维码生成ToolStripMenuItem.Click += new System.EventHandler(this.简易二维码生成ToolStripMenuItem_Click);
             // 
@@ -16823,7 +16777,7 @@ namespace DocumentTools
             // 
             this.随机身份证号码生成ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.身份证;
             this.随机身份证号码生成ToolStripMenuItem.Name = "随机身份证号码生成ToolStripMenuItem";
-            this.随机身份证号码生成ToolStripMenuItem.Size = new System.Drawing.Size(216, 30);
+            this.随机身份证号码生成ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.随机身份证号码生成ToolStripMenuItem.Text = "身份证号码校验";
             this.随机身份证号码生成ToolStripMenuItem.Click += new System.EventHandler(this.随机身份证号码生成ToolStripMenuItem_Click);
             // 
@@ -16831,7 +16785,7 @@ namespace DocumentTools
             // 
             this.文件副本生成ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.文件;
             this.文件副本生成ToolStripMenuItem.Name = "文件副本生成ToolStripMenuItem";
-            this.文件副本生成ToolStripMenuItem.Size = new System.Drawing.Size(216, 30);
+            this.文件副本生成ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.文件副本生成ToolStripMenuItem.Text = "补充功能";
             this.文件副本生成ToolStripMenuItem.Click += new System.EventHandler(this.文件副本生成ToolStripMenuItem_Click);
             // 
@@ -16839,7 +16793,7 @@ namespace DocumentTools
             // 
             this.网卡设置ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.接口数据;
             this.网卡设置ToolStripMenuItem.Name = "网卡设置ToolStripMenuItem";
-            this.网卡设置ToolStripMenuItem.Size = new System.Drawing.Size(216, 30);
+            this.网卡设置ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.网卡设置ToolStripMenuItem.Text = "网卡设置";
             this.网卡设置ToolStripMenuItem.Click += new System.EventHandler(this.网卡设置ToolStripMenuItem_Click);
             // 
@@ -16847,7 +16801,7 @@ namespace DocumentTools
             // 
             this.选举报告单样式生成ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.报告单;
             this.选举报告单样式生成ToolStripMenuItem.Name = "选举报告单样式生成ToolStripMenuItem";
-            this.选举报告单样式生成ToolStripMenuItem.Size = new System.Drawing.Size(216, 30);
+            this.选举报告单样式生成ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.选举报告单样式生成ToolStripMenuItem.Text = "选举结果报告单样式生成";
             this.选举报告单样式生成ToolStripMenuItem.Click += new System.EventHandler(this.选举报告单样式生成ToolStripMenuItem_Click);
             // 
@@ -16855,7 +16809,7 @@ namespace DocumentTools
             // 
             this.单人表生成ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.word;
             this.单人表生成ToolStripMenuItem.Name = "单人表生成ToolStripMenuItem";
-            this.单人表生成ToolStripMenuItem.Size = new System.Drawing.Size(216, 30);
+            this.单人表生成ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.单人表生成ToolStripMenuItem.Text = "单人表生成";
             this.单人表生成ToolStripMenuItem.Click += new System.EventHandler(this.单人表生成ToolStripMenuItem_Click);
             // 
@@ -16863,7 +16817,7 @@ namespace DocumentTools
             // 
             this.考评报表修改ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.文件;
             this.考评报表修改ToolStripMenuItem.Name = "考评报表修改ToolStripMenuItem";
-            this.考评报表修改ToolStripMenuItem.Size = new System.Drawing.Size(216, 30);
+            this.考评报表修改ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.考评报表修改ToolStripMenuItem.Text = "考评报表修改";
             this.考评报表修改ToolStripMenuItem.Click += new System.EventHandler(this.考评报表修改ToolStripMenuItem_Click);
             // 
@@ -16871,7 +16825,7 @@ namespace DocumentTools
             // 
             this.考评表信息插入ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.access;
             this.考评表信息插入ToolStripMenuItem.Name = "考评表信息插入ToolStripMenuItem";
-            this.考评表信息插入ToolStripMenuItem.Size = new System.Drawing.Size(216, 30);
+            this.考评表信息插入ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.考评表信息插入ToolStripMenuItem.Text = "考评表信息插入";
             this.考评表信息插入ToolStripMenuItem.Click += new System.EventHandler(this.考评表信息插入ToolStripMenuItem_Click);
             // 
@@ -16879,7 +16833,7 @@ namespace DocumentTools
             // 
             this.其他功能ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.其他单据;
             this.其他功能ToolStripMenuItem.Name = "其他功能ToolStripMenuItem";
-            this.其他功能ToolStripMenuItem.Size = new System.Drawing.Size(161, 30);
+            this.其他功能ToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.其他功能ToolStripMenuItem.Text = "其他功能";
             this.其他功能ToolStripMenuItem.Click += new System.EventHandler(this.其他功能ToolStripMenuItem_Click);
             // 
@@ -16887,7 +16841,7 @@ namespace DocumentTools
             // 
             this.系统工具ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.系统;
             this.系统工具ToolStripMenuItem.Name = "系统工具ToolStripMenuItem";
-            this.系统工具ToolStripMenuItem.Size = new System.Drawing.Size(161, 30);
+            this.系统工具ToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.系统工具ToolStripMenuItem.Text = "系统工具";
             this.系统工具ToolStripMenuItem.Click += new System.EventHandler(this.系统工具ToolStripMenuItem_Click);
             // 
@@ -16895,7 +16849,7 @@ namespace DocumentTools
             // 
             this.关于软件ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.关于;
             this.关于软件ToolStripMenuItem.Name = "关于软件ToolStripMenuItem";
-            this.关于软件ToolStripMenuItem.Size = new System.Drawing.Size(161, 30);
+            this.关于软件ToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.关于软件ToolStripMenuItem.Text = "关于软件";
             this.关于软件ToolStripMenuItem.Click += new System.EventHandler(this.关于软件ToolStripMenuItem_Click);
             // 
@@ -16926,7 +16880,7 @@ namespace DocumentTools
             this.menu_start_page_index_combox});
             this.menu_start_page_index.Image = global::DocumentTools.Properties.Resources.初始化;
             this.menu_start_page_index.Name = "menu_start_page_index";
-            this.menu_start_page_index.Size = new System.Drawing.Size(212, 30);
+            this.menu_start_page_index.Size = new System.Drawing.Size(204, 22);
             this.menu_start_page_index.Text = "初始页面索引设置";
             // 
             // menu_start_page_index_combox
@@ -16941,7 +16895,7 @@ namespace DocumentTools
             this.menu_tabpage_heigh_light_combox});
             this.menu_tabpage_heighlight.Image = global::DocumentTools.Properties.Resources.红旗_高亮;
             this.menu_tabpage_heighlight.Name = "menu_tabpage_heighlight";
-            this.menu_tabpage_heighlight.Size = new System.Drawing.Size(212, 30);
+            this.menu_tabpage_heighlight.Size = new System.Drawing.Size(204, 22);
             this.menu_tabpage_heighlight.Text = "高亮标签卡";
             // 
             // menu_tabpage_heigh_light_combox
@@ -16956,7 +16910,7 @@ namespace DocumentTools
             this.menu_tabpage_icon_combox});
             this.menu_tabpage_icon.Image = global::DocumentTools.Properties.Resources.标签;
             this.menu_tabpage_icon.Name = "menu_tabpage_icon";
-            this.menu_tabpage_icon.Size = new System.Drawing.Size(212, 30);
+            this.menu_tabpage_icon.Size = new System.Drawing.Size(204, 22);
             this.menu_tabpage_icon.Text = "标签卡图标";
             // 
             // menu_tabpage_icon_combox
@@ -16971,7 +16925,7 @@ namespace DocumentTools
             this.menu_finshined_messbox_combox});
             this.menu_confirm_dialog.Image = global::DocumentTools.Properties.Resources.弹窗消息;
             this.menu_confirm_dialog.Name = "menu_confirm_dialog";
-            this.menu_confirm_dialog.Size = new System.Drawing.Size(212, 30);
+            this.menu_confirm_dialog.Size = new System.Drawing.Size(204, 22);
             this.menu_confirm_dialog.Text = "处理完毕弹窗";
             // 
             // menu_finshined_messbox_combox
@@ -16986,7 +16940,7 @@ namespace DocumentTools
             this.menu_listview_line_heigh_combox});
             this.menu_listview_height.Image = global::DocumentTools.Properties.Resources.字行距;
             this.menu_listview_height.Name = "menu_listview_height";
-            this.menu_listview_height.Size = new System.Drawing.Size(212, 30);
+            this.menu_listview_height.Size = new System.Drawing.Size(204, 22);
             this.menu_listview_height.Text = "文件列表行距";
             // 
             // menu_listview_line_heigh_combox
@@ -17001,7 +16955,7 @@ namespace DocumentTools
             this.menu_listview_gridline_combox});
             this.menu_listview_gridline.Image = global::DocumentTools.Properties.Resources.icon_网格;
             this.menu_listview_gridline.Name = "menu_listview_gridline";
-            this.menu_listview_gridline.Size = new System.Drawing.Size(212, 30);
+            this.menu_listview_gridline.Size = new System.Drawing.Size(204, 22);
             this.menu_listview_gridline.Text = "文件列表网格线";
             // 
             // menu_listview_gridline_combox
@@ -17016,7 +16970,7 @@ namespace DocumentTools
             this.menu_chrome_path});
             this.toolStripMenuItem1.Image = global::DocumentTools.Properties.Resources.谷歌浏览器;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(212, 30);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(204, 22);
             this.toolStripMenuItem1.Text = "Chromium路径配置";
             // 
             // menu_chrome_path
@@ -17033,7 +16987,7 @@ namespace DocumentTools
             this.选举数据包路径ToolStripMenuItem});
             this.vFSOFT数据包路径配置ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.云;
             this.vFSOFT数据包路径配置ToolStripMenuItem.Name = "vFSOFT数据包路径配置ToolStripMenuItem";
-            this.vFSOFT数据包路径配置ToolStripMenuItem.Size = new System.Drawing.Size(212, 30);
+            this.vFSOFT数据包路径配置ToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.vFSOFT数据包路径配置ToolStripMenuItem.Text = "VFSOFT数据包路径配置";
             // 
             // 考评数据包路径ToolStripMenuItem
@@ -17042,7 +16996,7 @@ namespace DocumentTools
             this.vfsoft_examdata_path_textbox});
             this.考评数据包路径ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.access;
             this.考评数据包路径ToolStripMenuItem.Name = "考评数据包路径ToolStripMenuItem";
-            this.考评数据包路径ToolStripMenuItem.Size = new System.Drawing.Size(168, 30);
+            this.考评数据包路径ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.考评数据包路径ToolStripMenuItem.Text = "考评数据包路径";
             // 
             // vfsoft_examdata_path_textbox
@@ -17057,7 +17011,7 @@ namespace DocumentTools
             this.vfsoft_mssdata_path_textbox});
             this.选举数据包路径ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.压缩;
             this.选举数据包路径ToolStripMenuItem.Name = "选举数据包路径ToolStripMenuItem";
-            this.选举数据包路径ToolStripMenuItem.Size = new System.Drawing.Size(168, 30);
+            this.选举数据包路径ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.选举数据包路径ToolStripMenuItem.Text = "选举数据包路径";
             // 
             // vfsoft_mssdata_path_textbox
@@ -17073,7 +17027,7 @@ namespace DocumentTools
             this.设置界面高度ToolStripMenuItem});
             this.界面大小设置ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.ＧＵＩ界面设计;
             this.界面大小设置ToolStripMenuItem.Name = "界面大小设置ToolStripMenuItem";
-            this.界面大小设置ToolStripMenuItem.Size = new System.Drawing.Size(212, 30);
+            this.界面大小设置ToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.界面大小设置ToolStripMenuItem.Text = "界面大小设置";
             // 
             // 设置界面宽度ToolStripMenuItem
@@ -17082,7 +17036,7 @@ namespace DocumentTools
             this.bodyform_width});
             this.设置界面宽度ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.宽度;
             this.设置界面宽度ToolStripMenuItem.Name = "设置界面宽度ToolStripMenuItem";
-            this.设置界面宽度ToolStripMenuItem.Size = new System.Drawing.Size(156, 30);
+            this.设置界面宽度ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.设置界面宽度ToolStripMenuItem.Text = "设置界面宽度";
             // 
             // bodyform_width
@@ -17097,7 +17051,7 @@ namespace DocumentTools
             this.bodyform_height});
             this.设置界面高度ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.高度;
             this.设置界面高度ToolStripMenuItem.Name = "设置界面高度ToolStripMenuItem";
-            this.设置界面高度ToolStripMenuItem.Size = new System.Drawing.Size(156, 30);
+            this.设置界面高度ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.设置界面高度ToolStripMenuItem.Text = "设置界面高度";
             // 
             // bodyform_height
@@ -17112,7 +17066,7 @@ namespace DocumentTools
             this.menu_widget_anchor_combox});
             this.控件锚点模式ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.布局;
             this.控件锚点模式ToolStripMenuItem.Name = "控件锚点模式ToolStripMenuItem";
-            this.控件锚点模式ToolStripMenuItem.Size = new System.Drawing.Size(212, 30);
+            this.控件锚点模式ToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.控件锚点模式ToolStripMenuItem.Text = "控件锚点配置";
             this.控件锚点模式ToolStripMenuItem.ToolTipText = resources.GetString("控件锚点模式ToolStripMenuItem.ToolTipText");
             // 
@@ -17126,7 +17080,7 @@ namespace DocumentTools
             // 
             this.查看标签索引对照表ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.查看;
             this.查看标签索引对照表ToolStripMenuItem.Name = "查看标签索引对照表ToolStripMenuItem";
-            this.查看标签索引对照表ToolStripMenuItem.Size = new System.Drawing.Size(212, 30);
+            this.查看标签索引对照表ToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.查看标签索引对照表ToolStripMenuItem.Text = "查看标签索引对照表";
             this.查看标签索引对照表ToolStripMenuItem.Click += new System.EventHandler(this.查看标签索引对照表ToolStripMenuItem_Click);
             // 
@@ -17134,7 +17088,7 @@ namespace DocumentTools
             // 
             this.初始化配置文件ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.系统初始化;
             this.初始化配置文件ToolStripMenuItem.Name = "初始化配置文件ToolStripMenuItem";
-            this.初始化配置文件ToolStripMenuItem.Size = new System.Drawing.Size(212, 30);
+            this.初始化配置文件ToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.初始化配置文件ToolStripMenuItem.Text = "初始化配置文件";
             this.初始化配置文件ToolStripMenuItem.Click += new System.EventHandler(this.初始化配置文件ToolStripMenuItem_Click);
             // 
@@ -17142,7 +17096,7 @@ namespace DocumentTools
             // 
             this.保存设置并重启软件ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.保存;
             this.保存设置并重启软件ToolStripMenuItem.Name = "保存设置并重启软件ToolStripMenuItem";
-            this.保存设置并重启软件ToolStripMenuItem.Size = new System.Drawing.Size(212, 30);
+            this.保存设置并重启软件ToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.保存设置并重启软件ToolStripMenuItem.Text = "保存设置并重启软件";
             this.保存设置并重启软件ToolStripMenuItem.Click += new System.EventHandler(this.保存设置并重启软件ToolStripMenuItem_Click);
             // 
@@ -17161,7 +17115,7 @@ namespace DocumentTools
             // 
             this.CheckVersionButton.Image = global::DocumentTools.Properties.Resources.更新;
             this.CheckVersionButton.Name = "CheckVersionButton";
-            this.CheckVersionButton.Size = new System.Drawing.Size(156, 30);
+            this.CheckVersionButton.Size = new System.Drawing.Size(148, 22);
             this.CheckVersionButton.Text = "检查更新";
             this.CheckVersionButton.Click += new System.EventHandler(this.CheckVersionButton_Click);
             // 
@@ -17169,7 +17123,7 @@ namespace DocumentTools
             // 
             this.VersionUpdateLog.Image = global::DocumentTools.Properties.Resources.更新日志;
             this.VersionUpdateLog.Name = "VersionUpdateLog";
-            this.VersionUpdateLog.Size = new System.Drawing.Size(156, 30);
+            this.VersionUpdateLog.Size = new System.Drawing.Size(148, 22);
             this.VersionUpdateLog.Text = "查看更新日志";
             this.VersionUpdateLog.Click += new System.EventHandler(this.VersionUpdateLog_Click);
             // 
@@ -17177,7 +17131,7 @@ namespace DocumentTools
             // 
             this.查看公告信息ToolStripMenuItem.Image = global::DocumentTools.Properties.Resources.公告;
             this.查看公告信息ToolStripMenuItem.Name = "查看公告信息ToolStripMenuItem";
-            this.查看公告信息ToolStripMenuItem.Size = new System.Drawing.Size(156, 30);
+            this.查看公告信息ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.查看公告信息ToolStripMenuItem.Text = "查看公告信息";
             this.查看公告信息ToolStripMenuItem.Click += new System.EventHandler(this.查看公告信息ToolStripMenuItem_Click);
             // 
@@ -18022,12 +17976,82 @@ namespace DocumentTools
             this.toolStripMenuItem13.Size = new System.Drawing.Size(352, 22);
             this.toolStripMenuItem13.Text = "批量添加选项（a、b、c、d）";
             // 
-            // ExamDataPakUnitOrder_ProgressBar
+            // set_interface_dns2
             // 
-            this.ExamDataPakUnitOrder_ProgressBar.Location = new System.Drawing.Point(589, 347);
-            this.ExamDataPakUnitOrder_ProgressBar.Name = "ExamDataPakUnitOrder_ProgressBar";
-            this.ExamDataPakUnitOrder_ProgressBar.Size = new System.Drawing.Size(119, 33);
-            this.ExamDataPakUnitOrder_ProgressBar.TabIndex = 17;
+            this.set_interface_dns2.Location = new System.Drawing.Point(91, 228);
+            this.set_interface_dns2.Margin = new System.Windows.Forms.Padding(1);
+            this.set_interface_dns2.MaxLength = 12;
+            this.set_interface_dns2.Name = "set_interface_dns2";
+            this.set_interface_dns2.Size = new System.Drawing.Size(229, 21);
+            this.set_interface_dns2.TabIndex = 4;
+            this.set_interface_dns2.Text = "0.0.0.0";
+            this.set_interface_dns2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.set_interface_dns2.WordWrap = false;
+            // 
+            // set_interface_dns1
+            // 
+            this.set_interface_dns1.Location = new System.Drawing.Point(91, 197);
+            this.set_interface_dns1.Margin = new System.Windows.Forms.Padding(1);
+            this.set_interface_dns1.MaxLength = 12;
+            this.set_interface_dns1.Name = "set_interface_dns1";
+            this.set_interface_dns1.Size = new System.Drawing.Size(229, 21);
+            this.set_interface_dns1.TabIndex = 22;
+            this.set_interface_dns1.Text = "0.0.0.0";
+            this.set_interface_dns1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.set_interface_dns1.WordWrap = false;
+            // 
+            // set_interface_gateway
+            // 
+            this.set_interface_gateway.Location = new System.Drawing.Point(61, 160);
+            this.set_interface_gateway.Margin = new System.Windows.Forms.Padding(1);
+            this.set_interface_gateway.MaxLength = 12;
+            this.set_interface_gateway.Name = "set_interface_gateway";
+            this.set_interface_gateway.Size = new System.Drawing.Size(259, 21);
+            this.set_interface_gateway.TabIndex = 21;
+            this.set_interface_gateway.Text = "0.0.0.0";
+            this.set_interface_gateway.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.set_interface_gateway.WordWrap = false;
+            // 
+            // set_interface_mask
+            // 
+            this.set_interface_mask.Location = new System.Drawing.Point(61, 129);
+            this.set_interface_mask.Margin = new System.Windows.Forms.Padding(1);
+            this.set_interface_mask.MaxLength = 12;
+            this.set_interface_mask.Name = "set_interface_mask";
+            this.set_interface_mask.Size = new System.Drawing.Size(259, 21);
+            this.set_interface_mask.TabIndex = 20;
+            this.set_interface_mask.Text = "0.0.0.0";
+            this.set_interface_mask.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.set_interface_mask.WordWrap = false;
+            // 
+            // set_interface_ipaddress
+            // 
+            this.set_interface_ipaddress.Location = new System.Drawing.Point(61, 91);
+            this.set_interface_ipaddress.Margin = new System.Windows.Forms.Padding(1);
+            this.set_interface_ipaddress.MaxLength = 12;
+            this.set_interface_ipaddress.Name = "set_interface_ipaddress";
+            this.set_interface_ipaddress.Size = new System.Drawing.Size(259, 21);
+            this.set_interface_ipaddress.TabIndex = 19;
+            this.set_interface_ipaddress.Text = "0.0.0.0";
+            this.set_interface_ipaddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.set_interface_ipaddress.WordWrap = false;
+            // 
+            // label238
+            // 
+            this.label238.AutoSize = true;
+            this.label238.Location = new System.Drawing.Point(6, 60);
+            this.label238.Name = "label238";
+            this.label238.Size = new System.Drawing.Size(53, 12);
+            this.label238.TabIndex = 18;
+            this.label238.Text = "快速定位";
+            // 
+            // ExamDataPakUnitOrder_QuickFind
+            // 
+            this.ExamDataPakUnitOrder_QuickFind.Location = new System.Drawing.Point(77, 56);
+            this.ExamDataPakUnitOrder_QuickFind.Name = "ExamDataPakUnitOrder_QuickFind";
+            this.ExamDataPakUnitOrder_QuickFind.Size = new System.Drawing.Size(262, 21);
+            this.ExamDataPakUnitOrder_QuickFind.TabIndex = 19;
+            this.ExamDataPakUnitOrder_QuickFind.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ExamDataPakUnitOrder_QuickFind_KeyDown);
             // 
             // BodyForm
             // 
@@ -19729,6 +19753,8 @@ namespace DocumentTools
         private Button ExamDataPackUnitOrder_Down;
         private Button ExamDataPakOrder_Refresh;
         private ProgressBar ExamDataPakUnitOrder_ProgressBar;
+        private TextBox ExamDataPakUnitOrder_QuickFind;
+        private Label label238;
     }
 }
 

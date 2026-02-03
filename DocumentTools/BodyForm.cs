@@ -9898,7 +9898,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
         private void ExamDataPakOrder_Select_Click(object sender, EventArgs e)
         {
-           ExamDataPakOrder_Path.Text  =  Util.ShowSelectDialog(false, false,"数据库文件", "*.mdb;*.db").FirstOrDefault();
+           ExamDataPakOrder_Path.Text  =  Util.ShowSelectDialog(false, false,"数据库文件", "*.mdb;*.db", vfsoft_examdata_path_textbox.Text).FirstOrDefault();
 
             if(!string.IsNullOrEmpty(ExamDataPakOrder_Path.Text) && ExamDataPakOrder_Path.Text != string.Empty )
             {
@@ -10010,6 +10010,93 @@ IPGATEWAY:'{set_interface_gateway.Text}',
             catch { }
         }
 
+        private int _examDataPakQuickFindLastIndex = -1;
+        private string _examDataPakQuickFindLastKeyword = string.Empty;
+
+        private void ExamDataPakUnitOrder_QuickFind_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter) return;
+
+            var keyword = ExamDataPakUnitOrder_QuickFind.Text?.Trim();
+            if (string.IsNullOrEmpty(keyword)) return;
+
+            var dgv = ExamDataPakOrder_UnitListView;
+            if (dgv == null || dgv.DataSource == null) return;
+            if (!(dgv.DataSource is System.Data.DataTable dt) || dt.Rows.Count <= 0) return;
+
+            keyword = keyword.ToLowerInvariant();
+
+            // 关键字变化时，从头开始搜索
+            bool keywordChanged = !string.Equals(keyword, _examDataPakQuickFindLastKeyword, StringComparison.OrdinalIgnoreCase);
+            if (keywordChanged)
+            {
+                _examDataPakQuickFindLastKeyword = keyword;
+                _examDataPakQuickFindLastIndex = -1;
+            }
+
+            int startIndex = _examDataPakQuickFindLastIndex + 1;
+            if (startIndex >= dt.Rows.Count) startIndex = 0;
+
+            int targetRowIndex = -1;
+
+            // 先从 startIndex 往后找一圈
+            for (int i = startIndex; i < dt.Rows.Count; i++)
+            {
+                string unitName = string.Empty;
+                string unitShort = string.Empty;
+
+                try { unitName = dt.Rows[i][1]?.ToString() ?? string.Empty; } catch { }
+                try { unitShort = dt.Rows[i][3]?.ToString() ?? string.Empty; } catch { }
+
+                var nameLower = unitName.ToLowerInvariant();
+                var shortLower = unitShort.ToLowerInvariant();
+
+                if (nameLower.Contains(keyword) || shortLower.Contains(keyword))
+                {
+                    targetRowIndex = i;
+                    break;
+                }
+            }
+
+            // 没找到，再从 0 到 startIndex-1 再找一圈（实现循环查找）
+            if (targetRowIndex < 0 && dt.Rows.Count > 0)
+            {
+                for (int i = 0; i < startIndex; i++)
+                {
+                    string unitName = string.Empty;
+                    string unitShort = string.Empty;
+
+                    try { unitName = dt.Rows[i][1]?.ToString() ?? string.Empty; } catch { }
+                    try { unitShort = dt.Rows[i][3]?.ToString() ?? string.Empty; } catch { }
+
+                    var nameLower = unitName.ToLowerInvariant();
+                    var shortLower = unitShort.ToLowerInvariant();
+
+                    if (nameLower.Contains(keyword) || shortLower.Contains(keyword))
+                    {
+                        targetRowIndex = i;
+                        break;
+                    }
+                }
+            }
+
+            if (targetRowIndex < 0) return;
+
+            _examDataPakQuickFindLastIndex = targetRowIndex;
+
+            try
+            {
+                dgv.ClearSelection();
+                if (targetRowIndex >= 0 && targetRowIndex < dgv.Rows.Count)
+                {
+                    dgv.CurrentCell = dgv.Rows[targetRowIndex].Cells[0];
+                    dgv.Rows[targetRowIndex].Selected = true;
+                    dgv.FirstDisplayedScrollingRowIndex = targetRowIndex;
+                }
+            }
+            catch { }
+        }
+
         private void ExamDataPakOrder_Modify_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(ExamDataPakOrder_Path.Text) || File.Exists(ExamDataPakOrder_Path.Text))
@@ -10033,6 +10120,16 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                 try { ExamDataPackUnitOrder_Up.Enabled = false; } catch { }
                 try { ExamDataPackUnitOrder_Down.Enabled = false; } catch { }
 
+                // 初始化进度条
+                try
+                {
+                    ExamDataPakUnitOrder_ProgressBar.Minimum = 0;
+                    ExamDataPakUnitOrder_ProgressBar.Maximum = dt.Rows.Count;
+                    ExamDataPakUnitOrder_ProgressBar.Value = 0;
+                    ExamDataPakUnitOrder_ProgressBar.Visible = true;
+                }
+                catch { }
+
                 Task.Run(
                     () =>
                     {
@@ -10042,7 +10139,8 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                             // 约定：dt 第一列为“单位序号”，第三列为“单位编码”
                             var factory = new AccessDatabaseFactory();
 
-                            for (int i = 0; i < dt.Rows.Count; i++)
+                            int total = dt.Rows.Count;
+                            for (int i = 0; i < total; i++)
                             {
                                 var unitCodeObj = dt.Rows[i][2];
                                 var unitCode = unitCodeObj?.ToString();
@@ -10057,6 +10155,22 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                                 string sql = $"UPDATE Unit_Ess SET AtOrder={atOrder} WHERE UnitCode='{unitCode.Replace("'", "''")}'";
                                 var (_, conn) = Util.ExecuteAccessSql(ExamDataPakOrder_Path.Text, sql, factory);
                                 conn.Close();
+
+                                // 更新进度条
+                                int progress = i + 1;
+                                try
+                                {
+                                    this.BeginInvoke(
+                                        new Action(
+                                            () =>
+                                            {
+                                                if (progress <= ExamDataPakUnitOrder_ProgressBar.Maximum)
+                                                {
+                                                    ExamDataPakUnitOrder_ProgressBar.Value = progress;
+                                                }
+                                            }));
+                                }
+                                catch { }
                             }
 
                             this.BeginInvoke(
@@ -10098,6 +10212,19 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                                 ExamDataPackUnitOrder_Down.BeginInvoke(new Action(() => ExamDataPackUnitOrder_Down.Enabled = true));
                             }
                             catch { }
+
+                            // 收尾进度条
+                            try
+                            {
+                                this.BeginInvoke(
+                                    new Action(
+                                        () =>
+                                        {
+                                            ExamDataPakUnitOrder_ProgressBar.Value = 0;
+                                            ExamDataPakUnitOrder_ProgressBar.Visible = false;
+                                        }));
+                            }
+                            catch { }
                         }
                     });
             }
@@ -10123,20 +10250,34 @@ IPGATEWAY:'{set_interface_gateway.Text}',
             var sourceRoot = ExamMergeDataPak_SourcePath.Text?.Trim();
             var targetRoot = ExamMergeDataPak_TargetPath.Text?.Trim();
 
-            if (!string.IsNullOrEmpty(sourceRoot) && !string.IsNullOrEmpty(targetRoot))
+            if (string.IsNullOrEmpty(sourceRoot) || string.IsNullOrEmpty(targetRoot))
             {
-                var sourceMdb = Path.Combine(sourceRoot, "Exam_Base.mdb");
-                var targetMdb = Path.Combine(targetRoot, "Exam_Base.mdb");
+                MessageBox.Show("请先选择待合并数据包路径和目标数据包路径。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                return;
+            }
 
-                if (!File.Exists(sourceMdb) || !File.Exists(targetMdb))
-                {
-                    MessageBox.Show("数据包目录下未找到 Exam_Base.mdb。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    return;
-                }
+            var sourceMdb = Path.Combine(sourceRoot, "Exam_Base.mdb");
+            var targetMdb = Path.Combine(targetRoot, "Exam_Base.mdb");
+
+            if (!File.Exists(sourceMdb))
+            {
+                MessageBox.Show("源数据包目录下未找到 Exam_Base.mdb。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                return;
+            }
+
+            if (!File.Exists(targetMdb))
+            {
+                MessageBox.Show("目标数据包目录下未找到 Exam_Base.mdb。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                return;
+            }
 
             var confirm = MessageBox.Show(
-                "即将合并，该操作不可撤销，是否继续？",
-                "提示",
+                "将把源数据包中的人员与单位数据合并到目标数据包中：\r\n" +
+                "1、源 Exam_People 全部追加到目标 Exam_People（不做去重）。\r\n" +
+                "2、源 Unit_Ess 全部追加到目标 Unit_Ess，按目标库当前最大 AtOrder 继续编号。\r\n" +
+                (ExamMergeDataPak_CopyExam.Checked ? "3、同时复制源目录下的所有 .exam 文件到目标目录（同名直接覆盖）。\r\n\r\n" : "\r\n") +
+                "该操作无法自动还原，请谨慎确认。\r\n\r\n是否继续？",
+                "确认合并",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning);
 
@@ -10180,7 +10321,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                             new Action(
                                 () =>
                                 {
-                                    MessageBox.Show("数据包合并完成。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    MessageBox.Show("数据包合并完成。", "完成", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 }));
                     }
                     catch (Exception ex)
@@ -10216,9 +10357,105 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                         catch { }
                     }
                 });
+        }
+
+        private void ExamRestDataPakSelect_Click(object sender, EventArgs e)
+        {
+            ExamRestDataPakPath.Text = Util.ShowSelectDialog(false, true, "数据包目录", string.Empty, vfsoft_examdata_path_textbox.Text).FirstOrDefault();
+        }
+
+        private void ExamRestDataPakReset_Click(object sender, EventArgs e)
+        {
+
+            var root = ExamRestDataPakPath.Text?.Trim();
+            var mdbPath = Path.Combine(root, "Exam_Base.mdb");
+
+            if (!string.IsNullOrEmpty(root) && File.Exists(mdbPath))
+            {
+
+                var confirm = MessageBox.Show(
+                    "该操作会删除所有单位、人员、模板、结果数据，恢复为初始化状态，不可恢复，请谨慎操作，是否继续？",
+                    "提示",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Asterisk);
+
+                if (confirm != DialogResult.Yes)
+                {
+                    return;
+                }
+
+                var btn = sender as Button;
+                if (btn != null) btn.Enabled = false;
+
+                Task.Run(
+                    () =>
+                    {
+                        try
+                        {
+                            // 1/2. 清空 Exam_People、Unit_Ess
+                            var factory = new AccessDatabaseFactory();
+
+                            var (_, conn1) = Util.ExecuteAccessSql(mdbPath, "DELETE FROM Exam_People", factory);
+                            conn1.Close();
+
+                            var (_, conn2) = Util.ExecuteAccessSql(mdbPath, "DELETE FROM Unit_Ess", factory);
+                            conn2.Close();
+
+                            // 3. 删除 .exam 文件
+                            try
+                            {
+                                if (Directory.Exists(root))
+                                {
+                                    var examFiles = Directory.GetFiles(root, "*.exam", SearchOption.TopDirectoryOnly);
+                                    foreach (var f in examFiles)
+                                    {
+                                        try { File.Delete(f); } catch { }
+                                    }
+                                }
+                            }
+                            catch { }
+
+                            // 4. 删除 SelfReport 目录
+                            try
+                            {
+                                var selfReportDir = Path.Combine(root, "SelfReport");
+                                if (Directory.Exists(selfReportDir))
+                                {
+                                    Directory.Delete(selfReportDir, true);
+                                }
+                            }
+                            catch { }
+
+                            this.BeginInvoke(
+                                new Action(
+                                    () =>
+                                    {
+                                        MessageBox.Show("数据包已重置", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    }));
+                        }
+                        catch (Exception ex)
+                        {
+                            this.BeginInvoke(
+                                new Action(
+                                    () =>
+                                    {
+                                        MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }));
+                        }
+                        finally
+                        {
+                            try
+                            {
+                                if (btn != null)
+                                {
+                                    btn.BeginInvoke(new Action(() => btn.Enabled = true));
+                                }
+                            }
+                            catch { }
+                        }
+                    });
             }
 
-            
         }
 
         private static void MergeExamPeople(string sourceMdb, string targetMdb, DataBaseFactory.IDatabaseMethodFactory factory)

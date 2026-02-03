@@ -12145,6 +12145,33 @@
         3GZ3Scdpbh9zezm+mav5qgLqP9Tx7YJ+1DUdAAAAAElFTkSuQmCC
 </value>
   </data>
+  <data name="文件操作ToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAABGdBTUEAALGPC/xhBQAABORJREFUeF7t
+        3dtt22gUhdGU4NgNpBSX4k5SRaxHl5IyAkgGVMoMjjwXDGXsiU2JPL+4NrBenCCkQ36RLDnJly8X3N3u
+        8Hi/O3y/f94f758Pf7Cg3evL9HpYk53CEMW6BNJzb48Y71wwliWQfquLcnahWIdAeu3tadU7F4p1zAjk
+        4cf+afoxmzlfczQzI5DTtdwdvk8/bp+cp1YNzQ3k9Ovsj3e7X9+mP24fnEePhi4SSKlIDo/Tn2Mf2NnF
+        YX0XC6SI5NOrL+jOLg7ru2ggxdcln5pAmrp4IEUkH543Bpu6SiBFJB+aQJq6WiBFJL89gTR11UCKSH5r
+        Amnq6oEUkfzvBNLUIoEUkcQJpKnFAvn7eCJ5dwJpaulATscUydkE0tQagZyOK5L/TCBNrRXI6dgi+WcC
+        aWrNQE7HF8lpAmlq7UCKSATSVodAytYjEUhTXQIpW45EIE11CqRsNRKBNNUtkLLFSATSVMdAytYiEUhT
+        XQMpW4pEIE11DqTMOL+hJpCmZtyAiwRSZpzjMBNIUzNuvsUCKTPOc4gJpKkZN96igZQZ59p+Amlqxk23
+        eCBlxvm2nkCamnHDrRJImXHObSeQpmbcbKsFcrI/Ts9n6AmkqWEDKTcUiUCaGjqQciORCKSp4QMpNxCJ
+        QJq6iUDK4JEIpKmbCaQM/B/5CKSpmwqkDBqJQJq6uUDKgJEIpKmbDKQMFolAmrrZQMpAkQikqZsOpAwS
+        iUCauvlAygCRCKSpTQRSmkcikKY2E0hpHIlAmtpUIKVpJAJpanOBlIaRCKSpTQZSmkUikKY2G0hpFIlA
+        mtp0IKUiOTxOP7fFJ5CmNh9IafBIIpCmBPKXlf8+iUCaEsi/ZvxezJ5AmppxU9xcIGWtfzBbIE3NCKSe
+        t9+a6ee42ATS1IxA7IITSFMC6TGBNCWQHhNIT1+fDz+n18pWmEC6Wvn1f3ubQPpa9dUbe5tA+mrxvUhb
+        n0A68zRr9QmkubXeQba3CaS7Jt/2vdUJZAQNvu17qxPIKPZHT7dWmEBGsz8+/Ng/Ta+jXWkCGdX+WO+2
+        17ekbNUif1AIhGEt8ZRTIAxLIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFA
+        IBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgE
+        AoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAg
+        EAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQC
+        gUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQ
+        CAQCgUAgEAgEAoFAIBAIBAKBQCAQCJYI5OHH/unswDCAunen9/PFd7c7PE4PDCOoe3d6P198d7tf36YH
+        hhFM7+Wr7X73+jI9OLS2e32Z3sdXm0cRRlP37PQ+vuq8msUwlnj16r2JhO6+Ph9+Tu/bxXZ6qiUSulrr
+        kWO6t/dG9sezE4RV7I+LvKT7kdWjySmU3etLPaydnzRcS/3hvD/WI8alw/gT362khBr24PsAAAAASUVO
+        RK5CYII=
+</value>
+  </data>
   <data name="打开源文件目录ToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAANkAAADICAYAAABlNERIAAAABGdBTUEAALGPC/xhBQAACD9JREFUeF7t
@@ -12313,33 +12340,6 @@
         TkSuQmCC
 </value>
   </data>
-  <data name="文件操作ToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAABGdBTUEAALGPC/xhBQAABORJREFUeF7t
-        3dtt22gUhdGU4NgNpBSX4k5SRaxHl5IyAkgGVMoMjjwXDGXsiU2JPL+4NrBenCCkQ36RLDnJly8X3N3u
-        8Hi/O3y/f94f758Pf7Cg3evL9HpYk53CEMW6BNJzb48Y71wwliWQfquLcnahWIdAeu3tadU7F4p1zAjk
-        4cf+afoxmzlfczQzI5DTtdwdvk8/bp+cp1YNzQ3k9Ovsj3e7X9+mP24fnEePhi4SSKlIDo/Tn2Mf2NnF
-        YX0XC6SI5NOrL+jOLg7ru2ggxdcln5pAmrp4IEUkH543Bpu6SiBFJB+aQJq6WiBFJL89gTR11UCKSH5r
-        Amnq6oEUkfzvBNLUIoEUkcQJpKnFAvn7eCJ5dwJpaulATscUydkE0tQagZyOK5L/TCBNrRXI6dgi+WcC
-        aWrNQE7HF8lpAmlq7UCKSATSVodAytYjEUhTXQIpW45EIE11CqRsNRKBNNUtkLLFSATSVMdAytYiEUhT
-        XQMpW4pEIE11DqTMOL+hJpCmZtyAiwRSZpzjMBNIUzNuvsUCKTPOc4gJpKkZN96igZQZ59p+Amlqxk23
-        eCBlxvm2nkCamnHDrRJImXHObSeQpmbcbKsFcrI/Ts9n6AmkqWEDKTcUiUCaGjqQciORCKSp4QMpNxCJ
-        QJq6iUDK4JEIpKmbCaQM/B/5CKSpmwqkDBqJQJq6uUDKgJEIpKmbDKQMFolAmrrZQMpAkQikqZsOpAwS
-        iUCauvlAygCRCKSpTQRSmkcikKY2E0hpHIlAmtpUIKVpJAJpanOBlIaRCKSpTQZSmkUikKY2G0hpFIlA
-        mtp0IKUiOTxOP7fFJ5CmNh9IafBIIpCmBPKXlf8+iUCaEsi/ZvxezJ5AmppxU9xcIGWtfzBbIE3NCKSe
-        t9+a6ee42ATS1IxA7IITSFMC6TGBNCWQHhNIT1+fDz+n18pWmEC6Wvn1f3ubQPpa9dUbe5tA+mrxvUhb
-        n0A68zRr9QmkubXeQba3CaS7Jt/2vdUJZAQNvu17qxPIKPZHT7dWmEBGsz8+/Ng/Ta+jXWkCGdX+WO+2
-        17ekbNUif1AIhGEt8ZRTIAxLIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFA
-        IBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgE
-        AoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAg
-        EAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQC
-        gUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQ
-        CAQCgUAgEAgEAoFAIBAIBAKBQCAQCJYI5OHH/unswDCAunen9/PFd7c7PE4PDCOoe3d6P198d7tf36YH
-        hhFM7+Wr7X73+jI9OLS2e32Z3sdXm0cRRlP37PQ+vuq8msUwlnj16r2JhO6+Ph9+Tu/bxXZ6qiUSulrr
-        kWO6t/dG9sezE4RV7I+LvKT7kdWjySmU3etLPaydnzRcS/3hvD/WI8alw/gT362khBr24PsAAAAASUVO
-        RK5CYII=
-</value>
-  </data>
   <data name="获取PDF文件版本信息ToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAABGdBTUEAALGPC/xhBQAACEFJREFUeF7t
@@ -12405,16 +12405,6 @@
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>589, 50</value>
   </metadata>
-  <data name="控件锚点模式ToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>说明：
-1、开启锚点：控件将会根据窗体大小变化自适应位置
-2、关闭锚点：控件将不会跟随窗体大小变化改变位置，而是永远固定位置；窗体小于控件内容的时候，将会自动显示滚动条
-
-注：
-1、保存设置的同时窗体大小也会改变，如果从关闭变为开启状态，务必将窗体调整到合适大小，否则窗体大小改变的同时，位置也会一直变化
-2、建议1080p的笔记本电脑使用125%缩放比例；使用150缩放的1080p笔记本电脑，开启锚点后可直接全屏显示，避免控件位置不正确
-3、最佳建议是150缩放的笔记本电脑，可关闭锚点设置后再进行使用</value>
-  </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEA9PQAAAAAIACjnQUAFgAAAIlQTkcNChoKAAAADUlIRFIAAAH0AAAB9AgGAAAAy9bfigAAAAlw
@@ -18554,6 +18544,16 @@
         JECAaTkAAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="控件锚点模式ToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>说明：
+1、开启锚点：控件将会根据窗体大小变化自适应位置
+2、关闭锚点：控件将不会跟随窗体大小变化改变位置，而是永远固定位置；窗体小于控件内容的时候，将会自动显示滚动条
+
+注：
+1、保存设置的同时窗体大小也会改变，如果从关闭变为开启状态，务必将窗体调整到合适大小，否则窗体大小改变的同时，位置也会一直变化
+2、建议1080p的笔记本电脑使用125%缩放比例；使用150缩放的1080p笔记本电脑，开启锚点后可直接全屏显示，避免控件位置不正确
+3、最佳建议是150缩放的笔记本电脑，可关闭锚点设置后再进行使用</value>
+  </data>
   <metadata name="TabPageIcoList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>394, 50</value>
   </metadata>
@@ -18562,7 +18562,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAU
-        dAAAAk1TRnQBSQFMAgEBFwEAAaQBMAGkATABEgEAARIBAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFI
+        dAAAAk1TRnQBSQFMAgEBFwEAAbQBMAG0ATABEgEAARIBAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFI
         AwABbAMAAQEBAAEgBQABgAF5YgADLgFGAa8B5AL/Aa8B5AL/Aa8B5AL/Aa8B5AL/Aa8B5AL/Aa8B5AL/
         Aa8B5AL/Aa8B5AL/Aa8B5AL/Aa8B5AL/Aa8B5AL/Aa8B5AL/Aa8B5AL/AwUBBqAAAzMB/wMzAf8DMwH/
         AzMB/wMzAf8DMwH/AzMB/wMzAf8DMwH/AzMB/wNQAZoYAAGvAeQC/wGhAcIB0wH/A4gB/wOIAf8DiAH/
