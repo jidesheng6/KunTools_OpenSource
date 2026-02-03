@@ -1165,6 +1165,7 @@ namespace DocumentTools
             this.label6 = new System.Windows.Forms.Label();
             this.TabPage_43 = new System.Windows.Forms.TabPage();
             this.ExamDataPakOrder_UnitList = new System.Windows.Forms.GroupBox();
+            this.ExamDataPakOrder_Refresh = new System.Windows.Forms.Button();
             this.ExamDataPakOrder_UnitListView = new System.Windows.Forms.DataGridView();
             this.ExamDataPackUnitOrder_Up = new System.Windows.Forms.Button();
             this.ExamDataPackUnitOrder_Down = new System.Windows.Forms.Button();
@@ -1399,7 +1400,7 @@ namespace DocumentTools
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem12 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem13 = new System.Windows.Forms.ToolStripMenuItem();
-            this.ExamDataPakOrder_Refresh = new System.Windows.Forms.Button();
+            this.ExamDataPakUnitOrder_ProgressBar = new System.Windows.Forms.ProgressBar();
             this.MainTabPage.SuspendLayout();
             this.TabPage_01.SuspendLayout();
             this.TabPage_02.SuspendLayout();
@@ -16010,6 +16011,7 @@ namespace DocumentTools
             // 
             // ExamDataPakOrder_UnitList
             // 
+            this.ExamDataPakOrder_UnitList.Controls.Add(this.ExamDataPakUnitOrder_ProgressBar);
             this.ExamDataPakOrder_UnitList.Controls.Add(this.ExamDataPakOrder_Refresh);
             this.ExamDataPakOrder_UnitList.Controls.Add(this.ExamDataPakOrder_UnitListView);
             this.ExamDataPakOrder_UnitList.Controls.Add(this.ExamDataPackUnitOrder_Up);
@@ -16024,6 +16026,16 @@ namespace DocumentTools
             this.ExamDataPakOrder_UnitList.TabIndex = 9;
             this.ExamDataPakOrder_UnitList.TabStop = false;
             this.ExamDataPakOrder_UnitList.Text = "数据包单位顺序修改";
+            // 
+            // ExamDataPakOrder_Refresh
+            // 
+            this.ExamDataPakOrder_Refresh.Location = new System.Drawing.Point(8, 347);
+            this.ExamDataPakOrder_Refresh.Name = "ExamDataPakOrder_Refresh";
+            this.ExamDataPakOrder_Refresh.Size = new System.Drawing.Size(111, 33);
+            this.ExamDataPakOrder_Refresh.TabIndex = 16;
+            this.ExamDataPakOrder_Refresh.Text = "刷新表数据";
+            this.ExamDataPakOrder_Refresh.UseVisualStyleBackColor = true;
+            this.ExamDataPakOrder_Refresh.Click += new System.EventHandler(this.ExamDataPakOrder_Refresh_Click);
             // 
             // ExamDataPakOrder_UnitListView
             // 
@@ -18010,15 +18022,12 @@ namespace DocumentTools
             this.toolStripMenuItem13.Size = new System.Drawing.Size(352, 22);
             this.toolStripMenuItem13.Text = "批量添加选项（a、b、c、d）";
             // 
-            // ExamDataPakOrder_Refresh
+            // ExamDataPakUnitOrder_ProgressBar
             // 
-            this.ExamDataPakOrder_Refresh.Location = new System.Drawing.Point(8, 347);
-            this.ExamDataPakOrder_Refresh.Name = "ExamDataPakOrder_Refresh";
-            this.ExamDataPakOrder_Refresh.Size = new System.Drawing.Size(111, 33);
-            this.ExamDataPakOrder_Refresh.TabIndex = 16;
-            this.ExamDataPakOrder_Refresh.Text = "刷新表数据";
-            this.ExamDataPakOrder_Refresh.UseVisualStyleBackColor = true;
-            this.ExamDataPakOrder_Refresh.Click += new System.EventHandler(this.ExamDataPakOrder_Refresh_Click);
+            this.ExamDataPakUnitOrder_ProgressBar.Location = new System.Drawing.Point(589, 347);
+            this.ExamDataPakUnitOrder_ProgressBar.Name = "ExamDataPakUnitOrder_ProgressBar";
+            this.ExamDataPakUnitOrder_ProgressBar.Size = new System.Drawing.Size(119, 33);
+            this.ExamDataPakUnitOrder_ProgressBar.TabIndex = 17;
             // 
             // BodyForm
             // 
@@ -19719,6 +19728,7 @@ namespace DocumentTools
         private Button ExamDataPackUnitOrder_Up;
         private Button ExamDataPackUnitOrder_Down;
         private Button ExamDataPakOrder_Refresh;
+        private ProgressBar ExamDataPakUnitOrder_ProgressBar;
     }
 }
 

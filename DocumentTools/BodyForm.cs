@@ -10117,5 +10117,295 @@ IPGATEWAY:'{set_interface_gateway.Text}',
         {
             ExamMergeDataPak_TargetPath.Text = Util.ShowSelectDialog(false, true, "数据包目录", string.Empty).FirstOrDefault();
         }
+
+        private void ExamMergeDataPak_MergeButton_Click(object sender, EventArgs e)
+        {
+            var sourceRoot = ExamMergeDataPak_SourcePath.Text?.Trim();
+            var targetRoot = ExamMergeDataPak_TargetPath.Text?.Trim();
+
+            if (!string.IsNullOrEmpty(sourceRoot) && !string.IsNullOrEmpty(targetRoot))
+            {
+                var sourceMdb = Path.Combine(sourceRoot, "Exam_Base.mdb");
+                var targetMdb = Path.Combine(targetRoot, "Exam_Base.mdb");
+
+                if (!File.Exists(sourceMdb) || !File.Exists(targetMdb))
+                {
+                    MessageBox.Show("数据包目录下未找到 Exam_Base.mdb。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    return;
+                }
+
+            var confirm = MessageBox.Show(
+                "即将合并，该操作不可撤销，是否继续？",
+                "提示",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (confirm != DialogResult.Yes)
+            {
+                return;
+            }
+
+            var btn = sender as Button;
+            if (btn != null) btn.Enabled = false;
+
+            try
+            {
+                ExamMergeDataPak_SourceSelect.Enabled = false;
+                ExamMergeDataPak_TargetSelect.Enabled = false;
+            }
+            catch { }
+
+            var copyExam = ExamMergeDataPak_CopyExam.Checked;
+
+            Task.Run(
+                () =>
+                {
+                    try
+                    {
+                        var factory = new AccessDatabaseFactory();
+
+                        // 1. 合并 Exam_People：源全部插入到目标
+                        MergeExamPeople(sourceMdb, targetMdb, factory);
+
+                        // 2. 合并 Unit_Ess：按目标库最大 AtOrder 递增
+                        MergeUnitEss(sourceMdb, targetMdb, factory);
+
+                        // 3. 复制 .exam 文件（可选）
+                        if (copyExam)
+                        {
+                            CopyExamFiles(sourceRoot, targetRoot);
+                        }
+
+                        this.BeginInvoke(
+                            new Action(
+                                () =>
+                                {
+                                    MessageBox.Show("数据包合并完成。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }));
+                    }
+                    catch (Exception ex)
+                    {
+                        this.BeginInvoke(
+                            new Action(
+                                () =>
+                                {
+                                    MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }));
+                    }
+                    finally
+                    {
+                        try
+                        {
+                            if (btn != null)
+                            {
+                                btn.BeginInvoke(new Action(() => btn.Enabled = true));
+                            }
+                        }
+                        catch { }
+
+                        try
+                        {
+                            ExamMergeDataPak_SourceSelect.BeginInvoke(new Action(() => ExamMergeDataPak_SourceSelect.Enabled = true));
+                        }
+                        catch { }
+
+                        try
+                        {
+                            ExamMergeDataPak_TargetSelect.BeginInvoke(new Action(() => ExamMergeDataPak_TargetSelect.Enabled = true));
+                        }
+                        catch { }
+                    }
+                });
+            }
+
+            
+        }
+
+        private static void MergeExamPeople(string sourceMdb, string targetMdb, DataBaseFactory.IDatabaseMethodFactory factory)
+        {
+            var accessFactory = factory as AccessDatabaseFactory ?? new AccessDatabaseFactory();
+
+            using (var sourceConn = accessFactory.CreateConnection(sourceMdb))
+            using (var targetConn = accessFactory.CreateConnection(targetMdb))
+            {
+                sourceConn.Open();
+                targetConn.Open();
+
+                using (var sourceCmd = sourceConn.CreateCommand())
+                {
+                    sourceCmd.CommandText = "SELECT * FROM Exam_People";
+                    using (var reader = sourceCmd.ExecuteReader())
+                    {
+                        var schemaTable = reader.GetSchemaTable();
+                        if (schemaTable == null)
+                        {
+                            return;
+                        }
+
+                        // 构造 INSERT 语句（不包含自增列，按现有库结构简单处理）
+                        var columnNames = new System.Collections.Generic.List<string>();
+                        for (int i = 0; i < reader.FieldCount; i++)
+                        {
+                            var name = reader.GetName(i);
+                            if (!string.IsNullOrEmpty(name))
+                            {
+                                columnNames.Add(name);
+                            }
+                        }
+
+                        if (columnNames.Count == 0)
+                        {
+                            return;
+                        }
+
+                        var columnList = string.Join(",", columnNames.Select(n => $"[{n}]"));
+                        var paramList = string.Join(",", columnNames.Select((n, idx) => $"@p{idx}"));
+
+                        using (var insertCmd = accessFactory.CreateCommand(string.Empty, targetConn))
+                        {
+                            insertCmd.CommandText = $"INSERT INTO Exam_People ({columnList}) VALUES ({paramList})";
+
+                            for (int i = 0; i < columnNames.Count; i++)
+                            {
+                                accessFactory.CreateCommandParameter(insertCmd, $"@p{i}", DBNull.Value);
+                            }
+
+                            while (reader.Read())
+                            {
+                                for (int i = 0; i < columnNames.Count; i++)
+                                {
+                                    var value = reader[columnNames[i]] ?? DBNull.Value;
+                                    insertCmd.Parameters[i].Value = value;
+                                }
+
+                                insertCmd.ExecuteNonQuery();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private static void MergeUnitEss(string sourceMdb, string targetMdb, DataBaseFactory.IDatabaseMethodFactory factory)
+        {
+            var accessFactory = factory as AccessDatabaseFactory ?? new AccessDatabaseFactory();
+
+            using (var sourceConn = accessFactory.CreateConnection(sourceMdb))
+            using (var targetConn = accessFactory.CreateConnection(targetMdb))
+            {
+                sourceConn.Open();
+                targetConn.Open();
+
+                int maxAtOrder = 0;
+                using (var maxCmd = targetConn.CreateCommand())
+                {
+                    maxCmd.CommandText = "SELECT MAX(AtOrder) FROM Unit_Ess";
+                    var obj = maxCmd.ExecuteScalar();
+                    if (obj != DBNull.Value && obj != null)
+                    {
+                        int.TryParse(obj.ToString(), out maxAtOrder);
+                    }
+                }
+
+                using (var sourceCmd = sourceConn.CreateCommand())
+                {
+                    sourceCmd.CommandText = "SELECT * FROM Unit_Ess";
+                    using (var reader = sourceCmd.ExecuteReader())
+                    {
+                        var schemaTable = reader.GetSchemaTable();
+                        if (schemaTable == null)
+                        {
+                            return;
+                        }
+
+                        var columnNames = new System.Collections.Generic.List<string>();
+                        int atOrderIndex = -1;
+
+                        for (int i = 0; i < reader.FieldCount; i++)
+                        {
+                            var name = reader.GetName(i);
+                            if (string.Equals(name, "AtOrder", StringComparison.OrdinalIgnoreCase))
+                            {
+                                atOrderIndex = i;
+                            }
+
+                            if (!string.IsNullOrEmpty(name))
+                            {
+                                columnNames.Add(name);
+                            }
+                        }
+
+                        if (columnNames.Count == 0)
+                        {
+                            return;
+                        }
+
+                        var columnList = string.Join(",", columnNames.Select(n => $"[{n}]"));
+                        var paramList = string.Join(",", columnNames.Select((n, idx) => $"@p{idx}"));
+
+                        using (var insertCmd = accessFactory.CreateCommand(string.Empty, targetConn))
+                        {
+                            insertCmd.CommandText = $"INSERT INTO Unit_Ess ({columnList}) VALUES ({paramList})";
+
+                            for (int i = 0; i < columnNames.Count; i++)
+                            {
+                                accessFactory.CreateCommandParameter(insertCmd, $"@p{i}", DBNull.Value);
+                            }
+
+                            while (reader.Read())
+                            {
+                                maxAtOrder++;
+
+                                for (int i = 0; i < columnNames.Count; i++)
+                                {
+                                    object value;
+
+                                    if (string.Equals(columnNames[i], "AtOrder", StringComparison.OrdinalIgnoreCase))
+                                    {
+                                        value = maxAtOrder;
+                                    }
+                                    else
+                                    {
+                                        value = reader[columnNames[i]] ?? DBNull.Value;
+                                    }
+
+                                    insertCmd.Parameters[i].Value = value;
+                                }
+
+                                insertCmd.ExecuteNonQuery();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private static void CopyExamFiles(string sourceRoot, string targetRoot)
+        {
+            if (!Directory.Exists(sourceRoot) || !Directory.Exists(targetRoot))
+            {
+                return;
+            }
+
+            var examFiles = Directory.GetFiles(sourceRoot, "*.exam", SearchOption.TopDirectoryOnly);
+            foreach (var src in examFiles)
+            {
+                try
+                {
+                    var fileName = Path.GetFileName(src);
+                    if (string.IsNullOrEmpty(fileName))
+                    {
+                        continue;
+                    }
+
+                    var dest = Path.Combine(targetRoot, fileName);
+                    File.Copy(src, dest, true);
+                }
+                catch
+                {
+                    // 单个文件失败不影响整体
+                }
+            }
+        }
     }
 }
