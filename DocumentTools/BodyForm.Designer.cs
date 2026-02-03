@@ -16153,7 +16153,7 @@ namespace DocumentTools
             this.ExamMergeDataPak_MergeButton.TabIndex = 4;
             this.ExamMergeDataPak_MergeButton.Text = "开始合并";
             this.ExamMergeDataPak_MergeButton.UseVisualStyleBackColor = true;
-            //this.ExamMergeDataPak_MergeButton.Click += new System.EventHandler(this.ExamMergeDataPak_MergeButton_Click);
+            this.ExamMergeDataPak_MergeButton.Click += new System.EventHandler(this.ExamMergeDataPak_MergeButton_Click);
             // 
             // ExamMergeDataPak_SourceSelect
             // 

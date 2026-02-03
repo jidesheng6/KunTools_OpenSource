@@ -19,7 +19,6 @@ using Microsoft.WindowsAPICodePack.Dialogs;
 using NAudio.CoreAudioApi;
 using NAudio.Wave;
 using Newtonsoft.Json.Linq;
-using Microsoft.International.Converters.PinYinConverter;
 using OpenCvSharp;
 using PuppeteerSharp.Media;
 using Sdcb.PaddleInference;

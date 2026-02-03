@@ -1737,6 +1737,10 @@ namespace DocumentTools
                             {
                                 TempPage.ImageIndex = 22;
                             }
+                            else if (TabPageCaption.Contains("考评系统数据包"))
+                            {
+                                TempPage.ImageIndex = 22;
+                            }
                         }
                     });
         }
