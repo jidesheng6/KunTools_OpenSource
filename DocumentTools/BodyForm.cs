@@ -10016,7 +10016,16 @@ IPGATEWAY:'{set_interface_gateway.Text}',
         private void ExamDataPakUnitOrder_QuickFind_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode != Keys.Enter) return;
+            ExamDataPakUnitOrder_DoQuickFind();
+        }
 
+        private void ExamDataPakUnitOrder_QuickFindButton_Click(object sender, EventArgs e)
+        {
+            ExamDataPakUnitOrder_DoQuickFind();
+        }
+
+        private void ExamDataPakUnitOrder_DoQuickFind()
+        {
             var keyword = ExamDataPakUnitOrder_QuickFind.Text?.Trim();
             if (string.IsNullOrEmpty(keyword)) return;
 
@@ -10092,6 +10101,58 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                     dgv.CurrentCell = dgv.Rows[targetRowIndex].Cells[0];
                     dgv.Rows[targetRowIndex].Selected = true;
                     dgv.FirstDisplayedScrollingRowIndex = targetRowIndex;
+                }
+            }
+            catch { }
+        }
+
+        private void ExamDataPakUnitOrder_MoveToOrder_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var dgv = ExamDataPakOrder_UnitListView;
+                if (dgv == null || dgv.DataSource == null) return;
+                if (!(dgv.DataSource is System.Data.DataTable dt) || dt.Rows.Count <= 0) return;
+                if (dgv.CurrentRow == null) return;
+
+                // 当前选中行索引
+                int currentIndex = dgv.CurrentRow.Index;
+                if (currentIndex < 0 || currentIndex >= dt.Rows.Count) return;
+
+                // 目标序号：来自输入框
+                int targetOrder;
+                if (!int.TryParse(ExamDataPakUnitOrder_TargetOrder.Text?.Trim(), out targetOrder))
+                {
+                    return;
+                }
+
+                if (targetOrder < 1) targetOrder = 1;
+                if (targetOrder > dt.Rows.Count) targetOrder = dt.Rows.Count;
+
+                int targetIndex = targetOrder - 1;
+                if (targetIndex == currentIndex) return;
+
+                // 取出当前行数据并从原位置移除，再插入到目标位置
+                var rowData = (object[])dt.Rows[currentIndex].ItemArray.Clone();
+                dt.Rows.RemoveAt(currentIndex);
+                dt.Rows.InsertAt(dt.NewRow(), targetIndex);
+                dt.Rows[targetIndex].ItemArray = rowData;
+
+                // 重新按照当前位置生成序号（1..N）
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    dt.Rows[i][0] = i + 1;
+                }
+
+                ExamDataPakOrder_MarkChangedRows();
+
+                // 更新 DataGridView 选择和当前行
+                dgv.ClearSelection();
+                if (targetIndex >= 0 && targetIndex < dgv.Rows.Count)
+                {
+                    dgv.CurrentCell = dgv.Rows[targetIndex].Cells[0];
+                    dgv.Rows[targetIndex].Selected = true;
+                    dgv.FirstDisplayedScrollingRowIndex = targetIndex;
                 }
             }
             catch { }
@@ -10252,7 +10313,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
             if (string.IsNullOrEmpty(sourceRoot) || string.IsNullOrEmpty(targetRoot))
             {
-                MessageBox.Show("请先选择待合并数据包路径和目标数据包路径。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+               // MessageBox.Show("请先选择待合并数据包路径和目标数据包路径。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 return;
             }
 
@@ -10272,12 +10333,8 @@ IPGATEWAY:'{set_interface_gateway.Text}',
             }
 
             var confirm = MessageBox.Show(
-                "将把源数据包中的人员与单位数据合并到目标数据包中：\r\n" +
-                "1、源 Exam_People 全部追加到目标 Exam_People（不做去重）。\r\n" +
-                "2、源 Unit_Ess 全部追加到目标 Unit_Ess，按目标库当前最大 AtOrder 继续编号。\r\n" +
-                (ExamMergeDataPak_CopyExam.Checked ? "3、同时复制源目录下的所有 .exam 文件到目标目录（同名直接覆盖）。\r\n\r\n" : "\r\n") +
                 "该操作无法自动还原，请谨慎确认。\r\n\r\n是否继续？",
-                "确认合并",
+                "提示",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning);
 
@@ -10298,12 +10355,91 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
             var copyExam = ExamMergeDataPak_CopyExam.Checked;
 
+            // 检查是否存在重复单位/人员
+            bool hasDup = false;
+            try
+            {
+                var factory = new AccessDatabaseFactory();
+                hasDup = HasDuplicateUnitOrPeople(sourceMdb, targetMdb, factory);
+            }
+            catch
+            {
+                hasDup = false;
+            }
+
+            if (hasDup)
+            {
+                var warn1 = MessageBox.Show(
+                    "待合并数据包中的单位/人员，在被合并的数据包中已存在。\n\n" +
+                    "建议先在考评软件中完成合并并删除重复单位，再使用本工具进行合并。\n\n" +
+                    "是否继续由本工具进行预处理？",
+                    "提示",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+
+                if (warn1 != DialogResult.Yes)
+                {
+                    if (btn != null) btn.Enabled = true;
+                    try
+                    {
+                        ExamMergeDataPak_SourceSelect.Enabled = true;
+                        ExamMergeDataPak_TargetSelect.Enabled = true;
+                    }
+                    catch { }
+                    return;
+                }
+
+                var warn2 = MessageBox.Show(
+                    "如果继续，将对被合并的数据包做预处理：\n" +
+                    "自动删除其中与待合并数据包重复的单位及相关人员信息，仅保留一份数据。\n\n" +
+                    "此操作会修改被合并数据包中的数据，是否继续预处理？",
+                    "预处理确认",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+
+                if (warn2 != DialogResult.Yes)
+                {
+                    if (btn != null) btn.Enabled = true;
+                    try
+                    {
+                        ExamMergeDataPak_SourceSelect.Enabled = true;
+                        ExamMergeDataPak_TargetSelect.Enabled = true;
+                    }
+                    catch { }
+                    return;
+                }
+            }
+
+            var finalConfirm = MessageBox.Show(
+                "即将执行数据包合并操作，过程不可撤销，请确认已备份数据包。\n\n是否确认执行合并？",
+                "最终确认",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (finalConfirm != DialogResult.Yes)
+            {
+                if (btn != null) btn.Enabled = true;
+                try
+                {
+                    ExamMergeDataPak_SourceSelect.Enabled = true;
+                    ExamMergeDataPak_TargetSelect.Enabled = true;
+                }
+                catch { }
+                return;
+            }
+
             Task.Run(
                 () =>
                 {
                     try
                     {
                         var factory = new AccessDatabaseFactory();
+
+                        // 如存在重复，先对被合并数据包做预处理删除重复单位/人员
+                        if (hasDup)
+                        {
+                            RemoveDuplicateUnitAndPeople(sourceMdb, targetMdb, factory);
+                        }
 
                         // 1. 合并 Exam_People：源全部插入到目标
                         MergeExamPeople(sourceMdb, targetMdb, factory);
@@ -10321,7 +10457,7 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                             new Action(
                                 () =>
                                 {
-                                    MessageBox.Show("数据包合并完成。", "完成", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    MessageBox.Show("数据包合并完成", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 }));
                     }
                     catch (Exception ex)
@@ -10366,12 +10502,72 @@ IPGATEWAY:'{set_interface_gateway.Text}',
 
         private void ExamRestDataPakReset_Click(object sender, EventArgs e)
         {
-
             var root = ExamRestDataPakPath.Text?.Trim();
             var mdbPath = Path.Combine(root, "Exam_Base.mdb");
 
             if (!string.IsNullOrEmpty(root) && File.Exists(mdbPath))
             {
+                // 先检查是否已是初始化状态
+                bool isPeopleEmpty = true;
+                bool isUnitEmpty = true;
+                bool hasExamFiles = false;
+                bool hasSelfReport = false;
+
+                try
+                {
+                    var factory = new AccessDatabaseFactory();
+                    using (var conn = factory.CreateConnection(mdbPath))
+                    {
+                        conn.Open();
+                        using (var cmd = conn.CreateCommand())
+                        {
+                            cmd.CommandText = "SELECT COUNT(*) FROM Exam_People";
+                            var obj = cmd.ExecuteScalar();
+                            int count;
+                            if (obj != null && obj != DBNull.Value && int.TryParse(obj.ToString(), out count))
+                            {
+                                isPeopleEmpty = count == 0;
+                            }
+                        }
+
+                        using (var cmd = conn.CreateCommand())
+                        {
+                            cmd.CommandText = "SELECT COUNT(*) FROM Unit_Ess";
+                            var obj = cmd.ExecuteScalar();
+                            int count;
+                            if (obj != null && obj != DBNull.Value && int.TryParse(obj.ToString(), out count))
+                            {
+                                isUnitEmpty = count == 0;
+                            }
+                        }
+                    }
+                }
+                catch
+                {
+                    // 统计失败则视为非空，允许后续继续重置
+                    isPeopleEmpty = false;
+                    isUnitEmpty = false;
+                }
+
+                try
+                {
+                    hasExamFiles = Directory.Exists(root) &&
+                                   Directory.GetFiles(root, "*.exam", SearchOption.TopDirectoryOnly).Length > 0;
+                }
+                catch { hasExamFiles = false; }
+
+                try
+                {
+                    var selfReportDir = Path.Combine(root, "SelfReport");
+                    hasSelfReport = Directory.Exists(selfReportDir);
+                }
+                catch { hasSelfReport = false; }
+
+                if (isPeopleEmpty && isUnitEmpty && !hasExamFiles && !hasSelfReport)
+                {
+                    MessageBox.Show("当前数据包已是初始化状态，无需重置", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
 
                 var confirm = MessageBox.Show(
                     "该操作会删除所有单位、人员、模板、结果数据，恢复为初始化状态，不可恢复，请谨慎操作，是否继续？",
@@ -10518,6 +10714,162 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                                 insertCmd.ExecuteNonQuery();
                             }
                         }
+                    }
+                }
+            }
+        }
+
+        private static bool HasDuplicateUnitOrPeople(string sourceMdb, string targetMdb, DataBaseFactory.IDatabaseMethodFactory factory)
+        {
+            var accessFactory = factory as AccessDatabaseFactory ?? new AccessDatabaseFactory();
+
+            var dupFound = false;
+
+            using (var sourceConn = accessFactory.CreateConnection(sourceMdb))
+            using (var targetConn = accessFactory.CreateConnection(targetMdb))
+            {
+                sourceConn.Open();
+                targetConn.Open();
+
+                // 检查 Unit_Ess 的 UnitCode 是否有交集
+                var unitCodes = new System.Collections.Generic.HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                using (var cmd = sourceConn.CreateCommand())
+                {
+                    cmd.CommandText = "SELECT UnitCode FROM Unit_Ess";
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var code = reader["UnitCode"]?.ToString();
+                            if (!string.IsNullOrEmpty(code))
+                            {
+                                unitCodes.Add(code);
+                            }
+                        }
+                    }
+                }
+
+                if (unitCodes.Count > 0)
+                {
+                    // 这里直接构造 IN ('A','B',...)，避免 OleDb 参数位置问题
+                    var inList = string.Join(
+                        ",",
+                        unitCodes.Select(c => $"'{c.Replace("'", "''")}'"));
+
+                    using (var cmd = targetConn.CreateCommand())
+                    {
+                        cmd.CommandText = "SELECT COUNT(*) FROM Unit_Ess WHERE UnitCode IN (" + inList + ")";
+
+                        var obj = cmd.ExecuteScalar();
+                        int count;
+                        if (obj != null && obj != DBNull.Value && int.TryParse(obj.ToString(), out count) && count > 0)
+                        {
+                            dupFound = true;
+                        }
+                    }
+                }
+
+                if (dupFound) return true;
+
+                // 如果需要更细，可以在此处扩展 Exam_People 的重复检测逻辑
+            }
+
+            return dupFound;
+        }
+
+        private static void RemoveDuplicateUnitAndPeople(string sourceMdb, string targetMdb, DataBaseFactory.IDatabaseMethodFactory factory)
+        {
+            var accessFactory = factory as AccessDatabaseFactory ?? new AccessDatabaseFactory();
+
+            using (var sourceConn = accessFactory.CreateConnection(sourceMdb))
+            using (var targetConn = accessFactory.CreateConnection(targetMdb))
+            {
+                sourceConn.Open();
+                targetConn.Open();
+
+                var unitCodes = new System.Collections.Generic.HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                using (var cmd = sourceConn.CreateCommand())
+                {
+                    cmd.CommandText = "SELECT UnitCode FROM Unit_Ess";
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var code = reader["UnitCode"]?.ToString();
+                            if (!string.IsNullOrEmpty(code))
+                            {
+                                unitCodes.Add(code);
+                            }
+                        }
+                    }
+                }
+
+                if (unitCodes.Count == 0) return;
+
+                // 检查 Exam_People 中是否真的存在 UnitCode 字段，避免列名不匹配导致参数错误
+                bool hasUnitCodeInPeople = false;
+                try
+                {
+                    using (var checkCmd = targetConn.CreateCommand())
+                    {
+                        checkCmd.CommandText = "SELECT * FROM Exam_People WHERE 1=0";
+                        using (var reader = checkCmd.ExecuteReader())
+                        {
+                            var schema = reader.GetSchemaTable();
+                            if (schema != null)
+                            {
+                                foreach (System.Data.DataRow row in schema.Rows)
+                                {
+                                    var colName = row["ColumnName"]?.ToString();
+                                    if (string.Equals(colName, "UnitCode", StringComparison.OrdinalIgnoreCase))
+                                    {
+                                        hasUnitCodeInPeople = true;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                catch
+                {
+                    // 检查失败则认为没有该字段，后续跳过 Exam_People 的删除
+                    hasUnitCodeInPeople = false;
+                }
+
+                using (var tran = targetConn.BeginTransaction())
+                {
+                    try
+                    {
+                        // 构造 IN 列表
+                        var inList = string.Join(
+                            ",",
+                            unitCodes.Select(c => $"'{c.Replace("'", "''")}'"));
+
+                        if (hasUnitCodeInPeople)
+                        {
+                            using (var delPeople = targetConn.CreateCommand())
+                            {
+                                delPeople.Transaction = tran;
+                                delPeople.CommandText = "DELETE FROM Exam_People WHERE UnitCode IN (" + inList + ")";
+                                delPeople.ExecuteNonQuery();
+                            }
+                        }
+
+                        using (var delUnit = targetConn.CreateCommand())
+                        {
+                            delUnit.Transaction = tran;
+                            delUnit.CommandText = "DELETE FROM Unit_Ess WHERE UnitCode IN (" + inList + ")";
+
+                            delUnit.ExecuteNonQuery();
+                        }
+
+                        tran.Commit();
+                    }
+                    catch
+                    {
+                        try { tran.Rollback(); } catch { }
+                        throw;
                     }
                 }
             }

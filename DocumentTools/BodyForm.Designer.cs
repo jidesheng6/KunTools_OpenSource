@@ -1159,16 +1159,6 @@ namespace DocumentTools
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.TabPage_43 = new System.Windows.Forms.TabPage();
-            this.ExamDataPakOrder_UnitList = new System.Windows.Forms.GroupBox();
-            this.ExamDataPakUnitOrder_ProgressBar = new System.Windows.Forms.ProgressBar();
-            this.ExamDataPakOrder_Refresh = new System.Windows.Forms.Button();
-            this.ExamDataPakOrder_UnitListView = new System.Windows.Forms.DataGridView();
-            this.ExamDataPackUnitOrder_Up = new System.Windows.Forms.Button();
-            this.ExamDataPackUnitOrder_Down = new System.Windows.Forms.Button();
-            this.ExamDataPakOrder_Modify = new System.Windows.Forms.Button();
-            this.ExamDataPakOrder_Select = new System.Windows.Forms.Button();
-            this.ExamDataPakOrder_Path = new System.Windows.Forms.TextBox();
-            this.label235 = new System.Windows.Forms.Label();
             this.groupBox80 = new System.Windows.Forms.GroupBox();
             this.ExamMergeDataPak_CopyExam = new System.Windows.Forms.CheckBox();
             this.ExamMergeDataPak_TargetSelect = new System.Windows.Forms.Button();
@@ -1184,6 +1174,21 @@ namespace DocumentTools
             this.ExamRestDataPakSelect = new System.Windows.Forms.Button();
             this.ExamRestDataPakPath = new System.Windows.Forms.TextBox();
             this.label233 = new System.Windows.Forms.Label();
+            this.ExamDataPakOrder_UnitList = new System.Windows.Forms.GroupBox();
+            this.ExamDataPakUnitOrder_QuickFindButton = new System.Windows.Forms.Button();
+            this.ExamDataPakUnitOrder_TargetOrder = new System.Windows.Forms.TextBox();
+            this.ExamDataPakUnitOrder_MoveToOrder = new System.Windows.Forms.Button();
+            this.ExamDataPakUnitOrder_QuickFind = new System.Windows.Forms.TextBox();
+            this.label238 = new System.Windows.Forms.Label();
+            this.ExamDataPakUnitOrder_ProgressBar = new System.Windows.Forms.ProgressBar();
+            this.ExamDataPakOrder_Refresh = new System.Windows.Forms.Button();
+            this.ExamDataPakOrder_UnitListView = new System.Windows.Forms.DataGridView();
+            this.ExamDataPackUnitOrder_Up = new System.Windows.Forms.Button();
+            this.ExamDataPackUnitOrder_Down = new System.Windows.Forms.Button();
+            this.ExamDataPakOrder_Modify = new System.Windows.Forms.Button();
+            this.ExamDataPakOrder_Select = new System.Windows.Forms.Button();
+            this.ExamDataPakOrder_Path = new System.Windows.Forms.TextBox();
+            this.label235 = new System.Windows.Forms.Label();
             this.SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.ListViewRightMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.列表操作ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1396,13 +1401,13 @@ namespace DocumentTools
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem12 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem13 = new System.Windows.Forms.ToolStripMenuItem();
+            this.label239 = new System.Windows.Forms.Label();
+            this.label240 = new System.Windows.Forms.Label();
             this.set_interface_dns2 = new DocumentTools.IPAddressInputTextBox();
             this.set_interface_dns1 = new DocumentTools.IPAddressInputTextBox();
             this.set_interface_gateway = new DocumentTools.IPAddressInputTextBox();
             this.set_interface_mask = new DocumentTools.IPAddressInputTextBox();
             this.set_interface_ipaddress = new DocumentTools.IPAddressInputTextBox();
-            this.label238 = new System.Windows.Forms.Label();
-            this.ExamDataPakUnitOrder_QuickFind = new System.Windows.Forms.TextBox();
             this.MainTabPage.SuspendLayout();
             this.TabPage_01.SuspendLayout();
             this.TabPage_02.SuspendLayout();
@@ -1585,10 +1590,10 @@ namespace DocumentTools
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.TabPage_43.SuspendLayout();
-            this.ExamDataPakOrder_UnitList.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ExamDataPakOrder_UnitListView)).BeginInit();
             this.groupBox80.SuspendLayout();
             this.groupBox79.SuspendLayout();
+            this.ExamDataPakOrder_UnitList.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ExamDataPakOrder_UnitListView)).BeginInit();
             this.ListViewRightMenu.SuspendLayout();
             this.TreeViewContentMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainFormError)).BeginInit();
@@ -15941,9 +15946,9 @@ namespace DocumentTools
             // 
             // TabPage_43
             // 
-            this.TabPage_43.Controls.Add(this.ExamDataPakOrder_UnitList);
             this.TabPage_43.Controls.Add(this.groupBox80);
             this.TabPage_43.Controls.Add(this.groupBox79);
+            this.TabPage_43.Controls.Add(this.ExamDataPakOrder_UnitList);
             this.TabPage_43.Location = new System.Drawing.Point(4, 124);
             this.TabPage_43.Name = "TabPage_43";
             this.TabPage_43.Size = new System.Drawing.Size(882, 648);
@@ -15951,111 +15956,9 @@ namespace DocumentTools
             this.TabPage_43.Text = "考评系统数据包管理";
             this.TabPage_43.UseVisualStyleBackColor = true;
             // 
-            // ExamDataPakOrder_UnitList
-            // 
-            this.ExamDataPakOrder_UnitList.Controls.Add(this.ExamDataPakUnitOrder_QuickFind);
-            this.ExamDataPakOrder_UnitList.Controls.Add(this.label238);
-            this.ExamDataPakOrder_UnitList.Controls.Add(this.ExamDataPakUnitOrder_ProgressBar);
-            this.ExamDataPakOrder_UnitList.Controls.Add(this.ExamDataPakOrder_Refresh);
-            this.ExamDataPakOrder_UnitList.Controls.Add(this.ExamDataPakOrder_UnitListView);
-            this.ExamDataPakOrder_UnitList.Controls.Add(this.ExamDataPackUnitOrder_Up);
-            this.ExamDataPakOrder_UnitList.Controls.Add(this.ExamDataPackUnitOrder_Down);
-            this.ExamDataPakOrder_UnitList.Controls.Add(this.ExamDataPakOrder_Modify);
-            this.ExamDataPakOrder_UnitList.Controls.Add(this.ExamDataPakOrder_Select);
-            this.ExamDataPakOrder_UnitList.Controls.Add(this.ExamDataPakOrder_Path);
-            this.ExamDataPakOrder_UnitList.Controls.Add(this.label235);
-            this.ExamDataPakOrder_UnitList.Location = new System.Drawing.Point(8, 251);
-            this.ExamDataPakOrder_UnitList.Name = "ExamDataPakOrder_UnitList";
-            this.ExamDataPakOrder_UnitList.Size = new System.Drawing.Size(866, 386);
-            this.ExamDataPakOrder_UnitList.TabIndex = 9;
-            this.ExamDataPakOrder_UnitList.TabStop = false;
-            this.ExamDataPakOrder_UnitList.Text = "数据包单位顺序修改";
-            // 
-            // ExamDataPakUnitOrder_ProgressBar
-            // 
-            this.ExamDataPakUnitOrder_ProgressBar.Location = new System.Drawing.Point(589, 347);
-            this.ExamDataPakUnitOrder_ProgressBar.Name = "ExamDataPakUnitOrder_ProgressBar";
-            this.ExamDataPakUnitOrder_ProgressBar.Size = new System.Drawing.Size(119, 33);
-            this.ExamDataPakUnitOrder_ProgressBar.TabIndex = 17;
-            // 
-            // ExamDataPakOrder_Refresh
-            // 
-            this.ExamDataPakOrder_Refresh.Location = new System.Drawing.Point(8, 347);
-            this.ExamDataPakOrder_Refresh.Name = "ExamDataPakOrder_Refresh";
-            this.ExamDataPakOrder_Refresh.Size = new System.Drawing.Size(111, 33);
-            this.ExamDataPakOrder_Refresh.TabIndex = 16;
-            this.ExamDataPakOrder_Refresh.Text = "刷新表数据";
-            this.ExamDataPakOrder_Refresh.UseVisualStyleBackColor = true;
-            this.ExamDataPakOrder_Refresh.Click += new System.EventHandler(this.ExamDataPakOrder_Refresh_Click);
-            // 
-            // ExamDataPakOrder_UnitListView
-            // 
-            this.ExamDataPakOrder_UnitListView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ExamDataPakOrder_UnitListView.Location = new System.Drawing.Point(8, 85);
-            this.ExamDataPakOrder_UnitListView.Name = "ExamDataPakOrder_UnitListView";
-            this.ExamDataPakOrder_UnitListView.RowTemplate.Height = 23;
-            this.ExamDataPakOrder_UnitListView.Size = new System.Drawing.Size(817, 256);
-            this.ExamDataPakOrder_UnitListView.TabIndex = 13;
-            // 
-            // ExamDataPackUnitOrder_Up
-            // 
-            this.ExamDataPackUnitOrder_Up.Location = new System.Drawing.Point(831, 51);
-            this.ExamDataPackUnitOrder_Up.Name = "ExamDataPackUnitOrder_Up";
-            this.ExamDataPackUnitOrder_Up.Size = new System.Drawing.Size(25, 131);
-            this.ExamDataPackUnitOrder_Up.TabIndex = 14;
-            this.ExamDataPackUnitOrder_Up.Text = "△";
-            this.ExamDataPackUnitOrder_Up.UseVisualStyleBackColor = true;
-            this.ExamDataPackUnitOrder_Up.Click += new System.EventHandler(this.ExamDataPackUnitOrder_Up_Click);
-            // 
-            // ExamDataPackUnitOrder_Down
-            // 
-            this.ExamDataPackUnitOrder_Down.Location = new System.Drawing.Point(831, 210);
-            this.ExamDataPackUnitOrder_Down.Name = "ExamDataPackUnitOrder_Down";
-            this.ExamDataPackUnitOrder_Down.Size = new System.Drawing.Size(25, 131);
-            this.ExamDataPackUnitOrder_Down.TabIndex = 15;
-            this.ExamDataPackUnitOrder_Down.Text = "▽";
-            this.ExamDataPackUnitOrder_Down.UseVisualStyleBackColor = true;
-            this.ExamDataPackUnitOrder_Down.Click += new System.EventHandler(this.ExamDataPackUnitOrder_Down_Click);
-            // 
-            // ExamDataPakOrder_Modify
-            // 
-            this.ExamDataPakOrder_Modify.Location = new System.Drawing.Point(714, 347);
-            this.ExamDataPakOrder_Modify.Name = "ExamDataPakOrder_Modify";
-            this.ExamDataPakOrder_Modify.Size = new System.Drawing.Size(111, 33);
-            this.ExamDataPakOrder_Modify.TabIndex = 12;
-            this.ExamDataPakOrder_Modify.Text = "开始修改";
-            this.ExamDataPakOrder_Modify.UseVisualStyleBackColor = true;
-            this.ExamDataPakOrder_Modify.Click += new System.EventHandler(this.ExamDataPakOrder_Modify_Click);
-            // 
-            // ExamDataPakOrder_Select
-            // 
-            this.ExamDataPakOrder_Select.Location = new System.Drawing.Point(725, 23);
-            this.ExamDataPakOrder_Select.Name = "ExamDataPakOrder_Select";
-            this.ExamDataPakOrder_Select.Size = new System.Drawing.Size(100, 23);
-            this.ExamDataPakOrder_Select.TabIndex = 11;
-            this.ExamDataPakOrder_Select.Text = "选择文件...";
-            this.ExamDataPakOrder_Select.UseVisualStyleBackColor = true;
-            this.ExamDataPakOrder_Select.Click += new System.EventHandler(this.ExamDataPakOrder_Select_Click);
-            // 
-            // ExamDataPakOrder_Path
-            // 
-            this.ExamDataPakOrder_Path.Location = new System.Drawing.Point(77, 24);
-            this.ExamDataPakOrder_Path.Name = "ExamDataPakOrder_Path";
-            this.ExamDataPakOrder_Path.ReadOnly = true;
-            this.ExamDataPakOrder_Path.Size = new System.Drawing.Size(642, 21);
-            this.ExamDataPakOrder_Path.TabIndex = 10;
-            // 
-            // label235
-            // 
-            this.label235.AutoSize = true;
-            this.label235.Location = new System.Drawing.Point(6, 28);
-            this.label235.Name = "label235";
-            this.label235.Size = new System.Drawing.Size(65, 12);
-            this.label235.TabIndex = 9;
-            this.label235.Text = "数据包路径";
-            // 
             // groupBox80
             // 
+            this.groupBox80.Controls.Add(this.label239);
             this.groupBox80.Controls.Add(this.ExamMergeDataPak_CopyExam);
             this.groupBox80.Controls.Add(this.ExamMergeDataPak_TargetSelect);
             this.groupBox80.Controls.Add(this.ExamMergeDataPak_TargetPath);
@@ -16074,6 +15977,8 @@ namespace DocumentTools
             // ExamMergeDataPak_CopyExam
             // 
             this.ExamMergeDataPak_CopyExam.AutoSize = true;
+            this.ExamMergeDataPak_CopyExam.Checked = true;
+            this.ExamMergeDataPak_CopyExam.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ExamMergeDataPak_CopyExam.Location = new System.Drawing.Point(8, 98);
             this.ExamMergeDataPak_CopyExam.Name = "ExamMergeDataPak_CopyExam";
             this.ExamMergeDataPak_CopyExam.Size = new System.Drawing.Size(180, 16);
@@ -16205,6 +16110,157 @@ namespace DocumentTools
             this.label233.Size = new System.Drawing.Size(65, 12);
             this.label233.TabIndex = 0;
             this.label233.Text = "数据包路径";
+            // 
+            // ExamDataPakOrder_UnitList
+            // 
+            this.ExamDataPakOrder_UnitList.Controls.Add(this.label240);
+            this.ExamDataPakOrder_UnitList.Controls.Add(this.ExamDataPakUnitOrder_QuickFindButton);
+            this.ExamDataPakOrder_UnitList.Controls.Add(this.ExamDataPakUnitOrder_TargetOrder);
+            this.ExamDataPakOrder_UnitList.Controls.Add(this.ExamDataPakUnitOrder_MoveToOrder);
+            this.ExamDataPakOrder_UnitList.Controls.Add(this.ExamDataPakUnitOrder_QuickFind);
+            this.ExamDataPakOrder_UnitList.Controls.Add(this.label238);
+            this.ExamDataPakOrder_UnitList.Controls.Add(this.ExamDataPakUnitOrder_ProgressBar);
+            this.ExamDataPakOrder_UnitList.Controls.Add(this.ExamDataPakOrder_Refresh);
+            this.ExamDataPakOrder_UnitList.Controls.Add(this.ExamDataPakOrder_UnitListView);
+            this.ExamDataPakOrder_UnitList.Controls.Add(this.ExamDataPackUnitOrder_Up);
+            this.ExamDataPakOrder_UnitList.Controls.Add(this.ExamDataPackUnitOrder_Down);
+            this.ExamDataPakOrder_UnitList.Controls.Add(this.ExamDataPakOrder_Modify);
+            this.ExamDataPakOrder_UnitList.Controls.Add(this.ExamDataPakOrder_Select);
+            this.ExamDataPakOrder_UnitList.Controls.Add(this.ExamDataPakOrder_Path);
+            this.ExamDataPakOrder_UnitList.Controls.Add(this.label235);
+            this.ExamDataPakOrder_UnitList.Location = new System.Drawing.Point(8, 251);
+            this.ExamDataPakOrder_UnitList.Name = "ExamDataPakOrder_UnitList";
+            this.ExamDataPakOrder_UnitList.Size = new System.Drawing.Size(866, 386);
+            this.ExamDataPakOrder_UnitList.TabIndex = 9;
+            this.ExamDataPakOrder_UnitList.TabStop = false;
+            this.ExamDataPakOrder_UnitList.Text = "数据包单位顺序修改";
+            // 
+            // ExamDataPakUnitOrder_QuickFindButton
+            // 
+            this.ExamDataPakUnitOrder_QuickFindButton.Location = new System.Drawing.Point(433, 55);
+            this.ExamDataPakUnitOrder_QuickFindButton.Name = "ExamDataPakUnitOrder_QuickFindButton";
+            this.ExamDataPakUnitOrder_QuickFindButton.Size = new System.Drawing.Size(75, 23);
+            this.ExamDataPakUnitOrder_QuickFindButton.TabIndex = 22;
+            this.ExamDataPakUnitOrder_QuickFindButton.Text = "查找";
+            this.ExamDataPakUnitOrder_QuickFindButton.UseVisualStyleBackColor = true;
+            this.ExamDataPakUnitOrder_QuickFindButton.Click += new System.EventHandler(this.ExamDataPakUnitOrder_QuickFindButton_Click);
+            // 
+            // ExamDataPakUnitOrder_TargetOrder
+            // 
+            this.ExamDataPakUnitOrder_TargetOrder.Location = new System.Drawing.Point(575, 56);
+            this.ExamDataPakUnitOrder_TargetOrder.Name = "ExamDataPakUnitOrder_TargetOrder";
+            this.ExamDataPakUnitOrder_TargetOrder.Size = new System.Drawing.Size(144, 21);
+            this.ExamDataPakUnitOrder_TargetOrder.TabIndex = 21;
+            // 
+            // ExamDataPakUnitOrder_MoveToOrder
+            // 
+            this.ExamDataPakUnitOrder_MoveToOrder.Location = new System.Drawing.Point(725, 56);
+            this.ExamDataPakUnitOrder_MoveToOrder.Name = "ExamDataPakUnitOrder_MoveToOrder";
+            this.ExamDataPakUnitOrder_MoveToOrder.Size = new System.Drawing.Size(100, 23);
+            this.ExamDataPakUnitOrder_MoveToOrder.TabIndex = 20;
+            this.ExamDataPakUnitOrder_MoveToOrder.Text = "修改为指定序号";
+            this.ExamDataPakUnitOrder_MoveToOrder.UseVisualStyleBackColor = true;
+            this.ExamDataPakUnitOrder_MoveToOrder.Click += new System.EventHandler(this.ExamDataPakUnitOrder_MoveToOrder_Click);
+            // 
+            // ExamDataPakUnitOrder_QuickFind
+            // 
+            this.ExamDataPakUnitOrder_QuickFind.Location = new System.Drawing.Point(77, 56);
+            this.ExamDataPakUnitOrder_QuickFind.Name = "ExamDataPakUnitOrder_QuickFind";
+            this.ExamDataPakUnitOrder_QuickFind.Size = new System.Drawing.Size(350, 21);
+            this.ExamDataPakUnitOrder_QuickFind.TabIndex = 19;
+            this.ExamDataPakUnitOrder_QuickFind.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ExamDataPakUnitOrder_QuickFind_KeyDown);
+            // 
+            // label238
+            // 
+            this.label238.AutoSize = true;
+            this.label238.Location = new System.Drawing.Point(6, 60);
+            this.label238.Name = "label238";
+            this.label238.Size = new System.Drawing.Size(53, 12);
+            this.label238.TabIndex = 18;
+            this.label238.Text = "快速定位";
+            // 
+            // ExamDataPakUnitOrder_ProgressBar
+            // 
+            this.ExamDataPakUnitOrder_ProgressBar.Location = new System.Drawing.Point(589, 347);
+            this.ExamDataPakUnitOrder_ProgressBar.Name = "ExamDataPakUnitOrder_ProgressBar";
+            this.ExamDataPakUnitOrder_ProgressBar.Size = new System.Drawing.Size(119, 33);
+            this.ExamDataPakUnitOrder_ProgressBar.TabIndex = 17;
+            // 
+            // ExamDataPakOrder_Refresh
+            // 
+            this.ExamDataPakOrder_Refresh.Location = new System.Drawing.Point(8, 347);
+            this.ExamDataPakOrder_Refresh.Name = "ExamDataPakOrder_Refresh";
+            this.ExamDataPakOrder_Refresh.Size = new System.Drawing.Size(111, 33);
+            this.ExamDataPakOrder_Refresh.TabIndex = 16;
+            this.ExamDataPakOrder_Refresh.Text = "刷新表数据";
+            this.ExamDataPakOrder_Refresh.UseVisualStyleBackColor = true;
+            this.ExamDataPakOrder_Refresh.Click += new System.EventHandler(this.ExamDataPakOrder_Refresh_Click);
+            // 
+            // ExamDataPakOrder_UnitListView
+            // 
+            this.ExamDataPakOrder_UnitListView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ExamDataPakOrder_UnitListView.Location = new System.Drawing.Point(8, 85);
+            this.ExamDataPakOrder_UnitListView.Name = "ExamDataPakOrder_UnitListView";
+            this.ExamDataPakOrder_UnitListView.RowTemplate.Height = 23;
+            this.ExamDataPakOrder_UnitListView.Size = new System.Drawing.Size(817, 256);
+            this.ExamDataPakOrder_UnitListView.TabIndex = 13;
+            // 
+            // ExamDataPackUnitOrder_Up
+            // 
+            this.ExamDataPackUnitOrder_Up.Location = new System.Drawing.Point(831, 51);
+            this.ExamDataPackUnitOrder_Up.Name = "ExamDataPackUnitOrder_Up";
+            this.ExamDataPackUnitOrder_Up.Size = new System.Drawing.Size(25, 131);
+            this.ExamDataPackUnitOrder_Up.TabIndex = 14;
+            this.ExamDataPackUnitOrder_Up.Text = "△";
+            this.ExamDataPackUnitOrder_Up.UseVisualStyleBackColor = true;
+            this.ExamDataPackUnitOrder_Up.Click += new System.EventHandler(this.ExamDataPackUnitOrder_Up_Click);
+            // 
+            // ExamDataPackUnitOrder_Down
+            // 
+            this.ExamDataPackUnitOrder_Down.Location = new System.Drawing.Point(831, 210);
+            this.ExamDataPackUnitOrder_Down.Name = "ExamDataPackUnitOrder_Down";
+            this.ExamDataPackUnitOrder_Down.Size = new System.Drawing.Size(25, 131);
+            this.ExamDataPackUnitOrder_Down.TabIndex = 15;
+            this.ExamDataPackUnitOrder_Down.Text = "▽";
+            this.ExamDataPackUnitOrder_Down.UseVisualStyleBackColor = true;
+            this.ExamDataPackUnitOrder_Down.Click += new System.EventHandler(this.ExamDataPackUnitOrder_Down_Click);
+            // 
+            // ExamDataPakOrder_Modify
+            // 
+            this.ExamDataPakOrder_Modify.Location = new System.Drawing.Point(714, 347);
+            this.ExamDataPakOrder_Modify.Name = "ExamDataPakOrder_Modify";
+            this.ExamDataPakOrder_Modify.Size = new System.Drawing.Size(111, 33);
+            this.ExamDataPakOrder_Modify.TabIndex = 12;
+            this.ExamDataPakOrder_Modify.Text = "开始修改";
+            this.ExamDataPakOrder_Modify.UseVisualStyleBackColor = true;
+            this.ExamDataPakOrder_Modify.Click += new System.EventHandler(this.ExamDataPakOrder_Modify_Click);
+            // 
+            // ExamDataPakOrder_Select
+            // 
+            this.ExamDataPakOrder_Select.Location = new System.Drawing.Point(725, 23);
+            this.ExamDataPakOrder_Select.Name = "ExamDataPakOrder_Select";
+            this.ExamDataPakOrder_Select.Size = new System.Drawing.Size(100, 23);
+            this.ExamDataPakOrder_Select.TabIndex = 11;
+            this.ExamDataPakOrder_Select.Text = "选择文件...";
+            this.ExamDataPakOrder_Select.UseVisualStyleBackColor = true;
+            this.ExamDataPakOrder_Select.Click += new System.EventHandler(this.ExamDataPakOrder_Select_Click);
+            // 
+            // ExamDataPakOrder_Path
+            // 
+            this.ExamDataPakOrder_Path.Location = new System.Drawing.Point(77, 24);
+            this.ExamDataPakOrder_Path.Name = "ExamDataPakOrder_Path";
+            this.ExamDataPakOrder_Path.ReadOnly = true;
+            this.ExamDataPakOrder_Path.Size = new System.Drawing.Size(642, 21);
+            this.ExamDataPakOrder_Path.TabIndex = 10;
+            // 
+            // label235
+            // 
+            this.label235.AutoSize = true;
+            this.label235.Location = new System.Drawing.Point(6, 28);
+            this.label235.Name = "label235";
+            this.label235.Size = new System.Drawing.Size(65, 12);
+            this.label235.TabIndex = 9;
+            this.label235.Text = "数据包路径";
             // 
             // ListViewRightMenu
             // 
@@ -17976,6 +18032,26 @@ namespace DocumentTools
             this.toolStripMenuItem13.Size = new System.Drawing.Size(352, 22);
             this.toolStripMenuItem13.Text = "批量添加选项（a、b、c、d）";
             // 
+            // label239
+            // 
+            this.label239.AutoSize = true;
+            this.label239.ForeColor = System.Drawing.Color.Red;
+            this.label239.Location = new System.Drawing.Point(182, 99);
+            this.label239.Name = "label239";
+            this.label239.Size = new System.Drawing.Size(569, 12);
+            this.label239.TabIndex = 5;
+            this.label239.Text = "注：双方数据包不建议有交叉数据存在，必须为双方独有单位，程序会自动检测进行处理，请妥善保管数据";
+            // 
+            // label240
+            // 
+            this.label240.AutoSize = true;
+            this.label240.ForeColor = System.Drawing.Color.Red;
+            this.label240.Location = new System.Drawing.Point(125, 357);
+            this.label240.Name = "label240";
+            this.label240.Size = new System.Drawing.Size(281, 12);
+            this.label240.TabIndex = 9;
+            this.label240.Text = "注：支持手动调整顺序、快速定位、修改为指定顺序";
+            // 
             // set_interface_dns2
             // 
             this.set_interface_dns2.Location = new System.Drawing.Point(91, 228);
@@ -18035,23 +18111,6 @@ namespace DocumentTools
             this.set_interface_ipaddress.Text = "0.0.0.0";
             this.set_interface_ipaddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.set_interface_ipaddress.WordWrap = false;
-            // 
-            // label238
-            // 
-            this.label238.AutoSize = true;
-            this.label238.Location = new System.Drawing.Point(6, 60);
-            this.label238.Name = "label238";
-            this.label238.Size = new System.Drawing.Size(53, 12);
-            this.label238.TabIndex = 18;
-            this.label238.Text = "快速定位";
-            // 
-            // ExamDataPakUnitOrder_QuickFind
-            // 
-            this.ExamDataPakUnitOrder_QuickFind.Location = new System.Drawing.Point(77, 56);
-            this.ExamDataPakUnitOrder_QuickFind.Name = "ExamDataPakUnitOrder_QuickFind";
-            this.ExamDataPakUnitOrder_QuickFind.Size = new System.Drawing.Size(262, 21);
-            this.ExamDataPakUnitOrder_QuickFind.TabIndex = 19;
-            this.ExamDataPakUnitOrder_QuickFind.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ExamDataPakUnitOrder_QuickFind_KeyDown);
             // 
             // BodyForm
             // 
@@ -18364,13 +18423,13 @@ namespace DocumentTools
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.TabPage_43.ResumeLayout(false);
-            this.ExamDataPakOrder_UnitList.ResumeLayout(false);
-            this.ExamDataPakOrder_UnitList.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ExamDataPakOrder_UnitListView)).EndInit();
             this.groupBox80.ResumeLayout(false);
             this.groupBox80.PerformLayout();
             this.groupBox79.ResumeLayout(false);
             this.groupBox79.PerformLayout();
+            this.ExamDataPakOrder_UnitList.ResumeLayout(false);
+            this.ExamDataPakOrder_UnitList.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ExamDataPakOrder_UnitListView)).EndInit();
             this.ListViewRightMenu.ResumeLayout(false);
             this.TreeViewContentMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.MainFormError)).EndInit();
@@ -19755,6 +19814,11 @@ namespace DocumentTools
         private ProgressBar ExamDataPakUnitOrder_ProgressBar;
         private TextBox ExamDataPakUnitOrder_QuickFind;
         private Label label238;
+        private Button ExamDataPakUnitOrder_MoveToOrder;
+        private TextBox ExamDataPakUnitOrder_TargetOrder;
+        private Button ExamDataPakUnitOrder_QuickFindButton;
+        private Label label239;
+        private Label label240;
     }
 }
 
