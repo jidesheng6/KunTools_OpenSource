@@ -4,19 +4,20 @@
   Sdcb.PaddleOCR.Models.Local
   Sdcb.PaddleOCR.Models.LocalV3
   Sdcb.PaddleOCR.Models.LocalV4
-  opencv_videoio_ffmpeg4100
-  opencv_videoio_ffmpeg4100_64
-  OpenCvSharpExtern
   </ExcludeAssemblies>
   <Unmanaged32Assemblies>
     SQLite.Interop
     WebView2Loader
     TWAINDSM
+    opencv_videoio_ffmpeg4100
+    OpenCvSharpExtern
   </Unmanaged32Assemblies>
   <Unmanaged64Assemblies>
     SQLite.Interop
     WebView2Loader
     TWAINDSM
+    opencv_videoio_ffmpeg4100_64
+    OpenCvSharpExtern
   </Unmanaged64Assemblies>
   </Costura>
 </Weavers>

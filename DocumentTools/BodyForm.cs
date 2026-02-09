@@ -2,6 +2,7 @@ using AutoUpdaterDotNET;
 using Gma.System.MouseKeyHook;
 using Microsoft.Toolkit.Uwp.Notifications;
 using Microsoft.VisualBasic.Logging;
+using Aspose.BarCode.BarCodeRecognition;
 using Newtonsoft.Json.Linq;
 using NPinyin;
 using NTwain;
@@ -94,6 +95,10 @@ namespace DocumentTools
 
         bool ExamReportMiddleClickStatus = false;
 
+        private Bitmap _examCircleFixBmp; // 考评修复专用内存图片
+        private Bitmap _examCircleFixBmpOriginal; // 考评修复专用内存图片备份(用于重置)
+        private bool _isExamFixScanning = false; // 是否正在为考评修复进行扫描
+
         private string ChangeReportItemTempHelpPdfFile = string.Empty;
         private string ChangeExamComputerNameHelpPdfFile = string.Empty;
         private string VoteMssTifHelpPdfFile = string.Empty;
@@ -120,6 +125,345 @@ namespace DocumentTools
             foreach(TabPage TempPage in this.MainTabPage.TabPages)
             {
                 Debug.WriteLine($"{TempPage.Text}：{MainTabPage.TabPages.IndexOf(TempPage)}");
+            }
+        }
+
+        private void ExamCircleFix_SelectButton_Click(object sender, EventArgs e)
+        {
+            ExamCircleFix_FromFileMenuItem_Click(sender, e);
+        }
+
+        private void SetExamCircleFixImage(Bitmap bmp, string filePathOrEmpty, bool isNewSource = false)
+        {
+            if (bmp == null) return;
+
+            // 1. 彻底清理旧图，释放内存（增加引用比对，防止销毁正在传入的对象）
+            if (ExamCircleFix_Preview.Image != null)
+            {
+                var oldImg = ExamCircleFix_Preview.Image;
+                ExamCircleFix_Preview.Image = null;
+                try { oldImg.Dispose(); } catch { }
+            }
+
+            if (_examCircleFixBmp != null && _examCircleFixBmp != bmp)
+            {
+                try { _examCircleFixBmp.Dispose(); } catch { }
+            }
+            
+            // 仅在导入/扫描“新源图片”时更新原始备份，避免旋转/自动旋转把备份覆盖掉
+            if (isNewSource)
+            {
+                if (_examCircleFixBmpOriginal != null && _examCircleFixBmpOriginal != bmp)
+                {
+                    try { _examCircleFixBmpOriginal.Dispose(); } catch { }
+                }
+                _examCircleFixBmpOriginal = (Bitmap)bmp.Clone();
+            }
+
+            // 2. 内存隔离
+            _examCircleFixBmp = (Bitmap)bmp.Clone();
+            
+            // 3. 赋值给 PictureBox
+            ExamCircleFix_Preview.Image = (Bitmap)_examCircleFixBmp.Clone();
+
+            ExamCircleFIxPath.Text = filePathOrEmpty ?? string.Empty;
+            ExamCircleFIx_Start_ShowDialog.Visible = true;
+
+            // 4. 强制布局更新
+            ExamCircleFix_Preview.Refresh();
+        }
+
+        private void ExamCircleFix_GetImageButton_Click(object sender, EventArgs e)
+        {
+            if(ExamCircleFix_GetImageMenu == null) return;
+            ExamCircleFix_GetImageMenu.Show(ExamCircleFix_GetImageButton, 0, ExamCircleFix_GetImageButton.Height);
+        }
+
+        private void ExamCircleFix_FromFileMenuItem_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                ofd.Filter = "图片文件|*.jpg;*.png;*.bmp;*.jpeg";
+                ofd.Title = "请选择待修复的图片";
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        using (FileStream fs = new FileStream(ofd.FileName, FileMode.Open, FileAccess.Read))
+                        using (var img = System.Drawing.Image.FromStream(fs))
+                        {
+                            using (var tmpBmp = new Bitmap(img))
+                            {
+                                SetExamCircleFixImage(tmpBmp, ofd.FileName, true);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("加载图片失败：" + ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
+        private void ExamCircleFix_FromScannerMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if(!TwainInitState)
+                {
+                    InitTwain();
+                    TwainInitState = true;
+                }
+
+                _isExamFixScanning = true;
+                dataSource ??= twainSession.DefaultSource;
+
+                if(dataSource == null)
+                {
+                    MessageBox.Show("未找到可用扫描仪，请先点击‘扫描仪设置’选择设备。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    _isExamFixScanning = false;
+                    return;
+                }
+
+                if(dataSource.Open() == ReturnCode.Success)
+                {
+                    // 考评修复模式：强制只扫描/传输 1 张，避免进纸器继续进纸
+                    if(dataSource.Capabilities.CapXferCount.CanSet)
+                    {
+                        dataSource.Capabilities.CapXferCount.SetValue(1);
+                    }
+
+                    dataSource.Enable(SourceEnableMode.ShowUI, false, IntPtr.Zero);
+                }
+            }
+            catch(Exception ex)
+            {
+                _isExamFixScanning = false;
+                MessageBox.Show("启动扫描失败：" + ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ExamCircleFix_ScannerSetting_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if(ExamCircleFix_ScannerSettingMenu == null) return;
+            var p = Cursor.Position;
+            ExamCircleFix_ScannerSettingMenu.Show(p);
+        }
+
+        private void ExamCircleFix_SelectScannerMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if(!TwainInitState)
+                {
+                    InitTwain();
+                    TwainInitState = true;
+                }
+                SelectTwainDevice_LinkClicked(sender, null);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("选择扫描仪失败：" + ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ExamCircleFix_OpenScannerSettingMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if(!TwainInitState)
+                {
+                    InitTwain();
+                    TwainInitState = true;
+                }
+                SetTwainDevice_LinkClicked(sender, null);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("打开扫描仪设置失败：" + ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ExamCircleFix_RotateLeft_Click(object sender, EventArgs e)
+        {
+            if (_examCircleFixBmp == null) return;
+            try
+            {
+                using (Bitmap rotateBmp = (Bitmap)_examCircleFixBmp.Clone())
+                {
+                    rotateBmp.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                    SetExamCircleFixImage(rotateBmp, ExamCircleFIxPath.Text, false);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("左转操作失败：" + ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ExamCircleFix_RotateRight_Click(object sender, EventArgs e)
+        {
+            if (_examCircleFixBmp == null) return;
+            try
+            {
+                using (Bitmap rotateBmp = (Bitmap)_examCircleFixBmp.Clone())
+                {
+                    rotateBmp.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                    SetExamCircleFixImage(rotateBmp, ExamCircleFIxPath.Text, false);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("右转操作失败：" + ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ExamCircleFix_AutoRotate_Click(object sender, EventArgs e)
+        {
+            if (_examCircleFixBmp == null) return;
+
+            try
+            {
+                bool foundTCode = false;
+                string resultMsg = "";
+                RotateFlipType rotateType = RotateFlipType.RotateNoneFlipNone;
+
+                // 1. 准备识别专用的位图（处理 PNG 透明度：绘制在白色背景上）
+                using (Bitmap recognitionBmp = new Bitmap(_examCircleFixBmp.Width, _examCircleFixBmp.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb))
+                {
+                    using (Graphics g = Graphics.FromImage(recognitionBmp))
+                    {
+                        g.Clear(Color.White);
+                        g.DrawImage(_examCircleFixBmp, 0, 0);
+                    }
+
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        recognitionBmp.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                        ms.Position = 0;
+                        using (BarCodeReader reader = new BarCodeReader(ms, DecodeType.DataMatrix))
+                        {
+                            reader.QualitySettings = QualitySettings.HighPerformance;
+
+                            foreach (BarCodeResult result in reader.ReadBarCodes())
+                            {
+                                if (result.CodeText != null && result.CodeText.StartsWith("T"))
+                                {
+                                    // 获取条码中心点位置判断象限
+                                    var points = result.Region.Points;
+                                    if (points != null && points.Length > 0)
+                                    {
+                                        float centerX = (float)points.Average(p => p.X);
+                                        float centerY = (float)points.Average(p => p.Y);
+                                        float imgW = recognitionBmp.Width;
+                                        float imgH = recognitionBmp.Height;
+
+                                        // 逻辑：正向时，T码应位于右上象限 (X > W/2, Y < H/2)
+                                        if (centerX > imgW / 2 && centerY < imgH / 2)
+                                        {
+                                            resultMsg = "当前方向已是正确方向(T码在右上角)。";
+                                            rotateType = RotateFlipType.RotateNoneFlipNone;
+                                        }
+                                        else if (centerX < imgW / 2 && centerY < imgH / 2)
+                                        {
+                                            resultMsg = $"检测到T码在左上角(X:{centerX:f0},Y:{centerY:f0})，已自动顺时针旋转 90°。";
+                                            rotateType = RotateFlipType.Rotate90FlipNone;
+                                        }
+                                        else if (centerX < imgW / 2 && centerY > imgH / 2)
+                                        {
+                                            resultMsg = $"检测到T码在左下角(X:{centerX:f0},Y:{centerY:f0})，已自动旋转 180°。";
+                                            rotateType = RotateFlipType.Rotate180FlipNone;
+                                        }
+                                        else if (centerX > imgW / 2 && centerY > imgH / 2)
+                                        {
+                                            resultMsg = $"检测到T码在右下角(X:{centerX:f0},Y:{centerY:f0})，已自动逆时针旋转 90°。";
+                                            rotateType = RotateFlipType.Rotate270FlipNone;
+                                        }
+
+                                        foundTCode = true;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (foundTCode)
+                {
+                    if (rotateType != RotateFlipType.RotateNoneFlipNone)
+                    {
+                        using (Bitmap finalRotateBmp = (Bitmap)_examCircleFixBmp.Clone())
+                        {
+                            finalRotateBmp.RotateFlip(rotateType);
+                            SetExamCircleFixImage(finalRotateBmp, ExamCircleFIxPath.Text, false);
+                        }
+                    }
+                    return;
+                }
+
+                // 2. 如果二维码识别失败，尝试 EXIF 兜底
+                const int ExifOrientationId = 0x0112;
+                if (_examCircleFixBmp.PropertyIdList != null && _examCircleFixBmp.PropertyIdList.Contains(ExifOrientationId))
+                {
+                    var prop = _examCircleFixBmp.GetPropertyItem(ExifOrientationId);
+                    if (prop != null && prop.Value != null && prop.Value.Length >= 2)
+                    {
+                        int orientation = BitConverter.ToUInt16(prop.Value, 0);
+                        RotateFlipType exifRotateType = RotateFlipType.RotateNoneFlipNone;
+                        switch (orientation)
+                        {
+                            case 3: exifRotateType = RotateFlipType.Rotate180FlipNone; break;
+                            case 6: exifRotateType = RotateFlipType.Rotate90FlipNone; break;
+                            case 8: exifRotateType = RotateFlipType.Rotate270FlipNone; break;
+                        }
+
+                        if (exifRotateType != RotateFlipType.RotateNoneFlipNone)
+                        {
+                            using (Bitmap finalRotateBmp = (Bitmap)_examCircleFixBmp.Clone())
+                            {
+                                finalRotateBmp.RotateFlip(exifRotateType);
+                                var p = finalRotateBmp.GetPropertyItem(ExifOrientationId);
+                                p.Value = BitConverter.GetBytes((ushort)1);
+                                finalRotateBmp.SetPropertyItem(p);
+                                SetExamCircleFixImage(finalRotateBmp, ExamCircleFIxPath.Text, false);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("自动旋转识别过程发生异常：" + ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ExamCircleFix_Reset_Click(object sender, EventArgs e)
+        {
+            if (_examCircleFixBmpOriginal != null)
+            {
+                SetExamCircleFixImage(_examCircleFixBmpOriginal, ExamCircleFIxPath.Text, false);
+            }
+        }
+
+        private void ExamCircleFIx_Start_ShowDialog_Click(object sender, EventArgs e)
+        {
+            if (_examCircleFixBmp == null)
+            {
+                MessageBox.Show("请先获取图片！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string suggestedName = "";
+            if (!string.IsNullOrEmpty(ExamCircleFIxPath.Text) && File.Exists(ExamCircleFIxPath.Text))
+            {
+                suggestedName = Path.GetFileNameWithoutExtension(ExamCircleFIxPath.Text);
+            }
+
+            using (var fixFrm = new ExamCircleFixForm(_examCircleFixBmp, suggestedName))
+            {
+                fixFrm.ShowDialog();
             }
         }
 
@@ -1741,6 +2085,10 @@ namespace DocumentTools
                             {
                                 TempPage.ImageIndex = 22;
                             }
+                            else if (TabPageCaption.Contains("考评圆圈"))
+                            {
+                                TempPage.ImageIndex = 22;
+                            }
                         }
                     });
         }
@@ -2607,25 +2955,42 @@ namespace DocumentTools
 
         private void Twain_Scanning(object sender, DataTransferredEventArgs e)
         {
-            using System.Drawing.Image TempScannedImage = System.Drawing.Image.FromStream(e.GetNativeImageStream());
-            if(this.ScanPictureSavePathBox.Text != string.Empty)
+            using (System.Drawing.Image tempScannedImage = System.Drawing.Image.FromStream(e.GetNativeImageStream()))
+            {
+                if (_isExamFixScanning)
+                {
+                    try
+                    {
+                        using (var tmpBmp = new Bitmap(tempScannedImage))
+                        {
+                            SetExamCircleFixImage(tmpBmp, string.Empty, true);
+                            // 扫描后自动执行旋转逻辑
+                            ExamCircleFix_AutoRotate_Click(null, null);
+                        }
+                    }
+                    finally
+                    {
+                        _isExamFixScanning = false;
+                    }
+                    return;
+                }
+
+                if (this.ScanPictureSavePathBox.Text != string.Empty)
             {
                 ScanStopWatch.Start();
-                ++TempImageCount;//每次扫描的时候进入纸张数量，扫描完毕后需要在开始扫描按钮重置该值为0
-                ++TotalTempImageCount;//程序运行期间，扫描纸张的总数量，和上面的不同之处在于，点击开始扫描以后不进行重置值
+                    ++TempImageCount;
+                    ++TotalTempImageCount;
                 string SaveImageName = System.IO.Path
-                    .Combine(ScanPictureSavePathBox.Text, $"ScanImage_{++ImageIndex}.jpg");//Imageindex为全局属性，值为目录内的文件数量，防止下次扫描原图片被覆盖
-                TempScannedImage.Save(SaveImageName, System.Drawing.Imaging.ImageFormat.Jpeg);
+                        .Combine(ScanPictureSavePathBox.Text, $"ScanImage_{++ImageIndex}.jpg");
+                    tempScannedImage.Save(SaveImageName, System.Drawing.Imaging.ImageFormat.Jpeg);
                 this.PreviewPictureName.Text = $"图片名称：{System.IO.Path.GetFileName(SaveImageName)}";
 
                 this.NowScanNumber.Text = $"本次扫描数量：{TempImageCount}";
                 this.ScannTotalNumber.Text = $"扫描总数量：{TotalTempImageCount}";
                 this.SavedPathFileCount.Text = $"扫描路径内文件数量：{Directory.GetFiles(this.ScanPictureSavePathBox.Text).Length}";
                 ScanStopWatch.Stop();
-                ScanSeconds += ScanStopWatch.Elapsed.TotalSeconds;//一个扫描过程中花费的时间值，值将会在开始扫描按钮中重置为0
-                //PictureBoxPreviewImage = new Bitmap(SaveImageName);
-                //this.PreviewPictureBox.Image = PictureBoxPreviewImage;
-                //TempScannedImageBmpList.Add(PictureBoxPreviewImage);//添加bitmap对象到列表中
+                    ScanSeconds += ScanStopWatch.Elapsed.TotalSeconds;
+                }
             }
         }
 
@@ -10995,6 +11360,21 @@ IPGATEWAY:'{set_interface_gateway.Text}',
                     // 单个文件失败不影响整体
                 }
             }
+        }
+
+        private void 考评ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MainTabPage.SelectedIndex = GetTabPageIndex("考评系统数据包管理");
+        }
+
+        private void 考评圆圈修复工具ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MainTabPage.SelectedIndex = GetTabPageIndex("考评圆圈修复工具");
+        }
+
+        private void ExamCircleFIx_Start_ShowDialog_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -118,8 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="拆分" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\拆分.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="顶部居中" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\顶部居中.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="xtbb" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\xtbb.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="复制" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\复制.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -133,11 +136,17 @@
   <data name="底部居中" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\底部居中.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="拆分" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\拆分.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="右上方" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\右上方.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="默认_折叠" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\默认_折叠.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="左旋转" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\左旋转.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="接口数据" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\接口数据.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -183,8 +192,8 @@
     <value>https://www.52pojie.cn/thread-1909757-1-1.html</value>
     <comment>坤Tools的吾爱破解原帖地址</comment>
   </data>
-  <data name="压缩" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\压缩.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="水印" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\水印.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="展开 (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\展开 (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -201,28 +210,25 @@
   <data name="excel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\excel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Link_Download_Net48" xml:space="preserve">
-    <value>https://dotnet.microsoft.com/zh-cn/download/dotnet-framework/net48</value>
-    <comment>.net48的官方下载地址</comment>
-  </data>
   <data name="批量移除蓝色 (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\批量移除蓝色 (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="批量移除蓝色" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\批量移除蓝色.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="LInk_Download_SaveHtmlExtension" xml:space="preserve">
+    <value>https://microsoftedge.microsoft.com/addons/detail/save-as-mhtml-mime-html/mlicehneaeopekphfhnfcbkdnelhldmo</value>
+    <comment>savehtml插件的下载地址</comment>
+  </data>
   <data name="Link_NetPan_Download_OcrMode" xml:space="preserve">
     <value>https://www.123684.com/s/JXY5Vv-aCSwd</value>
     <comment>OCR离线算法包的分享链接</comment>
   </data>
-  <data name="7" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\7.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="13" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\13.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="版本更新" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\版本更新.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="右下角箭头" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\右下角箭头.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -264,8 +270,8 @@
     <value>https://www.123pan.com/s/JXY5Vv-HX8wd.html</value>
     <comment>扫描仪驱动的分享链接</comment>
   </data>
-  <data name="批量添加 (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\批量添加 (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="版本更新" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\版本更新.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ppt" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ppt.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -297,9 +303,6 @@
   <data name="5" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="china_level" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\china_level.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
-  </data>
   <data name="懒得喷" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\懒得喷.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -313,8 +316,8 @@
   <data name="zdsny" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\wzdsny.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="大头儿子" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\大头儿子.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="批量添加 (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\批量添加 (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="AccessTokenGite" xml:space="preserve">
     <value>a00fc52925bbae0cfaedd113fc438e2c</value>
@@ -328,8 +331,8 @@
   <data name="6" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Epub-Local-default" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Epub-Local-default.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="加" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\加.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="二维码" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\二维码.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -337,11 +340,9 @@
   <data name="2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="查看" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\查看.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Link_Download_Net48" xml:space="preserve">
+    <value>https://dotnet.microsoft.com/zh-cn/download/dotnet-framework/net48</value>
+    <comment>.net48的官方下载地址</comment>
   </data>
   <data name="系统初始化" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\系统初始化.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -355,8 +356,12 @@
   <data name="pdf" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pdf.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="水印" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\水印.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="表单预设6 (2)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\表单预设6 (2).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Link_Download_ChromeDriver" xml:space="preserve">
+    <value>https://commondatastorage.googleapis.com/chromium-browser-snapshots/index.html?prefix=Win_x64/999988/</value>
+    <comment>chrome驱动的原版下载地址</comment>
   </data>
   <data name="公告" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\公告.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -379,12 +384,14 @@
   <data name="保存" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\保存.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="LInk_Download_SaveHtmlExtension" xml:space="preserve">
-    <value>https://microsoftedge.microsoft.com/addons/detail/save-as-mhtml-mime-html/mlicehneaeopekphfhnfcbkdnelhldmo</value>
-    <comment>savehtml插件的下载地址</comment>
+  <data name="压缩" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\压缩.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="顶部居中" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\顶部居中.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Epub-Local-default" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Epub-Local-default.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="china_level" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\china_level.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
   </data>
   <data name="返回" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\返回.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -413,8 +420,8 @@
   <data name="批量添加" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\批量添加.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ReNamerPro73" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ReNamerPro73.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="大头儿子" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\大头儿子.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="谷歌浏览器" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\谷歌浏览器.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -425,15 +432,17 @@
   <data name="ＧＵＩ界面设计" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ＧＵＩ界面设计.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="批量设置 (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\批量设置 (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="9" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\9.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="dtez" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\dtez.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Link_Download_ChromeDriver" xml:space="preserve">
-    <value>https://commondatastorage.googleapis.com/chromium-browser-snapshots/index.html?prefix=Win_x64/999988/</value>
-    <comment>chrome驱动的原版下载地址</comment>
+  <data name="查看" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\查看.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="BarCodeTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BarCodeTemplate.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -450,8 +459,8 @@
   <data name="Man" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Man.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="批量设置 (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\批量设置 (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\7.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="A" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\A.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -525,8 +534,8 @@
   <data name="表单预设6 (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\表单预设6 (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="表单预设6 (2)" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\表单预设6 (2).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ReNamerPro73" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ReNamerPro73.exe;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="html" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\html.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -537,10 +546,7 @@
   <data name="去水印" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\去水印.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="加" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\加.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="xtbb" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\xtbb.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="右旋转" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\右旋转.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

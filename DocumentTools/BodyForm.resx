@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <metadata name="MainToolsTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>405, 88</value>
+    <value>17, 93</value>
   </metadata>
   <data name="UseLocalOffice.ToolTip" xml:space="preserve">
     <value>1、使用本机Office转换准确率为100%，但是速度较慢
@@ -146,7 +146,7 @@
 模板制作完毕后，可使用选举软件中的选票模板比对功能对上述图片进行比对，验证是否可被正常识别</value>
   </data>
   <metadata name="ExamReportItemSortMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>424, 126</value>
+    <value>17, 131</value>
   </metadata>
   <data name="ExamReportPara_RowMode.ToolTip" xml:space="preserve">
     <value>行模式：
@@ -12103,10 +12103,10 @@
 </value>
   </data>
   <metadata name="SaveFileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>135, 17</value>
+    <value>502, 17</value>
   </metadata>
   <metadata name="ListViewRightMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>326, 17</value>
+    <value>641, 17</value>
   </metadata>
   <data name="列表操作ToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -12382,28 +12382,28 @@
 </value>
   </data>
   <metadata name="MemoryTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>559, 17</value>
+    <value>805, 17</value>
   </metadata>
   <metadata name="TreeViewContentMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>912, 17</value>
+    <value>942, 17</value>
   </metadata>
   <metadata name="ColorSelectDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1178, 17</value>
+    <value>17, 55</value>
   </metadata>
   <metadata name="FontSelectDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1398, 17</value>
+    <value>176, 55</value>
   </metadata>
   <metadata name="MainFormError.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>261, 88</value>
+    <value>959, 55</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>144</value>
   </metadata>
   <metadata name="statusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>954, 50</value>
+    <value>592, 55</value>
   </metadata>
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>589, 50</value>
+    <value>471, 55</value>
   </metadata>
   <data name="控件锚点模式ToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>说明：
@@ -18555,14 +18555,14 @@
 </value>
   </data>
   <metadata name="TabPageIcoList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>394, 50</value>
+    <value>328, 55</value>
   </metadata>
   <data name="TabPageIcoList.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAU
-        dAAAAk1TRnQBSQFMAgEBFwEAAfwBMAH8ATABEgEAARIBAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFI
+        dAAAAk1TRnQBSQFMAgEBFwEAAWwBMQFsATEBEgEAARIBAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFI
         AwABbAMAAQEBAAEgBQABgAF5YgADLgFGAa8B5AL/Aa8B5AL/Aa8B5AL/Aa8B5AL/Aa8B5AL/Aa8B5AL/
         Aa8B5AL/Aa8B5AL/Aa8B5AL/Aa8B5AL/Aa8B5AL/Aa8B5AL/Aa8B5AL/AwUBBqAAAzMB/wMzAf8DMwH/
         AzMB/wMzAf8DMwH/AzMB/wMzAf8DMwH/AzMB/wNQAZoYAAGvAeQC/wGhAcIB0wH/A4gB/wOIAf8DiAH/
@@ -19061,10 +19061,10 @@
 </value>
   </data>
   <metadata name="MainNotify.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>539, 88</value>
+    <value>151, 93</value>
   </metadata>
   <metadata name="MainContextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>658, 88</value>
+    <value>270, 93</value>
   </metadata>
   <data name="MainNotify.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -25206,16 +25206,16 @@
 </value>
   </data>
   <metadata name="WatcherMakeTestFileMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>819, 88</value>
+    <value>431, 93</value>
   </metadata>
   <metadata name="GetExamNameAndSelectorMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 88</value>
+    <value>715, 55</value>
   </metadata>
   <metadata name="PdfWaterSetPreCustomMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>201, 126</value>
+    <value>827, 93</value>
   </metadata>
   <metadata name="InsetExam_BacthMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 126</value>
+    <value>643, 93</value>
   </metadata>
   <data name="InsertExam_BatchSelectors_C7.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -25257,13 +25257,13 @@
 </value>
   </data>
   <metadata name="Insert_ExamItem_PasteStuffix.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>633, 126</value>
+    <value>226, 131</value>
   </metadata>
   <metadata name="Insert_ExamSelector_PasteStuffix.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>854, 126</value>
+    <value>447, 131</value>
   </metadata>
   <metadata name="InsertExamCustomSelectorsBacthMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 164</value>
+    <value>689, 131</value>
   </metadata>
   <data name="toolStripMenuItem10.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -25304,4 +25304,10 @@
         QmCC
 </value>
   </data>
+  <metadata name="ExamCircleFix_GetImageMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>274, 17</value>
+  </metadata>
+  <metadata name="ExamCircleFix_ScannerSettingMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>

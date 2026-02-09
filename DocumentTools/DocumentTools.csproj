@@ -18,6 +18,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkProfile />
     <LangVersion>8.0</LangVersion>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -33,7 +34,6 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -64,7 +64,8 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>v2-30675d7656fcb8e2cc959cedd8b8db19_r.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -207,6 +208,12 @@
       <DependentUpon>DonateMeFrm.cs</DependentUpon>
     </Compile>
     <Compile Include="DynamicAddControlParams.cs" />
+    <Compile Include="ExamCircleFixForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExamCircleFixForm.Designer.cs">
+      <DependentUpon>ExamCircleFixForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ExceptionParamter.cs" />
     <Compile Include="FileDropHandler.cs" />
     <Compile Include="BodyForm.cs">
@@ -269,6 +276,9 @@
     <EmbeddedResource Include="BodyForm.resx">
       <DependentUpon>BodyForm.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExamCircleFixForm.resx">
+      <DependentUpon>ExamCircleFixForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="IPAddressInputTextBox.resx">
       <DependentUpon>IPAddressInputTextBox.cs</DependentUpon>
@@ -376,6 +386,18 @@
     <EmbeddedResource Include="costura-win-x86\SQLite.Interop.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="costura-win-x64\OpenCvSharpExtern.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="costura-win-x64\opencv_videoio_ffmpeg4100_64.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="costura-win-x86\OpenCvSharpExtern.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="costura-win-x86\opencv_videoio_ffmpeg4100.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Content Include="Resources\wzdsny.mp3" />
     <None Include="Resources\功能.png" />
     <None Include="Resources\关于.png" />
@@ -454,6 +476,8 @@
     <None Include="Resources\粘贴.png" />
     <None Include="Resources\加.png" />
     <None Include="Resources\xtbb.jpg" />
+    <None Include="Resources\左旋转.png" />
+    <None Include="Resources\右旋转.png" />
     <Content Include="TWAINDSM.dll" />
     <Content Include="v2-30675d7656fcb8e2cc959cedd8b8db19_r.ico" />
     <Content Include="WebView2Loader.dll" />
@@ -602,6 +626,9 @@
     </PackageReference>
     <PackageReference Include="OpenCvSharp4">
       <Version>4.10.0.20241108</Version>
+    </PackageReference>
+    <PackageReference Include="OpenCvSharp4.Extensions">
+      <Version>4.11.0.20250507</Version>
     </PackageReference>
     <PackageReference Include="OpenCvSharp4.runtime.win">
       <Version>4.10.0.20241108</Version>

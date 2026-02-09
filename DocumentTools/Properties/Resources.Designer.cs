@@ -19,7 +19,7 @@ namespace DocumentTools.Properties {
     // 类通过类似于 ResGen 或 Visual Studio 的工具自动生成的。
     // 若要添加或移除成员，请编辑 .ResX 文件，然后重新运行 ResGen
     // (以 /str 作为命令选项)，或重新生成 VS 项目。
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -912,6 +912,16 @@ namespace DocumentTools.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap 右旋转 {
+            get {
+                object obj = ResourceManager.GetObject("右旋转", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap 图片 {
             get {
                 object obj = ResourceManager.GetObject("图片", resourceCulture);
@@ -1025,6 +1035,16 @@ namespace DocumentTools.Properties {
         internal static System.Drawing.Bitmap 左下角 {
             get {
                 object obj = ResourceManager.GetObject("左下角", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 左旋转 {
+            get {
+                object obj = ResourceManager.GetObject("左旋转", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
