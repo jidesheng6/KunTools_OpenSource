@@ -2816,6 +2816,99 @@ namespace DocumentTools
         }
 
         /// <summary>
+        /// 执行一条写语句，并立刻释放它打开的连接
+        /// </summary>
+        /// <remarks>
+        /// Factory.ExecuteDataBaseSql 每调用一次就新开一个连接并把连接返回给调用方，
+        /// 调用方一旦丢弃返回值，这个连接就一直开着，Jet/ACE 的 .ldb 里会多出一个会话，
+        /// 页锁也不会释放，后续 UPDATE 就会报“无法更新；当前被锁定”。
+        /// 这里统一关连接，并对锁定类错误做短重试。
+        /// </remarks>
+        /// <param name="DataBaseFile">数据库文件</param>
+        /// <param name="ExecuteSqlString">SQL 语句</param>
+        /// <param name="Factory">数据库访问工厂</param>
+        /// <param name="RetryTimes">遇锁重试次数</param>
+        /// <returns>受影响行数</returns>
+        private static int ExecuteAccessSqlAndRelease(
+            string DataBaseFile,
+            string ExecuteSqlString,
+            IDatabaseMethodFactory Factory,
+            int RetryTimes = 6)
+        {
+            for (int TempAttempt = 1; ; TempAttempt++)
+            {
+                try
+                {
+                    (int AffectedRows, DbConnection TempConnection) TempResult =
+                        Factory.ExecuteDataBaseSql(DataBaseFile, ExecuteSqlString);
+
+                    ReleaseAccessConnection(TempResult.TempConnection);
+
+                    return TempResult.AffectedRows;
+                }
+                catch (Exception ex)
+                {
+                    if (TempAttempt >= RetryTimes || !IsRecordLockedError(ex))
+                    {
+                        throw;
+                    }
+
+                    System.Threading.Thread.Sleep(200 * TempAttempt);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 判断异常是否为 Jet/ACE 的锁定类错误
+        /// </summary>
+        private static bool IsRecordLockedError(Exception Exception)
+        {
+            for (Exception TempException = Exception; TempException != null; TempException = TempException.InnerException)
+            {
+                string TempMessage = TempException.Message ?? string.Empty;
+
+                if (TempMessage.IndexOf("锁定", StringComparison.Ordinal) >= 0 ||
+                    TempMessage.IndexOf("正在使用", StringComparison.Ordinal) >= 0 ||
+                    TempMessage.IndexOf("locked", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                    TempMessage.IndexOf("in use", StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// 关闭并释放连接，异常情况忽略
+        /// </summary>
+        private static void ReleaseAccessConnection(DbConnection Connection)
+        {
+            if (Connection == null)
+            {
+                return;
+            }
+
+            try
+            {
+                Connection.Close();
+            }
+            catch
+            {
+                // 关闭失败不影响结果，连接最终由 GC 回收
+            }
+
+            try
+            {
+                Connection.Dispose();
+            }
+            catch
+            {
+                // 同上
+            }
+        }
+
+        /// <summary>
         /// 生成身份证信息，带有计算校验位
         /// </summary>
         /// <param name="card_pac_code">地区编码</param>
@@ -3743,6 +3836,10 @@ namespace DocumentTools
 
             var (TempExamIdValue, TempExamIdConn) = GetAccessDataByOne(DataBaseFile, SelectExamIdByEssInfoSql, Factory);
 
+            // 只取一个值，连接立刻放掉：否则它会一直占着这一页的读锁，
+            // 后面那几十条 UPDATE 会和它抢同一批页，报“无法更新；当前被锁定”。
+            ReleaseAccessConnection(TempExamIdConn);
+
             int RecommendExamIdValue = -1;
 
             if (TempExamIdValue == null)
@@ -3751,7 +3848,7 @@ namespace DocumentTools
                 {
                     string UpdateTableIndexSql = $"UPDATE {TempTableName} SET ExamID={int.Parse(ChangeTableIndex)} WHERE ExamID={int.Parse(OrginTableIndex)}";
 
-                    ExecuteAccessSql(DataBaseFile, UpdateTableIndexSql, Factory);
+                    ExecuteAccessSqlAndRelease(DataBaseFile, UpdateTableIndexSql, Factory);
                 });
                 ChangeStatus = true;
             }
@@ -3770,18 +3867,18 @@ namespace DocumentTools
                     //1、将已存在的ExamId更改为TempUpdateMaxId
                     string UpdateTagretId2TempMaxIdSql = $"UPDATE {TempTableName} SET ExamID={TempUpdateMaxId} WHERE ExamID={int.Parse(ChangeTableIndex)}";
 
-                    ExecuteAccessSql(DataBaseFile, UpdateTagretId2TempMaxIdSql, Factory);
+                    ExecuteAccessSqlAndRelease(DataBaseFile, UpdateTagretId2TempMaxIdSql, Factory);
 
                     //2、将原来的ExamId更改为要设置的目标值
 
                     string UpdateOrginId2TargetIdSql = $"UPDATE {TempTableName} SET ExamID={int.Parse(ChangeTableIndex)} WHERE ExamID={int.Parse(OrginTableIndex)}";
 
-                    ExecuteAccessSql(DataBaseFile, UpdateOrginId2TargetIdSql, Factory);
+                    ExecuteAccessSqlAndRelease(DataBaseFile, UpdateOrginId2TargetIdSql, Factory);
                     //3、将TempUpdateMaxId更改为原始值
 
                     string UpdateTempMaxId2OrginIdSql = $"UPDATE {TempTableName} SET ExamID={int.Parse(OrginTableIndex)} WHERE ExamID={TempUpdateMaxId}";
 
-                    ExecuteAccessSql(DataBaseFile, UpdateTempMaxId2OrginIdSql, Factory);
+                    ExecuteAccessSqlAndRelease(DataBaseFile, UpdateTempMaxId2OrginIdSql, Factory);
 
                     ChangeProgressTextBox.ForeColor = Color.ForestGreen;
 
@@ -3796,10 +3893,247 @@ namespace DocumentTools
                 ChangeStatus = true;
             }
 
-            TempExamIdConn.Close();
+            // 只改 ExamID 的值不会移动记录在表里的物理位置，考评软件里不带 ORDER BY 的
+            // "Select * from Exam_EssInfo" 依旧按老顺序返回，所以这里按新顺序把表重写一遍。
+            if (ChangeStatus)
+            {
+                (bool Status, string Message) TempRebuildResult =
+                    RebuildExamEssInfoPhysicalOrder(DataBaseFile, Factory, ChangeProgressTextBox);
+
+                if (ChangeProgressTextBox != null)
+                {
+                    ChangeProgressTextBox.ForeColor = TempRebuildResult.Status ? Color.ForestGreen : Color.Red;
+
+                    ChangeProgressTextBox.Text = TempRebuildResult.Status
+                        ? $"序号修改完成；{TempRebuildResult.Message}"
+                        : $"序号已修改，但表顺序重建未完成：{TempRebuildResult.Message}";
+                }
+            }
 
             return (ChangeStatus, RecommendExamIdValue);
 
+        }
+
+        /// <summary>
+        /// 按 ExamID 升序重建 Exam_EssInfo 的物理记录顺序
+        /// </summary>
+        /// <remarks>
+        /// 考评软件「自定义报表设置」的考评表下拉框用的是不带 ORDER BY 的 Select * from Exam_EssInfo，
+        /// 返回顺序等于记录的物理存放顺序；UPDATE 只改字段值不改行位置，必须 DELETE + INSERT 重写才能生效。
+        /// 全过程的 DELETE 与 INSERT 都在同一个事务内，任何一步异常整表回滚，不会留下删了一半的表；
+        /// 不生成 .bak 备份文件，避免文件被占用导致后续操作报“被锁定”。
+        /// </remarks>
+        /// <param name="DataBaseFile">数据库文件</param>
+        /// <param name="Factory">数据库访问工厂（Access / Sqlite）</param>
+        /// <param name="ChangeProgressTextBox">进度提示文本框，可为空</param>
+        /// <returns>是否成功，以及说明文字</returns>
+        public static (bool Status, string Message) RebuildExamEssInfoPhysicalOrder(
+            string DataBaseFile,
+            IDatabaseMethodFactory Factory,
+            TextBox ChangeProgressTextBox = null)
+        {
+            const string TableName = "Exam_EssInfo";
+
+            if (string.IsNullOrEmpty(DataBaseFile) || !File.Exists(DataBaseFile))
+            {
+                return (false, $"数据库文件不存在：{DataBaseFile}");
+            }
+
+            bool IsSqlite = Factory is SqliteDatabaseFactory;
+
+            try
+            {
+                SetOrderRebuildProgress(ChangeProgressTextBox, $"正在重建<{TableName}>物理顺序...", Color.Red);
+
+                using (DbConnection TempConnection = Factory.CreateConnection(DataBaseFile))
+                {
+                    TempConnection.Open();
+
+                    DataTable SnapshotTable = ReadWholeTable(TempConnection, TableName);
+
+                    if (SnapshotTable.Rows.Count <= 1)
+                    {
+                        return (true, $"<{TableName}>记录数不超过1条，无需重建");
+                    }
+
+                    List<string> ColumnNames = SnapshotTable.Columns
+                        .Cast<DataColumn>()
+                        .Select(TempColumn => TempColumn.ColumnName)
+                        .ToList();
+
+                    List<DataRow> OrderedRows = SnapshotTable.Rows
+                        .Cast<DataRow>()
+                        .OrderBy(TempRow => Convert.ToInt32(TempRow["ExamID"]))
+                        .ToList();
+
+                    List<string> ExpectSignatures = OrderedRows
+                        .Select(TempRow => BuildOrderRebuildRowSignature(TempRow, ColumnNames))
+                        .ToList();
+
+                    string ColumnList = string.Join(",", ColumnNames.Select(TempName => $"[{TempName}]"));
+
+                    string ParameterList = string.Join(
+                        ",",
+                        ColumnNames.Select((TempName, TempIndex) => IsSqlite ? $"@p{TempIndex}" : "?"));
+
+                    using (DbTransaction TempTransaction = TempConnection.BeginTransaction())
+                    {
+                        try
+                        {
+                            using (DbCommand TempDeleteCommand = Factory.CreateCommand($"DELETE FROM {TableName}", TempConnection))
+                            {
+                                TempDeleteCommand.Transaction = TempTransaction;
+
+                                TempDeleteCommand.ExecuteNonQuery();
+                            }
+
+                            using (DbCommand TempInsertCommand = Factory.CreateCommand(
+                                $"INSERT INTO {TableName} ({ColumnList}) VALUES ({ParameterList})",
+                                TempConnection))
+                            {
+                                TempInsertCommand.Transaction = TempTransaction;
+
+                                foreach (DataRow TempRow in OrderedRows)
+                                {
+                                    TempInsertCommand.Parameters.Clear();
+
+                                    for (int TempIndex = 0; TempIndex < ColumnNames.Count; TempIndex++)
+                                    {
+                                        object TempValue = TempRow[ColumnNames[TempIndex]];
+
+                                        Factory.CreateCommandParameter(
+                                            TempInsertCommand,
+                                            IsSqlite ? $"@p{TempIndex}" : $"p{TempIndex}",
+                                            TempValue is DBNull ? DBNull.Value : TempValue);
+                                    }
+
+                                    TempInsertCommand.ExecuteNonQuery();
+                                }
+                            }
+
+                            // 校验放在事务内完成：任何一条对不上就回滚，库里保持改动前的原样
+                            SetOrderRebuildProgress(ChangeProgressTextBox, $"正在校验<{TableName}>...", Color.Red);
+
+                            DataTable VerifyTable = ReadWholeTable(TempConnection, TableName, TempTransaction);
+
+                            List<string> ActualSignatures = VerifyTable.Rows
+                                .Cast<DataRow>()
+                                .Select(TempRow => BuildOrderRebuildRowSignature(TempRow, ColumnNames))
+                                .ToList();
+
+                            if (ActualSignatures.Count != ExpectSignatures.Count)
+                            {
+                                TempTransaction.Rollback();
+
+                                return (false, $"重建后记录数不一致（应为{ExpectSignatures.Count}条，实际{ActualSignatures.Count}条），已整表回滚，原数据未变");
+                            }
+
+                            for (int TempIndex = 0; TempIndex < ExpectSignatures.Count; TempIndex++)
+                            {
+                                if (string.CompareOrdinal(ExpectSignatures[TempIndex], ActualSignatures[TempIndex]) != 0)
+                                {
+                                    TempTransaction.Rollback();
+
+                                    return (false, $"重建后第{TempIndex + 1}条记录与原始内容不一致，已整表回滚，原数据未变");
+                                }
+                            }
+
+                            List<int> ActualExamIds = VerifyTable.Rows
+                                .Cast<DataRow>()
+                                .Select(TempRow => Convert.ToInt32(TempRow["ExamID"]))
+                                .ToList();
+
+                            bool OrderAscending = ActualExamIds
+                                .SequenceEqual(ActualExamIds.OrderBy(TempId => TempId));
+
+                            if (!OrderAscending)
+                            {
+                                TempTransaction.Rollback();
+
+                                return (false, $"重建后物理顺序仍不是 ExamID 升序（{string.Join(",", ActualExamIds)}），已整表回滚，原数据未变");
+                            }
+
+                            TempTransaction.Commit();
+
+                            return (true, $"<{TableName}>物理顺序已按 ExamID 升序重建，{ActualSignatures.Count}条记录逐列校验一致（{string.Join(",", ActualExamIds)}）");
+                        }
+                        catch
+                        {
+                            try { TempTransaction.Rollback(); } catch { }
+
+                            throw;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return (false, $"重建异常：{ex.Message}（已整表回滚，原数据未变）");
+            }
+        }
+
+        /// <summary>
+        /// 不带 ORDER BY 地读出整张表，用于快照与校验
+        /// </summary>
+        private static DataTable ReadWholeTable(DbConnection Connection, string TableName, DbTransaction Transaction = null)
+        {
+            DataTable TempTable = new DataTable();
+
+            using (DbCommand TempCommand = Connection.CreateCommand())
+            {
+                TempCommand.CommandText = $"SELECT * FROM {TableName}";
+
+                if (Transaction != null)
+                {
+                    TempCommand.Transaction = Transaction;
+                }
+
+                using (DbDataReader TempReader = TempCommand.ExecuteReader())
+                {
+                    TempTable.Load(TempReader);
+                }
+            }
+
+            return TempTable;
+        }
+
+        /// <summary>
+        /// 把一行拼成可比较的字符串，用于重建前后的逐列校验
+        /// </summary>
+        private static string BuildOrderRebuildRowSignature(DataRow Row, List<string> ColumnNames)
+        {
+            return string.Join(
+                "\u0001",
+                ColumnNames.Select(TempName =>
+                {
+                    object TempValue = Row[TempName];
+
+                    return TempValue == null || TempValue is DBNull
+                        ? "<null>"
+                        : Convert.ToString(TempValue, CultureInfo.InvariantCulture);
+                }));
+        }
+
+        /// <summary>
+        /// 设置重建过程的进度提示（界面控件，可能为空）
+        /// </summary>
+        private static void SetOrderRebuildProgress(TextBox ProgressTextBox, string Text, Color ForeColor)
+        {
+            if (ProgressTextBox == null)
+            {
+                return;
+            }
+
+            try
+            {
+                ProgressTextBox.ForeColor = ForeColor;
+
+                ProgressTextBox.Text = Text;
+            }
+            catch
+            {
+                // 控件已销毁时忽略，不影响数据操作
+            }
         }
 
 

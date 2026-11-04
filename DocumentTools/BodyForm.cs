@@ -234,7 +234,7 @@ namespace DocumentTools
                         dataSource.Capabilities.CapXferCount.SetValue(1);
                     }
 
-                    dataSource.Enable(SourceEnableMode.ShowUI, false, IntPtr.Zero);
+                    dataSource.Enable(SourceEnableMode.NoUI, false, IntPtr.Zero);
                 }
             }
             catch(Exception ex)
