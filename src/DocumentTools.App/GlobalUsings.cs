@@ -1,0 +1,12 @@
+global using System.IO;
+global using System.Windows;
+global using System.Windows.Controls;
+global using Button = Wpf.Ui.Controls.Button;
+global using TextBox = Wpf.Ui.Controls.TextBox;
+global using ListView = System.Windows.Controls.ListView;
+global using GridView = System.Windows.Controls.GridView;
+global using GridViewColumn = System.Windows.Controls.GridViewColumn;
+global using Image = System.Windows.Controls.Image;
+global using TextBlock = System.Windows.Controls.TextBlock;
+global using TreeView = System.Windows.Controls.TreeView;
+global using TreeViewItem = System.Windows.Controls.TreeViewItem;

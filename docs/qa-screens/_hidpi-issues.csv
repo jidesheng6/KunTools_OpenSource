@@ -1,0 +1,5 @@
+﻿功能ID,DPI,严重度,检查项,控件,说明,截图
+"home",120,"Low","无输入控件","-","页面只有按钮/列表，没有文本、下拉、复选等输入控件","docs/qa-screens/hidpi/home@120.png"
+"about",120,"Low","无输入控件","-","页面只有按钮/列表，没有文本、下拉、复选等输入控件","docs/qa-screens/hidpi/about@120.png"
+"home",144,"Low","无输入控件","-","页面只有按钮/列表，没有文本、下拉、复选等输入控件","docs/qa-screens/hidpi/home@144.png"
+"about",144,"Low","无输入控件","-","页面只有按钮/列表，没有文本、下拉、复选等输入控件","docs/qa-screens/hidpi/about@144.png"

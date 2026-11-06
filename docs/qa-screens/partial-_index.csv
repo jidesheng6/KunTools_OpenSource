@@ -1,0 +1,2 @@
+﻿序号,分类,功能ID,标题,截图,字节,缩放,元素数,文本块,按钮,Tab可达,首个输入控件,High,Medium,Low,致命错误
+40,"Exam","exam.insert","考评表信息插入","docs/qa-screens/exam.insert.png",64250,1.00,618,81,44,30,"TextBox",0,0,0,

@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- Windows TFM: OleDb/Registry/WMI/TWAIN/System.Drawing are Windows-only, and NTwain ships a
+         net6.0-windows asset (plain net8.0 silently resolved the net462 one). Still UI-framework free. -->
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <RootNamespace>DocumentTools.Core</RootNamespace>
+    <Description>UI-agnostic domain services for DocumentTools (convert, barcode, text helpers).</Description>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+  </PropertyGroup>
+
+  <!-- Pin to versions that match Aspose.Hook 2025.1.7 / legacy DocumentTools (do NOT float to latest). -->
+  <ItemGroup>
+    <PackageReference Include="Aspose.BarCode" Version="25.3.0" />
+    <PackageReference Include="Aspose.Cells" Version="25.12.0" />
+    <PackageReference Include="Aspose.HTML" Version="25.12.0" />
+    <PackageReference Include="Aspose.PDF" Version="25.12.0" />
+    <PackageReference Include="Aspose.Slides.NET" Version="25.12.0" />
+    <PackageReference Include="Aspose.Words" Version="26.1.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.4" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
+    <!-- legacy 用 NPinyin 0.2.6321.26573（net461 资产，在 net8.0 上触发 NU1701）。
+         NPinyin.Core 3.0.0 是同名同 API 的 netstandard 版本：U+4E00..U+9FA5 全段
+         GetPinyin/GetInitials 输出逐字符相同（0 差异），故换包以保持 0 警告。 -->
+    <PackageReference Include="NPinyin.Core" Version="3.0.0" />
+    <PackageReference Include="NTwain" Version="3.7.5" />
+    <PackageReference Include="PuppeteerSharp" Version="20.2.4" />
+    <PackageReference Include="SkiaSharp" Version="3.119.0" />
+    <PackageReference Include="System.Data.OleDb" Version="8.0.1" />
+    <PackageReference Include="System.Drawing.Common" Version="8.0.11" />
+    <PackageReference Include="System.Management" Version="8.0.0" />
+    <PackageReference Include="System.Security.Principal.Windows" Version="5.0.0" />
+  </ItemGroup>
+
+  <!-- 随机身份证号生成所需的静态数据（构建期从 legacy GBK 资源转成 UTF-8 后随程序集分发）。 -->
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\china_level.json" LogicalName="DocumentTools.Core.Resources.china_level.json" />
+    <EmbeddedResource Include="Resources\chinese_han.txt" LogicalName="DocumentTools.Core.Resources.chinese_han.txt" />
+    <EmbeddedResource Include="Resources\chinse_first.txt" LogicalName="DocumentTools.Core.Resources.chinse_first.txt" />
+  </ItemGroup>
+
+</Project>

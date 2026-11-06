@@ -1,0 +1,59 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    OCR 可选组件：不随主程序引用，发布到 exe 同级 ocr\ 目录后由宿主按需加载
+    （见 docs\packaging.md「OCR 可选组件」）。这样主包保持 ~160MB，需要 OCR 的机器拷一个目录即可。
+    Paddle 2.7 的 Run 只接受 OpenCvSharp Mat，因此 OpenCV 是硬依赖。
+  -->
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <PlatformTarget>x64</PlatformTarget>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>DocumentTools.Ocr</AssemblyName>
+    <RootNamespace>DocumentTools.Ocr</RootNamespace>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!--
+      编译期依赖 Core 的接口；运行期 DocumentTools.Core 由宿主提供（插件加载器把它交回 Default 上下文）。
+      Private=false 阻止把 Core 及它的 Aspose 依赖复制进 ocr 目录——否则 ocr\ 会从 ~194MB 涨到 ~712MB。
+    -->
+    <ProjectReference Include="..\DocumentTools.Core\DocumentTools.Core.csproj">
+      <Private>false</Private>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </ProjectReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Sdcb.PaddleInference" Version="2.5.0.1" />
+    <PackageReference Include="Sdcb.PaddleOCR" Version="2.7.0.3" />
+    <PackageReference Include="Sdcb.PaddleOCR.Models.Local" Version="2.7.0" />
+    <PackageReference Include="Sdcb.PaddleInference.runtime.win64.mkl" Version="2.5.1" />
+    <PackageReference Include="OpenCvSharp4" Version="4.10.0.20240616" />
+    <PackageReference Include="OpenCvSharp4.runtime.win" Version="4.10.0.20241108" />
+
+    <!--
+      注意：不要为了体积排除 Sdcb.PaddleOCR.Models.LocalV3 / LocalV4。
+      Models.Local 的 LocalFullModels.ChineseV3 在运行时经 Utils.LocalModel 分派，
+      JIT 会解析 V3 与 V4 两个分支 → 缺任一程序集都会 FileNotFoundException（2026-11-06 实测）。
+      因此 ocr 目录 ≈ 445MB（V3 132 + V4 123 + Models.Local 21 + native/OpenCV ~170）。
+    -->
+  </ItemGroup>
+
+  <!--
+    发布后清理：只删 OpenCV 的视频解码 dll（OCR 只走静态图，VideoCapture 不会加载它）。
+    其余都不能删——Sdcb.PaddleInference 的 PaddleInferenceLibLoader 把
+    libiomp5 / mklml / onnxruntime / paddle2onnx / mkldnn 都列为 paddle_inference_c 的已知依赖，
+    缺一个就 DllNotFoundException（2026-11-06 实测：删 paddle2onnx 直接级联失败）。
+  -->
+  <Target Name="TrimOcrPublish" AfterTargets="Publish">
+    <ItemGroup>
+      <OcrTrimmedFile Include="$(PublishDir)opencv_videoio_ffmpeg*_64.dll" />
+    </ItemGroup>
+    <Delete Files="@(OcrTrimmedFile)" />
+  </Target>
+
+</Project>

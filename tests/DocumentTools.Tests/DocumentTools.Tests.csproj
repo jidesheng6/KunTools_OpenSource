@@ -1,0 +1,49 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <RootNamespace>DocumentTools.Tests</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+    <PackageReference Include="xunit" Version="2.9.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <!--
+      与 App 同一条构建期链接：内置测评人码图的单一真相源是 legacy 目录里的 zip，避免测试另造夹具。
+      相对路径由 MSBuild 按「本 csproj 所在目录」解析，所以从仓库根 / tests 目录 / IDE 构建都指向同一个文件；
+      缺文件时由下面的 EnsurePersonCodeArchive 直接报错——静默少一份资产会让 PersonCodeLibraryTests 变成「4 红」，
+      而「4 红」比构建失败难查得多。
+    -->
+    <Content Include="..\..\DocumentTools\Resources\PersonCode.zip"
+             Link="assets\embedded\PersonCode.zip"
+             CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <Target Name="EnsurePersonCodeArchive" BeforeTargets="Build">
+    <Error Condition="!Exists('$(MSBuildProjectDirectory)\..\..\DocumentTools\Resources\PersonCode.zip')"
+           Text="PersonCode.zip not found at '$(MSBuildProjectDirectory)\..\..\DocumentTools\Resources\PersonCode.zip'. exam.single 的内置测评人码图与 PersonCodeLibraryTests 都依赖它。" />
+  </Target>
+
+  <ItemGroup>
+    <!--
+      关掉测试集并行：本测试集大量依赖「进程级」状态——ACE/Jet OLE DB 提供者、Aspose 的许可证/字体缓存、
+      ConversionLog 的日志目录环境变量。并行跑不同测试类会互相踩（曾表现为 ExamReportExtrasAccessTests /
+      ExamIndexServiceAccessTests 随机红、单跑必过）。串行的代价远小于「红绿不确定」。
+    -->
+    <None Update="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\DocumentTools.Core\DocumentTools.Core.csproj" />
+    <ProjectReference Include="..\..\tools\ExamFixture\ExamFixture.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -361,3 +361,38 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+# ==== DocumentTools open-source hygiene ====
+DocumentTools.zip
+UpgradeLog*.htm
+.cr/
+assets/licenses/*.lic
+!assets/licenses/README.md
+# Embedded release payloads (export locally; do not publish crack/KMS binaries)
+assets/embedded/*
+!assets/embedded/README.md
+!assets/embedded/link-netfx35.txt
+!assets/embedded/VoteReportDoc.doc
+
+_Probe.*
+_probe_pages.txt
+_launch_err.txt
+_aspose_probe/
+_aspose_probe2/
+*.slnx
+
+# Private Aspose.Hook binary (keep README only)
+libs/Aspose.Hook/*.dll
+libs/Aspose.Hook/*.pdb
+libs/Aspose.Hook/*.xml
+
+# Local scratch probes (never publish)
+_hook_probe/
+_hook_probe.cs
+_Probe.cs
+_feat_sunny.txt
+_tabpages_utf8.txt
+_probe_pages.txt
+_launch_err.txt
+
+# 真实考评数据包（用户本地验证用，1GB 级，不入库）
+exambase/

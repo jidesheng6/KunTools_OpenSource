@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <!-- Same TFM as Core: OleDb / System.Drawing / NTwain assets only resolve for net8.0-windows. -->
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <RootNamespace>DocumentTools.QaFunction</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>QaFunction</AssemblyName>
+    <!-- QA harness only: exercise real conversions, never shipped with the app. -->
+    <IsPackable>false</IsPackable>
+    <!-- UX 政策的行为断言要在真实 Window 里布局（task-46）：路径框只读可聚焦、父级行高 ≥34。 -->
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Core only depends on the DI abstractions; the harness needs a container to resolve operations. -->
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\DocumentTools.Core\DocumentTools.Core.csproj" />
+    <!-- 考评夹具统一由 tools\ExamFixture 生成（同一份 DDL 真相），harness 不自己拼表结构。 -->
+    <ProjectReference Include="..\ExamFixture\ExamFixture.csproj" />
+    <!--
+      UI 政策断言需要 App 的视图与壳层。AdditionalProperties 让 App 以 UseAppHost=false 构建，
+      避免桌面程序正在运行时写了被占用的 DocumentTools.exe（同一手法见 tools\UiSnapshot）。
+    -->
+    <ProjectReference Include="..\..\src\DocumentTools.App\DocumentTools.App.csproj"
+                      AdditionalProperties="UseAppHost=false" />
+  </ItemGroup>
+
+</Project>

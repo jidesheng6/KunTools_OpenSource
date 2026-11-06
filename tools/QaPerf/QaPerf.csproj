@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <!-- Same TFM as Core so OleDb / System.Drawing / NTwain assets resolve; console-only, no WPF. -->
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <RootNamespace>DocumentTools.QaPerf</RootNamespace>
+    <AssemblyName>QaPerf</AssemblyName>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <!-- QA harness only: measures the shipping Core pipelines, never shipped with the app. -->
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Build the real DI graph so scenarios run through the same operations the app resolves. -->
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.4" />
+    <!-- Fixture generation: 1600x1200 PNGs (gradient + noise) without external tooling. -->
+    <PackageReference Include="SkiaSharp" Version="3.119.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\DocumentTools.Core\DocumentTools.Core.csproj" />
+  </ItemGroup>
+
+</Project>

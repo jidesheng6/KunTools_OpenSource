@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- 环境降级验证台：只引用 Core（不引用 App/WPF），不进入解决方案。 -->
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>QaCompat</RootNamespace>
+    <AssemblyName>QaCompat</AssemblyName>
+    <Description>QA harness: verifies how DocumentTools degrades when ACE / browser / scanner / license / writable output / long paths are missing.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\DocumentTools.Core\DocumentTools.Core.csproj" />
+  </ItemGroup>
+
+</Project>

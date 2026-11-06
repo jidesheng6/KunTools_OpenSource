@@ -1,0 +1,13 @@
+<Weavers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="FodyWeavers.xsd">
+  <Costura CreateTemporaryAssemblies="false">
+    <!-- 非托管清单：只列新版真正需要的 TWAINDSM（NTwain 3.7.5 的数据源管理器）。
+         新版没有 OpenCvSharp / WebView2 / SQLite.Interop，故不再内嵌这些；
+         来源与 x86/x64 策略见 docs/packaging.md。 -->
+    <Unmanaged32Assemblies>
+      TWAINDSM
+    </Unmanaged32Assemblies>
+    <Unmanaged64Assemblies>
+      TWAINDSM
+    </Unmanaged64Assemblies>
+  </Costura>
+</Weavers>

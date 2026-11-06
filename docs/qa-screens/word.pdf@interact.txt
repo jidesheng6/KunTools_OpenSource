@@ -1,0 +1,8 @@
+﻿feature: word.pdf
+outcome: ok
+screenshot: word.pdf@interact.png
+png bytes: 43706
+fatal: no
+trace:
+  click 开始处理
+  status + 请先点「选择文件」把要处理的文件加进列表。

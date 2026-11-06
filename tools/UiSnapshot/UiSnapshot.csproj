@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>DocumentTools.UiSnapshot</AssemblyName>
+    <RootNamespace>DocumentTools.UiSnapshot</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!--
+      截图工具只需要 App 的托管程序集，不需要它的 apphost（DocumentTools.exe）。
+      别人正在运行桌面程序时 DocumentTools.exe 会被占用，AdditionalProperties 让 App
+      以 UseAppHost=false 构建，避免写这个文件而随机构建失败。
+    -->
+    <ProjectReference Include="..\..\src\DocumentTools.App\DocumentTools.App.csproj"
+                      AdditionalProperties="UseAppHost=false" />
+  </ItemGroup>
+
+</Project>

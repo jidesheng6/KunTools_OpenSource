@@ -1,0 +1,16 @@
+﻿feature: exam.vote
+outcome: ok
+screenshot: exam.vote@interact.png
+png bytes: 61669
+fatal: no
+trace:
+  set 候选人姓名，每行一个 = 张三
+李四
+王五
+  click 生成报告单
+  dialog SaveFile(Word 文档|*.docx,选举结果报告单.docx)
+  dialog Confirm(确认): 已生成。是否打开文件？
+  status + 已生成 3 人的报告单：C:\Users\pw\AppData\Local\Temp\dtsnap-dialogs\exam.vote-选举结果报告单.docx
+  status + 张三
+李四
+王五

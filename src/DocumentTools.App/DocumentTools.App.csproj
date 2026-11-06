@@ -1,0 +1,145 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <RootNamespace>DocumentTools.App</RootNamespace>
+    <AssemblyName>DocumentTools</AssemblyName>
+    <StartupObject>DocumentTools.App.Program</StartupObject>
+    <Description>DocumentTools desktop shell built with WPF-UI (DPI-aware).</Description>
+    <ApplicationIcon Condition="Exists('..\..\assets\icons\app.ico')">..\..\assets\icons\app.ico</ApplicationIcon>
+    <!-- Override: -p:AsposeHookPath=C:\path\Aspose.Hook.dll -->
+    <AsposeHookPath Condition="'$(AsposeHookPath)' == ''">$(MSBuildThisFileDirectory)..\..\libs\Aspose.Hook\Aspose.Hook.dll</AsposeHookPath>
+    <!-- Override: -p:TwainDsmPath=C:\path\TWAINDSM.dll（必须是 x64 的 DSM，legacy 目录里那份即 x64） -->
+    <TwainDsmPath Condition="'$(TwainDsmPath)' == ''">$(MSBuildThisFileDirectory)..\..\DocumentTools\costura-win-x64\TWAINDSM.dll</TwainDsmPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.4" />
+    <PackageReference Include="WPF-UI" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DocumentTools.Core\DocumentTools.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Aspose.Hook">
+      <HintPath>$(AsposeHookPath)</HintPath>
+      <Private>true</Private>
+    </Reference>
+  </ItemGroup>
+
+  <PropertyGroup>
+    <!-- 内置测评人码图包：单一真相源在 legacy 目录，构建期链接进输出，不复制 2.3 MB 二进制进仓。 -->
+    <PersonCodeArchivePath Condition="'$(PersonCodeArchivePath)' == ''">$(MSBuildThisFileDirectory)..\..\DocumentTools\Resources\PersonCode.zip</PersonCodeArchivePath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!--
+      内置测评人码图包同理必须留散文件：实测（.NET 8 / SDK 10.0.300）单文件打包器会把
+      Content 项一并折进 bundle（对 exe 做字符串搜索能看到 bundle 清单里的
+      assets/embedded/PersonCode.zip），而 PersonCodeLibrary 读的是
+      AppContext.BaseDirectory\assets\embedded\PersonCode.zip —— 折进去就是运行期文件不存在。
+      ExcludeFromSingleFile=true 后它留在发布目录，体积只多 2.3 MB。
+    -->
+    <Content Include="$(PersonCodeArchivePath)"
+             Link="assets\embedded\PersonCode.zip"
+             CopyToOutputDirectory="PreserveNewest"
+             CopyToPublishDirectory="PreserveNewest"
+             ExcludeFromSingleFile="true"
+             Condition="Exists('$(PersonCodeArchivePath)')" />
+  </ItemGroup>
+
+  <Target Name="EnsurePersonCodeArchive" BeforeTargets="Build">
+    <Error
+      Condition="!Exists('$(PersonCodeArchivePath)')"
+      Text="PersonCode.zip not found at '$(PersonCodeArchivePath)'. exam.single 的内置测评人码图依赖它；请从 legacy 目录取回或传 -p:PersonCodeArchivePath=..." />
+  </Target>
+
+  <Target Name="EnsureAsposeHook" BeforeTargets="ResolveAssemblyReferences">
+    <Error
+      Condition="!Exists('$(AsposeHookPath)')"
+      Text="Aspose.Hook.dll not found at '$(AsposeHookPath)'. Copy net8.0 build to libs/Aspose.Hook/ or pass -p:AsposeHookPath=..." />
+  </Target>
+
+  <!--
+    ========================================================================
+    发布形态：单文件 / 免安装（取代 legacy 的 Costura.Fody 折包）
+    ========================================================================
+    命令：dotnet publish src\DocumentTools.App\DocumentTools.App.csproj
+            -c Release -r win-x64 -o artifacts\publish\win-x64
+    为什么不再用 Fody/Costura：legacy（net472）没有运行时自包含能力，只能靠 Costura 把
+    ILMerge 式地折进 exe；net8 有官方单文件打包器（AppHost + .NET 8 bundle），托管程序集、
+    原生库、去重与压缩都由 SDK 负责，不需要 IL 重写，也不会像 Costura 那样在 Release
+    构建里改写程序集加载路径（Debug 曾因此被 cleanup 清 bin）。
+
+    下面的属性只在指定 RID（发布路径）时生效，`dotnet build` / FeatureSmoke / 测试等
+    不带 RID 的构建完全不受影响。
+    ========================================================================
+  -->
+  <PropertyGroup Condition="'$(RuntimeIdentifier)' != ''">
+    <!-- 自包含：目标机不需要预装 .NET 8 Desktop Runtime，双击即跑（代价是体积）。 -->
+    <SelfContained>true</SelfContained>
+    <!-- 打成一个 DocumentTools.exe（bundle 形式，非 ILMerge）。 -->
+    <PublishSingleFile>true</PublishSingleFile>
+    <!--
+      必须开：Core 依赖 SkiaSharp（libSkiaSharp.dll）、WPF 渲染栈等 PackageReference 原生库。
+      不开时这些 .dll 会散落在发布目录（几十个文件），「单文件」名存实亡；
+      开启后它们被折进 bundle，首次启动解压到 %TEMP%\.net\DocumentTools\<hash>\，之后复用。
+      注意这条规则**不适用于随附的 TWAINDSM.dll**：NTwain 用 File.Exists 只看
+      exe 目录 / AppContext.BaseDirectory / System32（PlatformInfo.cs：GetExeFolder →
+      GetFirstFilePathThatExists），不会去解压目录找，所以 TWAINDSM.dll 必须显式
+      ExcludeFromSingleFile 摆在 exe 旁边（见下方 ItemGroup）。
+    -->
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <!--
+      压缩 bundle（实测体积约减半）。代价：启动时要把整包解压到临时目录，
+      冷启动比不压缩慢（实测体积/启动与「不要关压缩」的反例见 docs\packaging.md §3、§6）。
+    -->
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+    <!-- 裁剪/原生 AOT 一律关闭：WPF 反射 + Aspose 动态加载，裁剪后运行期才炸。 -->
+    <PublishTrimmed>false</PublishTrimmed>
+    <PublishReadyToRun>false</PublishReadyToRun>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!--
+      TWAIN 数据源管理器（非托管，NTwain 通过它枚举扫描仪）。
+      必须摆在 exe 旁边而不是折进 bundle：
+        NTwain 3.7.5 的 PlatformInfo 构造函数按
+        GetExeFolder() / AppContext.BaseDirectory / System32 / Windows / CWD 的顺序
+        File.Exists("twaindsm.dll")，命中才算 DsmExists；单文件解压目录不在搜索列表里。
+      本机 C:\Windows\twain_32 与 System32 都没有 twaindsm.dll，所以这份随附文件是扫描
+      功能可用的前提；实测证据见 docs\packaging.md。
+    -->
+    <None Include="$(TwainDsmPath)"
+          Link="TWAINDSM.dll"
+          CopyToOutputDirectory="PreserveNewest"
+          CopyToPublishDirectory="PreserveNewest"
+          ExcludeFromSingleFile="true"
+          Condition="Exists('$(TwainDsmPath)')" />
+  </ItemGroup>
+
+  <Target Name="EnsureTwainDsm" BeforeTargets="Build" Condition="'$(Configuration)' == 'Release' and !Exists('$(TwainDsmPath)')">
+    <Warning Text="TWAINDSM.dll not found at '$(TwainDsmPath)'. 扫描功能（NTwain）需要它随 exe 一起发布；请从 legacy 目录取回或传 -p:TwainDsmPath=..." />
+  </Target>
+
+  <ItemGroup>
+    <!--
+      Embedded payloads for other.misc (see assets/embedded/README.md)。
+      运行时按 AppContext.BaseDirectory\embedded 读（EmbeddedAssetService / other.misc 处理链），
+      所以必须保持「exe 旁边的散文件」布局。单文件打包器默认会把 Content/None 项也折进 bundle
+      （实测见 docs\packaging.md），这里逐个 ExcludeFromSingleFile 把它们钉在发布目录。
+    -->
+    <None Include="..\..\assets\embedded\**\*"
+          Link="embedded\%(RecursiveDir)%(Filename)%(Extension)"
+          CopyToOutputDirectory="PreserveNewest"
+          CopyToPublishDirectory="PreserveNewest"
+          ExcludeFromSingleFile="true"
+          Condition="Exists('..\..\assets\embedded')" />
+  </ItemGroup>
+
+</Project>

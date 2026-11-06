@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <RootNamespace>DocumentTools.ExamFixture</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Description>考评 Access 夹具生成器：用 ACE/ADOX 造出 Exam_Base.mdb，供集成测试与手工复现使用。</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\DocumentTools.Core\DocumentTools.Core.csproj" />
+  </ItemGroup>
+
+</Project>
